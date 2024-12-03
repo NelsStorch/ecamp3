@@ -2,13 +2,13 @@ name: '[reusable only] api performance tests'
 
 on:
   workflow_call:
-    
+
 jobs:
   api-performance-test:
     name: 'Tests: API performance tests'
     runs-on: ubuntu-latest
     env:
-      TEST_DATABASE_URL: postgresql://ecamp3:ecamp3@localhost:5432/ecamp3test?serverVersion=15&charset=utf8
+      DATABASE_URL: postgresql://ecamp3:ecamp3@localhost:5432/ecamp3?serverVersion=15&charset=utf8
 
     services:
       postgres:
@@ -28,13 +28,13 @@ jobs:
           --memory 1G
 
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.9'
+          php-version: '8.3.13'
           extensions: intl-73.1
-          tools: composer:2.7.0
+          tools: composer:2.8.0
           coverage: pcov
 
       - name: Get Composer Cache Directory
@@ -42,7 +42,7 @@ jobs:
         run: 'echo "dir=$(composer config cache-files-dir)" | tr -d "\n" >> $GITHUB_OUTPUT'
         working-directory: api
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}

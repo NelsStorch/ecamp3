@@ -20,6 +20,9 @@
           }
         }
       },
+      "copyActivityInfoDialog": {
+        "allow": "Consenti ora"
+      },
       "menuCardlessContentNode": {
         "deletingDisabled": "Deve essere vuoto per essere eliminato"
       },
@@ -71,8 +74,8 @@
       "campDangerZone": {
         "deleteCamp": {
           "description": "Una volta eliminato un campo, non è più possibile tornare indietro. Siate certi.",
-          "explanation": "Questa azione non può essere annullata. Questo eliminerà definitivamente il campo \"{campName}\", le attività, gli elenchi di materiali e rimuoverà tutte le associazioni di collaboratori.",
-          "label": "Digita \"{campName}\" per confermare.",
+          "explanation": "Questa azione non può essere annullata. Questo eliminerà definitivamente il campo \"{campTitle}\", le attività, gli elenchi di materiali e rimuoverà tutte le associazioni di collaboratori.",
+          "label": "Digita \"{campTitle}\" per confermare.",
           "title": "Elimina il campo"
         },
         "title": "Zona di pericolo"
@@ -80,10 +83,6 @@
       "campMaterialLists": {
         "createMaterialList": "Crea l'elenco dei materiali",
         "title": "Elenchi di materiali"
-      },
-      "campMaterialListsItem": {
-        "deleteError": "Impossibile eliminare l'elenco dei materiali. Controlla che l'elenco sia vuoto prima di eliminarlo.",
-        "deleteWarning": "Vuoi davvero cancellare questo elenco di materiali?"
       },
       "campPeriods": {
         "createPeriod": "Creare il periodo",
@@ -116,6 +115,7 @@
         "title": "Crea l'elenco dei materiali"
       },
       "dialogMaterialListEdit": {
+        "deleteError": "Impossibile eliminare l'elenco dei materiali. Controlla che l'elenco sia vuoto prima di eliminarlo.",
         "title": "Modifica elenco materiali"
       },
       "dialogPeriodCreate": {
@@ -281,15 +281,10 @@
           "activity": "Attività"
         },
         "picassoConfig": {
-          "orientation": "Layout della pagina",
-          "periods": "Sezione/i portante/i"
+          "orientation": "Layout della pagina"
         },
         "programConfig": {
-          "dayOverview": "Panoramica della giornata di stampa",
-          "periods": "Sezione/i portante/i"
-        },
-        "storyConfig": {
-          "periods": "Sezione/i portante/i"
+          "dayOverview": "Panoramica della giornata di stampa"
         }
       },
       "documents": {
@@ -325,6 +320,7 @@
           "Cover": "Pagina di copertina",
           "Picasso": "Picasso",
           "Program": "Programma",
+          "SafetyConsiderations": "Considerazioni sulla sicurezza",
           "Story": "Riassunto della storia",
           "Toc": "Indice dei contenuti"
         }
@@ -387,6 +383,11 @@
     "prompt": {
       "promptEntityDelete": {
         "title": "Davvero cancellare?"
+      }
+    },
+    "story": {
+      "storyDay": {
+        "noStory": "Nessun contenuto di storia trovato in questo giorno..."
       }
     },
     "toast": {
@@ -472,6 +473,7 @@
       "short": "Errore del server"
     },
     "validation": {
+      "greaterThan": "{_field_} deve essere maggiore di {min}",
       "greaterThanOrEqual_date": "{_field_} non può essere prima che {min}",
       "greaterThan_time": "{_camp_} deve essere posteriore a {min}",
       "lessThanOrEqual_date": "{_camp_} non può essere successivo a {max}",
@@ -482,42 +484,6 @@
     }
   },
   "views": {
-    "activity": {
-      "printPreview": "Apri l'anteprima di stampa",
-      "sideBarProgram": {
-        "title": "Attività in questo giorno"
-      }
-    },
-    "admin": {
-      "activity": {
-        "title": "Impostazioni dell'attività"
-      },
-      "adminMaterialLists": {
-        "title": "Liste di materiali"
-      },
-      "collaborators": {
-        "email": "Indirizzo e-mail",
-        "inactiveCollaborators": "Inattivo",
-        "members": "Membri",
-        "openInvitations": "Inviti aperti",
-        "title": "Team"
-      },
-      "info": {
-        "title": "Info sul campo"
-      },
-      "print": {
-        "title": "Stampa il campo"
-      },
-      "sideBarAdmin": {
-        "itemActivity": "Attività",
-        "itemActivitySubtitle": "Categoria, modello, stati",
-        "itemCollaborators": "Team",
-        "itemInfos": "Info sul campo",
-        "itemMaterialLists": "Liste di materiali",
-        "itemPrint": "PDF / Stampa"
-      },
-      "title": "Admin"
-    },
     "auth": {
       "activate": {
         "error": "Attivazione fallita",
@@ -577,10 +543,56 @@
       }
     },
     "camp": {
+      "activity": {
+        "printPreview": "Apri l'anteprima di stampa",
+        "sideBarProgram": {
+          "title": "Attività in questo giorno"
+        }
+      },
+      "admin": {
+        "activity": {
+          "title": "Impostazioni dell'attività"
+        },
+        "adminMaterialLists": {
+          "title": "Liste di materiali"
+        },
+        "collaborators": {
+          "email": "Indirizzo e-mail",
+          "inactiveCollaborators": "Inattivo",
+          "members": "Membri",
+          "openInvitations": "Inviti aperti",
+          "title": "Team"
+        },
+        "info": {
+          "title": "Info sul campo"
+        },
+        "print": {
+          "title": "Stampa il campo"
+        },
+        "sideBarAdmin": {
+          "itemActivity": "Attività",
+          "itemActivitySubtitle": "Categoria, modello, stati",
+          "itemCollaborators": "Team",
+          "itemInfos": "Info sul campo",
+          "itemMaterialLists": "Liste di materiali",
+          "itemPrint": "PDF / Stampa"
+        },
+        "title": "Admin"
+      },
       "campProgram": {
         "reminderLockedCreate": "Trascinare per creare è possibile solo in modalità sbloccata.",
         "reminderLockedMove": "Trascinare per spostarsi è possibile solo in modalità sbloccata.",
         "title": "Picasso"
+      },
+      "category": {
+        "category": {
+          "deleteCategory": "Elimina la categoria",
+          "properties": "Proprietà",
+          "template": "Modello per le nuove attività"
+        },
+        "sideBarCategory": {
+          "title": "Categorie"
+        }
       },
       "dashboard": {
         "activities": "Attività",
@@ -592,6 +604,7 @@
           "title": "Titolo"
         },
         "noEntries": "Non sono state trovate attività. Prova a cancellare i filtri di selezione e/o a ricaricare la pagina.",
+        "today": "Oggi",
         "welcome": "Benvenuto nel tuo nuovo campo. Non ci sono ancora attività definite."
       },
       "invitation": {
@@ -606,6 +619,19 @@
         "title": "Invito",
         "useOtherAuth": "Esci e usa un altro account",
         "userAlreadyInCamp": "Stai già partecipando a questo campo"
+      },
+      "material": {
+        "materialLists": {
+          "title": "Liste di materiali"
+        },
+        "materialOverview": {
+          "createNewList": "Creare un elenco di materiali",
+          "download": "Scarica la panoramica",
+          "title": "Panoramica generale"
+        },
+        "sideBarMaterialLists": {
+          "title": "Liste di materiali"
+        }
       },
       "navigation": {
         "desktop": {
@@ -651,31 +677,8 @@
       "prototypeCamps": "Prototipi",
       "title": "I miei campi"
     },
-    "category": {
-      "category": {
-        "deleteCategory": "Elimina la categoria",
-        "properties": "Proprietà",
-        "template": "Modello per le nuove attività"
-      },
-      "sideBarCategory": {
-        "title": "Categorie"
-      }
-    },
     "invitations": {
       "personalInvitations": "Inviti"
-    },
-    "material": {
-      "materialLists": {
-        "title": "Liste di materiali"
-      },
-      "materialOverview": {
-        "createNewList": "Creare un elenco di materiali",
-        "download": "Scarica la panoramica",
-        "title": "Panoramica generale"
-      },
-      "sideBarMaterialLists": {
-        "title": "Liste di materiali"
-      }
     },
     "pageNotFound": {
       "backToHome": "Torna a casa",

@@ -5,8 +5,8 @@
     ":prConcurrentLimitNone"
   ],
   "constraints": {
-    "node": "22.3.0",
-    "php": "8.3.9"
+    "node": "22.11.0",
+    "php": "8.3.13"
   },
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
@@ -78,6 +78,16 @@
     },
     {
       "matchDepNames": [
+        "@vue/test-utils"
+      ],
+      "matchFileNames": [
+        "frontend/package.json"
+      ],
+      "dependencyDashboardApproval": true,
+      "groupName": "vue-test-utils-frontend"
+    },
+    {
+      "matchDepNames": [
         "sass"
       ],
       "dependencyDashboardApproval": true
@@ -130,6 +140,14 @@
         "postgres"
       ],
       "allowedVersions": "15-alpine"
+    },
+    {
+      "matchDepNames": [
+        "cypress",
+        "cypress/included"
+      ],
+      "automerge": false,
+      "groupName": "cypress"
     }
   ],
   "customManagers": [

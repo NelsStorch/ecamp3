@@ -1,15 +1,18 @@
+import { describe, test, expect } from 'vitest'
 import repairConfig from '../repairPrintConfig.js'
 import PicassoConfig from '../config/PicassoConfig.vue'
 import ActivityConfig from '../config/ActivityConfig.vue'
 import CoverConfig from '../config/CoverConfig.vue'
 import ProgramConfig from '../config/ProgramConfig.vue'
 import StoryConfig from '../config/StoryConfig.vue'
+import SafetyConsiderationsConfig from '../config/SafetyConsiderationsConfig.vue'
 import TocConfig from '../config/TocConfig.vue'
+import ActivityListConfig from '../config/ActivityListConfig.vue'
 
 describe('repairConfig', () => {
   const camp = {
     _meta: { self: '/camps/1a2b3c4d' },
-    name: 'test camp',
+    shortTitle: 'test camp',
     periods: () => ({
       items: [
         {
@@ -25,8 +28,10 @@ describe('repairConfig', () => {
       CoverConfig,
       PicassoConfig,
       ProgramConfig,
+      SafetyConsiderationsConfig,
       StoryConfig,
       TocConfig,
+      ActivityListConfig,
     ].map((component) => [component.name.replace(/Config$/, ''), component.repairConfig])
   )
   const defaultContents = [
@@ -840,7 +845,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Story',
-            options: { periods: [] },
+            options: { periods: [], contentType: 'Storycontext' },
           },
         ],
         documentName: 'test camp',
@@ -855,7 +860,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Story',
-            options: { periods: [] },
+            options: { periods: [], contentType: 'Storycontext' },
           },
         ],
         documentName: 'test camp',
@@ -871,7 +876,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Story',
-            options: { periods: [] },
+            options: { periods: [], contentType: 'Storycontext' },
           },
         ],
         documentName: 'test camp',
@@ -888,6 +893,7 @@ describe('repairConfig', () => {
             type: 'Story',
             options: {
               periods: ['/periods/11112222', '/periods/1a2b3c4d'],
+              contentType: 'Storycontext',
             },
           },
         ],
@@ -904,7 +910,184 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Story',
-            options: { periods: ['/periods/1a2b3c4d'] },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'Storycontext',
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('uses known contentType', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Story',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'Storyboard',
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Story',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'Storycontext',
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+  })
+
+  describe('safetyConsiderations', () => {
+    test('adds missing options', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: { periods: [], contentType: 'SafetyConsiderations' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('allows empty periods', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: { periods: [], contentType: 'SafetyConsiderations' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: { periods: [], contentType: 'SafetyConsiderations' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('filters out unknown periods', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: {
+              periods: ['/periods/11112222', '/periods/1a2b3c4d'],
+              contentType: 'SafetyConsiderations',
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'SafetyConsiderations',
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('uses known contentType', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'Storyboard',
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'SafetyConsiderations',
+            },
           },
         ],
         documentName: 'test camp',
@@ -938,6 +1121,104 @@ describe('repairConfig', () => {
           {
             type: 'Toc',
             foo: 'bar',
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+  })
+
+  describe('activityList', () => {
+    test('adds missing options', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+            options: { periods: [] },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('allows empty periods', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+            options: { periods: [] },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+            options: { periods: [] },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('filters out unknown periods', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+            options: {
+              periods: ['/periods/11112222', '/periods/1a2b3c4d'],
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+            },
           },
         ],
         documentName: 'test camp',

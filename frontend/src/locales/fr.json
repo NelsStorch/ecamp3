@@ -79,8 +79,8 @@
       "campDangerZone": {
         "deleteCamp": {
           "description": "Une fois un camp supprimé, il est impossible de revenir en arrière. Ne continue que si tu es sûr.",
-          "explanation": "Cette action ne peut pas être annulée. Cette action supprimera définitivement le camp \"{campName}\", les activités, les listes de matériel et supprimera toutes les associations de collaborateurs.",
-          "label": "Veuillez taper \"{campName}\" pour confirmer.",
+          "explanation": "Cette action ne peut pas être annulée. Cette action supprimera définitivement le camp \"{campTitle}\", les activités, les listes de matériel et supprimera toutes les associations de collaborateurs.",
+          "label": "Veuillez taper \"{campTitle}\" pour confirmer.",
           "title": "Supprimer le camp"
         },
         "title": "Zone à risque"
@@ -88,10 +88,6 @@
       "campMaterialLists": {
         "createMaterialList": "Créer une liste de matériel",
         "title": "Listes de matériel"
-      },
-      "campMaterialListsItem": {
-        "deleteError": "Impossible de supprimer la liste de matériel. Vérifie que la liste soit vide avant de la supprimer.",
-        "deleteWarning": "Veux-tu vraiment supprimer cette liste de matériel ?"
       },
       "campPeriods": {
         "createPeriod": "Créer une période",
@@ -124,6 +120,7 @@
         "title": "Créer une liste de matériel"
       },
       "dialogMaterialListEdit": {
+        "deleteError": "Impossible de supprimer la liste de matériel. Vérifie que la liste soit vide avant de la supprimer.",
         "title": "Modifier la liste de matériel"
       },
       "dialogPeriodCreate": {
@@ -289,15 +286,10 @@
           "activity": "Activité"
         },
         "picassoConfig": {
-          "orientation": "Mise en page",
-          "periods": "Période(s) du camp"
+          "orientation": "Mise en page"
         },
         "programConfig": {
-          "dayOverview": "Aperçu des jours",
-          "periods": "Période(s) du camp"
-        },
-        "storyConfig": {
-          "periods": "Période(s) du camp"
+          "dayOverview": "Aperçu des jours"
         }
       },
       "documents": {
@@ -333,6 +325,7 @@
           "Cover": "Page de couverture",
           "Picasso": "Picasso",
           "Program": "Programme",
+          "SafetyConsiderations": "Considérations de sécurité",
           "Story": "Histoire",
           "Toc": "Table des matières"
         }
@@ -361,7 +354,7 @@
         "clipboard": "Presse-papier",
         "copyActivity": "Copier une activité",
         "copyActivityContent": "Copier le contenu depuis une activité",
-        "copyPastActivity": "Copier et coller une activité",
+        "copyPasteActivity": "Copier et coller une activité",
         "copySourceInfo": "Vous pouvez coller ici l'URL d'une activité pour copier son contenu.",
         "pasteActivity": "coller l'activité"
       },
@@ -404,6 +397,11 @@
     "prompt": {
       "promptEntityDelete": {
         "title": "Confirmation de suppression"
+      }
+    },
+    "story": {
+      "storyDay": {
+        "noStory": "Aucun file rouge trouvé ce jour-là..."
       }
     },
     "toast": {
@@ -492,6 +490,7 @@
       "copied": "{source} copié"
     },
     "validation": {
+      "greaterThan": "{_field_} doit être superieur à {min}",
       "greaterThanOrEqual_date": "{_field_} ne peut pas être antérieure à {min}",
       "greaterThan_time": "{_field_} doit être postérieure à {min}",
       "lessThanOrEqual_date": "{_field_} ne peut pas être postérieure à {max}",
@@ -502,42 +501,6 @@
     }
   },
   "views": {
-    "activity": {
-      "printPreview": "Ouvrir l'aperçu avant impression",
-      "sideBarProgram": {
-        "title": "Activités du jour"
-      }
-    },
-    "admin": {
-      "activity": {
-        "title": "Paramètres d'activité"
-      },
-      "adminMaterialLists": {
-        "title": "Liste de matériel"
-      },
-      "collaborators": {
-        "email": "Adresse e-mail",
-        "inactiveCollaborators": "Inactif",
-        "members": "Membres",
-        "openInvitations": "Invitations ouvertes",
-        "title": "Team"
-      },
-      "info": {
-        "title": "Infos sur le camp"
-      },
-      "print": {
-        "title": "Imprimer un camp"
-      },
-      "sideBarAdmin": {
-        "itemActivity": "Activités",
-        "itemActivitySubtitle": "Catégorie, modèle & statut",
-        "itemCollaborators": "Team",
-        "itemInfos": "Infos sur le camp",
-        "itemMaterialLists": "Liste de matériel",
-        "itemPrint": "PDF / Imprimer"
-      },
-      "title": "Admin"
-    },
     "auth": {
       "activate": {
         "error": "L'activation a échoué",
@@ -597,10 +560,56 @@
       }
     },
     "camp": {
+      "activity": {
+        "printPreview": "Ouvrir l'aperçu avant impression",
+        "sideBarProgram": {
+          "title": "Activités du jour"
+        }
+      },
+      "admin": {
+        "activity": {
+          "title": "Paramètres d'activité"
+        },
+        "adminMaterialLists": {
+          "title": "Liste de matériel"
+        },
+        "collaborators": {
+          "email": "Adresse e-mail",
+          "inactiveCollaborators": "Inactif",
+          "members": "Membres",
+          "openInvitations": "Invitations ouvertes",
+          "title": "Team"
+        },
+        "info": {
+          "title": "Infos sur le camp"
+        },
+        "print": {
+          "title": "Imprimer un camp"
+        },
+        "sideBarAdmin": {
+          "itemActivity": "Activités",
+          "itemActivitySubtitle": "Catégorie, modèle & statut",
+          "itemCollaborators": "Team",
+          "itemInfos": "Infos sur le camp",
+          "itemMaterialLists": "Liste de matériel",
+          "itemPrint": "PDF / Imprimer"
+        },
+        "title": "Admin"
+      },
       "campProgram": {
         "reminderLockedCreate": "Glisser pour créer n'est possible qu'en mode déverrouillé.",
         "reminderLockedMove": "Glisser pour déplacer n'est possible qu'en mode déverrouillé.",
         "title": "Programme général"
+      },
+      "category": {
+        "category": {
+          "deleteCategory": "Supprimer l'activité",
+          "properties": "Propriétés",
+          "template": "Modèle pour nouvelles activités"
+        },
+        "sideBarCategory": {
+          "title": "Catégories"
+        }
       },
       "dashboard": {
         "activities": "Activités",
@@ -612,6 +621,7 @@
           "title": "Titre"
         },
         "noEntries": "Aucune activité trouvée. Essaie d'effacer les filtres de sélection et/ou de recharger la page.",
+        "today": "Aujourd'hui",
         "welcome": "Bienvenue dans ton nouveau camp. Il n'y a pas encore d'activités définies."
       },
       "invitation": {
@@ -626,6 +636,19 @@
         "title": "Invitation",
         "useOtherAuth": "Déconnecte-toi et utilise un autre compte",
         "userAlreadyInCamp": "Tu participes déjà à ce camp"
+      },
+      "material": {
+        "materialLists": {
+          "title": "Liste de matériel"
+        },
+        "materialOverview": {
+          "createNewList": "Créer une liste de matériel",
+          "download": "Télécharger l'aperçu",
+          "title": "Aperçu général"
+        },
+        "sideBarMaterialLists": {
+          "title": "Listes de matériel"
+        }
       },
       "navigation": {
         "desktop": {
@@ -671,31 +694,8 @@
       "prototypeCamps": "Prototypes",
       "title": "Mes camps"
     },
-    "category": {
-      "category": {
-        "deleteCategory": "Supprimer l'activité",
-        "properties": "Propriétés",
-        "template": "Modèle pour nouvelles activités"
-      },
-      "sideBarCategory": {
-        "title": "Catégories"
-      }
-    },
     "invitations": {
       "personalInvitations": "Invitations"
-    },
-    "material": {
-      "materialLists": {
-        "title": "Liste de matériel"
-      },
-      "materialOverview": {
-        "createNewList": "Créer une liste de matériel",
-        "download": "Télécharger l'aperçu",
-        "title": "Aperçu général"
-      },
-      "sideBarMaterialLists": {
-        "title": "Listes de matériel"
-      }
     },
     "pageNotFound": {
       "backToHome": "Retour à l'accueil",

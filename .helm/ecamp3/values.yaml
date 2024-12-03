@@ -15,6 +15,7 @@ helpLink: # 'https://ecamp3.ch/faq'
 # enable/disable feature across the complete deployment
 featureToggle:
   developer: false # enables various tools/features foreseen for development deployments (language switcher, form controls view, performance measurement view, etc.)
+  checklist: false # enables checklist feature in frontend
 
 api:
   subpath: "/api"
@@ -225,6 +226,7 @@ apiCache:
   varnishSize: 50M
   varnishHttpPort: 8080
   varnishPurgePort: 8081
+  sendXKeyHeadersDownstream: false
   resources:
     requests:
       cpu: 10m
@@ -251,7 +253,7 @@ apiCache:
       requests:
         cpu: 10m
         memory: 20Mi
-  
+
 autoscaling:
   enabled: false
   minReplicas: 1

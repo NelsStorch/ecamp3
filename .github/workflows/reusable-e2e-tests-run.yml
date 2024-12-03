@@ -22,7 +22,7 @@ jobs:
           - firefox
           - edge
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - run: cp .env.ci .env
 
@@ -42,22 +42,39 @@ jobs:
           docker image ls -a --digests
 
       - name: Restore cache volumes (npm, composer)
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: .cache
           key: docker-compose-${{ hashFiles('frontend/package-lock.json', 'print/package-lock.json', 'api/composer.lock') }}-${{ matrix.browser }}
           restore-keys: |
             docker-compose-
+            
+      - run: |
+          jwt_passphrase=${JWT_PASSPHRASE:-$(grep ''^JWT_PASSPHRASE='' .env | cut -f 2 -d ''='')}
+          echo "Generating public / private keys for JWT"
+          mkdir -p config/jwt
+          echo "$jwt_passphrase" | openssl genpkey -out config/jwt/private.pem -pass stdin -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+          echo "$jwt_passphrase" | openssl pkey -in config/jwt/private.pem -passin stdin -out config/jwt/public.pem -pubout
+          setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+          setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+        working-directory: api
+
+      - run: docker compose up --wait -d database
+        
+      - run: docker compose -f docker-compose.yml run --rm api migrate-database
 
       # start necessary containers
-      - run: docker compose up -d api frontend pdf print browserless database docker-host http-cache mail
+      - run: docker compose -f docker-compose.yml up -d api frontend pdf print browserless database docker-host http-cache mail pg-admin reverse-proxy
 
-      - uses: cypress-io/github-action@v6.7.1
-        with:
-          working-directory: e2e
-          browser: ${{ matrix.browser }}
-          wait-on: 'http://localhost:3000, http://localhost:3000/api, http://localhost:3000/print/health'
-          wait-on-timeout: 300
+      # pull cypress while container are starting up
+      - run: docker compose pull e2e
+
+      - run: sh -x wait-for-container-startup.sh
+
+      - run: docker compose --profile e2e run --rm e2e --browser ${{ matrix.browser }}
+
+      - run: sudo chown -R $USER e2e
+        if: always()
 
       # store screenshots and videos on GitHub as artifacts, for downloading and debugging in case of problems
       - uses: actions/upload-artifact@v4
@@ -66,6 +83,10 @@ jobs:
           name: cypress-output-${{ matrix.browser }}${{ inputs.run-identifier != null && format('-{0}', inputs.run-identifier) }}
           path: |
             e2e/data/**/*
+
+      # print running containers
+      - run: docker ps -a
+        if: always()
 
       # print docker container logs (good for debugging; can be disabled again later on)
       - run: docker compose logs --tail="all"

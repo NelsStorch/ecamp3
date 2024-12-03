@@ -40,6 +40,22 @@ jobs:
               ".github/workflows/continuous-integration.yml"
             ]
           do_not_skip: '["workflow_dispatch", "schedule"]'
+          
+  frontend-check-needed:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          skip_after_successful_duplicate: 'true'
+          paths: |
+            [
+              "frontend/**",
+              ".github/workflows/continuous-integration.yml"
+            ]
+          do_not_skip: '["workflow_dispatch", "schedule"]'
   
   e2e-check-needed:
     runs-on: ubuntu-latest
@@ -71,12 +87,12 @@ jobs:
       - api-check-needed
     if: needs.api-check-needed.outputs.should_skip != 'true'
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.9'
-          tools: composer:2.7.0
+          php-version: '8.3.13'
+          tools: composer:2.8.0
           coverage: none
 
       - name: Get Composer Cache Directory
@@ -84,7 +100,7 @@ jobs:
         run: 'echo "dir=$(composer config cache-files-dir)" | tr -d "\n" >> $GITHUB_OUTPUT'
         working-directory: api
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -100,14 +116,17 @@ jobs:
   frontend-eslint:
     name: 'Lint: Frontend (ESLint)'
     runs-on: ubuntu-latest
+    needs:
+      - frontend-check-needed
+    if: needs.frontend-check-needed.outputs.should_skip != 'true'
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.3.0'
+          node-version: '22.11.0'
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -130,13 +149,13 @@ jobs:
     name: 'Lint: ClientPrint (ESLint)'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.3.0'
+          node-version: '22.11.0'
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -159,13 +178,13 @@ jobs:
     name: 'Lint: Print (ESLint)'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.3.0'
+          node-version: '22.11.0'
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -191,13 +210,13 @@ jobs:
       - e2e-check-needed
     if: needs.e2e-check-needed.outputs.should_skip != 'true'
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.3.0'
+          node-version: '22.11.0'
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -223,7 +242,7 @@ jobs:
       - api-check-needed
     if: needs.api-check-needed.outputs.should_skip != 'true'
     env:
-      TEST_DATABASE_URL: postgresql://ecamp3:ecamp3@localhost:5432/ecamp3test?serverVersion=15&charset=utf8
+      DATABASE_URL: postgresql://ecamp3:ecamp3@localhost:5432/ecamp3?serverVersion=15&charset=utf8
 
     services:
       postgres:
@@ -241,13 +260,13 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.9'
+          php-version: '8.3.13'
           extensions: intl-73.1
-          tools: composer:2.7.0
+          tools: composer:2.8.0
           coverage: pcov
 
       - name: Get Composer Cache Directory
@@ -255,7 +274,7 @@ jobs:
         run: 'echo "dir=$(composer config cache-files-dir)" | tr -d "\n" >> $GITHUB_OUTPUT'
         working-directory: api
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -279,7 +298,35 @@ jobs:
       - run: php bin/console doctrine:migrations:migrate --no-interaction -e test
         working-directory: api
 
-      - run: composer test
+      - run: |
+          php bin/console doctrine:database:create --no-interaction -e test
+          php bin/console doctrine:migrations:migrate --no-interaction -e test
+        env:
+          TEST_TOKEN: 1
+        working-directory: api
+
+      - run: |
+          php bin/console doctrine:database:create --no-interaction -e test
+          php bin/console doctrine:migrations:migrate --no-interaction -e test
+        env:
+          TEST_TOKEN: 2
+        working-directory: api
+
+      - run: |
+          php bin/console doctrine:database:create --no-interaction -e test
+          php bin/console doctrine:migrations:migrate --no-interaction -e test
+        env:
+          TEST_TOKEN: 3
+        working-directory: api
+
+      - run: |
+          php bin/console doctrine:database:create --no-interaction -e test
+          php bin/console doctrine:migrations:migrate --no-interaction -e test
+        env:
+          TEST_TOKEN: 4
+        working-directory: api
+
+      - run: composer paratest -- -p 4
         working-directory: api
         env:
           PERFORMANCE_TEST_DEBUG_OUTPUT: ${{ vars.PERFORMANCE_TEST_DEBUG_OUTPUT }}
@@ -298,14 +345,17 @@ jobs:
   frontend-tests:
     name: 'Tests: Frontend'
     runs-on: ubuntu-latest
+    needs:
+      - frontend-check-needed
+    if: needs.frontend-check-needed.outputs.should_skip != 'true'
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.3.0'
+          node-version: '22.11.0'
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -330,7 +380,7 @@ jobs:
       - name: replace paths in lcov.info that they reflect repo path
         run: |
           sed -i "s|src/|frontend/src/|g" frontend/data/coverage/lcov.info
-          
+
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@v2
         with:
@@ -342,13 +392,13 @@ jobs:
     name: 'Tests: Print'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.3.0'
+          node-version: '22.11.0'
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -381,13 +431,13 @@ jobs:
     name: 'Tests: PDF'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.3.0'
+          node-version: '22.11.0'
 
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -442,7 +492,7 @@ jobs:
           parallel-finished: true
           carryforward: "api,frontend,print,pdf"
           fail-on-error: false
-          
+
   workflow-success:
     name: workflow-success
     needs:

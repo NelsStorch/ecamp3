@@ -5,15 +5,18 @@
     <v-toolbar-items>
       <v-btn :to="campRoute(camp)" text>
         <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-tent</v-icon>
-        <span class="sr-only-sm-and-down">{{
-          camp.title
-            | loading($tc('views.camp.navigation.desktop.navTopbar.campIsLoading'))
-        }}</span>
+        <span class="sr-only-sm-and-down">{{ campShortTitle(camp) }}</span>
       </v-btn>
       <v-btn :to="campRoute(camp, 'program')" text>
         <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-view-dashboard</v-icon>
         <span class="sr-only-sm-and-down">{{
           $tc('views.camp.navigation.desktop.navTopbar.program')
+        }}</span>
+      </v-btn>
+      <v-btn v-if="hasChecklist" :to="campRoute(camp, 'overview/checklists')" text>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-clipboard-list-outline</v-icon>
+        <span class="sr-only-sm-and-down">{{
+          $tc('views.camp.navigation.desktop.navTopbar.checklist')
         }}</span>
       </v-btn>
       <v-btn :to="campRoute(camp, 'story')" text>
@@ -53,6 +56,7 @@ import { campRoute, materialListRoute } from '@/router.js'
 import { mapGetters } from 'vuex'
 import { campRoleMixin } from '@/mixins/campRoleMixin.js'
 import { getEnv } from '@/environment.js'
+import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default {
   name: 'NavTopbar',
@@ -70,6 +74,9 @@ export default {
     }
   },
   computed: {
+    hasChecklist() {
+      return this.camp.checklists().items.length > 0
+    },
     helpLink() {
       return getEnv().HELP_LINK
     },
@@ -80,12 +87,9 @@ export default {
   methods: {
     materialListRoute,
     campRoute,
+    campShortTitle,
   },
 }
 </script>
 
-<style lang="scss" scoped>
-.camp--name:deep(.v-btn__content) {
-  width: 100%;
-}
-</style>
+<style lang="scss" scoped></style>

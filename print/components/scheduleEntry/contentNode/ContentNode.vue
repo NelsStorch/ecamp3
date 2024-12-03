@@ -16,7 +16,7 @@ const props = defineProps({
 const { error } = await useAsyncData(
   `ContentNode-${props.contentNode._meta.self}`,
   async () => {
-    await Promise.all([
+    return await Promise.all([
       props.contentNode._meta.load,
       props.contentNode.children().$loadItems(),
       props.contentNode.contentType()._meta.load,
@@ -34,9 +34,10 @@ import LearningObjectives from './LearningObjectives.vue'
 import LearningTopics from './LearningTopics.vue'
 import Material from './Material.vue'
 import Notes from './Notes.vue'
-import SafetyConcept from './SafetyConcept.vue'
+import SafetyConsiderations from './SafetyConsiderations.vue'
 import Storycontext from './Storycontext.vue'
 import Storyboard from './Storyboard.vue'
+import Checklist from './Checklist.vue'
 
 export default defineNuxtComponent({
   components: {
@@ -48,9 +49,10 @@ export default defineNuxtComponent({
     LearningTopics,
     Material,
     Notes,
-    SafetyConcept,
+    SafetyConsiderations,
     Storyboard,
     Storycontext,
+    Checklist,
   },
   methods: {
     componentFor(contentNode) {

@@ -13,7 +13,7 @@ on:
       env:
         required: true
         type: string
-      pr_number:
+      pr-number:
         required: false
         type: string
       dropDBOnUninstall:
@@ -32,7 +32,7 @@ jobs:
       name: ${{ inputs.env }}
     steps:
       - name: Get link to currently running job logs
-        uses: Tiryoh/gha-jobid-action@v1.3.0
+        uses: Tiryoh/gha-jobid-action@v1.4.0
         id: job-url
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -47,10 +47,10 @@ jobs:
           env: ${{ inputs.name }}
 
       - name: Comment progress on PR
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@v3
         if: ${{ inputs.env == 'feature-branch' }}
         with:
-          pr_number: ${{ inputs.pr_number }}
+          pr-number: ${{ inputs.pr-number }}
           message: |
             ### <span aria-hidden="true">🏗️</span> Feature branch deployment in progress
 
@@ -59,9 +59,9 @@ jobs:
             |---------------------------------|------------------------|
             |<span aria-hidden="true">🔨</span> Latest commit | [${{ inputs.sha }}](https://github.com/${{ github.repository }}/commit/${{ inputs.sha }}) |
             |<span aria-hidden="true">🔍</span> Latest deploy log | [${{ steps.job-url.outputs.html_url }}](${{ steps.job-url.outputs.html_url }}) |
-          comment_tag: feature-branch-deployment-status
+          comment-tag: feature-branch-deployment-status
 
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           ref: ${{ inputs.sha }}
 
@@ -94,6 +94,7 @@ jobs:
             --set ingress.basicAuth.username=${{ secrets.BASIC_AUTH_USERNAME }} \
             --set ingress.basicAuth.password='${{ secrets.BASIC_AUTH_PASSWORD }}' \
             --set apiCache.enabled=${{ vars.API_CACHE_ENABLED || false }} \
+            --set apiCache.sendXKeyHeadersDownstream=${{ vars.SEND_XKEY_HEADERS_DOWNSTREAM != null && format('''{0}''', vars.SEND_XKEY_HEADERS_DOWNSTREAM) || null }} \
             --set mail.dummyEnabled=true \
             --set postgresql.url='${{ secrets.POSTGRES_URL }}/ecamp3${{ inputs.name }}?sslmode=require' \
             --set postgresql.adminUrl='${{ secrets.POSTGRES_ADMIN_URL }}/ecamp3${{ inputs.name }}?sslmode=require' \
@@ -129,7 +130,8 @@ jobs:
             --set recaptcha.siteKey='${{ secrets.RECAPTCHA_SITE_KEY }}' \
             --set recaptcha.secret='${{ secrets.RECAPTCHA_SECRET }}' \
             --set frontend.loginInfoTextKey=${{ vars.LOGIN_INFO_TEXT_KEY }} \
-            --set featureToggle.developer=true
+            --set featureToggle.developer=true \
+            --set featureToggle.checklist=${{ vars.FEATURE_CHECKLIST || 'false' }}
 
       - name: Finish the GitHub deployment
         uses: bobheadxi/deployments@v1.5.0
@@ -150,10 +152,10 @@ jobs:
           timezone: Europe/Zurich
 
       - name: Comment success on PR
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@v3
         if: ${{ success() && inputs.env == 'feature-branch' }}
         with:
-          pr_number: ${{ inputs.pr_number }}
+          pr-number: ${{ inputs.pr-number }}
           message: |
             ### <span aria-hidden="true">✅</span> Feature branch deployment ready!
 
@@ -167,13 +169,13 @@ jobs:
             |<span aria-hidden="true">🔍</span> Latest deploy log | [${{ steps.job-url.outputs.html_url }}](${{ steps.job-url.outputs.html_url }}) |
             |<span aria-hidden="true">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://api.qrserver.com/v1/create-qr-code/?size=180x180&ecc=H&format=svg&qzone=4&color=5-72-97&data=https://${{ inputs.name }}.${{ vars.DOMAIN }}/)<br /><br />_Use your smartphone camera to open QR code link._</details> |
             ---
-          comment_tag: feature-branch-deployment-status
+          comment-tag: feature-branch-deployment-status
 
       - name: Comment failure on PR
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@v3
         if: ${{ failure() && inputs.env == 'feature-branch' }}
         with:
-          pr_number: ${{ inputs.pr_number }}
+          pr-number: ${{ inputs.pr-number }}
           message: |
             ### <span aria-hidden="true">💥</span> Feature branch deployment failed
 
@@ -184,4 +186,4 @@ jobs:
             |<span aria-hidden="true">🔨</span> Latest commit | [${{ inputs.sha }}](https://github.com/${{ github.repository }}/commit/${{ inputs.sha }}) |
             |<span aria-hidden="true">🔍</span> Latest deploy log | [${{ steps.job-url.outputs.html_url }}](${{ steps.job-url.outputs.html_url }}) |
             ---
-          comment_tag: feature-branch-deployment-status
+          comment-tag: feature-branch-deployment-status

@@ -15,9 +15,10 @@ import LearningObjectives from './LearningObjectives.vue'
 import LearningTopics from './LearningTopics.vue'
 import Storyboard from './Storyboard.vue'
 import Notes from './Notes.vue'
-import SafetyConcept from './SafetyConcept.vue'
+import SafetyConsiderations from './SafetyConsiderations.vue'
 import Material from './Material.vue'
 import Storycontext from './Storycontext.vue'
+import Checklist from './Checklist.vue'
 
 export default {
   name: 'ContentNode',
@@ -38,9 +39,10 @@ export default {
         LearningTopics,
         Storyboard,
         Notes,
-        SafetyConcept,
+        SafetyConsiderations,
         Material,
         Storycontext,
+        Checklist,
       }[this.contentTypeName]
     },
   },

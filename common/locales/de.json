@@ -1,12 +1,16 @@
 {
   "components": {
-    "story": {
-      "storyDay": {
-        "noStory": "Die Blöcke an diesem Tag enthalten keinen roten Faden."
+    "summary": {
+      "summaryDay": {
+        "noContent": "Die Blöcke an diesem Tag enthalten keine '{contentType}' Inhalte."
       }
     }
   },
   "contentNode": {
+    "checklist": {
+      "info": "Wähle die relevanten Checklistenpunkte, welche durch diese Aktivität abgedeckt werden (Ausbildungsziele, J+S-Checklisten, etc.).",
+      "name": "Checkliste"
+    },
     "columnLayout": {
       "entity": {
         "column": {
@@ -72,9 +76,9 @@
       "printAboveMainContent": "Über dem Hauptinhalt drucken",
       "printBelowMainContent": "Unter dem Hauptinhalt drucken"
     },
-    "safetyConcept": {
+    "safetyConsiderations": {
       "info": "Einige Blöcke erfordern, dass ihr euch Gedanken zu den Risiken macht. Hier könnt ihr diese Gedanken erfassen.{br}Haltet fest, welche Risiken ihr erkannt habt - und wie ihr diesen begegnen könnt.",
-      "name": "Sicherheitskonzept"
+      "name": "Sicherheitsüberlegungen"
     },
     "storyboard": {
       "entity": {
@@ -128,10 +132,10 @@
         "courseKind": "Kursbezeichnung (bei J+S Kurs: J+S Bezeichnung)",
         "courseNumber": "Kursnummer",
         "kind": "Lagerart (Haus-, Zelt-, Unterwegslager, Sommer-, Herbstlager)",
-        "motto": "Motto",
-        "name": "Lagername",
+        "motto": "Motto / Thema",
         "organizer": "Organisator",
         "printYSLogoOnPicasso": "J+S-Logo auf Grobprogramm drucken (bei J+S-Kursen aktivieren)",
+        "shortTitle": "Kurzer Lagertitel",
         "title": "Lagertitel",
         "trainingAdvisorName": "Bürgerlicher Name der Betreuungsperson"
       },
@@ -161,13 +165,26 @@
       },
       "name": "Block-Kategorien",
       "numberingStyles": {
+        "-": "keine Nummerierung",
         "1": "1, 2, 3 - Zahlen",
         "A": "A, B, C - grosse Buchstaben",
         "I": "I, II, III - grosse römische Zahlen",
         "a": "a, b, c - kleine Buchstaben",
-        "i": "i, ii, iii - kleine römische Zahlen",
-        "-": "keine Nummerierung"
+        "i": "i, ii, iii - kleine römische Zahlen"
       }
+    },
+    "checklist": {
+      "fields": {
+        "copyChecklistSource": "Vorlage",
+        "name": "Name"
+      },
+      "name": "Checkliste | Checklisten"
+    },
+    "checklistItem": {
+      "fields": {
+        "text": "Text"
+      },
+      "name": "Checklisteneintrag"
     },
     "contentType": {
       "name": "Inhalttyp | Inhalttypen"
@@ -221,9 +238,9 @@
         "endDate": "Enddatum",
         "endDatetime": "Endzeit",
         "nr": "Nr.",
-        "time": "Zeitpunkt",
         "startDate": "Startdatum",
-        "startDatetime": "Startzeit"
+        "startDatetime": "Startzeit",
+        "time": "Zeitpunkt"
       },
       "name": "Zeitplaneintrag"
     }
@@ -244,6 +261,12 @@
     "shortScheduleEntryDescription": "Tag\u202f{dayNumber} {startTime}"
   },
   "print": {
+    "activityList": {
+      "title": "Aktivitätsübersicht"
+    },
+    "config": {
+      "periods": "Lagerabschnitt(e)"
+    },
     "cover": {
       "title": "Titelseite"
     },
@@ -259,8 +282,13 @@
     "program": {
       "title": "Detailprogramm"
     },
-    "story": {
-      "title": "Roter Faden"
+    "summary": {
+      "safetyConsiderations": {
+        "title": "Sicherheitsüberlegungen"
+      },
+      "storycontext": {
+        "title": "Roter Faden"
+      }
     },
     "toc": {
       "title": "Inhaltsverzeichnis"

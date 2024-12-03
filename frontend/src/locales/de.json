@@ -2,6 +2,9 @@
   "components": {
     "activity": {
       "content": {
+        "checklist": {
+          "title": "Checkliste bearbeiten"
+        },
         "columnLayout": {
           "columnOperations": {
             "addColumn": "Spalte hinzufügen",
@@ -80,8 +83,8 @@
       "campDangerZone": {
         "deleteCamp": {
           "description": "Nachdem ein Lager gelöscht ist, gibt es kein zurück mehr. Bitte fahre nur fort, wenn du sicher bist.",
-          "explanation": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird das Lager \"{campName}\" inklusive allen Aktivitäten, Materiallisten und Verantwortungszuweisungen dauerhaft gelöscht.",
-          "label": "Bitte gib zur Bestätigung \"{campName}\" ein.",
+          "explanation": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird das Lager \"{campTitle}\" inklusive allen Aktivitäten, Materiallisten und Verantwortungszuweisungen dauerhaft gelöscht.",
+          "label": "Bitte gib zur Bestätigung \"{campTitle}\" ein.",
           "title": "Lager löschen"
         },
         "title": "Gefahrenzone"
@@ -89,10 +92,6 @@
       "campMaterialLists": {
         "createMaterialList": "Materialliste erstellen",
         "title": "Materiallisten"
-      },
-      "campMaterialListsItem": {
-        "deleteError": "Materialliste konnte nicht gelöscht werden. Überprüfe vor dem Löschen, dass die Liste leer ist.",
-        "deleteWarning": "Möchtest du diese Materialliste wirklich löschen?"
       },
       "campPeriods": {
         "createPeriod": "Lagerabschnitt erstellen",
@@ -132,6 +131,7 @@
         "title": "Materialliste erstellen"
       },
       "dialogMaterialListEdit": {
+        "deleteError": "Materialliste konnte nicht gelöscht werden. Überprüfe vor dem Löschen, dass die Liste leer ist.",
         "title": "Materialliste bearbeiten"
       },
       "dialogPeriodCreate": {
@@ -159,7 +159,8 @@
         }
       },
       "campCreateStep1": {
-        "submitTooltip": "Bitte fülle alle Pflichtfelder aus."
+        "submitTooltip": "Bitte fülle alle Pflichtfelder aus.",
+        "titlePlaceholder": "Klassenlager 2024 5. Klasse"
       },
       "campCreateStep2": {
         "category": "Block-Kategorien",
@@ -187,10 +188,30 @@
       },
       "copyCategoryInfoDialog": {
         "allow": "Jetzt erlauben",
-        "denied": "Du hast das Lesen von der Zwischenablage untersagt. Du kannst daher kopierte Kategorien nicht einfügen.",
+        "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Kategorien können daher nicht eingefügt werden.",
         "description": "Damit du eine kopierte Kategorie einfügen kannst, musst du eCamp erlauben deine Zwischenablage zu lesen.",
         "granted": "Du kannst nun kopierte Kategorien einfügen.",
         "title": "Kategorie kopieren & einfügen"
+      }
+    },
+    "checklist": {
+      "checklistCreate": {
+        "title": "Checkliste erstellen"
+      },
+      "checklistDetail": {
+        "deleteError": "Checkliste konnte nicht gelöscht werden. Überprüfe vor dem Löschen, dass die Checkliste nicht mehr in Aktivitäten verwendet wird.",
+        "deleteWarning": "Möchtest du diese Checkliste wirklich löschen? Der komplette Inhalt dieser Checkliste wird gelöscht."
+      },
+      "checklistItemCreate": {
+        "add": "Checklisten-Eintrag erstellen",
+        "title": "Checklisten-Eintrag hinzufügen"
+      },
+      "checklistItemEdit": {
+        "delete": "Möchtest du diesen Eintrag wirklich löschen?",
+        "title": "Checklisten-Eintrag bearbeiten"
+      },
+      "sortableChecklist": {
+        "add": "Zu \"{parent}\" hinzufügen"
       }
     },
     "collaborator": {
@@ -286,6 +307,7 @@
     },
     "navigation": {
       "userMeta": {
+        "admin": "Admin",
         "invitations": "Einladungen",
         "logOut": "Ausloggen",
         "myCamps": "Meine Lager",
@@ -313,11 +335,7 @@
           "periods": "Lagerabschnitt(e)"
         },
         "programConfig": {
-          "dayOverview": "Tagesübersicht",
-          "periods": "Lagerabschnitt(e)"
-        },
-        "storyConfig": {
-          "periods": "Lagerabschnitt(e)"
+          "dayOverview": "Tagesübersicht"
         }
       },
       "documents": {
@@ -350,10 +368,12 @@
         "add": "Inhalt hinzufügen",
         "config": {
           "Activity": "Einzelne Aktivität",
+          "ActivityList": "Aktivitätenliste (Kurse)",
           "Cover": "Titelseite",
           "Picasso": "Grobprogramm",
           "Program": "Detailprogramm",
-          "Story": "Roter Faden",
+          "SafetyConsiderations": "Sicherheits­überlegungen",
+          "Story": "Geschichte",
           "Toc": "Inhaltsverzeichnis"
         }
       },
@@ -424,6 +444,11 @@
     "prompt": {
       "promptEntityDelete": {
         "title": "Wirklich löschen?"
+      }
+    },
+    "story": {
+      "storyDay": {
+        "noStory": "Die Blöcke an diesem Tag enthalten keinen roten Faden."
       }
     },
     "toast": {
@@ -512,6 +537,7 @@
       "copied": "{source} kopiert"
     },
     "validation": {
+      "greaterThan": "{_field_} muss grösser sein als {min}",
       "greaterThanOrEqual_date": "{_field_} darf nicht vor {min} liegen",
       "greaterThan_time": "{_field_} muss später als {min} sein",
       "lessThanOrEqual_date": "{_field_} darf nicht nach {max} liegen",
@@ -522,42 +548,6 @@
     }
   },
   "views": {
-    "activity": {
-      "printPreview": "Druckvorschau öffnen",
-      "sideBarProgram": {
-        "title": "Tagesübersicht"
-      }
-    },
-    "admin": {
-      "activity": {
-        "title": "Aktivitätseinstellungen"
-      },
-      "adminMaterialLists": {
-        "title": "Materiallisten"
-      },
-      "collaborators": {
-        "email": "E-Mail-Adresse",
-        "inactiveCollaborators": "Inaktiv",
-        "members": "Mitarbeitende",
-        "openInvitations": "Offene Einladungen",
-        "title": "Team"
-      },
-      "info": {
-        "title": "Lagerinfos"
-      },
-      "print": {
-        "title": "Lager drucken"
-      },
-      "sideBarAdmin": {
-        "itemActivity": "Aktivitäten",
-        "itemActivitySubtitle": "Kategorie, Vorlagen & Status",
-        "itemCollaborators": "Team",
-        "itemInfos": "Lagerinfos",
-        "itemMaterialLists": "Materiallisten",
-        "itemPrint": "PDF / Drucken"
-      },
-      "title": "Admin"
-    },
     "auth": {
       "activate": {
         "error": "Aktivierung fehlgeschlagen",
@@ -574,6 +564,7 @@
         "loginCallback": {
           "loginInProgress": "Du wirst eingeloggt"
         },
+        "notActivated": "Nicht aktiviert?",
         "or": "oder mit",
         "password": "Passwort",
         "passwordForgotten": "Passwort vergessen?",
@@ -585,6 +576,8 @@
           "midata": "MiData"
         },
         "registernow": "Jetzt registrieren",
+        "resendActivation": "Aktivierungsmail erneut senden",
+        "resetPassword": "Passwort zurücksetzen",
         "termsOfServiceLink": "Nutzungsbedingungen"
       },
       "register": {
@@ -599,6 +592,12 @@
         "message": "Wir haben dir eine Mail geschickt. Bitte schliesse die Registrierung ab, in dem du den Aktivierungs-Link im Mail aufrufst.",
         "success": "Erfolgreich registriert",
         "title": "Konto erstellen"
+      },
+      "resendActivation": {
+        "errorMessage": "Erneutes Senden der Aktivierung fehlgeschlagen.",
+        "send": "Abschicken",
+        "successMessage": "Mail mit Link für 'Aktivierung' wird versendet.",
+        "title": "Aktivierungsmail erneut senden"
       },
       "resetPassword": {
         "errorMessage": "Passwort konnte nicht geändert werden.",
@@ -617,10 +616,62 @@
       }
     },
     "camp": {
+      "activity": {
+        "printPreview": "Druckvorschau öffnen",
+        "sideBarProgram": {
+          "title": "Tagesübersicht"
+        }
+      },
+      "admin": {
+        "activity": {
+          "title": "Aktivitätseinstellungen"
+        },
+        "adminMaterialLists": {
+          "title": "Materiallisten"
+        },
+        "collaborators": {
+          "email": "E-Mail-Adresse",
+          "inactiveCollaborators": "Inaktiv",
+          "members": "Mitarbeitende",
+          "openInvitations": "Offene Einladungen",
+          "title": "Team"
+        },
+        "info": {
+          "title": "Lagerinfos"
+        },
+        "print": {
+          "title": "Lager drucken"
+        },
+        "sideBarAdmin": {
+          "itemActivity": "Aktivitäten",
+          "itemActivitySubtitle": "Kategorie, Vorlagen & Status",
+          "itemCollaborators": "Team",
+          "itemInfos": "Lagerinfos",
+          "itemMaterialLists": "Materiallisten",
+          "itemPrint": "PDF / Drucken"
+        },
+        "title": "Admin"
+      },
       "campProgram": {
         "reminderLockedCreate": "Ziehen zum Erstellen ist nur im entsperrten Modus möglich.",
         "reminderLockedMove": "Ziehen zum Verschieben ist nur im entsperrten Modus möglich.",
         "title": "Grobprogramm"
+      },
+      "category": {
+        "category": {
+          "copyCategory": "Kategorie kopieren",
+          "deleteCategory": "Kategorie löschen",
+          "properties": "Eigenschaften",
+          "template": "Vorlage für neue Blöcke"
+        },
+        "sideBarCategory": {
+          "title": "Kategorien"
+        }
+      },
+      "checklistOverview": {
+        "checklistLists": {
+          "title": "Checklisten-Übersicht"
+        }
       },
       "dashboard": {
         "activities": "Aktivitäten",
@@ -632,6 +683,7 @@
           "title": "Titel"
         },
         "noEntries": "Keine Aktivitäten gefunden. Versuche die Filter zu entfernen oder lade die Seite neu.",
+        "today": "Heute",
         "welcome": "Willkommen in deinem neuen Lager. Es sind noch keine Aktivitäten erfasst. "
       },
       "invitation": {
@@ -647,11 +699,25 @@
         "useOtherAuth": "Ausloggen und einen anderen Account benutzen",
         "userAlreadyInCamp": "Du arbeitest schon an diesem Lager mit"
       },
+      "material": {
+        "materialLists": {
+          "title": "Materiallisten"
+        },
+        "materialOverview": {
+          "createNewList": "Materialliste erstellen",
+          "download": "Übersicht herunterladen",
+          "title": "Gesamtübersicht"
+        },
+        "sideBarMaterialLists": {
+          "title": "Materiallisten"
+        }
+      },
       "navigation": {
         "desktop": {
           "navTopbar": {
             "admin": "Admin",
             "campIsLoading": "Lager wird geladen",
+            "checklist": "Checkliste",
             "material": "Material",
             "print": "Drucken",
             "program": "Programm",
@@ -670,6 +736,7 @@
             "itemActivity": "Aktivitäten",
             "itemActivitySubtitle": "Kategorie, Vorlagen & Status",
             "itemCamps": "Meine Lager",
+            "itemChecklists": "Checklisten-Übersicht",
             "itemClose": "Menü schliessen",
             "itemCollaborators": "Team",
             "itemInfos": "Lagerinfos",
@@ -691,32 +758,8 @@
       "prototypeCamps": "Vorlagen",
       "title": "Meine Lager"
     },
-    "category": {
-      "category": {
-        "copyCategory": "Kategorie kopieren",
-        "deleteCategory": "Kategorie löschen",
-        "properties": "Eigenschaften",
-        "template": "Vorlage für neue Blöcke"
-      },
-      "sideBarCategory": {
-        "title": "Kategorien"
-      }
-    },
     "invitations": {
       "personalInvitations": "Einladungen"
-    },
-    "material": {
-      "materialLists": {
-        "title": "Materiallisten"
-      },
-      "materialOverview": {
-        "createNewList": "Materialliste erstellen",
-        "download": "Übersicht herunterladen",
-        "title": "Gesamtübersicht"
-      },
-      "sideBarMaterialLists": {
-        "title": "Materiallisten"
-      }
     },
     "pageNotFound": {
       "backToHome": "Zurück zur Startseite",

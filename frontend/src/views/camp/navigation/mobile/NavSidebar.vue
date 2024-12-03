@@ -39,11 +39,12 @@
 
       <v-list v-if="!camp._meta.loading">
         <SidebarListItem
-          :title="camp.name"
+          :title="camp.title"
           :subtitle="camp.motto"
           two-line
           hide-avatar
           hide-chevron
+          title-overflow
         />
         <v-divider inset i />
         <SidebarListItem
@@ -57,6 +58,12 @@
           :title="$tc('views.camp.navigation.mobile.navSidebar.itemActivity')"
           :subtitle="$tc('views.camp.navigation.mobile.navSidebar.itemActivitySubtitle')"
           icon="mdi-view-dashboard"
+        />
+        <v-divider inset />
+        <SidebarListItem
+          :to="campRoute(camp, 'overview/checklists')"
+          :title="$tc('views.camp.navigation.mobile.navSidebar.itemChecklists')"
+          icon="mdi-clipboard-list-outline"
         />
         <v-divider inset />
         <SidebarListItem
@@ -158,12 +165,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-bottom-navigation--fixed {
-  height: auto !important;
-  min-height: 56px;
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
 .v-application .ec-close-drawer {
   background-color: #{map-get($blue-grey, 'lighten-5')};
   border-top: 1px solid #{map-get($blue-grey, 'lighten-4')};

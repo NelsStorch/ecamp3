@@ -2,6 +2,9 @@
   "components": {
     "activity": {
       "content": {
+        "checklist": {
+          "title": "Edit checklist"
+        },
         "columnLayout": {
           "columnOperations": {
             "addColumn": "Add a column",
@@ -80,8 +83,8 @@
       "campDangerZone": {
         "deleteCamp": {
           "description": "Once you delete a camp, there is no going back. Please be certain.",
-          "explanation": "This action cannot be undone. This will permanently delete the \"{campName}\" camp, activities, material lists and remove all collaborator associations.",
-          "label": "Please type \"{campName}\" to confirm.",
+          "explanation": "This action cannot be undone. This will permanently delete the \"{campTitle}\" camp, activities, material lists and remove all collaborator associations.",
+          "label": "Please type \"{campTitle}\" to confirm.",
           "title": "Delete Camp"
         },
         "title": "Danger Zone"
@@ -89,10 +92,6 @@
       "campMaterialLists": {
         "createMaterialList": "Create material list",
         "title": "Material lists"
-      },
-      "campMaterialListsItem": {
-        "deleteError": "Could not delete the material list. Check if the list is empty before deleting it.",
-        "deleteWarning": "Do you really want to delete this material list?"
       },
       "campPeriods": {
         "createPeriod": "Create period",
@@ -132,6 +131,7 @@
         "title": "Create material list"
       },
       "dialogMaterialListEdit": {
+        "deleteError": "Could not delete the material list. Check if the list is empty before deleting it.",
         "title": "Edit material list"
       },
       "dialogPeriodCreate": {
@@ -159,7 +159,8 @@
         }
       },
       "campCreateStep1": {
-        "submitTooltip": "Please fill out all required fields."
+        "submitTooltip": "Please fill out all required fields.",
+        "titlePlaceholder": "Summer camp 2024"
       },
       "campCreateStep2": {
         "category": "Activity categories",
@@ -185,12 +186,32 @@
         "layout": "Layout",
         "noTemplate": "No template"
       },
-      "copyActivityInfoDialog": {
+      "copyCategoryInfoDialog": {
         "allow": "Allow now",
         "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied categories.",
         "description": "In order to paste a copied category, you must allow eCamp to read your clipboard.",
         "granted": "You can now paste copied categories.",
         "title": "Copy & paste category"
+      }
+    },
+    "checklist": {
+      "checklistCreate": {
+        "title": "Create checklist"
+      },
+      "checklistDetail": {
+        "deleteError": "Checklist couldn't be deleted. Ensure checklist is not used within activities before trying to delete it.",
+        "deleteWarning": "Do you really want to remove this checklist? All content of the checklist will be deleted."
+      },
+      "checklistItemCreate": {
+        "add": "Create checklist entry",
+        "title": "Add checklist entry"
+      },
+      "checklistItemEdit": {
+        "delete": "Do you really want to remove this item?",
+        "title": "Edit checklist entry"
+      },
+      "sortableChecklist": {
+        "add": "Add to \"{parent}\""
       }
     },
     "collaborator": {
@@ -286,6 +307,7 @@
     },
     "navigation": {
       "userMeta": {
+        "admin": "Admin",
         "invitations": "Invitations",
         "logOut": "Log out",
         "myCamps": "My camps",
@@ -313,11 +335,7 @@
           "periods": "Period(s)"
         },
         "programConfig": {
-          "dayOverview": "print day overview",
-          "periods": "Period(s)"
-        },
-        "storyConfig": {
-          "periods": "Period(s)"
+          "dayOverview": "print day overview"
         }
       },
       "documents": {
@@ -350,10 +368,12 @@
         "add": "Add content",
         "config": {
           "Activity": "Single activity",
+          "ActivityList": "Activity list (courses)",
           "Cover": "Cover page",
           "Picasso": "Picasso",
           "Program": "Program",
-          "Story": "Story summary",
+          "SafetyConsiderations": "Safety considerations",
+          "Story": "Story",
           "Toc": "Table of contents"
         }
       },
@@ -424,6 +444,11 @@
     "prompt": {
       "promptEntityDelete": {
         "title": "Really delete?"
+      }
+    },
+    "story": {
+      "storyDay": {
+        "noStory": "The activities on this day do not contain any story content."
       }
     },
     "toast": {
@@ -512,6 +537,7 @@
       "copied": "{source} copied"
     },
     "validation": {
+      "greaterThan": "{_field_} must be greater than {min}",
       "greaterThanOrEqual_date": "{_field_} may not be earlier than {min}",
       "greaterThan_time": "{_field_} must be later than {min}",
       "lessThanOrEqual_date": "{_field_} may not be later than {max}",
@@ -522,42 +548,6 @@
     }
   },
   "views": {
-    "activity": {
-      "printPreview": "Open print preview",
-      "sideBarProgram": {
-        "title": "Activities on this day"
-      }
-    },
-    "admin": {
-      "activity": {
-        "title": "Activity settings"
-      },
-      "adminMaterialLists": {
-        "title": "Material lists"
-      },
-      "collaborators": {
-        "email": "Email address",
-        "inactiveCollaborators": "Inactive",
-        "members": "Members",
-        "openInvitations": "Open invitations",
-        "title": "Team"
-      },
-      "info": {
-        "title": "Camp infos"
-      },
-      "print": {
-        "title": "Print camp"
-      },
-      "sideBarAdmin": {
-        "itemActivity": "Activities",
-        "itemActivitySubtitle": "Category, templates & status",
-        "itemCollaborators": "Team",
-        "itemInfos": "Camp infos",
-        "itemMaterialLists": "Material lists",
-        "itemPrint": "PDF / Print"
-      },
-      "title": "Admin"
-    },
     "auth": {
       "activate": {
         "error": "Activation failed",
@@ -574,6 +564,7 @@
         "loginCallback": {
           "loginInProgress": "You will be logged in"
         },
+        "notActivated": "Not activated?",
         "or": "or with",
         "password": "Password",
         "passwordForgotten": "Forgotten your password?",
@@ -585,6 +576,8 @@
           "midata": "MiData"
         },
         "registernow": "Register now",
+        "resendActivation": "Send activation email again",
+        "resetPassword": "Reset password",
         "termsOfServiceLink": "terms of service"
       },
       "register": {
@@ -599,6 +592,12 @@
         "message": "We sent you an email. Please complete your registration by clicking the activation-link in the email",
         "success": "Successfully registered",
         "title": "Create account"
+      },
+      "resendActivation": {
+        "errorMessage": "Sending the activation email again failed.",
+        "send": "Send",
+        "successMessage": "Mail with link to activate your account will be delivered.",
+        "title": "Send activation email again"
       },
       "resetPassword": {
         "errorMessage": "Reset password failed.",
@@ -617,10 +616,62 @@
       }
     },
     "camp": {
+      "activity": {
+        "printPreview": "Open print preview",
+        "sideBarProgram": {
+          "title": "Activities on this day"
+        }
+      },
+      "admin": {
+        "activity": {
+          "title": "Activity settings"
+        },
+        "adminMaterialLists": {
+          "title": "Material lists"
+        },
+        "collaborators": {
+          "email": "Email address",
+          "inactiveCollaborators": "Inactive",
+          "members": "Members",
+          "openInvitations": "Open invitations",
+          "title": "Team"
+        },
+        "info": {
+          "title": "Camp infos"
+        },
+        "print": {
+          "title": "Print camp"
+        },
+        "sideBarAdmin": {
+          "itemActivity": "Activities",
+          "itemActivitySubtitle": "Category, templates & status",
+          "itemCollaborators": "Team",
+          "itemInfos": "Camp infos",
+          "itemMaterialLists": "Material lists",
+          "itemPrint": "PDF / Print"
+        },
+        "title": "Admin"
+      },
       "campProgram": {
         "reminderLockedCreate": "Drag to create is only possible in unlocked mode.",
         "reminderLockedMove": "Drag to move is only possible in unlocked mode.",
         "title": "Picasso"
+      },
+      "category": {
+        "category": {
+          "copyCategory": "Copy category",
+          "deleteCategory": "Delete category",
+          "properties": "Properties",
+          "template": "Template for new activities"
+        },
+        "sideBarCategory": {
+          "title": "Categories"
+        }
+      },
+      "checklistOverview": {
+        "checklistLists": {
+          "title": "Checklist Overview"
+        }
       },
       "dashboard": {
         "activities": "Activities",
@@ -632,6 +683,7 @@
           "title": "Title"
         },
         "noEntries": "No activities found. Try clearing the selection filters and/or reloading the page.",
+        "today": "Today",
         "welcome": "Welcome to your new camp. There aren't any activities defined yet."
       },
       "invitation": {
@@ -647,11 +699,25 @@
         "useOtherAuth": "Logout & use another account",
         "userAlreadyInCamp": "You are already participating in this camp"
       },
+      "material": {
+        "materialLists": {
+          "title": "Material lists"
+        },
+        "materialOverview": {
+          "createNewList": "Create material list",
+          "download": "Download overview",
+          "title": "General overview"
+        },
+        "sideBarMaterialLists": {
+          "title": "Material lists"
+        }
+      },
       "navigation": {
         "desktop": {
           "navTopbar": {
             "admin": "Admin",
             "campIsLoading": "Camp is loading",
+            "checklist": "Checklist",
             "material": "Materials",
             "print": "Print",
             "program": "Program",
@@ -670,6 +736,7 @@
             "itemActivity": "Activities",
             "itemActivitySubtitle": "Category, templates & status",
             "itemCamps": "My Camps",
+            "itemChecklists": "Checklist Overview",
             "itemClose": "Close menu",
             "itemCollaborators": "Team",
             "itemInfos": "Camp infos",
@@ -691,32 +758,8 @@
       "prototypeCamps": "Prototypes",
       "title": "My Camps"
     },
-    "category": {
-      "category": {
-        "copyCategory": "Copy category",
-        "deleteCategory": "Delete category",
-        "properties": "Properties",
-        "template": "Template for new activities"
-      },
-      "sideBarCategory": {
-        "title": "Categories"
-      }
-    },
     "invitations": {
       "personalInvitations": "Invitations"
-    },
-    "material": {
-      "materialLists": {
-        "title": "Material lists"
-      },
-      "materialOverview": {
-        "createNewList": "Create material list",
-        "download": "Download overview",
-        "title": "General overview"
-      },
-      "sideBarMaterialLists": {
-        "title": "Material lists"
-      }
     },
     "pageNotFound": {
       "backToHome": "Back to home",

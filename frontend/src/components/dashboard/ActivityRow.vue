@@ -136,7 +136,7 @@ export default {
     },
     routerLink() {
       return {
-        name: 'activity',
+        name: 'camp/activity',
         params: {
           campId: this.scheduleEntry.period().camp().id,
           scheduleEntryId: this.scheduleEntry.id,
@@ -195,10 +195,6 @@ tr + tr :is(td, th) {
 
 .smaller {
   font-size: 0.75em;
-}
-
-.mt-2px {
-  margin-top: 2px;
 }
 
 .my-6px {

@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use App\Doctrine\Filter\ContentNodeCampFilter;
 use App\Doctrine\Filter\ContentNodePeriodFilter;
 use App\Entity\ContentNode\ColumnLayout;
 use App\InputFilter;
@@ -14,9 +15,9 @@ use App\Repository\ContentNodeRepository;
 use App\Util\ClassInfoTrait;
 use App\Util\EntityMap;
 use App\Util\JsonMergePatch;
+use App\Validator\AssertNoLoop;
 use App\Validator\ContentNode\AssertAttachedToRoot;
 use App\Validator\ContentNode\AssertContentTypeCompatible;
-use App\Validator\ContentNode\AssertNoLoop;
 use App\Validator\ContentNode\AssertNoRootChange;
 use App\Validator\ContentNode\AssertSlotSupportedByParent;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -44,12 +45,13 @@ use Symfony\Component\Validator\Constraints as Assert;
     order: ['root.id', 'parent.id', 'slot', 'position']
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['contentType', 'root'])]
+#[ApiFilter(filterClass: ContentNodeCampFilter::class)]
 #[ApiFilter(filterClass: ContentNodePeriodFilter::class)]
 #[ORM\Entity(repositoryClass: ContentNodeRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'strategy', type: 'string')]
 #[ORM\UniqueConstraint(name: 'contentnode_parentid_slot_position_unique', columns: ['parentid', 'slot', 'position'])]
-abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTreeInterface, CopyFromPrototypeInterface {
+abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTreeInterface, CopyFromPrototypeInterface, HasParentInterface {
     use ClassInfoTrait;
 
     /**
@@ -160,7 +162,7 @@ abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTre
     /**
      * The name of the content type of this content node. Read-only, for convenience.
      */
-    #[ApiProperty(example: 'SafetyConcept')]
+    #[ApiProperty(example: 'SafetyConsiderations')]
     #[Groups(['read'])]
     public function getContentTypeName(): string {
         return $this->contentType?->name;
@@ -178,6 +180,10 @@ abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTre
         }
 
         return $this->root;
+    }
+
+    public function getParent(): ?HasParentInterface {
+        return $this->parent;
     }
 
     /**

@@ -9,20 +9,13 @@
           <v-skeleton-loader type="list-item-two-line" height="64" />
           <v-skeleton-loader type="list-item-two-line" height="64" />
         </template>
-        <v-list-item
-          v-for="camp in upcomingCamps"
-          v-else
-          :key="camp._meta.self"
-          two-line
-          :to="campRoute(camp)"
-        >
-          <v-list-item-content>
-            <v-list-item-title>{{ camp.title }}</v-list-item-title>
-            <v-list-item-subtitle>
-              {{ camp.name }} - {{ camp.motto }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+        <template v-else>
+          <CampListItem
+            v-for="camp in upcomingCamps"
+            :key="camp._meta.self"
+            :camp="camp"
+          />
+        </template>
         <v-list-item>
           <v-list-item-content />
           <v-list-item-action>
@@ -34,13 +27,13 @@
       </v-list>
       <v-expansion-panels
         v-if="
-          !loading && ((isAdmin() && prototypeCamps.length > 0) || pastCamps.length > 0)
+          !loading && ((isAdmin && prototypeCamps.length > 0) || pastCamps.length > 0)
         "
         multiple
         flat
         accordion
       >
-        <v-expansion-panel v-if="isAdmin() && prototypeCamps.length > 0">
+        <v-expansion-panel v-if="isAdmin && prototypeCamps.length > 0">
           <v-expansion-panel-header>
             <h3>
               {{ $tc('views.camps.prototypeCamps') }}
@@ -48,19 +41,11 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-list class="py-0">
-              <v-list-item
+              <CampListItem
                 v-for="camp in prototypeCamps"
                 :key="camp._meta.self"
-                two-line
-                :to="campRoute(camp)"
-              >
-                <v-list-item-content>
-                  <v-list-item-title>{{ camp.title }}</v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{ camp.name }} - {{ camp.motto }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+                :camp="camp"
+              />
             </v-list>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -72,19 +57,11 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-list class="py-0">
-              <v-list-item
+              <CampListItem
                 v-for="camp in pastCamps"
                 :key="camp._meta.self"
-                two-line
-                :to="campRoute(camp)"
-              >
-                <v-list-item-content>
-                  <v-list-item-title>{{ camp.title }}</v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{ camp.name }} - {{ camp.motto }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+                :camp="camp"
+              />
             </v-list>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -101,10 +78,12 @@ import ContentCard from '@/components/layout/ContentCard.vue'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
 import { mapGetters } from 'vuex'
 import UserMeta from '@/components/navigation/UserMeta.vue'
+import CampListItem from '@/components/camp/CampListItem.vue'
 
 export default {
   name: 'Camps',
   components: {
+    CampListItem,
     UserMeta,
     ContentCard,
     ButtonAdd,
@@ -112,6 +91,7 @@ export default {
   data: function () {
     return {
       loading: true,
+      isAdmin: false,
     }
   },
   computed: {
@@ -140,10 +120,10 @@ export default {
   },
   async mounted() {
     this.loadCamps()
+    this.isAdmin = isAdmin()
   },
   methods: {
     campRoute,
-    isAdmin,
     async loadCamps() {
       // Only reload camps if they were loaded before, to avoid console error
       if (this.camps._meta.self !== null) {

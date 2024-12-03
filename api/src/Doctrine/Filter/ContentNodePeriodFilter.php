@@ -52,7 +52,7 @@ final class ContentNodePeriodFilter extends AbstractFilter {
         ?Operation $operation = null,
         array $context = []
     ): void {
-        if (ContentNode::class !== $resourceClass) {
+        if (ContentNode::class !== $resourceClass && !is_subclass_of($resourceClass, ContentNode::class)) {
             throw new \Exception("ContentNodePeriodFilter can only be applied to entities of type ContentNode (received: {$resourceClass}).");
         }
 

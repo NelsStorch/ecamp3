@@ -21,10 +21,39 @@
         <i18n :path="infoTextKey">
           <template #br><br /></template>
         </i18n>
+        <v-btn
+          text
+          elevation="0"
+          color="warning darken-3"
+          height="32px"
+          class="v-btn--has-bg float-end dev-login-button"
+          @click="
+            () => {
+              email = 'test@example.com'
+              password = 'test'
+              login()
+            }
+          "
+        >
+          Login
+          <v-icon right>mdi-auto-fix</v-icon>
+        </v-btn>
       </div>
     </v-alert>
     <v-alert v-if="error" outlined text border="left" type="error">
-      {{ error }}
+      <span class="d-block">{{ error }}</span>
+      <span class="d-block mt-1"
+        >{{ $tc('views.auth.login.passwordForgotten') }}
+        <router-link :to="{ name: 'resetPasswordRequest' }">
+          {{ $tc('views.auth.login.resetPassword') }}
+        </router-link>
+      </span>
+      <span class="d-block mt-1"
+        >{{ $tc('views.auth.login.notActivated') }}
+        <router-link :to="{ name: 'resendActivation' }">
+          {{ $tc('views.auth.login.resendActivation') }}
+        </router-link>
+      </span>
     </v-alert>
     <v-form @submit.prevent="login">
       <e-text-field
@@ -259,5 +288,11 @@ export default {
   :deep(.v-btn__content) {
     flex-direction: column;
   }
+}
+.dev-login-button {
+  background-color: #f7e4cc !important;
+  margin-top: 12px;
+  margin-bottom: -12px;
+  translate: 0 -12px;
 }
 </style>
