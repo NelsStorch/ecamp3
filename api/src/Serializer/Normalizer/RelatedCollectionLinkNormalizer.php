@@ -8,6 +8,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Exception\ResourceClassNotFoundException;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\IriConverterInterface;
+use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use ApiPlatform\Metadata\UrlGeneratorInterface;
 use App\Entity\BaseEntity;
@@ -81,6 +82,8 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
     use PropertyHelperTrait;
     use ClassInfoTrait;
 
+    private $exactSearchFilterExistsCache = [];
+
     public function __construct(
         private NormalizerInterface $decorated,
         private ServiceLocator $filterLocator,
@@ -110,12 +113,14 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
             if (isset($link['href'])) {
                 continue;
             }
-
-            try {
-                $normalized_data['_links'][$rel] = ['href' => $this->getRelatedCollectionHref($data, $rel, $context)];
-            } catch (UnsupportedRelationException $e) {
-                // The relation is not supported, or there is no matching filter defined on the related entity
+            // Only consider relations with non-null value (object or collection)
+            if (property_exists($data, $rel) && !isset($data->$rel)) {
                 continue;
+            }
+
+            list ($ok, $href) = $this->getRelatedCollectionHref($data, $rel, $context);
+            if ($ok) {
+                $normalized_data['_links'][$rel] = ['href' => $href];
             }
         }
 
@@ -136,7 +141,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
         }
     }
 
-    public function getRelatedCollectionHref($object, $rel, array $context = []): string {
+    public function getRelatedCollectionHref($object, $rel, array $context = []): array {
         $resourceClass = $this->getObjectClass($object);
 
         if ($this->nameConverter instanceof NameConverterInterface) {
@@ -149,7 +154,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
             $params = $this->extractUriParams($object, $annotation->getParams());
             [$uriTemplate] = $this->uriTemplateFactory->createFromResourceClass($annotation->getRelatedEntity());
 
-            return $this->uriTemplate->expand($uriTemplate, $params);
+            return [true, $this->uriTemplate->expand($uriTemplate, $params)];
         }
 
         try {
@@ -161,7 +166,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
 
             $relationMetadata = $classMetadata->getAssociationMapping($rel);
         } catch (MappingException) {
-            throw new UnsupportedRelationException($resourceClass.'#'.$rel.' is not a Doctrine association. Embedding non-Doctrine collections is currently not implemented.');
+            return [false, $resourceClass.'#'.$rel.' is not a Doctrine association. Embedding non-Doctrine collections is currently not implemented.'];
         }
 
         $relatedResourceClass = $relationMetadata['targetEntity'];
@@ -170,21 +175,36 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
         $relatedFilterName ??= $relationMetadata['inversedBy'];
 
         if (empty($relatedResourceClass) || empty($relatedFilterName)) {
-            throw new UnsupportedRelationException('The '.$resourceClass.'#'.$rel.' relation does not have both a targetEntity and a mappedBy or inversedBy property');
+            return [false, 'The '.$resourceClass.'#'.$rel.' relation does not have both a targetEntity and a mappedBy or inversedBy property'];
         }
 
-        $resourceMetadataCollection = $this->resourceMetadataCollectionFactory->create($relatedResourceClass);
-        $operation = OperationHelper::findOneByType($resourceMetadataCollection, GetCollection::class);
+        $lookupKey = $relatedResourceClass.':'.$relatedFilterName;
+        if (isset($this->exactSearchFilterExistsCache[$lookupKey])) {
+            $result = $this->exactSearchFilterExistsCache[$lookupKey];
 
-        if (!$operation) {
-            throw new UnsupportedRelationException('The resource '.$relatedResourceClass.' does not implement GetCollection() operation.');
+        } else {
+            $result = [null, ''];
+            $resourceMetadataCollection = $this->resourceMetadataCollectionFactory->create($relatedResourceClass);
+            $operation = OperationHelper::findOneByType($resourceMetadataCollection, GetCollection::class);
+            
+            if (!$operation) {
+                $result = [null, 'The resource '.$relatedResourceClass.' does not implement GetCollection() operation.'];
+            } else {
+                $filterExists = $this->exactSearchFilterExists($relatedResourceClass, $relatedFilterName);
+                if (!$filterExists) {
+                    $result = [null, 'The resource '.$relatedResourceClass.' does not have a search filter for the relation '.$relatedFilterName.'.'];
+                } else {
+                    $result = [$operation, ''];
+                }
+            }
+            $this->exactSearchFilterExistsCache[$lookupKey] = $result;
         }
 
-        if (!$this->exactSearchFilterExists($relatedResourceClass, $relatedFilterName)) {
-            throw new UnsupportedRelationException('The resource '.$relatedResourceClass.' does not have a search filter for the relation '.$relatedFilterName.'.');
+        if ($result[0] instanceof Operation) {
+            return [true, $this->router->generate($result[0]->getName(), [$relatedFilterName => urlencode($this->iriConverter->getIriFromResource($object))], UrlGeneratorInterface::ABS_PATH)];
+        } else {
+            return [false, $result[1]];
         }
-
-        return $this->router->generate($operation->getName(), [$relatedFilterName => urlencode($this->iriConverter->getIriFromResource($object))], UrlGeneratorInterface::ABS_PATH);
     }
 
     protected function getRelatedCollectionLinkAnnotation(string $className, string $propertyName): ?RelatedCollectionLink {
