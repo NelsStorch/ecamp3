@@ -114,9 +114,10 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
                 continue;
             }
             // Only consider relations with non-null value (object or collection)
-            if (property_exists($data, $rel) && !isset($data->$rel)) {
-                continue;
-            }
+            // (does not yet work, some properties are private and cannot be read out)
+            // if (property_exists($data, $rel) && !isset($data->$rel)) {
+            //     continue;
+            // }
 
             list ($ok, $href) = $this->getRelatedCollectionHref($data, $rel, $context);
             if ($ok) {
