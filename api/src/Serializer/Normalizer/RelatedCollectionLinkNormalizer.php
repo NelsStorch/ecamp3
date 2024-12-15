@@ -119,7 +119,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
             //     continue;
             // }
 
-            list ($ok, $href) = $this->getRelatedCollectionHref($data, $rel, $context);
+            list($ok, $href) = $this->getRelatedCollectionHref($data, $rel, $context);
             if ($ok) {
                 $normalized_data['_links'][$rel] = ['href' => $href];
             }
@@ -182,12 +182,11 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
         $lookupKey = $relatedResourceClass.':'.$relatedFilterName;
         if (isset($this->exactSearchFilterExistsCache[$lookupKey])) {
             $result = $this->exactSearchFilterExistsCache[$lookupKey];
-
         } else {
             $result = [null, ''];
             $resourceMetadataCollection = $this->resourceMetadataCollectionFactory->create($relatedResourceClass);
             $operation = OperationHelper::findOneByType($resourceMetadataCollection, GetCollection::class);
-            
+
             if (!$operation) {
                 $result = [null, 'The resource '.$relatedResourceClass.' does not implement GetCollection() operation.'];
             } else {
@@ -203,9 +202,9 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
 
         if ($result[0] instanceof Operation) {
             return [true, $this->router->generate($result[0]->getName(), [$relatedFilterName => urlencode($this->iriConverter->getIriFromResource($object))], UrlGeneratorInterface::ABS_PATH)];
-        } else {
-            return [false, $result[1]];
         }
+
+        return [false, $result[1]];
     }
 
     protected function getRelatedCollectionLinkAnnotation(string $className, string $propertyName): ?RelatedCollectionLink {
