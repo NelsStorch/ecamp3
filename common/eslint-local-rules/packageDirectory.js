@@ -1,5 +1,7 @@
-module.exports = (path, fs) => ({
-  packageDirectory: function (filename) {
+import path from "path";
+import fs from "fs";
+
+export function packageDirectory(filename) {
     const { root } = path.parse(filename)
 
     let directory = filename
@@ -16,5 +18,4 @@ module.exports = (path, fs) => ({
     }
 
     return ''
-  },
-})
+}

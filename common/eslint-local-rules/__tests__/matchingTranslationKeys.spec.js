@@ -1,11 +1,9 @@
-import rule from '../matchingTranslationKeys.js'
+import createMatchingTranslationKeys from '../matchingTranslationKeys.js'
 import { RuleTester } from 'eslint'
-import path from 'path'
-import fs from 'fs'
-import utils from 'eslint-plugin-vue/lib/utils/index.js'
 import { describe, it } from 'vitest'
 import localRules from 'eslint-plugin-local-rules'
 import globals from 'globals'
+import utils from 'eslint-plugin-vue/lib/utils/index.js'
 import eslintParser from 'vue-eslint-parser'
 
 RuleTester.describe = describe
@@ -28,7 +26,7 @@ const ruleTester = new RuleTester({
     },
   },
 })
-const ruleInstance = rule(path, utils, fs)
+const ruleInstance = createMatchingTranslationKeys(utils)
 
 const options = [
   {

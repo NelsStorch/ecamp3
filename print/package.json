@@ -1,6 +1,7 @@
 {
   "name": "@ecamp3/backend-print",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "nuxt dev",
     "dev-debug": "node --inspect node_modules/.bin/nuxt",
