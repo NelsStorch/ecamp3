@@ -82,7 +82,10 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
     use PropertyHelperTrait;
     use ClassInfoTrait;
 
-    private $exactSearchFilterExistsCache = [];
+    /**
+     * @var (Operation|string)[]
+     */
+    private array $exactSearchFilterExistsOperationCache = [];
 
     public function __construct(
         private NormalizerInterface $decorated,
@@ -121,10 +124,10 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
                 continue;
             }
 
-            list($ok, $href) = $this->getRelatedCollectionHref($data, $rel, $context);
-            if ($ok) {
-                $normalized_data['_links'][$rel] = ['href' => $href];
+            if (!$this->getRelatedCollectionHref($data, $rel, $context, $result)) {
+                continue;
             }
+            $normalized_data['_links'][$rel] = ['href' => $result];
         }
 
         return $normalized_data;
@@ -144,7 +147,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
         }
     }
 
-    public function getRelatedCollectionHref($object, $rel, array $context = []): array {
+    protected function getRelatedCollectionHref($object, $rel, array $context, &$href): bool {
         $resourceClass = $this->getObjectClass($object);
 
         if ($this->nameConverter instanceof NameConverterInterface) {
@@ -157,7 +160,9 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
             $params = $this->extractUriParams($object, $annotation->getParams());
             [$uriTemplate] = $this->uriTemplateFactory->createFromResourceClass($annotation->getRelatedEntity());
 
-            return [true, $this->uriTemplate->expand($uriTemplate, $params)];
+            $href = $this->uriTemplate->expand($uriTemplate, $params);
+
+            return true;
         }
 
         try {
@@ -169,7 +174,8 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
 
             $relationMetadata = $classMetadata->getAssociationMapping($rel);
         } catch (MappingException) {
-            return [false, $resourceClass.'#'.$rel.' is not a Doctrine association. Embedding non-Doctrine collections is currently not implemented.'];
+            // $resourceClass # $rel is not a Doctrine association. Embedding non-Doctrine collections is currently not implemented
+            return false;
         }
 
         $relatedResourceClass = $relationMetadata['targetEntity'];
@@ -178,35 +184,38 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
         $relatedFilterName ??= $relationMetadata['inversedBy'];
 
         if (empty($relatedResourceClass) || empty($relatedFilterName)) {
-            return [false, 'The '.$resourceClass.'#'.$rel.' relation does not have both a targetEntity and a mappedBy or inversedBy property'];
+            // The $resourceClass # $rel relation does not have both a targetEntity and a mappedBy or inversedBy property
+            return false;
         }
 
         $lookupKey = $relatedResourceClass.':'.$relatedFilterName;
-        if (isset($this->exactSearchFilterExistsCache[$lookupKey])) {
-            $result = $this->exactSearchFilterExistsCache[$lookupKey];
+        if (isset($this->exactSearchFilterExistsOperationCache[$lookupKey])) {
+            $result = $this->exactSearchFilterExistsOperationCache[$lookupKey];
         } else {
-            $result = [null, ''];
+            $result = 'No Operation';
             $resourceMetadataCollection = $this->resourceMetadataCollectionFactory->create($relatedResourceClass);
             $operation = OperationHelper::findOneByType($resourceMetadataCollection, GetCollection::class);
 
             if (!$operation) {
-                $result = [null, 'The resource '.$relatedResourceClass.' does not implement GetCollection() operation.'];
+                // The resource $relatedResourceClass does not implement GetCollection() operation
             } else {
                 $filterExists = $this->exactSearchFilterExists($relatedResourceClass, $relatedFilterName);
                 if (!$filterExists) {
-                    $result = [null, 'The resource '.$relatedResourceClass.' does not have a search filter for the relation '.$relatedFilterName.'.'];
+                    // The resource $relatedResourceClass does not have a search filter for the relation $relatedFilterName
                 } else {
-                    $result = [$operation, ''];
+                    $result = $operation;
                 }
             }
-            $this->exactSearchFilterExistsCache[$lookupKey] = $result;
+            $this->exactSearchFilterExistsOperationCache[$lookupKey] = $result;
         }
 
-        if ($result[0] instanceof Operation) {
-            return [true, $this->router->generate($result[0]->getName(), [$relatedFilterName => urlencode($this->iriConverter->getIriFromResource($object))], UrlGeneratorInterface::ABS_PATH)];
+        if ($result instanceof Operation) {
+            $href = $this->router->generate($result->getName(), [$relatedFilterName => urlencode($this->iriConverter->getIriFromResource($object))], UrlGeneratorInterface::ABS_PATH);
+
+            return true;
         }
 
-        return [false, $result[1]];
+        return false;
     }
 
     protected function getRelatedCollectionLinkAnnotation(string $className, string $propertyName): ?RelatedCollectionLink {
