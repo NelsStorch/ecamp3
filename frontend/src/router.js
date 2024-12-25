@@ -704,11 +704,10 @@ async function requireChecklist(to, from, next) {
 }
 
 export function campFromRoute(route) {
-  if (route.params.campId) {
-    return apiStore.get().camps({ id: route.params.campId })
-  } else {
+  if (!route.params.campId) {
     return undefined
   }
+  return apiStore.get().camps({ id: route.params.campId })
 }
 
 export function invitationFromInviteKey(inviteKey) {
@@ -716,47 +715,42 @@ export function invitationFromInviteKey(inviteKey) {
 }
 
 export function periodFromRoute(route) {
-  if (route.params.periodId) {
-    return apiStore.get().periods({ id: route.params.periodId })
-  } else {
+  if (!route.params.periodId) {
     return undefined
   }
+  return apiStore.get().periods({ id: route.params.periodId })
 }
 
 function scheduleEntryFromRoute(route) {
-  if (route.params.scheduleEntryId) {
-    return apiStore.get().scheduleEntries({ id: route.params.scheduleEntryId })
-  } else {
+  if (!route.params.scheduleEntryId) {
     return undefined
   }
+  return apiStore.get().scheduleEntries({ id: route.params.scheduleEntryId })
 }
 
 function categoryFromRoute(route) {
-  if (route.params.categoryId) {
-    return campFromRoute(route)
-      .categories()
-      .allItems.find((c) => c.id === route.params.categoryId)
-  } else {
+  if (!route.params.categoryId) {
     return undefined
   }
+  return campFromRoute(route)
+    .categories()
+    .allItems.find((c) => c.id === route.params.categoryId)
 }
 
 export function materialListFromRoute(route) {
-  if (route.params.materialId) {
-    return apiStore.get().materialLists({ id: route.params.materialId })
-  } else {
+  if (!route.params.materialId) {
     return undefined
   }
+  return apiStore.get().materialLists({ id: route.params.materialId })
 }
 
 export function checklistFromRoute(route) {
-  if (route.params.checklistId) {
-    return campFromRoute(route)
-      .checklists()
-      .allItems.find((c) => c.id === route.params.checklistId)
-  } else {
+  if (!route.params.checklistId) {
     return undefined
   }
+  return campFromRoute(route)
+    .checklists()
+    .allItems.find((c) => c.id === route.params.checklistId)
 }
 
 function getContentLayout(route) {
@@ -779,11 +773,10 @@ function getContentLayout(route) {
 }
 
 function dayFromScheduleEntryInRoute(route) {
-  if (route.params.scheduleEntryId) {
-    return apiStore.get().scheduleEntries({ id: route.params.scheduleEntryId }).day()
-  } else {
+  if (!route.params.scheduleEntryId) {
     return undefined
   }
+  return apiStore.get().scheduleEntries({ id: route.params.scheduleEntryId }).day()
 }
 
 /**
@@ -962,17 +955,16 @@ export function checklistOverviewRoute(camp, checklist, query = {}) {
 }
 
 async function firstFuturePeriod(route) {
-  if (route.params.campId) {
-    const periods = await apiStore.get().camps({ id: route.params.campId }).periods()
-      ._meta.load
-    // Return the first period that hasn't ended, or if no such period exists, return the first period
-    return (
-      periods.items.find((period) => new Date(period.end) >= new Date()) ||
-      periods.items.find((_) => true)
-    )
-  } else {
+  if (!route.params.campId) {
     return undefined
   }
+  const periods = await apiStore.get().camps({ id: route.params.campId }).periods()._meta
+    .load
+  // Return the first period that hasn't ended, or if no such period exists, return the first period
+  return (
+    periods.items.find((period) => new Date(period.end) >= new Date()) ||
+    periods.items.find((_) => true)
+  )
 }
 
 async function redirectToPeriod(to, from, next, routeName) {
