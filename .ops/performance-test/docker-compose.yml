@@ -6,7 +6,8 @@ services:
     user: ${USER_ID:-1000}
     network_mode: host
     working_dir: /app
-#    environment:
-#      - K6_WEB_DASHBOARD=true
+    env_file:
+      - path: .env
+        required: false
     ports:
       - '5665:5665'
