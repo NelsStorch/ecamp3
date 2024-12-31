@@ -15,10 +15,15 @@ class TranslationInfoOfConstraintViolation {
         return new TranslationInfo($key, $paramsWithoutCurlyBraces);
     }
 
+    /**
+     * @psalm-suppress InvalidReturnType
+     * @psalm-suppress InvalidReturnStatement
+     */
     public static function removeCurlyBraces(array $parameters): array {
         $paramsWithoutCurlyBraces = [];
         foreach ($parameters as $key => $value) {
             /** @var int|string $key */
+            /** @phpstan-ignore varTag.nativeType */
             $key = str_replace('{{ ', '', $key);
             $key = str_replace(' }}', '', $key);
             $paramsWithoutCurlyBraces[$key] = $value;
