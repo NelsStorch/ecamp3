@@ -18,6 +18,7 @@ use App\Serializer\Normalizer\RelatedCollectionLinkNormalizer;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToManyAssociationMapping;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -159,7 +160,13 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
+
         $this->mockRelatedResourceMetadata(['filters' => ['attribute_filter_something_something']]);
         $this->mockRelatedFilterDescription(['parent' => ['strategy' => 'exact']]);
         $this->mockGeneratedRoute();
@@ -231,7 +238,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
 
         $this->mockRelatedResourceMetadata(['filters' => ['attribute_filter_something_something']]);
         $this->mockRelatedFilterDescription(['parent' => ['strategy' => 'exact']]);
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockGeneratedRoute();
 
         // when
@@ -252,7 +264,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockRelatedResourceMetadata(['filters' => ['attribute_filter_something_something']]);
         $this->mockRelatedFilterDescription(['some_other_property' => ['strategy' => 'exact']]);
         $this->mockGeneratedRoute();
@@ -269,7 +286,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockRelatedResourceMetadata(['filters' => []]);
         $this->mockRelatedFilterDescription(['parent' => ['strategy' => 'exact']]);
         $this->mockGeneratedRoute();
@@ -286,7 +308,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockRelatedResourceMetadata([]);
         $this->mockRelatedFilterDescription(['parent' => ['strategy' => 'exact']]);
         $this->mockGeneratedRoute();
@@ -303,7 +330,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => null, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => '',
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockRelatedResourceMetadata(['filters' => ['attribute_filter_something_something']]);
         $this->mockRelatedFilterDescription(['parent' => ['strategy' => 'exact']]);
         $this->mockGeneratedRoute();
@@ -342,7 +374,11 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => null, 'inversedBy' => null]);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockRelatedResourceMetadata(['filters' => ['attribute_filter_something_something']]);
         $this->mockRelatedFilterDescription(['parent' => ['strategy' => 'exact']]);
         $this->mockGeneratedRoute();
@@ -359,7 +395,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockRelatedResourceMetadata(['filters' => ['attribute_filter_something_something']]);
         $this->filterInstance = null;
         $this->mockGeneratedRoute();
@@ -376,7 +417,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
         $this->mockRelatedResourceMetadata(['filters' => ['attribute_filter_something_something']]);
         $this->filterInstance = new DateFilter($this->managerRegistryMock, null, ['filters' => ['attribute_filter_something_something']]);
         $this->mockGeneratedRoute();
@@ -393,7 +439,12 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
-        $this->mockAssociationMetadata(['targetEntity' => Child::class, 'mappedBy' => 'parent']);
+        $this->mockAssociationMetadata(OneToManyAssociationMapping::fromMappingArray([
+            'targetEntity' => Child::class,
+            'mappedBy' => 'parent',
+            'fieldName' => 'children',
+            'sourceEntity' => ParentEntity::class,
+        ]));
 
         $metadataCollection = new ResourceMetadataCollection('Dummy');
         $metadataCollection->append((new ApiResource())->withOperations(new Operations([new Get()])));
