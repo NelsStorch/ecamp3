@@ -1,3 +1,5 @@
+import vueEslintConfigPrettier from '@vue/eslint-config-prettier'
+
 import { includeIgnoreFile } from '@eslint/compat'
 import localRules from 'eslint-plugin-local-rules'
 import globals from 'globals'
@@ -19,15 +21,15 @@ export default [
     'plugin:vue/recommended',
     'plugin:vue/vue3-recommended',
     'plugin:vue-scoped-css/vue3-recommended',
-    'eslint:recommended',
-    'plugin:prettier/recommended',
-    '@vue/eslint-config-prettier'
+    'eslint:recommended'
   ),
   {
     ignores: ['data/', 'dist/', 'public/twemoji/'],
   },
 
   includeIgnoreFile(gitignorePath),
+
+  vueEslintConfigPrettier,
 
   {
     plugins: {

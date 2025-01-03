@@ -1,3 +1,5 @@
+import vueEslintConfigPrettier from '@vue/eslint-config-prettier'
+
 import { includeIgnoreFile } from '@eslint/compat'
 import localRules from 'eslint-plugin-local-rules'
 import globals from 'globals'
@@ -16,17 +18,14 @@ const compat = new FlatCompat({
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
 export default [
-  ...compat.extends(
-    'plugin:vue/vue3-recommended',
-    'eslint:recommended',
-    'plugin:prettier/recommended',
-    '@vue/eslint-config-prettier'
-  ),
+  ...compat.extends('plugin:vue/vue3-recommended', 'eslint:recommended'),
   {
     ignores: ['dist/*.mjs'],
   },
 
   includeIgnoreFile(gitignorePath),
+
+  vueEslintConfigPrettier,
 
   {
     plugins: {
