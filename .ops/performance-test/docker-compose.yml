@@ -1,6 +1,6 @@
 services:
   performance-test:
-    image: grafana/k6:0.55.2
+    image: grafana/k6:0.56.0
     volumes:
       - .:/app
     user: ${USER_ID:-1000}
