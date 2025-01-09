@@ -52,7 +52,7 @@
     },
     "require-dev": {
         "brianium/paratest": "v7.7.0",
-        "friendsofphp/php-cs-fixer": "3.66.1",
+        "friendsofphp/php-cs-fixer": "3.67.0",
         "hautelook/alice-bundle": "2.14.0",
         "justinrainbow/json-schema": "6.0.0",
         "php-coveralls/php-coveralls": "2.7.0",
