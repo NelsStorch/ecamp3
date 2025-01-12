@@ -100,6 +100,7 @@ export default defineConfig(({ mode }) => ({
       'lodash/size.js',
       'runes',
       'vee-validate',
+      'vite-plugin-comlink/symbol',
       'vue',
       'vuedraggable',
       'vue-toastification',
