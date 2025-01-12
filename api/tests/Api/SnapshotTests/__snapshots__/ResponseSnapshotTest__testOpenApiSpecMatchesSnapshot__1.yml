@@ -22847,6 +22847,8 @@ paths:
                   $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
                 type: array
           description: 'Activity collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Activity resources.'
       tags:
         - Activity
@@ -22922,6 +22924,8 @@ paths:
       responses:
         204:
           description: 'Activity resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the Activity resource.'
@@ -22963,6 +22967,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: 'Activity resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Activity resource.'
@@ -23017,6 +23023,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -23096,6 +23104,8 @@ paths:
                   $ref: '#/components/schemas/ActivityProgressLabel-read'
                 type: array
           description: 'ActivityProgressLabel collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ActivityProgressLabel resources.'
       tags:
         - ActivityProgressLabel
@@ -23171,6 +23181,8 @@ paths:
       responses:
         204:
           description: 'ActivityProgressLabel resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the ActivityProgressLabel resource.'
@@ -23212,6 +23224,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ActivityProgressLabel-read'
           description: 'ActivityProgressLabel resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ActivityProgressLabel resource.'
@@ -23266,6 +23280,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -23371,6 +23387,8 @@ paths:
                   $ref: '#/components/schemas/ActivityResponsible-read'
                 type: array
           description: 'ActivityResponsible collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ActivityResponsible resources.'
       tags:
         - ActivityResponsible
@@ -23446,6 +23464,8 @@ paths:
       responses:
         204:
           description: 'ActivityResponsible resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the ActivityResponsible resource.'
@@ -23487,6 +23507,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ActivityResponsible-read'
           description: 'ActivityResponsible resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ActivityResponsible resource.'
@@ -23626,6 +23648,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         422:
           description: 'Unprocessable entity'
       summary: 'Request activation email again'
@@ -23673,6 +23697,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         422:
           description: 'Unprocessable entity'
       summary: 'Request Password-Reset-Mail'
@@ -23715,6 +23741,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResetPassword'
           description: 'ResetPassword resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ResetPassword resource.'
@@ -23769,6 +23797,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -23909,6 +23939,8 @@ paths:
                   $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
                 type: array
           description: 'CampCollaboration collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of CampCollaboration resources.'
       tags:
         - CampCollaboration
@@ -23984,6 +24016,8 @@ paths:
       responses:
         204:
           description: 'CampCollaboration resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the CampCollaboration resource.'
@@ -24025,6 +24059,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
           description: 'CampCollaboration resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a CampCollaboration resource.'
@@ -24079,6 +24115,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -24136,6 +24174,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -24215,6 +24255,8 @@ paths:
                   $ref: '#/components/schemas/Camp-read'
                 type: array
           description: 'Camp collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Camp resources.'
       tags:
         - Camp
@@ -24264,6 +24306,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         422:
           description: 'Unprocessable entity'
       summary: 'Creates a Camp resource.'
@@ -24490,6 +24534,8 @@ paths:
       responses:
         204:
           description: 'Camp resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the Camp resource.'
@@ -24531,6 +24577,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Camp-read_Camp.Periods_Period.Days_Camp.CampCollaborations_CampCollaboration.User'
           description: 'Camp resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Camp resource.'
@@ -24585,6 +24633,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -24664,6 +24714,8 @@ paths:
                   $ref: '#/components/schemas/Category-read'
                 type: array
           description: 'Category collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Category resources.'
       tags:
         - Category
@@ -24739,6 +24791,8 @@ paths:
       responses:
         204:
           description: 'Category resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the Category resource.'
@@ -24780,6 +24834,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Category-read_Category.PreferredContentTypes_Category.ContentNodes'
           description: 'Category resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Category resource.'
@@ -24834,6 +24890,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -24939,6 +24997,8 @@ paths:
                   $ref: '#/components/schemas/ChecklistItem-read'
                 type: array
           description: 'ChecklistItem collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ChecklistItem resources.'
       tags:
         - ChecklistItem
@@ -25014,6 +25074,8 @@ paths:
       responses:
         204:
           description: 'ChecklistItem resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the ChecklistItem resource.'
@@ -25055,6 +25117,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChecklistItem-read'
           description: 'ChecklistItem resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ChecklistItem resource.'
@@ -25109,6 +25173,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -25214,6 +25280,8 @@ paths:
                   $ref: '#/components/schemas/Checklist-read'
                 type: array
           description: 'Checklist collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Checklist resources.'
       tags:
         - Checklist
@@ -25402,6 +25470,8 @@ paths:
       responses:
         204:
           description: 'Checklist resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the Checklist resource.'
@@ -25443,6 +25513,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Checklist-read'
           description: 'Checklist resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Checklist resource.'
@@ -25497,6 +25569,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -25626,6 +25700,8 @@ paths:
                   $ref: '#/components/schemas/ChecklistNode-read'
                 type: array
           description: 'ChecklistNode collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ChecklistNode resources.'
       tags:
         - ChecklistNode
@@ -25701,6 +25777,8 @@ paths:
       responses:
         204:
           description: 'ChecklistNode resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the ChecklistNode resource.'
@@ -25742,6 +25820,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChecklistNode-read'
           description: 'ChecklistNode resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ChecklistNode resource.'
@@ -25796,6 +25876,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -25925,6 +26007,8 @@ paths:
                   $ref: '#/components/schemas/ColumnLayout-read'
                 type: array
           description: 'ColumnLayout collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ColumnLayout resources.'
       tags:
         - ColumnLayout
@@ -26000,6 +26084,8 @@ paths:
       responses:
         204:
           description: 'ColumnLayout resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the ColumnLayout resource.'
@@ -26041,6 +26127,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ColumnLayout-read'
           description: 'ColumnLayout resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ColumnLayout resource.'
@@ -26095,6 +26183,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -26224,6 +26314,8 @@ paths:
                   $ref: '#/components/schemas/MaterialNode-read'
                 type: array
           description: 'MaterialNode collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of MaterialNode resources.'
       tags:
         - MaterialNode
@@ -26299,6 +26391,8 @@ paths:
       responses:
         204:
           description: 'MaterialNode resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the MaterialNode resource.'
@@ -26340,6 +26434,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MaterialNode-read'
           description: 'MaterialNode resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a MaterialNode resource.'
@@ -26394,6 +26490,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -26523,6 +26621,8 @@ paths:
                   $ref: '#/components/schemas/MultiSelect-read'
                 type: array
           description: 'MultiSelect collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of MultiSelect resources.'
       tags:
         - MultiSelect
@@ -26598,6 +26698,8 @@ paths:
       responses:
         204:
           description: 'MultiSelect resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the MultiSelect resource.'
@@ -26639,6 +26741,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MultiSelect-read'
           description: 'MultiSelect resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a MultiSelect resource.'
@@ -26693,6 +26797,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -26822,6 +26928,8 @@ paths:
                   $ref: '#/components/schemas/ResponsiveLayout-read'
                 type: array
           description: 'ResponsiveLayout collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ResponsiveLayout resources.'
       tags:
         - ResponsiveLayout
@@ -26897,6 +27005,8 @@ paths:
       responses:
         204:
           description: 'ResponsiveLayout resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the ResponsiveLayout resource.'
@@ -26938,6 +27048,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponsiveLayout-read'
           description: 'ResponsiveLayout resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ResponsiveLayout resource.'
@@ -26992,6 +27104,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -27121,6 +27235,8 @@ paths:
                   $ref: '#/components/schemas/SingleText-read'
                 type: array
           description: 'SingleText collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of SingleText resources.'
       tags:
         - SingleText
@@ -27196,6 +27312,8 @@ paths:
       responses:
         204:
           description: 'SingleText resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the SingleText resource.'
@@ -27237,6 +27355,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SingleText-read'
           description: 'SingleText resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a SingleText resource.'
@@ -27291,6 +27411,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -27420,6 +27542,8 @@ paths:
                   $ref: '#/components/schemas/Storyboard-read'
                 type: array
           description: 'Storyboard collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Storyboard resources.'
       tags:
         - Storyboard
@@ -27495,6 +27619,8 @@ paths:
       responses:
         204:
           description: 'Storyboard resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the Storyboard resource.'
@@ -27536,6 +27662,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Storyboard-read'
           description: 'Storyboard resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Storyboard resource.'
@@ -27590,6 +27718,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -27719,6 +27849,8 @@ paths:
                   $ref: '#/components/schemas/ContentNode-read'
                 type: array
           description: 'ContentNode collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ContentNode resources.'
       tags:
         - ContentNode
@@ -27963,6 +28095,8 @@ paths:
                   $ref: '#/components/schemas/DayResponsible-read'
                 type: array
           description: 'DayResponsible collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of DayResponsible resources.'
       tags:
         - DayResponsible
@@ -28038,6 +28172,8 @@ paths:
       responses:
         204:
           description: 'DayResponsible resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the DayResponsible resource.'
@@ -28079,6 +28215,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DayResponsible-read'
           description: 'DayResponsible resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a DayResponsible resource.'
@@ -28182,6 +28320,8 @@ paths:
                   $ref: '#/components/schemas/Day-read_Day.DayResponsibles'
                 type: array
           description: 'Day collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Day resources.'
       tags:
         - Day
@@ -28335,6 +28475,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Day-read_Day.DayResponsibles'
           description: 'Day resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Day resource.'
@@ -28390,6 +28532,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -28606,6 +28750,8 @@ paths:
                   $ref: '#/components/schemas/MaterialItem-read'
                 type: array
           description: 'MaterialItem collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of MaterialItem resources.'
       tags:
         - MaterialItem
@@ -28681,6 +28827,8 @@ paths:
       responses:
         204:
           description: 'MaterialItem resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the MaterialItem resource.'
@@ -28722,6 +28870,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MaterialItem-read'
           description: 'MaterialItem resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a MaterialItem resource.'
@@ -28776,6 +28926,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -28855,6 +29007,8 @@ paths:
                   $ref: '#/components/schemas/MaterialList-read'
                 type: array
           description: 'MaterialList collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of MaterialList resources.'
       tags:
         - MaterialList
@@ -28930,6 +29084,8 @@ paths:
       responses:
         204:
           description: 'MaterialList resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the MaterialList resource.'
@@ -28971,6 +29127,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MaterialList-read'
           description: 'MaterialList resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a MaterialList resource.'
@@ -29025,6 +29183,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -29104,6 +29264,8 @@ paths:
                   $ref: '#/components/schemas/Period-read'
                 type: array
           description: 'Period collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Period resources.'
       tags:
         - Period
@@ -29179,6 +29341,8 @@ paths:
       responses:
         204:
           description: 'Period resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the Period resource.'
@@ -29220,6 +29384,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Period-read_Period.Camp_Period.Days'
           description: 'Period resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Period resource.'
@@ -29274,6 +29440,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -29391,6 +29559,8 @@ paths:
                   $ref: '#/components/schemas/Day-read_Day.DayResponsibles'
                 type: array
           description: 'Day collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Day resources.'
       tags:
         - Day
@@ -29600,6 +29770,8 @@ paths:
                   $ref: '#/components/schemas/ScheduleEntry-read'
                 type: array
           description: 'ScheduleEntry collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ScheduleEntry resources.'
       tags:
         - ScheduleEntry
@@ -29649,6 +29821,8 @@ paths:
                   $ref: '#/components/schemas/PersonalInvitation-read'
                 type: array
           description: 'PersonalInvitation collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of PersonalInvitation resources.'
       tags:
         - PersonalInvitation
@@ -29744,6 +29918,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -29880,6 +30056,8 @@ paths:
                   $ref: '#/components/schemas/Profile-read'
                 type: array
           description: 'Profile collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of Profile resources.'
       tags:
         - Profile
@@ -29920,6 +30098,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Profile-read'
           description: 'Profile resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Profile resource.'
@@ -29974,6 +30154,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -30175,6 +30357,8 @@ paths:
                   $ref: '#/components/schemas/ScheduleEntry-read'
                 type: array
           description: 'ScheduleEntry collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of ScheduleEntry resources.'
       tags:
         - ScheduleEntry
@@ -30250,6 +30434,8 @@ paths:
       responses:
         204:
           description: 'ScheduleEntry resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the ScheduleEntry resource.'
@@ -30291,6 +30477,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScheduleEntry-read_ScheduleEntry.Activity'
           description: 'ScheduleEntry resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a ScheduleEntry resource.'
@@ -30345,6 +30533,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
@@ -30398,6 +30588,8 @@ paths:
                   $ref: '#/components/schemas/User-read'
                 type: array
           description: 'User collection'
+        403:
+          description: Forbidden
       summary: 'Retrieves the collection of User resources.'
       tags:
         - User
@@ -30447,6 +30639,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         422:
           description: 'Unprocessable entity'
       summary: 'Creates a User resource.'
@@ -30473,6 +30667,8 @@ paths:
       responses:
         204:
           description: 'User resource deleted'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Removes the User resource.'
@@ -30514,6 +30710,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/User-read'
           description: 'User resource'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
       summary: 'Retrieves a User resource.'
@@ -30568,6 +30766,8 @@ paths:
           links: []
         400:
           description: 'Invalid input'
+        403:
+          description: Forbidden
         404:
           description: 'Resource not found'
         422:
