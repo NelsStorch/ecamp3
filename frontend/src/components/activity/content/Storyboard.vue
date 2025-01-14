@@ -94,6 +94,7 @@ import StoryboardSortable from '@/components/activity/content/storyboard/Storybo
 // with ancient Safari versions lacking support for randomUUID,
 // see https://caniuse.com/mdn-api_crypto_randomuuid
 const poorUuidPolyfill = function () {
+  console.log('uuid polyfill invoked')
   function randomDigit() {
     const random = (Math.random() * 16) | 0
     return random.toString(16)
@@ -105,6 +106,8 @@ const poorUuidPolyfill = function () {
     return v.toString(16)
   })
 }
+
+self.crypto.randomUUID = undefined // TODO revert
 
 export default {
   name: 'Storyboard',
