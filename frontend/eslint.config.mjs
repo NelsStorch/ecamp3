@@ -79,7 +79,7 @@ export default [
         },
       ],
 
-      'local-rules/matching-translation-keys': [
+      'local-rules/matchingTranslationKeys': [
         'error',
         {
           ignoreKeysRegex:

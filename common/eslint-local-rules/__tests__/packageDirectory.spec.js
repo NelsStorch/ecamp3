@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import factory from '../packageDirectory.js'
+import { packageDirectory } from '../packageDirectory.js'
 import path from 'path'
 import fs from 'fs'
-
-const { packageDirectory } = factory(path, fs)
 
 describe('packageDirectory', () => {
   it('resolves the location of the closest package.json', () => {
