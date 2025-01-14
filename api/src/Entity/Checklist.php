@@ -116,6 +116,13 @@ class Checklist extends BaseEntity implements BelongsToCampInterface, CopyFromPr
     public string $name;
 
     /**
+     * The id of the checklist that was used as a template for creating this checklist. Internal for now, is
+     * not published through the API.
+     */
+    #[ORM\Column(type: 'string', length: 16, nullable: true)]
+    public ?string $checklistPrototypeId = null;
+
+    /**
      * Whether this checklist is a template.
      */
     #[Assert\Type('bool')]
@@ -167,6 +174,8 @@ class Checklist extends BaseEntity implements BelongsToCampInterface, CopyFromPr
      */
     public function copyFromPrototype($prototype, $entityMap): void {
         $entityMap->add($prototype, $this);
+
+        $this->checklistPrototypeId = $prototype->getId();
 
         // copy Checklist base properties
         $this->name ??= $prototype->name;
