@@ -26,6 +26,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
      * @param Activity $data
      */
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Activity {
+        // @phpstan-ignore nullsafe.neverNull
         if (!isset($data->category?->rootContentNode)) {
             throw new \UnexpectedValueException('Property rootContentNode of provided category is null. Object of type '.ColumnLayout::class.' expected.');
         }

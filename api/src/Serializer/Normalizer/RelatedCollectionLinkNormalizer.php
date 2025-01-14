@@ -136,11 +136,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
     }
 
     public function getSupportedTypes(?string $format): array {
-        if (method_exists($this->decorated, 'getSupportedTypes')) {
-            return $this->decorated->getSupportedTypes($format);
-        }
-
-        return ['*' => false];
+        return $this->decorated->getSupportedTypes($format);
     }
 
     public function setSerializer(SerializerInterface $serializer): void {
@@ -152,8 +148,9 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
     protected function getRelatedCollectionHref($object, $rel, array $context, &$href): bool {
         $resourceClass = $this->getObjectClass($object);
 
+        // @phpstan-ignore instanceof.alwaysTrue
         if ($this->nameConverter instanceof NameConverterInterface) {
-            // @phpstan-ignore-next-line
+            /** @phpstan-ignore arguments.count */
             $rel = $this->nameConverter->denormalize($rel, $resourceClass, null, array_merge($context, ['groups' => ['read']]));
         }
 
@@ -170,6 +167,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
         try {
             $classMetadata = $this->getClassMetadata($resourceClass);
 
+            // @phpstan-ignore instanceof.alwaysTrue
             if (!$classMetadata instanceof ClassMetadata) {
                 throw new \RuntimeException("The class metadata for {$resourceClass} must be an instance of ClassMetadata.");
             }

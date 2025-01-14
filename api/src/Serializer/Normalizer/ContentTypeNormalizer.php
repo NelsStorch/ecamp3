@@ -44,11 +44,7 @@ class ContentTypeNormalizer implements NormalizerInterface, SerializerAwareInter
     }
 
     public function getSupportedTypes(?string $format): array {
-        if (method_exists($this->decorated, 'getSupportedTypes')) {
-            return $this->decorated->getSupportedTypes($format);
-        }
-
-        return ['*' => false];
+        return $this->decorated->getSupportedTypes($format);
     }
 
     public function setSerializer(SerializerInterface $serializer): void {
