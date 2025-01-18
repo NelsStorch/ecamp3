@@ -12492,6 +12492,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12522,6 +12525,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -12550,6 +12556,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12580,6 +12589,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -12605,6 +12617,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12635,6 +12650,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -12668,6 +12686,7 @@ components:
                   example: '2022-01-03T00:00:00+00:00'
                   format: date
                   readOnly: true
+                  type: ['null', string]
                 number:
                   description: 'The 1-based cardinal number of the day in the period. Not unique within the camp.'
                   example: '2'
@@ -12678,6 +12697,7 @@ components:
                   example: '2022-01-02T00:00:00+00:00'
                   format: date
                   readOnly: true
+                  type: ['null', string]
               required:
                 - dayOffset
               type: object
@@ -12745,6 +12765,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12775,6 +12798,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -12812,6 +12838,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12842,6 +12871,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -12876,6 +12908,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12906,6 +12941,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -12954,6 +12992,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12984,6 +13025,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -13035,6 +13079,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -13065,6 +13112,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -13113,6 +13163,9 @@ components:
           example: '2022-01-03T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -13143,6 +13196,9 @@ components:
           example: '2022-01-02T00:00:00+00:00'
           format: date
           readOnly: true
+          type:
+            - 'null'
+            - string
       required:
         - dayOffset
         - dayResponsibles
@@ -15789,6 +15845,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -15818,6 +15875,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -15872,6 +15930,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -15901,6 +15960,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -15959,6 +16019,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -15988,6 +16049,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -16016,6 +16078,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         moveScheduleEntries:
           default: true
           description: |-
@@ -16027,6 +16090,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - description
         - end
@@ -16057,6 +16121,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         moveScheduleEntries:
           default: true
           description: |-
@@ -16068,6 +16133,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - description
@@ -16102,6 +16168,7 @@ components:
                     not be before "start".
                   example: '2022-01-08'
                   format: date
+                  type: string
                 moveScheduleEntries:
                   default: true
                   description: |-
@@ -16114,6 +16181,7 @@ components:
                   description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
                   example: '2022-01-01'
                   format: date
+                  type: string
               required:
                 - description
                 - end
@@ -16225,6 +16293,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -16254,6 +16323,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -16317,6 +16387,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -16346,6 +16417,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -16413,6 +16485,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -16442,6 +16515,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -16484,6 +16558,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         moveScheduleEntries:
           default: true
           description: |-
@@ -16495,6 +16570,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - description
@@ -16573,6 +16649,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -16602,6 +16679,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -16679,6 +16757,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -16708,6 +16787,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -16789,6 +16869,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -16818,6 +16899,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - days
@@ -16851,6 +16933,7 @@ components:
             not be before "start".
           example: '2022-01-08'
           format: date
+          type: string
         moveScheduleEntries:
           default: true
           description: |-
@@ -16862,6 +16945,7 @@ components:
           description: 'The day on which the period starts, as an ISO date string. Should not be after "end".'
           example: '2022-01-01'
           format: date
+          type: string
       required:
         - camp
         - description
@@ -19011,6 +19095,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19053,6 +19138,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19096,6 +19182,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19139,6 +19226,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19183,6 +19271,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19226,6 +19315,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19272,6 +19362,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19315,6 +19406,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19341,6 +19433,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         left:
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
@@ -19361,6 +19454,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19393,6 +19487,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         left:
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
@@ -19413,6 +19508,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19454,6 +19550,7 @@ components:
                   description: 'End date and time of the schedule entry.'
                   example: '2022-01-02T01:30:00+00:00'
                   format: date-time
+                  type: string
                 left:
                   description: |-
                     When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
@@ -19484,6 +19581,7 @@ components:
                   description: 'Start date and time of the schedule entry.'
                   example: '2022-01-02T00:00:00+00:00'
                   format: date-time
+                  type: string
                 width:
                   default: 1
                   description: |-
@@ -19570,6 +19668,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19612,6 +19711,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19664,6 +19764,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19707,6 +19808,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19760,6 +19862,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19803,6 +19906,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19858,6 +19962,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -19901,6 +20006,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -19943,6 +20049,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         left:
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
@@ -19963,6 +20070,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -20032,6 +20140,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -20074,6 +20183,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -20140,6 +20250,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -20183,6 +20294,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -20250,6 +20362,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -20293,6 +20406,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -20362,6 +20476,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -20405,6 +20520,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
@@ -20438,6 +20554,7 @@ components:
           description: 'End date and time of the schedule entry.'
           example: '2022-01-02T01:30:00+00:00'
           format: date-time
+          type: string
         left:
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
@@ -20458,6 +20575,7 @@ components:
           description: 'Start date and time of the schedule entry.'
           example: '2022-01-02T00:00:00+00:00'
           format: date-time
+          type: string
         width:
           default: 1
           description: |-
