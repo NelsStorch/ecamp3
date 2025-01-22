@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
 final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInterface {
+    // @phpstan-ignore property.onlyWritten
     public function __construct(private QueryCollectionExtensionInterface $decorated) {}
 
     public function applyToCollection(
@@ -42,6 +43,6 @@ final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInte
         // Orig-Verison performs better.
         // FilterEagerLoadingExtension is disabled.
 
-        $this->decorated->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operation, $context);
+        // $this->decorated->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operation, $context);
     }
 }
