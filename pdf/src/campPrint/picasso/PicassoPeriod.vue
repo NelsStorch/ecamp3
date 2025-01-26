@@ -14,7 +14,7 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import PicassoPage from './PicassoPage.vue'
-import sortBy from 'lodash/sortBy.js'
+import sortBy from 'lodash-es/sortBy.js'
 import { splitDaysIntoPages, calculateBedtime } from '../../../common/helpers/picasso.js'
 
 export default {

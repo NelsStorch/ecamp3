@@ -34,7 +34,7 @@
 <script>
 import RichText from '../../generic/RichText.vue'
 import ContentNodeContent from './ContentNodeContent.vue'
-import values from 'lodash/values.js'
+import values from 'lodash-es/values.js'
 import { mdiScriptTextOutline } from '@mdi/js'
 
 export default {

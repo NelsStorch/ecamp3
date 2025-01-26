@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { flattenDeep, groupBy } from 'lodash'
+import { flattenDeep, groupBy } from 'lodash-es'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ChecklistItemParent from '@/components/checklist/ChecklistItemParent.vue'
 

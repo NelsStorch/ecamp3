@@ -32,7 +32,7 @@
 <script>
 import { serverErrorToString } from '@/helpers/serverError.js'
 import campCollaborationDisplayName from '@/common/helpers/campCollaborationDisplayName.js'
-import { isEqual, sortBy } from 'lodash'
+import { isEqual, sortBy } from 'lodash-es'
 import UserAvatar from '@/components/user/UserAvatar.vue'
 
 export default {

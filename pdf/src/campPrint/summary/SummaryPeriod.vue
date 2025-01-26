@@ -16,8 +16,8 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import SummaryDay from './SummaryDay.vue'
-import sortBy from 'lodash/sortBy.js'
-import camelCase from 'lodash/camelCase.js'
+import sortBy from 'lodash-es/sortBy.js'
+import camelCase from 'lodash-es/camelCase.js'
 
 export default {
   name: 'SummaryPeriod',

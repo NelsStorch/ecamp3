@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import ContentGroup from '@/components/layout/ContentGroup.vue'
 import DialogActivityProgressLabelCreate from './DialogActivityProgressLabelCreate.vue'
 import DialogActivityProgressLabelEdit from '@/components/campAdmin/DialogActivityProgressLabelEdit.vue'

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import groupBy from 'lodash/groupBy.js'
-import sortBy from 'lodash/sortBy.js'
+import groupBy from 'lodash-es/groupBy.js'
+import sortBy from 'lodash-es/sortBy.js'
 import FlexItem from './FlexItem.vue'
 export default {
   components: { FlexItem },

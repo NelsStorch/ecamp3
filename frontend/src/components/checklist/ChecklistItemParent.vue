@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import ScheduleEntryLinks from '../material/ScheduleEntryLinks.vue'
 
 export default {

@@ -51,7 +51,7 @@
 import CategoryLabel from '@/components/generic/CategoryLabel.vue'
 import RichText from '@/components/generic/RichText.vue'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash-es/camelCase.js'
 
 function isEmptyHtml(html) {
   if (html === null) {

@@ -1,4 +1,4 @@
-import { size } from 'lodash'
+import { size } from 'lodash-es'
 
 export default (i18n) => ({
   validate: (value) => {

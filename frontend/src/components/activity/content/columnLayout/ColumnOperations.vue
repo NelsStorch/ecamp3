@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import { cloneDeep, groupBy } from 'lodash'
+import { cloneDeep, groupBy } from 'lodash-es'
 import {
   calculateNextSlotName,
   adjustColumnWidths,

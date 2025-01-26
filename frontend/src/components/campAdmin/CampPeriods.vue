@@ -36,7 +36,7 @@ Displays all periods of a single camp and allows to edit them & create new ones
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
 import PeriodItem from './CampPeriodsListItem.vue'
 import DialogPeriodCreate from './DialogPeriodCreate.vue'

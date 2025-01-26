@@ -14,7 +14,7 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import InstanceName from '../InstanceName.vue'
-import sortBy from 'lodash/sortBy.js'
+import sortBy from 'lodash-es/sortBy.js'
 
 export default {
   name: 'Material',

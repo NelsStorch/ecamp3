@@ -1,4 +1,4 @@
-import maxBy from 'lodash/maxBy.js'
+import maxBy from 'lodash-es/maxBy.js'
 
 export default function longestTime(times, dayjs) {
   return dayjs()

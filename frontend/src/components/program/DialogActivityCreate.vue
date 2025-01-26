@@ -109,7 +109,7 @@ import DialogBase from '@/components/dialog/DialogBase.vue'
 import DialogActivityForm from './DialogActivityForm.vue'
 import CopyActivityInfoDialog from '@/components/activity/CopyActivityInfoDialog.vue'
 import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
-import { uniqueId } from 'lodash'
+import { uniqueId } from 'lodash-es'
 import router from '@/router.js'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
 

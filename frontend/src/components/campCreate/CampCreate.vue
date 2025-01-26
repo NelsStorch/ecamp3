@@ -31,7 +31,7 @@
   </v-stepper>
 </template>
 <script>
-import { camelCase } from 'lodash'
+import { camelCase } from 'lodash-es'
 import { campRoute } from '@/router.js'
 import CampCreateStep1 from '@/components/campCreate/CampCreateStep1.vue'
 import CampCreateStep2 from '@/components/campCreate/CampCreateStep2.vue'

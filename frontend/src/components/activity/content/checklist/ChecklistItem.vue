@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { filter, sortBy } from 'lodash'
+import { filter, sortBy } from 'lodash-es'
 
 export default {
   name: 'ChecklistItem',
