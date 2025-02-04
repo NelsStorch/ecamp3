@@ -54,7 +54,7 @@
         "brianium/paratest": "v7.7.0",
         "friendsofphp/php-cs-fixer": "3.68.5",
         "hautelook/alice-bundle": "2.14.1",
-        "justinrainbow/json-schema": "6.0.0",
+        "justinrainbow/json-schema": "6.1.0",
         "php-coveralls/php-coveralls": "2.7.0",
         "phpspec/prophecy-phpunit": "2.3.0",
         "phpstan/phpstan": "2.1.2",
