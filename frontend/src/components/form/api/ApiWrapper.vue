@@ -29,7 +29,7 @@ Wrapper component for form components to save data back to API
 </template>
 
 <script>
-import { debounce, set, get } from 'lodash'
+import { debounce, set, get } from 'lodash-es'
 import { apiPropsMixin } from '@/mixins/apiPropsMixin.js'
 import { ValidationObserver } from 'vee-validate'
 import { serverErrorToString } from '@/helpers/serverError.js'

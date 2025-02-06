@@ -1,4 +1,4 @@
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default function repairConfig(

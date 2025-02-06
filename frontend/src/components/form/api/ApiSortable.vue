@@ -25,7 +25,7 @@
 
 <script>
 import draggable from 'vuedraggable'
-import { every, sortBy } from 'lodash'
+import { every, sortBy } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
 export default {
   name: 'ApiSortable',

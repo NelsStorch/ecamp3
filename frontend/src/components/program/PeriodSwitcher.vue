@@ -43,7 +43,7 @@
   </v-toolbar-title>
 </template>
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import { periodRoute } from '@/router.js'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
 

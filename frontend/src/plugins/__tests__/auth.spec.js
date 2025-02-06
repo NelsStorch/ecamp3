@@ -2,7 +2,7 @@ import { describe, beforeEach, afterEach, vi, expect, it } from 'vitest'
 import Vue from 'vue'
 import { auth } from '@/plugins/auth'
 import Cookies from 'js-cookie'
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 import { getEnv } from '@/environment'
 
 const storePlugin = await vi.importActual('@/plugins/store')

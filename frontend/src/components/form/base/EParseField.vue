@@ -47,7 +47,7 @@ Displays a field as a textfield (can be used with v-model)
 </template>
 
 <script>
-import { debounce } from 'lodash'
+import { debounce } from 'lodash-es'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { ValidationProvider } from 'vee-validate'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'

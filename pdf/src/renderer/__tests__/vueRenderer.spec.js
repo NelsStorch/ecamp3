@@ -6,7 +6,7 @@ import { renderVueToPdfStructure } from '../vueRenderer.js'
 import SimpleDocument from './SimpleDocument.vue'
 import CampPrint from '../../CampPrint.vue'
 import { createCircularReplacer } from '@/renderer/__tests__/createCircularReplacer'
-import { cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash-es'
 import dayjs from '../../../common/helpers/dayjs.js'
 import enCommon from '../../../common/locales/en.json'
 import {

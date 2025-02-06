@@ -247,7 +247,7 @@ Displays a single scheduleEntry
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ApiTextField from '@/components/form/api/ApiTextField.vue'
 import RootNode from '@/components/activity/RootNode.vue'

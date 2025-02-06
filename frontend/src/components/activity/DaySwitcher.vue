@@ -76,7 +76,7 @@
 </template>
 <script>
 import AvatarRow from '@/components/generic/AvatarRow.vue'
-import { reduce, sortBy } from 'lodash'
+import { reduce, sortBy } from 'lodash-es'
 
 export default {
   name: 'DaySwitcher',

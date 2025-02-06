@@ -74,7 +74,7 @@
 <script>
 import ContentNodeCard from '@/components/activity/content/layout/ContentNodeCard.vue'
 import { contentNodeMixin } from '@/mixins/contentNodeMixin.js'
-import { debounce, isEqual, sortBy } from 'lodash'
+import { debounce, isEqual, sortBy } from 'lodash-es'
 import { serverErrorToString } from '@/helpers/serverError.js'
 
 export default {

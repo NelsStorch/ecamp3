@@ -58,7 +58,7 @@
   </v-row>
 </template>
 <script>
-import { camelCase } from 'lodash'
+import { camelCase } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import { getEnv } from '@/environment.js'
 

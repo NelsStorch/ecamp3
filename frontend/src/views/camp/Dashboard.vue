@@ -138,7 +138,7 @@
 import { periodRoute } from '@/router.js'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ActivityRow from '@/components/dashboard/ActivityRow.vue'
-import { keyBy, groupBy, mapValues } from 'lodash'
+import { keyBy, groupBy, mapValues } from 'lodash-es'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
 import { mapGetters } from 'vuex'
 import {

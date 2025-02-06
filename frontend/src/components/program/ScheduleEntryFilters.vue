@@ -118,7 +118,7 @@ import TextAlignBaseline from '@/components/layout/TextAlignBaseline.vue'
 import BooleanFilter from '@/components/dashboard/BooleanFilter.vue'
 import FilterDivider from '@/components/dashboard/FilterDivider.vue'
 import { mapGetters } from 'vuex'
-import { keyBy, sortBy } from 'lodash'
+import { keyBy, sortBy } from 'lodash-es'
 import campCollaborationDisplayName from '@/common/helpers/campCollaborationDisplayName.js'
 
 function filterEquals(arr1, arr2) {

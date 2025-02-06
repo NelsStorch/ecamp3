@@ -11,7 +11,7 @@
   </v-expansion-panels>
 </template>
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import StoryDay from './StoryDay.vue'
 
 export default {

@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { get, keyBy } from 'lodash'
+import { get, keyBy } from 'lodash-es'
 
 export default {
   name: 'SelectFilter',

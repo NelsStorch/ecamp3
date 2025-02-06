@@ -87,7 +87,7 @@ import { contentNodeMixin } from '@/mixins/contentNodeMixin.js'
 import DraggableContentNodes from '@/components/activity/DraggableContentNodes.vue'
 import MenuCardlessContentNode from '@/components/activity/MenuCardlessContentNode.vue'
 import LayoutNodeCard from '@/components/activity/content/layout/LayoutNodeCard.vue'
-import { groupBy } from 'lodash'
+import { groupBy } from 'lodash-es'
 
 const ASIDE_CONTENT_WIDTH = 250
 const MAIN_CONTENT_WIDTH = 600

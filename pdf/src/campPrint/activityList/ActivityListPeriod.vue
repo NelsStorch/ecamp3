@@ -16,7 +16,7 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import ActivityListScheduleEntry from './ActivityListScheduleEntry.vue'
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash-es/camelCase.js'
 
 export default {
   name: 'ActivityListPeriod',

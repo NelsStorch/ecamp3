@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 
 const ORIENTATIONS = [
   {

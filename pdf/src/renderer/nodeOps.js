@@ -1,5 +1,5 @@
 import { styleStore } from './styleStore.js'
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash-es/camelCase.js'
 import * as primitives from '@react-pdf/primitives'
 
 export const htmlToPdfElementMap = { ...primitives }

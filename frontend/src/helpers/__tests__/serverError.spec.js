@@ -1,6 +1,6 @@
 import { describe, beforeEach, vi, expect, it } from 'vitest'
 import { transformViolations } from '@/helpers/serverError'
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 import { fallbackLocales } from '@/plugins/i18n'
 
 const fallbackLocale = fallbackLocales.default
