@@ -48,6 +48,10 @@ for (const [_, value] of Object.entries(getUrlsToMeasure()._links)) {
   }
 }
 
+for (const url of getCampRelations()) {
+  metricsMap.set(url, new Trend(toMetricName(url)));
+}
+
 
 export default function() {
   const payload = JSON.stringify({
@@ -71,6 +75,11 @@ export default function() {
         const itemUrl = JSON.parse(collection.body)._embedded?.items[0]._links.self.href
         const itemResponse = http.get(`${host}${itemUrl}.jsonhal`, { headers: addAuthorizationHeadersIfNecessary() })
         metricsMap.get(`${urlWithoutTemplate}/item`)?.add(itemResponse.timings.duration)
+        if (urlWithoutTemplate.includes('/api/camps')) {
+          for (const [_, value] of Object.entries(JSON.parse(itemResponse.body)._links)) {
+            measureCampRelation(value);
+          }
+        }
       }
       // this also catches the ReferenceError on the long path to find the item url
       catch (e) 
@@ -79,6 +88,23 @@ export default function() {
         metricsMap.get(`${urlWithoutTemplate}/item`)?.add(-1E9)
       }
     }
+  }
+}
+
+function measureCampRelation(value) {
+  const urlToMeasure = value.href
+  const urlWithReplacedId = urlToMeasure.replace(/(\/|%2F)[0-9a-f]{6,}\/?/, "/{id}/");
+  const url = `${host}${urlToMeasure}`;
+  try {
+    const response = http.get(url, { headers: addAuthorizationHeadersIfNecessary({ 'accept': 'application/hal+json' }) });
+    const trend = metricsMap.get(urlWithReplacedId);
+    if (!trend) {
+      console.log(`trend for ${urlWithReplacedId} not found`);
+    }
+    trend?.add(response.timings.duration);
+  } catch (e) {
+    console.log(`Failed to fetch url ${url}, reason: `, e);
+    metricsMap.get(`${urlWithReplacedId}`)?.add(-1E9);
   }
 }
 
@@ -236,8 +262,28 @@ function getUrlsToMeasure() {
   }
 }
 
+function getCampRelations() {
+  return [
+    "/api/camp_collaborations?camp=%2Fapi%2Fcamps/{id}/",
+    "/api/periods?camp=%2Fapi%2Fcamps/{id}/",
+    "/api/camps/{id}/categories",
+    "/api/activity_progress_labels?camp=%2Fapi%2Fcamps/{id}/",
+    "/api/activities?camp=%2Fapi%2Fcamps/{id}/",
+    "/api/material_lists?camp=%2Fapi%2Fcamps/{id}/",
+    "/api/camps/{id}/checklists",
+    "/api/users/{id}",
+    "/api/profiles?user.collaborations.camp=%2Fapi%2Fcamps/{id}/"
+  ];
+}
+
 function toMetricName(name) {
   return name.replaceAll("/", "_")
+    .replaceAll("%", "_")
+    .replaceAll("{", "_")
+    .replaceAll("}", "_")
+    .replaceAll("?", "_")
+    .replaceAll("=", "_")
+    .replaceAll(".", "_");
 }
 
 function addAuthorizationHeadersIfNecessary(headers = {}) {
