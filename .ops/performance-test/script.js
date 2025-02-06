@@ -1,6 +1,8 @@
+import encoding from 'k6/encoding'
 import http from 'k6/http'
 import { Trend } from 'k6/metrics'
 
+// noinspection JSUnusedGlobalSymbols
 export const options = {
   // A number specifying the number of VUs to run concurrently.
   vus: __ENV.VUS || 10,
@@ -10,6 +12,15 @@ export const options = {
 }
 
 const host = __ENV.API_ROOT_URL || 'http://localhost:3000'
+
+const basicAuthUser = __ENV.BASIC_AUTH_USER
+const basicAuthPassword = __ENV.BASIC_AUTH_PASSWORD
+
+if (!!basicAuthUser !== !!basicAuthPassword) {
+  throw new Error('BASIC_AUTH_USER and BASIC_AUTH_PASSWORD must be set together')
+}
+
+const basicAuthActive = !!basicAuthUser && !!basicAuthPassword
 
 const specialEndpoints = [
   '/',
@@ -45,20 +56,20 @@ export default function() {
   const loginResponse = http.post(
     `${host}/api/authentication_token`,
     payload,
-    { headers: { 'Content-Type': 'application/json' } })
+    { headers: addAuthorizationHeadersIfNecessary({ 'Content-Type': 'application/json' }) })
   loginTrend.add(loginResponse.timings.duration);
 
   for (const [_, value] of Object.entries(getUrlsToMeasure()._links)) {
     const urlWithoutTemplate = value.href.replace(/{.*$/, '')
     if (!specialEndpoints.includes(urlWithoutTemplate)) {
       const url = `${host}${urlWithoutTemplate}.jsonhal`
-      const collection = http.get(url)
+      const collection = http.get(url, { headers: addAuthorizationHeadersIfNecessary() })
 
       metricsMap.get(urlWithoutTemplate)?.add(collection.timings.duration)
 
       try {
         const itemUrl = JSON.parse(collection.body)._embedded?.items[0]._links.self.href
-        const itemResponse = http.get(`${host}${itemUrl}.jsonhal`)
+        const itemResponse = http.get(`${host}${itemUrl}.jsonhal`, { headers: addAuthorizationHeadersIfNecessary() })
         metricsMap.get(`${urlWithoutTemplate}/item`)?.add(itemResponse.timings.duration)
       }
       // this also catches the ReferenceError on the long path to find the item url
@@ -227,4 +238,15 @@ function getUrlsToMeasure() {
 
 function toMetricName(name) {
   return name.replaceAll("/", "_")
+}
+
+function addAuthorizationHeadersIfNecessary(headers = {}) {
+  const authHeaders = {}
+  if (basicAuthActive) {
+    authHeaders['Authorization'] =  `Basic ${encoding.b64encode(`${basicAuthUser}:${basicAuthPassword}`)}`
+  }
+  return {
+    ...authHeaders,
+    ...headers
+  }
 }
