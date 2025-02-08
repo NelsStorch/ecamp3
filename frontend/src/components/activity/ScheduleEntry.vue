@@ -308,6 +308,7 @@ import ApiForm from '@/components/form/api/ApiForm.vue'
 import ApiSelect from '@/components/form/api/ApiSelect.vue'
 import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
 import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
+import scheduleEntryRouteChange from '@/mixins/scheduleEntryRouteChange.js'
 
 export default {
   name: 'ScheduleEntry',
@@ -337,23 +338,7 @@ export default {
     }
   },
   async beforeRouteUpdate(to, from, next) {
-    if (to.params.scheduleEntryId !== from.params.scheduleEntryId) {
-      return await this.api
-        .get()
-        .scheduleEntries({ id: to.params.scheduleEntryId })
-        ._meta.load.then(() => next())
-        .catch(async () => {
-          return next({
-            name: 'camp/activity',
-            params: {
-              ...to.params,
-              scheduleEntryId: (await firstActivityScheduleEntry(this.activityId)).id,
-            },
-          })
-        })
-    } else {
-      return next()
-    }
+    return scheduleEntryRouteChange(this.activityId, to, from, next)
   },
   props: {
     activityId: {

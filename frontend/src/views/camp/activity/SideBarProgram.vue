@@ -38,28 +38,13 @@ import ScheduleEntries from '@/components/program/ScheduleEntries.vue'
 import { HTML5_FMT } from '@/common/helpers/dateFormat.js'
 import DaySwitcher from '@/components/activity/DaySwitcher.vue'
 import { firstActivityScheduleEntry } from '@/router.js'
+import scheduleEntryRouteChange from '@/mixins/scheduleEntryRouteChange.js'
 
 export default {
   name: 'SideBarProgram',
   components: { DaySwitcher, SideBar, Picasso, ScheduleEntries },
   async beforeRouteUpdate(to, from, next) {
-    if (to.params.scheduleEntryId !== from.params.scheduleEntryId) {
-      return await this.api
-        .get()
-        .scheduleEntries({ id: to.params.scheduleEntryId })
-        ._meta.load.then(() => next())
-        .catch(async () => {
-          return next({
-            name: 'camp/activity',
-            params: {
-              ...to.params,
-              scheduleEntryId: (await firstActivityScheduleEntry(this.activityId)).id,
-            },
-          })
-        })
-    } else {
-      return next()
-    }
+    return scheduleEntryRouteChange(this.activityId, to, from, next)
   },
   props: {
     camp: { type: Object, required: true },
