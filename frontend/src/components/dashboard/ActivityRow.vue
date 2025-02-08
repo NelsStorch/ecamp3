@@ -139,6 +139,7 @@ export default {
         name: 'camp/activity',
         params: {
           campId: this.scheduleEntry.period().camp().id,
+          activityId: this.scheduleEntry.activity().id,
           scheduleEntryId: this.scheduleEntry.id,
         },
       }

@@ -193,7 +193,7 @@ Displays a single scheduleEntry
                     class="text-right tabular-nums pb-2 pr-4"
                   >
                     <RouterLink
-                      v-if="scheduleEntryItem._meta.self !== scheduleEntry()._meta.self"
+                      v-if="scheduleEntryItem._meta.self !== scheduleEntry._meta.self"
                       :to="scheduleEntryRoute(scheduleEntryItem)"
                       class="e-title-link"
                     >
@@ -215,7 +215,7 @@ Displays a single scheduleEntry
                     <RouterLink
                       v-if="
                         category.numberingStyle === '-' &&
-                        scheduleEntryItem._meta.self !== scheduleEntry()._meta.self
+                        scheduleEntryItem._meta.self !== scheduleEntry._meta.self
                       "
                       :to="scheduleEntryRoute(scheduleEntryItem)"
                       class="e-title-link"
@@ -231,9 +231,9 @@ Displays a single scheduleEntry
             </table>
             <DialogActivityEdit
               v-if="activity && isContributor"
-              :schedule-entry="scheduleEntry()"
+              :schedule-entry="scheduleEntry"
               hide-header-fields
-              @activityUpdated="activity.$reload()"
+              @activity-updated="activity.$reload()"
             >
               <template #activator="{ on }">
                 <ButtonEdit text small class="v-btn--has-bg" v-on="on" />
@@ -292,7 +292,11 @@ import RootNode from '@/components/activity/RootNode.vue'
 import ActivityResponsibles from '@/components/activity/ActivityResponsibles.vue'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
 import { campRoleMixin } from '@/mixins/campRoleMixin'
-import router, { periodRoute, scheduleEntryRoute } from '@/router.js'
+import router, {
+  firstActivityScheduleEntry,
+  periodRoute,
+  scheduleEntryRoute,
+} from '@/router.js'
 import DownloadNuxtPdf from '@/components/print/print-nuxt/DownloadNuxtPdfListItem.vue'
 import DownloadClientPdf from '@/components/print/print-client/DownloadClientPdfListItem.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
@@ -332,10 +336,33 @@ export default {
       isPaperDisplaySize: () => this.isPaperDisplaySize,
     }
   },
+  async beforeRouteUpdate(to, from, next) {
+    if (to.params.scheduleEntryId !== from.params.scheduleEntryId) {
+      return await this.api
+        .get()
+        .scheduleEntries({ id: to.params.scheduleEntryId })
+        ._meta.load.then(() => next())
+        .catch(() =>
+          next({
+            name: 'camp/activity',
+            params: {
+              ...to.params,
+              scheduleEntryId: firstActivityScheduleEntry(this.activity).id,
+            },
+          })
+        )
+    } else {
+      return next()
+    }
+  },
   props: {
-    scheduleEntry: {
-      type: Object,
+    activityId: {
+      type: String,
       required: true,
+    },
+    scheduleEntryId: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -348,7 +375,18 @@ export default {
   },
   computed: {
     activity() {
-      return this.scheduleEntry.activity()
+      return this.api.get().activities({ id: this.activityId })
+    },
+    scheduleEntry() {
+      try {
+        if (this.scheduleEntryId) {
+          return this.api.get().scheduleEntries({ id: this.scheduleEntryId })
+        } else {
+          return firstActivityScheduleEntry(this.activity)
+        }
+      } catch {
+        return firstActivityScheduleEntry(this.activity)
+      }
     },
     camp() {
       return this.activity.camp()

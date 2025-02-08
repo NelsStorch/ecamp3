@@ -264,10 +264,7 @@ export default {
         const match = router.matcher.match(url)
 
         if (match.name === 'camp/activity') {
-          const scheduleEntry = await this.api
-            .get()
-            .scheduleEntries({ id: match.params['scheduleEntryId'] })
-          return await scheduleEntry.activity()
+          return await this.api.get().activities({ id: match.params['activityId'] })
         } else if (match.name === 'camp/admin/activity/category') {
           return await this.api.get().categories({ id: match.params['categoryId'] })
         }

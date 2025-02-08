@@ -24,8 +24,8 @@
           :periods="periods"
           :deletable="
             scheduleEntriesWithoutDeleted.length > 1 &&
-            ($route.name !== 'activity' ||
-              scheduleEntry.self !== currentScheduleEntry._meta.self)
+            ($route.name !== 'camp/activity' ||
+              scheduleEntry.self !== currentScheduleEntry?._meta.self)
           "
           @delete="deleteEntry(scheduleEntry)"
         />
@@ -53,7 +53,7 @@ export default {
 
     currentScheduleEntry: {
       type: Object,
-      required: true,
+      default: null,
     },
 
     // all available periods

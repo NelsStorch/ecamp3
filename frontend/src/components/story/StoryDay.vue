@@ -24,6 +24,7 @@
                   name: 'camp/activity',
                   params: {
                     campId: day.period().camp().id,
+                    activityId: scheduleEntry.activity().id,
                     scheduleEntryId: scheduleEntry.id,
                   },
                 }"

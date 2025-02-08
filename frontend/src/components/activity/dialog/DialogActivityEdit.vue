@@ -20,7 +20,7 @@
     <DialogActivityForm
       :activity="entityData"
       :current-schedule-entry="scheduleEntry"
-      :period="scheduleEntry.period"
+      :period="scheduleEntry.period()"
       :hide-location="hideHeaderFields"
     />
   </dialog-form>
@@ -131,6 +131,7 @@ export default {
     },
     updatedSuccessful(data) {
       this.close()
+      this.api.reload(this.activity)
       this.$emit('activity-updated', data)
     },
   },

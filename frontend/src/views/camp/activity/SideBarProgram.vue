@@ -37,13 +37,15 @@ import ScheduleEntries from '@/components/program/ScheduleEntries.vue'
 
 import { HTML5_FMT } from '@/common/helpers/dateFormat.js'
 import DaySwitcher from '@/components/activity/DaySwitcher.vue'
+import { firstActivityScheduleEntry } from '@/router.js'
 
 export default {
   name: 'SideBarProgram',
   components: { DaySwitcher, SideBar, Picasso, ScheduleEntries },
   props: {
-    day: { type: Object, required: true },
     camp: { type: Object, required: true },
+    activityId: { type: String, required: true },
+    scheduleEntryId: { type: String, default: null },
   },
   data() {
     return {
@@ -51,6 +53,13 @@ export default {
     }
   },
   computed: {
+    day() {
+      if (this.scheduleEntryId) {
+        return this.api.get().scheduleEntries({ id: this.scheduleEntryId }).day()
+      } else {
+        return firstActivityScheduleEntry(this.activityId).day()
+      }
+    },
     period() {
       return this.daySelection.period()
     },

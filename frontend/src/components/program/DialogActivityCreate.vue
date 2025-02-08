@@ -143,7 +143,7 @@ export default {
       return this.period.camp()
     },
     period() {
-      return this.scheduleEntry.period
+      return this.scheduleEntry.period()
     },
     clipboardAccessDenied() {
       return (
@@ -282,11 +282,7 @@ export default {
         const match = router.matcher.match(url)
 
         if (match.name === 'camp/activity') {
-          const scheduleEntry = await this.api
-            .get()
-            .scheduleEntries({ id: match.params['scheduleEntryId'] })
-
-          return await scheduleEntry.activity()
+          return await this.api.get().activities({ id: match.params['activityId'] })
         }
       }
       return null
