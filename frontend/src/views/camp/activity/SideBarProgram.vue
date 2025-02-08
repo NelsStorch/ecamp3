@@ -52,7 +52,7 @@ export default {
           return next({
             name: 'camp/activity',
             params: {
-              activityId: to.params.activityId,
+              ...to.params,
               scheduleEntryId: (await firstActivityScheduleEntry(this.activityId)).id,
             },
           })
