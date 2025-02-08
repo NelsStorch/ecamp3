@@ -65,7 +65,7 @@ export default {
       }
     },
     period() {
-      return this.daySelection?.period()
+      return this.daySelection.period()
     },
     daySelection() {
       return this.selectedDay ?? this.day
