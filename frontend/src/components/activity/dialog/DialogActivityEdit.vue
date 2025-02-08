@@ -1,7 +1,7 @@
 <template>
   <dialog-form
     v-model="showDialog"
-    :title="$tc('components.program.dialogActivityEdit.title')"
+    :title="$tc('components.activity.dialog.dialogActivityEdit.title')"
     :loading="loading"
     :error="error"
     icon="mdi-calendar-plus"

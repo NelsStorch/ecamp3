@@ -413,9 +413,6 @@
         "copySourceInfo": "Hier kannst du die URL einer Aktivität einfügen, um dessen Inhalte zu kopieren.",
         "pasteActivity": "Kopierte Aktivität einfügen"
       },
-      "dialogActivityEdit": {
-        "title": "Aktivität bearbeiten"
-      },
       "formScheduleEntryItem": {
         "end": "Ende",
         "start": "Start"
