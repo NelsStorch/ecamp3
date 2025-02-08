@@ -342,15 +342,15 @@ export default {
         .get()
         .scheduleEntries({ id: to.params.scheduleEntryId })
         ._meta.load.then(() => next())
-        .catch(() =>
-          next({
+        .catch(async () => {
+          return next({
             name: 'camp/activity',
             params: {
-              ...to.params,
-              scheduleEntryId: firstActivityScheduleEntry(this.activity).id,
+              activityId: to.params.activityId,
+              scheduleEntryId: (await firstActivityScheduleEntry(this.activityId)).id,
             },
           })
-        )
+        })
     } else {
       return next()
     }

@@ -625,11 +625,13 @@ async function requireActivityScheduleEntry(to, from, next) {
           })
           .catch(async () => {
             // scheduleEntry is not found, use first activity scheduleEntry
-            to.params.scheduleEntryId = firstActivityScheduleEntry(activity).id
+            const scheduleEntry = await firstActivityScheduleEntry(activity)
+            to.params.scheduleEntryId = scheduleEntry.id
             next(to)
           })
+      } else {
+        next()
       }
-      next()
     })
     .catch(() => {
       // activityId does not exist, check if scheduleEntryId exists
@@ -987,8 +989,9 @@ async function firstFuturePeriod(route) {
 
 export async function firstActivityScheduleEntry(activity) {
   if (typeof activity === 'string') {
-    activity = apiStore.get().activities({ id: activity })
+    activity = await apiStore.get().activities({ id: activity })._meta.load
   }
+  await activity.scheduleEntries()._meta.load
   return activity
     .scheduleEntries()
     .items.reduce(
