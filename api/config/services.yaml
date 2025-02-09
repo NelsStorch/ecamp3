@@ -53,6 +53,9 @@ services:
         tags:
             - 'app.input_filter'
 
+    App\Doctrine\Orm\Extension\FilterEagerLoadingsExtension:
+        decorates: 'api_platform.doctrine.orm.query_extension.filter_eager_loading'
+
     App\Serializer\Normalizer\RelatedCollectionLinkNormalizer:
         decorates: 'api_platform.hal.normalizer.item'
         arguments:
