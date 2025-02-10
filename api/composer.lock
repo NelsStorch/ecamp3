@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "238b7be212bac1e54510a5fe4e5c9725",
+    "content-hash": "3f3eb9e4a2f86cc2e929091b9931fdb5",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13879,16 +13879,16 @@
         },
         {
             "name": "spatie/phpunit-snapshot-assertions",
-            "version": "5.1.7",
+            "version": "5.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/phpunit-snapshot-assertions.git",
-                "reference": "5c7ae9d555c3b46bddd35f4e4bab9a6181aa1446"
+                "reference": "9cdaa6a197e8dba3e9ebda6f73ac6e0e6db143ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/5c7ae9d555c3b46bddd35f4e4bab9a6181aa1446",
-                "reference": "5c7ae9d555c3b46bddd35f4e4bab9a6181aa1446",
+                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/9cdaa6a197e8dba3e9ebda6f73ac6e0e6db143ca",
+                "reference": "9cdaa6a197e8dba3e9ebda6f73ac6e0e6db143ca",
                 "shasum": ""
             },
             "require": {
@@ -13897,7 +13897,7 @@
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "php": "^8.1",
-                "phpunit/phpunit": "^10.0|^11.0",
+                "phpunit/phpunit": "^10.0|^11.0|^12.0",
                 "symfony/property-access": "^5.2|^6.2|^7.0",
                 "symfony/serializer": "^5.2|^6.2|^7.0",
                 "symfony/yaml": "^5.2|^6.2|^7.0"
@@ -13944,7 +13944,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/phpunit-snapshot-assertions/issues",
-                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/5.1.7"
+                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/5.1.8"
             },
             "funding": [
                 {
@@ -13952,7 +13952,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-12-09T15:47:41+00:00"
+            "time": "2025-02-10T09:19:13+00:00"
         },
         {
             "name": "staabm/side-effects-detector",
