@@ -872,12 +872,41 @@ export function periodRoute(period, routeName = 'camp/period/program', query = {
 }
 
 export function scheduleEntryRoute(scheduleEntry, query = {}) {
-  if (scheduleEntry._meta.loading || scheduleEntry.activity()._meta.loading) return {}
+  if (scheduleEntry?._meta.loading || scheduleEntry?.activity()._meta.loading) return {}
 
   const activity = scheduleEntry.activity()
   const camp = activity.camp()
 
   // if (camp._meta.loading) return {}
+
+  return {
+    name: 'camp/activity',
+    params: {
+      campId: camp.id,
+      campShortTitle: slugify(campShortTitle(camp)),
+      scheduleEntryId: scheduleEntry.id,
+      activityId: activity.id,
+      activityName: slugify(activity.title),
+    },
+    query,
+  }
+}
+
+export async function firstActivityScheduleEntryRoute(activity, query = {}) {
+  if (typeof activity === 'string') {
+    activity = await apiStore.get().activities({ id: activity })._meta.load
+  }
+  const camp = activity.camp()
+  await apiStore.reload(activity.scheduleEntries())
+  const scheduleEntry = activity
+    .scheduleEntries()
+    .items.reduce(
+      (result, current) =>
+        result === null || new Date(result.start) > new Date(current.start)
+          ? current
+          : result,
+      null
+    )
 
   return {
     name: 'camp/activity',

@@ -20,7 +20,7 @@
     <DialogActivityForm
       :activity="entityData"
       :current-schedule-entry="scheduleEntry"
-      :period="scheduleEntry.period()"
+      :period="period"
       :hide-location="hideHeaderFields"
     />
   </dialog-form>
@@ -30,6 +30,7 @@
 import DialogForm from '@/components/dialog/DialogForm.vue'
 import DialogBase from '@/components/dialog/DialogBase.vue'
 import DialogActivityForm from './DialogActivityForm.vue'
+import { firstActivityScheduleEntryRoute } from '@/router.js'
 
 export default {
   name: 'DialogActivityEdit',
@@ -51,6 +52,9 @@ export default {
   computed: {
     activity() {
       return this.scheduleEntry.activity()
+    },
+    period() {
+      return this.scheduleEntry.period()
     },
     scheduleEntries() {
       return this.activity.scheduleEntries()
@@ -97,11 +101,27 @@ export default {
 
         // update existing
         if (entry.self) {
-          return this.api.patch(entry.self, {
-            period: entry.period()._meta.self,
-            start: entry.start,
-            end: entry.end,
-          })
+          return this.api
+            .patch(entry.self, {
+              period: entry.period()._meta.self,
+              start: entry.start,
+              end: entry.end,
+            })
+            .catch(async (e) => {
+              // entry was deleted in the meantime
+              if (e.response.status === 404) {
+                if (entry.self === this.scheduleEntry._meta.self) {
+                  // redirect to first entry to not break UI
+                  this.$router.push(await firstActivityScheduleEntryRoute(this.activity))
+                  return Promise.resolve()
+                } else {
+                  // remove self reference and show error
+                  entry.self = null
+                  return Promise.reject(e)
+                }
+              }
+              return Promise.reject(e)
+            })
         }
 
         // else: create new entry
