@@ -14,7 +14,8 @@ export default async function scheduleEntryRouteChange(activity, to, from, next)
     return await apiStore
       .get()
       .scheduleEntries({ id: to.params.scheduleEntryId })
-      ._meta.load.then(() => next())
+      .$reload()
+      .then(() => next())
       .catch(async () => {
         return next({
           name: 'camp/activity',

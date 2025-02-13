@@ -38,7 +38,7 @@ import ScheduleEntries from '@/components/program/ScheduleEntries.vue'
 import { HTML5_FMT } from '@/common/helpers/dateFormat.js'
 import DaySwitcher from '@/components/activity/DaySwitcher.vue'
 import { firstActivityScheduleEntry } from '@/router.js'
-import scheduleEntryRouteChange from '@/mixins/scheduleEntryRouteChange.js'
+import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
 
 export default {
   name: 'SideBarProgram',
@@ -54,15 +54,12 @@ export default {
   data() {
     return {
       selectedDay: null,
+      scheduleEntry: null,
     }
   },
   computed: {
     day() {
-      if (this.scheduleEntryId) {
-        return this.api.get().scheduleEntries({ id: this.scheduleEntryId }).day()
-      } else {
-        return firstActivityScheduleEntry(this.activityId).day()
-      }
+      return this.scheduleEntry.day()
     },
     period() {
       return this.daySelection.period()
@@ -72,6 +69,18 @@ export default {
     },
     currentDayAsString() {
       return this.$date.utc(this.daySelection.start).format(HTML5_FMT.DATE)
+    },
+  },
+  watch: {
+    scheduleEntryId: {
+      async handler(id) {
+        try {
+          this.scheduleEntry = this.api.get().scheduleEntries({ id })
+        } catch {
+          this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
+        }
+      },
+      immediate: true,
     },
   },
 }

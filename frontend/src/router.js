@@ -897,7 +897,7 @@ export async function firstActivityScheduleEntryRoute(activity, query = {}) {
     activity = await apiStore.get().activities({ id: activity })._meta.load
   }
   const camp = activity.camp()
-  await apiStore.reload(activity.scheduleEntries())
+  apiStore.reload(activity.scheduleEntries())
   const scheduleEntry = await firstActivityScheduleEntry(activity)
 
   return {

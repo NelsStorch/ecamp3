@@ -158,6 +158,7 @@ export default {
     updatedSuccessful(data) {
       this.close()
       this.api.reload(this.activity)
+      this.api.reload(this.scheduleEntry.period().scheduleEntries())
       this.$emit('activity-updated', data)
     },
   },

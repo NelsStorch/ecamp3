@@ -308,7 +308,7 @@ import ApiForm from '@/components/form/api/ApiForm.vue'
 import ApiSelect from '@/components/form/api/ApiSelect.vue'
 import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
 import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
-import scheduleEntryRouteChange from '@/mixins/scheduleEntryRouteChange.js'
+import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
 
 export default {
   name: 'ScheduleEntry',
@@ -355,19 +355,13 @@ export default {
       layoutMode: false,
       editActivityTitle: false,
       categoryChangeState: null,
+      scheduleEntry: null,
       loading: true,
     }
   },
   computed: {
     activity() {
       return this.api.get().activities({ id: this.activityId })
-    },
-    scheduleEntry() {
-      if (this.scheduleEntryId) {
-        return this.api.get().scheduleEntries({ id: this.scheduleEntryId })
-      } else {
-        return firstActivityScheduleEntry(this.activityId)
-      }
     },
     camp() {
       return this.activity.camp()
@@ -424,6 +418,19 @@ export default {
           paperDisplaySize: value,
         })
       },
+    },
+  },
+
+  watch: {
+    scheduleEntryId: {
+      async handler(id) {
+        try {
+          this.scheduleEntry = this.api.get().scheduleEntries({ id })
+        } catch {
+          this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
+        }
+      },
+      immediate: true,
     },
   },
 
