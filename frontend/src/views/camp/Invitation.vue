@@ -221,12 +221,8 @@ export default {
 
 .hill {
   height: 100%;
-  background-image: radial-gradient(
-      150vmax 80% at bottom,
-      #2c5b23,
-      #84b444 70.1%,
-      transparent 70.2%
-    ),
+  background-image:
+    radial-gradient(150vmax 80% at bottom, #2c5b23, #84b444 70.1%, transparent 70.2%),
     url(../../assets/invitation/edge-left.svg),
     url(../../assets/invitation/edge-right.svg);
   background-size: auto, 40%, 40%;
@@ -242,12 +238,8 @@ export default {
 
 @media #{map-get($display-breakpoints, 'sm-and-up')} {
   .hill {
-    background-image: radial-gradient(
-        150vmax 75% at bottom,
-        #2c5b23,
-        #84b444 70.1%,
-        transparent 70.2%
-      ),
+    background-image:
+      radial-gradient(150vmax 75% at bottom, #2c5b23, #84b444 70.1%, transparent 70.2%),
       url(../../assets/invitation/edge-left.svg),
       url(../../assets/invitation/edge-right.svg);
     grid-template-rows: auto 1fr auto 1fr auto;
@@ -292,7 +284,8 @@ export default {
 }
 
 .wood {
-  background: linear-gradient(to left, #6236002b, #462c061f, #542e002b),
+  background:
+    linear-gradient(to left, #6236002b, #462c061f, #542e002b),
     linear-gradient(to right top, #4d31191f, #502f122b, #cab09b26, #d9b18a4f),
     linear-gradient(
       to bottom,
@@ -363,7 +356,8 @@ export default {
   width: 10px;
   z-index: 1;
   border-radius: 50px;
-  background-image: linear-gradient(0deg, #2d0b0396, #ffffff 8%, #ffffff 48%, #000000cc),
+  background-image:
+    linear-gradient(0deg, #2d0b0396, #ffffff 8%, #ffffff 48%, #000000cc),
     linear-gradient(90deg, #583c175c, #c1916054, #5f401712),
     linear-gradient(309deg, #552302, transparent, #552302, transparent, #552302),
     linear-gradient(319deg, #efd0b3, #c19160);
@@ -420,7 +414,8 @@ export default {
   position: absolute;
   pointer-events: none;
   inset: 0;
-  background-image: url('../../assets/invitation/tree-left.svg'),
+  background-image:
+    url('../../assets/invitation/tree-left.svg'),
     url('../../assets/invitation/tree-right.svg');
   background-position:
     left bottom,
