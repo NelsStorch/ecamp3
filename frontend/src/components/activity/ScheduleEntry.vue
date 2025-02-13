@@ -363,14 +363,10 @@ export default {
       return this.api.get().activities({ id: this.activityId })
     },
     scheduleEntry() {
-      try {
-        if (this.scheduleEntryId) {
-          return this.api.get().scheduleEntries({ id: this.scheduleEntryId })
-        } else {
-          return firstActivityScheduleEntry(this.activity)
-        }
-      } catch {
-        return firstActivityScheduleEntry(this.activity)
+      if (this.scheduleEntryId) {
+        return this.api.get().scheduleEntries({ id: this.scheduleEntryId })
+      } else {
+        return firstActivityScheduleEntry(this.activityId)
       }
     },
     camp() {
