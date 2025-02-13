@@ -898,15 +898,7 @@ export async function firstActivityScheduleEntryRoute(activity, query = {}) {
   }
   const camp = activity.camp()
   await apiStore.reload(activity.scheduleEntries())
-  const scheduleEntry = activity
-    .scheduleEntries()
-    .items.reduce(
-      (result, current) =>
-        result === null || new Date(result.start) > new Date(current.start)
-          ? current
-          : result,
-      null
-    )
+  const scheduleEntry = await firstActivityScheduleEntry(activity)
 
   return {
     name: 'camp/activity',
