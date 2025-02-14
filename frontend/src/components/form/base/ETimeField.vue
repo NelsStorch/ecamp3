@@ -24,6 +24,7 @@
 
 <script>
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import parseTime from '@/common/helpers/dayjs/parseTime.js'
 
 export default {
   name: 'ETimeField',
@@ -47,66 +48,13 @@ export default {
         return null
       }
       value = value.trim()
-      try {
-        if (!value.match(/[.:,h\s]+/)) {
-          if (Number.isNaN(parseInt(value))) {
-            throw new Error('Invalid number')
-          }
-          if (value.length === 1) {
-            return this.$date({ hour: this.parseHour(value) })
-          }
-          if (value.length === 2) {
-            const hour = parseInt(value)
-            if (0 <= hour && hour < 24) {
-              return this.$date({ hour })
-            } else {
-              return this.$date({
-                hour: this.parseHour(value.slice(0, 1)),
-                minute: this.parseMinute(value.slice(1, 2)),
-              })
-            }
-          }
-          if (value.length === 3) {
-            const hour = parseInt(value.slice(0, 2))
-            if (hour >= 24) {
-              return this.$date({
-                hour: this.parseHour(value.slice(0, 1)),
-                minute: this.parseMinute(value.slice(1, 3)),
-              })
-            }
-            const minute = parseInt(value.slice(2, 3))
-            if (minute >= 6) {
-              return this.$date({
-                hour: this.parseHour(value.slice(0, 2)),
-                minute: this.parseMinute(value.slice(2, 3).padStart(2, '0')),
-              })
-            } else {
-              return this.$date({
-                hour: this.parseHour(value.slice(0, 2)),
-                minute: this.parseMinute(value.slice(2, 3).padEnd(2, '0')),
-              })
-            }
-          }
-          if (value.length === 4) {
-            const hour = parseInt(value.slice(0, 2))
-            if (hour >= 24) {
-              return null
-            }
-            return this.$date({
-              hour,
-              minute: parseInt(value.slice(2, 4)),
-            })
-          }
-        } else {
-          return this.$date(value, ['H:m:s', 'H:m', 'H[h]m'])
-        }
-        return null
-      } catch (e) {
-        if (e instanceof TypeError) {
-          throw new Error(this.$tc('components.form.base.eTimeField.parseError'))
-        } else {
-          throw e
-        }
+
+      const { parsedDateTime, isValid } = parseTime(value)
+
+      if (isValid) {
+        return parsedDateTime
+      } else {
+        throw new Error(this.$tc('components.form.base.eTimeField.parseError'))
       }
     },
     /**
@@ -115,7 +63,7 @@ export default {
     serialize(value) {
       try {
         return value?.format('HH:mm')
-      } catch (e) {
+      } catch {
         return null
       }
     },
@@ -126,38 +74,12 @@ export default {
     deserialize(value) {
       try {
         return !value ? null : this.$date.utc(value, 'HH:mm')
-      } catch (e) {
+      } catch {
         return null
       }
     },
     focus() {
       this.$refs.input.focus()
-    },
-    parseHour(value) {
-      const hour = parseInt(value)
-
-      if (Number.isNaN(hour)) throw new Error('Invalid minute')
-
-      if (value.length === 1) {
-        return hour
-      }
-      if (0 <= hour && hour < 24) return hour
-      throw new Error('Invalid hour')
-    },
-    parseMinute(value) {
-      const minute = parseInt(value)
-
-      if (Number.isNaN(minute)) throw new Error('Invalid minute')
-
-      if (value.length === 1) {
-        if (minute < 6) {
-          return parseInt(value.padEnd(2, '0'))
-        } else {
-          return minute
-        }
-      }
-      if (0 <= minute && minute < 60) return minute
-      throw new Error('Invalid minute')
     },
   },
 }
