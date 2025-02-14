@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a27c5329dbe66e5198f4e4ee72cb1dc",
+    "content-hash": "25aa6aa5fb9693247bd19c95c63da785",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10164,16 +10164,16 @@
     "packages-dev": [
         {
             "name": "brianium/paratest",
-            "version": "v7.8.0",
+            "version": "v7.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paratestphp/paratest.git",
-                "reference": "d18f88bfaa26d83bed8208d08fd918c224a0cc92"
+                "reference": "be947b2e977887dc4c2e511b35c357a98f8d7797"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/d18f88bfaa26d83bed8208d08fd918c224a0cc92",
-                "reference": "d18f88bfaa26d83bed8208d08fd918c224a0cc92",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/be947b2e977887dc4c2e511b35c357a98f8d7797",
+                "reference": "be947b2e977887dc4c2e511b35c357a98f8d7797",
                 "shasum": ""
             },
             "require": {
@@ -10196,7 +10196,7 @@
                 "doctrine/coding-standard": "^12.0.0",
                 "ext-pcov": "*",
                 "ext-posix": "*",
-                "phpstan/phpstan": "^2.1.2",
+                "phpstan/phpstan": "^2.1.5",
                 "phpstan/phpstan-deprecation-rules": "^2.0.1",
                 "phpstan/phpstan-phpunit": "^2.0.4",
                 "phpstan/phpstan-strict-rules": "^2.0.3",
@@ -10241,7 +10241,7 @@
             ],
             "support": {
                 "issues": "https://github.com/paratestphp/paratest/issues",
-                "source": "https://github.com/paratestphp/paratest/tree/v7.8.0"
+                "source": "https://github.com/paratestphp/paratest/tree/v7.8.1"
             },
             "funding": [
                 {
@@ -10253,7 +10253,7 @@
                     "type": "paypal"
                 }
             ],
-            "time": "2025-02-07T06:48:30+00:00"
+            "time": "2025-02-14T08:09:55+00:00"
         },
         {
             "name": "clue/ndjson-react",
