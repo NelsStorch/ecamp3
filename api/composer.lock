@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5925220b4a9966465a17a4559ce558a6",
+    "content-hash": "54851829166301848fd5cbba92a24b25",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10164,16 +10164,16 @@
     "packages-dev": [
         {
             "name": "brianium/paratest",
-            "version": "v7.8.1",
+            "version": "v7.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paratestphp/paratest.git",
-                "reference": "be947b2e977887dc4c2e511b35c357a98f8d7797"
+                "reference": "22c45ae560825291f11b32455878b89e718e758c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/be947b2e977887dc4c2e511b35c357a98f8d7797",
-                "reference": "be947b2e977887dc4c2e511b35c357a98f8d7797",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/22c45ae560825291f11b32455878b89e718e758c",
+                "reference": "22c45ae560825291f11b32455878b89e718e758c",
                 "shasum": ""
             },
             "require": {
@@ -10241,7 +10241,7 @@
             ],
             "support": {
                 "issues": "https://github.com/paratestphp/paratest/issues",
-                "source": "https://github.com/paratestphp/paratest/tree/v7.8.1"
+                "source": "https://github.com/paratestphp/paratest/tree/v7.8.2"
             },
             "funding": [
                 {
@@ -10253,7 +10253,7 @@
                     "type": "paypal"
                 }
             ],
-            "time": "2025-02-14T08:09:55+00:00"
+            "time": "2025-02-19T07:26:44+00:00"
         },
         {
             "name": "clue/ndjson-react",
