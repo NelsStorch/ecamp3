@@ -52,7 +52,7 @@
         "webonyx/graphql-php": "15.19.1"
     },
     "require-dev": {
-        "brianium/paratest": "v7.8.1",
+        "brianium/paratest": "v7.8.2",
         "friendsofphp/php-cs-fixer": "3.69.1",
         "hautelook/alice-bundle": "2.14.1",
         "justinrainbow/json-schema": "6.1.0",
