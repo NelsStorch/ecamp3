@@ -1,7 +1,7 @@
 <template>
   <v-skeleton-loader v-if="loading" class="mt-2 mt-sm-3" type="list-item-three-line" />
   <v-expansion-panels v-else v-model="expandedDays" accordion flat multiple>
-    <story-day
+    <StoryDay
       v-for="day in sortedDays"
       :key="day._meta.self"
       :day="day"
