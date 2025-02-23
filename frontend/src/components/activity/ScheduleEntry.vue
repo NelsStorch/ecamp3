@@ -230,7 +230,7 @@ Displays a single scheduleEntry
               </tbody>
             </table>
             <DialogActivityEdit
-              v-if="activity && isContributor"
+              v-if="scheduleEntry && isContributor"
               :schedule-entry="scheduleEntry"
               hide-header-fields
               @activity-updated="activity.$reload()"
