@@ -10,7 +10,10 @@ import { apiStore } from '@/plugins/store'
  * @return {Promise<*>}
  */
 export default async function scheduleEntryRouteChange(activity, to, from, next) {
-  if (to.params.scheduleEntryId !== from.params.scheduleEntryId) {
+  if (
+    to.params.scheduleEntryId !== from.params.scheduleEntryId ||
+    to.params.activityId !== from.params.activityId
+  ) {
     return await apiStore
       .get()
       .scheduleEntries({ id: to.params.scheduleEntryId })
@@ -21,7 +24,7 @@ export default async function scheduleEntryRouteChange(activity, to, from, next)
           name: 'camp/activity',
           params: {
             ...to.params,
-            scheduleEntryId: (await firstActivityScheduleEntry(activity)).id,
+            scheduleEntryId: (await firstActivityScheduleEntry(to.params.activityId)).id,
           },
         })
       })

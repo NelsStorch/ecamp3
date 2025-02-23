@@ -613,24 +613,22 @@ async function requireActivityScheduleEntry(to, from, next) {
   await apiStore
     .get()
     .activities({ id: to.params.activityId })
-    ._meta.load.then((activity) => {
+    .$reload()
+    .then(async (activity) => {
       // activity exists
-      if (to.params.scheduleEntryId) {
-        apiStore
-          .get()
-          .scheduleEntries({ id: to.params.scheduleEntryId })
-          ._meta.load.then(() => {
-            // activity and scheduleEntry exist
-            next()
-          })
-          .catch(async () => {
-            // scheduleEntry is not found, use first activity scheduleEntry
-            const scheduleEntry = await firstActivityScheduleEntry(activity)
-            to.params.scheduleEntryId = scheduleEntry.id
-            next(to)
-          })
-      } else {
+      const scheduleEntry = to.params.scheduleEntryId
+        ? activity
+            .scheduleEntries()
+            .items.find((entry) => entry.id === to.params.scheduleEntryId)
+        : null
+
+      if (scheduleEntry) {
+        // activity and scheduleEntry exist
         next()
+      } else {
+        // scheduleEntry is not found, use first activity scheduleEntry
+        to.params.scheduleEntryId = (await firstActivityScheduleEntry(activity)).id
+        next(to)
       }
     })
     .catch(() => {
@@ -640,8 +638,7 @@ async function requireActivityScheduleEntry(to, from, next) {
           .get()
           .scheduleEntries({ id: to.params.scheduleEntryId })
           ._meta.load.then(async (scheduleEntry) => {
-            const activity = await scheduleEntry.activity()._meta.load
-            to.params.activityId = activity.id
+            to.params.activityId = scheduleEntry.activity().id
             next(to)
           })
           .catch(async () => {
