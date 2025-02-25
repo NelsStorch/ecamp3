@@ -4,7 +4,7 @@ Displays a single activity
 
 <template>
   <v-container fluid>
-    <ScheduleEntry :key="scheduleEntry._meta.self" :schedule-entry="scheduleEntry" />
+    <ScheduleEntry :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
   </v-container>
 </template>
 
@@ -18,9 +18,13 @@ export default {
   },
 
   props: {
-    scheduleEntry: {
-      type: Object,
+    activityId: {
+      type: String,
       required: true,
+    },
+    scheduleEntryId: {
+      type: String,
+      default: null,
     },
   },
 }

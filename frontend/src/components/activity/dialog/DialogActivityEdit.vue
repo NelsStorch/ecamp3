@@ -1,7 +1,7 @@
 <template>
   <dialog-form
     v-model="showDialog"
-    :title="$tc('components.program.dialogActivityEdit.title')"
+    :title="$tc('components.activity.dialog.dialogActivityEdit.title')"
     :loading="loading"
     :error="error"
     icon="mdi-calendar-plus"
@@ -15,15 +15,14 @@
       <slot name="activator" v-bind="scope" />
     </template>
     <template #moreActions>
-      <v-btn
-        v-if="!scheduleEntry.tmpEvent"
-        color="primary"
-        :to="scheduleEntryRoute(scheduleEntry)"
-      >
-        {{ $tc('global.button.open') }}
-      </v-btn>
+      <slot name="moreActions" />
     </template>
-    <dialog-activity-form :activity="entityData" :period="scheduleEntry.period()" />
+    <DialogActivityForm
+      :activity="entityData"
+      :current-schedule-entry="scheduleEntry"
+      :period="period"
+      :hide-location="hideHeaderFields"
+    />
   </dialog-form>
 </template>
 
@@ -31,7 +30,7 @@
 import DialogForm from '@/components/dialog/DialogForm.vue'
 import DialogBase from '@/components/dialog/DialogBase.vue'
 import DialogActivityForm from './DialogActivityForm.vue'
-import { scheduleEntryRoute } from '@/router.js'
+import { firstActivityScheduleEntryRoute } from '@/router.js'
 
 export default {
   name: 'DialogActivityEdit',
@@ -39,6 +38,10 @@ export default {
   extends: DialogBase,
   props: {
     scheduleEntry: { type: Object, required: true },
+    hideHeaderFields: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -47,11 +50,14 @@ export default {
     }
   },
   computed: {
-    scheduleEntries() {
-      return this.activity.scheduleEntries()
-    },
     activity() {
       return this.scheduleEntry.activity()
+    },
+    period() {
+      return this.scheduleEntry.period()
+    },
+    scheduleEntries() {
+      return this.activity.scheduleEntries()
     },
   },
   watch: {
@@ -95,24 +101,49 @@ export default {
 
         // update existing
         if (entry.self) {
-          return this.api.patch(entry.self, {
-            period: entry.period()._meta.self,
-            start: entry.start,
-            end: entry.end,
-          })
+          return this.api
+            .patch(entry.self, {
+              period: entry.period()._meta.self,
+              start: entry.start,
+              end: entry.end,
+            })
+            .then((serverEntry) => {
+              entry.start = serverEntry.start
+              entry.end = serverEntry.end
+              entry.period = serverEntry.period
+            })
+            .catch(async (e) => {
+              // entry was deleted in the meantime
+              if (e.response.status === 404) {
+                if (entry.self === this.scheduleEntry._meta.self) {
+                  // redirect to first entry to not break UI
+                  this.$router.push(await firstActivityScheduleEntryRoute(this.activity))
+                }
+                entry.deleted = true
+                return Promise.resolve()
+              }
+              return Promise.reject(e)
+            })
         }
 
         // else: create new entry
-        return this.scheduleEntries.$post({
-          period: entry.period()._meta.self,
-          start: entry.start,
-          end: entry.end,
-          activity: this.activity._meta.self,
-        })
+        return this.scheduleEntries
+          .$post({
+            period: entry.period()._meta.self,
+            start: entry.start,
+            end: entry.end,
+            activity: this.activity._meta.self,
+          })
+          .then((data) => {
+            entry.self = data._meta.self
+          })
       })
 
       // patch activity entity
       const activityPayload = { ...this.entityData }
+      if (this.hideHeaderFields) {
+        delete activityPayload.location
+      }
       delete activityPayload.scheduleEntries
       promises.push(this.api.patch(this.entityUri, activityPayload))
 
@@ -126,9 +157,10 @@ export default {
     },
     updatedSuccessful(data) {
       this.close()
+      this.api.reload(this.activity)
+      this.api.reload(this.scheduleEntry.period().scheduleEntries())
       this.$emit('activity-updated', data)
     },
-    scheduleEntryRoute,
   },
 }
 </script>

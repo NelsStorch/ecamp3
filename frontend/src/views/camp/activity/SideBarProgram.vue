@@ -3,7 +3,7 @@
     :title="$tc('views.camp.activity.sideBarProgram.title')"
     icon="mdi-format-list-numbered"
   >
-    <ScheduleEntries :period="period" :show-button="false">
+    <ScheduleEntries v-if="period" :period="period" :show-button="false">
       <template #default="slotProps">
         <DaySwitcher
           :camp="camp"
@@ -37,20 +37,30 @@ import ScheduleEntries from '@/components/program/ScheduleEntries.vue'
 
 import { HTML5_FMT } from '@/common/helpers/dateFormat.js'
 import DaySwitcher from '@/components/activity/DaySwitcher.vue'
+import { firstActivityScheduleEntry } from '@/router.js'
+import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
 
 export default {
   name: 'SideBarProgram',
   components: { DaySwitcher, SideBar, Picasso, ScheduleEntries },
+  async beforeRouteUpdate(to, from, next) {
+    return scheduleEntryRouteChange(this.activityId, to, from, next)
+  },
   props: {
-    day: { type: Object, required: true },
     camp: { type: Object, required: true },
+    activityId: { type: String, required: true },
+    scheduleEntryId: { type: String, default: null },
   },
   data() {
     return {
       selectedDay: null,
+      scheduleEntry: null,
     }
   },
   computed: {
+    day() {
+      return this.scheduleEntry.day()
+    },
     period() {
       return this.daySelection.period()
     },
@@ -59,6 +69,18 @@ export default {
     },
     currentDayAsString() {
       return this.$date.utc(this.daySelection.start).format(HTML5_FMT.DATE)
+    },
+  },
+  watch: {
+    scheduleEntryId: {
+      async handler(id) {
+        try {
+          this.scheduleEntry = this.api.get().scheduleEntries({ id })
+        } catch {
+          this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
+        }
+      },
+      immediate: true,
     },
   },
 }

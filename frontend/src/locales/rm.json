@@ -17,6 +17,14 @@
           }
         }
       },
+      "dialog": {
+        "dialogActivityEdit": {
+          "title": "Modifitgar l'activitad"
+        },
+        "formScheduleEntryList": {
+          "name": "Termins planisads"
+        }
+      },
       "menuCardlessContentNode": {
         "deletingDisabled": "Sto esser vid per stizzar"
       },
@@ -304,9 +312,6 @@
       }
     },
     "program": {
-      "dialogActivityEdit": {
-        "title": "Modifitgar l'activitad"
-      },
       "formScheduleEntryItem": {
         "end": "Fin",
         "start": "Entschatta"
