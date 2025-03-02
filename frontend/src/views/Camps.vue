@@ -11,9 +11,10 @@
         </template>
         <template v-else>
           <CampListItem
-            v-for="camp in upcomingCamps"
+            v-for="{ camp, periods } in upcomingCamps"
             :key="camp._meta.self"
             :camp="camp"
+            :periods="periods"
           />
         </template>
         <v-list-item>
@@ -58,9 +59,10 @@
           <v-expansion-panel-content>
             <v-list class="py-0">
               <CampListItem
-                v-for="camp in pastCamps"
+                v-for="{ camp, periods } in pastCamps"
                 :key="camp._meta.self"
                 :camp="camp"
+                :periods="periods"
               />
             </v-list>
           </v-expansion-panel-content>
@@ -79,6 +81,7 @@ import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
 import { mapGetters } from 'vuex'
 import UserMeta from '@/components/navigation/UserMeta.vue'
 import CampListItem from '@/components/camp/CampListItem.vue'
+import groupBy from 'lodash-es/groupBy.js'
 
 export default {
   name: 'Camps',
@@ -98,21 +101,37 @@ export default {
     camps() {
       return this.api.get().camps()
     },
+    periods() {
+      return this.api.get().periods()
+    },
     prototypeCamps() {
       return this.camps.items.filter((c) => c.isPrototype)
     },
-    nonPrototypeCamps() {
-      return this.camps.items.filter((c) => !c.isPrototype)
-    },
     upcomingCamps() {
-      return this.nonPrototypeCamps.filter((c) =>
-        c.periods().items.some((p) => dayjs(p.end).endOf('day').isAfter(dayjs()))
+      return Object.values(
+        groupBy(
+          this.periods.items.filter((p) => dayjs(p.end).endOf('day').isAfter(dayjs())),
+          (p) => p.camp()._meta.self
+        )
       )
+        .map((periods) => ({
+          camp: periods[0].camp(),
+          periods: periods,
+        }))
+        .filter(({ camp }) => !camp.isPrototype)
     },
     pastCamps() {
-      return this.nonPrototypeCamps.filter(
-        (c) => !c.periods().items.some((p) => dayjs(p.end).endOf('day').isAfter(dayjs()))
+      return Object.values(
+        groupBy(
+          this.periods.items.filter((p) => !dayjs(p.end).endOf('day').isAfter(dayjs())),
+          (p) => p.camp()._meta.self
+        )
       )
+        .map((periods) => ({
+          camp: periods[0].camp(),
+          periods: periods,
+        }))
+        .filter(({ camp }) => !camp.isPrototype)
     },
     ...mapGetters({
       user: 'getLoggedInUser',
@@ -130,13 +149,7 @@ export default {
         this.api.reload(this.camps)
       }
 
-      await this.camps._meta.load
-
-      await Promise.all(
-        this.nonPrototypeCamps.map((camp) => {
-          camp.periods()._meta.load
-        })
-      )
+      await Promise.all([this.camps._meta.load, this.api.get().periods()._meta.load])
 
       this.loading = false
     },
