@@ -16,6 +16,13 @@ module.exports = defineConfig({
         deleteDownloads: () => deleteDownloads(config),
         moveDownloads: (destSubDir) => moveDownloads(config, destSubDir),
       })
+      const cypressTerminalReportOptions = {
+        printLogsToConsole: 'always',
+      }
+      require('cypress-terminal-report/src/installLogsPrinter')(
+        on,
+        cypressTerminalReportOptions
+      )
     },
     specPattern: 'specs/**/*.cy.{js,jsx,ts,tsx}',
     supportFile: 'support/index.js',
