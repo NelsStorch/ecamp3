@@ -60,7 +60,7 @@
         "phpspec/prophecy-phpunit": "2.3.0",
         "phpstan/phpstan": "2.1.6",
         "phpunit/phpunit": "11.5.10",
-        "rector/rector": "2.0.9",
+        "rector/rector": "2.0.10",
         "psalm/phar": "5.26.1",
         "spatie/phpunit-snapshot-assertions": "5.1.8",
         "symfony/browser-kit": "7.2.4",
