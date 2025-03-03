@@ -181,15 +181,17 @@ describe('authentication logic', () => {
       // given
       store.replaceState(createState())
       Cookies.set('localhost_jwt_hp', validJWTPayload)
-      vi.spyOn(apiStore, 'get')
+      const rootEndpointGet = await apiStore.get()
+      vi.spyOn(rootEndpointGet, 'profiles')
+      vi.spyOn(apiStore, 'get').mockImplementation(() => rootEndpointGet)
 
       // when
       const result = await auth.loadUser()
 
       // then
       expect(result.id).toEqual('1a2b3c4d')
-      expect(apiStore.get).toHaveBeenCalledTimes(1)
-      expect(apiStore.get).toHaveBeenCalledWith('/users/1a2b3c4d')
+      expect(rootEndpointGet.profiles).toHaveBeenCalledTimes(1)
+      expect(rootEndpointGet.profiles).toHaveBeenCalledWith({ user: '/users/1a2b3c4d' })
     })
 
     it.each([[401], [403], [404]])(
@@ -199,7 +201,8 @@ describe('authentication logic', () => {
         store.replaceState(createState())
         Cookies.set('localhost_jwt_hp', validJWTPayload)
 
-        const user = {
+        const rootEndpointGet = await apiStore.get()
+        vi.spyOn(rootEndpointGet, 'profiles').mockImplementation(() => ({
           _meta: {
             load: new Promise(() => {
               const error = new Error('test error')
@@ -207,8 +210,8 @@ describe('authentication logic', () => {
               throw error
             }),
           },
-        }
-        vi.spyOn(apiStore, 'get').mockImplementation(() => user)
+        }))
+        vi.spyOn(apiStore, 'get').mockImplementation(() => rootEndpointGet)
         vi.spyOn(auth, 'logout')
 
         // when
@@ -216,8 +219,8 @@ describe('authentication logic', () => {
 
         // then
         expect(result).toEqual(null)
-        expect(apiStore.get).toHaveBeenCalledTimes(1)
-        expect(apiStore.get).toHaveBeenCalledWith('/users/1a2b3c4d')
+        expect(rootEndpointGet.profiles).toHaveBeenCalledTimes(1)
+        expect(rootEndpointGet.profiles).toHaveBeenCalledWith({ user: '/users/1a2b3c4d' })
         expect(auth.logout).toHaveBeenCalledTimes(1)
       }
     )
@@ -351,6 +354,10 @@ function createState(authState = {}) {
         login: {
           href: '/authentication_token',
         },
+        profiles: {
+          href: '/profiles{?user}',
+          templated: true,
+        },
         oauthGoogle: {
           href: '/auth/google{?callback}',
           templated: true,
@@ -373,11 +380,40 @@ function createState(authState = {}) {
       },
       '/users/1a2b3c4d': {
         id: '1a2b3c4d',
+        profile: {
+          href: '/profile/5c6c7c8',
+        },
         _meta: {
           load: Promise.resolve({
             id: '1a2b3c4d',
           }),
         },
+      },
+      '/profile/5c6c7c8': {
+        id: '5c6c7c8',
+        user: { href: '/users/1a2b3c4d' },
+        _meta: {
+          load: Promise.resolve({
+            id: '5c6c7c8',
+            user: { href: '/users/1a2b3c4d' },
+          }),
+        },
+      },
+      '/profiles?user=%2Fusers%2F1a2b3c4d': {
+        _meta: {
+          load: Promise.resolve({
+            items: [
+              {
+                href: '/profile/5c6c7c8',
+              },
+            ],
+          }),
+        },
+        items: [
+          {
+            href: '/profile/5c6c7c8',
+          },
+        ],
       },
     },
   }
