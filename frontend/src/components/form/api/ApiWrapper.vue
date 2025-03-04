@@ -58,8 +58,8 @@ export default {
       showIconSuccess: false,
       dirty: false,
       savingRequestCount: 0,
-      serverErrorMessage: '',
-      loadingErrorMessage: '',
+      serverErrorMessage: null,
+      loadingErrorMessage: null,
       validationErrorMessages: [],
       eventHandlers: {
         save: this.save,
@@ -84,13 +84,13 @@ export default {
       return this.savingRequestCount > 0
     },
     hasLoadingError() {
-      return this.loadingErrorMessage != null || this.loadingErrorMessage !== ''
+      return this.loadingErrorMessage != null
     },
     hasServerError() {
-      return this.serverErrorMessage != null || this.serverErrorMessage !== ''
+      return this.serverErrorMessage != null
     },
     status: function () {
-      if (this.savingRequestCount > 0) {
+      if (this.isSaving) {
         return 'saving'
       } else if (this.showIconSuccess) {
         return 'success'
