@@ -84,10 +84,10 @@ export default {
       return this.savingRequestCount > 0
     },
     hasLoadingError() {
-      return this.loadingErrorMessage != null || this.loadingErrorMessage === ''
+      return this.loadingErrorMessage != null || this.loadingErrorMessage !== ''
     },
     hasServerError() {
-      return this.serverErrorMessage != null || this.serverErrorMessage === ''
+      return this.serverErrorMessage != null || this.serverErrorMessage !== ''
     },
     status: function () {
       if (this.savingRequestCount > 0) {
