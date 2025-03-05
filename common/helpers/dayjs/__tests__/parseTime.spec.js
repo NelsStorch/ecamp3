@@ -4,6 +4,9 @@ import parseTime from '../parseTime'
 import { padStart, range } from 'lodash-es'
 import { HTML5_FMT } from '../../dateFormat'
 
+/**
+ * Source: https://github.com/sbb-design-systems/sbb-angular/blob/24d4a804a55fa671cdf441a4556741ecfa2c638c/src/angular/time-input/time-input.spec.ts#L38
+ */
 describe('parseTime', () => {
   describe.each(Object.keys(dayjsLocaleMap))('`%s` locale', (locale) => {
     beforeEach(() => {
