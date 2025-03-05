@@ -4,12 +4,12 @@ dependencies:
   version: 7.12.1
 - name: kubernetes-dashboard
   repository: https://kubernetes.github.io/dashboard/
-  version: 7.11.0
+  version: 7.11.1
 - name: oauth2-proxy
   repository: https://oauth2-proxy.github.io/manifests
   version: 7.12.1
 - name: oauth2-proxy
   repository: https://oauth2-proxy.github.io/manifests
   version: 7.12.1
-digest: sha256:16d49fee415ca644b04a0d53128b9dad90043174d67806e92e6b332c6092f847
-generated: "2025-03-03T18:12:15.841467305Z"
+digest: sha256:d5fea711532b9e3c8367b024abf95201cf5e78d48022beac18823ea2cbe5d10f
+generated: "2025-03-05T19:08:01.441895213Z"
