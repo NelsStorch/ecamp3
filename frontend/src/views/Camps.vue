@@ -149,7 +149,7 @@ export default {
         this.api.reload(this.camps)
       }
 
-      await Promise.all([this.camps._meta.load, this.api.get().periods()._meta.load])
+      await Promise.all([this.camps._meta.load, this.periods._meta.load])
 
       this.loading = false
     },
