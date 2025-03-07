@@ -20,7 +20,7 @@
     "postinstall": "./scripts/install-twemoji.sh"
   },
   "dependencies": {
-    "@intlify/core": "11.1.2",
+    "@intlify/core": "11.1.1",
     "@mdi/font": "7.4.47",
     "@react-pdf/font": "2.5.2",
     "@react-pdf/layout": "3.13.0",
@@ -53,7 +53,7 @@
     "@zxcvbn-ts/language-fr": "3.0.2",
     "@zxcvbn-ts/language-it": "3.0.2",
     "assert": "2.1.0",
-    "axios": "1.8.1",
+    "axios": "1.8.2",
     "colorjs.io": "0.5.2",
     "comlink": "4.4.2",
     "dayjs": "1.11.13",
