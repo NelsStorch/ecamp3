@@ -51,9 +51,9 @@ elasticsearch:
     storageClassName: do-block-storage
     resources:
       requests:
-        storage: 10Gi
+        storage: ${ELASTIC_NODE_STORAGE_SIZE}
   removeOldIndexes:
-    maxIndexAge: 15
+    maxIndexAge: ${ELASTIC_NODE_MAX_INDEX_AGE}
     image: node:22.14.0
 
 kibana:
