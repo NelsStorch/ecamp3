@@ -31,8 +31,16 @@ export default {
   mixins: [formComponentMixin],
   props: {
     value: { type: String, required: false, default: null },
+
+    // format in which the `value` property is being provided & input events are triggered
+    valueFormat: { type: [String, Array], default: 'HH:mm' },
   },
   emits: ['input'],
+  data() {
+    return {
+      date: null,
+    }
+  },
   methods: {
     format(value) {
       if (typeof value === 'string') {
@@ -52,7 +60,13 @@ export default {
       const { parsedDateTime, isValid } = parseTime(value)
 
       if (isValid) {
-        return parsedDateTime
+        return (
+          this.date
+            ?.hour(parsedDateTime.hour())
+            .minute(parsedDateTime.minute())
+            .second(parsedDateTime.second())
+            .millisecond(parsedDateTime.millisecond()) ?? parsedDateTime
+        )
       } else {
         throw new Error(this.$tc('components.form.base.eTimeField.parseError'))
       }
@@ -62,7 +76,7 @@ export default {
      */
     serialize(value) {
       try {
-        return value?.format('HH:mm')
+        return value?.format(this.valueFormat)
       } catch {
         return null
       }
@@ -73,13 +87,17 @@ export default {
      */
     deserialize(value) {
       try {
-        return !value ? null : this.$date.utc(value, 'HH:mm')
+        this.date = this.$date.utc(value, this.valueFormat)
+        return !value ? null : this.date
       } catch {
         return null
       }
     },
     focus() {
       this.$refs.input.focus()
+    },
+    unmounted() {
+      this.date = null
     },
   },
 }
