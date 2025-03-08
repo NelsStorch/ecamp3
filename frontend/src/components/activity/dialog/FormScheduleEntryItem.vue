@@ -1,68 +1,101 @@
 <template>
-  <v-container>
-    <v-row no-gutters class="mx-2 mb-2" justify="center" align="center">
-      <v-col cols="5">
-        <e-date-picker
-          v-model="localScheduleEntry.start"
-          value-format="YYYY-MM-DDTHH:mm:ssZ"
-          path="startDate"
-          vee-rules="required"
-          :allowed-dates="dateIsInAnyPeriod"
-          :filled="false"
-          class="float-left date-picker mr-3 mt-1"
-          required
-        />
+  <div class="d-flex px-4">
+    <div>
+      <e-date-picker
+        v-model="localScheduleEntry.start"
+        value-format="YYYY-MM-DDTHH:mm:ssZ"
+        path="startDate"
+        vee-rules="required"
+        :allowed-dates="dateIsInAnyPeriod"
+        :filled="false"
+        class="float-left date-picker mr-3 mt-1"
+        required
+      />
 
-        <e-time-picker
-          v-model="localScheduleEntry.start"
-          path="startDatetime"
-          vee-rules="required"
-          :filled="false"
-          class="float-left mt-1 time-picker"
-          required
-        />
-      </v-col>
-      <v-col cols="1" class="text-center pt-4">
-        <v-icon>mdi-ray-start-arrow</v-icon>
-      </v-col>
-      <v-col cols="5">
-        <e-date-picker
-          v-model="localScheduleEntry.end"
-          value-format="YYYY-MM-DDTHH:mm:ssZ"
-          path="endDate"
-          vee-rules="required|greaterThanOrEqual_date:@startDate"
-          :min="localScheduleEntry.start"
-          :allowed-dates="dateIsInSelectedPeriod"
-          :filled="false"
-          class="float-left date-picker mr-3 mt-1"
-          required
-        />
+      <e-time-dropdown
+        v-model="localScheduleEntry.start"
+        path="startDatetime"
+        vee-rules="required"
+        :filled="false"
+        input-class="float-left mt-1"
+        required
+        value-format="YYYY-MM-DDTHH:mm:ssZ"
+        :items="startTimeList"
+        :menu-props="{
+          maxHeight: '320',
+          offsetOverflow: true,
+          offsetY: true,
+          nudgeLeft: '16px',
+        }"
+      />
+    </div>
+    <div
+      class="pt-1 mx-2 v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-text-field--is-booted"
+    >
+      <div class="v-text-field input">-</div>
+    </div>
+    <div>
+      <e-time-dropdown
+        v-model="localScheduleEntry.end"
+        value-format="YYYY-MM-DDTHH:mm:ssZ"
+        path="endDatetime"
+        :vee-rules="endTimeValidation"
+        :min="minEndTime"
+        :filled="false"
+        input-class="float-left mt-1 mr-3"
+        required
+        :items="endTimeList"
+        :menu-props="{
+          maxHeight: '320',
+          offsetOverflow: true,
+          offsetY: true,
+          nudgeLeft: '16px',
+        }"
+      >
+        <template #item="{ item }">
+          <span class="tabular-nums">{{ item.label }}</span
+          >&nbsp;<span class="opacity-60">({{ item.duration }})</span>
+        </template>
+      </e-time-dropdown>
 
-        <e-time-picker
-          v-model="localScheduleEntry.end"
-          path="endDatetime"
-          :vee-rules="endTimeValidation"
-          :min="minEndTime"
-          :filled="false"
-          class="float-left mt-1 time-picker"
-          required
-        />
-      </v-col>
+      <e-date-picker
+        v-if="!isSameDay"
+        v-model="localScheduleEntry.end"
+        value-format="YYYY-MM-DDTHH:mm:ssZ"
+        path="endDate"
+        vee-rules="required|greaterThanOrEqual_date:@startDate"
+        :min="localScheduleEntry.start"
+        :allowed-dates="dateIsInSelectedPeriod"
+        :filled="false"
+        class="float-left date-picker mr-3 mt-1"
+        required
+      />
 
-      <v-col cols="1" class="pt-3 text-center">
-        <button-delete v-if="deletable" icon-only @click="$emit('delete')" />
-      </v-col>
-    </v-row>
-  </v-container>
+      <e-text-field
+        v-else
+        readonly
+        label="Dauer"
+        :filled="false"
+        class="float-left date-picker mt-1"
+        :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
+      />
+    </div>
+    <div class="text-field-alignment">
+      <button-delete v-if="deletable" icon-only @click="$emit('delete')" />
+    </div>
+  </div>
 </template>
 <script>
 import dayjs from '@/common/helpers/dayjs.js'
 
 import ButtonDelete from '@/components/buttons/ButtonDelete.vue'
+import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
+import ETimeDropdown from '@/components/form/base/ETimeDropdown.vue'
 
 export default {
   name: 'FormScheduleEntryItem',
-  components: { ButtonDelete },
+  components: { ETimeDropdown, ButtonDelete },
+  mixins: [dateHelperUTCFormatted],
   provide() {
     return {
       entityName: 'scheduleEntry',
@@ -106,10 +139,14 @@ export default {
         )
       })
     },
+    startUTC() {
+      return this.$date.utc(this.localScheduleEntry.start)
+    },
+    endUTC() {
+      return this.$date.utc(this.localScheduleEntry.end)
+    },
     isSameDay() {
-      return this.$date
-        .utc(this.localScheduleEntry.start)
-        .isSame(this.$date.utc(this.localScheduleEntry.end), 'day')
+      return this.startUTC.isSame(this.endUTC, 'day')
     },
     endTimeValidation() {
       const validator = {
@@ -130,6 +167,37 @@ export default {
         .utc(this.localScheduleEntry.start)
         .add(this.$date.duration(15, 'm'))
         .format('HH:mm')
+    },
+    startTimeList() {
+      const start = this.$date.utc(this.localScheduleEntry.start).startOf('day')
+      const times = []
+
+      for (let i = 0; i <= 4 * 24; i++) {
+        const value = start.add(i * 15, 'm')
+        times.push({
+          date: value,
+          value: value.format('YYYY-MM-DDTHH:mm:ssZ'),
+          label: value.format('HH:mm'),
+        })
+      }
+
+      return times
+    },
+    endTimeList() {
+      const start = this.$date.utc(this.localScheduleEntry.start)
+      const times = []
+
+      for (let i = 0; i <= 4 * 26; i++) {
+        const value = start.add(i * 15, 'm')
+        times.push({
+          date: value,
+          value: value.format('YYYY-MM-DDTHH:mm:ssZ'),
+          label: value.format('HH:mm'),
+          duration: this.timeDurationShort(start, value),
+        })
+      }
+
+      return times
     },
   },
   watch: {
@@ -183,7 +251,8 @@ export default {
   width: 130px;
 }
 
-.time-picker {
-  width: 115px;
+.text-field-alignment {
+  padding-top: 12px;
+  margin-top: 4px;
 }
 </style>
