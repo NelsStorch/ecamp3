@@ -7,6 +7,7 @@ import {
   grgrCampId,
   loremIpsumCampId,
 } from '../constants'
+import collectionResponse from './responses/categories_collection.json'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */
@@ -34,9 +35,7 @@ describe('cache test: /camps/categories', () => {
       const headers = response.headers
       expect(headers.xkey).to.eq(collectionXKeys)
       expect(headers['x-cache']).to.eq('MISS')
-      cy.readFile('./specs/httpCache/responses/categories_collection.json').then((data) =>
-        expect(response.body).to.deep.equal(data)
-      )
+      expect(response.body).to.deep.equal(collectionResponse)
     })
 
     // second request is a cache hit
