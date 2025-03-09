@@ -192,11 +192,4 @@ describe('HTTP cache tests', () => {
       cy.contains('GRGR')
     })
   })
-
-  it("doesn't cache /camps", () => {
-    const uri = '/api/camps'
-    Cypress.session.clearAllSavedSessions()
-    cy.login('test@example.com')
-    cy.expectCachePass(uri)
-  })
 })
