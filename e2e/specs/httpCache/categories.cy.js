@@ -1,12 +1,12 @@
-const cachedEndpoint = Cypress.env('API_ROOT_URL_CACHED')
-
-const grgrCampId = '3c79b99ab424'
-const loremIpsumCampId = '9c2447aefe38'
-
-const bipiUser = 'test@example.com'
-const castorUser = 'castor@example.com'
-const felicitySmoakUser = 'felicity@smoak.com'
-const bruceWayneUser = 'bruce@wayne.com'
+import {
+  bipiUser,
+  bruceWayneUser,
+  cachedEndpoint,
+  castorUser,
+  felicitySmoakUser,
+  grgrCampId,
+  loremIpsumCampId,
+} from '../constants'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */
