@@ -233,9 +233,13 @@
       "dateShort": "dd D.M.",
       "dateTimeLong": "dd L LT",
       "duration": {
-        "hoursAndMinutes": "{hours}h {minutes}min",
-        "hoursOnly": "{hours}h",
-        "minutesOnly": "{minutes}min"
+        "daysAndHours": "{days} d {hours} h",
+        "daysAndHoursAndMinutes": "{days} d {hours} h {minutes} min",
+        "daysAndMinutes": "{days} d {minutes} min",
+        "hoursAndMinutes": "{hours} h {minutes} min",
+        "daysOnly": "{days} d",
+        "hoursOnly": "{hours} h",
+        "minutesOnly": "{minutes} min"
       },
       "hourLong": "LT",
       "hourShort": "H:mm"

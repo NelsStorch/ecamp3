@@ -28,6 +28,14 @@ const tcMockString = (string) => {
       return '{minutes}min'
     case 'global.datetime.duration.hoursOnly':
       return '{hours}h'
+    case 'global.datetime.duration.daysOnly':
+      return '{days}d'
+    case 'global.datetime.duration.daysAndHours':
+      return '{days}d {hours}h'
+    case 'global.datetime.duration.daysAndHoursAndMinutes':
+      return '{days}d {hours}h {minutes}min'
+    case 'global.datetime.duration.daysAndMinutes':
+      return '{days}d {minutes}min'
     case 'global.datetime.duration.hoursAndMinutes':
       return '{hours}h {minutes}min'
   }
@@ -35,11 +43,15 @@ const tcMockString = (string) => {
 
 describe('timeDurationShort', function () {
   it.each([
+    ['only day(s)', '1d', '2020-06-07T10:00:00.000Z', '2020-06-08T10:00:00.000Z'],
     ['only hour(s)', '1h', '2020-06-07T10:00:00.000Z', '2020-06-07T11:00:00.000Z'],
     ['only minute(s)', '30min', '2020-06-07T10:00:00.000Z', '2020-06-07T10:30:00.000Z'],
-    ['both', '1h 30min', '2020-06-07T10:00:00.000Z', '2020-06-07T11:30:00.000Z'],
-    ['both', '8h', '2020-06-07T10:00:00.000Z', '2020-06-07T18:00:00.000Z'],
-    ['both', '25h 30min', '2020-06-07T10:00:00.000Z', '2020-06-08T11:30:00.000Z'],
+    ['all', '2d 1h 30min', '2020-06-07T10:00:00.000Z', '2020-06-09T11:30:00.000Z'],
+    ['days&minutes', '2d 45min', '2020-06-07T10:00:00.000Z', '2020-06-09T10:45:00.000Z'],
+    ['hour&minutes', '1h 30min', '2020-06-07T10:00:00.000Z', '2020-06-07T11:30:00.000Z'],
+    ['leap year', '2d', '2020-02-28T10:00:00.000Z', '2020-03-01T10:00:00.000Z'],
+    ['year', '730d 1h 30min', '2020-06-07T10:00:00.000Z', '2022-06-07T11:30:00.000Z'],
+    ['0', '0min', '2020-06-07T10:00:00.000Z', '2020-06-07T10:00:00.000Z'],
   ])('should print %s: %s', (_, duration, start, end) => {
     expect(timeDurationShort(start, end, tcMock)).toEqual(duration)
   })

@@ -76,7 +76,7 @@
         readonly
         label="Dauer"
         :filled="false"
-        class="float-left date-picker mt-1"
+        class="float-left date-picker mr-3 mt-1"
         :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
       />
     </div>
@@ -169,35 +169,63 @@ export default {
         .format('HH:mm')
     },
     startTimeList() {
-      const start = this.$date.utc(this.localScheduleEntry.start).startOf('day')
-      const times = []
+      const start = this.startUTC.startOf('day')
 
-      for (let i = 0; i <= 4 * 24; i++) {
-        const value = start.add(i * 15, 'm')
-        times.push({
-          date: value,
-          value: value.format('YYYY-MM-DDTHH:mm:ssZ'),
-          label: value.format('HH:mm'),
-        })
-      }
-
-      return times
-    },
-    endTimeList() {
-      const start = this.$date.utc(this.localScheduleEntry.start)
-      const times = []
-
-      for (let i = 0; i <= 4 * 26; i++) {
-        const value = start.add(i * 15, 'm')
-        times.push({
+      // Show whole start day
+      const hours = 24
+      const minuteInterval = 15
+      return Array.from(
+        { length: hours * (60 / minuteInterval) },
+        (_, i) => i * minuteInterval
+      ).map((minutes) => {
+        const value = start.add(minutes, 'm')
+        return {
           date: value,
           value: value.format('YYYY-MM-DDTHH:mm:ssZ'),
           label: value.format('HH:mm'),
           duration: this.timeDurationShort(start, value),
+        }
+      })
+    },
+    endTimeList() {
+      // be able to select end time on the end day
+      if (this.isSameDay) {
+        // Show 25 hours from start time
+        const hours = 25
+        const minuteInterval = 15
+        return Array.from(
+          { length: hours * (60 / minuteInterval) },
+          (_, i) => (i + 1) * minuteInterval
+        ).map((minutes) => {
+          const value = this.startUTC.add(minutes, 'm')
+          return {
+            date: value,
+            value: value.format('YYYY-MM-DDTHH:mm:ssZ'),
+            label: value.format('HH:mm'),
+            duration: this.timeDurationShort(this.startUTC, value),
+          }
+        })
+      } else {
+        const hour = this.endUTC.hour()
+
+        const hoursBefore = hour + 2
+        return [
+          // first hours + 2 before end time
+          ...Array.from({ length: hoursBefore }, (_, i) => (i - hoursBefore) * 60),
+          // ± 30 minutes around the end time
+          ...Array.from({ length: 5 }, (_, i) => (i - 2) * 15),
+          // remaining hours of end day or at least 12 hours
+          ...Array.from({ length: Math.max(24 - hour, 12) }, (_, i) => (i + 1) * 60),
+        ].map((minutes) => {
+          const value = this.endUTC.add(minutes, 'm')
+          return {
+            date: value,
+            value: value.format('YYYY-MM-DDTHH:mm:ssZ'),
+            label: value.format('HH:mm'),
+            duration: this.timeDurationShort(this.startUTC, value),
+          }
         })
       }
-
-      return times
     },
   },
   watch: {
