@@ -173,7 +173,7 @@ describe('cache test: /camps/categories', () => {
 
     // delete old emails
     cy.request({
-      url: 'localhost:3000/mail/email/all',
+      url: '/mail/email/all',
       method: 'DELETE',
     })
 
@@ -188,7 +188,7 @@ describe('cache test: /camps/categories', () => {
     cy.login(castorUser)
 
     cy.request({
-      url: 'localhost:3000/mail/email',
+      url: '/mail/email',
     }).then((response) => {
       const emailHtmlContent = response.body[0].html
       cy.document().then((document) => {
