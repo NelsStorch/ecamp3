@@ -12,8 +12,8 @@ describe('HTTP cache tests', () => {
         'a4211c11211c c462edd869f3 5e2028c55ee4 a4211c112939 f17470519474 1a0f84e322c8 3ef17bd1df72 4f0c657fecef 44dcc7493c65 cfccaecd4bad 318e064ea0c9 /api/content_types'
       )
       expect(headers['x-cache']).to.eq('MISS')
-      cy.readFile('./specs/responses/content_types_collection.json').then((data) =>
-        expect(response.body).to.deep.equal(data)
+      cy.readFile('./specs/httpCache/responses/content_types_collection.json').then(
+        (data) => expect(response.body).to.deep.equal(data)
       )
     })
 
@@ -36,7 +36,7 @@ describe('HTTP cache tests', () => {
       const headers = response.headers
       expect(headers.xkey).to.eq('318e064ea0c9')
       expect(headers['x-cache']).to.eq('MISS')
-      cy.readFile('./specs/responses/content_types_entity.json').then((data) =>
+      cy.readFile('./specs/httpCache/responses/content_types_entity.json').then((data) =>
         expect(response.body).to.deep.equal(data)
       )
     })
@@ -69,7 +69,7 @@ describe('HTTP cache tests', () => {
           '/api/camps/3c79b99ab424/categories'
       )
       expect(headers['x-cache']).to.eq('MISS')
-      cy.readFile('./specs/responses/categories_collection.json').then((data) =>
+      cy.readFile('./specs/httpCache/responses/categories_collection.json').then((data) =>
         expect(response.body).to.deep.equal(data)
       )
     })
