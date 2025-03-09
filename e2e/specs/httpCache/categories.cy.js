@@ -1,4 +1,4 @@
-describe('HTTP cache tests', () => {
+describe('cache test: /camps/categories', () => {
   it('caches /camp/{campId}/categories separately for each login', () => {
     const uri = '/api/camps/3c79b99ab424/categories'
 
