@@ -17,7 +17,7 @@ exports[`An EColorField > looks like a textfield > empty 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <input id
                                      type="text">
                          </div>
@@ -36,7 +36,7 @@ exports[`An EColorField > looks like a textfield > with text 1`] = `
                <div class="v-input__prepend-outer">
                     <div aria-label="#FF0000"
                          class="e-colorswatch mt-n1 v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                         style="height: 30px; width: 30px; --ee5e0d96-contrast: #fff; background-color: rgb(255, 0, 0); border-color: #ff0000;"
+                         style="height: 30px; width: 30px; --ee5e0d96-contrast: #fff; background-color: rgb(255, 0, 0); border-color: rgb(255, 0, 0);"
                          tag="div">
                          <span class="v-btn__content"></span>
                     </div>
@@ -46,7 +46,7 @@ exports[`An EColorField > looks like a textfield > with text 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label v-label--active theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <input id
                                      type="text">
                          </div>

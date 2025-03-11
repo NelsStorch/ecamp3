@@ -10,7 +10,7 @@ exports[`An ENumberField > looks like a numberfield > empty 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <input id
                                      type="text">
                          </div>
@@ -31,7 +31,7 @@ exports[`An ENumberField > looks like a numberfield > with text 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label v-label--active theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <input id
                                      type="text">
                          </div>

@@ -17,7 +17,7 @@ exports[`An EColorPicker > looks like a color picker > pickerclosed 1`] = `
                                            aria-haspopup="true"
                                            aria-label="Dialog öffnen, um eine Farbe für test zu wählen"
                                            class="e-colorswatch mt-n1 v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                                           style="height: 30px; width: 30px; background-color: rgb(255, 0, 0); border-color: #ff0000; --ee5e0d96-contrast: #fff;"
+                                           style="height: 30px; width: 30px; background-color: rgb(255, 0, 0); border-color: rgb(255, 0, 0); --ee5e0d96-contrast: #fff;"
                                            type="button">
                                         <span class="v-btn__content"></span>
                                    </button>
@@ -27,7 +27,7 @@ exports[`An EColorPicker > looks like a color picker > pickerclosed 1`] = `
                                         <div class="v-text-field__slot">
                                              <label class="v-label v-label--active theme--light"
                                                     for
-                                                    style="left: 0px; position: absolute;">test</label>
+                                                    style="left: 0px; right: auto; position: absolute;">test</label>
                                              <input id
                                                     type="text">
                                         </div>
@@ -58,7 +58,7 @@ exports[`An EColorPicker > looks like a color picker > pickeropen 1`] = `
                                       aria-haspopup="true"
                                       aria-label="Dialog schliessen"
                                       class="e-colorswatch mt-n1 v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                                      style="height: 30px; width: 30px; background-color: rgb(255, 0, 0); border-color: #ff0000; --ee5e0d96-contrast: #fff;"
+                                      style="height: 30px; width: 30px; background-color: rgb(255, 0, 0); border-color: rgb(255, 0, 0); --ee5e0d96-contrast: #fff;"
                                       type="button">
                                    <span class="v-btn__content"></span>
                               </button>
@@ -68,7 +68,7 @@ exports[`An EColorPicker > looks like a color picker > pickeropen 1`] = `
                                    <div class="v-text-field__slot">
                                         <label class="v-label v-label--active theme--light"
                                                for
-                                               style="left: 0px; position: absolute;">test</label>
+                                               style="left: 0px; right: auto; position: absolute;">test</label>
                                         <input id
                                                type="text">
                                    </div>
@@ -114,7 +114,7 @@ exports[`An EColorPicker > looks like a color picker > pickeropen 1`] = `
                                                             <div class="v-slider__track-background primary lighten-3"
                                                                  style="right: 0px; width: calc(100%);"></div>
                                                             <div class="v-slider__track-fill primary"
-                                                                 style="left: 0px; width: 0%;"></div>
+                                                                 style="left: 0px; right: auto; width: 0%;"></div>
                                                        </div>
                                                        <div aria-orientation="horizontal"
                                                             aria-readonly="false"
@@ -170,72 +170,72 @@ exports[`An EColorPicker > looks like a color picker > pickeropen 1`] = `
                    role="separator">
                <div class="d-flex gap-2 pa-4 flex-wrap">
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(144, 183, 228); border-color: #90b7e4; --ee5e0d96-contrast: #000;"
+                            style="height: 30px; width: 30px; background-color: rgb(144, 183, 228); border-color: rgb(144, 183, 228); --ee5e0d96-contrast: #000;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(110, 219, 233); border-color: #6edbe9; --ee5e0d96-contrast: #000;"
+                            style="height: 30px; width: 30px; background-color: rgb(110, 219, 233); border-color: rgb(110, 219, 233); --ee5e0d96-contrast: #000;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(77, 187, 82); border-color: #4dbb52; --ee5e0d96-contrast: #000;"
+                            style="height: 30px; width: 30px; background-color: rgb(77, 187, 82); border-color: rgb(77, 187, 82); --ee5e0d96-contrast: #000;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(255, 152, 0); border-color: #ff9800; --ee5e0d96-contrast: #000;"
+                            style="height: 30px; width: 30px; background-color: rgb(255, 152, 0); border-color: rgb(255, 152, 0); --ee5e0d96-contrast: #000;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(253, 122, 122); border-color: #fd7a7a; --ee5e0d96-contrast: #000;"
+                            style="height: 30px; width: 30px; background-color: rgb(253, 122, 122); border-color: rgb(253, 122, 122); --ee5e0d96-contrast: #000;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(213, 132, 233); border-color: #d584e9; --ee5e0d96-contrast: #000;"
+                            style="height: 30px; width: 30px; background-color: rgb(213, 132, 233); border-color: rgb(213, 132, 233); --ee5e0d96-contrast: #000;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(187, 187, 187); border-color: #bbbbbb; --ee5e0d96-contrast: #000;"
+                            style="height: 30px; width: 30px; background-color: rgb(187, 187, 187); border-color: rgb(187, 187, 187); --ee5e0d96-contrast: #000;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(25, 100, 177); border-color: #1964b1; --ee5e0d96-contrast: #fff;"
+                            style="height: 30px; width: 30px; background-color: rgb(25, 100, 177); border-color: rgb(25, 100, 177); --ee5e0d96-contrast: #fff;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(30, 134, 202); border-color: #1e86ca; --ee5e0d96-contrast: #fff;"
+                            style="height: 30px; width: 30px; background-color: rgb(30, 134, 202); border-color: rgb(30, 134, 202); --ee5e0d96-contrast: #fff;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(61, 184, 66); border-color: #3db842; --ee5e0d96-contrast: #fff;"
+                            style="height: 30px; width: 30px; background-color: rgb(61, 184, 66); border-color: rgb(61, 184, 66); --ee5e0d96-contrast: #fff;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(241, 129, 13); border-color: #f1810d; --ee5e0d96-contrast: #fff;"
+                            style="height: 30px; width: 30px; background-color: rgb(241, 129, 13); border-color: rgb(241, 129, 13); --ee5e0d96-contrast: #fff;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(199, 26, 26); border-color: #c71a1a; --ee5e0d96-contrast: #fff;"
+                            style="height: 30px; width: 30px; background-color: rgb(199, 26, 26); border-color: rgb(199, 26, 26); --ee5e0d96-contrast: #fff;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(207, 59, 214); border-color: #cf3bd6; --ee5e0d96-contrast: #fff;"
+                            style="height: 30px; width: 30px; background-color: rgb(207, 59, 214); border-color: rgb(207, 59, 214); --ee5e0d96-contrast: #fff;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
                     <button class="e-colorswatch reset v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light elevation-0 v-size--default"
-                            style="height: 30px; width: 30px; background-color: rgb(0, 0, 0); border-color: #000000; --ee5e0d96-contrast: #fff;"
+                            style="height: 30px; width: 30px; background-color: rgb(0, 0, 0); border-color: rgb(0, 0, 0); --ee5e0d96-contrast: #fff;"
                             type="button">
                          <span class="v-btn__content"></span>
                     </button>
