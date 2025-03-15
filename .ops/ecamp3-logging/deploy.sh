@@ -7,10 +7,17 @@ cd $SCRIPT_DIR
 
 ELASTIC_NODE_REQUESTS_MEMORY=1000Mi
 ELASTIC_NODE_LIMITS_MEMORY=1000Mi
+ELASTIC_NODE_MAX_INDEX_AGE=15
 RANDOM_STRING=$(uuidgen)
 
 if [ -f $SCRIPT_DIR/.env ]; then
   . $SCRIPT_DIR/.env
+fi
+
+if [ -z "${ELASTIC_NODE_STORAGE_SIZE}" ]; then
+  echo "Please define ELASTIC_NODE_STORAGE_SIZE. There is no good default value."
+  echo "It can also not be automatically enlarged, see: https://github.com/kubernetes/enhancements/pull/4651 and https://github.com/kubernetes/kubernetes/issues/68737"
+  exit 1
 fi
 
 envsubst < $SCRIPT_DIR/values.yaml > $SCRIPT_DIR/values.out.yaml
