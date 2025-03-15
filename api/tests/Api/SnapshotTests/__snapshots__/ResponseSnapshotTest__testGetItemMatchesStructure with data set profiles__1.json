@@ -1,4 +1,20 @@
 {
+    "_embedded": {
+        "user": {
+            "_links": {
+                "profile": {
+                    "href": "escaped_value"
+                },
+                "self": {
+                    "href": "escaped_value"
+                }
+            },
+            "abbreviation": "escaped_value",
+            "color": "escaped_value",
+            "displayName": "escaped_value",
+            "id": "escaped_value"
+        }
+    },
     "_links": {
         "self": {
             "href": "escaped_value"

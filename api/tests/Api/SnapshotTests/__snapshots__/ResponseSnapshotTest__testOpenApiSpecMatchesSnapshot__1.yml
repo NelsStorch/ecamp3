@@ -17167,12 +17167,13 @@ components:
             - 'null'
             - string
         user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User-read'
+            -
+              type: 'null'
           example: /users/1a2b3c4d
-          format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
       required:
         - email
       type: object
@@ -17258,12 +17259,13 @@ components:
             - 'null'
             - string
         user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User-read_User.create'
+            -
+              type: 'null'
           example: /users/1a2b3c4d
-          format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
       required:
         - email
       type: object
@@ -17621,12 +17623,13 @@ components:
             - 'null'
             - string
         user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonhal-read'
+            -
+              type: 'null'
           example: /users/1a2b3c4d
-          format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
       required:
         - email
       type: object
@@ -17721,12 +17724,13 @@ components:
             - 'null'
             - string
         user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonhal-read_User.create'
+            -
+              type: 'null'
           example: /users/1a2b3c4d
-          format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
       required:
         - email
       type: object
@@ -17928,12 +17932,13 @@ components:
             - 'null'
             - string
         user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonld-read'
+            -
+              type: 'null'
           example: /users/1a2b3c4d
-          format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
       required:
         - email
       type: object
@@ -18042,12 +18047,13 @@ components:
             - 'null'
             - string
         user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonld-read_User.create'
+            -
+              type: 'null'
           example: /users/1a2b3c4d
-          format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
       required:
         - email
       type: object
@@ -21976,9 +21982,7 @@ components:
       type: object
     User-read:
       deprecated: false
-      description: |-
-        A person using eCamp.
-        The properties available for all other eCamp users are here.
+      description: ''
       properties:
         abbreviation:
           description: 'A displayable name of the user.'
@@ -22269,9 +22273,7 @@ components:
       type: object
     User.jsonhal-read:
       deprecated: false
-      description: |-
-        A person using eCamp.
-        The properties available for all other eCamp users are here.
+      description: ''
       properties:
         _links:
           properties:
@@ -22514,9 +22516,7 @@ components:
       type: object
     User.jsonld-read:
       deprecated: false
-      description: |-
-        A person using eCamp.
-        The properties available for all other eCamp users are here.
+      description: ''
       properties:
         '@context':
           oneOf:
@@ -30115,6 +30115,18 @@ paths:
           description: ''
           explode: false
           in: query
+          name: user
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
           name: user.collaborations.camp
           required: false
           schema:
@@ -30128,6 +30140,20 @@ paths:
           explode: true
           in: query
           name: 'user.collaborations.camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'user[]'
           required: false
           schema:
             items:
