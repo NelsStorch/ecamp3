@@ -435,9 +435,9 @@
     "isPrototype": "escaped_value",
     "kind": "escaped_value",
     "motto": "escaped_value",
-    "shortTitle": "escaped_value",
     "organizer": "escaped_value",
     "printYSLogoOnPicasso": "escaped_value",
+    "shortTitle": "escaped_value",
     "title": "escaped_value",
     "trainingAdvisorName": "escaped_value"
 }
