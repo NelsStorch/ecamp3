@@ -3,6 +3,8 @@ fluent-operator:
   operator: 
     annotations: 
       trigger-recreate: ${RANDOM_STRING}
+    container: 
+      tag: 3.3.0
   fluentbit:
     enable: true
     input:
