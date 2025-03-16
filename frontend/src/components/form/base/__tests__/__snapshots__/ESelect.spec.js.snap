@@ -15,7 +15,7 @@ exports[`An ESelect > looks like a dropdown > dropdown closed with selected valu
                          <div class="v-select__slot">
                               <label class="v-label v-label--active theme--light primary--text"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div class="v-select__selections">
                                    <div class="v-select__selection v-select__selection--comma">firstOption</div>
                                    <input aria-readonly="false"
@@ -92,7 +92,7 @@ exports[`An ESelect > looks like a dropdown > dropdown open 1`] = `
                          <div class="v-select__slot">
                               <label class="v-label v-label--active theme--light primary--text"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div class="v-select__selections">
                                    <input aria-readonly="false"
                                           autocomplete="off"
@@ -168,7 +168,7 @@ exports[`An ESelect > looks like a dropdown > dropdown open with selected value 
                          <div class="v-select__slot">
                               <label class="v-label v-label--active theme--light primary--text"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div class="v-select__selections">
                                    <div class="v-select__selection v-select__selection--comma">firstOption</div>
                                    <input aria-readonly="false"
@@ -245,7 +245,7 @@ exports[`An ESelect > looks like a dropdown > no item selected 1`] = `
                          <div class="v-select__slot">
                               <label class="v-label theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div class="v-select__selections">
                                    <input aria-readonly="false"
                                           autocomplete="off"

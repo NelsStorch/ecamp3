@@ -18,7 +18,7 @@ exports[`An ECheckbox > looks like a checkbox > checked 1`] = `
                          </div>
                          <label class="v-label theme--light"
                                 for
-                                style="left: 0px; position: relative;">test</label>
+                                style="left: 0px; right: auto; position: relative;">test</label>
                     </div>
                </div>
           </div>
@@ -44,7 +44,7 @@ exports[`An ECheckbox > looks like a checkbox > unchecked 1`] = `
                          </div>
                          <label class="v-label theme--light"
                                 for
-                                style="left: 0px; position: relative;">test</label>
+                                style="left: 0px; right: auto; position: relative;">test</label>
                     </div>
                </div>
           </div>

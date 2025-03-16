@@ -20,7 +20,7 @@ exports[`An ESwitch > looks like a switch > checked 1`] = `
                          </div>
                          <label class="v-label theme--light"
                                 for
-                                style="left: 0px; position: relative;">test</label>
+                                style="left: 0px; right: auto; position: relative;">test</label>
                     </div>
                </div>
           </div>
@@ -48,7 +48,7 @@ exports[`An ESwitch > looks like a switch > unchecked 1`] = `
                          </div>
                          <label class="v-label theme--light"
                                 for
-                                style="left: 0px; position: relative;">test</label>
+                                style="left: 0px; right: auto; position: relative;">test</label>
                     </div>
                </div>
           </div>
