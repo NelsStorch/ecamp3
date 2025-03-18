@@ -93,7 +93,7 @@ describe('HTTP cache tests', () => {
     })
 
     // warm up cache
-    cy.expectCacheMiss(uri)
+    cy.waitForCacheMiss(uri)
     cy.expectCacheHit(uri)
 
     cy.login('felicity@smoak.com')
@@ -106,7 +106,9 @@ describe('HTTP cache tests', () => {
     })
 
     // ensure cache was invalidated
-    cy.expectCacheMiss(uri)
+    cy.waitForCacheMiss(uri)
+    cy.expectCacheHit(uri)
+
     cy.login('bruce@wayne.com')
     cy.expectCacheMiss(uri)
   })
@@ -130,14 +132,15 @@ describe('HTTP cache tests', () => {
       const newContentNodeUri = response.body._links.self.href
 
       // ensure cache was invalidated
-      cy.expectCacheMiss(uri)
+      cy.waitForCacheMiss(uri)
       cy.expectCacheHit(uri)
 
       // delete newly created contentNode
       cy.apiDelete(newContentNodeUri)
 
       // ensure cache was invalidated
-      cy.expectCacheMiss(uri)
+      cy.waitForCacheMiss(uri)
+      cy.expectCacheHit(uri)
     })
   })
 
@@ -162,14 +165,15 @@ describe('HTTP cache tests', () => {
       const newContentNodeUri = response.body._links.self.href
 
       // ensure cache was invalidated
-      cy.expectCacheMiss(uri)
+      cy.waitForCacheMiss(uri)
       cy.expectCacheHit(uri)
 
       // delete newly created contentNode
       cy.apiDelete(newContentNodeUri)
 
       // ensure cache was invalidated
-      cy.expectCacheMiss(uri)
+      cy.waitForCacheMiss(uri)
+      cy.expectCacheHit(uri)
     })
   })
 

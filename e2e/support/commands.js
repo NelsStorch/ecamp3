@@ -41,28 +41,31 @@ Cypress.Commands.add('moveDownloads', () => {
 })
 
 Cypress.Commands.add('expectCacheHit', (uri) => {
-  cy.waitUntil(() =>
-    cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
-      const headers = response.headers
-      return headers['x-cache'] === 'HIT'
-    })
-  ).then((result) => expect(result).to.eq(true))
+  cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
+    const headers = response.headers
+    expect(headers['x-cache']).to.eq('HIT')
+  })
 })
 
 Cypress.Commands.add('expectCacheMiss', (uri) => {
+  cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
+    const headers = response.headers
+    expect(headers['x-cache']).to.eq('MISS')
+  })
+})
+
+Cypress.Commands.add('expectCachePass', (uri) => {
+  cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
+    const headers = response.headers
+    expect(headers['x-cache']).to.eq('PASS')
+  })
+})
+
+Cypress.Commands.add('waitForCacheMiss', (uri) => {
   cy.waitUntil(() =>
     cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
       const headers = response.headers
       return headers['x-cache'] === 'MISS'
-    })
-  ).then((result) => expect(result).to.eq(true))
-})
-
-Cypress.Commands.add('expectCachePass', (uri) => {
-  cy.waitUntil(() =>
-    cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
-      const headers = response.headers
-      return headers['x-cache'] === 'PASS'
     })
   ).then((result) => expect(result).to.eq(true))
 })
