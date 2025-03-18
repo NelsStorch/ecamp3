@@ -4,6 +4,7 @@ Displays a single scheduleEntry
 
 <template>
   <content-card
+    :key="activityId"
     class="ec-schedule-entry"
     toolbar
     back
