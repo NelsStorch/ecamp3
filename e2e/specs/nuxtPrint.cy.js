@@ -10,28 +10,42 @@ describe('Nuxt print test', () => {
       const body = response.body
       const camp = body._embedded.items.filter((c) => c.motto)[0]
       const campUri = camp._links.self.href
+      const campPeriodsLink = camp._links.periods.href
+      cy.request(Cypress.env('API_ROOT_URL') + campPeriodsLink.replace('/api', '')).then(
+        (periodsResponse) => {
+          const period = periodsResponse.body._embedded.items[0]
+          const periodUri = period._links.self.href
 
-      const printConfig = {
-        language: 'en',
-        documentName: 'camp',
-        camp: campUri,
-        contents: [
-          {
-            type: 'Cover',
-            options: {},
-          },
-        ],
-      }
+          const printConfig = {
+            language: 'en',
+            documentName: 'camp',
+            camp: campUri,
+            contents: [
+              {
+                type: 'Cover',
+                options: {},
+              },
+              {
+                type: 'Story',
+                options: {
+                  periods: [periodUri],
+                  contentType: 'Storycontext',
+                },
+              },
+            ],
+          }
 
-      cy.visit(
-        Cypress.env('PRINT_URL') +
-          '/?config=' +
-          encodeURIComponent(JSON.stringify(printConfig))
+          cy.visit(
+            Cypress.env('PRINT_URL') +
+              '/?config=' +
+              encodeURIComponent(JSON.stringify(printConfig))
+          )
+          cy.contains(camp.title)
+          cy.contains(camp.motto)
+
+          cy.get('#content_0_cover').should('have.css', 'font-size', '50px') // this ensures Tailwind is properly built and integrated
+        }
       )
-      cy.contains(camp.title)
-      cy.contains(camp.motto)
-
-      cy.get('#content_0_cover').should('have.css', 'font-size', '50px') // this ensures Tailwind is properly built and integrated
     })
   })
 
