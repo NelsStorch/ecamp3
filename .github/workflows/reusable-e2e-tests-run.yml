@@ -68,6 +68,8 @@ jobs:
 
       # pull cypress while container are starting up
       - run: docker compose pull e2e
+        
+      - run: docker compose run --entrypoint="npm ci" --rm e2e
 
       - run: sh -x wait-for-container-startup.sh
 
