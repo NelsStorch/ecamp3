@@ -26,11 +26,29 @@ describe('Nuxt print test', () => {
                 options: {},
               },
               {
+                type: 'Picasso',
+                options: {
+                  periods: [periodUri],
+                  orientation: 'L',
+                },
+              },
+              {
                 type: 'Story',
                 options: {
                   periods: [periodUri],
                   contentType: 'Storycontext',
                 },
+              },
+              {
+                type: 'Program',
+                options: {
+                  periods: [periodUri],
+                  dayOverview: true,
+                },
+              },
+              {
+                type: 'Toc',
+                options: {},
               },
             ],
           }
