@@ -58,7 +58,7 @@ export default {
     toggle() {
       // mechanism taken from v-select
       this.$nextTick(() => this.$refs.menu.getTiles())
-      setTimeout(() => this.setMenuIndex(this.index))
+      setTimeout(() => this.setMenuIndex(this.index), 10)
     },
     setMenuIndex(index) {
       this.$refs.menu && (this.$refs.menu.listIndex = index)
@@ -69,6 +69,6 @@ export default {
 
 <style scoped>
 .e-time-dropdown--input {
-  width: 64px;
+  width: 56px;
 }
 </style>

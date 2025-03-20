@@ -1,23 +1,23 @@
 <template>
-  <div class="d-flex px-4">
-    <div>
-      <e-date-picker
-        v-model="localScheduleEntry.start"
-        value-format="YYYY-MM-DDTHH:mm:ssZ"
-        path="startDate"
-        vee-rules="required"
-        :allowed-dates="dateIsInAnyPeriod"
-        :filled="false"
-        class="float-left date-picker mr-3 mt-1"
-        required
-      />
+  <div class="ec-form-schedule-entry-item px-3 w-100">
+    <e-date-picker
+      v-model="localScheduleEntry.start"
+      value-format="YYYY-MM-DDTHH:mm:ssZ"
+      path="startDate"
+      vee-rules="required"
+      :allowed-dates="dateIsInAnyPeriod"
+      :filled="false"
+      class="area-startdate float-left date-picker mr-1 mt-md-1"
+      required
+    />
 
+    <div class="area-starttime">
       <e-time-dropdown
         v-model="localScheduleEntry.start"
         path="startDatetime"
         vee-rules="required"
         :filled="false"
-        input-class="float-left mt-1"
+        input-class="float-left mt-md-1"
         required
         value-format="YYYY-MM-DDTHH:mm:ssZ"
         :items="startTimeList"
@@ -29,12 +29,23 @@
         }"
       />
     </div>
-    <div
-      class="pt-1 mx-2 v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-text-field--is-booted"
-    >
-      <div class="v-text-field input">-</div>
+    <div class="area-dash mt-2">
+      <div class="text-field-alignment">-</div>
     </div>
-    <div>
+    <e-date-picker
+      v-if="!$vuetify.breakpoint.mdAndUp"
+      v-model="localScheduleEntry.end"
+      value-format="YYYY-MM-DDTHH:mm:ssZ"
+      path="endDate"
+      vee-rules="required|greaterThanOrEqual_date:@startDate"
+      :min="localScheduleEntry.start"
+      :allowed-dates="dateIsInSelectedPeriod"
+      :filled="false"
+      class="area-enddate float-left date-picker mr-3 mt-md-1"
+      required
+    />
+
+    <div class="area-endtime">
       <e-time-dropdown
         v-model="localScheduleEntry.end"
         value-format="YYYY-MM-DDTHH:mm:ssZ"
@@ -42,7 +53,7 @@
         :vee-rules="endTimeValidation"
         :min="minEndTime"
         :filled="false"
-        input-class="float-left mt-1 mr-3"
+        input-class="float-left mt-md-1 mr-1"
         required
         :items="endTimeList"
         :menu-props="{
@@ -57,31 +68,30 @@
           >&nbsp;<span class="opacity-60">({{ item.duration }})</span>
         </template>
       </e-time-dropdown>
-
-      <e-date-picker
-        v-if="!isSameDay"
-        v-model="localScheduleEntry.end"
-        value-format="YYYY-MM-DDTHH:mm:ssZ"
-        path="endDate"
-        vee-rules="required|greaterThanOrEqual_date:@startDate"
-        :min="localScheduleEntry.start"
-        :allowed-dates="dateIsInSelectedPeriod"
-        :filled="false"
-        class="float-left date-picker mr-3 mt-1"
-        required
-      />
-
-      <e-text-field
-        v-else
-        readonly
-        label="Dauer"
-        :filled="false"
-        class="float-left date-picker mr-3 mt-1"
-        :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
-      />
     </div>
-    <div class="text-field-alignment">
-      <button-delete v-if="deletable" icon-only @click="$emit('delete')" />
+
+    <e-date-picker
+      v-if="$vuetify.breakpoint.mdAndUp"
+      v-model="localScheduleEntry.end"
+      value-format="YYYY-MM-DDTHH:mm:ssZ"
+      path="endDate"
+      vee-rules="required|greaterThanOrEqual_date:@startDate"
+      :min="localScheduleEntry.start"
+      :allowed-dates="dateIsInSelectedPeriod"
+      :filled="false"
+      :class="{ 'hide-control': isSameDay }"
+      class="area-enddate float-left date-picker mr-3 mt-md-1"
+      required
+    />
+    <e-text-field
+      readonly
+      label="Dauer"
+      :filled="false"
+      class="area-duration float-left mr-3 mt-md-1"
+      :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
+    />
+    <div class="area-delete text-field-alignment ml-auto">
+      <button-delete :disabled="!deletable" icon-only @click="$emit('delete')" />
     </div>
   </div>
 </template>
@@ -191,7 +201,7 @@ export default {
       // be able to select end time on the end day
       if (this.isSameDay) {
         // Show 25 hours from start time
-        const hours = 25
+        const hours = this.startUTC.format('HH:mm') === '00:00' ? 25 : 24
         const minuteInterval = 15
         return Array.from(
           { length: hours * (60 / minuteInterval) },
@@ -206,18 +216,14 @@ export default {
           }
         })
       } else {
-        const hour = this.endUTC.hour()
-
-        const hoursBefore = hour + 2
-        return [
-          // first hours + 2 before end time
-          ...Array.from({ length: hoursBefore }, (_, i) => (i - hoursBefore) * 60),
-          // ± 30 minutes around the end time
-          ...Array.from({ length: 5 }, (_, i) => (i - 2) * 15),
-          // remaining hours of end day or at least 12 hours
-          ...Array.from({ length: Math.max(24 - hour, 12) }, (_, i) => (i + 1) * 60),
-        ].map((minutes) => {
-          const value = this.endUTC.add(minutes, 'm')
+        const startEndDay = this.endUTC.startOf('day')
+        const hours = 24
+        const minuteInterval = 30
+        return Array.from(
+          { length: hours * (60 / minuteInterval) },
+          (_, i) => i * minuteInterval
+        ).map((minutes) => {
+          const value = startEndDay.add(minutes, 'm')
           return {
             date: value,
             value: value.format('YYYY-MM-DDTHH:mm:ssZ'),
@@ -259,6 +265,9 @@ export default {
         )
       })
     },
+    alert() {
+      console.log('test')
+    },
     dateIsInSelectedPeriod: function (val) {
       if (this.period === undefined) {
         return this.dateIsInAnyPeriod(val)
@@ -282,5 +291,68 @@ export default {
 .text-field-alignment {
   padding-top: 12px;
   margin-top: 4px;
+}
+
+.area-startdate {
+  grid-area: startdate;
+}
+
+.area-starttime {
+  grid-area: starttime;
+}
+
+.area-enddate {
+  grid-area: enddate;
+}
+
+.area-endtime {
+  grid-area: endtime;
+}
+
+.area-dash {
+  display: none;
+  grid-area: dash;
+}
+
+@media (min-width: 768px) {
+  .area-dash {
+    display: block;
+  }
+  .area-duration {
+    width: 130px;
+    margin-left: 0;
+  }
+}
+
+.area-duration {
+  grid-area: duration;
+  margin-left: 8px;
+}
+
+.hide-control:not(:hover):not(:focus):not(:focus-within):not(:has(.error--text))
+  :deep(.v-input__control) {
+  display: none;
+}
+
+.area-delete {
+  grid-area: delete;
+}
+
+.ec-form-schedule-entry-item {
+  display: grid !important;
+  row-gap: 4px;
+  column-gap: 0px;
+  grid-template-areas:
+    'startdate starttime duration'
+    'enddate endtime delete';
+  grid-template-columns: auto auto 1fr;
+}
+
+@media (min-width: 768px) {
+  .ec-form-schedule-entry-item {
+    column-gap: 8px;
+    grid-template-areas: 'startdate starttime dash endtime enddate duration delete';
+    grid-template-columns: auto auto auto auto 1fr auto auto;
+  }
 }
 </style>
