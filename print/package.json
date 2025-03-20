@@ -18,7 +18,7 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "0.1.2",
     "@mdi/js": "7.4.47",
-    "@sentry/node": "9.6.1",
+    "@sentry/node": "9.7.0",
     "axios": "1.8.2",
     "colorjs.io": "0.5.2",
     "dayjs": "1.11.13",
