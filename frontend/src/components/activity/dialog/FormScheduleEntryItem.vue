@@ -4,6 +4,7 @@
       v-model="localScheduleEntry.start"
       value-format="YYYY-MM-DDTHH:mm:ssZ"
       path="startDate"
+      :vee-id="'startDate' + startUTC"
       vee-rules="required"
       :allowed-dates="dateIsInAnyPeriod"
       :filled="false"
@@ -32,19 +33,6 @@
     <div class="area-dash mt-2">
       <div class="text-field-alignment">-</div>
     </div>
-    <e-date-picker
-      v-if="!$vuetify.breakpoint.mdAndUp"
-      v-model="localScheduleEntry.end"
-      value-format="YYYY-MM-DDTHH:mm:ssZ"
-      path="endDate"
-      vee-rules="required|greaterThanOrEqual_date:@startDate"
-      :min="localScheduleEntry.start"
-      :allowed-dates="dateIsInSelectedPeriod"
-      :filled="false"
-      class="area-enddate float-left date-picker mr-3 mt-md-1"
-      required
-    />
-
     <div class="area-endtime">
       <e-time-dropdown
         v-model="localScheduleEntry.end"
@@ -71,15 +59,14 @@
     </div>
 
     <e-date-picker
-      v-if="$vuetify.breakpoint.mdAndUp"
       v-model="localScheduleEntry.end"
       value-format="YYYY-MM-DDTHH:mm:ssZ"
       path="endDate"
-      vee-rules="required|greaterThanOrEqual_date:@startDate"
+      :vee-rules="'required|greaterThanOrEqual_date:@startDate' + startUTC"
       :min="localScheduleEntry.start"
       :allowed-dates="dateIsInSelectedPeriod"
       :filled="false"
-      :class="{ 'hide-control': isSameDay }"
+      :class="{ 'hide-control': $vuetify.breakpoint.mdAndUp && isSameDay }"
       class="area-enddate float-left date-picker mr-3 mt-md-1"
       required
     />
@@ -216,9 +203,11 @@ export default {
           }
         })
       } else {
-        const startEndDay = this.endUTC.startOf('day')
         const hours = 24
         const minuteInterval = 30
+        const startEndDay = this.endUTC.isBefore(this.startUTC)
+          ? this.startUTC.add(minuteInterval, 'm')
+          : this.endUTC.startOf('day')
         return Array.from(
           { length: hours * (60 / minuteInterval) },
           (_, i) => i * minuteInterval
@@ -329,9 +318,14 @@ export default {
   margin-left: 8px;
 }
 
+.hide-control :deep(.v-input__control) {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
 .hide-control:not(:hover):not(:focus):not(:focus-within):not(:has(.error--text))
   :deep(.v-input__control) {
-  display: none;
+  opacity: 0;
 }
 
 .area-delete {
