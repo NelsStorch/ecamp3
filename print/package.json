@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@eslint/compat": "1.2.7",
-    "@eslint/eslintrc": "3.3.0",
+    "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.22.0",
     "@nuxt/eslint": "1.2.0",
     "@nuxt/eslint-config": "0.7.6",
