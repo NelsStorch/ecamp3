@@ -1,5 +1,5 @@
 <template>
-  <div class="ec-form-schedule-entry-item px-3 w-100">
+  <div class="ec-form-schedule-entry-item items-center px-3 w-100">
     <e-date-picker
       v-model="localScheduleEntry.start"
       value-format="YYYY-MM-DDTHH:mm:ssZ"
@@ -8,7 +8,7 @@
       vee-rules="required"
       :allowed-dates="dateIsInAnyPeriod"
       :filled="false"
-      class="area-startdate float-left date-picker mr-1 mt-md-1"
+      class="area-startdate date-picker"
       required
     />
 
@@ -18,7 +18,6 @@
         path="startDatetime"
         vee-rules="required"
         :filled="false"
-        input-class="float-left mt-md-1"
         required
         value-format="YYYY-MM-DDTHH:mm:ssZ"
         :items="startTimeList"
@@ -30,9 +29,7 @@
         }"
       />
     </div>
-    <div class="area-dash mt-2">
-      <div class="text-field-alignment">-</div>
-    </div>
+    <div class="area-dash text-field-alignment">-</div>
     <div class="area-endtime">
       <e-time-dropdown
         v-model="localScheduleEntry.end"
@@ -41,7 +38,6 @@
         :vee-rules="endTimeValidation"
         :min="minEndTime"
         :filled="false"
-        input-class="float-left mt-md-1 mr-1"
         required
         :items="endTimeList"
         :menu-props="{
@@ -67,18 +63,23 @@
       :allowed-dates="dateIsInSelectedPeriod"
       :filled="false"
       :class="{ 'hide-control': $vuetify.breakpoint.mdAndUp && isSameDay }"
-      class="area-enddate float-left date-picker mr-3 mt-md-1"
+      class="area-enddate date-picker"
       required
     />
-    <e-text-field
-      readonly
-      label="Dauer"
-      :filled="false"
-      class="area-duration float-left mr-3 mt-md-1"
-      :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
-    />
-    <div class="area-delete text-field-alignment ml-auto">
-      <button-delete :disabled="!deletable" icon-only @click="$emit('delete')" />
+    <div class="area-action">
+      <e-text-field
+        readonly
+        path="duration"
+        :filled="false"
+        class="duration"
+        :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
+      />
+      <button-delete
+        class="ml-auto"
+        :disabled="!deletable"
+        icon-only
+        @click="$emit('delete')"
+      />
     </div>
   </div>
 </template>
@@ -254,9 +255,6 @@ export default {
         )
       })
     },
-    alert() {
-      console.log('test')
-    },
     dateIsInSelectedPeriod: function (val) {
       if (this.period === undefined) {
         return this.dateIsInAnyPeriod(val)
@@ -307,15 +305,17 @@ export default {
   .area-dash {
     display: block;
   }
-  .area-duration {
+  .duration {
     width: 130px;
-    margin-left: 0;
   }
 }
 
-.area-duration {
-  grid-area: duration;
+.area-action {
+  grid-area: action;
   margin-left: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 
 .hide-control :deep(.v-input__control) {
@@ -328,25 +328,21 @@ export default {
   opacity: 0;
 }
 
-.area-delete {
-  grid-area: delete;
-}
-
 .ec-form-schedule-entry-item {
   display: grid !important;
   row-gap: 4px;
-  column-gap: 0px;
+  column-gap: 4px;
   grid-template-areas:
-    'startdate starttime duration'
-    'enddate endtime delete';
+    'startdate starttime action'
+    'enddate endtime action';
   grid-template-columns: auto auto 1fr;
 }
 
 @media (min-width: 768px) {
   .ec-form-schedule-entry-item {
     column-gap: 8px;
-    grid-template-areas: 'startdate starttime dash endtime enddate duration delete';
-    grid-template-columns: auto auto auto auto 1fr auto auto;
+    grid-template-areas: 'startdate starttime dash endtime enddate action';
+    grid-template-columns: auto auto auto auto 1fr auto;
   }
 }
 </style>
