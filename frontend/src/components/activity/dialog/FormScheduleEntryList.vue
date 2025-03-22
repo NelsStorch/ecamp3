@@ -3,7 +3,7 @@
     <v-card outlined color="grey lighten-3" class="period mb-2 rounded-b-0">
       <v-row no-gutters>
         <v-col class="header mb-3">
-          <legend class="pa-2 float-left">
+          <legend class="py-2 px-3 float-left">
             {{ $tc('components.activity.dialog.formScheduleEntryList.name') }}
           </legend>
 
@@ -15,11 +15,15 @@
           />
         </v-col>
       </v-row>
-      <transition-group name="transition-list" tag="div" class="row no-gutters">
+      <transition-group
+        name="transition-list"
+        tag="div"
+        class="row no-gutters d-grid gap-4"
+      >
         <FormScheduleEntryItem
           v-for="scheduleEntry in scheduleEntriesWithoutDeleted"
           :key="scheduleEntry.key"
-          class="transition-list-item pa-0 mb-4"
+          class="transition-list-item pa-0"
           :schedule-entry="scheduleEntry"
           :periods="periods"
           :deletable="
