@@ -59,7 +59,7 @@
         "php-coveralls/php-coveralls": "2.7.0",
         "phpspec/prophecy-phpunit": "2.3.0",
         "phpstan/phpstan": "2.1.10",
-        "phpunit/phpunit": "11.5.14",
+        "phpunit/phpunit": "11.5.15",
         "rector/rector": "2.0.10",
         "psalm/phar": "5.26.1",
         "spatie/phpunit-snapshot-assertions": "5.1.8",
