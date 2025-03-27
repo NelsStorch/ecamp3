@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7061a392298bdde28f63ab1c3322eeab",
+    "content-hash": "8304f75641d37bb2f52d075d184122f2",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10880,23 +10880,23 @@
         },
         {
             "name": "hautelook/alice-bundle",
-            "version": "2.15.0",
+            "version": "2.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theofidry/AliceBundle.git",
-                "reference": "df1df6983c8aafaf6e70bdf05088c9ae9282ff00"
+                "reference": "e33d72e4df48b846dd5fb99039dbcfc5401daf2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theofidry/AliceBundle/zipball/df1df6983c8aafaf6e70bdf05088c9ae9282ff00",
-                "reference": "df1df6983c8aafaf6e70bdf05088c9ae9282ff00",
+                "url": "https://api.github.com/repos/theofidry/AliceBundle/zipball/e33d72e4df48b846dd5fb99039dbcfc5401daf2c",
+                "reference": "e33d72e4df48b846dd5fb99039dbcfc5401daf2c",
                 "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "^1.7 || ^2.0",
                 "doctrine/doctrine-bundle": "^2.11.3",
                 "doctrine/orm": "^3.1",
-                "doctrine/persistence": "^3.3.1",
+                "doctrine/persistence": "^3.3.1 || ^4.0",
                 "php": "^8.2",
                 "psr/log": "^1.0 || ^2.0 || ^3.0",
                 "symfony/finder": "^6.4 || ^7.0",
@@ -10948,9 +10948,9 @@
             ],
             "support": {
                 "issues": "https://github.com/theofidry/AliceBundle/issues",
-                "source": "https://github.com/theofidry/AliceBundle/tree/2.15.0"
+                "source": "https://github.com/theofidry/AliceBundle/tree/2.15.1"
             },
-            "time": "2025-03-11T22:55:25+00:00"
+            "time": "2025-03-27T09:27:25+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
