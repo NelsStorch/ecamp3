@@ -58,7 +58,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new GetCollection(
             security: 'is_fully_authenticated()',
-            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT
         ),
         new Post(
             processor: CampCollaborationCreateProcessor::class,
@@ -89,6 +89,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Index(columns: ['status'])]
 class CampCollaboration extends BaseEntity implements BelongsToCampInterface {
     public const ITEM_NORMALIZATION_CONTEXT = [
+        'groups' => ['read', 'CampCollaboration:User'],
+        'swagger_definition_name' => 'read',
+    ];
+    public const COLLECTION_NORMALIZATION_CONTEXT = [
         'groups' => ['read', 'CampCollaboration:Camp', 'CampCollaboration:User'],
         'swagger_definition_name' => 'read',
     ];

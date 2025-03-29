@@ -5593,6 +5593,82 @@ components:
         - role
         - status
       type: object
+    CampCollaboration-read_CampCollaboration.User:
+      deprecated: false
+      description: 'A user participating in some way in the planning or realization of a camp.'
+      properties:
+        abbreviation:
+          description: 'The abbreviation in the avatar.'
+          example: AB
+          maxLength: 2
+          type:
+            - 'null'
+            - string
+        camp:
+          description: 'The camp that the collaborator is part of. Cannot be changed once the campCollaboration is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the avatar as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        inviteEmail:
+          description: |-
+            The receiver email address of the invitation email, in case the collaboration does not yet have
+            a user account. Either this field or the user field should be null.
+          example: some-email@example.com
+          externalDocs:
+            url: 'https://schema.org/email'
+          format: email
+          maxLength: 128
+          minLength: 1
+          type:
+            - 'null'
+            - string
+        role:
+          description: |-
+            The role that this person has in the camp. Depending on the role, the collaborator might have
+            different access rights. There must always be at least one manager in a camp.
+          enum:
+            - guest
+            - manager
+            - member
+          example: member
+          maxLength: 16
+          type: string
+        status:
+          default: invited
+          description: 'Indicates whether the collaborator is still invited, has left the camp, or is participating normally.'
+          enum:
+            - established
+            - inactive
+            - invited
+          example: inactive
+          maxLength: 16
+          type: string
+        user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User-read_CampCollaboration.User'
+            -
+              type: 'null'
+          readOnly: true
+      required:
+        - camp
+        - role
+        - status
+      type: object
     CampCollaboration-resend_invitation:
       deprecated: false
       description: 'A user participating in some way in the planning or realization of a camp.'
@@ -6020,6 +6096,91 @@ components:
         - role
         - status
       type: object
+    CampCollaboration.jsonhal-read_CampCollaboration.User:
+      deprecated: false
+      description: 'A user participating in some way in the planning or realization of a camp.'
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        abbreviation:
+          description: 'The abbreviation in the avatar.'
+          example: AB
+          maxLength: 2
+          type:
+            - 'null'
+            - string
+        camp:
+          description: 'The camp that the collaborator is part of. Cannot be changed once the campCollaboration is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the avatar as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        inviteEmail:
+          description: |-
+            The receiver email address of the invitation email, in case the collaboration does not yet have
+            a user account. Either this field or the user field should be null.
+          example: some-email@example.com
+          externalDocs:
+            url: 'https://schema.org/email'
+          format: email
+          maxLength: 128
+          minLength: 1
+          type:
+            - 'null'
+            - string
+        role:
+          description: |-
+            The role that this person has in the camp. Depending on the role, the collaborator might have
+            different access rights. There must always be at least one manager in a camp.
+          enum:
+            - guest
+            - manager
+            - member
+          example: member
+          maxLength: 16
+          type: string
+        status:
+          default: invited
+          description: 'Indicates whether the collaborator is still invited, has left the camp, or is participating normally.'
+          enum:
+            - established
+            - inactive
+            - invited
+          example: inactive
+          maxLength: 16
+          type: string
+        user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonhal-read_CampCollaboration.User'
+            -
+              type: 'null'
+          readOnly: true
+      required:
+        - camp
+        - role
+        - status
+      type: object
     CampCollaboration.jsonhal-write_create:
       deprecated: false
       description: 'A user participating in some way in the planning or realization of a camp.'
@@ -6267,23 +6428,6 @@ components:
       deprecated: false
       description: 'A user participating in some way in the planning or realization of a camp.'
       properties:
-        '@context':
-          oneOf:
-            -
-              additionalProperties: true
-              properties:
-                '@vocab':
-                  type: string
-                hydra:
-                  enum: ['http://www.w3.org/ns/hydra/core#']
-                  type: string
-              required:
-                - '@vocab'
-                - hydra
-              type: object
-            -
-              type: string
-          readOnly: true
         '@id':
           readOnly: true
           type: string
@@ -6356,6 +6500,105 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/User.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+            -
+              type: 'null'
+          readOnly: true
+      required:
+        - camp
+        - role
+        - status
+      type: object
+    CampCollaboration.jsonld-read_CampCollaboration.User:
+      deprecated: false
+      description: 'A user participating in some way in the planning or realization of a camp.'
+      properties:
+        '@context':
+          oneOf:
+            -
+              additionalProperties: true
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+                  type: string
+              required:
+                - '@vocab'
+                - hydra
+              type: object
+            -
+              type: string
+          readOnly: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        abbreviation:
+          description: 'The abbreviation in the avatar.'
+          example: AB
+          maxLength: 2
+          type:
+            - 'null'
+            - string
+        camp:
+          description: 'The camp that the collaborator is part of. Cannot be changed once the campCollaboration is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the avatar as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        inviteEmail:
+          description: |-
+            The receiver email address of the invitation email, in case the collaboration does not yet have
+            a user account. Either this field or the user field should be null.
+          example: some-email@example.com
+          externalDocs:
+            url: 'https://schema.org/email'
+          format: email
+          maxLength: 128
+          minLength: 1
+          type:
+            - 'null'
+            - string
+        role:
+          description: |-
+            The role that this person has in the camp. Depending on the role, the collaborator might have
+            different access rights. There must always be at least one manager in a camp.
+          enum:
+            - guest
+            - manager
+            - member
+          example: member
+          maxLength: 16
+          type: string
+        status:
+          default: invited
+          description: 'Indicates whether the collaborator is still invited, has left the camp, or is participating normally.'
+          enum:
+            - established
+            - inactive
+            - invited
+          example: inactive
+          maxLength: 16
+          type: string
+        user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonld-read_CampCollaboration.User'
             -
               type: 'null'
           readOnly: true
@@ -22017,6 +22260,47 @@ components:
           format: iri-reference
           type: string
       type: object
+    User-read_CampCollaboration.User:
+      deprecated: false
+      description: ''
+      properties:
+        abbreviation:
+          description: 'A displayable name of the user.'
+          example: AB
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        color:
+          description: 'A displayable name of the user.'
+          example: '#ff0000'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        displayName:
+          description: 'A displayable name of the user.'
+          example: 'Robert Baden-Powell'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        profile:
+          example:
+            email: bi-pi@example.com
+            firstname: Robert
+            language: en
+            nickname: Bi-Pi
+            surname: Baden-Powell
+          format: iri-reference
+          type: string
+      type: object
     User-read_User.create:
       deprecated: false
       description: |-
@@ -22335,6 +22619,56 @@ components:
           format: iri-reference
           type: string
       type: object
+    User.jsonhal-read_CampCollaboration.User:
+      deprecated: false
+      description: ''
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        abbreviation:
+          description: 'A displayable name of the user.'
+          example: AB
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        color:
+          description: 'A displayable name of the user.'
+          example: '#ff0000'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        displayName:
+          description: 'A displayable name of the user.'
+          example: 'Robert Baden-Powell'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        profile:
+          example:
+            email: bi-pi@example.com
+            firstname: Robert
+            language: en
+            nickname: Bi-Pi
+            surname: Baden-Powell
+          format: iri-reference
+          type: string
+      type: object
     User.jsonhal-read_User.create:
       deprecated: false
       description: |-
@@ -22557,6 +22891,70 @@ components:
           type: string
       type: object
     User.jsonld-read_CampCollaboration.Camp_CampCollaboration.User:
+      deprecated: false
+      description: ''
+      properties:
+        '@context':
+          oneOf:
+            -
+              additionalProperties: true
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+                  type: string
+              required:
+                - '@vocab'
+                - hydra
+              type: object
+            -
+              type: string
+          readOnly: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        abbreviation:
+          description: 'A displayable name of the user.'
+          example: AB
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        color:
+          description: 'A displayable name of the user.'
+          example: '#ff0000'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        displayName:
+          description: 'A displayable name of the user.'
+          example: 'Robert Baden-Powell'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        profile:
+          example:
+            email: bi-pi@example.com
+            firstname: Robert
+            language: en
+            nickname: Bi-Pi
+            surname: Baden-Powell
+          format: iri-reference
+          type: string
+      type: object
+    User.jsonld-read_CampCollaboration.User:
       deprecated: false
       description: ''
       properties:
@@ -24005,19 +24403,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.User'
             application/json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.User'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
           description: 'CampCollaboration resource created'
           links: []
         400:
@@ -24077,19 +24475,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.User'
             application/json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.User'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
           description: 'CampCollaboration resource'
         403:
           description: Forbidden
@@ -24130,19 +24528,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.User'
             application/json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.User'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
           description: 'CampCollaboration resource updated'
           links: []
         400:
