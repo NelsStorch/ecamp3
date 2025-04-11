@@ -339,6 +339,8 @@ export default {
     }
   },
   async beforeRouteUpdate(to, from, next) {
+    // to avoid stale data, trigger reload (which includes embedded contentNode data). However, don't await in order to render early with cached data.
+    this.scheduleEntry.activity().$reload()
     return scheduleEntryRouteChange(this.activityId, to, from, next)
   },
   props: {
@@ -441,8 +443,7 @@ export default {
     await this.scheduleEntry.activity()._meta.load // wait if activity is being loaded as part of a collection
     this.loading = false
 
-    // to avoid stale data, trigger reload (which includes embedded contentNode data). However, don't await in order to render early with cached data.
-    this.scheduleEntry.activity().$reload()
+    // no refresh of activity here because the requireActivityScheduleEntry guard already does a refresh
   },
 
   methods: {
