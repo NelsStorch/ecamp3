@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Tests\Integration\Serializer\Normalizer;
+namespace App\Tests\Integration\State;
 
-use ApiPlatform\Hydra\Serializer\ConstraintViolationListNormalizer as HydraConstraintViolationListNormalizer;
-use ApiPlatform\Problem\Serializer\ConstraintViolationListNormalizer as JsonProblemConstraintViolationListNormalizer;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestAssertionsTrait;
+use ApiPlatform\Validator\Exception\ValidationException;
 use App\Entity\CampCollaboration;
-use App\Serializer\Normalizer\TranslationConstraintViolationListNormalizer;
+use App\State\ValidationErrorProvider;
 use App\Validator\AllowTransition\AssertAllowTransitions;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -20,10 +19,10 @@ use Symfony\Component\Validator\ConstraintViolationList;
 /**
  * @internal
  */
-class TranslationConstraintViolationListNormalizerIntegrationTest extends KernelTestCase {
+class ValidationErrorProviderIntegrationTest extends KernelTestCase {
     use ApiTestAssertionsTrait;
 
-    private TranslationConstraintViolationListNormalizer $translationConstraintViolationListNormalizer;
+    private ValidationErrorProvider $validationErrorProvider;
 
     /**
      * @throws \Exception
@@ -32,26 +31,27 @@ class TranslationConstraintViolationListNormalizerIntegrationTest extends Kernel
         self::bootKernel();
         parent::setUp();
 
-        /** @var TranslationConstraintViolationListNormalizer $obj */
-        $obj = self::getContainer()->get('App\Serializer\Normalizer\TranslationConstraintViolationListNormalizer');
-        $this->translationConstraintViolationListNormalizer = $obj;
+        /** @var ValidationErrorProvider $obj */
+        $obj = self::getContainer()->get('App\State\ValidationErrorProvider');
+        $this->validationErrorProvider = $obj;
     }
 
-    /**
-     * @throws ExceptionInterface
-     * @throws \Exception
-     */
-    #[DataProvider('getFormats')]
-    public function testAddsTranslationKeyAndParameters(string $format) {
+    public function testAddsTranslationKeyAndParameters() {
         $constraintViolationList = new ConstraintViolationList(self::getConstraintViolations());
 
-        $result = $this->translationConstraintViolationListNormalizer->normalize(
-            $constraintViolationList,
-            $format,
-            ['api_error_resource' => true]
+        $request = new Request();
+        $validationException = new ValidationException(message: $constraintViolationList, code: 0);
+        $request->attributes->set('exception', $validationException);
+
+        $validationError = $this->validationErrorProvider->provide(
+            new Patch(status: 422),
+            [],
+            [
+                'request' => $request,
+            ]
         );
 
-        self::assertArraySubset(['violations' => [
+        self::assertArraySubset([
             [
                 'i18n' => [
                     'key' => 'app.validator.allowtransition.assertallowtransitions',
@@ -77,28 +77,29 @@ class TranslationConstraintViolationListNormalizerIntegrationTest extends Kernel
             ],
             [
                 'i18n' => [
-                    'key' => 'app.tests.integration.serializer.normalizer.myconstraint',
+                    'key' => 'app.tests.integration.state.myconstraint',
                     'parameters' => [],
                 ],
             ],
-        ]], $result);
+        ], $validationError->getViolations());
     }
 
-    /**
-     * @throws ExceptionInterface
-     * @throws \Exception
-     */
-    #[DataProvider('getFormats')]
-    public function testAddsTranslations(string $format) {
+    public function testAddsTranslations() {
         $constraintViolationList = new ConstraintViolationList(self::getConstraintViolations());
 
-        $result = $this->translationConstraintViolationListNormalizer->normalize(
-            $constraintViolationList,
-            $format,
-            ['api_error_resource' => true]
+        $request = new Request();
+        $validationException = new ValidationException(message: $constraintViolationList, code: 0);
+        $request->attributes->set('exception', $validationException);
+
+        $validationError = $this->validationErrorProvider->provide(
+            new Patch(status: 422),
+            [],
+            [
+                'request' => $request,
+            ]
         );
 
-        self::assertArraySubset(['violations' => [
+        self::assertArraySubset([
             [
                 'i18n' => [
                     'translations' => [
@@ -145,17 +146,7 @@ class TranslationConstraintViolationListNormalizerIntegrationTest extends Kernel
                     ],
                 ],
             ],
-        ]], $result);
-    }
-
-    public static function getFormats() {
-        $hydra = HydraConstraintViolationListNormalizer::FORMAT;
-        $problem = JsonProblemConstraintViolationListNormalizer::FORMAT;
-
-        return [
-            $hydra => [$hydra],
-            $problem => [$problem],
-        ];
+        ], $validationError->getViolations());
     }
 
     public static function getConstraintViolations(): array {
