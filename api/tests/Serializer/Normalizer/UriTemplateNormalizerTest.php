@@ -3,8 +3,8 @@
 namespace App\Tests\Serializer\Normalizer;
 
 use ApiPlatform\Api\Entrypoint;
-use ApiPlatform\Api\UrlGeneratorInterface;
 use ApiPlatform\Metadata\Resource\ResourceNameCollection;
+use ApiPlatform\Metadata\UrlGeneratorInterface;
 use App\Entity\Activity;
 use App\Entity\Camp;
 use App\Metadata\Resource\Factory\UriTemplateFactory;

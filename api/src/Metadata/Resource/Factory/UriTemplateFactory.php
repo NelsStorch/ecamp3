@@ -2,7 +2,7 @@
 
 namespace App\Metadata\Resource\Factory;
 
-use ApiPlatform\Exception\ResourceClassNotFoundException;
+use ApiPlatform\Metadata\Exception\ResourceClassNotFoundException;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\HttpOperation;
