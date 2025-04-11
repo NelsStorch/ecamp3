@@ -2,7 +2,6 @@
 
 namespace App\Metadata\Resource\Factory;
 
-use ApiPlatform\Api\UrlGeneratorInterface;
 use ApiPlatform\Exception\ResourceClassNotFoundException;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -11,6 +10,7 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use ApiPlatform\Metadata\Resource\Factory\ResourceNameCollectionFactoryInterface;
 use ApiPlatform\Metadata\Resource\ResourceMetadataCollection;
+use ApiPlatform\Metadata\UrlGeneratorInterface;
 use ApiPlatform\State\Pagination\PaginationOptions;
 use App\Metadata\Resource\OperationHelper;
 use Psr\Container\ContainerInterface;
