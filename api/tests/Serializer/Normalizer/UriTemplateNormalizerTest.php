@@ -2,7 +2,7 @@
 
 namespace App\Tests\Serializer\Normalizer;
 
-use ApiPlatform\Api\Entrypoint;
+use ApiPlatform\Documentation\Entrypoint;
 use ApiPlatform\Metadata\Resource\ResourceNameCollection;
 use ApiPlatform\Metadata\UrlGeneratorInterface;
 use App\Entity\Activity;
