@@ -2,10 +2,10 @@
 
 namespace App\Serializer\Normalizer\Error;
 
-use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 
 class TranslationInfoOfConstraintViolation {
-    public function extract(ConstraintViolation $constraintViolation): TranslationInfo {
+    public function extract(ConstraintViolationInterface $constraintViolation): TranslationInfo {
         $constraint = $constraintViolation->getConstraint();
         $constraintClass = get_class($constraint);
         $key = str_replace('\\', '.', $constraintClass);

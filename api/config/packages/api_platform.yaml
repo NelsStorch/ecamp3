@@ -30,7 +30,7 @@ api_platform:
         stateless: true
         extra_properties:
             standard_put: true
-            rfc_7807_compliant_errors: false
+            rfc_7807_compliant_errors: true
         pagination_enabled: false
         itemOperations: [ 'get', 'patch', 'delete' ]
         collection_operations:
