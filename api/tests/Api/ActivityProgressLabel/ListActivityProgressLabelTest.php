@@ -65,6 +65,27 @@ class ListActivityProgressLabelTest extends ECampApiTestCase {
         ], $response->toArray()['_links']['items']);
     }
 
+    public function testListActivityProgressLabelsAsSubresourceOfCampIsAllowedForCollaborator() {
+        $camp = static::getFixture('camp1');
+        $response = static::createClientWithCredentials()
+            ->request('GET', "/camps/{$camp->getId()}/activity_progress_labels")
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('activityProgressLabel1')],
+            ['href' => $this->getIriFor('activityProgressLabel2')],
+        ], $response->toArray()['_links']['items']);
+    }
+
     public function testListActivityProgressLabelsFilteredByCampIsDeniedForUnrelatedUser() {
         $camp = static::getFixture('camp1');
         $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
