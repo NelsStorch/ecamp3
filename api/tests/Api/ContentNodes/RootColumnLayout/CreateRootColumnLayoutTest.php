@@ -35,7 +35,7 @@ class CreateRootColumnLayoutTest extends CreateContentNodeTestCase {
         $this->assertJsonContains([
             'violations' => [
                 [
-                    'propertyPath' => 'parent',
+                    'propertyPath' => 'root',
                     'message' => 'This value should not be null.',
                 ],
             ],

@@ -8392,9 +8392,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -8409,6 +8407,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode-write_create:
       deprecated: false
@@ -8650,9 +8649,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -8667,6 +8664,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode.jsonhal-read:
       deprecated: false
@@ -8759,9 +8757,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -8776,6 +8772,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode.jsonhal-write_create:
       deprecated: false
@@ -8966,9 +8963,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -8983,6 +8978,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode.jsonld-write_create:
       deprecated: false
@@ -9139,9 +9135,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9156,6 +9150,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
@@ -9237,9 +9232,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9254,6 +9247,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -9335,9 +9329,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9352,6 +9344,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -9433,9 +9426,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9450,6 +9441,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_ScheduleEntry.Activity:
       deprecated: false
@@ -9531,9 +9523,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9548,6 +9538,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-write_create:
       deprecated: false
@@ -9756,9 +9747,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9773,6 +9762,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read:
       deprecated: false
@@ -9863,9 +9853,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9880,6 +9868,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
@@ -9970,9 +9959,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9987,6 +9974,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -10077,9 +10065,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10094,6 +10080,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -10184,9 +10171,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10201,6 +10186,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_ScheduleEntry.Activity:
       deprecated: false
@@ -10291,9 +10277,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10308,6 +10292,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-write_create:
       deprecated: false
@@ -10489,9 +10474,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10506,6 +10489,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
@@ -10610,9 +10594,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10627,6 +10609,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -10731,9 +10714,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10748,6 +10729,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -10852,9 +10834,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10869,6 +10849,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_ScheduleEntry.Activity:
       deprecated: false
@@ -10973,9 +10954,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10990,6 +10969,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-write_create:
       deprecated: false
@@ -11138,9 +11118,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11154,6 +11132,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -11229,9 +11208,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11245,6 +11222,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -11320,9 +11298,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11336,6 +11312,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonapi:
       deprecated: false
@@ -11417,9 +11394,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11433,6 +11408,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonhal-read:
       deprecated: false
@@ -11522,9 +11498,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11538,6 +11512,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -11622,9 +11597,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11638,6 +11611,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -11722,9 +11696,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11738,6 +11710,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonld-read:
       deprecated: false
@@ -11824,9 +11797,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11840,6 +11811,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -11938,9 +11910,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11954,6 +11924,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonld-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -12052,9 +12023,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -12068,6 +12037,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentType-read:
       deprecated: false
@@ -14489,9 +14459,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -14506,6 +14474,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode-write_create:
       deprecated: false
@@ -14699,9 +14668,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -14716,6 +14683,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode.jsonhal-read:
       deprecated: false
@@ -14804,9 +14772,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -14821,6 +14787,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode.jsonhal-write_create:
       deprecated: false
@@ -14993,9 +14960,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15010,6 +14975,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode.jsonld-write_create:
       deprecated: false
@@ -15152,9 +15118,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15168,6 +15132,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect-write_create:
       deprecated: false
@@ -15375,9 +15340,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15391,6 +15354,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect.jsonhal-read:
       deprecated: false
@@ -15481,9 +15445,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15497,6 +15459,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect.jsonhal-write_create:
       deprecated: false
@@ -15677,9 +15640,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15693,6 +15654,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect.jsonld-write_create:
       deprecated: false
@@ -18398,9 +18360,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -18415,6 +18375,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout-write_create:
       deprecated: false
@@ -18632,9 +18593,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -18649,6 +18608,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout.jsonhal-read:
       deprecated: false
@@ -18742,9 +18702,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -18759,6 +18717,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout.jsonhal-write_create:
       deprecated: false
@@ -18946,9 +18905,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -18963,6 +18920,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout.jsonld-write_create:
       deprecated: false
@@ -20639,9 +20597,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -20656,6 +20612,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText-write_create:
       deprecated: false
@@ -20855,9 +20812,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -20872,6 +20827,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText.jsonhal-read:
       deprecated: false
@@ -20959,9 +20915,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -20976,6 +20930,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText.jsonhal-write_create:
       deprecated: false
@@ -21151,9 +21106,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21168,6 +21121,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText.jsonld-write_create:
       deprecated: false
@@ -21315,9 +21269,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21331,6 +21283,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard-write_create:
       deprecated: false
@@ -21541,9 +21494,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21557,6 +21508,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard.jsonhal-read:
       deprecated: false
@@ -21648,9 +21600,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21664,6 +21614,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard.jsonhal-write_create:
       deprecated: false
@@ -21846,9 +21797,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21862,6 +21811,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard.jsonld-write_create:
       deprecated: false
