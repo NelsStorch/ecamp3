@@ -58,12 +58,13 @@ components:
             - 'null'
             - string
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout-read'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           description: "The list of points in time when this activity's programme will be carried out."
           example:
@@ -138,12 +139,13 @@ components:
               type: 'null'
           readOnly: true
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           items:
             $ref: '#/components/schemas/ScheduleEntry-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
@@ -211,12 +213,13 @@ components:
               type: 'null'
           readOnly: true
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           items:
             $ref: '#/components/schemas/ScheduleEntry-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
@@ -287,12 +290,13 @@ components:
             - 'null'
             - string
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout-read_ScheduleEntry.Activity'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           description: "The list of points in time when this activity's programme will be carried out."
           example:
@@ -562,12 +566,13 @@ components:
             - 'null'
             - string
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonhal-read'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           description: "The list of points in time when this activity's programme will be carried out."
           example:
@@ -651,12 +656,13 @@ components:
               type: 'null'
           readOnly: true
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           items:
             $ref: '#/components/schemas/ScheduleEntry.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
@@ -733,12 +739,13 @@ components:
               type: 'null'
           readOnly: true
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           items:
             $ref: '#/components/schemas/ScheduleEntry.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
@@ -818,12 +825,13 @@ components:
             - 'null'
             - string
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonhal-read_ScheduleEntry.Activity'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           description: "The list of points in time when this activity's programme will be carried out."
           example:
@@ -985,12 +993,13 @@ components:
             - 'null'
             - string
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonld-read'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           description: "The list of points in time when this activity's programme will be carried out."
           example:
@@ -1071,12 +1080,13 @@ components:
               type: 'null'
           readOnly: true
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           items:
             $ref: '#/components/schemas/ScheduleEntry.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
@@ -1167,12 +1177,13 @@ components:
               type: 'null'
           readOnly: true
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           items:
             $ref: '#/components/schemas/ScheduleEntry.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
@@ -1266,12 +1277,13 @@ components:
             - 'null'
             - string
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonld-read_ScheduleEntry.Activity'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         scheduleEntries:
           description: "The list of points in time when this activity's programme will be carried out."
           example:
@@ -6717,12 +6729,13 @@ components:
             type: string
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout-read'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -6789,12 +6802,13 @@ components:
             type: string
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -6870,12 +6884,13 @@ components:
           readOnly: true
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout-read_Category.PreferredContentTypes_Category.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -7165,12 +7180,13 @@ components:
             type: string
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonhal-read'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -7246,12 +7262,13 @@ components:
             type: string
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -7336,12 +7353,13 @@ components:
           readOnly: true
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -7509,12 +7527,13 @@ components:
             type: string
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonld-read'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -7604,12 +7623,13 @@ components:
             type: string
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -7708,12 +7728,13 @@ components:
           readOnly: true
           type: array
         rootContentNode:
-          $ref: '#/components/schemas/ColumnLayout.jsonld-read_Category.PreferredContentTypes_Category.ContentNodes'
           description: |-
             The programme contents, organized as a tree of content nodes. The root content node cannot be
             exchanged, but all the contents attached to it can.
           example: /content_nodes/1a2b3c4d
+          format: iri-reference
           readOnly: true
+          type: string
         short:
           description: |-
             An abbreviated name of the category, for display in tight spaces, often together with the day and
@@ -9395,394 +9416,6 @@ components:
         - position
         - root
       type: object
-    ColumnLayout-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
-      deprecated: false
-      description: ''
-      properties:
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
-      deprecated: false
-      description: ''
-      properties:
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout-read_Category.PreferredContentTypes_Category.ContentNodes:
-      deprecated: false
-      description: ''
-      properties:
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout-read_ScheduleEntry.Activity:
-      deprecated: false
-      description: ''
-      properties:
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
     ColumnLayout-write_create:
       deprecated: false
       description: ''
@@ -10113,430 +9746,6 @@ components:
         - position
         - root
       type: object
-    ColumnLayout.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
-      deprecated: false
-      description: ''
-      properties:
-        _links:
-          properties:
-            self:
-              properties:
-                href:
-                  format: iri-reference
-                  type: string
-              type: object
-          type: object
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
-      deprecated: false
-      description: ''
-      properties:
-        _links:
-          properties:
-            self:
-              properties:
-                href:
-                  format: iri-reference
-                  type: string
-              type: object
-          type: object
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes:
-      deprecated: false
-      description: ''
-      properties:
-        _links:
-          properties:
-            self:
-              properties:
-                href:
-                  format: iri-reference
-                  type: string
-              type: object
-          type: object
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout.jsonhal-read_ScheduleEntry.Activity:
-      deprecated: false
-      description: ''
-      properties:
-        _links:
-          properties:
-            self:
-              properties:
-                href:
-                  format: iri-reference
-                  type: string
-              type: object
-          type: object
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
     ColumnLayout.jsonhal-write_create:
       deprecated: false
       description: ''
@@ -10615,486 +9824,6 @@ components:
         - position
       type: object
     ColumnLayout.jsonld-read:
-      deprecated: false
-      description: ''
-      properties:
-        '@context':
-          oneOf:
-            -
-              additionalProperties: true
-              properties:
-                '@vocab':
-                  type: string
-                hydra:
-                  enum: ['http://www.w3.org/ns/hydra/core#']
-                  type: string
-              required:
-                - '@vocab'
-                - hydra
-              type: object
-            -
-              type: string
-          readOnly: true
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
-      deprecated: false
-      description: ''
-      properties:
-        '@context':
-          oneOf:
-            -
-              additionalProperties: true
-              properties:
-                '@vocab':
-                  type: string
-                hydra:
-                  enum: ['http://www.w3.org/ns/hydra/core#']
-                  type: string
-              required:
-                - '@vocab'
-                - hydra
-              type: object
-            -
-              type: string
-          readOnly: true
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
-      deprecated: false
-      description: ''
-      properties:
-        '@context':
-          oneOf:
-            -
-              additionalProperties: true
-              properties:
-                '@vocab':
-                  type: string
-                hydra:
-                  enum: ['http://www.w3.org/ns/hydra/core#']
-                  type: string
-              required:
-                - '@vocab'
-                - hydra
-              type: object
-            -
-              type: string
-          readOnly: true
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout.jsonld-read_Category.PreferredContentTypes_Category.ContentNodes:
-      deprecated: false
-      description: ''
-      properties:
-        '@context':
-          oneOf:
-            -
-              additionalProperties: true
-              properties:
-                '@vocab':
-                  type: string
-                hydra:
-                  enum: ['http://www.w3.org/ns/hydra/core#']
-                  type: string
-              required:
-                - '@vocab'
-                - hydra
-              type: object
-            -
-              type: string
-          readOnly: true
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        children:
-          description: 'All content nodes that are direct children of this content node.'
-          example: '["/content_nodes/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        contentType:
-          description: |-
-            Defines the type of this content node. There is a fixed list of types that are implemented
-            in eCamp. Depending on the type, different content data and different slots may be allowed
-            in a content node. The content type may not be changed once the content node is created.
-          example: /content_types/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentTypeName:
-          description: 'The name of the content type of this content node. Read-only, for convenience.'
-          example: SafetyConsiderations
-          readOnly: true
-          type: string
-        data:
-          default: '{"columns":[{"slot":"1","width":6},{"slot":"2","width":6}]}'
-          description: |-
-            Holds the actual data of the content node
-            (overridden from abstract class in order to add specific validation).
-          example:
-            columns:
-              -
-                slot: '1'
-                width: 12
-          items:
-            type: string
-          type:
-            - array
-            - 'null'
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        instanceName:
-          description: |-
-            An optional name for this content node. This is useful when planning e.g. an alternative
-            version of the programme suited for bad weather, in addition to the normal version.
-          example: Schlechtwetterprogramm
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-        parent:
-          description: |-
-            The parent to which this content node belongs. Is null in case this content node is the
-            root of a content node tree. For non-root content nodes, the parent can be changed, as long
-            as the new parent is in the same camp as the old one.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          type:
-            - 'null'
-            - string
-        position:
-          default: -1
-          description: |-
-            A whole number used for ordering multiple content nodes that are in the same slot of the
-            same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
-          type: integer
-        root:
-          description: |-
-            The content node that is the root of the content node tree. Refers to itself in case this
-            content node is the root.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        slot:
-          description: |-
-            The name of the slot in the parent in which this content node resides. The valid slot names
-            are defined by the content type of the parent.
-          example: '1'
-          maxLength: 32
-          type:
-            - 'null'
-            - string
-      required:
-        - children
-        - contentType
-        - data
-        - position
-        - root
-      type: object
-    ColumnLayout.jsonld-read_ScheduleEntry.Activity:
       deprecated: false
       description: ''
       properties:
