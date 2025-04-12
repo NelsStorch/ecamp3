@@ -175,6 +175,17 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
     public string $location = '';
 
     /**
+     * All comments of the activity.
+     */
+    #[ApiProperty(
+        writable: false,
+        uriTemplate: Comment::ACTIVITY_SUBRESOURCE_URI_TEMPLATE,
+        example: '/activity/1a2b3c4d/comments'
+    )]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'activity')]
+    public Collection $comments;
+
+    /**
      * The list of people that are responsible for planning or carrying out this activity.
      */
     #[ApiProperty(writable: false)]
@@ -186,6 +197,7 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
         parent::__construct();
         $this->scheduleEntries = new ArrayCollection();
         $this->activityResponsibles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getCamp(): ?Camp {
@@ -282,6 +294,16 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
         if ($this->activityResponsibles->removeElement($activityResponsible)) {
             if ($activityResponsible->activity === $this) {
                 $activityResponsible->activity = null;
+            }
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->activity === $this) {
+                $comment->activity = null;
             }
         }
 

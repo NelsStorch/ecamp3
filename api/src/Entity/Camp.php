@@ -386,6 +386,13 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[ORM\JoinColumn(nullable: false)]
     public ?User $owner = null;
 
+    /**
+     * All comments of the camp.
+     */
+    #[ApiProperty(readable: false, writable: false)]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'camp', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    public Collection $comments;
+
     public function __construct() {
         parent::__construct();
         $this->collaborations = new ArrayCollection();
@@ -397,6 +404,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
         $this->materialLists = new ArrayCollection();
         $this->checklists = new ArrayCollection();
         $this->campRootContentNodes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
