@@ -2,30 +2,31 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Metadata\ApiFilter;
-use ApiPlatform\Metadata\ApiProperty;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
-use App\Doctrine\Filter\ContentNodeCampFilter;
-use App\Doctrine\Filter\ContentNodePeriodFilter;
-use App\Entity\ContentNode\ColumnLayout;
-use App\InputFilter;
-use App\Repository\ContentNodeRepository;
-use App\Util\ClassInfoTrait;
-use App\Util\EntityMap;
-use App\Util\JsonMergePatch;
-use App\Validator\AssertNoLoop;
-use App\Validator\ContentNode\AssertAttachedToRoot;
-use App\Validator\ContentNode\AssertContentTypeCompatible;
-use App\Validator\ContentNode\AssertNoRootChange;
-use App\Validator\ContentNode\AssertSlotSupportedByParent;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Validator\ContentNode\AssertSlotSupportedByParent;
+use App\Validator\ContentNode\AssertNoRootChange;
+use App\Validator\ContentNode\AssertContentTypeCompatible;
+use App\Validator\ContentNode\AssertAttachedToRoot;
+use App\Validator\AssertNoLoop;
+use App\Util\JsonMergePatch;
+use App\Util\EntityMap;
+use App\Util\ClassInfoTrait;
+use App\Repository\ContentNodeRepository;
+use App\InputFilter;
+use App\Entity\ContentNode\ColumnLayout;
+use App\Doctrine\Filter\ContentNodePeriodFilter;
+use App\Doctrine\Filter\ContentNodeIsRootFilter;
+use App\Doctrine\Filter\ContentNodeCampFilter;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * A piece of information that is part of a programme. ContentNodes may store content such as
@@ -47,6 +48,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['contentType', 'root'])]
 #[ApiFilter(filterClass: ContentNodeCampFilter::class)]
 #[ApiFilter(filterClass: ContentNodePeriodFilter::class)]
+#[ApiFilter(filterClass: ContentNodeIsRootFilter::class)]
 #[ORM\Entity(repositoryClass: ContentNodeRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'strategy', type: 'string')]

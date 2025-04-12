@@ -134,4 +134,24 @@ class ListContentNodesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('columnLayout1campPrototype')],
         ], $response->toArray()['_links']['items']);
     }
+
+
+    public function testListRootContentNodesFilteredByPeriodIsAllowedForCollaborator() {
+        $period = static::getFixture('period1');
+        $response = static::createClientWithCredentials()->request('GET', '/content_nodes?isRoot=true&period=%2Fperiods%2F'.$period->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('columnLayout1')],
+            ['href' => $this->getIriFor('columnLayout3')]
+        ], $response->toArray()['_links']['items']);
+    }
 }
