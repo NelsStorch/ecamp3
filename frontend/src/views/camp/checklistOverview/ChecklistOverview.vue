@@ -46,6 +46,14 @@ export default {
       indexedChecklistItems: {},
     }
   },
+  head() {
+    return {
+      title: () => this.checklist.name,
+      templateParams: {
+        section: this.camp.shortTitle,
+      },
+    }
+  },
   watch: {
     checklist: {
       handler(newVal, oldVal) {

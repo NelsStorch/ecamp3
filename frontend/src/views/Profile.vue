@@ -96,6 +96,11 @@ export default {
   props: {
     emailVerificationKey: { type: String, required: false, default: null },
   },
+  head() {
+    return {
+      title: this.$tc('views.profile.profile'),
+    }
+  },
   computed: {
     ...mapGetters({
       user: 'getLoggedInUser',
