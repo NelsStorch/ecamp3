@@ -97,6 +97,11 @@ export default {
       isAdmin: false,
     }
   },
+  head() {
+    return {
+      title: this.$tc('views.camps.title'),
+    }
+  },
   computed: {
     camps() {
       return this.api.get().camps()

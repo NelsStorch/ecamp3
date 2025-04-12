@@ -147,6 +147,14 @@ export default {
       openPanels: [0, 1],
     }
   },
+  head() {
+    return {
+      title: () => this.category.short + ': ' + this.category.title,
+      templateParams: {
+        section: this.camp.shortTitle,
+      },
+    }
+  },
   computed: {
     contentNodes() {
       return this.category.contentNodes()

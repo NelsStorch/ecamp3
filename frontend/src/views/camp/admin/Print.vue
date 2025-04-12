@@ -30,6 +30,14 @@ export default {
   data() {
     return {}
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.admin.print.title'),
+      templateParams: {
+        section: this.camp.shortTitle,
+      },
+    }
+  },
 }
 </script>
 

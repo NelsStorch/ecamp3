@@ -16,5 +16,10 @@ export default {
     CampCreate,
     ContentCard,
   },
+  head() {
+    return {
+      title: this.$tc('views.campCreate.title'),
+    }
+  },
 }
 </script>

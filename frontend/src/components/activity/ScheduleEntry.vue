@@ -360,6 +360,15 @@ export default {
       loading: true,
     }
   },
+  head() {
+    return {
+      title: () =>
+        `${this.scheduleEntry.number ? this.scheduleEntry.number + ' ' : ''}[${this.category.short}]: ${this.activity.title}`,
+      templateParams: {
+        section: this.camp.shortTitle,
+      },
+    }
+  },
   computed: {
     activity() {
       return this.api.get().activities({ id: this.activityId })
