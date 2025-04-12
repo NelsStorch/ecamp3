@@ -4,7 +4,6 @@ namespace App\Doctrine\Filter;
 
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
 use App\Entity\ContentNode;
 use Doctrine\ORM\QueryBuilder;
