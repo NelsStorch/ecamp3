@@ -4,16 +4,20 @@ Displays a single activity
 
 <template>
   <v-container fluid>
-    <ScheduleEntry :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
+    <CommentWrapper>
+      <ScheduleEntry :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
+    </CommentWrapper>
   </v-container>
 </template>
 
 <script>
 import ScheduleEntry from '@/components/activity/ScheduleEntry.vue'
+import CommentWrapper from '@/components/comments/CommentWrapper.vue'
 
 export default {
   name: 'Activity',
   components: {
+    CommentWrapper,
     ScheduleEntry,
   },
 
