@@ -10,9 +10,7 @@ use App\Entity\DayResponsible;
 use App\Entity\Period;
 use App\Entity\ScheduleEntry;
 use App\State\PeriodPersistProcessor;
-use Doctrine\ORM\EntityManagerInterface;
 use FOS\HttpCacheBundle\CacheManager;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
