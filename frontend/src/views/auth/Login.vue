@@ -28,8 +28,8 @@
           height="32px"
           class="v-btn--has-bg float-end dev-login-button"
           @click="
-            () => {
-              email = 'test@example.com'
+            (event) => {
+              email = event.shiftKey ? 'admin@example.com' : 'test@example.com'
               password = 'test'
               login()
             }
@@ -214,7 +214,6 @@ export default {
       error: null,
       authenticationInProgress: false,
       showCredits: true,
-      adminKeyString: '',
     }
   },
   computed: {
@@ -237,14 +236,6 @@ export default {
   },
   mounted() {
     this.$store.commit('setLanguage', this.$i18n.browserPreferredLocale)
-    if (!this.isProdSuffix) {
-      document.addEventListener('keyup', this.adminLoginKeyListener, { passive: true })
-    }
-  },
-  beforeDestroy() {
-    if (!this.isProdSuffix) {
-      document.removeEventListener('keyup', this.adminLoginKeyListener)
-    }
   },
   methods: {
     async login() {
@@ -276,18 +267,6 @@ export default {
     },
     async loginJublaDB() {
       await this.$auth.loginJublaDB()
-    },
-    adminLoginKeyListener(event) {
-      this.adminKeyString = (this.adminKeyString ?? '') + event.key
-      this.adminKeyString = this.adminKeyString.substring(
-        this.adminKeyString.length - 5,
-        this.adminKeyString.length
-      )
-      if (this.adminKeyString === 'admin') {
-        this.email = 'admin@example.com'
-        this.password = 'test'
-        this.login()
-      }
     },
   },
 }
