@@ -390,7 +390,7 @@ class UpdateMaterialItemTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testPatchMaterialItemDoesNotCrashForLargeNumberForQuantity() {
+    public function testPatchMaterialItemFailsForLargeNumberForQuantity() {
         $materialItem = static::getFixture('materialItem1');
         static::createClientWithCredentials()->request(
             'PATCH',
@@ -407,10 +407,7 @@ class UpdateMaterialItemTest extends ECampApiTestCase {
             ]
         );
 
-        $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContains([
-            'quantity' => 0,
-        ]);
+        $this->assertResponseStatusCodeSame(400);
     }
 
     public function testPatchMaterialItemAllowsMissingUnit() {

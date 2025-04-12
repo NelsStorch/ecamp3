@@ -42,6 +42,11 @@ export default {
       hasHistory: false,
     }
   },
+  head() {
+    return {
+      title: '404',
+    }
+  },
   mounted() {
     if (window.history.length && window.history.length >= 1) {
       this.hasHistory = true

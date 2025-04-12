@@ -182,6 +182,14 @@ export default {
       },
     }
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.dashboard.activities'),
+      templateParams: {
+        section: this.camp.shortTitle,
+      },
+    }
+  },
   computed: {
     periods() {
       return keyBy(this.camp.periods().items, '_meta.self')
