@@ -42,6 +42,9 @@ class PreventAutomaticEmbeddingPropertyMetadataFactoryTest extends TestCase {
             true,
             'uriTemplate',
             'property',
+            'policy',
+            ['serialize'],
+            true,
             ['extraProperties']
         );
         $decorated->expects($this->once())
@@ -83,6 +86,9 @@ class PreventAutomaticEmbeddingPropertyMetadataFactoryTest extends TestCase {
         $this->assertEquals($apiProperty->getGenId(), $result->getGenId());
         $this->assertEquals($apiProperty->getUriTemplate(), $result->getUriTemplate());
         $this->assertEquals($apiProperty->getProperty(), $result->getProperty());
+        $this->assertEquals($apiProperty->getPolicy(), $result->getPolicy());
+        $this->assertEquals($apiProperty->getSerialize(), $result->getSerialize());
+        $this->assertEquals($apiProperty->getHydra(), $result->getHydra());
         $this->assertEquals($apiProperty->getExtraProperties(), $result->getExtraProperties());
     }
 }
