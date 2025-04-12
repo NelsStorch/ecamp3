@@ -16,7 +16,6 @@
             :key="value?._meta.self"
             :checklist-item="value"
             :depth="depth"
-            :all-checklist-nodes="allChecklistNodes"
           />
         </tbody>
       </table>
@@ -42,7 +41,6 @@ export default {
   data() {
     return {
       loading: true,
-      allChecklistNodes: [],
       indexedChecklistItems: {},
     }
   },
@@ -72,20 +70,13 @@ export default {
     await Promise.all([
       this.camp.categories()._meta.load,
       this.camp.activities().$reload(),
-      this.api
-        .get()
-        .checklistNodes({ camp: this.camp._meta.self })
-        .$reload()
-        .then((cns) => {
-          this.allChecklistNodes = cns.items
-        }),
+      this.api.get().checklistNodes({ camp: this.camp._meta.self }).$reload(),
       this.api
         .get()
         .checklistItems({ 'checklist.camp': this.camp._meta.self })
         .$reload()
         .then(({ items }) => {
           this.processChecklistItems(items)
-          this.loading = false
         }),
       this.api
         .get()
@@ -94,7 +85,9 @@ export default {
           camp: this.camp._meta.self,
         })
         .$loadItems(),
-    ])
+    ]).then(() => {
+      this.loading = false
+    })
   },
   methods: {
     processChecklistItems(items) {

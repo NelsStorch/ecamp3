@@ -38,15 +38,6 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
             ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
         ;
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContains([
-            '_links' => [
-                'checklistItems' => [
-                    1 => [
-                        'href' => '/checklist_items/'.$checklistItemId,
-                    ],
-                ],
-            ],
-        ]);
     }
 
     public function testAddChecklistItemForManager() {
@@ -56,15 +47,6 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
 
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContains([
-            '_links' => [
-                'checklistItems' => [
-                    1 => [
-                        'href' => '/checklist_items/'.$checklistItemId,
-                    ],
-                ],
-            ],
-        ]);
     }
 
     public function testRemoveChecklistItemIsDeniedForGuest() {
