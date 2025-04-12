@@ -25621,12 +25621,12 @@ paths:
             application/ld+json:
               schema:
                 properties:
-                  'hydra:member': { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
-                  'hydra:search': { properties: { '@type': { type: string }, 'hydra:mapping': { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string } }, type: object }
-                  'hydra:totalItems': { minimum: 0, type: integer }
-                  'hydra:view': { example: { '@id': string, 'hydra:first': string, 'hydra:last': string, 'hydra:next': string, 'hydra:previous': string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, 'hydra:first': { format: iri-reference, type: string }, 'hydra:last': { format: iri-reference, type: string }, 'hydra:next': { format: iri-reference, type: string }, 'hydra:previous': { format: iri-reference, type: string } }, type: object }
+                  member: { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
+                  search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
+                  totalItems: { minimum: 0, type: integer }
+                  view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
                 required:
-                  - 'hydra:member'
+                  - member
                 type: object
             application/vnd.api+json:
               schema:
@@ -25640,7 +25640,18 @@ paths:
                 type: array
           description: 'Activity collection'
         403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: Forbidden
+          links: []
       summary: 'Retrieves the collection of Activity resources.'
       tags:
         - Activity
@@ -25710,12 +25721,12 @@ paths:
             application/ld+json:
               schema:
                 properties:
-                  'hydra:member': { items: { $ref: '#/components/schemas/ActivityProgressLabel.jsonld-read' }, type: array }
-                  'hydra:search': { properties: { '@type': { type: string }, 'hydra:mapping': { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string } }, type: object }
-                  'hydra:totalItems': { minimum: 0, type: integer }
-                  'hydra:view': { example: { '@id': string, 'hydra:first': string, 'hydra:last': string, 'hydra:next': string, 'hydra:previous': string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, 'hydra:first': { format: iri-reference, type: string }, 'hydra:last': { format: iri-reference, type: string }, 'hydra:next': { format: iri-reference, type: string }, 'hydra:previous': { format: iri-reference, type: string } }, type: object }
+                  member: { items: { $ref: '#/components/schemas/ActivityProgressLabel.jsonld-read' }, type: array }
+                  search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
+                  totalItems: { minimum: 0, type: integer }
+                  view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
                 required:
-                  - 'hydra:member'
+                  - member
                 type: object
             application/vnd.api+json:
               schema:
@@ -25729,7 +25740,18 @@ paths:
                 type: array
           description: 'ActivityProgressLabel collection'
         403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: Forbidden
+          links: []
       summary: 'Retrieves the collection of ActivityProgressLabel resources.'
       tags:
         - ActivityProgressLabel
