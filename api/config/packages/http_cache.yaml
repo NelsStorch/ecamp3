@@ -1,5 +1,5 @@
 parameters:
-    app.httpCache.matchPath: '^/?($|index.jsonhal$|content_types|camps/[0-9a-f]*/categories)'
+    app.httpCache.matchPath: '^/?($|index.jsonhal$|content_types|camps/[0-9a-f]*/categories|periods/[0-9a-f]*/schedule_entries)'
 
 fos_http_cache:
     debug:
