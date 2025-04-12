@@ -14,10 +14,10 @@ export default async function scheduleEntryRouteChange(activity, to, from, next)
     to.params.scheduleEntryId !== from.params.scheduleEntryId ||
     to.params.activityId !== from.params.activityId
   ) {
-    return await Promise.all([
-      apiStore.get().scheduleEntries({ id: to.params.scheduleEntryId }).$reload(),
-      apiStore.get().activities({ id: to.params.activityId }).$reload(),
-    ])
+    apiStore.get().activities({ id: to.params.activityId }).$reload()
+    // activity reload doesn't need to be awaited, but for scheduleEntry we want to
+    // ensure it exists and otherwise reroute
+    return await apiStore.get().scheduleEntries({ id: to.params.scheduleEntryId }).$reload()
       .then(() => next())
       .catch(async () => {
         return next({
