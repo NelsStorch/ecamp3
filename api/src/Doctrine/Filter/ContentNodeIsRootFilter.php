@@ -17,7 +17,6 @@ final class ContentNodeIsRootFilter extends AbstractFilter {
     public const IS_ROOT_QUERY_NAME = 'isRoot';
 
     public function __construct(
-        private IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?LoggerInterface $logger = null,
         ?array $properties = null,
