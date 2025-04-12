@@ -40,7 +40,7 @@ jobs:
               ".github/workflows/continuous-integration.yml"
             ]
           do_not_skip: '["workflow_dispatch", "schedule"]'
-          
+
   frontend-check-needed:
     runs-on: ubuntu-latest
     outputs:
@@ -56,7 +56,7 @@ jobs:
               ".github/workflows/continuous-integration.yml"
             ]
           do_not_skip: '["workflow_dispatch", "schedule"]'
-  
+
   e2e-check-needed:
     runs-on: ubuntu-latest
     outputs:
@@ -79,7 +79,7 @@ jobs:
               ".env.ci"
             ]
           do_not_skip: '["workflow_dispatch", "schedule"]'
-  
+
   api-cs-check:
     name: 'Lint: API (php-cs-fixer)'
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.13'
+          php-version: '8.4.6'
           tools: composer:2.8.0
           coverage: none
 
@@ -110,7 +110,7 @@ jobs:
       - run: composer install --no-interaction --no-plugins --no-scripts --prefer-dist
         working-directory: api
 
-      - run: php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php -v --dry-run --diff
+      - run: PHP_CS_FIXER_IGNORE_ENV=1 php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php -v --dry-run --diff
         working-directory: api
 
   frontend-eslint:
@@ -264,7 +264,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.13'
+          php-version: '8.4.6'
           extensions: intl-73.1
           tools: composer:2.8.0
           coverage: pcov
@@ -490,7 +490,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
-          carryforward: "api,frontend,print,pdf"
+          carryforward: 'api,frontend,print,pdf'
           fail-on-error: false
 
   workflow-success:
