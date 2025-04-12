@@ -117,6 +117,12 @@ export default {
   data: () => ({
     invitationFound: undefined,
   }),
+  head() {
+    return {
+      title: this.$tc('views.camp.invitation.title'),
+      templateParams: { section: () => this.invite?.campTitle ?? null },
+    }
+  },
   computed: {
     invite() {
       return this.invitationFound === true ? this.invitation : null
