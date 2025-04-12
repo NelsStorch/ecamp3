@@ -6,9 +6,7 @@ use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
-use App\Entity\Activity;
 use App\Entity\ContentNode;
-use App\Repository\FiltersByCampCollaboration;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
@@ -16,7 +14,6 @@ use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 final class ContentNodeIsRootFilter extends AbstractFilter {
-
     public const IS_ROOT_QUERY_NAME = 'isRoot';
 
     public function __construct(
@@ -61,7 +58,7 @@ final class ContentNodeIsRootFilter extends AbstractFilter {
         $isRootFilter = filter_var($value, FILTER_VALIDATE_BOOLEAN);
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
-        if($isRootFilter){
+        if ($isRootFilter) {
             $queryBuilder->andWhere("{$rootAlias}.parent IS NULL");
         } else {
             $queryBuilder->andWhere("{$rootAlias}.parent IS NOT NULL");
