@@ -14,6 +14,9 @@ export default async function scheduleEntryRouteChange(activity, to, from, next)
     to.params.scheduleEntryId !== from.params.scheduleEntryId ||
     to.params.activityId !== from.params.activityId
   ) {
+    apiStore.get().activities({ id: to.params.activityId }).$reload()
+    // activity reload doesn't need to be awaited, but for scheduleEntry we want to
+    // ensure it exists and otherwise reroute
     return await apiStore
       .get()
       .scheduleEntries({ id: to.params.scheduleEntryId })

@@ -44,8 +44,8 @@ class CamelPascalNamingStrategy extends DefaultNamingStrategy {
      * @param null|string $referencedColumnName a property
      */
     public function joinKeyColumnName($entityName, $referencedColumnName = null): string {
-        return $this->classToCamelCase($entityName).
-                ucfirst($referencedColumnName ?: $this->referenceColumnName());
+        return $this->classToCamelCase($entityName)
+                .ucfirst($referencedColumnName ?: $this->referenceColumnName());
     }
 
     /**
