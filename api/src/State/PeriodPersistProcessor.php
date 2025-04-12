@@ -2,13 +2,13 @@
 
 namespace App\State;
 
-use FOS\HttpCacheBundle\CacheManager;
-use App\Util\DateTimeUtil;
-use App\State\Util\AbstractPersistProcessor;
-use App\Entity\Period;
-use App\Entity\Day;
-use ApiPlatform\State\ProcessorInterface;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProcessorInterface;
+use App\Entity\Day;
+use App\Entity\Period;
+use App\State\Util\AbstractPersistProcessor;
+use App\Util\DateTimeUtil;
+use FOS\HttpCacheBundle\CacheManager;
 
 /**
  * @template-extends AbstractPersistProcessor<Period>
@@ -32,7 +32,7 @@ class PeriodPersistProcessor extends AbstractPersistProcessor {
         return $data;
     }
 
-    public  function moveDaysAndScheduleEntries(Period $period, ?Period $originalPeriod = null) {
+    public function moveDaysAndScheduleEntries(Period $period, ?Period $originalPeriod = null) {
         if (!$originalPeriod) {
             return;
         }
