@@ -339,8 +339,6 @@ export default {
     }
   },
   async beforeRouteUpdate(to, from, next) {
-    // to avoid stale data, trigger reload (which includes embedded contentNode data). However, don't await in order to render early with cached data.
-    this.scheduleEntry.activity().$reload()
     return scheduleEntryRouteChange(this.activityId, to, from, next)
   },
   props: {

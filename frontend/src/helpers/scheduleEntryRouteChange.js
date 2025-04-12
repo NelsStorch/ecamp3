@@ -14,10 +14,10 @@ export default async function scheduleEntryRouteChange(activity, to, from, next)
     to.params.scheduleEntryId !== from.params.scheduleEntryId ||
     to.params.activityId !== from.params.activityId
   ) {
-    return await apiStore
-      .get()
-      .scheduleEntries({ id: to.params.scheduleEntryId })
-      .$reload()
+    return await Promise.all([
+      apiStore.get().scheduleEntries({ id: to.params.scheduleEntryId }).$reload(),
+      apiStore.get().activities({ id: to.params.activityId }).$reload(),
+    ])
       .then(() => next())
       .catch(async () => {
         return next({
