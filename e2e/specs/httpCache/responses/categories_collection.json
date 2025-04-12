@@ -39,36 +39,6 @@
             "href": "/api/content_nodes?root=%2Fapi%2Fcontent_node%2Fcolumn_layouts%2F9d7b3a220fb4"
           }
         },
-        "_embedded": {
-          "rootContentNode": {
-            "_links": {
-              "self": {
-                "href": "/api/content_node/column_layouts/9d7b3a220fb4"
-              },
-              "root": {
-                "href": "/api/content_node/column_layouts/9d7b3a220fb4"
-              },
-              "parent": null,
-              "children": [],
-              "contentType": {
-                "href": "/api/content_types/f17470519474"
-              }
-            },
-            "data": {
-              "columns": [
-                {
-                  "slot": "1",
-                  "width": 12
-                }
-              ]
-            },
-            "slot": null,
-            "position": 0,
-            "instanceName": null,
-            "id": "9d7b3a220fb4",
-            "contentTypeName": "ColumnLayout"
-          }
-        },
         "short": "ES",
         "name": "Essen",
         "color": "#BBBBBB",
@@ -91,40 +61,6 @@
           },
           "contentNodes": {
             "href": "/api/content_nodes?root=%2Fapi%2Fcontent_node%2Fcolumn_layouts%2Fbe9b6b7f23f6"
-          }
-        },
-        "_embedded": {
-          "rootContentNode": {
-            "_links": {
-              "self": {
-                "href": "/api/content_node/column_layouts/be9b6b7f23f6"
-              },
-              "root": {
-                "href": "/api/content_node/column_layouts/be9b6b7f23f6"
-              },
-              "parent": null,
-              "children": [
-                {
-                  "href": "/api/content_node/responsive_layouts/179ba93a4bb9"
-                }
-              ],
-              "contentType": {
-                "href": "/api/content_types/f17470519474"
-              }
-            },
-            "data": {
-              "columns": [
-                {
-                  "slot": "1",
-                  "width": 12
-                }
-              ]
-            },
-            "slot": null,
-            "position": 0,
-            "instanceName": null,
-            "id": "be9b6b7f23f6",
-            "contentTypeName": "ColumnLayout"
           }
         },
         "short": "LA",
@@ -151,40 +87,6 @@
             "href": "/api/content_nodes?root=%2Fapi%2Fcontent_node%2Fcolumn_layouts%2F63cbc734fa04"
           }
         },
-        "_embedded": {
-          "rootContentNode": {
-            "_links": {
-              "self": {
-                "href": "/api/content_node/column_layouts/63cbc734fa04"
-              },
-              "root": {
-                "href": "/api/content_node/column_layouts/63cbc734fa04"
-              },
-              "parent": null,
-              "children": [
-                {
-                  "href": "/api/content_node/responsive_layouts/801027c511e6"
-                }
-              ],
-              "contentType": {
-                "href": "/api/content_types/f17470519474"
-              }
-            },
-            "data": {
-              "columns": [
-                {
-                  "slot": "1",
-                  "width": 12
-                }
-              ]
-            },
-            "slot": null,
-            "position": 0,
-            "instanceName": null,
-            "id": "63cbc734fa04",
-            "contentTypeName": "ColumnLayout"
-          }
-        },
         "short": "LP",
         "name": "Lagerprogramm",
         "color": "#90B7E4",
@@ -207,40 +109,6 @@
           },
           "contentNodes": {
             "href": "/api/content_nodes?root=%2Fapi%2Fcontent_node%2Fcolumn_layouts%2F2cce9e17a368"
-          }
-        },
-        "_embedded": {
-          "rootContentNode": {
-            "_links": {
-              "self": {
-                "href": "/api/content_node/column_layouts/2cce9e17a368"
-              },
-              "root": {
-                "href": "/api/content_node/column_layouts/2cce9e17a368"
-              },
-              "parent": null,
-              "children": [
-                {
-                  "href": "/api/content_node/responsive_layouts/80d79bc8f484"
-                }
-              ],
-              "contentType": {
-                "href": "/api/content_types/f17470519474"
-              }
-            },
-            "data": {
-              "columns": [
-                {
-                  "slot": "1",
-                  "width": 12
-                }
-              ]
-            },
-            "slot": null,
-            "position": 0,
-            "instanceName": "est",
-            "id": "2cce9e17a368",
-            "contentTypeName": "ColumnLayout"
           }
         },
         "short": "LS",

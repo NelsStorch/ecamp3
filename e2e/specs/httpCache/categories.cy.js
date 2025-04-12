@@ -13,13 +13,13 @@ const collectionXKeys =
   /* campCollaboration for bipiUser */
   'b0bdb7202a9d ' +
   /* Category ES */
-  'ebfd46a1c181 ebfd46a1c181#camp ebfd46a1c181#preferredContentTypes 9d7b3a220fb4 9d7b3a220fb4#root 9d7b3a220fb4#parent 9d7b3a220fb4#children 9d7b3a220fb4#contentType ebfd46a1c181#rootContentNode ebfd46a1c181#contentNodes ' +
+  'ebfd46a1c181 ebfd46a1c181#camp ebfd46a1c181#preferredContentTypes ebfd46a1c181#rootContentNode ebfd46a1c181#contentNodes ' +
   /* Category LA */
-  '1a869b162875 1a869b162875#camp 1a869b162875#preferredContentTypes be9b6b7f23f6 be9b6b7f23f6#root be9b6b7f23f6#parent be9b6b7f23f6#children be9b6b7f23f6#contentType 1a869b162875#rootContentNode 1a869b162875#contentNodes ' +
+  '1a869b162875 1a869b162875#camp 1a869b162875#preferredContentTypes 1a869b162875#rootContentNode 1a869b162875#contentNodes ' +
   /* Category LP */
-  'dfa531302823 dfa531302823#camp dfa531302823#preferredContentTypes 63cbc734fa04 63cbc734fa04#root 63cbc734fa04#parent 63cbc734fa04#children 63cbc734fa04#contentType dfa531302823#rootContentNode dfa531302823#contentNodes ' +
+  'dfa531302823 dfa531302823#camp dfa531302823#preferredContentTypes dfa531302823#rootContentNode dfa531302823#contentNodes ' +
   /* Category LS */
-  'a023e85227ac a023e85227ac#camp a023e85227ac#preferredContentTypes 2cce9e17a368 2cce9e17a368#root 2cce9e17a368#parent 2cce9e17a368#children 2cce9e17a368#contentType a023e85227ac#rootContentNode a023e85227ac#contentNodes ' +
+  'a023e85227ac a023e85227ac#camp a023e85227ac#preferredContentTypes a023e85227ac#rootContentNode a023e85227ac#contentNodes ' +
   /* collection URI (for detecting addition of new categories) */
   '/api/camps/3c79b99ab424/categories'
 
@@ -75,37 +75,6 @@ describe('cache test: /camps/categories', () => {
 
     cy.login(bruceWayneUser)
     cy.expectCacheMiss(uri)
-  })
-
-  it('invalidates /camp/{campId}/categories for new contentNode child', () => {
-    const uri = `/api/camps/${grgrCampId}/categories`
-
-    Cypress.session.clearAllSavedSessions()
-    cy.login(bipiUser)
-
-    // warm up cache
-    cy.expectCacheMiss(uri)
-    cy.expectCacheHit(uri)
-
-    // add new child to root content node (9d7b3a220fb4) of category (ebfd46a1c181)
-    cy.apiPost('/api/content_node/column_layouts', {
-      parent: '/api/content_node/column_layouts/9d7b3a220fb4',
-      slot: '1',
-      contentType: '/api/content_types/f17470519474',
-    }).then((response) => {
-      const newContentNodeUri = response.body._links.self.href
-
-      // ensure cache was invalidated
-      cy.waitForCacheMiss(uri)
-      cy.expectCacheHit(uri)
-
-      // delete newly created contentNode
-      cy.apiDelete(newContentNodeUri)
-
-      // ensure cache was invalidated
-      cy.waitForCacheMiss(uri)
-      cy.expectCacheHit(uri)
-    })
   })
 
   it('invalidates /camp/{campId}/categories for new category', () => {
