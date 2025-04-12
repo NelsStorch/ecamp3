@@ -11,6 +11,7 @@ use App\Entity\Period;
 use App\Entity\ScheduleEntry;
 use App\State\PeriodPersistProcessor;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\HttpCacheBundle\CacheManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -22,8 +23,6 @@ class PeriodPersistProcessorTest extends TestCase {
     private Period $period;
     private ScheduleEntry $scheduleEntry;
     private DayResponsible $dayResponsible;
-
-    private EntityManagerInterface|MockObject $em;
 
     private PeriodPersistProcessor $processor;
 
@@ -53,11 +52,11 @@ class PeriodPersistProcessorTest extends TestCase {
         $day2->addDayResponsible($this->dayResponsible);
 
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
+        $cacheManager = $this->createMock(CacheManager::class);
 
         $this->processor = new PeriodPersistProcessor(
             $decoratedProcessor,
-            $this->em
+            $cacheManager
         );
     }
 
