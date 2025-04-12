@@ -2,22 +2,22 @@
 
 
 
-INSERT INTO public.profile (id, email, firstname, surname, nickname, language, color, abbreviation, roles, createtime, updatetime, googleid, pbsmidataid, cevidbid, untrustedemail, untrustedemailkeyhash, jubladbid) VALUES
-	('711ad2e96f9f', 'admin@example.com', 'Admi', 'Nistrator', 'Administrator', 'de', NULL, NULL, '["ROLE_USER", "ROLE_ADMIN"]', '2022-01-23 16:19:10', '2022-01-23 16:19:10', NULL, NULL, NULL, NULL, NULL, NULL),
-	('5e387cad273d', 'test@example.com', 'Robert', 'Baden-Powell', 'Bi-Pi', 'de-CH-scout', '#6a209b', '⚜️', '["ROLE_USER"]', '2022-01-23 16:19:10', '2023-08-08 09:11:11', NULL, NULL, NULL, NULL, NULL, NULL),
-	('0870635edda6', 'idefix@example.com', 'Tremaine', 'Kohler', 'Idefix', 'en', NULL, NULL, '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:18:43', NULL, NULL, NULL, NULL, NULL, NULL),
-	('4cda72af2704', 'et@example.com', 'Karlie', 'Terry', 'ET', 'en', NULL, NULL, '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:21:43', NULL, NULL, NULL, NULL, NULL, NULL),
-	('22dce794d4e2', 'snoopy@example.com', 'Pat', 'Fadel', 'Snoopy', 'en', NULL, NULL, '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:19:40', NULL, NULL, NULL, NULL, NULL, NULL),
-	('d46337a76a2c', 'salamander@example.com', 'Fritz', 'Müller', 'Salamander', 'de', NULL, NULL, '["ROLE_USER"]', '2022-02-04 19:26:22', '2022-02-04 23:08:12', NULL, NULL, NULL, NULL, NULL, NULL),
-	('f9f1a2f9af25', 'baghira@example.com', 'Zora', 'Steuber', 'Baghira', 'en', NULL, NULL, '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:18:01', NULL, NULL, NULL, NULL, NULL, NULL),
-	('7d03c967be7e', 'castor@example.com', 'Hans', 'Muster', 'Castor', 'de', NULL, 'C', '["ROLE_USER"]', '2022-02-04 19:25:07', '2022-02-04 23:07:57', NULL, NULL, NULL, NULL, NULL, NULL),
-	('d36197370d44', 'sed@example.com', 'Clifford', 'Beier', 'sed', 'en', NULL, NULL, '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-01-23 16:19:10', NULL, NULL, NULL, NULL, NULL, NULL),
-	('e5433660140b', 'sit@example.com', 'Wanda', 'Koelpin', 'sit', 'en', NULL, NULL, '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-01-23 16:19:10', NULL, NULL, NULL, NULL, NULL, NULL),
-	('4bc441dc4b29', 'luke@skywalker.com', 'Luke', 'Skywalker', NULL, 'en', NULL, NULL, '["ROLE_USER"]', '2023-08-12 16:43:34', '2023-08-12 16:43:34', NULL, NULL, NULL, NULL, NULL, NULL),
-	('5552108bf43e', 'john@wick.com', 'John', 'Wick', NULL, 'en', NULL, NULL, '["ROLE_USER"]', '2023-08-12 16:46:43', '2023-08-12 16:46:43', NULL, NULL, NULL, NULL, NULL, NULL),
-	('abfcbcbd4566', 'clark@kent.com', 'Clark', 'Kent', NULL, 'en', NULL, NULL, '["ROLE_USER"]', '2023-08-12 16:49:27', '2023-08-12 16:49:27', NULL, NULL, NULL, NULL, NULL, NULL),
-	('3f3fa9319dd2', 'bruce@wayne.com', 'Bruce', 'Wayne', NULL, 'en', NULL, NULL, '["ROLE_USER"]', '2023-08-12 16:55:28', '2023-08-12 16:55:28', NULL, NULL, NULL, NULL, NULL, NULL),
-	('51245d0e2ad4', 'felicity@smoak.com', 'Felicity', 'Smoak', NULL, 'en', NULL, NULL, '["ROLE_USER"]', '2023-08-12 16:59:38', '2023-08-12 16:59:38', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.profile (id, email, firstname, surname, nickname, language, roles, createtime, updatetime, googleid, pbsmidataid, cevidbid, untrustedemail, untrustedemailkeyhash, jubladbid, color, abbreviation) VALUES
+	('711ad2e96f9f', 'admin@example.com', 'Admi', 'Nistrator', 'Administrator', 'de', '["ROLE_USER", "ROLE_ADMIN"]', '2022-01-23 16:19:10', '2022-01-23 16:19:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('5e387cad273d', 'test@example.com', 'Robert', 'Baden-Powell', 'Bi-Pi', 'de-CH-scout', '["ROLE_USER"]', '2022-01-23 16:19:10', '2023-08-08 09:11:11', NULL, NULL, NULL, NULL, NULL, NULL, '#6a209b', '⚜️'),
+	('0870635edda6', 'idefix@example.com', 'Tremaine', 'Kohler', 'Idefix', 'en', '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:18:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('4cda72af2704', 'et@example.com', 'Karlie', 'Terry', 'ET', 'en', '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:21:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('22dce794d4e2', 'snoopy@example.com', 'Pat', 'Fadel', 'Snoopy', 'en', '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:19:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('d46337a76a2c', 'salamander@example.com', 'Fritz', 'Müller', 'Salamander', 'de', '["ROLE_USER"]', '2022-02-04 19:26:22', '2022-02-04 23:08:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('f9f1a2f9af25', 'baghira@example.com', 'Zora', 'Steuber', 'Baghira', 'en', '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-02-04 19:18:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('7d03c967be7e', 'castor@example.com', 'Hans', 'Muster', 'Castor', 'de', '["ROLE_USER"]', '2022-02-04 19:25:07', '2022-02-04 23:07:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C'),
+	('d36197370d44', 'sed@example.com', 'Clifford', 'Beier', 'sed', 'en', '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-01-23 16:19:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('e5433660140b', 'sit@example.com', 'Wanda', 'Koelpin', 'sit', 'en', '["ROLE_USER"]', '2022-01-23 16:19:10', '2022-01-23 16:19:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('4bc441dc4b29', 'luke@skywalker.com', 'Luke', 'Skywalker', NULL, 'en', '["ROLE_USER"]', '2023-08-12 16:43:34', '2023-08-12 16:43:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('5552108bf43e', 'john@wick.com', 'John', 'Wick', NULL, 'en', '["ROLE_USER"]', '2023-08-12 16:46:43', '2023-08-12 16:46:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('abfcbcbd4566', 'clark@kent.com', 'Clark', 'Kent', NULL, 'en', '["ROLE_USER"]', '2023-08-12 16:49:27', '2023-08-12 16:49:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('3f3fa9319dd2', 'bruce@wayne.com', 'Bruce', 'Wayne', NULL, 'en', '["ROLE_USER"]', '2023-08-12 16:55:28', '2023-08-12 16:55:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('51245d0e2ad4', 'felicity@smoak.com', 'Felicity', 'Smoak', NULL, 'en', '["ROLE_USER"]', '2023-08-12 16:59:38', '2023-08-12 16:59:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 
 
@@ -49,7 +49,7 @@ Port Asiaton, MN 44798-0182', '10529', 'New Kaylinfort', '2022-01-23 16:19:10', 
 	('e5027d852487', NULL, true, NULL, 'J+S', '', '', '', '', '', '2022-01-23 16:19:10', '2022-02-04 21:45:19', '3b41dca5c568', '3b41dca5c568', NULL, NULL, NULL, NULL, NULL, NULL, false),
 	('9c2447aefe38', 'e5027d852487', false, 'Lorem ipsum', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum', 'Mainstreet 123', '1234', 'Kongo', '2023-08-12 17:41:55', '2023-08-12 17:45:10', '9145944210a7', '9145944210a7', 'Testinator', 'Summer Tent', 'Max Mustermann', NULL, NULL, NULL, false),
 	('5d28f99890bc', 'e5027d852487', false, 'PBS CH 361-25', 'Basiskurs Wolfsstufe 2025', 'Auf den Spuren von BiPi', 'Oskar Hugentobler', 'Rainweg 23', '1999', 'Les Bois', '2023-08-08 09:22:58', '2024-09-28 16:14:25', '9145944210a7', '9145944210a7', 'Pfadi Gryfenberg', 'Sommerlager', 'Andrea Schneider', 'JS-CH PBS CH 361-25', 'Basiskurs', 'Sandro Bodruzzi', true),
-    ('25a82475e0b7', '5d28f99890bc', true, NULL, 'J+S Kurs', '', NULL, NULL, NULL, NULL, '2024-09-28 21:19:13', '2024-09-28 21:23:05', '3b41dca5c568', '3b41dca5c568', '', NULL, NULL, NULL, NULL, NULL, true);
+	('25a82475e0b7', '5d28f99890bc', true, NULL, 'J+S Kurs', '', NULL, NULL, NULL, NULL, '2024-09-28 21:19:13', '2024-09-28 21:23:05', '3b41dca5c568', '3b41dca5c568', '', NULL, NULL, NULL, NULL, NULL, true);
 
 
 
@@ -1749,12 +1749,12 @@ INSERT INTO public.category_contenttype (category_id, contenttype_id) VALUES
 
 
 
-INSERT INTO public.checklist (id, createtime, updatetime, name, campid, isprototype) VALUES
-	('000100000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Basiskurs Wolfsstufe', NULL, true),
-	('000200000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Basiskurs Pfadistufe', NULL, true),
-	('000300000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Aufbaukurs Wolfsstufe', NULL, true),
-	('000400000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Aufbaukurs Pfadistufe', NULL, true),
-	('ebbd0c61eb85', '2024-09-28 16:41:19', '2024-09-28 16:41:19', 'Ausbildungsziele', '5d28f99890bc', false);
+INSERT INTO public.checklist (id, createtime, updatetime, name, campid, isprototype, checklistprototypeid) VALUES
+	('000100000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Basiskurs Wolfsstufe', NULL, true, NULL),
+	('000200000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Basiskurs Pfadistufe', NULL, true, NULL),
+	('000300000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Aufbaukurs Wolfsstufe', NULL, true, NULL),
+	('000400000000', '2024-09-28 10:00:00', '2024-09-28 10:00:00', 'PBS Aufbaukurs Pfadistufe', NULL, true, NULL),
+	('ebbd0c61eb85', '2024-09-28 16:41:19', '2024-09-28 16:41:19', 'Ausbildungsziele', '5d28f99890bc', false, NULL);
 
 
 
