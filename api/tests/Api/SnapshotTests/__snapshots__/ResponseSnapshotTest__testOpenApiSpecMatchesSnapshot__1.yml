@@ -2286,13 +2286,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -2438,13 +2435,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -2485,13 +2479,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -2632,13 +2623,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -2677,13 +2665,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -2829,13 +2814,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -2874,13 +2856,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -3026,13 +3005,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -3484,13 +3460,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -3636,13 +3609,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -3692,13 +3662,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -3839,13 +3806,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -3893,13 +3857,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4045,13 +4006,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -4099,13 +4057,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4251,13 +4206,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -4453,13 +4405,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4605,13 +4554,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -4675,13 +4621,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4822,13 +4765,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -4890,13 +4830,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -5042,13 +4979,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -5110,13 +5044,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -5262,13 +5193,10 @@ components:
           type: array
         progressLabels:
           description: 'All the progress labels within this camp.'
-          example: '["/progress_labels/1a2b3c4d"]'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: '"/camps/1a2b3c4d/activity_progress_labels"'
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         shortTitle:
           description: 'A short title for the camp.'
           example: 'SoLa 2022'
@@ -5621,6 +5549,82 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/User-read_CampCollaboration.Camp_CampCollaboration.User'
+            -
+              type: 'null'
+          readOnly: true
+      required:
+        - camp
+        - role
+        - status
+      type: object
+    CampCollaboration-read_CampCollaboration.User:
+      deprecated: false
+      description: 'A user participating in some way in the planning or realization of a camp.'
+      properties:
+        abbreviation:
+          description: 'The abbreviation in the avatar.'
+          example: AB
+          maxLength: 2
+          type:
+            - 'null'
+            - string
+        camp:
+          description: 'The camp that the collaborator is part of. Cannot be changed once the campCollaboration is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the avatar as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        inviteEmail:
+          description: |-
+            The receiver email address of the invitation email, in case the collaboration does not yet have
+            a user account. Either this field or the user field should be null.
+          example: some-email@example.com
+          externalDocs:
+            url: 'https://schema.org/email'
+          format: email
+          maxLength: 128
+          minLength: 1
+          type:
+            - 'null'
+            - string
+        role:
+          description: |-
+            The role that this person has in the camp. Depending on the role, the collaborator might have
+            different access rights. There must always be at least one manager in a camp.
+          enum:
+            - guest
+            - manager
+            - member
+          example: member
+          maxLength: 16
+          type: string
+        status:
+          default: invited
+          description: 'Indicates whether the collaborator is still invited, has left the camp, or is participating normally.'
+          enum:
+            - established
+            - inactive
+            - invited
+          example: inactive
+          maxLength: 16
+          type: string
+        user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User-read_CampCollaboration.User'
             -
               type: 'null'
           readOnly: true
@@ -6056,6 +6060,91 @@ components:
         - role
         - status
       type: object
+    CampCollaboration.jsonhal-read_CampCollaboration.User:
+      deprecated: false
+      description: 'A user participating in some way in the planning or realization of a camp.'
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        abbreviation:
+          description: 'The abbreviation in the avatar.'
+          example: AB
+          maxLength: 2
+          type:
+            - 'null'
+            - string
+        camp:
+          description: 'The camp that the collaborator is part of. Cannot be changed once the campCollaboration is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the avatar as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        inviteEmail:
+          description: |-
+            The receiver email address of the invitation email, in case the collaboration does not yet have
+            a user account. Either this field or the user field should be null.
+          example: some-email@example.com
+          externalDocs:
+            url: 'https://schema.org/email'
+          format: email
+          maxLength: 128
+          minLength: 1
+          type:
+            - 'null'
+            - string
+        role:
+          description: |-
+            The role that this person has in the camp. Depending on the role, the collaborator might have
+            different access rights. There must always be at least one manager in a camp.
+          enum:
+            - guest
+            - manager
+            - member
+          example: member
+          maxLength: 16
+          type: string
+        status:
+          default: invited
+          description: 'Indicates whether the collaborator is still invited, has left the camp, or is participating normally.'
+          enum:
+            - established
+            - inactive
+            - invited
+          example: inactive
+          maxLength: 16
+          type: string
+        user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonhal-read_CampCollaboration.User'
+            -
+              type: 'null'
+          readOnly: true
+      required:
+        - camp
+        - role
+        - status
+      type: object
     CampCollaboration.jsonhal-write_create:
       deprecated: false
       description: 'A user participating in some way in the planning or realization of a camp.'
@@ -6303,23 +6392,6 @@ components:
       deprecated: false
       description: 'A user participating in some way in the planning or realization of a camp.'
       properties:
-        '@context':
-          oneOf:
-            -
-              additionalProperties: true
-              properties:
-                '@vocab':
-                  type: string
-                hydra:
-                  enum: ['http://www.w3.org/ns/hydra/core#']
-                  type: string
-              required:
-                - '@vocab'
-                - hydra
-              type: object
-            -
-              type: string
-          readOnly: true
         '@id':
           readOnly: true
           type: string
@@ -6392,6 +6464,105 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/User.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+            -
+              type: 'null'
+          readOnly: true
+      required:
+        - camp
+        - role
+        - status
+      type: object
+    CampCollaboration.jsonld-read_CampCollaboration.User:
+      deprecated: false
+      description: 'A user participating in some way in the planning or realization of a camp.'
+      properties:
+        '@context':
+          oneOf:
+            -
+              additionalProperties: true
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+                  type: string
+              required:
+                - '@vocab'
+                - hydra
+              type: object
+            -
+              type: string
+          readOnly: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        abbreviation:
+          description: 'The abbreviation in the avatar.'
+          example: AB
+          maxLength: 2
+          type:
+            - 'null'
+            - string
+        camp:
+          description: 'The camp that the collaborator is part of. Cannot be changed once the campCollaboration is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the avatar as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        inviteEmail:
+          description: |-
+            The receiver email address of the invitation email, in case the collaboration does not yet have
+            a user account. Either this field or the user field should be null.
+          example: some-email@example.com
+          externalDocs:
+            url: 'https://schema.org/email'
+          format: email
+          maxLength: 128
+          minLength: 1
+          type:
+            - 'null'
+            - string
+        role:
+          description: |-
+            The role that this person has in the camp. Depending on the role, the collaborator might have
+            different access rights. There must always be at least one manager in a camp.
+          enum:
+            - guest
+            - manager
+            - member
+          example: member
+          maxLength: 16
+          type: string
+        status:
+          default: invited
+          description: 'Indicates whether the collaborator is still invited, has left the camp, or is participating normally.'
+          enum:
+            - established
+            - inactive
+            - invited
+          example: inactive
+          maxLength: 16
+          type: string
+        user:
+          anyOf:
+            -
+              $ref: '#/components/schemas/User.jsonld-read_CampCollaboration.User'
             -
               type: 'null'
           readOnly: true
@@ -8428,9 +8599,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -8445,6 +8614,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode-write_create:
       deprecated: false
@@ -8686,9 +8856,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -8703,6 +8871,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode.jsonhal-read:
       deprecated: false
@@ -8795,9 +8964,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -8812,6 +8979,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode.jsonhal-write_create:
       deprecated: false
@@ -9002,9 +9170,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9019,6 +9185,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ChecklistNode.jsonld-write_create:
       deprecated: false
@@ -9175,9 +9342,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9192,6 +9357,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
@@ -9273,9 +9439,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9290,6 +9454,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -9371,9 +9536,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9388,6 +9551,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -9469,9 +9633,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9486,6 +9648,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-read_ScheduleEntry.Activity:
       deprecated: false
@@ -9567,9 +9730,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9584,6 +9745,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout-write_create:
       deprecated: false
@@ -9792,9 +9954,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9809,6 +9969,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read:
       deprecated: false
@@ -9899,9 +10060,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -9916,6 +10075,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
@@ -10006,9 +10166,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10023,6 +10181,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -10113,9 +10272,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10130,6 +10287,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -10220,9 +10378,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10237,6 +10393,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-read_ScheduleEntry.Activity:
       deprecated: false
@@ -10327,9 +10484,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10344,6 +10499,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonhal-write_create:
       deprecated: false
@@ -10525,9 +10681,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10542,6 +10696,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
@@ -10646,9 +10801,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10663,6 +10816,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -10767,9 +10921,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10784,6 +10936,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -10888,9 +11041,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -10905,6 +11056,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-read_ScheduleEntry.Activity:
       deprecated: false
@@ -11009,9 +11161,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11026,6 +11176,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ColumnLayout.jsonld-write_create:
       deprecated: false
@@ -11272,9 +11423,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11288,6 +11437,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -11363,9 +11513,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11379,6 +11527,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -11454,9 +11603,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11470,6 +11617,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonapi:
       deprecated: false
@@ -11551,9 +11699,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11567,6 +11713,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonhal-read:
       deprecated: false
@@ -11656,9 +11803,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11672,6 +11817,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -11756,9 +11902,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11772,6 +11916,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -11856,9 +12001,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11872,6 +12015,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonld-read:
       deprecated: false
@@ -11958,9 +12102,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -11974,6 +12116,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
@@ -12072,9 +12215,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -12088,6 +12229,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentNode.jsonld-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
@@ -12186,9 +12328,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -12202,6 +12342,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     ContentType-read:
       deprecated: false
@@ -14713,9 +14854,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -14730,6 +14869,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode-write_create:
       deprecated: false
@@ -14923,9 +15063,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -14940,6 +15078,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode.jsonhal-read:
       deprecated: false
@@ -15028,9 +15167,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15045,6 +15182,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode.jsonhal-write_create:
       deprecated: false
@@ -15217,9 +15355,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15234,6 +15370,7 @@ components:
         - contentType
         - materialItems
         - position
+        - root
       type: object
     MaterialNode.jsonld-write_create:
       deprecated: false
@@ -15376,9 +15513,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15392,6 +15527,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect-write_create:
       deprecated: false
@@ -15599,9 +15735,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15615,6 +15749,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect.jsonhal-read:
       deprecated: false
@@ -15705,9 +15840,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15721,6 +15854,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect.jsonhal-write_create:
       deprecated: false
@@ -15901,9 +16035,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -15917,6 +16049,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     MultiSelect.jsonld-write_create:
       deprecated: false
@@ -18622,9 +18755,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -18639,6 +18770,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout-write_create:
       deprecated: false
@@ -18856,9 +18988,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -18873,6 +19003,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout.jsonhal-read:
       deprecated: false
@@ -18966,9 +19097,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -18983,6 +19112,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout.jsonhal-write_create:
       deprecated: false
@@ -19170,9 +19300,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -19187,6 +19315,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     ResponsiveLayout.jsonld-write_create:
       deprecated: false
@@ -20863,9 +20992,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -20880,6 +21007,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText-write_create:
       deprecated: false
@@ -21079,9 +21207,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21096,6 +21222,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText.jsonhal-read:
       deprecated: false
@@ -21183,9 +21310,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21200,6 +21325,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText.jsonhal-write_create:
       deprecated: false
@@ -21375,9 +21501,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21392,6 +21516,7 @@ components:
         - contentType
         - data
         - position
+        - root
       type: object
     SingleText.jsonld-write_create:
       deprecated: false
@@ -21539,9 +21664,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21555,6 +21678,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard-write_create:
       deprecated: false
@@ -21765,9 +21889,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21781,6 +21903,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard.jsonhal-read:
       deprecated: false
@@ -21872,9 +21995,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -21888,6 +22009,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard.jsonhal-write_create:
       deprecated: false
@@ -22070,9 +22192,7 @@ components:
           example: /content_nodes/1a2b3c4d
           format: iri-reference
           readOnly: true
-          type:
-            - 'null'
-            - string
+          type: string
         slot:
           description: |-
             The name of the slot in the parent in which this content node resides. The valid slot names
@@ -22086,6 +22206,7 @@ components:
         - children
         - contentType
         - position
+        - root
       type: object
     Storyboard.jsonld-write_create:
       deprecated: false
@@ -22251,6 +22372,47 @@ components:
           type: string
       type: object
     User-read_CampCollaboration.Camp_CampCollaboration.User:
+      deprecated: false
+      description: ''
+      properties:
+        abbreviation:
+          description: 'A displayable name of the user.'
+          example: AB
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        color:
+          description: 'A displayable name of the user.'
+          example: '#ff0000'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        displayName:
+          description: 'A displayable name of the user.'
+          example: 'Robert Baden-Powell'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        profile:
+          example:
+            email: bi-pi@example.com
+            firstname: Robert
+            language: en
+            nickname: Bi-Pi
+            surname: Baden-Powell
+          format: iri-reference
+          type: string
+      type: object
+    User-read_CampCollaboration.User:
       deprecated: false
       description: ''
       properties:
@@ -22609,6 +22771,56 @@ components:
           format: iri-reference
           type: string
       type: object
+    User.jsonhal-read_CampCollaboration.User:
+      deprecated: false
+      description: ''
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        abbreviation:
+          description: 'A displayable name of the user.'
+          example: AB
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        color:
+          description: 'A displayable name of the user.'
+          example: '#ff0000'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        displayName:
+          description: 'A displayable name of the user.'
+          example: 'Robert Baden-Powell'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        profile:
+          example:
+            email: bi-pi@example.com
+            firstname: Robert
+            language: en
+            nickname: Bi-Pi
+            surname: Baden-Powell
+          format: iri-reference
+          type: string
+      type: object
     User.jsonhal-read_User.create:
       deprecated: false
       description: |-
@@ -22831,6 +23043,70 @@ components:
           type: string
       type: object
     User.jsonld-read_CampCollaboration.Camp_CampCollaboration.User:
+      deprecated: false
+      description: ''
+      properties:
+        '@context':
+          oneOf:
+            -
+              additionalProperties: true
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+                  type: string
+              required:
+                - '@vocab'
+                - hydra
+              type: object
+            -
+              type: string
+          readOnly: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        abbreviation:
+          description: 'A displayable name of the user.'
+          example: AB
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        color:
+          description: 'A displayable name of the user.'
+          example: '#ff0000'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        displayName:
+          description: 'A displayable name of the user.'
+          example: 'Robert Baden-Powell'
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        profile:
+          example:
+            email: bi-pi@example.com
+            firstname: Robert
+            language: en
+            nickname: Bi-Pi
+            surname: Baden-Powell
+          format: iri-reference
+          type: string
+      type: object
+    User.jsonld-read_CampCollaboration.User:
       deprecated: false
       description: ''
       properties:
@@ -24741,19 +25017,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.User'
             application/json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.User'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
           description: 'CampCollaboration resource created'
           links: []
         400:
@@ -24857,19 +25133,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.User'
             application/json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.User'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
           description: 'CampCollaboration resource'
         403:
           content:
@@ -24932,19 +25208,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.User'
             application/json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.User'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.User'
           description: 'CampCollaboration resource updated'
           links: []
         400:
@@ -25279,6 +25555,184 @@ paths:
       summary: 'Creates a Camp resource.'
       tags:
         - Camp
+  '/camps/{campId}/activities':
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of Activity resources.'
+      operationId: api_camps_campIdactivities_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Activity identifier'
+          explode: false
+          in: path
+          name: campId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Activity.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  'hydra:member': { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
+                  'hydra:search': { properties: { '@type': { type: string }, 'hydra:mapping': { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string } }, type: object }
+                  'hydra:totalItems': { minimum: 0, type: integer }
+                  'hydra:view': { example: { '@id': string, 'hydra:first': string, 'hydra:last': string, 'hydra:next': string, 'hydra:previous': string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, 'hydra:first': { format: iri-reference, type: string }, 'hydra:last': { format: iri-reference, type: string }, 'hydra:next': { format: iri-reference, type: string }, 'hydra:previous': { format: iri-reference, type: string } }, type: object }
+                required:
+                  - 'hydra:member'
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                type: array
+          description: 'Activity collection'
+        403:
+          description: Forbidden
+      summary: 'Retrieves the collection of Activity resources.'
+      tags:
+        - Activity
+  '/camps/{campId}/activity_progress_labels':
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of ActivityProgressLabel resources.'
+      operationId: api_camps_campIdactivity_progress_labels_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'ActivityProgressLabel identifier'
+          explode: false
+          in: path
+          name: campId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/ActivityProgressLabel.jsonhal-read' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActivityProgressLabel-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  'hydra:member': { items: { $ref: '#/components/schemas/ActivityProgressLabel.jsonld-read' }, type: array }
+                  'hydra:search': { properties: { '@type': { type: string }, 'hydra:mapping': { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string } }, type: object }
+                  'hydra:totalItems': { minimum: 0, type: integer }
+                  'hydra:view': { example: { '@id': string, 'hydra:first': string, 'hydra:last': string, 'hydra:next': string, 'hydra:previous': string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, 'hydra:first': { format: iri-reference, type: string }, 'hydra:last': { format: iri-reference, type: string }, 'hydra:next': { format: iri-reference, type: string }, 'hydra:previous': { format: iri-reference, type: string } }, type: object }
+                required:
+                  - 'hydra:member'
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActivityProgressLabel.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActivityProgressLabel-read'
+                type: array
+          description: 'ActivityProgressLabel collection'
+        403:
+          description: Forbidden
+      summary: 'Retrieves the collection of ActivityProgressLabel resources.'
+      tags:
+        - ActivityProgressLabel
   '/camps/{campId}/categories':
     get:
       deprecated: false

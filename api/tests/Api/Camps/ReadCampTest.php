@@ -60,10 +60,11 @@ class ReadCampTest extends ECampApiTestCase {
             'isPrototype' => false,
             '_links' => [
                 'creator' => ['href' => $this->getIriFor('user2member')],
-                'activities' => ['href' => '/activities?camp=%2Fcamps%2F'.$camp->getId()],
+                'activities' => ['href' => "/camps/{$camp->getId()}/activities"],
                 'materialLists' => ['href' => '/material_lists?camp=%2Fcamps%2F'.$camp->getId()],
                 'campCollaborations' => ['href' => '/camp_collaborations?camp=%2Fcamps%2F'.$camp->getId()],
                 'periods' => ['href' => '/periods?camp=%2Fcamps%2F'.$camp->getId()],
+                'progressLabels' => ['href' => "/camps/{$camp->getId()}/activity_progress_labels"],
                 'categories' => ['href' => "/camps/{$camp->getId()}/categories"],
             ],
         ]);
@@ -94,10 +95,11 @@ class ReadCampTest extends ECampApiTestCase {
             'isPrototype' => false,
             '_links' => [
                 'creator' => ['href' => $this->getIriFor('user2member')],
-                'activities' => ['href' => '/activities?camp=%2Fcamps%2F'.$camp->getId()],
+                'activities' => ['href' => "/camps/{$camp->getId()}/activities"],
                 'materialLists' => ['href' => '/material_lists?camp=%2Fcamps%2F'.$camp->getId()],
                 'campCollaborations' => ['href' => '/camp_collaborations?camp=%2Fcamps%2F'.$camp->getId()],
                 'periods' => ['href' => '/periods?camp=%2Fcamps%2F'.$camp->getId()],
+                'progressLabels' => ['href' => "/camps/{$camp->getId()}/activity_progress_labels"],
                 'categories' => ['href' => "/camps/{$camp->getId()}/categories"],
             ],
         ]);
@@ -121,10 +123,11 @@ class ReadCampTest extends ECampApiTestCase {
             'isPrototype' => false,
             '_links' => [
                 'creator' => ['href' => $this->getIriFor('user2member')],
-                'activities' => ['href' => '/activities?camp=%2Fcamps%2F'.$camp->getId()],
+                'activities' => ['href' => "/camps/{$camp->getId()}/activities"],
                 'materialLists' => ['href' => '/material_lists?camp=%2Fcamps%2F'.$camp->getId()],
                 'campCollaborations' => ['href' => '/camp_collaborations?camp=%2Fcamps%2F'.$camp->getId()],
                 'periods' => ['href' => '/periods?camp=%2Fcamps%2F'.$camp->getId()],
+                'progressLabels' => ['href' => "/camps/{$camp->getId()}/activity_progress_labels"],
                 'categories' => ['href' => "/camps/{$camp->getId()}/categories"],
             ],
         ]);
