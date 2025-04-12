@@ -2286,13 +2286,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -2482,13 +2479,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -2671,13 +2665,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -2865,13 +2856,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -3472,13 +3460,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -3677,13 +3662,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -3875,13 +3857,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4078,13 +4057,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4429,13 +4405,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4648,13 +4621,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -4860,13 +4830,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -5077,13 +5044,10 @@ components:
           description: |-
             All the programme that will be carried out during the camp. An activity may be carried out
             multiple times in the same camp.
-          example: '/activities?camp=%2Fcamps%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
+          example: /camps/1a2b3c4d/activities
+          format: iri-reference
           readOnly: true
-          type: array
+          type: string
         addressCity:
           description: 'The name of the town where the camp will take place.'
           example: Hintertüpfingen
@@ -24743,6 +24707,95 @@ paths:
       summary: 'Creates a Camp resource.'
       tags:
         - Camp
+  '/camps/{campId}/activities':
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of Activity resources.'
+      operationId: api_camps_campIdactivities_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Activity identifier'
+          explode: false
+          in: path
+          name: campId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Activity.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  'hydra:member': { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
+                  'hydra:search': { properties: { '@type': { type: string }, 'hydra:mapping': { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string } }, type: object }
+                  'hydra:totalItems': { minimum: 0, type: integer }
+                  'hydra:view': { example: { '@id': string, 'hydra:first': string, 'hydra:last': string, 'hydra:next': string, 'hydra:previous': string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, 'hydra:first': { format: iri-reference, type: string }, 'hydra:last': { format: iri-reference, type: string }, 'hydra:next': { format: iri-reference, type: string }, 'hydra:previous': { format: iri-reference, type: string } }, type: object }
+                required:
+                  - 'hydra:member'
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                type: array
+          description: 'Activity collection'
+        403:
+          description: Forbidden
+      summary: 'Retrieves the collection of Activity resources.'
+      tags:
+        - Activity
   '/camps/{campId}/activity_progress_labels':
     get:
       deprecated: false
