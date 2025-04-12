@@ -23,6 +23,14 @@
       "copyActivityInfoDialog": {
         "allow": "Consenti ora"
       },
+      "dialog": {
+        "dialogActivityEdit": {
+          "title": "Modificare l'actività"
+        },
+        "formScheduleEntryList": {
+          "name": "Programmato"
+        }
+      },
       "menuCardlessContentNode": {
         "deletingDisabled": "Deve essere vuoto per essere eliminato"
       },
@@ -344,9 +352,6 @@
       }
     },
     "program": {
-      "dialogActivityEdit": {
-        "title": "Modificare l'actività"
-      },
       "formScheduleEntryItem": {
         "end": "Fine",
         "start": "Inizio"

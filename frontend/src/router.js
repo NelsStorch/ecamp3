@@ -502,22 +502,31 @@ export default new Router({
       ],
     },
     {
-      path: '/camps/:campId/:campShortTitle/program/activities/:scheduleEntryId/:activityName?',
+      path: '/camps/:campId/:campShortTitle/program/activity/:activityId/:scheduleEntryId?/:activityName?',
       name: 'camp/activity',
       components: {
         navigation: NavigationCamp,
         default: () => import('./views/camp/activity/Activity.vue'),
         aside: () => import('./views/camp/activity/SideBarProgram.vue'),
       },
-      beforeEnter: all([requireAuth, requireCamp, requireScheduleEntry]),
+      beforeEnter: all([requireAuth, requireCamp, requireActivityScheduleEntry]),
       props: {
         navigation: (route) => ({ camp: campFromRoute(route) }),
-        default: (route) => ({ scheduleEntry: scheduleEntryFromRoute(route) }),
+        default: (route) => ({
+          activityId: route.params.activityId,
+          scheduleEntryId: route.params.scheduleEntryId,
+        }),
         aside: (route) => ({
           camp: campFromRoute(route),
-          day: dayFromScheduleEntryInRoute(route),
+          activityId: route.params.activityId,
+          scheduleEntryId: route.params.scheduleEntryId,
         }),
       },
+    },
+    {
+      path: '/camps/:campId/:campShortTitle/program/activities/:scheduleEntryId/:activityName?',
+      redirect:
+        '/camps/:campId/:campShortTitle/program/activity/0/:scheduleEntryId?/:activityName?',
     },
     {
       path: '/',
@@ -600,27 +609,47 @@ async function requireCamp(to, from, next) {
   }
 }
 
-async function requireScheduleEntry(to, from, next) {
-  const scheduleEntry = await scheduleEntryFromRoute(to)
-  if (scheduleEntry === undefined) {
-    next({
-      name: 'PageNotFound',
-      params: [to.fullPath, ''],
-      replace: true,
-    })
-  } else {
-    await scheduleEntry._meta.load
-      .then(() => {
+async function requireActivityScheduleEntry(to, from, next) {
+  await apiStore
+    .get()
+    .activities({ id: to.params.activityId })
+    .$reload()
+    .then(async (activity) => {
+      // activity exists
+      const scheduleEntry = to.params.scheduleEntryId
+        ? activity
+            .scheduleEntries()
+            .items.find((entry) => entry.id === to.params.scheduleEntryId)
+        : null
+
+      if (scheduleEntry) {
+        // activity and scheduleEntry exist
         next()
-      })
-      .catch(() => {
-        next({
-          name: 'PageNotFound',
-          params: [to.fullPath, ''],
-          replace: true,
-        })
-      })
-  }
+      } else {
+        // scheduleEntry is not found, use first activity scheduleEntry
+        to.params.scheduleEntryId = (await firstActivityScheduleEntry(activity)).id
+        next(to)
+      }
+    })
+    .catch(() => {
+      // activityId does not exist, check if scheduleEntryId exists
+      if (to.params.scheduleEntryId) {
+        apiStore
+          .get()
+          .scheduleEntries({ id: to.params.scheduleEntryId })
+          ._meta.load.then(async (scheduleEntry) => {
+            to.params.activityId = scheduleEntry.activity().id
+            next(to)
+          })
+          .catch(async () => {
+            // scheduleEntry and activity are not found, fallback to camp program
+            next({
+              ...to,
+              name: 'camp/program',
+            })
+          })
+      }
+    })
 }
 
 async function requirePeriod(to, from, next) {
@@ -721,13 +750,6 @@ export function periodFromRoute(route) {
   return apiStore.get().periods({ id: route.params.periodId })
 }
 
-function scheduleEntryFromRoute(route) {
-  if (!route.params.scheduleEntryId) {
-    return undefined
-  }
-  return apiStore.get().scheduleEntries({ id: route.params.scheduleEntryId })
-}
-
 function categoryFromRoute(route) {
   if (!route.params.categoryId) {
     return undefined
@@ -770,13 +792,6 @@ function getContentLayout(route) {
     default:
       return 'normal'
   }
-}
-
-function dayFromScheduleEntryInRoute(route) {
-  if (!route.params.scheduleEntryId) {
-    return undefined
-  }
-  return apiStore.get().scheduleEntries({ id: route.params.scheduleEntryId }).day()
 }
 
 /**
@@ -854,9 +869,10 @@ export function periodRoute(period, routeName = 'camp/period/program', query = {
 }
 
 export function scheduleEntryRoute(scheduleEntry, query = {}) {
-  if (scheduleEntry._meta.loading || scheduleEntry.activity()._meta.loading) return {}
+  if (scheduleEntry?._meta.loading || scheduleEntry?.activity()._meta.loading) return {}
 
-  const camp = scheduleEntry.activity().camp()
+  const activity = scheduleEntry.activity()
+  const camp = activity.camp()
 
   // if (camp._meta.loading) return {}
 
@@ -866,7 +882,29 @@ export function scheduleEntryRoute(scheduleEntry, query = {}) {
       campId: camp.id,
       campShortTitle: slugify(campShortTitle(camp)),
       scheduleEntryId: scheduleEntry.id,
-      activityName: slugify(scheduleEntry.activity().title),
+      activityId: activity.id,
+      activityName: slugify(activity.title),
+    },
+    query,
+  }
+}
+
+export async function firstActivityScheduleEntryRoute(activity, query = {}) {
+  if (typeof activity === 'string') {
+    activity = await apiStore.get().activities({ id: activity })._meta.load
+  }
+  const camp = activity.camp()
+  apiStore.reload(activity.scheduleEntries())
+  const scheduleEntry = await firstActivityScheduleEntry(activity)
+
+  return {
+    name: 'camp/activity',
+    params: {
+      campId: camp.id,
+      campShortTitle: slugify(campShortTitle(camp)),
+      scheduleEntryId: scheduleEntry.id,
+      activityId: activity.id,
+      activityName: slugify(activity.title),
     },
     query,
   }
@@ -965,6 +1003,22 @@ async function firstFuturePeriod(route) {
     periods.items.find((period) => new Date(period.end) >= new Date()) ||
     periods.items.find((_) => true)
   )
+}
+
+export async function firstActivityScheduleEntry(activity) {
+  if (typeof activity === 'string') {
+    activity = await apiStore.get().activities({ id: activity })._meta.load
+  }
+  await activity.scheduleEntries()._meta.load
+  return activity
+    .scheduleEntries()
+    .items.reduce(
+      (result, current) =>
+        result === null || new Date(result.start) > new Date(current.start)
+          ? current
+          : result,
+      null
+    )
 }
 
 async function redirectToPeriod(to, from, next, routeName) {

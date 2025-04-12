@@ -15,7 +15,8 @@ trait HasRootContentNodeTrait {
      * exchanged, but all the contents attached to it can.
      */
     #[Assert\DisableAutoMapping]
-    #[ApiProperty(writable: false, readableLink: true, example: '/content_nodes/1a2b3c4d')]
+    #[ApiProperty(writable: false, example: '/content_nodes/1a2b3c4d')]
+    #[Groups(['read'])]
     #[ORM\OneToOne(targetEntity: ColumnLayout::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false, unique: true)]
     public ?ColumnLayout $rootContentNode = null;
@@ -29,8 +30,6 @@ trait HasRootContentNodeTrait {
         $this->rootContentNode = $rootContentNode;
     }
 
-    #[Assert\DisableAutoMapping]
-    #[Groups(['read'])]
     public function getRootContentNode(): ?ColumnLayout {
         // Getter is here to add annotations to parent class property
         return $this->rootContentNode;

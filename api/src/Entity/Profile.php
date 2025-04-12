@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']]
 )]
-#[ApiFilter(filterClass: SearchFilter::class, properties: ['user.collaborations.camp'])]
+#[ApiFilter(filterClass: SearchFilter::class, properties: ['user.collaborations.camp', 'user'])]
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 #[ORM\Table(name: '`profile`')]
 class Profile extends BaseEntity {
@@ -199,7 +199,7 @@ class Profile extends BaseEntity {
     #[ORM\Column(type: 'json')]
     public array $roles = ['ROLE_USER'];
 
-    #[ApiProperty(writable: false, example: '/users/1a2b3c4d')]
+    #[ApiProperty(writable: false, readableLink: true, example: '/users/1a2b3c4d')]
     #[Groups(['read'])]
     #[ORM\OneToOne(targetEntity: User::class, mappedBy: 'profile')]
     public User $user;

@@ -62,7 +62,7 @@ abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTre
     #[Gedmo\SortableGroup] // this is needed to avoid that all root nodes are in the same sort group (parent:null, slot: '')
     #[Groups(['read'])]
     #[ORM\ManyToOne(targetEntity: ColumnLayout::class, inversedBy: 'rootDescendants')]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')] // TODO make not null in the DB using a migration, and get fixtures to run
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     public ?ColumnLayout $root = null;
 
     /**
@@ -184,6 +184,11 @@ abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTre
 
     public function getParent(): ?HasParentInterface {
         return $this->parent;
+    }
+
+    public function setParent(?ContentNode $parent) {
+        $this->parent = $parent;
+        $this->root ??= $parent?->root;
     }
 
     /**

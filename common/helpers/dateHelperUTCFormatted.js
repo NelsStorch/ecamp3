@@ -19,22 +19,29 @@ function hourLong(dateTimeString, tc) {
 function timeDurationShort(start, end, tc) {
   const startTime = dayjs.utc(start)
   const endTime = dayjs.utc(end)
-  const duration = dayjs(endTime.diff(startTime))
-  const durationInMinutes = duration.valueOf() / 1000 / 60
-  if (durationInMinutes < 60) {
-    return tc('global.datetime.duration.minutesOnly', 0, {
-      minutes: durationInMinutes,
-    })
-  }
-  if (durationInMinutes % 60 === 0) {
-    return tc('global.datetime.duration.hoursOnly', 0, {
-      hours: durationInMinutes / 60,
-    })
-  }
-  return tc('global.datetime.duration.hoursAndMinutes', 0, {
-    hours: Math.floor(durationInMinutes / 60.0),
-    minutes: durationInMinutes % 60,
-  })
+  const duration = dayjs.duration(endTime.diff(startTime))
+
+  return tc(
+    duration.asDays() >= 1
+        ? duration.hours() === 0
+          ? duration.minutes() === 0
+            ? 'global.datetime.duration.daysOnly'
+            : 'global.datetime.duration.daysAndMinutes'
+          : duration.minutes() === 0
+            ? 'global.datetime.duration.daysAndHours'
+            : 'global.datetime.duration.daysAndHoursAndMinutes'
+        : duration.asMinutes() < 60
+          ? 'global.datetime.duration.minutesOnly'
+          : duration.minutes() === 0
+            ? 'global.datetime.duration.hoursOnly'
+            : 'global.datetime.duration.hoursAndMinutes',
+    0,
+    {
+      days: Math.floor(duration.asDays()),
+      hours: duration.hours(),
+      minutes: duration.minutes(),
+    }
+  )
 }
 
 // short format of dateTime range

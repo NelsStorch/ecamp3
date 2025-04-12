@@ -6,9 +6,8 @@
       :reload-entries="reloadScheduleEntries"
       :on="eventHandlers"
     />
-    <dialog-activity-create
+    <DialogActivityCreate
       ref="dialogActivityCreate"
-      :period="period"
       :schedule-entry="newScheduleEntry"
       @activity-created="afterCreateActivity($event)"
     />

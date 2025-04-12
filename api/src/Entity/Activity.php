@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\InputFilter;
@@ -43,15 +44,20 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
         ),
         new GetCollection(
-            normalizationContext: [
-                'groups' => [
-                    'read',
-                    'Activity:ActivityProgressLabel',
-                    'Activity:ActivityResponsibles',
-                    'Activity:ScheduleEntries',
-                ],
-            ],
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
             security: 'is_authenticated()'
+        ),
+        new GetCollection(
+            uriTemplate: self::CAMP_SUBRESOURCE_URI_TEMPLATE,
+            uriVariables: [
+                'campId' => new Link(
+                    toProperty: 'camp',
+                    fromClass: Camp::class,
+                    security: 'is_granted("CAMP_COLLABORATOR", camp) or is_granted("CAMP_IS_PROTOTYPE", camp)'
+                ),
+            ],
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
+            security: 'is_fully_authenticated()',
         ),
         new Post(
             processor: ActivityCreateProcessor::class,
@@ -68,6 +74,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity extends BaseEntity implements BelongsToCampInterface {
     use HasRootContentNodeTrait;
+
+    public const CAMP_SUBRESOURCE_URI_TEMPLATE = '/camps/{campId}/activities{._format}';
+
+    public const COLLECTION_NORMALIZATION_CONTEXT = [
+        'groups' => [
+            'read',
+            'Activity:ActivityProgressLabel',
+            'Activity:ActivityResponsibles',
+            'Activity:ScheduleEntries',
+        ],
+    ];
 
     public const ITEM_NORMALIZATION_CONTEXT = [
         'groups' => [

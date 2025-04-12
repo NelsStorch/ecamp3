@@ -159,7 +159,7 @@ export default {
         }
         this.serializedValue = val
         this.internalValue = this.deserialize?.(val) ?? val
-        this.stringValue = this.format?.(val) ?? val
+        this.stringValue = this.format?.(this.internalValue) ?? val
       },
       immediate: true,
     },

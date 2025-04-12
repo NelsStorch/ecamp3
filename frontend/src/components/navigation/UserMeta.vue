@@ -171,10 +171,14 @@ export default {
       open: false,
       logoutInProgress: false,
       isAdmin: false,
+      deferredLoad: true,
     }
   },
   computed: {
     invitationCount() {
+      if (this.deferredLoad) {
+        return 0
+      }
       return this.api.get().personalInvitations().totalItems
     },
     newsLink() {
@@ -197,6 +201,9 @@ export default {
   },
   mounted() {
     this.isAdmin = isAdmin()
+    setTimeout(() => {
+      this.deferredLoad = false
+    }, 400)
   },
   methods: {
     async logout() {

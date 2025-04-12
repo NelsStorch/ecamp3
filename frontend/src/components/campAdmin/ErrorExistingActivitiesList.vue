@@ -16,6 +16,7 @@
                 name: 'camp/activity',
                 params: {
                   campId: camp.id,
+                  activityId: activity.id,
                   scheduleEntryId: scheduleEntry.id,
                 },
               }"

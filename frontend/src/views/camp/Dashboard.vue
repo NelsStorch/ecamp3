@@ -267,6 +267,8 @@ export default {
       this.api.get().days({ 'period.camp': this.camp._meta.self }),
       ...this.camp.periods().items.map((period) => period.scheduleEntries()._meta.load),
       this.camp.activities()._meta.load,
+      this.camp.categories()._meta.load,
+      this.camp.progressLabels()._meta.load,
     ])
 
     this.loading = false

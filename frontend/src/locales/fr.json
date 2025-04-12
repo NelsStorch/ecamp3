@@ -27,6 +27,11 @@
         "granted": "Vous pouvez maintenant coller les activités copiées.",
         "title": "Copier et coller une activité"
       },
+      "dialog": {
+        "dialogActivityEdit": {
+          "title": "Modifier l'activité"
+        }
+      },
       "menuCardlessContentNode": {
         "deletingDisabled": "Doit être vide pour être supprimé"
       },
@@ -357,9 +362,6 @@
         "copyPasteActivity": "Copier et coller une activité",
         "copySourceInfo": "Vous pouvez coller ici l'URL d'une activité pour copier son contenu.",
         "pasteActivity": "coller l'activité"
-      },
-      "dialogActivityEdit": {
-        "title": "Modifier l'activité"
       },
       "formScheduleEntryItem": {
         "end": "Fin",
