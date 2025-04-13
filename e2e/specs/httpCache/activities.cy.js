@@ -4,6 +4,7 @@ import {
   cachedEndpoint,
   felicitySmoakUser,
   grgrCampId,
+  grgrPeriodId,
   loremIpsumCampId,
   skilagerCampId,
 } from '../constants'
@@ -222,5 +223,38 @@ describe('cache test: /camps/activities', () => {
       cy.waitForCacheMiss(uri)
       cy.expectCacheHit(uri)
     })
+  })
+
+  it('invalidates /camps/{campId}/activities when changing the period dates', () => {
+    const uri = `/api/camps/${grgrCampId}/activities`
+
+    Cypress.session.clearAllSavedSessions()
+    cy.login(bipiUser)
+
+    // warm up cache
+    cy.expectCacheMiss(uri)
+    cy.expectCacheHit(uri)
+
+    // move period start date
+    cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
+      start: '2025-05-09',
+      end: '2025-05-12',
+      moveScheduleEntries: true,
+    })
+
+    // ensure cache was invalidated
+    cy.waitForCacheMiss(uri)
+    cy.expectCacheHit(uri)
+
+    // move period start date
+    cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
+      start: '2025-05-10',
+      end: '2025-05-13',
+      moveScheduleEntries: true,
+    })
+
+    // ensure cache was invalidated
+    cy.waitForCacheMiss(uri)
+    cy.expectCacheHit(uri)
   })
 })
