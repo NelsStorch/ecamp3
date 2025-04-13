@@ -5,6 +5,7 @@ namespace App\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Activity;
+use App\Entity\Comment;
 use App\State\Util\AbstractRemoveProcessor;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -28,6 +29,7 @@ class ActivityRemoveProcessor extends AbstractRemoveProcessor {
         $this->em->remove($data->rootContentNode);
 
         foreach ($data->comments as $comment) {
+            /** @var Comment $comment */
             $comment->orphanDescription = $comment->activity->title;
             $comment->activity->removeComment($comment);
         }
