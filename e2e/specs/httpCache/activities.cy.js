@@ -226,7 +226,7 @@ describe('cache test: /camps/activities', () => {
     })
   })
 
-  it('invalidates /camps/{campId}/activities when changing the period dates', () => {
+  it('invalidates /camps/{campId}/activities when changing the period dates (moveScheduleEntries: true)', () => {
     const uri = `/api/camps/${grgrCampId}/activities`
 
     Cypress.session.clearAllSavedSessions()
@@ -252,6 +252,37 @@ describe('cache test: /camps/activities', () => {
       start: '2025-05-10',
       end: '2025-05-13',
       moveScheduleEntries: true,
+    })
+
+    // ensure cache was invalidated
+    cy.waitForCacheMiss(uri)
+    cy.expectCacheHit(uri)
+  })
+
+  it('invalidates /camps/{campId}/activities when changing the period dates (moveScheduleEntries: false)', () => {
+    const uri = `/api/camps/${grgrCampId}/activities`
+
+    Cypress.session.clearAllSavedSessions()
+    cy.login(bipiUser)
+
+    // warm up cache
+    cy.expectCacheMiss(uri)
+    cy.expectCacheHit(uri)
+
+    // move period start date
+    cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
+      start: '2025-05-09',
+      moveScheduleEntries: false,
+    })
+
+    // ensure cache was invalidated
+    cy.waitForCacheMiss(uri)
+    cy.expectCacheHit(uri)
+
+    // move period start date
+    cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
+      start: '2025-05-10',
+      moveScheduleEntries: false,
     })
 
     // ensure cache was invalidated
