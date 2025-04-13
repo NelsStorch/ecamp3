@@ -90,6 +90,13 @@ export default {
           this.processChecklistItems(items)
           this.loading = false
         }),
+      this.api
+        .get()
+        .contentNodes({
+          isRoot: 'true',
+          camp: this.camp._meta.self,
+        })
+        .$loadItems(),
     ])
   },
   methods: {
