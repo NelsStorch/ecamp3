@@ -1,0 +1,19 @@
+App\Entity\Comment:
+  comment1:
+    camp: '@camp1'
+    activity: '@activity1'
+    text: <sentence()>
+    author: '@user1manager'
+    orphanDescription: null
+  comment2:
+    camp: '@camp1'
+    activity: '@activity1'
+    text: <sentence()>
+    author: '@user4unrelated'
+    orphanDescription: null
+  comment3:
+    camp: '@camp1'
+    activity: '@activity2'
+    text: <sentence()>
+    author: '@user1manager'
+    orphanDescription: null
