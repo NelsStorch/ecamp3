@@ -9975,6 +9975,362 @@ components:
         - parent
         - position
       type: object
+    Comment-create_write:
+      deprecated: false
+      description: 'A Comment.'
+      properties:
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        text:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - text
+      type: object
+    Comment-read:
+      deprecated: false
+      description: 'A Comment.'
+      properties:
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        text:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - text
+      type: object
+    Comment.jsonapi:
+      deprecated: false
+      description: 'A Comment.'
+      properties:
+        data:
+          properties:
+            attributes:
+              properties:
+                _id:
+                  description: 'An internal, unique, randomly generated identifier of this entity.'
+                  example: 1a2b3c4d
+                  maxLength: 16
+                  readOnly: true
+                  type: string
+                orphanDescription:
+                  description: 'Persisted description of the context where the comment was originally writen.'
+                  example: Sportolympiade
+                  maxLength: 32
+                  readOnly: true
+                  type: ['null', string]
+                text:
+                  description: 'The actual comment.'
+                  example: 'This activity is great!'
+                  maxLength: 1024
+                  readOnly: true
+                  type: string
+              required:
+                - text
+              type: object
+            id:
+              type: string
+            relationships:
+              properties:
+                activity:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                author:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                camp:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+              required:
+                - camp
+              type: object
+            type:
+              type: string
+          required:
+            - id
+            - type
+          type: object
+        included:
+          description: 'Related resources requested via the "include" query parameter.'
+          externalDocs:
+            url: 'https://jsonapi.org/format/#fetching-includes'
+          items:
+            anyOf:
+              -
+                $ref: '#/components/schemas/Comment.jsonapi'
+              -
+                $ref: '#/components/schemas/Comment.jsonapi'
+              -
+                $ref: '#/components/schemas/Comment.jsonapi'
+          readOnly: true
+          type: array
+      type: object
+    Comment.jsonhal-create_write:
+      deprecated: false
+      description: 'A Comment.'
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        text:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - text
+      type: object
+    Comment.jsonhal-read:
+      deprecated: false
+      description: 'A Comment.'
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        text:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - text
+      type: object
+    Comment.jsonld-create_write:
+      deprecated: false
+      description: 'A Comment.'
+      properties:
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        text:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - text
+      type: object
+    Comment.jsonld-read:
+      deprecated: false
+      description: 'A Comment.'
+      properties:
+        '@context':
+          oneOf:
+            -
+              additionalProperties: true
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+                  type: string
+              required:
+                - '@vocab'
+                - hydra
+              type: object
+            -
+              type: string
+          readOnly: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        text:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - text
+      type: object
     ConstraintViolation-json:
       deprecated: false
       description: 'Unprocessable entity'
@@ -22247,6 +22603,132 @@ paths:
       summary: 'Creates a Activity resource.'
       tags:
         - Activity
+  '/activities/{activityId}/comments':
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of Comment resources.'
+      operationId: api_activities_activityIdcomments_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: activity
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'activity[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Comment identifier'
+          explode: false
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Comment.jsonhal-read' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  member: { items: { $ref: '#/components/schemas/Comment.jsonld-read' }, type: array }
+                  search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
+                  totalItems: { minimum: 0, type: integer }
+                  view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
+                required:
+                  - member
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+          description: 'Comment collection'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+      summary: 'Retrieves the collection of Comment resources.'
+      tags:
+        - Comment
   '/activities/{id}':
     delete:
       deprecated: false
@@ -26200,6 +26682,308 @@ paths:
       summary: 'Updates the Checklist resource.'
       tags:
         - Checklist
+  /comments:
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of Comment resources.'
+      operationId: api_comments_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: activity
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'activity[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Comment.jsonhal-read' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  member: { items: { $ref: '#/components/schemas/Comment.jsonld-read' }, type: array }
+                  search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
+                  totalItems: { minimum: 0, type: integer }
+                  view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
+                required:
+                  - member
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+          description: 'Comment collection'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+      summary: 'Retrieves the collection of Comment resources.'
+      tags:
+        - Comment
+    post:
+      deprecated: false
+      description: 'Creates a Comment resource.'
+      operationId: api_comments_post
+      parameters: []
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Comment.jsonhal-create_write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment-create_write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Comment.jsonld-create_write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Comment.jsonapi'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Comment-create_write'
+        description: 'The new Comment resource'
+        required: true
+      responses:
+        201:
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonhal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonapi'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+          description: 'Comment resource created'
+          links: []
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'Invalid input'
+          links: []
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation-json'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation-json'
+          description: 'An error occurred'
+          links: []
+      summary: 'Creates a Comment resource.'
+      tags:
+        - Comment
+  '/comments/{id}':
+    delete:
+      deprecated: false
+      description: 'Removes the Comment resource.'
+      operationId: api_comments_id_delete
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Comment identifier'
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        204:
+          description: 'Comment resource deleted'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'Not found'
+          links: []
+      summary: 'Removes the Comment resource.'
+      tags:
+        - Comment
+    get:
+      deprecated: false
+      description: 'Retrieves a Comment resource.'
+      operationId: api_comments_id_get
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Comment identifier'
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonhal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonapi'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+          description: 'Comment resource'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'Not found'
+          links: []
+      summary: 'Retrieves a Comment resource.'
+      tags:
+        - Comment
   /content_node/checklist_nodes:
     get:
       deprecated: false
@@ -33410,6 +34194,9 @@ tags:
       A Checklist
       Tree-Structure with ChecklistItems.
     name: Checklist
+  -
+    description: 'A Comment.'
+    name: Comment
   -
     description: |-
       A calendar event in a period of the camp, at which some activity will take place. The start time

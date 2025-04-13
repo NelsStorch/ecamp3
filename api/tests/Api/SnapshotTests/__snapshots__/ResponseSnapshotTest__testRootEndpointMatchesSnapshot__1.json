@@ -40,6 +40,10 @@
             "href": "/content_node/column_layouts{/id}{?contentType,contentType[],root,root[],camp,period}",
             "templated": true
         },
+        "comments": {
+            "href": "/comments{/id}{?camp,camp[],activity,activity[]}",
+            "templated": true
+        },
         "contentNodes": {
             "href": "/content_nodes{?contentType,contentType[],root,root[],camp,period}",
             "templated": true
