@@ -8,15 +8,13 @@ use App\Entity\Day;
 use App\Entity\Period;
 use App\State\Util\AbstractPersistProcessor;
 use App\Util\DateTimeUtil;
-use FOS\HttpCacheBundle\CacheManager;
 
 /**
  * @template-extends AbstractPersistProcessor<Period>
  */
 class PeriodPersistProcessor extends AbstractPersistProcessor {
     public function __construct(
-        ProcessorInterface $decorated,
-        private readonly CacheManager $cacheManager
+        ProcessorInterface $decorated
     ) {
         parent::__construct($decorated);
     }
@@ -25,29 +23,26 @@ class PeriodPersistProcessor extends AbstractPersistProcessor {
      * @param Period $data
      */
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Period {
-        $this->moveDaysAndScheduleEntries($data, $context['previous_data'] ?? null);
+        self::moveDaysAndScheduleEntries($data, $context['previous_data'] ?? null);
         self::removeExtraDays($data);
         self::addMissingDays($data);
 
         return $data;
     }
 
-    public function moveDaysAndScheduleEntries(Period $period, ?Period $originalPeriod = null) {
+    public static function moveDaysAndScheduleEntries(Period $period, ?Period $originalPeriod = null) {
         if (!$originalPeriod) {
+            return;
+        }
+
+        // moveScheduleEntries === true: scheduleEntries move relative to the start date (no change of offset needed -> return)
+        // moveScheduleEntries === false: scheduleEntries stay absolutely on the scheduled calendar date (change of offset needed)
+        if ($period->moveScheduleEntries) {
             return;
         }
 
         $deltaMinutes = DateTimeUtil::differenceInMinutes($originalPeriod->start, $period->start);
         if (0 === $deltaMinutes) {
-            return;
-        }
-
-        // start date shifts --> purge schedule_entries subresource to reflect changes in dates + numbers
-        $this->cacheManager->invalidateTags(["/api/periods/{$period->getId()}/schedule_entries"]);
-
-        // moveScheduleEntries === true: scheduleEntries move relative to the start date (no change of offset needed -> return)
-        // moveScheduleEntries === false: scheduleEntries stay absolutely on the scheduled calendar date (change of offset needed)
-        if ($period->moveScheduleEntries) {
             return;
         }
 
