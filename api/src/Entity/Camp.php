@@ -428,9 +428,13 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      *
      * @return CampCollaboration[]
      */
-    #[ApiProperty(writable: false, example: '["/camp_collaborations/1a2b3c4d"]')]
+    #[ApiProperty(
+        writable: false,
+        uriTemplate: CampCollaboration::CAMP_SUBRESOURCE_URI_TEMPLATE,
+        example: '["/camps/1a2b3c4d/camp_collaborations"]'
+    )]
     public function getCampCollaborations(): array {
-        return $this->collaborations->getValues();
+        return [];
     }
 
     /**

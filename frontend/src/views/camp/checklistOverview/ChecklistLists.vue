@@ -31,6 +31,11 @@ export default {
   props: {
     camp: { type: Object, required: true },
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.checklistOverview.checklistLists.title'),
+    }
+  },
   computed: {
     checklists() {
       return this.camp.checklists()

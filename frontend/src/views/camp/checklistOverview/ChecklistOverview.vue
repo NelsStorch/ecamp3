@@ -46,6 +46,11 @@ export default {
       indexedChecklistItems: {},
     }
   },
+  head() {
+    return {
+      title: () => this.checklist.name,
+    }
+  },
   watch: {
     checklist: {
       handler(newVal, oldVal) {
@@ -82,6 +87,13 @@ export default {
           this.processChecklistItems(items)
           this.loading = false
         }),
+      this.api
+        .get()
+        .contentNodes({
+          isRoot: 'true',
+          camp: this.camp._meta.self,
+        })
+        .$loadItems(),
     ])
   },
   methods: {

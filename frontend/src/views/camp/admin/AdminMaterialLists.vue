@@ -40,6 +40,11 @@ export default {
   props: {
     camp: { type: Object, required: true },
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.admin.adminMaterialLists.title'),
+    }
+  },
   computed: {
     materialLists() {
       return this.camp.materialLists()

@@ -24966,6 +24966,132 @@ paths:
       summary: 'Retrieves the collection of ActivityProgressLabel resources.'
       tags:
         - ActivityProgressLabel
+  '/camps/{campId}/camp_collaborations':
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of CampCollaboration resources.'
+      operationId: api_camps_campIdcamp_collaborations_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: activityResponsibles.activity
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'activityResponsibles.activity[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'CampCollaboration identifier'
+          explode: false
+          in: path
+          name: campId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/CampCollaboration.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  member: { items: { $ref: '#/components/schemas/CampCollaboration.jsonld-read_CampCollaboration.Camp_CampCollaboration.User' }, type: array }
+                  search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
+                  totalItems: { minimum: 0, type: integer }
+                  view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
+                required:
+                  - member
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CampCollaboration.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CampCollaboration-read_CampCollaboration.Camp_CampCollaboration.User'
+                type: array
+          description: 'CampCollaboration collection'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+      summary: 'Retrieves the collection of CampCollaboration resources.'
+      tags:
+        - CampCollaboration
   '/camps/{campId}/categories':
     get:
       deprecated: false
@@ -27021,6 +27147,18 @@ paths:
           description: ''
           explode: false
           in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
           name: period
           required: false
           schema:
@@ -27441,6 +27579,18 @@ paths:
           required: false
           schema:
             type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
           style: form
         -
           allowEmptyValue: false
@@ -27877,6 +28027,18 @@ paths:
           description: ''
           explode: false
           in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
           name: period
           required: false
           schema:
@@ -28297,6 +28459,18 @@ paths:
           required: false
           schema:
             type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
           style: form
         -
           allowEmptyValue: false
@@ -28733,6 +28907,18 @@ paths:
           description: ''
           explode: false
           in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
           name: period
           required: false
           schema:
@@ -29153,6 +29339,18 @@ paths:
           required: false
           schema:
             type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
           style: form
         -
           allowEmptyValue: false
@@ -29589,6 +29787,18 @@ paths:
           description: ''
           explode: false
           in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
           name: period
           required: false
           schema:
@@ -30009,6 +30219,18 @@ paths:
           required: false
           schema:
             type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: isRoot
+          required: false
+          schema:
+            type: boolean
           style: form
         -
           allowEmptyValue: false

@@ -4,6 +4,8 @@ import router from '@/router.js'
 import {
   vuetifyLoader,
   auth,
+  head,
+  unhead,
   storeLoader,
   formBaseComponents,
   ignoreNativeBindingWarnMessages,
@@ -36,6 +38,7 @@ if (env && env.SENTRY_FRONTEND_DSN) {
 }
 
 Vue.use(auth)
+Vue.use(head)
 Vue.use(formBaseComponents)
 Vue.use(ignoreNativeBindingWarnMessages)
 Vue.use(storeLoader)
@@ -57,5 +60,6 @@ new Vue({
   store,
   vuetify,
   i18n,
+  unhead,
   render: (h) => h(App),
 }).$mount('#app')

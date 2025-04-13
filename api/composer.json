@@ -2,7 +2,7 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": ">=8.1.0",
+        "php": ">=8.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/core": "4.1.7",
@@ -101,6 +101,8 @@
         "symfony/polyfill-intl-grapheme": "*",
         "symfony/polyfill-intl-normalizer": "*",
         "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-php83": "*",
+        "symfony/polyfill-php82": "*",
         "symfony/polyfill-php81": "*",
         "symfony/polyfill-php80": "*",
         "symfony/polyfill-php74": "*",
@@ -109,8 +111,8 @@
         "symfony/polyfill-php71": "*"
     },
     "scripts": {
-        "cs-check": "php-cs-fixer fix --dry-run",
-        "cs-fix": "php-cs-fixer fix",
+        "cs-check": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run",
+        "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix",
         "test": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/phpunit -d memory_limit=-1 -c phpunit.xml.dist"

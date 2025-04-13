@@ -56,6 +56,11 @@ export default {
     period: { type: Object, required: true },
     camp: { type: Object, required: true },
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.story.title'),
+    }
+  },
   computed: {
     printConfig() {
       return {

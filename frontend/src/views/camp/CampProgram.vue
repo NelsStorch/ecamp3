@@ -184,6 +184,12 @@ export default {
       },
     }
   },
+  head() {
+    return {
+      title: () =>
+        this.$tc('views.camp.campProgram.title') + ': ' + this.period.description,
+    }
+  },
   computed: {
     camp() {
       return this.period.camp()

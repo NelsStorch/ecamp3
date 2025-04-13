@@ -48,6 +48,11 @@ class TagCollector implements TagCollectorInterface {
         }
 
         $this->addCacheTagForResource($iri);
+
+        // add resource specific tags
+        if ($object instanceof CanGenerateTagsInterface) {
+            $this->responseTagger->addTags($object->getCacheTags());
+        }
     }
 
     private function addCacheTagForResource(string $iri): void {

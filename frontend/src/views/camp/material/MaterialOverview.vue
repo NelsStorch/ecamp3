@@ -83,5 +83,10 @@ export default {
   setup(props) {
     return useMaterialViewHelper(props.camp)
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.material.materialOverview.title'),
+    }
+  },
 }
 </script>
