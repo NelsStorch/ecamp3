@@ -1,25 +1,73 @@
 <template>
-  <v-card class="ec-comment" color="grey lighten-2" elevation="0" rounded="xl">
-    <v-card-text class="py-2 px-3">
+  <v-sheet
+    outlined
+    class="ec-comment"
+    elevation="2"
+    rounded="lg"
+    border="left"
+    colored-border="blue"
+  >
+    <PromptEntityDelete
+      v-if="deletable"
+      entity="/gugus"
+      class="ec-comment__delete"
+      warning-text-entity="Kommentar"
+    >
+      <template #activator="{ attrs, on }">
+        <v-btn
+          v-if="deletable"
+          class="ec-comment__delete"
+          icon
+          absolute
+          right
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </template>
+    </PromptEntityDelete>
+    <v-card-text class="px-3 pt-2 pb-2 ec-comment__text">
       <slot />
     </v-card-text>
-  </v-card>
+  </v-sheet>
 </template>
 
 <script>
-import UserAvatar from '@/components/user/UserAvatar.vue'
+import PromptEntityDelete from '@/components/prompt/PromptEntityDelete.vue'
 
 export default {
   name: 'Comment',
-  components: { UserAvatar },
+  components: { PromptEntityDelete },
+  props: {
+    deletable: {
+      type: Boolean,
+      default: false,
+    },
+  },
 }
 </script>
 
 <style scoped>
-.v-card.ec-comment {
-  border-width: 0 0 6px !important;
-  border-style: solid !important;
-  border-color: #e1ecf3 !important;
-  background-color: #cedbe1 !important;
+.ec-comment {
+  background-color: #cfe2f1 !important;
+  border-color: #e3edfc #cfe2f1 #588ebc !important;
+}
+
+.ec-comment:not(:hover) .ec-comment__delete {
+  display: none;
+}
+
+.ec-comment__text :deep(p) {
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+  letter-spacing: -0.006em;
+}
+
+.ec-comment__text :deep(.editor) {
+  padding-top: 10px;
+  padding-bottom: 2px;
 }
 </style>
