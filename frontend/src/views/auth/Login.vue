@@ -216,6 +216,11 @@ export default {
       showCredits: true,
     }
   },
+  head() {
+    return {
+      title: this.$tc('global.button.login'),
+    }
+  },
   computed: {
     infoTextSuffix() {
       return LOGIN_INFO_TEXT_KEY

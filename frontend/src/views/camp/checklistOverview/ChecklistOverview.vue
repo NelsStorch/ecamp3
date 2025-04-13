@@ -49,9 +49,6 @@ export default {
   head() {
     return {
       title: () => this.checklist.name,
-      templateParams: {
-        section: this.camp.shortTitle,
-      },
     }
   },
   watch: {
