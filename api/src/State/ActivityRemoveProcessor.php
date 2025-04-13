@@ -28,8 +28,9 @@ class ActivityRemoveProcessor extends AbstractRemoveProcessor {
         // However, this currently runs into an error due to https://github.com/doctrine-extensions/DoctrineExtensions/issues/2510
         $this->em->remove($data->rootContentNode);
 
-        foreach ($data->comments as $comment) {
-            /** @var Comment $comment */
+        /** @var Comment[] $comments */
+        $comments = $data->comments;
+        foreach ($comments as $comment) {
             $comment->orphanDescription = $comment->activity->title;
             $comment->activity->removeComment($comment);
         }
