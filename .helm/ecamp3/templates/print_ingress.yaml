@@ -28,7 +28,7 @@ spec:
       http:
         paths:
           - path: {{ .Values.print.subpath }}(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ include "print.name" . }}
