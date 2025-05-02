@@ -71,7 +71,7 @@ services:
   
   http-cache-logs:
     image: varnish:7.7.0
-    container_name: 'ecamp3-http-cache-log'
+    container_name: 'ecamp3-http-cache-logs'
     depends_on:
       - http-cache
     volumes:
