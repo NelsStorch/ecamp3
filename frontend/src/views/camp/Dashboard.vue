@@ -24,7 +24,10 @@
         :loading-endpoints="loadingEndpoints"
         :camp="camp"
         :periods="periods"
-        :filter-fn="(filter) => scheduleEntries.filter(scheduleEntry => filterFn(scheduleEntry, filter))"
+        :filter-fn="
+          (filter) =>
+            scheduleEntries.filter((scheduleEntry) => filterFn(scheduleEntry, filter))
+        "
       />
       <template v-if="!loading">
         <table
@@ -217,7 +220,9 @@ export default {
       )
     },
     filteredScheduleEntries() {
-      return this.scheduleEntries.filter(scheduleEntry => this.filterFn(scheduleEntry, this.filter))
+      return this.scheduleEntries.filter((scheduleEntry) =>
+        this.filterFn(scheduleEntry, this.filter)
+      )
     },
     groupedScheduleEntries() {
       const groupedByPeriod = groupBy(

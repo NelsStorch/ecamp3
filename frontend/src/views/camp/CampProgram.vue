@@ -90,7 +90,12 @@ Show all activity schedule entries of a single period.
       class="ec-content-card__toolbar--border pb-4 justify-center"
       :loading-endpoints="loadingEndpoints"
       :camp="camp"
-      :filter-fn="(filter) => period.scheduleEntries().items.filter(scheduleEntry => filterFn(scheduleEntry, filter))"
+      :filter-fn="
+        (filter) =>
+          period
+            .scheduleEntries()
+            .items.filter((scheduleEntry) => filterFn(scheduleEntry, filter))
+      "
       @height-changed="scheduleEntryFiltersHeightChanged"
     />
     <template v-if="loading">
