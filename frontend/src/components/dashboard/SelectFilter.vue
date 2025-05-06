@@ -28,6 +28,7 @@
       >
         <v-list-item-title>
           <slot name="item" v-bind="{ item, self }">{{ item.text }}</slot>
+          <template v-if="item.resultCount !== null">({{ item.resultCount }})</template>
         </v-list-item-title>
         <v-list-item-action v-if="multiple && !item.exclusiveNone">
           <v-checkbox v-model="item.selected" dense />
@@ -65,11 +66,12 @@ export default {
         Object.values(this.items).map((item) => {
           const text = this.displayValue(item)
           const value = get(item, this.valueField)
+          const resultCount = get(item, 'resultCount', null)
           const exclusiveNone = get(item, 'exclusiveNone')
           const selected = this.multiple
             ? this.value?.includes(value)
             : this.value === value
-          return { text, value, selected, exclusiveNone }
+          return { text, resultCount, value, selected, exclusiveNone }
         }),
         'value'
       )

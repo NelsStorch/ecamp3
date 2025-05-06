@@ -24,6 +24,7 @@
         :loading-endpoints="loadingEndpoints"
         :camp="camp"
         :periods="periods"
+        :filter-fn="(filter) => scheduleEntries.filter(scheduleEntry => filterFn(scheduleEntry, filter))"
       />
       <template v-if="!loading">
         <table

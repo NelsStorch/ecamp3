@@ -7,7 +7,7 @@
     <BooleanFilter
       v-if="loadingEndpoints !== true && loadingEndpoints.campCollaborations !== true"
       v-model="showOnlyMyActivities"
-      :label="$tc('components.program.scheduleEntryFilters.onlyMyActivities')"
+      :label="$tc('components.program.scheduleEntryFilters.onlyMyActivities') + ' (' + myActivitiesCount + ')'"
     />
     <v-skeleton-loader
       v-else
@@ -22,7 +22,7 @@
         <SelectFilter
           v-if="multiplePeriods"
           v-model="value.period"
-          :items="periods"
+          :items="periodItems"
           display-field="description"
           :label="$tc('components.program.scheduleEntryFilters.period')"
         />
@@ -157,8 +157,21 @@ export default {
       type: [Boolean, Object],
       default: true,
     },
+    filterFn: {
+      type: Function,
+      default: () => []
+    },
   },
   computed: {
+    periodItems() {
+      return keyBy(
+        Object.values(this.periods).map(period => ({
+          ...period,
+          resultCount: this.resultCountWithModifiedFilter('period', period._meta.self)
+        })),
+        '_meta.self'
+      )
+    },
     multiplePeriods() {
       return this.periods && Object.keys(this.periods).length > 1
     },
@@ -179,17 +192,36 @@ export default {
           exclusiveNone: true,
           label: this.$tc('components.program.scheduleEntryFilters.responsibleNone'),
           _meta: { self: 'none' },
+          resultCount: this.resultCountWithModifiedFilter('responsible', ['none'])
         },
         ...keyBy(
           sortBy(this.camp.campCollaborations().items, (u) =>
             campCollaborationDisplayName(u, this.$tc.bind(this)).toLowerCase()
-          ),
+          ).map(campCollaboration => {
+            return {
+              ...campCollaboration,
+              resultCount: this.resultCountWithModifiedFilter('responsible', this.value.responsible?.includes('none') ? [
+                campCollaboration._meta.self,
+              ] : [
+                ...this.value.responsible,
+                campCollaboration._meta.self,
+              ])
+            }
+          }),
           '_meta.self'
         ),
       }
     },
     categories() {
-      return keyBy(this.camp.categories().items, '_meta.self')
+      return keyBy(
+        this.camp.categories().items.map(category => {
+          return {
+            ...category,
+            resultCount: this.resultCountWithModifiedFilter('category', [category._meta.self])
+          }
+        }),
+        '_meta.self'
+      )
     },
     progressLabels() {
       const labels = sortBy(this.camp.progressLabels().items, (l) => l.position)
@@ -197,8 +229,17 @@ export default {
         none: {
           title: this.$tc('components.program.scheduleEntryFilters.progressLabelNone'),
           _meta: { self: 'none' },
+          resultCount: this.resultCountWithModifiedFilter('progressLabel', ['none'])
         },
-        ...keyBy(labels, '_meta.self'),
+        ...keyBy(
+          labels.map(label => {
+            return {
+              ...label,
+              resultCount: this.resultCountWithModifiedFilter('progressLabel', [label._meta.self])
+            }
+          }),
+          '_meta.self'
+        ),
       }
     },
     filteredPropertiesCount() {
@@ -225,6 +266,14 @@ export default {
         this.value.progressLabel = null
       },
     },
+    myActivitiesCount() {
+      return this.filterFn({
+        responsible: [this.loggedInCampCollaboration],
+        category: [],
+        period: null,
+        progressLabel: null,
+      }).length
+    }
   },
   mounted() {
     if (this.loadingEndpoints !== true) {
@@ -257,6 +306,12 @@ export default {
     onResize({ height }) {
       this.$emit('height-changed', height)
     },
+    resultCountWithModifiedFilter(filterName, filterValue) {
+      return this.filterFn({
+        ...this.value,
+        [filterName]: filterValue,
+      }).length
+    }
   },
 }
 </script>
