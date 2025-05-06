@@ -99,7 +99,7 @@ Show all activity schedule entries of a single period.
       v-else
       :period="period"
       :show-button="isContributor"
-      :match-fn="match"
+      :filter-fn="(scheduleEntry) => filterFn(scheduleEntry, filter)"
     >
       <template #default="slotProps">
         <Picasso
@@ -263,30 +263,38 @@ export default {
         : this.$tc('views.camp.campProgram.reminderLockedCreate')
       this.showReminder = true
     },
-    match(scheduleEntry) {
+    filterFn(scheduleEntry, filter) {
       return (
-        this.filteredPropertiesCount === 0 ||
-        ((this.filter.category === null ||
-          this.filter.category.length === 0 ||
-          this.filter.category.includes(
+        // filter by period
+        (filter.period === null ||
+          filter.period === undefined ||
+          scheduleEntry.period()._meta.self === filter.period) &&
+        // filter by categories: OR filter
+        (filter.category === null ||
+          filter.category === undefined ||
+          filter.category.length === 0 ||
+          filter.category?.includes(
             scheduleEntry.activity().category()._meta.self
           )) &&
-          (this.filter.responsible === null ||
-            this.filter.responsible.length === 0 ||
-            this.filter.responsible?.every((responsible) =>
-              scheduleEntry
-                .activity()
-                .activityResponsibles()
-                .items.map((responsible) => responsible.campCollaboration()._meta.self)
-                .includes(responsible)
-            ) ||
-            (this.filter.responsible[0] === 'none' &&
-              scheduleEntry.activity().activityResponsibles().items.length === 0)) &&
-          (this.filter.progressLabel === null ||
-            this.filter.progressLabel.length === 0 ||
-            this.filter.progressLabel?.includes(
-              scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
-            )))
+        // filter by responsibles: AND filter
+        (filter.responsible === null ||
+          filter.responsible === undefined ||
+          filter.responsible.length === 0 ||
+          filter.responsible?.every((responsible) => {
+            return scheduleEntry
+              .activity()
+              .activityResponsibles()
+              .items.map((responsible) => responsible.campCollaboration()._meta.self)
+              .includes(responsible)
+          }) ||
+          (filter.responsible[0] === 'none' &&
+            scheduleEntry.activity().activityResponsibles().items.length === 0)) &&
+        (filter.progressLabel === null ||
+          filter.progressLabel === undefined ||
+          filter.progressLabel.length === 0 ||
+          filter.progressLabel?.includes(
+            scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
+          ))
       )
     },
     persistRouterState() {

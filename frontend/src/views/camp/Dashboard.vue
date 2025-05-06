@@ -215,35 +215,7 @@ export default {
       )
     },
     filteredScheduleEntries() {
-      return this.scheduleEntries.filter(
-        (scheduleEntry) =>
-          // filter by period
-          (this.filter.period === null ||
-            scheduleEntry.period()._meta.self === this.filter.period) &&
-          // filter by categories: OR filter
-          (this.filter.category === null ||
-            this.filter.category.length === 0 ||
-            this.filter.category?.includes(
-              scheduleEntry.activity().category()._meta.self
-            )) &&
-          // filter by responsibles: AND filter
-          (this.filter.responsible === null ||
-            this.filter.responsible.length === 0 ||
-            this.filter.responsible?.every((responsible) => {
-              return scheduleEntry
-                .activity()
-                .activityResponsibles()
-                .items.map((responsible) => responsible.campCollaboration()._meta.self)
-                .includes(responsible)
-            }) ||
-            (this.filter.responsible[0] === 'none' &&
-              scheduleEntry.activity().activityResponsibles().items.length === 0)) &&
-          (this.filter.progressLabel === null ||
-            this.filter.progressLabel.length === 0 ||
-            this.filter.progressLabel?.includes(
-              scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
-            ))
-      )
+      return this.scheduleEntries.filter(scheduleEntry => this.filterFn(scheduleEntry, this.filter))
     },
     groupedScheduleEntries() {
       const groupedByPeriod = groupBy(
@@ -314,6 +286,40 @@ export default {
           behavior: 'smooth',
         })
       }
+    },
+    filterFn(scheduleEntry, filter) {
+      return (
+        // filter by period
+        (filter.period === null ||
+          filter.period === undefined ||
+          scheduleEntry.period()._meta.self === filter.period) &&
+        // filter by categories: OR filter
+        (filter.category === null ||
+          filter.category === undefined ||
+          filter.category.length === 0 ||
+          filter.category?.includes(
+            scheduleEntry.activity().category()._meta.self
+          )) &&
+        // filter by responsibles: AND filter
+        (filter.responsible === null ||
+          filter.responsible === undefined ||
+          filter.responsible.length === 0 ||
+          filter.responsible?.every((responsible) => {
+            return scheduleEntry
+              .activity()
+              .activityResponsibles()
+              .items.map((responsible) => responsible.campCollaboration()._meta.self)
+              .includes(responsible)
+          }) ||
+          (filter.responsible[0] === 'none' &&
+            scheduleEntry.activity().activityResponsibles().items.length === 0)) &&
+        (filter.progressLabel === null ||
+          filter.progressLabel === undefined ||
+          filter.progressLabel.length === 0 ||
+          filter.progressLabel?.includes(
+            scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
+          ))
+      )
     },
   },
 }
