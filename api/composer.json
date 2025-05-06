@@ -10,7 +10,7 @@
         "cweagans/composer-patches": "1.7.3",
         "doctrine/common": "3.5.0",
         "doctrine/doctrine-bundle": "2.14.0",
-        "doctrine/doctrine-migrations-bundle": "3.4.1",
+        "doctrine/doctrine-migrations-bundle": "3.4.2",
         "doctrine/orm": "3.3.3",
         "exercise/htmlpurifier-bundle": "5.0",
         "friendsofsymfony/http-cache": "3.1.0",
