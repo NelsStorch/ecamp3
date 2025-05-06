@@ -150,6 +150,7 @@ import {
 import AvatarRow from '@/components/generic/AvatarRow.vue'
 import ScheduleEntryFilters from '@/components/program/ScheduleEntryFilters.vue'
 import dayjs from '@/common/helpers/dayjs.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'Dashboard',
@@ -289,38 +290,7 @@ export default {
       }
     },
     filterFn(scheduleEntry, filter) {
-      return (
-        // filter by period
-        (filter.period === null ||
-          filter.period === undefined ||
-          scheduleEntry.period()._meta.self === filter.period) &&
-        // filter by categories: OR filter
-        (filter.category === null ||
-          filter.category === undefined ||
-          filter.category.length === 0 ||
-          filter.category?.includes(
-            scheduleEntry.activity().category()._meta.self
-          )) &&
-        // filter by responsibles: AND filter
-        (filter.responsible === null ||
-          filter.responsible === undefined ||
-          filter.responsible.length === 0 ||
-          filter.responsible?.every((responsible) => {
-            return scheduleEntry
-              .activity()
-              .activityResponsibles()
-              .items.map((responsible) => responsible.campCollaboration()._meta.self)
-              .includes(responsible)
-          }) ||
-          (filter.responsible[0] === 'none' &&
-            scheduleEntry.activity().activityResponsibles().items.length === 0)) &&
-        (filter.progressLabel === null ||
-          filter.progressLabel === undefined ||
-          filter.progressLabel.length === 0 ||
-          filter.progressLabel?.includes(
-            scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
-          ))
-      )
+      return filterMatchScheduleEntry(scheduleEntry, filter)
     },
   },
 }
