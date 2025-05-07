@@ -52,12 +52,10 @@
       "name": "LA Themenbereich"
     },
     "learningObjectives": {
-      "icon": "mdi-school",
       "info": "Formuliere die Kompetenzen, über welche die Teilnehmenden nach diesem Block verfügen, in der Form von Lernzielen.",
       "name": "Blockziele"
     },
     "learningTopics": {
-      "icon": "mdi-school",
       "info": "Liste die Ausbildungs-Themen auf, mit welchen die Teilnehmenden sich in diesem Block auseinandersetzen werden.",
       "name": "Blockinhalte"
     },
@@ -70,7 +68,6 @@
       "name": "Notizen"
     },
     "responsiveLayout": {
-      "icon": "mdi-view-compact",
       "mainContent": "Hauptinhalt",
       "name": "Standardlayout",
       "printAboveMainContent": "Über dem Hauptinhalt drucken",
