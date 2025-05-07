@@ -8,7 +8,6 @@
   },
   "contentNode": {
     "checklist": {
-      "icon": "",
       "info": "Wählen Sie die relevanten Checklisten-Einträge aus, die von dieser Aktivität abgedeckt werden (Kursziele, etc.).",
       "name": "Checklisten"
     },
@@ -18,7 +17,6 @@
           "name": "Spalte|Spalte {name}"
         }
       },
-      "icon": "",
       "name": "Spaltenlayout"
     },
     "laThematicArea": {
@@ -50,39 +48,32 @@
           }
         }
       },
-      "icon": "",
       "info": "Eine J+S Lageraktivität muss mindestens eines der aufgeführten Themen behandeln.{br}Erfasse, welche Themen in diesem Block behandelt werden.",
       "name": "LA Themenbereich"
     },
     "learningObjectives": {
-      "icon": "mdi-school",
       "info": "Formuliere die Kompetenzen, über welche die Teilnehmenden nach diesem Block verfügen, in der Form von Lernzielen.",
       "name": "Blockziele"
     },
     "learningTopics": {
-      "icon": "mdi-school",
       "info": "Liste die Ausbildungs-Themen auf, mit welchen die Teilnehmenden sich in diesem Block auseinandersetzen werden.",
       "name": "Blockinhalte"
     },
     "material": {
-      "icon": "",
       "info": "Hier kannst du den Material-Bedarf für diesen Block erfassen.{br}Die Materiallisten kannst du im Menu 'Admin' verwalten.{br}Eine Zusammenstellung für den Einkauf findest du im Menu 'Material'.",
       "name": "Material"
     },
     "notes": {
-      "icon": "",
       "info": "Hier kannst du beliebige Notizen erfassen.{br}z.B. Ideen, Todo's, offene Fragen, Kontakte, ÖV-Verbindungen, usw.",
       "name": "Notizen"
     },
     "responsiveLayout": {
-      "icon": "mdi-view-compact",
       "mainContent": "Hauptinhalt",
       "name": "Standardlayout",
       "printAboveMainContent": "Über dem Hauptinhalt drucken",
       "printBelowMainContent": "Unter dem Hauptinhalt drucken"
     },
     "safetyConsiderations": {
-      "icon": "",
       "info": "Einige Blöcke erfordern, dass ihr euch Gedanken zu den Risiken macht. Hier könnt ihr diese Gedanken erfassen.{br}Haltet fest, welche Risiken ihr erkannt habt - und wie ihr diesen begegnen könnt.",
       "name": "Sicherheitsüberlegungen"
     },
@@ -97,12 +88,10 @@
           "name": "Programmpunkt | Programmpunkte"
         }
       },
-      "icon": "",
       "info": "Hier kannst du den Inhalt von diesem Block planen.{br}In der linken Spalte [Zeit] kannst du die Dauer der einzelnen Elemente erfassen.{br}In der rechten Spalte [Verantwortlich] kannst du Personen zuteilen.",
       "name": "Programmabschnitt"
     },
     "storycontext": {
-      "icon": "",
       "info": "Beschreibe, wie sich dieser Block in die Geschichte vom Lager einbettet.{br}Eine Zusammenstellung aller Geschichts-Elemente findest du im Menu 'Geschichte'.{br}Ihr könnt auch erst im Menu 'Geschichte' zuerst eine durchgängige Geschichte erarbeiten - so dass man den Block-Inhalt perfekt in die Geschichte einbetten kann.",
       "name": "Geschichte"
     }
