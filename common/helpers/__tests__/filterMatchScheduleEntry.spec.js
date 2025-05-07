@@ -50,6 +50,60 @@ describe('filterMatchScheduleEntry', () => {
     [{ progressLabel: ['/progress_labels/00000000'] }, false],
     [{ progressLabel: ['/progress_labels/1a2b3c4d', '/progress_labels/00000000'] }, true],
     [{ progressLabel: ['/progress_labels/00000000', '/progress_labels/1a2b3c4d'] }, true],
+    [{
+      period: '/periods/1a2b3c4d',
+      category: ['/categories/1a2b3c4d'],
+      responsible: ['/camp_collaborations/1a2b3c4d'],
+      progressLabel: ['/progress_labels/1a2b3c4d'],
+    }, true],
+    [{
+      period: null,
+      category: ['/categories/1a2b3c4d'],
+      responsible: ['/camp_collaborations/1a2b3c4d'],
+      progressLabel: ['/progress_labels/1a2b3c4d'],
+    }, true],
+    [{
+      period: '/periods/1a2b3c4d',
+      category: null,
+      responsible: ['/camp_collaborations/1a2b3c4d'],
+      progressLabel: ['/progress_labels/1a2b3c4d'],
+    }, true],
+    [{
+      period: '/periods/1a2b3c4d',
+      category: ['/categories/1a2b3c4d'],
+      responsible: null,
+      progressLabel: ['/progress_labels/1a2b3c4d'],
+    }, true],
+    [{
+      period: '/periods/1a2b3c4d',
+      category: ['/categories/1a2b3c4d'],
+      responsible: ['/camp_collaborations/1a2b3c4d'],
+      progressLabel: null,
+    }, true],
+    [{
+      period: '/periods/00000000',
+      category: ['/categories/1a2b3c4d'],
+      responsible: ['/camp_collaborations/1a2b3c4d'],
+      progressLabel: ['/progress_labels/1a2b3c4d'],
+    }, false],
+    [{
+      period: '/periods/1a2b3c4d',
+      category: ['/categories/00000000'],
+      responsible: ['/camp_collaborations/1a2b3c4d'],
+      progressLabel: ['/progress_labels/1a2b3c4d'],
+    }, false],
+    [{
+      period: '/periods/1a2b3c4d',
+      category: ['/categories/1a2b3c4d'],
+      responsible: ['/camp_collaborations/00000000'],
+      progressLabel: ['/progress_labels/1a2b3c4d'],
+    }, false],
+    [{
+      period: '/periods/1a2b3c4d',
+      category: ['/categories/1a2b3c4d'],
+      responsible: ['/camp_collaborations/1a2b3c4d'],
+      progressLabel: ['/progress_labels/00000000'],
+    }, false],
   ])('maps %o to %s', (filter, expected) => {
     expect(filterMatchScheduleEntry(scheduleEntry, filter)).toEqual(expected)
   })
