@@ -90,12 +90,7 @@ Show all activity schedule entries of a single period.
       class="ec-content-card__toolbar--border pb-4 justify-center"
       :loading-endpoints="loadingEndpoints"
       :camp="camp"
-      :filter-fn="
-        (filter) =>
-          period
-            .scheduleEntries()
-            .items.filter((scheduleEntry) => filterFn(scheduleEntry, filter))
-      "
+      :filter-fn="filterFn"
       @height-changed="scheduleEntryFiltersHeightChanged"
     />
     <template v-if="loading">
@@ -105,7 +100,7 @@ Show all activity schedule entries of a single period.
       v-else
       :period="period"
       :show-button="isContributor"
-      :filter-fn="(scheduleEntry) => filterFn(scheduleEntry, filter)"
+      :filter-fn="filterMatchScheduleEntry"
     >
       <template #default="slotProps">
         <Picasso
@@ -236,6 +231,17 @@ export default {
     isFilterSet() {
       return this.filteredPropertiesCount > 0
     },
+    filterMatchScheduleEntry() {
+      return (scheduleEntry) => filterMatchScheduleEntry(scheduleEntry, this.filter)
+    },
+    filterFn() {
+      return (filter) =>
+        this.period
+          .scheduleEntries()
+          .items.filter((scheduleEntry) =>
+            filterMatchScheduleEntry(scheduleEntry, filter)
+          )
+    },
   },
   watch: {
     openFilter: {
@@ -269,9 +275,6 @@ export default {
         ? this.$tc('views.camp.campProgram.reminderLockedMove')
         : this.$tc('views.camp.campProgram.reminderLockedCreate')
       this.showReminder = true
-    },
-    filterFn(scheduleEntry, filter) {
-      return filterMatchScheduleEntry(scheduleEntry, filter)
     },
     persistRouterState() {
       const query = transformValuesToHalId(this.filter)

@@ -24,10 +24,7 @@
         :loading-endpoints="loadingEndpoints"
         :camp="camp"
         :periods="periods"
-        :filter-fn="
-          (filter) =>
-            scheduleEntries.filter((scheduleEntry) => filterFn(scheduleEntry, filter))
-        "
+        :filter-fn="filterFn"
       />
       <template v-if="!loading">
         <table
@@ -221,7 +218,7 @@ export default {
     },
     filteredScheduleEntries() {
       return this.scheduleEntries.filter((scheduleEntry) =>
-        this.filterFn(scheduleEntry, this.filter)
+        filterMatchScheduleEntry(scheduleEntry, this.filter)
       )
     },
     groupedScheduleEntries() {
@@ -234,6 +231,12 @@ export default {
           return scheduleEntry.day()._meta.self
         })
       )
+    },
+    filterFn() {
+      return (filter) =>
+        this.scheduleEntries.filter((scheduleEntry) =>
+          filterMatchScheduleEntry(scheduleEntry, filter)
+        )
     },
     ...mapGetters({
       loggedInUser: 'getLoggedInUser',
@@ -293,9 +296,6 @@ export default {
           behavior: 'smooth',
         })
       }
-    },
-    filterFn(scheduleEntry, filter) {
-      return filterMatchScheduleEntry(scheduleEntry, filter)
     },
   },
 }
