@@ -8,7 +8,6 @@
   },
   "contentNode": {
     "checklist": {
-      "icon": "",
       "info": "",
       "name": ""
     },
@@ -18,7 +17,6 @@
           "name": "Colonne|Colonne {name}"
         }
       },
-      "icon": "",
       "name": "Disposition des colonnes"
     },
     "laThematicArea": {
@@ -50,39 +48,32 @@
           }
         }
       },
-      "icon": "",
       "info": "Une activité de camp J+S doit aborder au moins un des sujets énumérés.{br}Sélectionne les sujets abordés dans ce bloc.",
       "name": "Domaine thématique AC"
     },
     "learningObjectives": {
-      "icon": "",
       "info": "",
       "name": ""
     },
     "learningTopics": {
-      "icon": "",
       "info": "",
       "name": ""
     },
     "material": {
-      "icon": "",
       "info": "Tu peux saisir ici les besoins en matériel pour ce bloc.{br}Tu peux gérer les listes de matériel dans le menu 'Admin'.{br}Tu peux trouver un résumé des achats dans le menu 'Matériel'.",
       "name": "Matériel"
     },
     "notes": {
-      "icon": "",
       "info": "Tu peux y inscrire tes notes, par exemple des idées, des tâches à faire, des questions ouvertes, des contacts, des correspondances avec les transports publics, etc.",
       "name": "Remarques"
     },
     "responsiveLayout": {
-      "icon": "mdi-view-compact",
       "mainContent": "Contenu principal",
       "name": "Disposition par défaut",
       "printAboveMainContent": "Imprimer au-dessus du contenu principal",
       "printBelowMainContent": "Imprimer sous le contenu principal"
     },
     "safetyConsiderations": {
-      "icon": "",
       "info": "",
       "name": ""
     },
@@ -97,12 +88,10 @@
           "name": "Section du programme | Sections du programme"
         }
       },
-      "icon": "",
       "info": "Ici, tu peux planifier le contenu de ce bloc.{br}Dans la colonne de gauche [Temps], tu peux enregistrer la durée des différents éléments.{br}Dans la colonne de droite [Responsable], tu peux assigner des personnes.",
       "name": "Sections du programme"
     },
     "storycontext": {
-      "icon": "",
       "info": "Décris comment ce bloc s'intègre dans l'histoire du camp.{br}Tu peux trouver un résumé de tous les éléments de l'histoire dans le menu 'Histoire'.{br}Tu peux aussi d'abord élaborer une histoire continue dans le menu 'Histoire' - pour que tu puisses parfaitement intégrer le contenu du bloc dans l'histoire.",
       "name": "Histoire"
     }
