@@ -15,15 +15,14 @@ const filterMatchScheduleEntry = (scheduleEntry, filter) => {
     (filter.category === null ||
       filter.category === undefined ||
       filter.category.length === 0 ||
-      filter.category?.includes(
+      filter.category.includes(
         scheduleEntry.activity().category()._meta.self
       )) &&
     // filter by responsibles: AND filter
     (filter.responsible === null ||
       filter.responsible === undefined ||
       filter.responsible.length === 0 ||
-      typeof filter.responsible?.every !== 'function' ||
-      filter.responsible?.every((responsible) => {
+      filter.responsible.every((responsible) => {
         return scheduleEntry
           .activity()
           .activityResponsibles()
@@ -35,7 +34,7 @@ const filterMatchScheduleEntry = (scheduleEntry, filter) => {
     (filter.progressLabel === null ||
       filter.progressLabel === undefined ||
       filter.progressLabel.length === 0 ||
-      filter.progressLabel?.includes(
+      filter.progressLabel.includes(
         scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
       ))
   )

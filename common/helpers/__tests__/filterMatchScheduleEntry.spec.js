@@ -36,8 +36,6 @@ describe('filterMatchScheduleEntry', () => {
     [{ category: ['/categories/00000000', '/categories/1a2b3c4d'] }, true],
     [{ responsible: undefined }, true],
     [{ responsible: null }, true],
-    [{ responsible: '/camp_collaborations/1a2b3c4d' }, true],
-    [{ responsible: '/camp_collaborations/00000000' }, true], // Non-array filter value is treated as absent filter value
     [{ responsible: ['/camp_collaborations/1a2b3c4d'] }, true],
     [{ responsible: ['/camp_collaborations/00000000'] }, false],
     [{ responsible: ['/camp_collaborations/1a2b3c4d', '/camp_collaborations/00000000'] }, false],
