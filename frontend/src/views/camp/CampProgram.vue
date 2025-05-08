@@ -127,6 +127,7 @@ Show all activity schedule entries of a single period.
           class="pa-4"
           :loading-endpoints="loadingEndpoints"
           :camp="camp"
+          :filter-fn="filterFn"
         />
       </v-sheet>
     </v-bottom-sheet>
