@@ -12,6 +12,7 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable vue-scoped-css/no-unused-selector */
 .v-badge {
   margin-top: 0;
 }
@@ -39,4 +40,5 @@ export default {
   transform: none;
   border-color: #cfd8dc;
 }
+/* eslint-enable vue-scoped-css/no-unused-selector */
 </style>
