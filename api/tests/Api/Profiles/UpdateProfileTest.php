@@ -3,6 +3,7 @@
 namespace App\Tests\Api\Profiles;
 
 use App\Entity\Profile;
+use App\Service\MailService;
 use App\Tests\Api\ECampApiTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -89,6 +90,37 @@ class UpdateProfileTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'detail' => 'Extra attributes are not allowed ("email" is unknown).',
         ]);
+    }
+
+    public function testPatchProfileValidatesChangedEmail() {
+        $client = static::createClientWithCredentials();
+        // Disable resetting the database between the two requests
+        $client->disableReboot();
+
+        $untrustedEmailKey = null;
+        $mailServiceMock = $this->createMock(MailService::class);
+        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function($user, $profile) use(&$untrustedEmailKey) {
+            $untrustedEmailKey = $profile->untrustedEmailKey;
+        });
+        $this->getContainer()->set(MailService::class, $mailServiceMock);
+
+        /** @var Profile $profile */
+        $profile = static::getFixture('profile1manager');
+
+        $client->request('PATCH', '/profiles/'.$profile->getId(), ['json' => [
+            'newEmail' => 'new@example.com',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+
+        // when
+        $client->request('PATCH', '/profiles/'.$profile->getId(), ['json' => [
+            'untrustedEmailKey' => $untrustedEmailKey,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+
+        // then
+        $this->assertResponseStatusCodeSame(200);
+        $profile = $this->getEntityManager()->find(Profile::class, $profile->getId());
+        $this->assertEquals('new@example.com', $profile->email);
     }
 
     public function testPatchProfileTrimsFirstname() {
