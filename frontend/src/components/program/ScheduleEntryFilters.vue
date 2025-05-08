@@ -7,12 +7,8 @@
     <BooleanFilter
       v-if="loadingEndpoints !== true && loadingEndpoints.campCollaborations !== true"
       v-model="showOnlyMyActivities"
-      :label="
-        $tc('components.program.scheduleEntryFilters.onlyMyActivities') +
-        ' (' +
-        myActivitiesCount +
-        ')'
-      "
+      :label="$tc('components.program.scheduleEntryFilters.onlyMyActivities')"
+      :result-count="myActivitiesCount"
     />
     <v-skeleton-loader
       v-else
