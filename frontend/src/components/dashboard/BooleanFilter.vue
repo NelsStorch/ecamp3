@@ -1,18 +1,15 @@
 <template>
   <v-chip label outlined :color="value ? 'primary' : null" @click="$emit('input', !value)"
-    >{{ label }}
-    <v-badge
-      v-if="resultCount !== null"
-      inline
-      bordered
-      color="#e8e8e8"
-      :content="resultCount"
+    >{{ label }} <CountBadge v-if="resultCount !== null" :count="resultCount"
   /></v-chip>
 </template>
 
 <script>
+import CountBadge from '@/components/dashboard/CountBadge.vue'
+
 export default {
   name: 'BooleanFilter',
+  components: { CountBadge },
   props: {
     value: Boolean,
     label: { type: String, required: true },
@@ -20,9 +17,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-::v-deep(.v-badge__badge) {
-  color: #000 !important;
-}
-</style>
