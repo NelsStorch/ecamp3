@@ -24,6 +24,7 @@
         :loading-endpoints="loadingEndpoints"
         :camp="camp"
         :periods="periods"
+        :filter-fn="filterFn"
       />
       <template v-if="!loading">
         <table
@@ -149,6 +150,7 @@ import {
 import AvatarRow from '@/components/generic/AvatarRow.vue'
 import ScheduleEntryFilters from '@/components/program/ScheduleEntryFilters.vue'
 import dayjs from '@/common/helpers/dayjs.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'Dashboard',
@@ -215,34 +217,8 @@ export default {
       )
     },
     filteredScheduleEntries() {
-      return this.scheduleEntries.filter(
-        (scheduleEntry) =>
-          // filter by period
-          (this.filter.period === null ||
-            scheduleEntry.period()._meta.self === this.filter.period) &&
-          // filter by categories: OR filter
-          (this.filter.category === null ||
-            this.filter.category.length === 0 ||
-            this.filter.category?.includes(
-              scheduleEntry.activity().category()._meta.self
-            )) &&
-          // filter by responsibles: AND filter
-          (this.filter.responsible === null ||
-            this.filter.responsible.length === 0 ||
-            this.filter.responsible?.every((responsible) => {
-              return scheduleEntry
-                .activity()
-                .activityResponsibles()
-                .items.map((responsible) => responsible.campCollaboration()._meta.self)
-                .includes(responsible)
-            }) ||
-            (this.filter.responsible[0] === 'none' &&
-              scheduleEntry.activity().activityResponsibles().items.length === 0)) &&
-          (this.filter.progressLabel === null ||
-            this.filter.progressLabel.length === 0 ||
-            this.filter.progressLabel?.includes(
-              scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
-            ))
+      return this.scheduleEntries.filter((scheduleEntry) =>
+        filterMatchScheduleEntry(scheduleEntry, this.filter)
       )
     },
     groupedScheduleEntries() {
@@ -255,6 +231,12 @@ export default {
           return scheduleEntry.day()._meta.self
         })
       )
+    },
+    filterFn() {
+      return (filter) =>
+        this.scheduleEntries.filter((scheduleEntry) =>
+          filterMatchScheduleEntry(scheduleEntry, filter)
+        )
     },
     ...mapGetters({
       loggedInUser: 'getLoggedInUser',
@@ -285,8 +267,8 @@ export default {
 
     this.camp.periods()._meta.load.then(({ allItems }) => {
       const collection = allItems.map((entry) => entry._meta.self)
-      this.filter.periods =
-        this.filter.periods?.filter((value) => collection.includes(value)) ?? null
+      this.filter.period =
+        this.filter.period?.filter((value) => collection.includes(value)) ?? null
       this.loadingEndpoints.periods = false
     })
   },

@@ -90,6 +90,7 @@ Show all activity schedule entries of a single period.
       class="ec-content-card__toolbar--border pb-4 justify-center"
       :loading-endpoints="loadingEndpoints"
       :camp="camp"
+      :filter-fn="filterFn"
       @height-changed="scheduleEntryFiltersHeightChanged"
     />
     <template v-if="loading">
@@ -99,7 +100,7 @@ Show all activity schedule entries of a single period.
       v-else
       :period="period"
       :show-button="isContributor"
-      :match-fn="match"
+      :filter-fn="filterMatchScheduleEntry"
     >
       <template #default="slotProps">
         <Picasso
@@ -126,6 +127,7 @@ Show all activity schedule entries of a single period.
           class="pa-4"
           :loading-endpoints="loadingEndpoints"
           :camp="camp"
+          :filter-fn="filterFn"
         />
       </v-sheet>
     </v-bottom-sheet>
@@ -147,6 +149,7 @@ import {
   processRouteQuery,
   transformValuesToHalId,
 } from '@/helpers/querySyncHelper.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'CampProgram',
@@ -229,6 +232,17 @@ export default {
     isFilterSet() {
       return this.filteredPropertiesCount > 0
     },
+    filterMatchScheduleEntry() {
+      return (scheduleEntry) => filterMatchScheduleEntry(scheduleEntry, this.filter)
+    },
+    filterFn() {
+      return (filter) =>
+        this.period
+          .scheduleEntries()
+          .items.filter((scheduleEntry) =>
+            filterMatchScheduleEntry(scheduleEntry, filter)
+          )
+    },
   },
   watch: {
     openFilter: {
@@ -262,32 +276,6 @@ export default {
         ? this.$tc('views.camp.campProgram.reminderLockedMove')
         : this.$tc('views.camp.campProgram.reminderLockedCreate')
       this.showReminder = true
-    },
-    match(scheduleEntry) {
-      return (
-        this.filteredPropertiesCount === 0 ||
-        ((this.filter.category === null ||
-          this.filter.category.length === 0 ||
-          this.filter.category.includes(
-            scheduleEntry.activity().category()._meta.self
-          )) &&
-          (this.filter.responsible === null ||
-            this.filter.responsible.length === 0 ||
-            this.filter.responsible?.every((responsible) =>
-              scheduleEntry
-                .activity()
-                .activityResponsibles()
-                .items.map((responsible) => responsible.campCollaboration()._meta.self)
-                .includes(responsible)
-            ) ||
-            (this.filter.responsible[0] === 'none' &&
-              scheduleEntry.activity().activityResponsibles().items.length === 0)) &&
-          (this.filter.progressLabel === null ||
-            this.filter.progressLabel.length === 0 ||
-            this.filter.progressLabel?.includes(
-              scheduleEntry.activity().progressLabel?.()._meta.self ?? 'none'
-            )))
-      )
     },
     persistRouterState() {
       const query = transformValuesToHalId(this.filter)
