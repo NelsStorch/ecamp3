@@ -269,6 +269,65 @@ class UpdateProfileTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testActivatingEmailClaimingPersonalInvitationHandlesUniqueConstraintViolationGracefully() {
+        $client = static::createClientWithCredentials();
+        // Disable resetting the database between the two requests
+        $client->disableReboot();
+
+        $camp = $this->getEntityManager()->find(Camp::class, static::getFixture('camp1')->getId());
+
+        // create an invitation which will be claimed by the user, in a camp where the user already collaborates
+        $invitation1 = new CampCollaboration();
+        $invitation1->camp = $camp;
+        $invitation1->status = CampCollaboration::STATUS_INVITED;
+        $invitation1->inviteEmail = 'new@example.com';
+        $invitation1->inviteKeyHash = '1234123412341234';
+        $invitation1->role = CampCollaboration::ROLE_MANAGER;
+        $this->getEntityManager()->persist($invitation1);
+
+        $this->getEntityManager()->flush();
+
+        $untrustedEmailKey = null;
+        $mailServiceMock = $this->createMock(MailService::class);
+        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function($user, $profile) use(&$untrustedEmailKey) {
+            $untrustedEmailKey = $profile->untrustedEmailKey;
+        });
+        $this->getContainer()->set(MailService::class, $mailServiceMock);
+
+        /** @var Profile $profile */
+        $profile = static::getFixture('profile1manager');
+
+        $client->request('PATCH', '/profiles/'.$profile->getId(), ['json' => [
+            'newEmail' => 'new@example.com',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+
+        // when
+        $client->request('PATCH', '/profiles/'.$profile->getId(), ['json' => [
+            'untrustedEmailKey' => $untrustedEmailKey,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+
+        // then
+
+        // we need to log in again after changing the email address, because the login email is in the JWT token
+        $profile = $this->getEntityManager()->find(Profile::class, $profile->getId());
+        $jwtToken = static::getContainer()->get('lexik_jwt_authentication.jwt_manager')->create($profile->user);
+        $lastPeriodPosition = strrpos($jwtToken, '.');
+        $jwtHeaderAndPayload = substr($jwtToken, 0, $lastPeriodPosition);
+        $jwtSignature = substr($jwtToken, $lastPeriodPosition + 1);
+        $cookies = $client->getCookieJar();
+        $cookies->set(new Cookie('example_com_jwt_hp', $jwtHeaderAndPayload, null, null, 'localhost', false, false, false, 'strict'));
+        $cookies->set(new Cookie('example_com_jwt_s', $jwtSignature, null, null, 'localhost', false, true, false, 'strict'));
+
+        $client->request('GET', '/personal_invitations');
+
+        // User has one personal invitation waiting for them
+        $this->assertJsonContains([
+            'totalItems' => 0,
+        ]);
+    }
+
     public function testPatchProfileTrimsFirstname() {
         $profile = static::getFixture('profile1manager');
         static::createClientWithCredentials()->request('PATCH', '/profiles/'.$profile->getId(), ['json' => [
