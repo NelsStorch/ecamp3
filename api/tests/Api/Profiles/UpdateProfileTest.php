@@ -6,7 +6,6 @@ use App\Entity\Camp;
 use App\Entity\CampCollaboration;
 use App\Entity\Profile;
 use App\Entity\User;
-use App\Repository\ProfileRepository;
 use App\Service\MailService;
 use App\Tests\Api\ECampApiTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -104,7 +103,7 @@ class UpdateProfileTest extends ECampApiTestCase {
 
         $untrustedEmailKey = null;
         $mailServiceMock = $this->createMock(MailService::class);
-        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function($user, $profile) use(&$untrustedEmailKey) {
+        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function ($user, $profile) use (&$untrustedEmailKey) {
             $untrustedEmailKey = $profile->untrustedEmailKey;
         });
         $this->getContainer()->set(MailService::class, $mailServiceMock);
@@ -222,7 +221,7 @@ class UpdateProfileTest extends ECampApiTestCase {
 
         $untrustedEmailKey = null;
         $mailServiceMock = $this->createMock(MailService::class);
-        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function($user, $profile) use(&$untrustedEmailKey) {
+        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function ($user, $profile) use (&$untrustedEmailKey) {
             $untrustedEmailKey = $profile->untrustedEmailKey;
         });
         $this->getContainer()->set(MailService::class, $mailServiceMock);
@@ -260,7 +259,7 @@ class UpdateProfileTest extends ECampApiTestCase {
             'totalItems' => 1,
             '_links' => [
                 'items' => [
-                    ['href' => "/personal_invitations/{$invitation1->getId()}"]
+                    ['href' => "/personal_invitations/{$invitation1->getId()}"],
                 ],
             ],
             '_embedded' => [
@@ -289,7 +288,7 @@ class UpdateProfileTest extends ECampApiTestCase {
 
         $untrustedEmailKey = null;
         $mailServiceMock = $this->createMock(MailService::class);
-        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function($user, $profile) use(&$untrustedEmailKey) {
+        $mailServiceMock->expects($this->once())->method('sendEmailVerificationMail')->willReturnCallback(function ($user, $profile) use (&$untrustedEmailKey) {
             $untrustedEmailKey = $profile->untrustedEmailKey;
         });
         $this->getContainer()->set(MailService::class, $mailServiceMock);

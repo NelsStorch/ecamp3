@@ -11,15 +11,16 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @internal
+ */
 class ClaimInvitationServiceTest extends KernelTestCase {
-
     private CampCollaborationRepository $campCollaborationRepository;
     private EntityManagerInterface $em;
     private ClaimInvitationService $claimInvitationService;
 
     private User $user;
     private string $email = 'test@example.com';
-
 
     protected function setUp(): void {
         static::bootKernel();
@@ -38,7 +39,8 @@ class ClaimInvitationServiceTest extends KernelTestCase {
             ->expects($this->once())
             ->method('findAllByInviteEmailAndInvited')
             ->with($this->email)
-            ->willReturn([]);
+            ->willReturn([])
+        ;
 
         // then
         $this->em->expects($this->never())->method('persist');
@@ -61,7 +63,8 @@ class ClaimInvitationServiceTest extends KernelTestCase {
             ->expects($this->once())
             ->method('findAllByInviteEmailAndInvited')
             ->with($this->email)
-            ->willReturn([ $invitation ]);
+            ->willReturn([$invitation])
+        ;
 
         // then
         $this->em->expects($this->once())->method('persist')->with($invitation);
@@ -97,13 +100,15 @@ class ClaimInvitationServiceTest extends KernelTestCase {
             ->expects($this->once())
             ->method('findAllByInviteEmailAndInvited')
             ->with($this->email)
-            ->willReturn([ $invitation ]);
+            ->willReturn([$invitation])
+        ;
 
         $this->campCollaborationRepository
             ->expects($this->once())
             ->method('findOneBy')
             ->with(['user' => $this->user, 'camp' => $camp])
-            ->willReturn($existingCollaboration);
+            ->willReturn($existingCollaboration)
+        ;
 
         // then
         $this->em->expects($this->never())->method('persist');
@@ -139,13 +144,15 @@ class ClaimInvitationServiceTest extends KernelTestCase {
             ->expects($this->once())
             ->method('findAllByInviteEmailAndInvited')
             ->with($this->email)
-            ->willReturn([ $invitation ]);
+            ->willReturn([$invitation])
+        ;
 
         $this->campCollaborationRepository
             ->expects($this->once())
             ->method('findOneBy')
             ->with(['user' => $this->user, 'camp' => $camp])
-            ->willReturn($existingCollaboration);
+            ->willReturn($existingCollaboration)
+        ;
 
         // then
         $this->em->expects($this->never())->method('persist');
@@ -181,24 +188,30 @@ class ClaimInvitationServiceTest extends KernelTestCase {
             ->expects($this->once())
             ->method('findAllByInviteEmailAndInvited')
             ->with($this->email)
-            ->willReturn([ $invitation, $invitation2 ]);
+            ->willReturn([$invitation, $invitation2])
+        ;
 
         // then
         $matcher1 = $this->exactly(2);
         $this->em->expects($matcher1)
             ->method('persist')
             ->willReturnCallback(function (CampCollaboration $value) use ($matcher1, $invitation, $invitation2) {
-                if ($matcher1->numberOfInvocations() === 1) $this->assertEquals($invitation, $value);
-                else $this->assertEquals($invitation2, $value);
-            });
+                if (1 === $matcher1->numberOfInvocations()) {
+                    $this->assertEquals($invitation, $value);
+                } else {
+                    $this->assertEquals($invitation2, $value);
+                }
+            })
+        ;
         $matcher2 = $this->exactly(2);
         $this->em->expects($matcher2)
             ->method('flush')
             ->willReturnCallback(function () use ($matcher2) {
-                if ($matcher2->numberOfInvocations() === 1) {
+                if (1 === $matcher2->numberOfInvocations()) {
                     throw $this->createMock(UniqueConstraintViolationException::class);
                 }
-            });
+            })
+        ;
         $this->em->expects($this->once())->method('clear');
 
         // when

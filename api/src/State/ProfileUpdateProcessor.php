@@ -23,7 +23,6 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
  * @template-extends AbstractPersistProcessor<Profile>
  */
 class ProfileUpdateProcessor extends AbstractPersistProcessor {
-
     private $emailAddressVerificationPerformed = false;
 
     public function __construct(
@@ -42,6 +41,7 @@ class ProfileUpdateProcessor extends AbstractPersistProcessor {
      */
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Profile {
         $this->emailAddressVerificationPerformed = false;
+
         /** @var Profile $data */
         if (isset($data->newEmail)) {
             $verificationKey = IdGenerator::generateRandomHexString(64);

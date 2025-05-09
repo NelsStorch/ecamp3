@@ -145,7 +145,7 @@ class CreateUserTest extends ECampApiTestCase {
             'totalItems' => 1,
             '_links' => [
                 'items' => [
-                    ['href' => "/personal_invitations/{$invitation1->getId()}"]
+                    ['href' => "/personal_invitations/{$invitation1->getId()}"],
                 ],
             ],
             '_embedded' => [

@@ -29,7 +29,7 @@ class ListPersonalInvitationsTest extends ECampApiTestCase {
             'totalItems' => 1,
             '_links' => [
                 'items' => [
-                    ['href' => "/personal_invitations/{$invitation->getId()}"]
+                    ['href' => "/personal_invitations/{$invitation->getId()}"],
                 ],
             ],
             '_embedded' => [

@@ -18,22 +18,19 @@ class ClaimInvitationService {
      * personal invitations, which the invited user will be able to see and
      * accept / reject in the UI, even without receiving the invitation email.
      * This is done by setting the user field instead of the inviteEmail field.
-     * @param User $user
-     * @param string $email
-     * @return void
      */
     public function claimInvitations(User $user, string $email): void {
         $personalInvitationsForNewEmail = $this->campCollaborationRepository->findAllByInviteEmailAndInvited($email);
 
         foreach ($personalInvitationsForNewEmail as $invitation) {
-            if ($this->campCollaborationRepository->findOneBy([
+            if (null !== $this->campCollaborationRepository->findOneBy([
                 'user' => $user,
                 'camp' => $invitation->camp,
-            ]) !== null) {
+            ])) {
                 // If the user is already part of the camp, we skip claiming this invitation,
                 // because it would otherwise create a unique constraint violation, or we would
                 // need to merge the existing collaboration and the invitation, which would be
-                //very complex for an extremely rare use case which can easily be resolved by
+                // very complex for an extremely rare use case which can easily be resolved by
                 // the camp leaders in the UI.
                 // We could also discard the invitation in this case, but previously, when users
                 // have had problems with receiving their invitation emails, we have recommended
@@ -43,6 +40,7 @@ class ClaimInvitationService {
                 // confusing for the users.
                 continue;
             }
+
             try {
                 $invitation->inviteEmail = null;
                 $invitation->user = $user;
