@@ -33,10 +33,9 @@
                       "style": {
                         "alignSelf": "center",
                         "backgroundColor": "#4DBB52",
-                        "borderRadius": "50%",
+                        "borderRadius": "18pt",
                         "color": "#000",
                         "fontSize": "12pt",
-                        "lineHeight": "1",
                         "margin": "4pt 0",
                         "padding": "2pt 8pt 4pt",
                       },
@@ -538,11 +537,11 @@
                           "parent": [Circular],
                           "props": {
                             "style": {
-                              "line-height": "1.4",
+                              "line-height": "0.8",
                             },
                           },
                           "style": {
-                            "lineHeight": "1.4",
+                            "lineHeight": "0.8",
                           },
                           "type": "VIEW",
                         },

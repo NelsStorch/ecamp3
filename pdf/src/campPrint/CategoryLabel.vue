@@ -26,8 +26,7 @@ export default {
 <pdf-style>
 .category-label {
   padding: 2pt 8pt 4pt;
-  border-radius: 50%;
+  border-radius: 18pt;
   align-self: center;
-  line-height: 1;
 }
 </pdf-style>

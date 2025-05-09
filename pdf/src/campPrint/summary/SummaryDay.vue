@@ -14,7 +14,7 @@
           {{ scheduleEntry.number }} {{ chapter.title }}
         </Text>
       </View>
-      <View style="line-height: 1.6">
+      <View style="line-height: 1">
         <RichText :rich-text="chapter.data.html" />
       </View>
     </template>
