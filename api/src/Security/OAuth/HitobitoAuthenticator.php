@@ -6,6 +6,7 @@ use App\Entity\Profile;
 use App\Entity\User;
 use App\OAuth\HitobitoUser;
 use App\OAuth\JWTStateOAuth2Client;
+use App\Service\ClaimInvitationService;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2Client;
@@ -31,6 +32,7 @@ class HitobitoAuthenticator extends OAuth2Authenticator {
         private EntityManagerInterface $entityManager,
         private Security $security,
         private JWTEncoderInterface $jwtDecoder,
+        private ClaimInvitationService $claimInvitationService,
     ) {}
 
     public function supports(Request $request): ?bool {
@@ -77,7 +79,9 @@ class HitobitoAuthenticator extends OAuth2Authenticator {
                     $user->profile = $profile;
                 }
 
+                $newlyActivatedUser = false;
                 if (in_array($user->state, [null, User::STATE_NONREGISTERED, User::STATE_REGISTERED])) {
+                    $newlyActivatedUser = true;
                     $user->state = User::STATE_ACTIVATED;
                 }
 
@@ -85,6 +89,12 @@ class HitobitoAuthenticator extends OAuth2Authenticator {
                 $profile->{"{$provider}Id"} = $hitobitoUser->getId();
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
+
+                if ($newlyActivatedUser) {
+                    // Only after the user is persisted, claim invitations to make
+                    // sure any errors during this process don't prevent user sign up
+                    $this->claimInvitationService->claimInvitations($user, $email);
+                }
 
                 return $user;
             })
