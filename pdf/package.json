@@ -24,9 +24,9 @@
   },
   "peerDependencies": {
     "@react-pdf/font": "4.0.2",
-    "@react-pdf/layout": "^4.4.0",
-    "@react-pdf/pdfkit": "^4.0.3",
-    "@react-pdf/render": "^4.3.0",
+    "@react-pdf/layout": "4.4.0",
+    "@react-pdf/pdfkit": "4.0.3",
+    "@react-pdf/render": "4.3.0",
     "colorjs.io": "0.5.2",
     "lodash-es": "4.17.21",
     "runes": "0.4.3"
