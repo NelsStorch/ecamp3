@@ -107,7 +107,6 @@ export default {
               )
               .reduce((p, v) => (p < v ? p : v))
         )
-        //console.log(res)
         this.activities = res
       },
       immediate: true,
