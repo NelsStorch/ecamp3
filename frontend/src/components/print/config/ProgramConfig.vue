@@ -14,7 +14,7 @@
       :label="$tc('components.print.config.programConfig.dayOverview')"
       @input="$emit('input')"
     />
-    <DialogScheduleEntryFilter :camp="camp" :filter-fn="filterFn()" :options="options" @input="updateFilter" />
+    <DialogScheduleEntryFilter :camp="camp" :filter-fn="filterFn()" :filter="options.filter" @input="updateFilter" />
   </div>
 </template>
 
@@ -60,9 +60,8 @@ export default {
           .filter((scheduleEntry) => filterMatchScheduleEntry(scheduleEntry, filter))
     },
     updateFilter(newFilter) {
-      const optionsClone = clone(this.options)
-      optionsClone.filter = newFilter
-      this.$emit('input', optionsClone)
+      this.options.filter = newFilter
+      this.$emit('input')
     },
   },
   defaultOptions(camp) {

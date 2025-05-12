@@ -338,13 +338,15 @@
         "activityConfig": {
           "activity": "Aktivität"
         },
+        "dialogScheduleEntryFilter": {
+          "filterActivities": "Aktivitäten filtern"
+        },
         "picassoConfig": {
           "orientation": "Seitenlayout",
           "periods": "Lagerabschnitt(e)"
         },
         "programConfig": {
-          "dayOverview": "Tagesübersicht",
-          "filterActivities": "Aktivitäten filtern"
+          "dayOverview": "Tagesübersicht"
         }
       },
       "documents": {

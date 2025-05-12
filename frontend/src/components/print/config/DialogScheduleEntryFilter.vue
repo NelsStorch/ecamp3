@@ -1,29 +1,28 @@
 <template>
   <v-dialog
-    v-model="openFilter"
+    v-model="dialogOpen"
     :fullscreen="$vuetify.breakpoint.smAndDown"
     width="1000"
-    @close="emit"
+    @input="emit"
   >
     <template #activator="{ on, attrs }">
       <v-chip
-        :input-value="openFilter"
+        :input-value="dialogOpen"
         outlined
         class="align-self-center mt-4"
         v-bind="attrs"
         v-on="on"
       >
         <v-icon left size="20">mdi-filter</v-icon>
-        {{ $tc('components.print.config.programConfig.filterActivities') }}
+        {{ $tc('components.print.config.dialogScheduleEntryFilter.filterActivities') }}
       </v-chip>
     </template>
     <v-card>
       <ScheduleEntryFilters
-        v-model="options.filter"
+        v-model="localFilter"
         class="py-4 justify-center"
         :camp="camp"
         :filter-fn="filterFn"
-        @input="$emit('input', options)"
       />
     </v-card>
   </v-dialog>
@@ -37,16 +36,18 @@ export default {
   props: {
     camp: {},
     filterFn: {},
-    options: {},
+    filter: {},
   },
   data() {
     return {
-      openFilter: false,
+      dialogOpen: false,
+      localFilter: this.filter,
     }
   },
   methods: {
-    emit() {
-      this.$emit('input', this.options)
+    emit(dialogOpen) {
+      if (dialogOpen) return // only emit when closing dialog
+      this.$emit('input', this.localFilter)
     }
   },
 }
