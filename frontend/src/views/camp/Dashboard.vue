@@ -12,7 +12,7 @@
         v-if="loading"
         key="loadingstate"
         class="ma-4"
-        :loading-endpoints="true"
+        :loading-endpoints="false"
         :camp="camp"
         :periods="periods"
       />

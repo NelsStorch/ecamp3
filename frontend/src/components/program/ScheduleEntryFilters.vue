@@ -160,7 +160,7 @@ export default {
     },
     loadingEndpoints: {
       type: [Boolean, Object],
-      default: true,
+      default: () => ({}),
     },
     filterFn: {
       type: Function,
@@ -287,7 +287,7 @@ export default {
     },
   },
   mounted() {
-    if (this.loadingEndpoints !== true) {
+    if (this.loadingEndpoints !== false) {
       this.loadEndpointData('categories', 'category')
       this.loadEndpointData('campCollaborations', 'responsible', true)
       this.loadEndpointData('progressLabels', 'progressLabel', true)
