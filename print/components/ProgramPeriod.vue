@@ -11,6 +11,7 @@
       v-else
       :key="'day' + day.id"
       :day="day"
+      :filter="filter"
       :show-daily-summary="showDailySummary"
       :show-activities="showActivities"
       :index="index"
@@ -21,6 +22,7 @@
 <script setup>
 const props = defineProps({
   period: { type: Object, required: true },
+  filter: { type: Object, default: () => ({}) },
   showDailySummary: { type: Boolean, required: true },
   showActivities: { type: Boolean, required: true },
   index: { type: Number, required: true },

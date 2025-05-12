@@ -14,6 +14,7 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import ScheduleEntry from '../scheduleEntry/ScheduleEntry.vue'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'ProgramPeriod',
@@ -21,10 +22,16 @@ export default {
   extends: PdfComponent,
   props: {
     period: { type: Object, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     scheduleEntries() {
-      return this.period.scheduleEntries().items
+      return this.period
+        .scheduleEntries()
+        .items.filter((scheduleEntry) => {
+            return filterMatchScheduleEntry(scheduleEntry, this.filter)
+          }
+        )
     },
   },
 }
