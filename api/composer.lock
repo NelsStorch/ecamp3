@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35a9a87ba7fd21f981bf5d7a16440466",
+    "content-hash": "52dc3bfa254e5210ffc98d650fcde39b",
     "packages": [
         {
             "name": "api-platform/core",
@@ -1999,16 +1999,16 @@
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle.git",
-                "reference": "b9a80ac0b4bd3954326ae53180a54292acef8386"
+                "reference": "af60b32499d612183c1f7ce3701105bd8fcc053e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/b9a80ac0b4bd3954326ae53180a54292acef8386",
-                "reference": "b9a80ac0b4bd3954326ae53180a54292acef8386",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/af60b32499d612183c1f7ce3701105bd8fcc053e",
+                "reference": "af60b32499d612183c1f7ce3701105bd8fcc053e",
                 "shasum": ""
             },
             "require": {
@@ -2094,9 +2094,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.1.1"
+                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.1.2"
             },
-            "time": "2025-01-09T12:08:06+00:00"
+            "time": "2025-05-12T14:38:41+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
