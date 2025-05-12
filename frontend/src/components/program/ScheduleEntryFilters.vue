@@ -209,7 +209,7 @@ export default {
                 'responsible',
                 this.value.responsible?.includes('none')
                   ? [campCollaboration._meta.self]
-                  : [...this.value.responsible, campCollaboration._meta.self]
+                  : [...(this.value.responsible ?? []), campCollaboration._meta.self]
               ),
             }
           }),
