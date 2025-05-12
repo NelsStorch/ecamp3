@@ -343,7 +343,8 @@
           "periods": "Lagerabschnitt(e)"
         },
         "programConfig": {
-          "dayOverview": "Tagesübersicht"
+          "dayOverview": "Tagesübersicht",
+          "filterActivities": "Aktivitäten filtern"
         }
       },
       "documents": {
