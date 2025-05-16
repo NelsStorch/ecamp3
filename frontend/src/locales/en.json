@@ -338,6 +338,10 @@
         "activityConfig": {
           "activity": "Activity"
         },
+        "dialogScheduleEntryFilter": {
+          "filterActive": "Filtered",
+          "filterActivities": "Filter activities"
+        },
         "picassoConfig": {
           "orientation": "Page layout",
           "periods": "Period(s)"
