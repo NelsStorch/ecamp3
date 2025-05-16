@@ -39,7 +39,7 @@
             <slot v-else />
           </div>
 
-          <v-card-text>
+          <v-card-text v-if="$slots.error || error">
             <!-- error message via slot -->
             <v-alert v-if="$slots.error" text outlined color="warning" icon="mdi-alert">
               <slot name="error" />

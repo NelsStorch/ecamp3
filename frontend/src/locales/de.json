@@ -340,7 +340,8 @@
         },
         "dialogScheduleEntryFilter": {
           "filterActive": "Gefiltert",
-          "filterActivities": "Aktivitäten filtern"
+          "filterActivities": "Aktivitäten filtern",
+          "title": "Aktivitäten filtern"
         },
         "picassoConfig": {
           "orientation": "Seitenlayout",

@@ -1,8 +1,11 @@
 <template>
-  <v-dialog
+  <DetailPane
     v-model="dialogOpen"
-    :fullscreen="$vuetify.breakpoint.smAndDown"
-    width="1000"
+    max-width="900px"
+    :title="$tc('components.print.config.dialogScheduleEntryFilter.title')"
+    icon="mdi-filter"
+    :cancel-action="close"
+    :cancel-label="$tc('global.button.close')"
     @input="emit"
   >
     <template #activator="{ on, attrs }">
@@ -19,23 +22,21 @@
         <CountBadge v-if="anyFilter" :count="filterFn(filter).length" />
       </v-chip>
     </template>
-    <v-card>
-      <ScheduleEntryFilters
-        v-model="localFilter"
-        class="py-4 justify-center"
-        :camp="camp"
-        :filter-fn="filterFn"
-      />
-    </v-card>
-  </v-dialog>
+    <ScheduleEntryFilters
+      v-model="localFilter"
+      :camp="camp"
+      :filter-fn="filterFn"
+    />
+  </DetailPane>
 </template>
 <script>
 import ScheduleEntryFilters from '../../program/ScheduleEntryFilters.vue'
 import CountBadge from '../../dashboard/CountBadge.vue'
+import DetailPane from '../../generic/DetailPane.vue'
 
 export default {
   name: 'DialogScheduleEntryFilter',
-  components: { CountBadge, ScheduleEntryFilters },
+  components: { DetailPane, CountBadge, ScheduleEntryFilters },
   props: {
     camp: {},
     filterFn: {},
@@ -63,6 +64,10 @@ export default {
     emit(dialogOpen) {
       if (dialogOpen) return // only emit when closing dialog
       this.$emit('input', this.localFilter)
+    },
+    close() {
+      this.dialogOpen = false
+      this.emit()
     }
   },
 }
