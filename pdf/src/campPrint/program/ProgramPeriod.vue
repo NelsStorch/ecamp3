@@ -26,12 +26,9 @@ export default {
   },
   computed: {
     scheduleEntries() {
-      return this.period
-        .scheduleEntries()
-        .items.filter((scheduleEntry) => {
-            return filterMatchScheduleEntry(scheduleEntry, this.filter)
-          }
-        )
+      return this.period.scheduleEntries().items.filter((scheduleEntry) => {
+        return filterMatchScheduleEntry(scheduleEntry, this.filter)
+      })
     },
   },
 }

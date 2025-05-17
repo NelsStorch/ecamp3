@@ -14,7 +14,12 @@
       :label="$tc('components.print.config.programConfig.dayOverview')"
       @input="$emit('input')"
     />
-    <DialogScheduleEntryFilter :camp="camp" :filter-fn="filterFn()" :filter="options.filter" @input="updateFilter" />
+    <DialogScheduleEntryFilter
+      :camp="camp"
+      :filter-fn="filterFn()"
+      :filter="options.filter"
+      @input="updateFilter"
+    />
   </div>
 </template>
 

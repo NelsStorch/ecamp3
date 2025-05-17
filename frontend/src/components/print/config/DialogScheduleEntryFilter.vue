@@ -22,11 +22,7 @@
         <CountBadge v-if="anyFilter" :count="filterFn(filter).length" />
       </v-chip>
     </template>
-    <ScheduleEntryFilters
-      v-model="localFilter"
-      :camp="camp"
-      :filter-fn="filterFn"
-    />
+    <ScheduleEntryFilters v-model="localFilter" :camp="camp" :filter-fn="filterFn" />
   </DetailPane>
 </template>
 <script>
@@ -50,15 +46,20 @@ export default {
   },
   computed: {
     activatorLabel() {
-      if (this.anyFilter) return this.$tc('components.print.config.dialogScheduleEntryFilter.filterActive')
-      return this.$tc('components.print.config.dialogScheduleEntryFilter.filterActivities')
+      if (this.anyFilter)
+        return this.$tc('components.print.config.dialogScheduleEntryFilter.filterActive')
+      return this.$tc(
+        'components.print.config.dialogScheduleEntryFilter.filterActivities'
+      )
     },
     anyFilter() {
-      return this.filter.period ||
+      return (
+        this.filter.period ||
         (this.filter.responsible != null && this.filter.responsible.length > 0) ||
         (this.filter.category != null && this.filter.category.length > 0) ||
         (this.filter.progressLabel != null && this.filter.progressLabel.length > 0)
-    }
+      )
+    },
   },
   methods: {
     emit(dialogOpen) {
@@ -68,7 +69,7 @@ export default {
     close() {
       this.dialogOpen = false
       this.emit()
-    }
+    },
   },
 }
 </script>
