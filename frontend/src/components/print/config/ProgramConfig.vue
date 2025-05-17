@@ -18,6 +18,7 @@
       :camp="camp"
       :filter-fn="filterFn()"
       :filter="options.filter"
+      hide-period-filter
       @input="updateFilter"
     />
   </div>

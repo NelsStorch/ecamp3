@@ -22,7 +22,12 @@
         <CountBadge v-if="anyFilter" :count="filterFn(filter).length" />
       </v-chip>
     </template>
-    <ScheduleEntryFilters v-model="localFilter" :camp="camp" :filter-fn="filterFn" />
+    <ScheduleEntryFilters
+      v-model="localFilter"
+      :camp="camp"
+      :filter-fn="filterFn"
+      :hide-period-filter="hidePeriodFilter"
+    />
   </DetailPane>
 </template>
 <script>
@@ -34,9 +39,10 @@ export default {
   name: 'DialogScheduleEntryFilter',
   components: { DetailPane, CountBadge, ScheduleEntryFilters },
   props: {
-    camp: {},
-    filterFn: {},
-    filter: {},
+    camp: { type: Object, required: true },
+    filterFn: { type: Function, required: true },
+    filter: { type: Object, required: true },
+    hidePeriodFilter: { type: Boolean, default: false },
   },
   data() {
     return {

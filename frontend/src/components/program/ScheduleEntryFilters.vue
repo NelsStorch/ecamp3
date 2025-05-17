@@ -18,7 +18,7 @@
       width="160px"
     />
     <FilterDivider />
-    <template v-if="!!periods">
+    <template v-if="!!periods && !hidePeriodFilter">
       <template v-if="loadingEndpoints !== true && loadingEndpoints.periods !== true">
         <SelectFilter
           v-if="multiplePeriods"
@@ -165,6 +165,10 @@ export default {
     filterFn: {
       type: Function,
       default: () => [],
+    },
+    hidePeriodFilter: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
