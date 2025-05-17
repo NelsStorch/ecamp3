@@ -27,7 +27,7 @@
 <script>
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
-import { clone, isEqual } from 'lodash-es'
+import { isEqual } from 'lodash-es'
 
 export default {
   name: 'ProgramConfig',
@@ -99,6 +99,9 @@ export default {
         progressLabel: [],
       }
     }
+    if (!config.options.filter.period) config.options.filter.period = null
+    if (!knownPeriods.includes(config.options.filter.period))
+      config.options.filter.period = null
     if (!config.options.filter.category) config.options.filter.category = []
     const knownCategories = camp.categories().items.map((c) => c._meta.self)
     config.options.filter.category = config.options.filter.category.filter((category) => {
