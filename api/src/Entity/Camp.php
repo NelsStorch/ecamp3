@@ -42,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new Delete(
             processor: CampRemoveProcessor::class,
-            security: 'object.owner == user'
+            security: 'is_granted("CAMP_MANAGER", object)',
         ),
         new GetCollection(
             security: 'is_authenticated()'

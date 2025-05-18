@@ -43,9 +43,9 @@ class DeleteCampTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteCampIsDeniedForCollaboratorThatIsNotOwner() {
-        $camp = static::getFixture('camp2');
-        static::createClientWithCredentials()->request('DELETE', '/camps/'.$camp->getId());
+    public function testDeleteCampIsDeniedForMember() {
+        $camp = static::getFixture('camp1');
+        static::createClientWithCredentials(['email' => static::$fixtures['campCollaboration2member']->getEmail()])->request('DELETE', '/camps/'.$camp->getId());
         $this->assertResponseStatusCodeSame(403);
         $this->assertJsonContains([
             'title' => 'An error occurred',
@@ -53,8 +53,8 @@ class DeleteCampTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteCampIsAllowedForCampOwner() {
-        $camp = static::getFixture('camp1');
+    public function testDeleteCampIsAllowedForManager() {
+        $camp = static::getFixture('camp2');
         static::createClientWithCredentials()->request('DELETE', '/camps/'.$camp->getId());
         $this->assertResponseStatusCodeSame(204);
         $this->assertNull(static::getContainer()->get(CampRepository::class)->findOneBy(['id' => $camp->getId()]));
