@@ -18,7 +18,7 @@ final class Version20250412165829 extends AbstractMigration {
     public function up(Schema $schema): void {
         // Add Column CampId
         $this->addSql(<<<'SQL'
-            ALTER TABLE material_item ADD campId VARCHAR(16) NULL
+            ALTER TABLE material_item ADD COLUMN IF NOT EXISTS campId VARCHAR(16) NULL
         SQL);
 
         // Insert values (MaterialItem -> Period -> Camp)
