@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="px-md-4">
     <e-select
       v-model="options.periods"
       :items="periods"

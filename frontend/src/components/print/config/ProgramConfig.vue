@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="px-md-4 flex-grow-1 d-flex flex-column justify-content-between">
     <e-select
       v-model="options.periods"
       :items="periods"
@@ -14,6 +14,7 @@
       :label="$tc('components.print.config.programConfig.dayOverview')"
       @input="$emit('input')"
     />
+    <div class="flex-grow-1"></div>
     <DialogScheduleEntryFilter
       :camp="camp"
       :filter-fn="filterFn()"

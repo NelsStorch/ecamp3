@@ -29,9 +29,7 @@
               ><v-icon>mdi-drag</v-icon></TextAlignBaseline
             >
           </h3>
-          <div class="mx-4">
-            <slot />
-          </div>
+          <slot />
         </div>
       </div>
       <ButtonDelete
@@ -168,6 +166,7 @@ export default {
   flex-direction: column;
   overflow: hidden auto;
   aspect-ratio: var(--aspect);
+  max-height: 100%;
 }
 
 .e-pages-config__title {

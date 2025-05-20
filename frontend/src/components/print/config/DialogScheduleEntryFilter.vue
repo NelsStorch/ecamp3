@@ -11,15 +11,15 @@
     <template #activator="{ on, attrs }">
       <v-chip
         :input-value="dialogOpen"
+        label
         outlined
-        :color="anyFilter ? 'info' : ''"
-        class="align-self-center mt-4"
+        :color="anyFilter ? 'primary' : null"
+        class="align-self-stretch mt-4 mb-4"
         v-bind="attrs"
         v-on="on"
       >
         <v-icon left size="20">mdi-filter</v-icon>
-        {{ activatorLabel }}
-        <CountBadge v-if="anyFilter" :count="filterFn(filter).length" />
+        <span class="flex-grow-1 text-center">{{ activatorLabel }}</span>
       </v-chip>
     </template>
     <ScheduleEntryFilters
@@ -53,9 +53,20 @@ export default {
   computed: {
     activatorLabel() {
       if (this.anyFilter)
-        return this.$tc('components.print.config.dialogScheduleEntryFilter.filterActive')
+        return this.$tc(
+          'components.print.config.dialogScheduleEntryFilter.filterActive',
+          1,
+          {
+            filtered: this.filterFn(this.localFilter).length,
+            total: this.filterFn({}).length,
+          }
+        )
       return this.$tc(
-        'components.print.config.dialogScheduleEntryFilter.filterActivities'
+        'components.print.config.dialogScheduleEntryFilter.filterActivities',
+        1,
+        {
+          total: this.filterFn({}).length,
+        }
       )
     },
     anyFilter() {
@@ -79,3 +90,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+:deep(.v-chip__content) {
+  width: 100%;
+}
+</style>

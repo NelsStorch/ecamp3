@@ -339,8 +339,8 @@
           "activity": "Aktivität"
         },
         "dialogScheduleEntryFilter": {
-          "filterActive": "Gefiltert",
-          "filterActivities": "Aktivitäten filtern",
+          "filterActive": "Filter: {filtered} von {total} Aktivitäten",
+          "filterActivities": "{total} Aktivitäten filtern",
           "title": "Aktivitäten filtern"
         },
         "picassoConfig": {
