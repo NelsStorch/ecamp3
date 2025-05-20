@@ -9,7 +9,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 require_once __DIR__.'/helpers.php';
 
-final class Version202504252112 extends AbstractMigration {
+final class Version202505202216 extends AbstractMigration {
     public function getDescription(): string {
         return 'Add 2nd period to Harry Potter camp';
     }
