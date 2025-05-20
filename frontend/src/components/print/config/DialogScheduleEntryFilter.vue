@@ -28,16 +28,18 @@
       :filter-fn="filterFn"
       :hide-period-filter="hidePeriodFilter"
     />
+    <template #moreActions>
+      {{ resultCountLabel }}
+    </template>
   </DetailPane>
 </template>
 <script>
 import ScheduleEntryFilters from '../../program/ScheduleEntryFilters.vue'
-import CountBadge from '../../dashboard/CountBadge.vue'
 import DetailPane from '../../generic/DetailPane.vue'
 
 export default {
   name: 'DialogScheduleEntryFilter',
-  components: { DetailPane, CountBadge, ScheduleEntryFilters },
+  components: { DetailPane, ScheduleEntryFilters },
   props: {
     camp: { type: Object, required: true },
     filterFn: { type: Function, required: true },
@@ -65,6 +67,16 @@ export default {
         'components.print.config.dialogScheduleEntryFilter.filterActivities',
         1,
         {
+          total: this.filterFn({}).length,
+        }
+      )
+    },
+    resultCountLabel() {
+      return this.$tc(
+        'components.print.config.dialogScheduleEntryFilter.resultCount',
+        1,
+        {
+          filtered: this.filterFn(this.localFilter).length,
           total: this.filterFn({}).length,
         }
       )
