@@ -2,7 +2,7 @@
   <View>
     <Text class="picasso-day-header-text">{{ date }}</Text>
     <View v-if="showDayResponsibles" class="picasso-day-responsibles">
-      <Text>{{ dayResponsibles }}</Text>
+      <Text class="picasso-day-responsibles-text">{{ dayResponsibles }}</Text>
     </View>
   </View>
 </template>
@@ -47,5 +47,9 @@ export default {
 .picasso-day-responsibles {
   font-size: 8pt;
   margin: 3pt auto 0;
+  line-height: 1.3;
+}
+.picasso-day-responsibles-text {
+  padding-bottom: 5pt;
 }
 </pdf-style>
