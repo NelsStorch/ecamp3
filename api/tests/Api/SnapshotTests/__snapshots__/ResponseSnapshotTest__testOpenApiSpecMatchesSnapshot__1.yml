@@ -12507,7 +12507,8 @@ components:
             - string
         status:
           default: 400
-          example: 404
+          examples:
+            - 404
           type: number
         title:
           description: 'A short, human-readable summary of the problem.'
@@ -12566,7 +12567,8 @@ components:
             - string
         status:
           default: 400
-          example: 404
+          examples:
+            - 404
           type: number
         title:
           description: 'A short, human-readable summary of the problem.'
