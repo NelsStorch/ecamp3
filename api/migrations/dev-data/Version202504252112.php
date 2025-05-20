@@ -13,9 +13,11 @@ final class Version202504252112 extends AbstractMigration {
     public function getDescription(): string {
         return 'Add 2nd period to Harry Potter camp';
     }
+
     public function up(Schema $schema): void {
         // START PHP CODE
         // END PHP CODE
     }
+
     public function down(Schema $schema): void {}
 }
