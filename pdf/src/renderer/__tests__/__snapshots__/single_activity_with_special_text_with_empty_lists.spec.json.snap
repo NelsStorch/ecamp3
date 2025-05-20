@@ -37,7 +37,7 @@
                         "color": "#000",
                         "fontSize": "12pt",
                         "margin": "4pt 0",
-                        "padding": "3pt 8pt",
+                        "padding": "2pt 8pt",
                       },
                       "type": "TEXT",
                     },
