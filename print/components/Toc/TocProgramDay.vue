@@ -15,6 +15,7 @@
 
 <script>
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'TocProgramDay',
@@ -22,6 +23,7 @@ export default {
   props: {
     index: { type: Number, required: true },
     day: { type: Object, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     // returns scheduleEntries of current day without the need for an additional API call
@@ -30,7 +32,10 @@ export default {
         .period()
         .scheduleEntries()
         .items.filter((scheduleEntry) => {
-          return scheduleEntry.day()._meta.self === this.day._meta.self
+          return (
+            scheduleEntry.day()._meta.self === this.day._meta.self &&
+            filterMatchScheduleEntry(scheduleEntry, this.filter)
+          )
         })
     },
   },

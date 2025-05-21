@@ -9,6 +9,7 @@
         v-else
         :key="day.id"
         :day="day"
+        :filter="filter"
         :index="index"
       />
     </ul>
@@ -19,6 +20,7 @@
 const props = defineProps({
   index: { type: Number, required: true },
   period: { type: Object, required: true },
+  filter: { type: Object, default: () => ({}) },
 })
 
 const { data: days, error } = await useAsyncData(
