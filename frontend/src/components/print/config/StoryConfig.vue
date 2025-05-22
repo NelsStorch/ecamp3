@@ -6,6 +6,7 @@
       :label="$tc('print.config.periods')"
       multiple
       :filled="false"
+      :readonly="periods.length === 1"
       @input="$emit('input')"
     />
   </div>
@@ -18,9 +19,10 @@ import { SUMMARY_CONTENTTYPES } from '@/components/print/config/SummaryConfig.vu
 export default {
   name: 'StoryConfig',
   extends: SummaryConfig,
-  defaultOptions() {
+  defaultOptions(camp) {
     return {
-      periods: [],
+      periods:
+        camp.periods().items.length === 1 ? [camp.periods().items[0]._meta.self] : [],
       contentType: 'Storycontext',
     }
   },

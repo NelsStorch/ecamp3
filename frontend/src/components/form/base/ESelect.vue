@@ -17,6 +17,8 @@
       :error-messages="veeErrors.concat(errorMessages)"
       :label="labelOrEntityFieldLabel"
       :class="[inputClass]"
+      :readonly="readonly"
+      :append-icon="readonly ? null : '$dropdown'"
       v-on="$listeners"
     >
       <!-- passing through all slots -->
@@ -40,6 +42,7 @@ export default {
   props: {
     immediateValidation: { type: Boolean, default: false },
     skipIfEmpty: { type: Boolean, default: true },
+    readonly: { type: Boolean, default: false },
   },
 }
 </script>

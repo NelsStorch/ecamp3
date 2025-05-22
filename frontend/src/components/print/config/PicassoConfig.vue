@@ -6,6 +6,7 @@
       :items="periods"
       multiple
       :filled="false"
+      :readonly="periods.length === 1"
       @input="$emit('input')"
     />
     <e-select
@@ -59,9 +60,10 @@ export default {
       }))
     },
   },
-  defaultOptions() {
+  defaultOptions(camp) {
     return {
-      periods: [],
+      periods:
+        camp.periods().items.length === 1 ? [camp.periods().items[0]._meta.self] : [],
       orientation: 'L',
     }
   },

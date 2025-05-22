@@ -39,7 +39,7 @@
             @click="
               addContent({
                 type: idx,
-                options: component.defaultOptions(),
+                options: component.defaultOptions(camp),
               })
             "
           >

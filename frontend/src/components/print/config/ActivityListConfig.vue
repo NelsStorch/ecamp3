@@ -6,6 +6,7 @@
       :label="$tc('print.config.periods')"
       multiple
       :filled="false"
+      :readonly="periods.length === 1"
       @input="$emit('input')"
     />
   </div>
@@ -34,9 +35,10 @@ export default {
       }))
     },
   },
-  defaultOptions() {
+  defaultOptions(camp) {
     return {
-      periods: [],
+      periods:
+        camp.periods().items.length === 1 ? [camp.periods().items[0]._meta.self] : [],
     }
   },
   design: {
