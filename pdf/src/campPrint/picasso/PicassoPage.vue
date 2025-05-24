@@ -123,14 +123,13 @@ export default {
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  line-height: 1;
+  line-height: 0.8;
 }
 .picasso-calendar-container {
   border: 1pt solid grey;
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  line-height: 1;
 }
 .picasso-day-header {
   border-right: 1pt solid white;

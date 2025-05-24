@@ -3,7 +3,7 @@
     <Text :id="id" :bookmark="$tc('print.toc.title')" class="toc-title">{{
       $tc('print.toc.title')
     }}</Text>
-    <View style="line-height: 1.6">
+    <View style="line-height: 1">
       <template v-for="(entry, index) in config.contents">
         <component
           :is="entryComponents[entry.type]"

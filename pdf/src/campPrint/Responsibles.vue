@@ -68,7 +68,7 @@ export default {
   align-items: flex-end;
 }
 .responsibles-avatar {
-  border-radius: 50%;
+  border-radius: 6pt;
   width: 12pt;
   height: 12pt;
   display: flex;
@@ -81,6 +81,6 @@ export default {
 .responsibles-initials {
   font-size: 6pt;
   text-align: center;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 </pdf-style>
