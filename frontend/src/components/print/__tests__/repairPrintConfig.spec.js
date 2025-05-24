@@ -479,7 +479,10 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Picasso',
-            options: { periods: [], orientation: 'L' },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'L',
+            },
           },
         ],
         documentName: 'test camp',
@@ -670,7 +673,7 @@ describe('repairConfig', () => {
           {
             type: 'Program',
             options: {
-              periods: [],
+              periods: ['/periods/1a2b3c4d'],
               dayOverview: true,
             },
           },
@@ -845,7 +848,10 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Story',
-            options: { periods: [], contentType: 'Storycontext' },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'Storycontext',
+            },
           },
         ],
         documentName: 'test camp',
@@ -982,7 +988,10 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'SafetyConsiderations',
-            options: { periods: [], contentType: 'SafetyConsiderations' },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'SafetyConsiderations',
+            },
           },
         ],
         documentName: 'test camp',
@@ -1152,7 +1161,9 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'ActivityList',
-            options: { periods: [] },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+            },
           },
         ],
         documentName: 'test camp',

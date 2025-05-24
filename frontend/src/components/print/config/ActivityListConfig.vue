@@ -46,7 +46,10 @@ export default {
   },
   repairConfig(config, camp) {
     if (!config.options) config.options = {}
-    if (!config.options.periods) config.options.periods = []
+    if (!config.options.periods) {
+      config.options.periods =
+        camp.periods().items.length === 1 ? [camp.periods().items[0]._meta.self] : []
+    }
     const knownPeriods = camp.periods().items.map((p) => p._meta.self)
     config.options.periods = config.options.periods.filter((period) => {
       return knownPeriods.includes(period)
