@@ -21,6 +21,20 @@ describe('repairConfig', () => {
       ],
     }),
   }
+  const multiPeriodCamp = {
+    _meta: { self: '/camps/1a2b3c4d' },
+    shortTitle: 'test camp',
+    periods: () => ({
+      items: [
+        {
+          _meta: { self: '/periods/1a2b3c4d' },
+        },
+        {
+          _meta: { self: '/periods/11223344' },
+        },
+      ],
+    }),
+  }
   const availableLocales = ['en-GB', 'de-CH', 'de-CH-scout']
   const componentRepairers = Object.fromEntries(
     [
@@ -38,6 +52,13 @@ describe('repairConfig', () => {
     { type: 'Picasso', options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' } },
   ]
   const args = [camp, availableLocales, 'en', componentRepairers, defaultContents]
+  const multiPeriodArgs = [
+    multiPeriodCamp,
+    availableLocales,
+    'en',
+    componentRepairers,
+    defaultContents,
+  ]
 
   test('fills empty config with default data', async () => {
     // given
@@ -567,7 +588,7 @@ describe('repairConfig', () => {
       }
 
       // when
-      const result = repairConfig(config, ...args)
+      const result = repairConfig(config, ...multiPeriodArgs)
 
       // then
       expect(result).toEqual({
@@ -576,6 +597,40 @@ describe('repairConfig', () => {
           {
             type: 'Picasso',
             options: { periods: [], orientation: 'L' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('does not allow empty periods if there is only one period in the camp', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: { periods: [], orientation: 'L' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'L',
+            },
           },
         ],
         documentName: 'test camp',
@@ -771,7 +826,7 @@ describe('repairConfig', () => {
       }
 
       // when
-      const result = repairConfig(config, ...args)
+      const result = repairConfig(config, ...multiPeriodArgs)
 
       // then
       expect(result).toEqual({
@@ -780,6 +835,43 @@ describe('repairConfig', () => {
           {
             type: 'Program',
             options: { periods: [], dayOverview: true },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('does not allow empty periods if there is only one period in the camp', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Program',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              dayOverview: true,
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Program',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              dayOverview: true,
+            },
           },
         ],
         documentName: 'test camp',
@@ -874,7 +966,7 @@ describe('repairConfig', () => {
       }
 
       // when
-      const result = repairConfig(config, ...args)
+      const result = repairConfig(config, ...multiPeriodArgs)
 
       // then
       expect(result).toEqual({
@@ -883,6 +975,43 @@ describe('repairConfig', () => {
           {
             type: 'Story',
             options: { periods: [], contentType: 'Storycontext' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('does not allow empty periods if there is only one period in the camp', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Story',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'Storycontext',
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Story',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'Storycontext',
+            },
           },
         ],
         documentName: 'test camp',
@@ -1014,7 +1143,7 @@ describe('repairConfig', () => {
       }
 
       // when
-      const result = repairConfig(config, ...args)
+      const result = repairConfig(config, ...multiPeriodArgs)
 
       // then
       expect(result).toEqual({
@@ -1023,6 +1152,40 @@ describe('repairConfig', () => {
           {
             type: 'SafetyConsiderations',
             options: { periods: [], contentType: 'SafetyConsiderations' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('does not allow empty period when there is only one period in the camp', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: { periods: [], contentType: 'SafetyConsiderations' },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              contentType: 'SafetyConsiderations',
+            },
           },
         ],
         documentName: 'test camp',
@@ -1186,7 +1349,7 @@ describe('repairConfig', () => {
       }
 
       // when
-      const result = repairConfig(config, ...args)
+      const result = repairConfig(config, ...multiPeriodArgs)
 
       // then
       expect(result).toEqual({
@@ -1195,6 +1358,39 @@ describe('repairConfig', () => {
           {
             type: 'ActivityList',
             options: { periods: [] },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('does not allow empty period if there is only one period in the camp', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+            options: { periods: [] },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'ActivityList',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+            },
           },
         ],
         documentName: 'test camp',

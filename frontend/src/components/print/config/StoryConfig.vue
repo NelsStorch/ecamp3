@@ -31,17 +31,18 @@ export default {
   },
   repairConfig(config, camp) {
     if (!config.options) config.options = {}
-    if (!config.options.periods) {
-      config.options.periods =
-        camp.periods().items.length === 1 ? [camp.periods().items[0]._meta.self] : []
-    }
     if (!config.options.contentType) config.options.contentType = 'Storycontext'
-    const knownPeriods = camp.periods().items.map((p) => p._meta.self)
-    config.options.periods = config.options.periods.filter((period) => {
-      return knownPeriods.includes(period)
-    })
     if (!SUMMARY_CONTENTTYPES.includes(config.options.contentType)) {
       config.options.contentType = 'Storycontext'
+    }
+    if (camp.periods().items.length === 1) {
+      config.options.periods = [camp.periods().items[0]._meta.self]
+    } else {
+      if (!config.options.periods) config.options.periods = []
+      const knownPeriods = camp.periods().items.map((p) => p._meta.self)
+      config.options.periods = config.options.periods.filter((period) => {
+        return knownPeriods.includes(period)
+      })
     }
     return config
   },
