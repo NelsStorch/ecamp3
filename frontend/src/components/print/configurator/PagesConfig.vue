@@ -5,6 +5,7 @@
       :class="{
         'e-pages-config--multiple': multiple,
         'e-pages-config--landscape': landscape,
+        'e-pages-config--portrait': !landscape,
         'e-pages-config--template': template,
       }"
     >
@@ -159,6 +160,14 @@ export default {
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.e-pages-config--landscape .e-pages-config__inner {
+  width: 100%;
+}
+
+.e-pages-config--portrait .e-pages-config__inner {
+  height: 100%;
 }
 
 .e-pages-config__scroller {
