@@ -73,5 +73,8 @@ export default {
   width: 100%;
   word-break: break-word;
   text-align: center;
+  text-wrap: balance;
+  line-height: 1 !important;
+  padding-bottom: 5px;
 }
 </style>
