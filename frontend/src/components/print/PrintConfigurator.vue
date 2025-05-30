@@ -187,6 +187,7 @@ export default {
       period.days().$reload()
       period.contentNodes().$reload()
     })
+    this.camp.activities().$reload()
   },
   methods: {
     resetConfig() {
