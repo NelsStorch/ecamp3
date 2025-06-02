@@ -32,7 +32,6 @@ export default {
   },
   data() {
     return {
-      entityProperties: ['camp', 'position', 'title'],
       entityUri: '',
     }
   },
@@ -54,6 +53,7 @@ export default {
     },
   },
   mounted() {
+    this.entityProperties.push('camp', 'position', 'title')
     this.api
       .href(this.api.get(), 'activityProgressLabels')
       .then((uri) => (this.entityUri = uri))

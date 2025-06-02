@@ -1,4 +1,6 @@
 <script>
+import { useEntityData } from './useEntityData.js'
+
 export default {
   name: 'DialogBase',
   props: {
@@ -8,24 +10,13 @@ export default {
 
     successHandler: { type: Function, required: false, default: null },
   },
+  setup() {
+    return useEntityData()
+  },
   data() {
     return {
-      // specifies entity properties available in the form
-      entityProperties: [],
-
-      // single selection of related entities (e.g. activity.category)
-      // suitable for ManyToOne relations. Property is sent as IRI to the API.
-      embeddedEntities: [],
-
-      // multi selection of related entities (e.g. category.preferredContentTypes)
-      // suitable for ManyToMany relations. Property is sent as array of IRIs to the API
-      // not suitable, if data of the embedded entities should be edited as well (e.g. OneToMany relations)
-      embeddedCollections: [],
-
-      entityData: {},
       entityUri: '',
       showDialog: false,
-      loading: true,
       error: null,
     }
   },
@@ -40,52 +31,12 @@ export default {
     },
   },
   methods: {
-    clearEntityData() {
-      this.loading = true
-      this.entityData = {}
-    },
     loadEntityData(uri) {
       this.clearEntityData()
       if (uri) {
         this.entityUri = uri
         this.api.get(uri)._meta.load.then(this.setEntityData)
       }
-    },
-    setEntityData(data) {
-      const loadingPromises = []
-
-      this.entityProperties.forEach((key) => {
-        this.$set(this.entityData, key, data[key])
-      })
-      this.embeddedEntities.forEach((key) => {
-        if (data[key]) {
-          const promise =
-            typeof data[key] === 'function'
-              ? data[key]()._meta.load
-              : data[key]._meta.load
-          loadingPromises.push(promise)
-          promise.then((obj) => this.$set(this.entityData, key, obj._meta.self))
-        }
-      })
-      this.embeddedCollections.forEach((key) => {
-        if (data[key]) {
-          loadingPromises.push(data[key]().$loadItems())
-          data[key]()
-            .$loadItems()
-            .then((obj) => {
-              this.$set(
-                this.entityData,
-                key,
-                obj.items.map((entity) => entity._meta.self)
-              )
-            })
-        }
-      })
-
-      // wait for all loading promises to finish before showing any content
-      Promise.all(loadingPromises).then(() => {
-        this.loading = false
-      })
     },
     create(payloadData = null) {
       this.error = null

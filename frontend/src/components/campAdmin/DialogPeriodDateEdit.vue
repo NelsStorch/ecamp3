@@ -85,11 +85,6 @@ export default {
     period: { type: Object, required: true },
     mode: { type: String, required: true },
   },
-  data() {
-    return {
-      entityProperties: ['start', 'end', 'moveScheduleEntries'],
-    }
-  },
   computed: {
     startString() {
       return this.$date.utc(this.entityData.start, 'YYYY-MM-DD').format('L')
@@ -115,6 +110,9 @@ export default {
         this.entityData.moveScheduleEntries = this.mode == 'move'
       }
     },
+  },
+  mounted() {
+    this.entityProperties.push('start', 'end', 'moveScheduleEntries')
   },
   methods: {
     startChanged() {

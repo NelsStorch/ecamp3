@@ -153,7 +153,6 @@ export default {
     return {
       resendingEmail: false,
       emailSent: false,
-      entityProperties: ['abbreviation', 'color', 'role', 'status'],
       entityUri: '',
     }
   },
@@ -199,6 +198,8 @@ export default {
     },
   },
   mounted() {
+    this.entityProperties.push('abbreviation', 'color', 'role', 'status')
+
     this.api
       .href(this.api.get(), 'campCollaborations')
       .then((uri) => (this.entityUri = uri))

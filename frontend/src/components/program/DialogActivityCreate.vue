@@ -1,7 +1,7 @@
 <template>
   <dialog-form
     v-model="showDialog"
-    :loading="loading"
+    :loading="entityDataLoading"
     :error="error"
     icon="mdi-calendar-plus"
     :title="$tc('entity.activity.new')"
@@ -17,9 +17,9 @@
     </template>
 
     <template #moreActions>
-      <CopyActivityInfoDialog @closed="refreshCopyActivitySource">
+      <CopyActivityInfoDialog @closed="attemptLoadingEntityFromClipboard">
         <template #activator="{ on }">
-          <v-btn v-show="clipboardPermission === 'prompt'" v-on="on">
+          <v-btn v-show="showClipboardPrompt" v-on="on">
             <v-icon left>mdi-information-outline</v-icon>
             {{ $tc('components.program.dialogActivityCreate.copyPasteActivity') }}
           </v-btn>
@@ -27,7 +27,7 @@
       </CopyActivityInfoDialog>
     </template>
 
-    <div v-if="hasCopyActivitySource">
+    <div v-if="hasClipboardEntity">
       <div class="mb-8">
         <div v-if="!clipboardAccessDenied">
           {{ $tc('components.program.dialogActivityCreate.clipboard') }}
@@ -51,30 +51,31 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>
-              <CategoryChip
-                :category="copyActivitySource.category()"
-                class="mx-1"
-                dense
-              />
-              {{ copyActivitySource.title }}
+              <CategoryChip :category="clipboardEntity.category()" class="mx-1" dense />
+              {{ clipboardEntity.title }}
             </v-list-item-title>
             <v-list-item-subtitle>
-              {{ copyActivitySource.camp().title }}
+              {{ clipboardEntity.camp().title }}
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
             <e-checkbox
-              v-model="copyContent"
+              :value="entityData.copyActivitySource !== null"
               :label="$tc('components.program.dialogActivityCreate.copyActivityContent')"
+              @input="setCopyContentCheckbox"
             />
           </v-list-item-action>
         </v-list-item>
       </div>
     </div>
-    <DialogActivityForm :activity="entityData" :period="period" :autoselect-title="true">
+    <DialogActivityForm
+      :activity="entityData"
+      :period="scheduleEntry.period()"
+      :autoselect-title="true"
+    >
       <template v-if="clipboardAccessDenied" #textFieldTitleAppend>
         <PopoverPrompt
-          v-model="copyActivitySourceUrlShowPopover"
+          v-model="showCopyActivityUrlPopover"
           icon="mdi-content-paste"
           :title="$tc('components.program.dialogActivityCreate.pasteActivity')"
         >
@@ -86,13 +87,13 @@
               height="56"
               v-on="scope.on"
             >
-              <v-progress-circular v-if="copyActivitySourceUrlLoading" indeterminate />
+              <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
               <v-icon v-else>mdi-content-paste</v-icon>
             </v-btn>
           </template>
           {{ $tc('components.program.dialogActivityCreate.copySourceInfo') }}
           <e-text-field
-            v-model="copyActivitySourceUrl"
+            v-model="clipboardEntityUrl"
             :label="$tc('components.program.dialogActivityCreate.copyActivity')"
             style="margin-bottom: 12px"
             autofocus
@@ -110,8 +111,12 @@ import DialogActivityForm from '@/components/activity/dialog/DialogActivityForm.
 import CopyActivityInfoDialog from '@/components/activity/CopyActivityInfoDialog.vue'
 import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
 import { uniqueId } from 'lodash-es'
-import router from '@/router.js'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
+import { useClipboardEntity } from '../generic/useClipboardEntity.js'
+import router from '@/router.js'
+import { apiStore as api } from '@/plugins/store'
+import { computed, nextTick, ref } from 'vue'
+import { useEntityData } from '@/components/dialog/useEntityData.js'
 
 export default {
   name: 'DialogActivityCreate',
@@ -126,70 +131,107 @@ export default {
   props: {
     scheduleEntry: { type: Object, required: true },
   },
+  setup({ scheduleEntry }) {
+    const {
+      entityData,
+      loading: entityDataLoading,
+      entityProperties,
+      embeddedEntities,
+      setEntityData,
+    } = useEntityData()
+    const showCopyActivityUrlPopover = ref(false)
+
+    const period = computed(() => scheduleEntry.period())
+    const camp = computed(() => period.value.camp())
+
+    const clipboard = useClipboardEntity(api.get.bind(this), {
+      fetchClipboardEntity: async (url) => {
+        if (url?.startsWith(window.location.origin)) {
+          url = url.substring(window.location.origin.length)
+          const match = router.matcher.match(url)
+
+          if (match.name === 'camp/activity') {
+            const result = await api.get().activities({ id: match.params['activityId'] })
+
+            // if Paste-Popover is shown, close it now
+            if (showCopyActivityUrlPopover.value) {
+              nextTick(() => {
+                showCopyActivityUrlPopover.value = false
+              })
+            }
+
+            return result
+          }
+        }
+        return null
+      },
+      onEntityLoaded: function () {
+        setCopyContentCheckbox(true)
+      },
+      onEntityLoadFailed: function () {
+        setCopyContentCheckbox(false)
+      },
+    })
+
+    const clipboardEntity = clipboard.clipboardEntity
+
+    const setCopyContentCheckbox = (val) => {
+      if (val) {
+        entityData.copyActivitySource = clipboardEntity.value._meta.self
+        entityData.title = clipboardEntity.value.title
+        entityData.location = clipboardEntity.value.location
+
+        const sourceCamp = clipboardEntity.value.camp()
+        const sourceCategory = clipboardEntity.value.category()
+
+        if (camp.value._meta.self === sourceCamp._meta.self) {
+          // same camp; use came category
+          entityData.category = sourceCategory._meta.self
+        } else {
+          // different camp; use category with same short-name
+          const categories = camp.value
+            .categories()
+            .allItems.filter((c) => c.short === sourceCategory.short)
+
+          if (categories.length === 1) {
+            entityData.category = categories[0]._meta.self
+          }
+        }
+      } else {
+        entityData.copyActivitySource = null
+      }
+    }
+
+    return {
+      ...clipboard,
+      setCopyContentCheckbox,
+      showCopyActivityUrlPopover,
+      entityData,
+      entityDataLoading,
+      entityProperties,
+      embeddedEntities,
+      setEntityData,
+    }
+  },
   data() {
     return {
-      clipboardPermission: 'unknown',
-      copyActivitySource: null,
-      copyActivitySourceUrl: null,
-      copyActivitySourceUrlLoading: false,
-      copyActivitySourceUrlShowPopover: false,
-      entityProperties: ['title', 'location', 'scheduleEntries'],
-      embeddedEntities: ['category'],
       entityUri: '',
     }
   },
   computed: {
-    camp() {
-      return this.period.camp()
-    },
-    period() {
-      return this.scheduleEntry.period()
-    },
-    clipboardAccessDenied() {
-      return (
-        this.clipboardPermission === 'unaccessable' ||
-        this.clipboardPermission === 'denied'
-      )
-    },
-    hasCopyActivitySource() {
-      return this.copyActivitySource != null && this.copyActivitySource._meta.self != null
-    },
     copyContent: {
       get() {
         return this.entityData.copyActivitySource != null
       },
       set(val) {
-        if (val) {
-          this.entityData.copyActivitySource = this.copyActivitySource._meta.self
-          this.entityData.title = this.copyActivitySource.title
-          this.entityData.location = this.copyActivitySource.location
-
-          const sourceCamp = this.copyActivitySource.camp()
-          const sourceCategory = this.copyActivitySource.category()
-
-          if (this.camp._meta.self === sourceCamp._meta.self) {
-            // same camp; use came category
-            this.entityData.category = sourceCategory._meta.self
-          } else {
-            // different camp; use category with same short-name
-            const categories = this.camp
-              .categories()
-              .allItems.filter((c) => c.short === sourceCategory.short)
-
-            if (categories.length === 1) {
-              this.entityData.category = categories[0]._meta.self
-            }
-          }
-        } else {
-          this.entityData.copyActivitySource = null
-        }
+        this.setCopyContentCheckbox(val)
       },
     },
   },
   watch: {
     showDialog: function (showDialog) {
       if (showDialog) {
-        this.refreshCopyActivitySource()
+        this.attemptLoadingEntityFromClipboard()
         this.setEntityData({
           title: this.entityData?.title,
           location: '',
@@ -202,95 +244,22 @@ export default {
               deleted: false,
             },
           ],
-          copyActivitySource: null,
         })
       } else {
         // clear the variable parts of the form on exit
-        this.copyActivitySource = null
-        this.copyActivitySourceUrl = null
+        this.clipboardEntityUrl = null
         this.entityData.location = ''
         this.entityData.scheduleEntries = []
       }
-    },
-    copyActivitySourceUrl: function (url) {
-      this.copyActivitySourceUrlLoading = true
-
-      this.getCopyActivitySource(url).then(
-        (activityProxy) => {
-          if (activityProxy != null) {
-            activityProxy._meta.load.then(
-              (activity) => {
-                this.copyActivitySource = activity
-                this.copyContent = true
-                this.copyActivitySourceUrlLoading = false
-              },
-              () => {
-                this.copyActivitySourceUrlLoading = false
-              }
-            )
-          } else {
-            this.copyActivitySource = null
-            this.copyContent = false
-            this.copyActivitySourceUrlLoading = false
-          }
-
-          // if Paste-Popover is shown, close it now
-          if (this.copyActivitySourceUrlShowPopover) {
-            this.$nextTick(() => {
-              this.copyActivitySourceUrlShowPopover = false
-            })
-          }
-        },
-        () => {
-          this.copyActivitySourceUrlLoading = false
-        }
-      )
+      this.clipboardEntity = null
     },
   },
   mounted() {
+    this.entityProperties.push('title', 'location', 'scheduleEntries')
+    this.embeddedEntities.push('category')
     this.api.href(this.api.get(), 'activities').then((url) => (this.entityUri = url))
   },
   methods: {
-    refreshCopyActivitySource() {
-      navigator.permissions.query({ name: 'clipboard-read' }).then(
-        (p) => {
-          this.clipboardPermission = p.state
-          this.copyActivitySource = null
-
-          if (p.state === 'granted') {
-            navigator.clipboard
-              .readText()
-              .then(async (url) => {
-                const copyActivitySource = await this.getCopyActivitySource(url)
-                this.copyActivitySource = await copyActivitySource?._meta.load
-              })
-              .catch(() => {
-                this.clipboardPermission = 'unaccessable'
-                console.warn('clipboard permission not requestable')
-              })
-          }
-        },
-        () => {
-          this.clipboardPermission = 'unaccessable'
-          console.warn('clipboard permission not requestable')
-        }
-      )
-    },
-    async getCopyActivitySource(url) {
-      if (url?.startsWith(window.location.origin)) {
-        url = url.substring(window.location.origin.length)
-        const match = router.matcher.match(url)
-
-        if (match.name === 'camp/activity') {
-          return await this.api.get().activities({ id: match.params['activityId'] })
-        }
-      }
-      return null
-    },
-    async clearClipboard() {
-      await navigator.clipboard.writeText('')
-      this.refreshCopyActivitySource()
-    },
     cancelCreate() {
       this.close()
     },

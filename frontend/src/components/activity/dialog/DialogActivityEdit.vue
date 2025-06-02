@@ -43,12 +43,6 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      entityProperties: ['title', 'location'],
-      embeddedEntities: ['category'],
-    }
-  },
   computed: {
     activity() {
       return this.scheduleEntry.activity()
@@ -82,6 +76,10 @@ export default {
         )
       }
     },
+  },
+  mounted() {
+    this.entityProperties.push('title', 'location')
+    this.embeddedEntities.push('category')
   },
   methods: {
     updateActivity() {

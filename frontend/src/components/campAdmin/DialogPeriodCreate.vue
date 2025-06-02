@@ -31,7 +31,6 @@ export default {
   },
   data() {
     return {
-      entityProperties: ['camp', 'description', 'start', 'end'],
       entityUri: '',
     }
   },
@@ -51,6 +50,7 @@ export default {
     },
   },
   mounted() {
+    this.entityProperties.push('camp', 'description', 'start', 'end')
     this.api.href(this.api.get(), 'periods').then((uri) => (this.entityUri = uri))
   },
   methods: {

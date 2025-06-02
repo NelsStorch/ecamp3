@@ -75,7 +75,6 @@ export default {
   },
   data() {
     return {
-      entityProperties: ['checklist', 'text'],
       entityUri: '',
     }
   },
@@ -123,6 +122,8 @@ export default {
     },
   },
   async mounted() {
+    this.entityProperties.push('checklist', 'text')
+
     this.api.href(this.api.get(), 'checklistItems').then((uri) => (this.entityUri = uri))
 
     await this.api.get().checklistNodes({ camp: this.camp._meta.self })

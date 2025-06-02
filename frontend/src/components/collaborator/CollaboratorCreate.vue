@@ -51,7 +51,6 @@ export default {
   },
   data() {
     return {
-      entityProperties: ['camp', 'inviteEmail', 'role'],
       entityUri: '',
     }
   },
@@ -70,6 +69,8 @@ export default {
     },
   },
   mounted() {
+    this.entityProperties.push('camp', 'inviteEmail', 'role')
+
     this.api
       .href(this.api.get(), 'campCollaborations')
       .then((uri) => (this.entityUri = uri))

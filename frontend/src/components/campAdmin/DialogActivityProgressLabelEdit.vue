@@ -54,11 +54,6 @@ export default {
   props: {
     progressLabel: { type: Object, required: true },
   },
-  data() {
-    return {
-      entityProperties: ['title'],
-    }
-  },
   computed: {
     camp() {
       return this.progressLabel.camp()
@@ -76,6 +71,9 @@ export default {
         this.loadEntityData(this.progressLabel._meta.self)
       }
     },
+  },
+  mounted() {
+    this.entityProperties.push('title')
   },
 }
 </script>
