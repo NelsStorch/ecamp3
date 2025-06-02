@@ -17,14 +17,17 @@
     </template>
 
     <template #moreActions>
-      <CopyActivityInfoDialog @closed="attemptLoadingEntityFromClipboard">
+      <ClipboardInfoDialog
+        translation-context-i18n-key="components.program.dialogActivityCreate.clipboardInfoDialog"
+        @closed="attemptLoadingEntityFromClipboard"
+      >
         <template #activator="{ on }">
           <v-btn v-show="showClipboardPrompt" v-on="on">
             <v-icon left>mdi-information-outline</v-icon>
             {{ $tc('components.program.dialogActivityCreate.copyPasteActivity') }}
           </v-btn>
         </template>
-      </CopyActivityInfoDialog>
+      </ClipboardInfoDialog>
     </template>
 
     <div v-if="hasClipboardEntity">
@@ -108,7 +111,7 @@
 import DialogForm from '@/components/dialog/DialogForm.vue'
 import DialogBase from '@/components/dialog/DialogBase.vue'
 import DialogActivityForm from '@/components/activity/dialog/DialogActivityForm.vue'
-import CopyActivityInfoDialog from '@/components/activity/CopyActivityInfoDialog.vue'
+import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
 import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
 import { uniqueId } from 'lodash-es'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
@@ -124,7 +127,7 @@ export default {
     CategoryChip,
     DialogForm,
     DialogActivityForm,
-    CopyActivityInfoDialog,
+    ClipboardInfoDialog,
     PopoverPrompt,
   },
   extends: DialogBase,

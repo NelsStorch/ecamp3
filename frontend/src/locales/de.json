@@ -23,13 +23,6 @@
           }
         }
       },
-      "copyActivityInfoDialog": {
-        "allow": "Jetzt erlauben",
-        "denied": "Du hast das Lesen aus der Zwischenablage untersagt. Du kannst daher kopierte Aktivitäten nicht einfügen.",
-        "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp erlauben deine Zwischenablage zu lesen.",
-        "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
-        "title": "Aktivität kopieren & einfügen"
-      },
       "dialog": {
         "dialogActivityEdit": {
           "title": "Aktivität bearbeiten"
@@ -44,6 +37,13 @@
       "scheduleEntry": {
         "backToContents": "Zurück zum Bearbeiten des Inhalts",
         "changeLayout": "Layout ändern",
+        "clipboardInfoDialog": {
+          "allow": "Jetzt erlauben",
+          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
+          "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
+          "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
+          "title": "Aktivität kopieren & einfügen"
+        },
         "copyScheduleEntry": "Aktivität kopieren",
         "deleteWarning": "Möchtest du diese Aktivität wirklich löschen? Der komplette Inhalt dieser Aktivität wird gelöscht."
       },
@@ -128,6 +128,13 @@
       "dialogCategoryCreate": {
         "clearClipboard": "Zwischenablage leeren",
         "clipboard": "Zwischenablage",
+        "clipboardInfoDialog": {
+          "allow": "Jetzt erlauben",
+          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Kategorien können daher nicht eingefügt werden.",
+          "description": "Damit du eine kopierte Kategorie einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
+          "granted": "Du kannst nun kopierte Kategorien einfügen.",
+          "title": "Kategorie kopieren & einfügen"
+        },
         "copyCategoryOrActivity": "Kategorie oder Aktivität kopieren",
         "copyContent": "Inhalt kopieren",
         "copyPasteCategory": "Kategorie kopieren & einfügen",
@@ -193,13 +200,6 @@
         "createLayoutHelp": "Hier kannst du die Vorlage für neue {categoryShort}-Blöcke definieren.{br}Blockinhalt & Layout bereits erstellter {categoryShort}-Blöcke, werden nicht angepasst.",
         "layout": "Layout",
         "noTemplate": "Keine Vorlage"
-      },
-      "copyCategoryInfoDialog": {
-        "allow": "Jetzt erlauben",
-        "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Kategorien können daher nicht eingefügt werden.",
-        "description": "Damit du eine kopierte Kategorie einfügen kannst, musst du eCamp erlauben deine Zwischenablage zu lesen.",
-        "granted": "Du kannst nun kopierte Kategorien einfügen.",
-        "title": "Kategorie kopieren & einfügen"
       }
     },
     "checklist": {
@@ -407,6 +407,13 @@
       "dialogActivityCreate": {
         "clearClipboard": "Zwischenablage leeren",
         "clipboard": "Zwischenablage",
+        "clipboardInfoDialog": {
+          "allow": "Jetzt erlauben",
+          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
+          "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
+          "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
+          "title": "Aktivität kopieren & einfügen"
+        },
         "copyActivity": "Aktivität kopieren",
         "copyActivityContent": "Inhalt von Aktivität kopieren",
         "copyPasteActivity": "Aktivität kopieren & einfügen",
@@ -431,6 +438,13 @@
           }
         },
         "picassoEntry": {
+          "clipboardInfoDialog": {
+            "allow": "Jetzt erlauben",
+            "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
+            "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
+            "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
+            "title": "Aktivität kopieren & einfügen"
+          },
           "location": "Ort:",
           "responsible": "Verantwortlich: "
         }
@@ -664,6 +678,13 @@
       },
       "category": {
         "category": {
+          "clipboardInfoDialog": {
+            "allow": "Jetzt erlauben",
+            "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Kategorien können daher nicht eingefügt werden.",
+            "description": "Damit du eine kopierte Kategorie einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
+            "granted": "Du kannst nun kopierte Kategorien einfügen.",
+            "title": "Kategorie kopieren & einfügen"
+          },
           "copyCategory": "Kategorie kopieren",
           "deleteCategory": "Kategorie löschen",
           "properties": "Eigenschaften",

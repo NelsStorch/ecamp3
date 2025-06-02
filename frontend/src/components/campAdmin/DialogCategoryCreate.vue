@@ -15,14 +15,17 @@
     </template>
 
     <template #moreActions>
-      <CopyCategoryInfoDialog @closed="attemptLoadingEntityFromClipboard">
+      <ClipboardInfoDialog
+        translation-context-i18n-key="components.campAdmin.dialogCategoryCreate.clipboardInfoDialog"
+        @closed="attemptLoadingEntityFromClipboard"
+      >
         <template #activator="{ on }">
           <v-btn v-show="showClipboardPrompt" v-on="on">
             <v-icon left>mdi-information-outline</v-icon>
             {{ $tc('components.campAdmin.dialogCategoryCreate.copyPasteCategory') }}
           </v-btn>
         </template>
-      </CopyCategoryInfoDialog>
+      </ClipboardInfoDialog>
     </template>
 
     <div v-if="hasClipboardEntity">
@@ -107,7 +110,7 @@ import DialogCategoryForm from './DialogCategoryForm.vue'
 import PopoverPrompt from '../prompt/PopoverPrompt.vue'
 import router from '@/router.js'
 import CategoryChip from '../generic/CategoryChip.vue'
-import CopyCategoryInfoDialog from '../category/CopyCategoryInfoDialog.vue'
+import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
 import { useEntityData } from '@/components/dialog/useEntityData.js'
 import { useClipboardEntity } from '@/components/generic/useClipboardEntity.js'
 import { apiStore as api } from '@/plugins/store/index.js'
@@ -116,7 +119,7 @@ import { nextTick, ref, computed } from 'vue'
 export default {
   name: 'DialogCategoryCreate',
   components: {
-    CopyCategoryInfoDialog,
+    ClipboardInfoDialog,
     CategoryChip,
     PopoverPrompt,
     DialogCategoryForm,

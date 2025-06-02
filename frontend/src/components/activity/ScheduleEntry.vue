@@ -138,7 +138,10 @@ Displays a single scheduleEntry
               {{ $tc('components.activity.scheduleEntry.copyScheduleEntry') }}
             </v-list-item-title>
           </v-list-item>
-          <CopyActivityInfoDialog ref="copyInfoDialog" />
+          <ClipboardInfoDialog
+            ref="copyInfoDialog"
+            translation-context-i18n-key="components.activity.scheduleEntry.clipboardInfoDialog"
+          />
 
           <v-divider />
 
@@ -302,7 +305,6 @@ import DownloadNuxtPdf from '@/components/print/print-nuxt/DownloadNuxtPdfListIt
 import DownloadClientPdf from '@/components/print/print-client/DownloadClientPdfListItem.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
-import CopyActivityInfoDialog from '@/components/activity/CopyActivityInfoDialog.vue'
 import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import ApiForm from '@/components/form/api/ApiForm.vue'
@@ -310,6 +312,7 @@ import ApiSelect from '@/components/form/api/ApiSelect.vue'
 import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
 import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
 import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
+import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
 
 export default {
   name: 'ScheduleEntry',
@@ -327,7 +330,7 @@ export default {
     DownloadClientPdf,
     DownloadNuxtPdf,
     CategoryChip,
-    CopyActivityInfoDialog,
+    ClipboardInfoDialog,
   },
   mixins: [campRoleMixin, dateHelperUTCFormatted],
   provide() {

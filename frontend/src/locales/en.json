@@ -23,13 +23,6 @@
           }
         }
       },
-      "copyActivityInfoDialog": {
-        "allow": "Allow now",
-        "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied activities.",
-        "description": "In order to paste a copied activity, you must allow eCamp to read your clipboard.",
-        "granted": "You can now paste copied activities.",
-        "title": "Copy & paste activity"
-      },
       "dialog": {
         "dialogActivityEdit": {
           "title": "Edit activity"
@@ -44,6 +37,13 @@
       "scheduleEntry": {
         "backToContents": "Back to editing content",
         "changeLayout": "Change layout",
+        "clipboardInfoDialog": {
+          "allow": "Allow now",
+          "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied activities.",
+          "description": "In order to paste a copied activity, you must allow eCamp v3 to read your clipboard.",
+          "granted": "You can now paste copied activities.",
+          "title": "Copy & paste activity"
+        },
         "copyScheduleEntry": "Copy activity",
         "deleteWarning": "Do you really want to delete this activity? All content of this activity will be removed."
       },
@@ -128,6 +128,13 @@
       "dialogCategoryCreate": {
         "clearClipboard": "Clear clipboard",
         "clipboard": "Clipboard",
+        "clipboardInfoDialog": {
+          "allow": "Allow now",
+          "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied categories.",
+          "description": "In order to paste a copied category, you must allow eCamp v3 to read your clipboard.",
+          "granted": "You can now paste copied categories.",
+          "title": "Copy & paste category"
+        },
         "copyCategoryOrActivity": "Copy category or activity",
         "copyContent": "Copy content",
         "copyPasteCategory": "Copy & paste category",
@@ -193,13 +200,6 @@
         "createLayoutHelp": "Here you can define the template for new {categoryShort} activities.{br}The content & layout of already created {categoryShort} activities will not be adjusted.",
         "layout": "Layout",
         "noTemplate": "No template"
-      },
-      "copyCategoryInfoDialog": {
-        "allow": "Allow now",
-        "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied categories.",
-        "description": "In order to paste a copied category, you must allow eCamp to read your clipboard.",
-        "granted": "You can now paste copied categories.",
-        "title": "Copy & paste category"
       }
     },
     "checklist": {
@@ -407,6 +407,13 @@
       "dialogActivityCreate": {
         "clearClipboard": "Clear clipboard",
         "clipboard": "Clipboard",
+        "clipboardInfoDialog": {
+          "allow": "Allow now",
+          "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied activities.",
+          "description": "In order to paste a copied activity, you must allow eCamp v3 to read your clipboard.",
+          "granted": "You can now paste copied activities.",
+          "title": "Copy & paste activity"
+        },
         "copyActivity": "Copy activity",
         "copyActivityContent": "Copy content from activity",
         "copyPasteActivity": "Copy & paste activity",
@@ -431,6 +438,13 @@
           }
         },
         "picassoEntry": {
+          "clipboardInfoDialog": {
+            "allow": "Allow now",
+            "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied activities.",
+            "description": "In order to paste a copied activity, you must allow eCamp v3 to read your clipboard.",
+            "granted": "You can now paste copied activities.",
+            "title": "Copy & paste activity"
+          },
           "location": "Location:",
           "responsible": "Responsible: "
         }
@@ -664,6 +678,13 @@
       },
       "category": {
         "category": {
+          "clipboardInfoDialog": {
+            "allow": "Allow now",
+            "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied categories.",
+            "description": "In order to paste a copied category, you must allow eCamp v3 to read your clipboard.",
+            "granted": "You can now paste copied categories.",
+            "title": "Copy & paste category"
+          },
           "copyCategory": "Copy category",
           "deleteCategory": "Delete category",
           "properties": "Properties",
