@@ -198,6 +198,7 @@
           "description": "You must make all settings manually. There are no block templates & layouts available. This is only suitable for experienced users.",
           "title": "Attention: You chose \"No template\"."
         },
+        "otherPrototype": "Copy the settings from another camp…",
         "pasteCamp": "Paste copied camp settings",
         "preview": "Preview of camp template",
         "progressStates": "Activity states",

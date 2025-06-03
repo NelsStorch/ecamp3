@@ -198,6 +198,7 @@
           "description": "Du musst alle Einstellungen manuell vornehmen. Es sind keine Blockvorlagen & Layouts vorhanden. Dies ist nur für erfahrene Nutzende geeignet.",
           "title": "Achtung: Du hast \"Keine Vorlage\" ausgewählt."
         },
+        "otherPrototype": "Einstellungen von einem anderen Lager kopieren…",
         "pasteCamp": "Kopierte Lagereinstellungen einfügen",
         "preview": "Vorschau der Lagervorlage",
         "progressStates": "Blockstatus",

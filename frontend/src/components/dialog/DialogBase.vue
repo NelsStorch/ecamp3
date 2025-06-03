@@ -31,6 +31,9 @@ export default {
     },
   },
   methods: {
+    setOpen(open) {
+      this.showDialog = open
+    },
     loadEntityData(uri) {
       this.clearEntityData()
       if (uri) {

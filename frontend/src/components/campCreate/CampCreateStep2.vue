@@ -8,7 +8,7 @@
             <div class="e-form-container d-flex gap-2">
               <e-select
                 v-model="localCamp.campPrototype"
-                :vee-rules="{ required: false, excluded: ['', false, true] }"
+                :vee-rules="{ required: false, excluded: ['', 'other', false, true] }"
                 :skip-if-empty="false"
                 :label="$tc('entity.camp.prototype')"
                 :hint="prototypeHint"
@@ -20,6 +20,7 @@
 
               <PopoverPrompt
                 v-if="clipboardAccessDenied"
+                ref="popoverPrompt"
                 v-model="showCopyCampUrlPopover"
                 icon="mdi-content-paste"
                 :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
@@ -46,6 +47,7 @@
               </PopoverPrompt>
               <ClipboardInfoDialog
                 v-else-if="showClipboardPrompt"
+                ref="clipboardInfoDialog"
                 translation-context-i18n-key="components.campCreate.campCreateStep2.clipboardInfoDialog"
                 @closed="attemptLoadingEntityFromClipboard"
               >
@@ -64,6 +66,7 @@
               </ClipboardInfoDialog>
               <v-btn
                 v-else
+                ref="pasteButton"
                 :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
                 text
                 class="v-btn--has-bg"
@@ -74,7 +77,7 @@
                 <v-icon v-else>mdi-content-paste</v-icon>
               </v-btn>
             </div>
-            <div v-if="localCamp.campPrototype" class="px-2 rounded-lg dashborder">
+            <div v-if="prototypePreview" class="px-2 rounded-lg dashborder">
               <h3 class="mt-2 h3">
                 {{ $tc('components.campCreate.campCreateStep2.preview') }}
               </h3>
@@ -255,7 +258,12 @@ export default {
                 text: this.clipboardEntity.title,
               },
             ]
-          : []),
+          : [
+              {
+                value: 'other',
+                text: this.$tc('components.campCreate.campCreateStep2.otherPrototype'),
+              },
+            ]),
         {
           value: null,
           text: this.$tc('components.campCreate.campCreateStep2.noPrototype'),
@@ -269,6 +277,8 @@ export default {
           return this.$tc('components.campCreate.campCreateStep2.prototypeHint')
         case null:
           return this.$tc('components.campCreate.campCreateStep2.prototypeHintEmpty')
+        case 'other':
+          return this.$tc('components.campCreate.campCreateStep2.prototypeHintOther')
         default:
           if (!campPrototypeUris.includes(this.localCamp.campPrototype)) {
             return this.$tc('components.campCreate.campCreateStep2.prototypeHintOther')
@@ -277,6 +287,9 @@ export default {
       }
     },
     prototypePreview() {
+      if (this.localCamp.campPrototype === 'other') {
+        return null
+      }
       if (this.localCamp.campPrototype) {
         return this.api.get(this.localCamp.campPrototype)
       }
@@ -291,6 +304,21 @@ export default {
           text: this.$tc(ct.title),
           object: ct,
         }))
+    },
+  },
+  watch: {
+    'localCamp.campPrototype'(newPrototype) {
+      if (newPrototype === 'other') {
+        if (this.$refs.popoverPrompt) {
+          this.$refs.popoverPrompt.setOpen(true)
+        }
+        if (this.$refs.clipboardInfoDialog) {
+          this.$refs.clipboardInfoDialog.setOpen(true)
+        }
+        if (this.$refs.pasteButton) {
+          this.attemptLoadingEntityFromClipboard()
+        }
+      }
     },
   },
   mounted() {
