@@ -10,7 +10,7 @@
               :vee-rules="{ required: false, excluded: ['', false, true] }"
               :skip-if-empty="false"
               :label="$tc('entity.camp.prototype')"
-              :hint="prorotypeHint"
+              :hint="prototypeHint"
               persistent-hint
               :items="campTemplates"
               :menu-props="{ offsetY: true }"
@@ -153,7 +153,7 @@ export default {
         },
       ])
     },
-    prorotypeHint() {
+    prototypeHint() {
       switch (this.localCamp.campPrototype) {
         case '':
           return this.$tc('components.campCreate.campCreateStep2.prototypeHint')
