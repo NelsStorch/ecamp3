@@ -14,7 +14,7 @@
       v-bind="$attrs"
       :filled="filled"
       :hide-details="hideDetails"
-      :error-messages="veeErrors.concat(errorMessages)"
+      :error-messages="errorMessages.concat(veeErrors)"
       :label="labelOrEntityFieldLabel"
       :class="[inputClass]"
       v-on="$listeners"

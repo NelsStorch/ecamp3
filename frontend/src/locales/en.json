@@ -192,6 +192,7 @@
         "copyPasteCamp": "Copy & paste camp settings",
         "copySourceInfo": "Here you can paste the URL of a camp, in order to copy its settings.",
         "create": "Create the Camp",
+        "noAccessibleCampFoundInClipboard": "No valid camp URL was found in the clipboard. Please copy the link to the template camp and try again.",
         "noContent": "No Content",
         "noPrototype": "No template",
         "noPrototypeAlert": {

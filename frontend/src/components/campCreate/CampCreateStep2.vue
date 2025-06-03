@@ -5,10 +5,46 @@
         <v-form ref="form" @submit.prevent="handleSubmit(() => $emit('create-camp'))">
           <v-card-text>
             <server-error :server-error="serverError" />
+
+            <div v-if="hasClipboardEntity">
+              <div class="mb-8">
+                <div v-if="!clipboardAccessDenied">
+                  {{ $tc('components.campCreate.campCreateStep2.clipboard') }}
+                  <div style="float: right">
+                    <small>
+                      <a
+                        href="#"
+                        style="color: inherit; text-decoration: none"
+                        @click="clearClipboard"
+                      >
+                        {{ $tc('components.campCreate.campCreateStep2.clearClipboard') }}
+                      </a>
+                    </small>
+                  </div>
+                </div>
+                <v-list-item
+                  class="ec-copy-source rounded-xl blue-grey lighten-5 blue-grey--text text--darken-4 mt-1"
+                >
+                  <v-list-item-avatar>
+                    <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{ clipboardEntity.title }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ clipboardEntity.organizer }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </div>
+            </div>
+
             <div class="e-form-container d-flex gap-2">
               <e-select
                 v-model="localCamp.campPrototype"
                 :vee-rules="{ required: false, excluded: ['', 'other', false, true] }"
+                :error-messages="prototypeSelectErrors"
                 :skip-if-empty="false"
                 :label="$tc('entity.camp.prototype')"
                 :hint="prototypeHint"
@@ -238,7 +274,9 @@ export default {
         localCamp.campPrototype = entity._meta.self
       },
       onEntityLoadFailed() {
-        localCamp.campPrototype = ''
+        // If "other" is selected, leave the selection as it is, so we can show an
+        // explaining error message to the user
+        if (localCamp.campPrototype !== 'other') localCamp.campPrototype = ''
       },
     })
 
@@ -304,6 +342,16 @@ export default {
           text: this.$tc(ct.title),
           object: ct,
         }))
+    },
+    prototypeSelectErrors() {
+      if (this.clipboardAccessDenied) return []
+      if (this.hasClipboardEntity) return []
+      if (this.localCamp.campPrototype !== 'other') return []
+      return [
+        this.$tc(
+          'components.campCreate.campCreateStep2.noAccessibleCampFoundInClipboard'
+        ),
+      ]
     },
   },
   watch: {

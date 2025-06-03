@@ -192,6 +192,7 @@
         "copyPasteCamp": "Lagereinstellungen kopieren & einfügen",
         "copySourceInfo": "Hier kannst du die URL eines Lagers einfügen, um dessen Einstellungen zu kopieren.",
         "create": "Lager erstellen",
+        "noAccessibleCampFoundInClipboard": "In der Zwischenablage wurde kein gültiger Link zu einem Lager gefunden. Bitte kopiere den Link zum Vorlage-Lager und probiere es erneut.",
         "noContent": "Keine Inhalte",
         "noPrototype": "Keine Vorlage",
         "noPrototypeAlert": {
