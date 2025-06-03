@@ -179,6 +179,18 @@
       },
       "campCreateStep2": {
         "category": "Activity categories",
+        "clearClipboard": "Clear clipboard",
+        "clipboard": "Clipboard",
+        "clipboardInfoDialog": {
+          "allow": "Allow now",
+          "denied": "You have denied access to your clipboard. Therefore, you cannot paste copied camp settings.",
+          "description": "In order to paste the settings of a copied camp, you must allow eCamp v3 to read your clipboard.",
+          "granted": "You can now paste copied camp settings.",
+          "title": "Copy & paste camp settings"
+        },
+        "copyCamp": "Copy camp settings",
+        "copyPasteCamp": "Copy & paste camp settings",
+        "copySourceInfo": "Here you can paste the URL of a camp, in order to copy its settings.",
         "create": "Create the Camp",
         "noContent": "No Content",
         "noPrototype": "No template",
@@ -186,10 +198,12 @@
           "description": "You must make all settings manually. There are no block templates & layouts available. This is only suitable for experienced users.",
           "title": "Attention: You chose \"No template\"."
         },
+        "pasteCamp": "Paste copied camp settings",
         "preview": "Preview of camp template",
         "progressStates": "Activity states",
         "prototypeHint": "Copy categories, activity templates and states from a template.",
         "prototypeHintEmpty": "Don't copy categories, activity templates and states.",
+        "prototypeHintOther": "Copy categories, activity templates and states from this other camp. No activities are copied.",
         "prototypeHintSelected": "Copy categories, activity templates and states from this template.",
         "submitTooltipPrototype": "You need to choose if and which template you want."
       }

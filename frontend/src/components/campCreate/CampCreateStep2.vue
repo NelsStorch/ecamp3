@@ -5,16 +5,75 @@
         <v-form ref="form" @submit.prevent="handleSubmit(() => $emit('create-camp'))">
           <v-card-text>
             <server-error :server-error="serverError" />
-            <e-select
-              v-model="localCamp.campPrototype"
-              :vee-rules="{ required: false, excluded: ['', false, true] }"
-              :skip-if-empty="false"
-              :label="$tc('entity.camp.prototype')"
-              :hint="prototypeHint"
-              persistent-hint
-              :items="campTemplates"
-              :menu-props="{ offsetY: true }"
-            />
+            <div class="e-form-container d-flex gap-2">
+              <e-select
+                v-model="localCamp.campPrototype"
+                :vee-rules="{ required: false, excluded: ['', false, true] }"
+                :skip-if-empty="false"
+                :label="$tc('entity.camp.prototype')"
+                :hint="prototypeHint"
+                persistent-hint
+                :items="campTemplates"
+                :menu-props="{ offsetY: true }"
+                class="flex-grow-1"
+              />
+
+              <PopoverPrompt
+                v-if="clipboardAccessDenied"
+                v-model="showCopyCampUrlPopover"
+                icon="mdi-content-paste"
+                :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
+              >
+                <template #activator="scope">
+                  <v-btn
+                    :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
+                    text
+                    class="v-btn--has-bg"
+                    height="56"
+                    v-on="scope.on"
+                  >
+                    <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
+                    <v-icon v-else>mdi-content-paste</v-icon>
+                  </v-btn>
+                </template>
+                {{ $tc('components.campCreate.campCreateStep2.copySourceInfo') }}
+                <e-text-field
+                  v-model="clipboardEntityUrl"
+                  :label="$tc('components.campCreate.campCreateStep2.copyCamp')"
+                  style="margin-bottom: 12px"
+                  autofocus
+                />
+              </PopoverPrompt>
+              <ClipboardInfoDialog
+                v-else-if="showClipboardPrompt"
+                translation-context-i18n-key="components.campCreate.campCreateStep2.clipboardInfoDialog"
+                @closed="attemptLoadingEntityFromClipboard"
+              >
+                <template #activator="{ on }">
+                  <v-btn
+                    :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
+                    text
+                    class="v-btn--has-bg"
+                    height="56"
+                    v-on="on"
+                  >
+                    <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
+                    <v-icon v-else>mdi-content-paste</v-icon>
+                  </v-btn>
+                </template>
+              </ClipboardInfoDialog>
+              <v-btn
+                v-else
+                :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
+                text
+                class="v-btn--has-bg"
+                height="56"
+                @click="attemptLoadingEntityFromClipboard"
+              >
+                <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
+                <v-icon v-else>mdi-content-paste</v-icon>
+              </v-btn>
+            </div>
             <div v-if="localCamp.campPrototype" class="px-2 rounded-lg dashborder">
               <h3 class="mt-2 h3">
                 {{ $tc('components.campCreate.campCreateStep2.preview') }}
@@ -120,10 +179,18 @@ import ButtonCancel from '@/components/buttons/ButtonCancel.vue'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
 import ContentActions from '@/components/layout/ContentActions.vue'
 import ServerError from '@/components/form/ServerError.vue'
+import ClipboardInfoDialog from '@/components/generic/ClipboardInfoDialog.vue'
+import { useClipboardEntity } from '@/components/generic/useClipboardEntity.js'
+import router from '@/router.js'
+import { apiStore as api } from '@/plugins/store/index.js'
+import { nextTick, reactive, ref } from 'vue'
+import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
 
 export default {
   name: 'CampCreateStep2',
   components: {
+    PopoverPrompt,
+    ClipboardInfoDialog,
     ButtonAdd,
     ButtonCancel,
     CategoryChip,
@@ -139,14 +206,56 @@ export default {
       default: null,
     },
   },
-  data: function () {
+  setup({ camp }) {
+    const showCopyCampUrlPopover = ref(false)
+    const localCamp = reactive(camp)
+
+    const clipboard = useClipboardEntity(api, {
+      fetchClipboardEntity: async (url) => {
+        if (url?.startsWith(window.location.origin)) {
+          url = url.substring(window.location.origin.length)
+          const match = router.matcher.match(url)
+
+          if (match.params?.campId) {
+            const result = await api.get().camps({ id: match.params.campId })
+
+            // if Paste-Popover is shown, close it now
+            if (result && showCopyCampUrlPopover.value) {
+              nextTick(() => {
+                showCopyCampUrlPopover.value = false
+              })
+            }
+
+            return result
+          }
+        }
+        return null
+      },
+      onEntityLoaded(entity) {
+        localCamp.campPrototype = entity._meta.self
+      },
+      onEntityLoadFailed() {
+        localCamp.campPrototype = ''
+      },
+    })
+
     return {
-      localCamp: this.camp,
+      ...clipboard,
+      showCopyCampUrlPopover,
+      localCamp,
     }
   },
   computed: {
     campTemplates() {
       return this.campPrototypes.concat([
+        ...(this.hasClipboardEntity
+          ? [
+              {
+                value: this.clipboardEntity._meta.self,
+                text: this.clipboardEntity.title,
+              },
+            ]
+          : []),
         {
           value: null,
           text: this.$tc('components.campCreate.campCreateStep2.noPrototype'),
@@ -154,12 +263,16 @@ export default {
       ])
     },
     prototypeHint() {
+      const campPrototypeUris = this.campPrototypes.map((prototype) => prototype.value)
       switch (this.localCamp.campPrototype) {
         case '':
           return this.$tc('components.campCreate.campCreateStep2.prototypeHint')
         case null:
           return this.$tc('components.campCreate.campCreateStep2.prototypeHintEmpty')
         default:
+          if (!campPrototypeUris.includes(this.localCamp.campPrototype)) {
+            return this.$tc('components.campCreate.campCreateStep2.prototypeHintOther')
+          }
           return this.$tc('components.campCreate.campCreateStep2.prototypeHintSelected')
       }
     },
@@ -179,6 +292,11 @@ export default {
           object: ct,
         }))
     },
+  },
+  mounted() {
+    this.attemptLoadingEntityFromClipboard().then(() => {
+      this.localCamp.campPrototype = ''
+    })
   },
   methods: { camelCase },
 }

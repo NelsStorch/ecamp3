@@ -179,6 +179,18 @@
       },
       "campCreateStep2": {
         "category": "Block-Kategorien",
+        "clearClipboard": "Zwischenablage leeren",
+        "clipboard": "Zwischenablage",
+        "clipboardInfoDialog": {
+          "allow": "Jetzt erlauben",
+          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Lagereinstellungen können daher nicht eingefügt werden.",
+          "description": "Damit du die Einstellungen eines kopierten Lagers einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
+          "granted": "Du kannst nun kopierte Lagereinstellungen einfügen.",
+          "title": "Lagereinstellungen kopieren & einfügen"
+        },
+        "copyCamp": "Aktivität kopieren",
+        "copyPasteCamp": "Lagereinstellungen kopieren & einfügen",
+        "copySourceInfo": "Hier kannst du die URL eines Lagers einfügen, um dessen Einstellungen zu kopieren.",
         "create": "Lager erstellen",
         "noContent": "Keine Inhalte",
         "noPrototype": "Keine Vorlage",
@@ -186,10 +198,12 @@
           "description": "Du musst alle Einstellungen manuell vornehmen. Es sind keine Blockvorlagen & Layouts vorhanden. Dies ist nur für erfahrene Nutzende geeignet.",
           "title": "Achtung: Du hast \"Keine Vorlage\" ausgewählt."
         },
+        "pasteCamp": "Kopierte Lagereinstellungen einfügen",
         "preview": "Vorschau der Lagervorlage",
         "progressStates": "Blockstatus",
         "prototypeHint": "Kopiere Kategorien, Blockvorlagen und Blockstatus von einer Lagervorlage",
         "prototypeHintEmpty": "Keine Kategorien, Blockvorlagen und Blockstatus aus einer Lagervorlage kopieren",
+        "prototypeHintOther": "Kopiere Kategorien, Blockvorlagen und Blockstatus von diesem anderen Lager. Es werden keine Aktivitäten kopiert.",
         "prototypeHintSelected": "Kopiere Kategorien, Blockvorlagen und Blockstatus von dieser Lagervorlage",
         "submitTooltipPrototype": "Du musst noch auswählen, ob und welche Lagervorlage du verwenden möchtest."
       }
