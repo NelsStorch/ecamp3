@@ -1,5 +1,5 @@
 <template>
-  <v-skeleton-loader v-if="camp._meta.loading" type="article" />
+  <v-skeleton-loader v-if="loading" type="article" />
   <div v-else>
     <PagesOverview v-model="cnf.contents" @input="onChange">
       <PagesConfig
@@ -143,6 +143,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       contentComponents: {
         Cover: CoverConfig,
         Picasso: PicassoConfig,
@@ -182,12 +183,19 @@ export default {
       immediate: true,
     },
   },
-  mounted() {
-    this.camp.periods().items.forEach((period) => {
-      period.days().$reload()
-      period.contentNodes().$reload()
-    })
-    this.camp.activities().$reload()
+  async mounted() {
+    await this.camp.periods().$reload()
+    await Promise.all([
+      ...this.camp
+        .periods()
+        .items.flatMap((period) => [
+          period.days().$reload(),
+          period.contentNodes().$reload(),
+        ]),
+      this.camp.activities().$reload(),
+      this.camp.categories().$reload(),
+    ])
+    this.loading = false
   },
   methods: {
     resetConfig() {

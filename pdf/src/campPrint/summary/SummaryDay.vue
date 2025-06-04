@@ -26,6 +26,7 @@ import { dateLong } from '../../../common/helpers/dateHelperUTCFormatted.js'
 import CategoryLabel from '../CategoryLabel.vue'
 import RichText from '../RichText.vue'
 import { isEmptyHtml } from '../helpers.js'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'SummaryDay',
@@ -35,6 +36,7 @@ export default {
     period: { type: Object, required: true },
     day: { type: Object, required: true },
     contentType: { type: String, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     date() {
@@ -42,7 +44,10 @@ export default {
     },
     scheduleEntries() {
       return this.period.scheduleEntries().items.filter((scheduleEntry) => {
-        return scheduleEntry.day()._meta.self === this.day._meta.self
+        return (
+          scheduleEntry.day()._meta.self === this.day._meta.self &&
+          filterMatchScheduleEntry(scheduleEntry, this.filter)
+        )
       })
     },
     entries() {

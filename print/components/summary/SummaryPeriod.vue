@@ -16,6 +16,7 @@
       :day="day"
       :all-content-nodes="data.contentNodes"
       :content-type="contentType"
+      :filter="filter"
     />
   </div>
 </template>
@@ -31,6 +32,7 @@ const props = defineProps({
   },
   index: { type: Number, required: true },
   contentType: { type: String, default: 'Storycontext' },
+  filter: { type: Object, default: () => ({}) },
 })
 
 const { $api } = useNuxtApp()

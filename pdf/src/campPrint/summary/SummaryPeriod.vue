@@ -11,6 +11,7 @@
     :period="period"
     :day="day"
     :content-type="contentType"
+    :filter="filter"
   />
 </template>
 <script>
@@ -26,6 +27,7 @@ export default {
   props: {
     period: { type: Object, required: true },
     contentType: { type: String, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     days() {

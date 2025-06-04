@@ -28,7 +28,7 @@
 <script>
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
-import { isEqual } from 'lodash-es'
+import { repairPrintFilterConfig } from '../repairPrintConfig.js'
 
 export default {
   name: 'ProgramConfig',
@@ -83,50 +83,17 @@ export default {
   },
   repairConfig(config, camp) {
     if (!config.options) config.options = {}
-    if (camp.periods().items.length === 1) {
+    const knownPeriods = camp.periods().items.map((p) => p._meta.self)
+    if (knownPeriods.length === 1) {
       config.options.periods = [camp.periods().items[0]._meta.self]
     } else {
       if (!config.options.periods) config.options.periods = []
-      const knownPeriods = camp.periods().items.map((p) => p._meta.self)
       config.options.periods = config.options.periods.filter((period) => {
         return knownPeriods.includes(period)
       })
     }
     if (typeof config.options.dayOverview !== 'boolean') config.options.dayOverview = true
-    if (!config.options.filter || typeof config.options.filter !== 'object') {
-      config.options.filter = {
-        category: [],
-        responsible: [],
-        progressLabel: [],
-      }
-    }
-    if (!config.options.filter.period) config.options.filter.period = null
-    if (!knownPeriods.includes(config.options.filter.period))
-      config.options.filter.period = null
-    if (!config.options.filter.category) config.options.filter.category = []
-    const knownCategories = camp.categories().items.map((c) => c._meta.self)
-    config.options.filter.category = config.options.filter.category.filter((category) => {
-      return knownCategories.includes(category)
-    })
-    if (!config.options.filter.responsible) config.options.filter.responsible = []
-    const knownCampCollaborations = camp
-      .campCollaborations()
-      .items.map((c) => c._meta.self)
-    if (!isEqual(config.options.filter.responsible, ['none'])) {
-      config.options.filter.responsible = config.options.filter.responsible.filter(
-        (responsible) => {
-          return knownCampCollaborations.includes(responsible)
-        }
-      )
-    }
-    if (!config.options.filter.progressLabel) config.options.filter.progressLabel = []
-    const knownProgressLabels = camp.progressLabels().items.map((l) => l._meta.self)
-    config.options.filter.progressLabel = config.options.filter.progressLabel.filter(
-      (progressLabel) => {
-        return knownProgressLabels.includes(progressLabel) || 'none' === progressLabel
-      }
-    )
-    return config
+    return repairPrintFilterConfig(config, camp, knownPeriods)
   },
 }
 </script>
