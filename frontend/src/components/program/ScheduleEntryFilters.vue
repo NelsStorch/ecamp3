@@ -80,6 +80,24 @@
         {{ categories[item.value].name }}
       </template>
     </SelectFilter>
+    <template v-if="!hideDayFilter">
+      <SelectFilter
+        v-if="loadingEndpoints !== true && loadingEndpoints.days !== true"
+        v-model="value.day"
+        multiple
+        :items="dayItems"
+        display-field="label"
+        :label="$tc('components.program.scheduleEntryFilters.day')"
+        @input="(val) => updateFilter({ day: val })"
+      />
+      <v-skeleton-loader
+        v-else
+        type="button"
+        class="v-skeleton-loader--inherit-size"
+        height="32"
+        width="150"
+      />
+    </template>
     <v-skeleton-loader
       v-else
       type="button"
@@ -170,6 +188,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    hideDayFilter: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     periodItems() {
@@ -183,6 +205,21 @@ export default {
     },
     multiplePeriods() {
       return this.periods && Object.keys(this.periods).length > 1
+    },
+    dayItems() {
+      return keyBy(
+        this.camp.periods().items.flatMap((period) =>
+          period.days().items.map((day) => ({
+            ...day,
+            label: this.$tc('components.program.scheduleEntryFilters.dayLabel', 0, {
+              dayNumber: day.number,
+              date: this.$date.utc(day.start).format('dd. DD. MMM'),
+            }),
+            resultCount: this.resultCountWithModifiedFilter('day', day._meta.self),
+          }))
+        ),
+        '_meta.self'
+      )
     },
     ...mapGetters({
       loggedInUser: 'getLoggedInUser',
@@ -317,6 +354,7 @@ export default {
     resetFilter() {
       this.updateFilter({
         period: null,
+        day: [],
         category: [],
         responsible: [],
         progressLabel: [],

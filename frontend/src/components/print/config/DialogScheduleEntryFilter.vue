@@ -27,6 +27,7 @@
       :camp="camp"
       :filter-fn="filterFn"
       :hide-period-filter="hidePeriodFilter"
+      :hide-day-filter="hideDayFilter"
     />
     <template #moreActions>
       {{ resultCountLabel }}
@@ -45,6 +46,7 @@ export default {
     filterFn: { type: Function, required: true },
     filter: { type: Object, required: true },
     hidePeriodFilter: { type: Boolean, default: false },
+    hideDayFilter: { type: Boolean, default: false },
   },
   data() {
     return {
@@ -84,6 +86,7 @@ export default {
     anyFilter() {
       return (
         this.filter.period ||
+        (this.filter.day != null && this.filter.day.length > 0) ||
         (this.filter.responsible != null && this.filter.responsible.length > 0) ||
         (this.filter.category != null && this.filter.category.length > 0) ||
         (this.filter.progressLabel != null && this.filter.progressLabel.length > 0)

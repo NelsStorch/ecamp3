@@ -444,6 +444,8 @@
       "scheduleEntryFilters": {
         "category": "Category",
         "clearFilters": "Clear filters",
+        "day": "Date",
+        "dayLabel": "Day {dayNumber} ({date})",
         "onlyMyActivities": "Only my activities",
         "period": "Period",
         "progressLabel": "State",

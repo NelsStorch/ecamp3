@@ -91,6 +91,8 @@ Show all activity schedule entries of a single period.
       :loading-endpoints="loadingEndpoints"
       :camp="camp"
       :filter-fn="filterFn"
+      hide-period-filter
+      hide-day-filter
       @height-changed="scheduleEntryFiltersHeightChanged"
     />
     <template v-if="loading">
@@ -127,6 +129,8 @@ Show all activity schedule entries of a single period.
           class="pa-4"
           :loading-endpoints="loadingEndpoints"
           :camp="camp"
+          hide-period-filter
+          hide-day-filter
           :filter-fn="filterFn"
         />
       </v-sheet>
@@ -177,6 +181,7 @@ export default {
       loadingEndpoints: {
         categories: true,
         periods: true,
+        days: false,
         campCollaborations: true,
         progressLabels: true,
       },

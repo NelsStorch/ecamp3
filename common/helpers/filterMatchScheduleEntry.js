@@ -11,6 +11,13 @@ const filterMatchScheduleEntry = (scheduleEntry, filter) => {
     (filter.period === null ||
       filter.period === undefined ||
       scheduleEntry.period()._meta.self === filter.period) &&
+    // filter by days: OR filter
+    (filter.day === null ||
+      filter.day === undefined ||
+      filter.day.length === 0 ||
+      filter.day.includes(
+        scheduleEntry.day()._meta.self
+      )) &&
     // filter by categories: OR filter
     (filter.category === null ||
       filter.category === undefined ||

@@ -14,6 +14,7 @@
         class="ma-4"
         :loading-endpoints="false"
         :camp="camp"
+        hide-day-filter
         :periods="periods"
       />
       <ScheduleEntryFilters
@@ -24,6 +25,7 @@
         :loading-endpoints="loadingEndpoints"
         :camp="camp"
         :periods="periods"
+        hide-day-filter
         :filter-fn="filterFn"
       />
       <template v-if="!loading">
@@ -170,6 +172,7 @@ export default {
       loadingEndpoints: {
         categories: true,
         periods: true,
+        days: false,
         campCollaborations: true,
         progressLabels: true,
       },

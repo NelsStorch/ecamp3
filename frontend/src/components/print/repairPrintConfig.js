@@ -39,6 +39,7 @@ export function repairPrintFilterConfig(config, camp, knownPeriods) {
   if (!config.options.filter || typeof config.options.filter !== 'object') {
     config.options.filter = {
       category: [],
+      day: [],
       responsible: [],
       progressLabel: [],
     }
@@ -46,6 +47,14 @@ export function repairPrintFilterConfig(config, camp, knownPeriods) {
   if (!config.options.filter.period) config.options.filter.period = null
   if (!knownPeriods.includes(config.options.filter.period))
     config.options.filter.period = null
+  if (!config.options.filter.day) config.options.filter.day = []
+  const knownDays = camp
+    .periods()
+    .items.flatMap((period) => period.days().items)
+    .map((d) => d._meta.self)
+  config.options.filter.day = config.options.filter.day.filter((day) => {
+    return knownDays.includes(day)
+  })
   if (!config.options.filter.category) config.options.filter.category = []
   const knownCategories = camp.categories().items.map((c) => c._meta.self)
   config.options.filter.category = config.options.filter.category.filter((category) => {

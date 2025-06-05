@@ -23,6 +23,7 @@
 
 <script setup>
 import camelCase from 'lodash-es/camelCase.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 const props = defineProps({
   camp: { type: Object, required: true },
@@ -38,7 +39,7 @@ const props = defineProps({
 const { $api } = useNuxtApp()
 
 const { data, error } = await useAsyncData(
-  `SummaryPeriod-${props.period._meta.self}`,
+  `SummaryPeriod-${props.index}-${props.period._meta.self}`,
   async () => {
     const contentType = (await $api.get().contentTypes().$loadItems()).items.find(
       (contentType) => contentType.name === props.contentType
@@ -65,7 +66,17 @@ const { data, error } = await useAsyncData(
     ])
 
     return {
-      days: props.period.days().items,
+      days: props.period.days().items.filter((day) => {
+        return (
+          props.period
+            .scheduleEntries()
+            .items.filter(
+              (scheduleEntry) =>
+                scheduleEntry.day()._meta.self === day._meta.self &&
+                filterMatchScheduleEntry(scheduleEntry, props.filter)
+            ).length > 0
+        )
+      }),
       contentNodes: contentNodes.items,
     }
   }

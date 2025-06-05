@@ -17,6 +17,13 @@ describe('repairConfig', () => {
       items: [
         {
           _meta: { self: '/periods/1a2b3c4d' },
+          days: () => ({
+            items: [
+              {
+                _meta: { self: '/days/1a2b3c4d' },
+              },
+            ]
+          }),
         },
       ],
     }),
@@ -728,6 +735,7 @@ describe('repairConfig', () => {
   describe('program', () => {
     const defaultFilter = {
       period: null,
+      day: [],
       category: [],
       progressLabel: [],
       responsible: [],
@@ -971,6 +979,7 @@ describe('repairConfig', () => {
                 dayOverview: false,
                 filter: {
                   period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
@@ -996,6 +1005,7 @@ describe('repairConfig', () => {
                 dayOverview: false,
                 filter: {
                   period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
@@ -1058,6 +1068,7 @@ describe('repairConfig', () => {
               periods: ['/periods/1a2b3c4d'],
               dayOverview: false,
               filter: {
+                day: [],
                 category: [],
                 progressLabel: [],
                 responsible: [],
@@ -1102,6 +1113,7 @@ describe('repairConfig', () => {
               dayOverview: false,
               filter: {
                 period: '/periods/00000000',
+                day: [],
                 category: [],
                 progressLabel: [],
                 responsible: [],
@@ -1146,6 +1158,7 @@ describe('repairConfig', () => {
               dayOverview: false,
               filter: {
                 period: null,
+                day: [],
                 category: [],
                 progressLabel: [],
               },
@@ -1189,6 +1202,7 @@ describe('repairConfig', () => {
               dayOverview: false,
               filter: {
                 period: null,
+                day: [],
                 category: [],
                 progressLabel: [],
                 responsible: ['/camp_collaborations/00000000'],
@@ -1233,6 +1247,7 @@ describe('repairConfig', () => {
               dayOverview: false,
               filter: {
                 period: null,
+                day: [],
                 responsible: [],
                 progressLabel: [],
               },
@@ -1276,7 +1291,97 @@ describe('repairConfig', () => {
               dayOverview: false,
               filter: {
                 period: null,
+                day: [],
                 category: ['/categories/00000000'],
+                progressLabel: [],
+                responsible: [],
+              },
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Program',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              dayOverview: false,
+              filter: defaultFilter,
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('adds day filter when missing', () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Program',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              dayOverview: false,
+              filter: {
+                period: null,
+                category: [],
+                responsible: [],
+                progressLabel: [],
+              },
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Program',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              dayOverview: false,
+              filter: defaultFilter,
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('removes invalid day', () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Program',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              dayOverview: false,
+              filter: {
+                period: null,
+                day: ['/days/00000000'],
+                category: [],
                 progressLabel: [],
                 responsible: [],
               },
@@ -1320,8 +1425,9 @@ describe('repairConfig', () => {
               dayOverview: false,
               filter: {
                 period: null,
-                responsible: [],
+                day: [],
                 category: [],
+                responsible: [],
               },
             },
           },
@@ -1363,6 +1469,7 @@ describe('repairConfig', () => {
               dayOverview: false,
               filter: {
                 period: null,
+                day: [],
                 category: [],
                 progressLabel: ['/progress_labels/00000000'],
                 responsible: [],
