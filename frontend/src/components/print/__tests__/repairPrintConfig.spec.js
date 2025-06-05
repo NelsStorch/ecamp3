@@ -22,7 +22,7 @@ describe('repairConfig', () => {
               {
                 _meta: { self: '/days/1a2b3c4d' },
               },
-            ]
+            ],
           }),
         },
       ],
@@ -1017,493 +1017,501 @@ describe('repairConfig', () => {
           language: 'en-GB',
         })
       })
-    })
 
-    test('adds default filter if missing', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('adds period if missing', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                day: [],
-                category: [],
-                progressLabel: [],
-                responsible: [],
+      test('adds default filter if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
 
-      // when
-      const result = repairConfig(config, ...args)
+        // when
+        const result = repairConfig(config, ...args)
 
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('removes invalid period', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: '/periods/00000000',
-                day: [],
-                category: [],
-                progressLabel: [],
-                responsible: [],
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
       })
-    })
 
-    test('adds responsible filter when missing', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                day: [],
-                category: [],
-                progressLabel: [],
+      test('adds period if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
 
-      // when
-      const result = repairConfig(config, ...args)
+        // when
+        const result = repairConfig(config, ...args)
 
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('removes invalid responsible', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                day: [],
-                category: [],
-                progressLabel: [],
-                responsible: ['/camp_collaborations/00000000'],
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
       })
-    })
 
-    test('adds category filter when missing', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                day: [],
-                responsible: [],
-                progressLabel: [],
+      test('removes invalid period', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: '/periods/00000000',
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
 
-      // when
-      const result = repairConfig(config, ...args)
+        // when
+        const result = repairConfig(config, ...args)
 
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('removes invalid category', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                day: [],
-                category: ['/categories/00000000'],
-                progressLabel: [],
-                responsible: [],
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
       })
-    })
 
-    test('adds day filter when missing', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                category: [],
-                responsible: [],
-                progressLabel: [],
+      test('adds responsible filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                },
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
 
-      // when
-      const result = repairConfig(config, ...args)
+        // when
+        const result = repairConfig(config, ...args)
 
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('removes invalid day', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                day: ['/days/00000000'],
-                category: [],
-                progressLabel: [],
-                responsible: [],
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
       })
-    })
 
-    test('adds progressLabel filter when missing', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                day: [],
-                category: [],
-                responsible: [],
+      test('removes invalid responsible', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: ['/camp_collaborations/00000000'],
+                },
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
 
-      // when
-      const result = repairConfig(config, ...args)
+        // when
+        const result = repairConfig(config, ...args)
 
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
-            },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('removes invalid progressLabel', () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: {
-                period: null,
-                day: [],
-                category: [],
-                progressLabel: ['/progress_labels/00000000'],
-                responsible: [],
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
               },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
 
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Program',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-              dayOverview: false,
-              filter: defaultFilter,
+      test('adds category filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
             },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid category', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: [],
+                  category: ['/categories/00000000'],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds day filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  category: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid day', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: ['/days/00000000'],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds progressLabel filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid progressLabel', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: ['/progress_labels/00000000'],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
       })
     })
   })
 
   describe('story', () => {
+    const defaultFilter = {
+      period: null,
+      day: [],
+      category: [],
+      progressLabel: [],
+      responsible: [],
+    }
+
     test('adds missing options', async () => {
       // given
       const config = {
@@ -1529,6 +1537,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'Storycontext',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1544,7 +1553,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Story',
-            options: { periods: [], contentType: 'Storycontext' },
+            options: { periods: [], contentType: 'Storycontext', filter: defaultFilter },
           },
         ],
         documentName: 'test camp',
@@ -1560,7 +1569,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Story',
-            options: { periods: [], contentType: 'Storycontext' },
+            options: { periods: [], contentType: 'Storycontext', filter: defaultFilter },
           },
         ],
         documentName: 'test camp',
@@ -1615,6 +1624,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/11112222', '/periods/1a2b3c4d'],
               contentType: 'Storycontext',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1634,6 +1644,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'Storycontext',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1652,6 +1663,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'Storyboard',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1671,6 +1683,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'Storycontext',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1678,9 +1691,553 @@ describe('repairConfig', () => {
         language: 'en-GB',
       })
     })
+
+    describe('filter', () => {
+      test('leaves valid filter as is', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
+                  category: ['/categories/1a2b3c4d'],
+                  progressLabel: ['/progress_labels/1a2b3c4d'],
+                  responsible: ['/camp_collaborations/1a2b3c4d'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
+                  category: ['/categories/1a2b3c4d'],
+                  progressLabel: ['/progress_labels/1a2b3c4d'],
+                  responsible: ['/camp_collaborations/1a2b3c4d'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds default filter if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds period if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid period', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: '/periods/00000000',
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds responsible filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid responsible', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: ['/camp_collaborations/00000000'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds category filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid category', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: ['/categories/00000000'],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds day filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  category: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid day', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: ['/days/00000000'],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds progressLabel filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid progressLabel', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: ['/progress_labels/00000000'],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+    })
   })
 
   describe('safetyConsiderations', () => {
+    const defaultFilter = {
+      period: null,
+      day: [],
+      category: [],
+      progressLabel: [],
+      responsible: [],
+    }
+
     test('adds missing options', async () => {
       // given
       const config = {
@@ -1706,6 +2263,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1721,7 +2279,11 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'SafetyConsiderations',
-            options: { periods: [], contentType: 'SafetyConsiderations' },
+            options: {
+              periods: [],
+              contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
+            },
           },
         ],
         documentName: 'test camp',
@@ -1737,7 +2299,11 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'SafetyConsiderations',
-            options: { periods: [], contentType: 'SafetyConsiderations' },
+            options: {
+              periods: [],
+              contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
+            },
           },
         ],
         documentName: 'test camp',
@@ -1789,6 +2355,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/11112222', '/periods/1a2b3c4d'],
               contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1808,6 +2375,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1826,6 +2394,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'Storyboard',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1845,11 +2414,548 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
             },
           },
         ],
         documentName: 'test camp',
         language: 'en-GB',
+      })
+    })
+
+    describe('filter', () => {
+      test('leaves valid filter as is', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
+                  category: ['/categories/1a2b3c4d'],
+                  progressLabel: ['/progress_labels/1a2b3c4d'],
+                  responsible: ['/camp_collaborations/1a2b3c4d'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
+                  category: ['/categories/1a2b3c4d'],
+                  progressLabel: ['/progress_labels/1a2b3c4d'],
+                  responsible: ['/camp_collaborations/1a2b3c4d'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds default filter if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds period if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid period', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: '/periods/00000000',
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds responsible filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid responsible', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: ['/camp_collaborations/00000000'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds category filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid category', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: ['/categories/00000000'],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds day filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  category: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid day', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: ['/days/00000000'],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds progressLabel filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid progressLabel', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: ['/progress_labels/00000000'],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
       })
     })
   })
@@ -1888,6 +2994,14 @@ describe('repairConfig', () => {
   })
 
   describe('activityList', () => {
+    const defaultFilter = {
+      period: null,
+      day: [],
+      category: [],
+      progressLabel: [],
+      responsible: [],
+    }
+
     test('adds missing options', async () => {
       // given
       const config = {
@@ -1910,9 +3024,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'ActivityList',
-            options: {
-              periods: ['/periods/1a2b3c4d'],
-            },
+            options: { periods: ['/periods/1a2b3c4d'], filter: defaultFilter },
           },
         ],
         documentName: 'test camp',
@@ -1927,7 +3039,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'ActivityList',
-            options: { periods: [] },
+            options: { periods: [], filter: defaultFilter },
           },
         ],
         documentName: 'test camp',
@@ -1943,7 +3055,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'ActivityList',
-            options: { periods: [] },
+            options: { periods: [], filter: defaultFilter },
           },
         ],
         documentName: 'test camp',
@@ -1993,6 +3105,7 @@ describe('repairConfig', () => {
             type: 'ActivityList',
             options: {
               periods: ['/periods/11112222', '/periods/1a2b3c4d'],
+              filter: defaultFilter,
             },
           },
         ],
@@ -2011,11 +3124,524 @@ describe('repairConfig', () => {
             type: 'ActivityList',
             options: {
               periods: ['/periods/1a2b3c4d'],
+              filter: defaultFilter,
             },
           },
         ],
         documentName: 'test camp',
         language: 'en-GB',
+      })
+    })
+
+    describe('filter', () => {
+      test('leaves valid filter as is', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
+                  category: ['/categories/1a2b3c4d'],
+                  progressLabel: ['/progress_labels/1a2b3c4d'],
+                  responsible: ['/camp_collaborations/1a2b3c4d'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: '/periods/1a2b3c4d',
+                  day: ['/days/1a2b3c4d'],
+                  category: ['/categories/1a2b3c4d'],
+                  progressLabel: ['/progress_labels/1a2b3c4d'],
+                  responsible: ['/camp_collaborations/1a2b3c4d'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds default filter if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds period if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid period', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: '/periods/00000000',
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds responsible filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid responsible', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: ['/camp_collaborations/00000000'],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds category filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid category', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: [],
+                  category: ['/categories/00000000'],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds day filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  category: [],
+                  responsible: [],
+                  progressLabel: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid day', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: ['/days/00000000'],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('adds progressLabel filter when missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
+      })
+
+      test('removes invalid progressLabel', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: ['/progress_labels/00000000'],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          language: 'en-GB',
+        })
       })
     })
   })
