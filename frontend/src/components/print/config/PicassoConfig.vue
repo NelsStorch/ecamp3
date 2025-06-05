@@ -6,6 +6,7 @@
       :items="periods"
       multiple
       :filled="false"
+      :readonly="periods.length === 1"
       @input="$emit('input')"
     />
     <e-select
@@ -59,9 +60,10 @@ export default {
       }))
     },
   },
-  defaultOptions() {
+  defaultOptions(camp) {
     return {
-      periods: [],
+      periods:
+        camp.periods().items.length === 1 ? [camp.periods().items[0]._meta.self] : [],
       orientation: 'L',
     }
   },
@@ -70,11 +72,15 @@ export default {
   },
   repairConfig(config, camp) {
     if (!config.options) config.options = {}
-    if (!config.options.periods) config.options.periods = []
-    const knownPeriods = camp.periods().items.map((p) => p._meta.self)
-    config.options.periods = config.options.periods.filter((period) => {
-      return knownPeriods.includes(period)
-    })
+    if (camp.periods().items.length === 1) {
+      config.options.periods = [camp.periods().items[0]._meta.self]
+    } else {
+      if (!config.options.periods) config.options.periods = []
+      const knownPeriods = camp.periods().items.map((p) => p._meta.self)
+      config.options.periods = config.options.periods.filter((period) => {
+        return knownPeriods.includes(period)
+      })
+    }
     if (!ORIENTATIONS.map((o) => o.value).includes(config.options.orientation)) {
       config.options.orientation = 'L'
     }
