@@ -80,6 +80,13 @@
         {{ categories[item.value].name }}
       </template>
     </SelectFilter>
+    <v-skeleton-loader
+      v-else
+      type="button"
+      class="v-skeleton-loader--inherit-size"
+      height="32"
+      width="100"
+    />
     <template v-if="!hideDayFilter">
       <SelectFilter
         v-if="loadingEndpoints !== true && loadingEndpoints.days !== true"
@@ -98,13 +105,6 @@
         width="150"
       />
     </template>
-    <v-skeleton-loader
-      v-else
-      type="button"
-      class="v-skeleton-loader--inherit-size"
-      height="32"
-      width="100"
-    />
     <SelectFilter
       v-if="loadingEndpoints !== true && loadingEndpoints.progressLabels !== true"
       v-model="value.progressLabel"
