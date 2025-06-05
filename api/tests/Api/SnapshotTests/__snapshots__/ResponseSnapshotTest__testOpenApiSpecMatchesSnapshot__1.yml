@@ -2452,14 +2452,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -2640,14 +2645,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -2831,14 +2841,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3022,14 +3037,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3151,14 +3171,19 @@ components:
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3255,14 +3280,19 @@ components:
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3361,12 +3391,17 @@ components:
                   example: true
                   type: boolean
                 shortTitle:
-                  description: 'A short title for the camp.'
+                  description: |-
+                    An optional short title for the camp. Can be used in the UI where space is tight. If
+                    not present, frontends may auto-shorten the title if the shortTitle is not set.
                   example: 'SoLa 2022'
                   maxLength: 32
                   type: ['null', string]
                 title:
-                  description: 'The full title of the camp.'
+                  description: |-
+                    The full title of the camp. Used for identifying the camp in lists of camps, so
+                    this should include all necessary information to distinguish this camp from
+                    other camps that the collaborators are part of.
                   example: 'Abteilungs-Sommerlager 2022'
                   maxLength: 32
                   type: string
@@ -3626,14 +3661,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3823,14 +3863,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4023,14 +4068,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4223,14 +4273,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4361,14 +4416,19 @@ components:
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4571,14 +4631,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4782,14 +4847,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4996,14 +5066,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -5210,14 +5285,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -5339,14 +5419,19 @@ components:
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string

@@ -192,7 +192,8 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public bool $isPrototype = false;
 
     /**
-     * A short title for the camp.
+     * An optional short title for the camp. Can be used in the UI where space is tight. If
+     * not present, frontends may auto-shorten the title if the shortTitle is not set.
      */
     #[InputFilter\Trim]
     #[InputFilter\CleanText]
@@ -203,7 +204,9 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public ?string $shortTitle;
 
     /**
-     * The full title of the camp.
+     * The full title of the camp. Used for identifying the camp in lists of camps, so
+     * this should include all necessary information to distinguish this camp from
+     * other camps that the collaborators are part of.
      */
     #[InputFilter\Trim]
     #[InputFilter\CleanText]
