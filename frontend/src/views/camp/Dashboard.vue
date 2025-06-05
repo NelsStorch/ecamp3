@@ -12,7 +12,7 @@
         v-if="loading"
         key="loadingstate"
         class="ma-4"
-        :loading-endpoints="false"
+        :loading-endpoints="true"
         :camp="camp"
         hide-day-filter
         :periods="periods"

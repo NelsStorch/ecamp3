@@ -26,6 +26,7 @@
       v-model="localFilter"
       :camp="camp"
       :filter-fn="filterFn"
+      :loading-endpoints="{}"
       :hide-period-filter="hidePeriodFilter"
       :hide-day-filter="hideDayFilter"
     />
