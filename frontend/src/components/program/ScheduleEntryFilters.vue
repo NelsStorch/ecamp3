@@ -305,14 +305,16 @@ export default {
         return (
           filterEquals(this.value.responsible, [this.loggedInCampCollaboration]) &&
           filterEquals(this.value.category, []) &&
+          filterEquals(this.value.day, []) &&
           filterEquals(this.value.period, null) &&
-          filterEquals(this.value.progressLabel, null)
+          filterEquals(this.value.progressLabel, [])
         )
       },
       set(value) {
         this.updateFilter({
           responsible: value ? [this.loggedInCampCollaboration] : [],
           category: [],
+          day: [],
           period: null,
           progressLabel: [],
         })
