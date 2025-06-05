@@ -52,7 +52,7 @@ class CreateCampTest extends ECampApiTestCase {
 
         $this->assertResponseStatusCodeSame(201);
         $this->assertJsonContains(['_links' => [
-            'creator' => ['href' => '/users/'.static::$fixtures['user1manager']->getId()],
+            'creator' => ['href' => '/users/'.static::getFixture('user1manager')->getId()],
         ]]);
     }
 
@@ -666,7 +666,7 @@ class CreateCampTest extends ECampApiTestCase {
 
     public function testCreateCampFromPrototype() {
         /** @var Camp $campPrototype */
-        $campPrototype = self::$fixtures['campPrototype'];
+        $campPrototype = self::getFixture('campPrototype');
 
         $response = static::createClientWithCredentials()->request('POST', '/camps', ['json' => $this->getExampleWritePayload([
             'campPrototype' => $this->getIriFor($campPrototype),
@@ -678,6 +678,28 @@ class CreateCampTest extends ECampApiTestCase {
         $this->assertEquals($campPrototype->getId(), $camp->campPrototypeId);
         $this->assertCount(1, $camp->categories);
         $this->assertCount(2, $camp->materialLists);
+        $this->assertCount(1, $camp->checklists);
+        $this->assertCount(3, $camp->progressLabels);
+    }
+
+    public function testCopiesCampSettingsFromNonPrototypeCamp() {
+        /** @var Camp $otherCamp */
+        $otherCamp = self::getFixture('camp1');
+
+        $response = static::createClientWithCredentials()->request('POST', '/camps', ['json' => $this->getExampleWritePayload([
+            'campPrototype' => $this->getIriFor($otherCamp),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(201);
+
+        $camp = $this->getEntityManager()->getRepository(Camp::class)->find($response->toArray()['id']);
+        $this->assertEquals($otherCamp->getId(), $camp->campPrototypeId);
+        $this->assertCount(3, $camp->categories);
+        // Does not copy the 2 personal material lists, only copies the 2 non-personal material lists, and then adds
+        // one personal material list for the creator of the new camp
+        $this->assertCount(3, $camp->materialLists);
+        $this->assertCount(2, $camp->checklists);
+        $this->assertCount(2, $camp->progressLabels);
     }
 
     public function testCreateCampReturnsProperDatesInTimezoneAheadOfUTC() {
