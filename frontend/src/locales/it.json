@@ -166,7 +166,7 @@
           "title": "Nota bene: avete scelto \"Nessun modello\"."
         },
         "preview": "Anteprima del modello di campo",
-        "progressStates": "Stati di attività",
+        "progressLabels": "Stati di attività",
         "prototypeHint": "Copiare le categorie, i modelli di blocco e stati di blocchi da un modello di campo.",
         "prototypeHintEmpty": "Non copiare categorie, modelli di blocco e stati di blocco da un modello di campo.",
         "prototypeHintSelected": "Copiate le categorie, i modelli di blocco e stati di blocchi da questo modello di campo.",

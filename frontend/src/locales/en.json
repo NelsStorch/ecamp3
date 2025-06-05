@@ -179,6 +179,8 @@
       },
       "campCreateStep2": {
         "category": "Activity categories",
+        "checklistItemCount": "No entries | One entry | {count} entries",
+        "checklists": "Checklists",
         "clearClipboard": "Clear clipboard",
         "clipboard": "Clipboard",
         "clipboardInfoDialog": {
@@ -192,6 +194,7 @@
         "copyPasteCamp": "Copy & paste camp settings",
         "copySourceInfo": "Here you can paste the URL of a camp, in order to copy its settings.",
         "create": "Create the Camp",
+        "materialLists": "Materiallisten",
         "noAccessibleCampFoundInClipboard": "No valid camp URL was found in the clipboard. Please copy the link to the template camp and try again.",
         "noContent": "No Content",
         "noPrototype": "No template",
@@ -202,11 +205,11 @@
         "otherPrototype": "Copy the settings from another camp…",
         "pasteCamp": "Paste copied camp settings",
         "preview": "Preview of camp template",
-        "progressStates": "Activity states",
-        "prototypeHint": "Copy categories, activity templates and states from a template.",
-        "prototypeHintEmpty": "Don't copy categories, activity templates and states.",
-        "prototypeHintOther": "Copy categories, activity templates and states from this other camp. No activities are copied.",
-        "prototypeHintSelected": "Copy categories, activity templates and states from this template.",
+        "progressLabels": "Activity states",
+        "prototypeHint": "Copy categories, activity templates, states, material lists and checklists from a template.",
+        "prototypeHintEmpty": "Don't copy any categories, activity templates, states, material lists or checklists.",
+        "prototypeHintOther": "Copy categories, activity templates, states, unpersonal material lists and checklists from this other camp. No activities are copied.",
+        "prototypeHintSelected": "Copy categories, activity templates, states and material lists from this template.",
         "submitTooltipPrototype": "You need to choose if and which template you want."
       }
     },

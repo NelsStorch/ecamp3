@@ -141,18 +141,62 @@
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
-              <v-list class="w-100" dense color="transparent">
+              <div class="d-flex flex-row">
+                <v-list class="w-100 sm:w-50" dense color="transparent">
+                  <v-subheader class="px-0" style="height: auto">
+                    {{ $tc('components.campCreate.campCreateStep2.progressLabels') }}
+                  </v-subheader>
+                  <v-list-item
+                    v-for="(progressLabel, idx) in prototypePreview.progressLabels()
+                      .items"
+                    :key="progressLabel._meta.self"
+                    class="pt-1 pb-1 px-0 min-h-0"
+                  >
+                    <v-list-item-title class="d-flex gap-2 align-baseline">
+                      <v-avatar color="rgba(0,0,0,0.12)" size="20">{{
+                        idx + 1
+                      }}</v-avatar>
+                      {{ progressLabel.title }}
+                    </v-list-item-title>
+                  </v-list-item>
+                </v-list>
+                <v-list class="w-100 sm:w-50" dense color="transparent">
+                  <v-subheader class="px-0" style="height: auto">
+                    {{ $tc('components.campCreate.campCreateStep2.materialLists') }}
+                  </v-subheader>
+                  <v-list-item
+                    v-for="materialList in copyableMaterialLists"
+                    :key="materialList._meta.self"
+                    class="pt-1 pb-1 px-0 min-h-0"
+                  >
+                    <v-list-item-title class="d-flex gap-2 align-baseline">
+                      {{ materialList.name }}
+                    </v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </div>
+              <v-list
+                v-if="prototypePreview.checklists().items.length"
+                class="w-100"
+                dense
+                color="transparent"
+              >
                 <v-subheader class="px-0" style="height: auto">
-                  {{ $tc('components.campCreate.campCreateStep2.progressStates') }}
+                  {{ $tc('components.campCreate.campCreateStep2.checklists') }}
                 </v-subheader>
                 <v-list-item
-                  v-for="(progressLabel, idx) in prototypePreview.progressLabels().items"
-                  :key="progressLabel._meta.self"
+                  v-for="checklist in prototypePreview.checklists().items"
+                  :key="checklist._meta.self"
                   class="pt-1 pb-1 px-0 min-h-0"
                 >
                   <v-list-item-title class="d-flex gap-2 align-baseline">
-                    <v-avatar color="rgba(0,0,0,0.12)" size="20">{{ idx + 1 }}</v-avatar>
-                    {{ progressLabel.title }}
+                    {{ checklist.name }}
+                    <small class="blue-grey--text">{{
+                      $tc(
+                        'components.campCreate.campCreateStep2.checklistItemCount',
+                        checklist.checklistItems().items.length
+                      )
+                    }}</small>
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -352,6 +396,12 @@ export default {
           'components.campCreate.campCreateStep2.noAccessibleCampFoundInClipboard'
         ),
       ]
+    },
+    copyableMaterialLists() {
+      if (!this.prototypePreview) return []
+      return this.prototypePreview.materialLists().items.filter((materialList) => {
+        return materialList.campCollaboration === null
+      })
     },
   },
   watch: {
