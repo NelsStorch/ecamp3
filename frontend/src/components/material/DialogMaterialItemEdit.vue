@@ -45,6 +45,12 @@ export default {
   props: {
     materialItemUri: { type: String, required: true },
   },
+  data() {
+    return {
+      entityProperties: ['quantity', 'unit', 'article'],
+      embeddedEntities: ['materialList'],
+    }
+  },
   computed: {
     materialItem() {
       return this.api.get(this.materialItemUri)
@@ -60,10 +66,6 @@ export default {
         this.loadEntityData(this.materialItemUri)
       }
     },
-  },
-  mounted() {
-    this.entityProperties.push('quantity', 'unit', 'article')
-    this.embeddedEntities.push('materialList')
   },
 }
 </script>

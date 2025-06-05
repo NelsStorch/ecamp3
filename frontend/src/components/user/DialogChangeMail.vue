@@ -44,6 +44,7 @@ export default {
   data() {
     return {
       status: '',
+      entityProperties: ['newEmail'],
     }
   },
   watch: {
@@ -54,9 +55,6 @@ export default {
         this.loadEntityData(this.$store.getters.getLoggedInUser.profile()._meta.self)
       }
     },
-  },
-  mounted() {
-    this.entityProperties.push('newEmail')
   },
   methods: {
     async sendChangeMailRequest() {

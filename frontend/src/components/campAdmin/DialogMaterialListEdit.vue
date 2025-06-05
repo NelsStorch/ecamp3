@@ -38,6 +38,11 @@ export default {
   props: {
     materialList: { type: Object, required: true },
   },
+  data() {
+    return {
+      entityProperties: ['name'],
+    }
+  },
   watch: {
     // copy data whenever dialog is opened
     showDialog: function (showDialog) {
@@ -45,9 +50,6 @@ export default {
         this.loadEntityData(this.materialList._meta.self)
       }
     },
-  },
-  mounted() {
-    this.entityProperties.push('name')
   },
   methods: {
     deleteErrorHandler(e) {

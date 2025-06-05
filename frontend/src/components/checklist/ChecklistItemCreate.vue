@@ -49,6 +49,7 @@ export default {
   },
   data() {
     return {
+      entityProperties: ['checklist', 'text', 'parent'],
       entityUri: '',
     }
   },
@@ -67,7 +68,6 @@ export default {
     },
   },
   mounted() {
-    this.entityProperties.push('checklist', 'text', 'parent')
     this.api.href(this.api.get(), 'checklistItems').then((uri) => (this.entityUri = uri))
   },
   methods: {

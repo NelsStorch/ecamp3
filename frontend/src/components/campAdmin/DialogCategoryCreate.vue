@@ -1,7 +1,7 @@
 <template>
   <dialog-form
     v-model="showDialog"
-    :loading="entityDataLoading"
+    :loading="loading"
     :error="error"
     icon="mdi-calendar-plus"
     :title="$tc('components.campAdmin.dialogCategoryCreate.title')"
@@ -103,18 +103,16 @@
 </template>
 
 <script>
-import { categoryRoute } from '@/router.js'
+import router, { categoryRoute } from '@/router.js'
 import DialogForm from '@/components/dialog/DialogForm.vue'
 import DialogBase from '@/components/dialog/DialogBase.vue'
 import DialogCategoryForm from './DialogCategoryForm.vue'
 import PopoverPrompt from '../prompt/PopoverPrompt.vue'
-import router from '@/router.js'
 import CategoryChip from '../generic/CategoryChip.vue'
 import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
-import { useEntityData } from '@/components/dialog/useEntityData.js'
 import { useClipboardEntity } from '@/components/generic/useClipboardEntity.js'
 import { apiStore as api } from '@/plugins/store/index.js'
-import { nextTick, ref, computed } from 'vue'
+import { getCurrentInstance, nextTick, ref } from 'vue'
 
 export default {
   name: 'DialogCategoryCreate',
@@ -130,17 +128,16 @@ export default {
     camp: { type: Object, required: true },
   },
   setup() {
-    const {
-      entityData,
-      loading: entityDataLoading,
-      entityProperties,
-      embeddedEntities,
-      embeddedCollections,
-      clearEntityData,
-      setEntityData,
-    } = useEntityData()
-
     const showCopyCategoryUrlPopover = ref(false)
+
+    // Hack: In this case we need access to a method defined in the options API
+    // because moving this method to the composition API would force us to move
+    // entityData and a whole big mess of inheritance-related code to the
+    // composition API as well. On a previous attempt, this completely broke the
+    // vee-validate validators, resulting in all validation always failing in all
+    // dialogs in the app. So using the undocumented but well-known
+    // getCurrentInstance here is the lesser evil right now.
+    const currentInstance = getCurrentInstance()
 
     const clipboard = useClipboardEntity(api, {
       fetchClipboardEntity: async (url) => {
@@ -169,50 +166,21 @@ export default {
         return null
       },
       onEntityLoaded: function () {
-        setCopyContentCheckbox(true)
+        currentInstance.proxy.setCopyContentCheckbox(true)
       },
       onEntityLoadFailed: function () {
-        setCopyContentCheckbox(false)
+        currentInstance.proxy.setCopyContentCheckbox(false)
       },
     })
-
-    const copyCategorySourceCategory = computed(() => {
-      if (!this.hasClipboardEntity) return null
-      return this.clipboardEntity.short
-        ? this.clipboardEntity
-        : this.clipboardEntity.category()
-    })
-
-    const clipboardEntity = clipboard.clipboardEntity
-
-    const setCopyContentCheckbox = (val) => {
-      if (val) {
-        entityData.copyCategorySource = clipboardEntity.value._meta.self
-        entityData.short = copyCategorySourceCategory.value.short
-        entityData.name = copyCategorySourceCategory.value.name
-        entityData.color = copyCategorySourceCategory.value.color
-        entityData.numberingStyle = copyCategorySourceCategory.value.numberingStyle
-      } else {
-        entityData.copyCategorySource = null
-      }
-    }
 
     return {
       ...clipboard,
-      setCopyContentCheckbox,
-      entityData,
-      entityDataLoading,
-      entityProperties,
-      embeddedEntities,
-      embeddedCollections,
-      copyCategorySourceCategory,
       showCopyCategoryUrlPopover,
-      setEntityData,
-      clearEntityData,
     }
   },
   data() {
     return {
+      entityProperties: ['camp', 'short', 'name', 'color', 'numberingStyle'],
       entityUri: '',
     }
   },
@@ -224,6 +192,12 @@ export default {
       set(val) {
         this.setCopyContentCheckbox(val)
       },
+    },
+    copyCategorySourceCategory() {
+      if (!this.hasClipboardEntity) return null
+      return this.clipboardEntity.short
+        ? this.clipboardEntity
+        : this.clipboardEntity.category?.()
     },
   },
   watch: {
@@ -246,8 +220,6 @@ export default {
     },
   },
   mounted() {
-    this.entityProperties.push('camp', 'short', 'name', 'color', 'numberingStyle')
-    this.embeddedCollections.push('preferredContentTypes')
     this.api.href(this.api.get(), 'categories').then((uri) => (this.entityUri = uri))
   },
   methods: {
@@ -255,6 +227,17 @@ export default {
       const createdCategory = await this.create(this.entityData)
       await this.api.reload(this.camp.categories())
       this.$router.push(categoryRoute(this.camp, createdCategory, { new: true }))
+    },
+    setCopyContentCheckbox(val) {
+      if (val) {
+        this.entityData.copyCategorySource = this.clipboardEntity._meta.self
+        this.entityData.short = this.copyCategorySourceCategory.short
+        this.entityData.name = this.copyCategorySourceCategory.name
+        this.entityData.color = this.copyCategorySourceCategory.color
+        this.entityData.numberingStyle = this.copyCategorySourceCategory.numberingStyle
+      } else {
+        this.entityData.copyCategorySource = null
+      }
     },
   },
 }

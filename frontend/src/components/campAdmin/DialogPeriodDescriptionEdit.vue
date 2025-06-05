@@ -34,6 +34,11 @@ export default {
   props: {
     period: { type: Object, required: true },
   },
+  data() {
+    return {
+      entityProperties: ['description'],
+    }
+  },
   watch: {
     // copy data whenever dialog is opened
     showDialog: function (showDialog) {
@@ -41,9 +46,6 @@ export default {
         this.loadEntityData(this.period._meta.self)
       }
     },
-  },
-  mounted() {
-    this.entityProperties.push('description')
   },
 }
 </script>

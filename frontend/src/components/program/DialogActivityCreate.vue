@@ -1,7 +1,7 @@
 <template>
   <dialog-form
     v-model="showDialog"
-    :loading="entityDataLoading"
+    :loading="loading"
     :error="error"
     icon="mdi-calendar-plus"
     :title="$tc('entity.activity.new')"
@@ -118,8 +118,7 @@ import CategoryChip from '@/components/generic/CategoryChip.vue'
 import { useClipboardEntity } from '../generic/useClipboardEntity.js'
 import router from '@/router.js'
 import { apiStore as api } from '@/plugins/store'
-import { computed, nextTick, ref } from 'vue'
-import { useEntityData } from '@/components/dialog/useEntityData.js'
+import { getCurrentInstance, nextTick, ref } from 'vue'
 
 export default {
   name: 'DialogActivityCreate',
@@ -134,18 +133,17 @@ export default {
   props: {
     scheduleEntry: { type: Object, required: true },
   },
-  setup({ scheduleEntry }) {
-    const {
-      entityData,
-      loading: entityDataLoading,
-      entityProperties,
-      embeddedEntities,
-      setEntityData,
-    } = useEntityData()
+  setup() {
     const showCopyActivityUrlPopover = ref(false)
 
-    const period = computed(() => scheduleEntry.period())
-    const camp = computed(() => period.value.camp())
+    // Hack: In this case we need access to a method defined in the options API
+    // because moving this method to the composition API would force us to move
+    // entityData and a whole big mess of inheritance-related code to the
+    // composition API as well. On a previous attempt, this completely broke the
+    // vee-validate validators, resulting in all validation always failing in all
+    // dialogs in the app. So using the undocumented but well-known
+    // getCurrentInstance here is the lesser evil right now.
+    const currentInstance = getCurrentInstance()
 
     const clipboard = useClipboardEntity(api.get.bind(this), {
       fetchClipboardEntity: async (url) => {
@@ -169,59 +167,32 @@ export default {
         return null
       },
       onEntityLoaded: function () {
-        setCopyContentCheckbox(true)
+        currentInstance.proxy.setCopyContentCheckbox(true)
       },
       onEntityLoadFailed: function () {
-        setCopyContentCheckbox(false)
+        currentInstance.proxy.setCopyContentCheckbox(false)
       },
     })
 
-    const clipboardEntity = clipboard.clipboardEntity
-
-    const setCopyContentCheckbox = (val) => {
-      if (val) {
-        entityData.copyActivitySource = clipboardEntity.value._meta.self
-        entityData.title = clipboardEntity.value.title
-        entityData.location = clipboardEntity.value.location
-
-        const sourceCamp = clipboardEntity.value.camp()
-        const sourceCategory = clipboardEntity.value.category()
-
-        if (camp.value._meta.self === sourceCamp._meta.self) {
-          // same camp; use came category
-          entityData.category = sourceCategory._meta.self
-        } else {
-          // different camp; use category with same short-name
-          const categories = camp.value
-            .categories()
-            .allItems.filter((c) => c.short === sourceCategory.short)
-
-          if (categories.length === 1) {
-            entityData.category = categories[0]._meta.self
-          }
-        }
-      } else {
-        entityData.copyActivitySource = null
-      }
-    }
-
     return {
       ...clipboard,
-      setCopyContentCheckbox,
       showCopyActivityUrlPopover,
-      entityData,
-      entityDataLoading,
-      entityProperties,
-      embeddedEntities,
-      setEntityData,
     }
   },
   data() {
     return {
+      entityProperties: ['title', 'location', 'scheduleEntries'],
+      embeddedEntities: ['category'],
       entityUri: '',
     }
   },
   computed: {
+    camp() {
+      return this.period.camp()
+    },
+    period() {
+      return this.scheduleEntry.period()
+    },
     copyContent: {
       get() {
         return this.entityData.copyActivitySource != null
@@ -258,8 +229,6 @@ export default {
     },
   },
   mounted() {
-    this.entityProperties.push('title', 'location', 'scheduleEntries')
-    this.embeddedEntities.push('category')
     this.api.href(this.api.get(), 'activities').then((url) => (this.entityUri = url))
   },
   methods: {
@@ -285,6 +254,32 @@ export default {
     onSuccess(activity) {
       this.close()
       this.$emit('activity-created', activity)
+    },
+    setCopyContentCheckbox(val) {
+      if (val) {
+        this.entityData.copyActivitySource = this.clipboardEntity._meta.self
+        this.entityData.title = this.clipboardEntity.title
+        this.entityData.location = this.clipboardEntity.location
+
+        const sourceCamp = this.clipboardEntity.camp()
+        const sourceCategory = this.clipboardEntity.category()
+
+        if (this.camp._meta.self === sourceCamp._meta.self) {
+          // same camp; use came category
+          this.entityData.category = sourceCategory._meta.self
+        } else {
+          // different camp; use category with same short-name
+          const categories = this.camp
+            .categories()
+            .allItems.filter((c) => c.short === sourceCategory.short)
+
+          if (categories.length === 1) {
+            this.entityData.category = categories[0]._meta.self
+          }
+        }
+      } else {
+        this.entityData.copyActivitySource = null
+      }
     },
   },
 }

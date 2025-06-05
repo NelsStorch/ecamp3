@@ -57,6 +57,7 @@ export default {
   },
   data() {
     return {
+      entityProperties: ['camp', 'name', 'copyChecklistSource', 'isPrototype'],
       entityUri: '',
     }
   },
@@ -88,7 +89,6 @@ export default {
     },
   },
   mounted() {
-    this.entityProperties.push('camp', 'name', 'copyChecklistSource', 'isPrototype')
     this.api.href(this.api.get(), 'checklists').then((uri) => (this.entityUri = uri))
   },
   methods: {

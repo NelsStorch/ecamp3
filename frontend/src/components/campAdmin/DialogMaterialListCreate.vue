@@ -32,6 +32,7 @@ export default {
   },
   data() {
     return {
+      entityProperties: ['camp', 'name'],
       entityUri: '',
     }
   },
@@ -49,7 +50,6 @@ export default {
     },
   },
   mounted() {
-    this.entityProperties.push('camp', 'name')
     this.api.href(this.api.get(), 'materialLists').then((uri) => (this.entityUri = uri))
   },
   methods: {
