@@ -135,6 +135,8 @@ export default {
       loading: entityDataLoading,
       entityProperties,
       embeddedEntities,
+      embeddedCollections,
+      clearEntityData,
       setEntityData,
     } = useEntityData()
 
@@ -148,9 +150,9 @@ export default {
 
           let result
           if (match.name === 'camp/activity') {
-            result = await this.api.get().activities({ id: match.params['activityId'] })
+            result = await api.get().activities({ id: match.params['activityId'] })
           } else if (match.name === 'camp/admin/activity/category') {
-            result = await this.api.get().categories({ id: match.params['categoryId'] })
+            result = await api.get().categories({ id: match.params['categoryId'] })
           }
 
           if (['camp/activity', 'camp/admin/activity/category'].includes(match.name)) {
@@ -202,9 +204,11 @@ export default {
       entityDataLoading,
       entityProperties,
       embeddedEntities,
+      embeddedCollections,
       copyCategorySourceCategory,
       showCopyCategoryUrlPopover,
       setEntityData,
+      clearEntityData,
     }
   },
   data() {
@@ -215,7 +219,7 @@ export default {
   computed: {
     copyContent: {
       get() {
-        return this.entityData.copyActivitySource != null
+        return this.entityData.copyCategorySource != null
       },
       set(val) {
         this.setCopyContentCheckbox(val)
