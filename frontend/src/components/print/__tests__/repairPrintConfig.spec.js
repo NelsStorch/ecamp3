@@ -89,8 +89,22 @@ describe('repairConfig', () => {
       ActivityListConfig,
     ].map((component) => [component.name.replace(/Config$/, ''), component.repairConfig])
   )
+  const defaultFilter = {
+    period: null,
+    day: [],
+    category: [],
+    progressLabel: [],
+    responsible: [],
+  }
   const defaultContents = [
-    { type: 'Picasso', options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' } },
+    {
+      type: 'Picasso',
+      options: {
+        periods: ['/periods/1a2b3c4d'],
+        orientation: 'L',
+        filter: defaultFilter,
+      },
+    },
   ]
   const args = [camp, availableLocales, 'en', componentRepairers, defaultContents]
   const multiPeriodArgs = [
@@ -114,7 +128,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -129,7 +147,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -145,7 +167,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -160,7 +186,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -176,7 +206,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -191,7 +225,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -214,7 +252,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -229,7 +271,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -252,7 +298,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -267,7 +317,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'foobar',
@@ -283,7 +337,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'foobar',
@@ -298,7 +356,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: '',
@@ -314,7 +376,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -329,7 +395,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -345,7 +415,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -371,7 +445,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -397,7 +475,11 @@ describe('repairConfig', () => {
       contents: [
         {
           type: 'Picasso',
-          options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
         },
       ],
       documentName: 'test camp',
@@ -544,6 +626,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               orientation: 'L',
+              filter: defaultFilter,
             },
           },
         ],
@@ -559,100 +642,11 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Picasso',
-            options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Picasso',
-            options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('allows portrait mode', async () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Picasso',
-            options: { periods: ['/periods/1a2b3c4d'], orientation: 'P' },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...args)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Picasso',
-            options: { periods: ['/periods/1a2b3c4d'], orientation: 'P' },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('allows empty periods', async () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Picasso',
-            options: { periods: [], orientation: 'L' },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      }
-
-      // when
-      const result = repairConfig(config, ...multiPeriodArgs)
-
-      // then
-      expect(result).toEqual({
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Picasso',
-            options: { periods: [], orientation: 'L' },
-          },
-        ],
-        documentName: 'test camp',
-        language: 'en-GB',
-      })
-    })
-
-    test('does not allow empty periods if there is only one period in the camp', async () => {
-      // given
-      const config = {
-        camp: '/camps/1a2b3c4d',
-        contents: [
-          {
-            type: 'Picasso',
-            options: { periods: [], orientation: 'L' },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'L',
+              filter: defaultFilter,
+            },
           },
         ],
         documentName: 'test camp',
@@ -671,6 +665,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               orientation: 'L',
+              filter: defaultFilter,
             },
           },
         ],
@@ -679,14 +674,18 @@ describe('repairConfig', () => {
       })
     })
 
-    test('overwrites invalid orientation', async () => {
+    test('allows portrait mode', async () => {
       // given
       const config = {
         camp: '/camps/1a2b3c4d',
         contents: [
           {
             type: 'Picasso',
-            options: { periods: ['/periods/1a2b3c4d'], orientation: 'hello' },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'P',
+              filter: defaultFilter,
+            },
           },
         ],
         documentName: 'test camp',
@@ -702,7 +701,116 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Picasso',
-            options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'P',
+              filter: defaultFilter,
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('allows empty periods', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: { periods: [], orientation: 'L', filter: defaultFilter },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...multiPeriodArgs)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: { periods: [], orientation: 'L', filter: defaultFilter },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('does not allow empty periods if there is only one period in the camp', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: { periods: [], orientation: 'L', filter: defaultFilter },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'L',
+              filter: defaultFilter,
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      })
+    })
+
+    test('overwrites invalid orientation', async () => {
+      // given
+      const config = {
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'hello',
+              filter: defaultFilter,
+            },
+          },
+        ],
+        documentName: 'test camp',
+        language: 'en-GB',
+      }
+
+      // when
+      const result = repairConfig(config, ...args)
+
+      // then
+      expect(result).toEqual({
+        camp: '/camps/1a2b3c4d',
+        contents: [
+          {
+            type: 'Picasso',
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'L',
+              filter: defaultFilter,
+            },
           },
         ],
         documentName: 'test camp',
@@ -720,6 +828,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/11112222', '/periods/1a2b3c4d'],
               orientation: 'L',
+              filter: defaultFilter,
             },
           },
         ],
@@ -736,7 +845,11 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'Picasso',
-            options: { periods: ['/periods/1a2b3c4d'], orientation: 'L' },
+            options: {
+              periods: ['/periods/1a2b3c4d'],
+              orientation: 'L',
+              filter: defaultFilter,
+            },
           },
         ],
         documentName: 'test camp',
@@ -746,14 +859,6 @@ describe('repairConfig', () => {
   })
 
   describe('program', () => {
-    const defaultFilter = {
-      period: null,
-      day: [],
-      category: [],
-      progressLabel: [],
-      responsible: [],
-    }
-
     test('adds missing options', async () => {
       // given
       const config = {
@@ -1520,14 +1625,6 @@ describe('repairConfig', () => {
   })
 
   describe('story', () => {
-    const defaultFilter = {
-      period: null,
-      day: [],
-      category: [],
-      progressLabel: [],
-      responsible: [],
-    }
-
     test('adds missing options', async () => {
       // given
       const config = {
@@ -2248,14 +2345,6 @@ describe('repairConfig', () => {
   })
 
   describe('safetyConsiderations', () => {
-    const defaultFilter = {
-      period: null,
-      day: [],
-      category: [],
-      progressLabel: [],
-      responsible: [],
-    }
-
     test('adds missing options', async () => {
       // given
       const config = {
@@ -3017,14 +3106,6 @@ describe('repairConfig', () => {
   })
 
   describe('activityList', () => {
-    const defaultFilter = {
-      period: null,
-      day: [],
-      category: [],
-      progressLabel: [],
-      responsible: [],
-    }
-
     test('adds missing options', async () => {
       // given
       const config = {

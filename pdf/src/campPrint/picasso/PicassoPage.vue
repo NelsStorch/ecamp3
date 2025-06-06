@@ -47,8 +47,9 @@ import TimeColumn from './TimeColumn.vue'
 import DayColumn from './DayColumn.vue'
 import Categories from './Categories.vue'
 import PicassoFooter from './PicassoFooter.vue'
-import { filterDayResponsiblesByDay } from '../../../common/helpers/dayResponsibles.js'
-import { times } from '../../../common/helpers/picasso.js'
+import { filterDayResponsiblesByDay } from '@/../common/helpers/dayResponsibles.js'
+import { times } from '@/../common/helpers/picasso.js'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'PicassoPage',
@@ -90,7 +91,9 @@ export default {
       return this.days.some((day) => filterDayResponsiblesByDay(day).length > 0)
     },
     scheduleEntries() {
-      return this.period.scheduleEntries().items
+      return this.period.scheduleEntries().items.filter((scheduleEntry) => {
+        return filterMatchScheduleEntry(scheduleEntry, this.content.options.filter)
+      })
     },
   },
 }
