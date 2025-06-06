@@ -81,6 +81,7 @@ export function useClipboardEntity(
     clipboardEntityUrl,
     clipboardEntityLoading: loading,
     attemptLoadingEntityFromClipboard,
+    setClipboardEntityUrl,
     clearClipboard,
   }
 }
