@@ -50,15 +50,28 @@ describe('repairConfig', () => {
     }),
   }
   const multiPeriodCamp = {
-    _meta: { self: '/camps/1a2b3c4d' },
-    shortTitle: 'test camp',
+    ...camp,
     periods: () => ({
       items: [
         {
           _meta: { self: '/periods/1a2b3c4d' },
+          days: () => ({
+            items: [
+              {
+                _meta: { self: '/days/1a2b3c4d' },
+              },
+            ],
+          }),
         },
         {
           _meta: { self: '/periods/11223344' },
+          days: () => ({
+            items: [
+              {
+                _meta: { self: '/days/bbbbbbbb' },
+              },
+            ],
+          }),
         },
       ],
     }),
@@ -784,6 +797,7 @@ describe('repairConfig', () => {
             type: 'Program',
             options: {
               periods: ['/periods/1a2b3c4d'],
+              filter: defaultFilter,
             },
           },
         ],
@@ -900,6 +914,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               dayOverview: true,
+              filter: defaultFilter,
             },
           },
         ],
@@ -919,6 +934,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               dayOverview: true,
+              filter: defaultFilter,
             },
           },
         ],
@@ -1587,6 +1603,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'Storycontext',
+              filter: defaultFilter,
             },
           },
         ],
@@ -1606,6 +1623,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'Storycontext',
+              filter: defaultFilter,
             },
           },
         ],
@@ -2318,7 +2336,11 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'SafetyConsiderations',
-            options: { periods: [], contentType: 'SafetyConsiderations' },
+            options: {
+              periods: [],
+              contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
+            },
           },
         ],
         documentName: 'test camp',
@@ -2337,6 +2359,7 @@ describe('repairConfig', () => {
             options: {
               periods: ['/periods/1a2b3c4d'],
               contentType: 'SafetyConsiderations',
+              filter: defaultFilter,
             },
           },
         ],
@@ -3070,7 +3093,7 @@ describe('repairConfig', () => {
         contents: [
           {
             type: 'ActivityList',
-            options: { periods: [] },
+            options: { periods: [], filter: defaultFilter },
           },
         ],
         documentName: 'test camp',
@@ -3088,6 +3111,7 @@ describe('repairConfig', () => {
             type: 'ActivityList',
             options: {
               periods: ['/periods/1a2b3c4d'],
+              filter: defaultFilter,
             },
           },
         ],
