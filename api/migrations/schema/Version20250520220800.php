@@ -29,6 +29,19 @@ final class Version20250520220800 extends AbstractMigration {
             AND     mi.periodId is not null
         SQL);
 
+        // Insert values (MaterialItem -> ContentNode -> Category -> Camp)
+        $this->addSql(<<<'SQL'
+            UPDATE  material_item mi
+            SET     campId = (
+                        SELECT ca.campId
+                        FROM content_node cn
+                        JOIN category ca on ca.rootContentNodeId = cn.rootId
+                        WHERE cn.id = mi.materialNodeId
+                    )
+            WHERE   mi.campId is null
+            AND     mi.materialNodeId is not null;
+        SQL);
+
         // Insert values (MaterialItem -> ContentNode -> Activity -> Camp)
         $this->addSql(<<<'SQL'
             UPDATE  material_item mi
