@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     days() {
-      const dayFilter = this.content.options.filter.day
+      const dayFilter = this.content.options.filter?.day
       return sortBy(this.period.days().items, (day) =>
         this.$date.utc(day.start).unix()
       ).filter((day) => {
