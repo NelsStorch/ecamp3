@@ -55,7 +55,7 @@ async function getSheets(camp, collection, materialList) {
             materialItem.quantity,
             materialItem.unit,
             materialItem.article,
-            ...(!materialList ? [materialItem.materialList().name] : []),
+            ...(!materialList ? [materialItem.materialList?.().name] : []),
             activity?.title
               ? `${activity.category().short} ${activity?.title}: ${scheduleEntries}`
               : period.description,
