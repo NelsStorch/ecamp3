@@ -8943,6 +8943,7 @@
       "parent": [Circular],
       "props": {
         "class": "page",
+        "filter": {},
         "orientation": "landscape",
         "size": "A4",
       },

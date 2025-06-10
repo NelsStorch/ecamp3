@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="px-md-4 flex-grow-1 d-flex flex-column justify-content-between">
     <e-select
       v-model="options.periods"
       :items="periods"
@@ -9,15 +9,27 @@
       :readonly="periods.length === 1"
       @input="$emit('input')"
     />
+    <div class="flex-grow-1"></div>
+    <DialogScheduleEntryFilter
+      :camp="camp"
+      :filter-fn="filterFn()"
+      :filter="options.filter"
+      hide-period-filter
+      @input="updateFilter"
+    />
   </div>
 </template>
 
 <script>
-import SummaryConfig from '@/components/print/config/SummaryConfig.vue'
-import { SUMMARY_CONTENTTYPES } from '@/components/print/config/SummaryConfig.vue'
+import SummaryConfig, {
+  SUMMARY_CONTENTTYPES,
+} from '@/components/print/config/SummaryConfig.vue'
+import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
+import { repairPrintFilterConfig } from '../repairPrintConfig.js'
 
 export default {
   name: 'StoryConfig',
+  components: { DialogScheduleEntryFilter },
   extends: SummaryConfig,
   defaultOptions(camp) {
     return {
@@ -35,16 +47,16 @@ export default {
     if (!SUMMARY_CONTENTTYPES.includes(config.options.contentType)) {
       config.options.contentType = 'Storycontext'
     }
-    if (camp.periods().items.length === 1) {
+    const knownPeriods = camp.periods().items.map((p) => p._meta.self)
+    if (knownPeriods.length === 1) {
       config.options.periods = [camp.periods().items[0]._meta.self]
     } else {
       if (!config.options.periods) config.options.periods = []
-      const knownPeriods = camp.periods().items.map((p) => p._meta.self)
       config.options.periods = config.options.periods.filter((period) => {
         return knownPeriods.includes(period)
       })
     }
-    return config
+    return repairPrintFilterConfig(config, camp, knownPeriods)
   },
 }
 </script>

@@ -9,6 +9,7 @@
         v-else
         :key="day.id"
         :day="day"
+        :filter="filter"
         :index="index"
       />
     </ul>
@@ -16,9 +17,12 @@
 </template>
 
 <script setup>
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
+
 const props = defineProps({
   index: { type: Number, required: true },
   period: { type: Object, required: true },
+  filter: { type: Object, default: () => ({}) },
 })
 
 const { data: days, error } = await useAsyncData(
@@ -29,7 +33,17 @@ const { data: days, error } = await useAsyncData(
       props.period.scheduleEntries().$loadItems(),
     ])
 
-    return props.period.days().items
+    return props.period.days().items.filter((day) => {
+      return (
+        props.period
+          .scheduleEntries()
+          .items.filter(
+            (scheduleEntry) =>
+              scheduleEntry.day()._meta.self === day._meta.self &&
+              filterMatchScheduleEntry(scheduleEntry, props.filter)
+          ).length > 0
+      )
+    })
   }
 )
 </script>

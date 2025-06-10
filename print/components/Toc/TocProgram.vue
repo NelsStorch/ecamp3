@@ -10,6 +10,7 @@
         v-else
         :key="period._meta.self"
         :period="period"
+        :filter="options.filter"
         :index="index"
       />
     </ul>

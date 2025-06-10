@@ -1,4 +1,6 @@
 <script>
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
+
 export const SUMMARY_CONTENTTYPES = ['Storycontext', 'SafetyConsiderations']
 
 export default {
@@ -26,6 +28,24 @@ export default {
         value: p._meta.self,
         text: p.description,
       }))
+    },
+    selectedPeriods() {
+      if (!this.options.filter.period) return this.camp.periods().items
+      return this.camp.periods().items.filter((period) => {
+        return this.filter.periods.includes(period._meta.self)
+      })
+    },
+  },
+  methods: {
+    filterFn() {
+      return (filter) =>
+        this.selectedPeriods
+          .flatMap((period) => period.scheduleEntries().items)
+          .filter((scheduleEntry) => filterMatchScheduleEntry(scheduleEntry, filter))
+    },
+    updateFilter(newFilter) {
+      this.options.filter = newFilter
+      this.$emit('input')
     },
   },
 }
