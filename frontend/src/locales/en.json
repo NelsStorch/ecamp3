@@ -338,6 +338,12 @@
         "activityConfig": {
           "activity": "Activity"
         },
+        "dialogScheduleEntryFilter": {
+          "filterActive": "Filter: {filtered} of {total} activities",
+          "filterActivities": "Filter {total} activities",
+          "resultCount": "Result: {filtered} of {total} activities",
+          "title": "Filter activities"
+        },
         "picassoConfig": {
           "orientation": "Page layout",
           "periods": "Period(s)"
@@ -438,6 +444,8 @@
       "scheduleEntryFilters": {
         "category": "Category",
         "clearFilters": "Clear filters",
+        "day": "Date",
+        "dayLabel": "Day {dayNumber} ({date})",
         "onlyMyActivities": "Only my activities",
         "period": "Period",
         "progressLabel": "State",
