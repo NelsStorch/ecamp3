@@ -25,14 +25,12 @@ class SingleTextPersistProcessorTest extends TestCase {
     protected function setUp(): void {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
         $this->cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
-        $this->cleanHTMLFilter->method('applyTo')->will(
-            $this->returnCallback(
-                function ($object, $property) {
-                    $object[$property] = '***sanitizedHTML***';
+        $this->cleanHTMLFilter->method('applyTo')->willReturnCallback(
+            function ($object, $property) {
+                $object[$property] = '***sanitizedHTML***';
 
-                    return $object;
-                }
-            )
+                return $object;
+            }
         );
 
         $this->contentNode = new SingleText();
