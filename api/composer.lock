@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c00b6f7c824790a4910f336230c09ebf",
+    "content-hash": "6d57f862c960154512a166f3b86ba342",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2001,20 +2001,20 @@
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
-            "version": "3.1.2",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle.git",
-                "reference": "af60b32499d612183c1f7ce3701105bd8fcc053e"
+                "reference": "389b6d84d6fc754279eb52cbdd57f1952907dc0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/af60b32499d612183c1f7ce3701105bd8fcc053e",
-                "reference": "af60b32499d612183c1f7ce3701105bd8fcc053e",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/389b6d84d6fc754279eb52cbdd57f1952907dc0e",
+                "reference": "389b6d84d6fc754279eb52cbdd57f1952907dc0e",
                 "shasum": ""
             },
             "require": {
-                "friendsofsymfony/http-cache": "^2.15 || ^3.0",
+                "friendsofsymfony/http-cache": "^3.0",
                 "php": "^8.1",
                 "symfony/dependency-injection": "^6.4 || ^7.0",
                 "symfony/expression-language": "^6.4 || ^7.0",
@@ -2030,7 +2030,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.54",
                 "guzzlehttp/guzzle": "^7.2",
-                "jean-beru/fos-http-cache-cloudfront": "^1.1",
+                "jean-beru/fos-http-cache-cloudfront": "^1.1.1",
                 "matthiasnoback/symfony-config-test": "^4.3.0 || ^5.1",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.3.1 || ^5.0",
                 "mockery/mockery": "^1.6.9",
@@ -2096,9 +2096,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.1.2"
+                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.2.0"
             },
-            "time": "2025-05-12T14:38:41+00:00"
+            "time": "2025-06-17T14:04:24+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
