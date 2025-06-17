@@ -31,6 +31,8 @@ class ResendActivationProcessorTest extends TestCase {
     private MockObject|UserRepository $userRepository;
     private MailService|MockObject $mailService;
 
+    private ResendActivationProcessor $processor;
+
     /**
      * @throws Exception
      */
