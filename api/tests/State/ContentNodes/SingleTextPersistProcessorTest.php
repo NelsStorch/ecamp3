@@ -9,23 +9,28 @@ use App\Entity\ContentNode\ColumnLayout;
 use App\Entity\ContentNode\SingleText;
 use App\InputFilter\CleanHTMLFilter;
 use App\State\ContentNode\SingleTextPersistProcessor;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
+
+use function PHPUnit\Framework\assertThat;
+use function PHPUnit\Framework\equalTo;
+use function PHPUnit\Framework\logicalNot;
 
 /**
  * @internal
  */
 class SingleTextPersistProcessorTest extends TestCase {
     private SingleTextPersistProcessor $processor;
-
-    private CleanHTMLFilter|MockObject $cleanHTMLFilter;
     private ColumnLayout $root;
     private SingleText $contentNode;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
-        $this->cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
-        $this->cleanHTMLFilter->method('applyTo')->willReturnCallback(
+        $cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
+        $cleanHTMLFilter->method('applyTo')->willReturnCallback(
             function ($object, $property) {
                 $object[$property] = '***sanitizedHTML***';
 
@@ -42,33 +47,24 @@ class SingleTextPersistProcessorTest extends TestCase {
         $this->contentNode->parent = new SingleText();
         $this->contentNode->parent->root = $this->root;
 
-        $this->processor = new SingleTextPersistProcessor($decoratedProcessor, $this->cleanHTMLFilter);
+        $this->processor = new SingleTextPersistProcessor($decoratedProcessor, $cleanHTMLFilter);
     }
 
     public function testSetsRootFromParentOnCreate() {
-        // when
-        /** @var SingleText $data */
         $data = $this->processor->onBefore($this->contentNode, new Post());
 
-        // then
-        $this->assertEquals($this->root, $data->root);
+        assertThat($this->root, equalTo($data->root));
     }
 
     public function testDoesNotSetRootFromParentOnUpdate() {
-        // when
-        /** @var SingleText $data */
         $data = $this->processor->onBefore($this->contentNode, new Patch());
 
-        // then
-        $this->assertNotEquals($this->root, $data->root);
+        assertThat($this->root, logicalNot(equalTo($data->root)));
     }
 
-    public function testSantizeData() {
-        // when
-        /** @var SingleText $data */
+    public function testSanitizeData() {
         $data = $this->processor->onBefore($this->contentNode, new Post());
 
-        // then
-        $this->assertEquals('***sanitizedHTML***', $data->data['html']);
+        assertThat('***sanitizedHTML***', equalTo($data->data['html']));
     }
 }
