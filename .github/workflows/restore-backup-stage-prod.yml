@@ -7,7 +7,8 @@ on:
         type: string
         description: |
           The restoreSourceFile of the backup in the bucket to restore, e.g.
-          ecamp3-staging/2023-07-17-12-55-33-ecamp3-staging.sql.gz.gpg
+          ecamp3-staging/2023-07-17-12-55-33-ecamp3-staging.sql.gz.gpg.
+          Use "latest" for the latest backup.
         required: true
         default: latest
       branch:
