@@ -12,7 +12,7 @@
   "rebaseWhen": "conflicted",
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["on tuesday and wednesday"]
+    "schedule": ["on wednesday and thursday"]
   },
   "vulnerabilityAlerts": {
     "automerge": true
