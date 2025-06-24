@@ -94,11 +94,9 @@
             },
             {
                 "_links": {
-                    "checklistItems": [
-                        {
-                            "href": "escaped_value"
-                        }
-                    ],
+                    "checklistItems": {
+                        "href": "escaped_value"
+                    },
                     "children": [],
                     "contentType": {
                         "href": "escaped_value"
