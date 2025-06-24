@@ -21,7 +21,7 @@ class CreateCommentTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testCreateCommentIsNotPossibleForUnrelatedUserBecauseActivityIsNotReadable() {
+    public function testCreateCommentIsNotPossibleForUnrelatedUserBecauseCampIsNotReadable() {
         static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
             ->request('POST', '/comments', ['json' => $this->getExampleWritePayload()])
         ;
