@@ -147,24 +147,21 @@ export default {
 
     const clipboard = useClipboardEntity({
       fetchClipboardEntity: async (url) => {
-        if (url?.startsWith(window.location.origin)) {
-          url = url.substring(window.location.origin.length)
-          const match = router.matcher.match(url)
+        if (!url.startsWith(window.location.origin)) return null
+        url = url.substring(window.location.origin.length)
+        const match = router.matcher.match(url)
 
-          if (match.name === 'camp/activity') {
-            const result = await api.get().activities({ id: match.params['activityId'] })
+        if (match.name !== 'camp/activity') return null
+        const result = await api.get().activities({ id: match.params['activityId'] })
 
-            // if Paste-Popover is shown, close it now
-            if (showCopyActivityUrlPopover.value) {
-              nextTick(() => {
-                showCopyActivityUrlPopover.value = false
-              })
-            }
-
-            return result
-          }
+        // if Paste-Popover is shown, close it now
+        if (showCopyActivityUrlPopover.value) {
+          nextTick(() => {
+            showCopyActivityUrlPopover.value = false
+          })
         }
-        return null
+
+        return result
       },
       onEntityLoaded: function () {
         currentInstance.proxy.setCopyContentCheckbox(true)

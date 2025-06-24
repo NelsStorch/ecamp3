@@ -239,14 +239,12 @@ export default {
 
     const clipboard = useClipboardEntity({
       fetchClipboardEntity: async (url) => {
-        if (url?.startsWith(window.location.origin)) {
-          url = url.substring(window.location.origin.length)
-          const match = router.matcher.match(url)
-          if (match.params?.campId) {
-            return await api.get().camps({ id: match.params.campId })
-          }
-        }
-        return null
+        if (!url.startsWith(window.location.origin)) return null
+        url = url.substring(window.location.origin.length)
+        const match = router.matcher.match(url)
+        if (!match.params?.campId) return null
+
+        return await api.get().camps({ id: match.params.campId })
       },
       onEntityLoaded(entity) {
         localCamp.campPrototype = entity._meta.self

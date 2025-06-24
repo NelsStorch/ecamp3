@@ -141,29 +141,27 @@ export default {
 
     const clipboard = useClipboardEntity({
       fetchClipboardEntity: async (url) => {
-        if (url?.startsWith(window.location.origin)) {
-          url = url.substring(window.location.origin.length)
-          const match = router.matcher.match(url)
+        if (!url.startsWith(window.location.origin)) return null
+        url = url.substring(window.location.origin.length)
+        const match = router.matcher.match(url)
 
-          let result
-          if (match.name === 'camp/activity') {
-            result = await api.get().activities({ id: match.params['activityId'] })
-          } else if (match.name === 'camp/admin/activity/category') {
-            result = await api.get().categories({ id: match.params['categoryId'] })
-          }
-
-          if (['camp/activity', 'camp/admin/activity/category'].includes(match.name)) {
-            // if Paste-Popover is shown, close it now
-            if (showCopyCategoryUrlPopover.value) {
-              nextTick(() => {
-                showCopyCategoryUrlPopover.value = false
-              })
-            }
-          }
-
-          return result
+        let result
+        if (match.name === 'camp/activity') {
+          result = await api.get().activities({ id: match.params['activityId'] })
+        } else if (match.name === 'camp/admin/activity/category') {
+          result = await api.get().categories({ id: match.params['categoryId'] })
         }
-        return null
+
+        if (['camp/activity', 'camp/admin/activity/category'].includes(match.name)) {
+          // if Paste-Popover is shown, close it now
+          if (showCopyCategoryUrlPopover.value) {
+            nextTick(() => {
+              showCopyCategoryUrlPopover.value = false
+            })
+          }
+        }
+
+        return result
       },
       onEntityLoaded: function () {
         currentInstance.proxy.setCopyContentCheckbox(true)

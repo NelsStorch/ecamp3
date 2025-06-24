@@ -55,13 +55,14 @@ export function useClipboardEntity({
     clipboardEntity.value = null
     return navigator.permissions
       .query({ name: 'clipboard-read' })
-      .then((p) => {
+      .then(async (p) => {
         clipboardPermission.value = p.state
-        if (p.state !== 'granted') return null
-        return navigator.clipboard.readText()
-      })
-      .then(async (url) => {
-        return setClipboardEntityUrl(url)
+        if (p.state === 'granted') {
+          const url = await navigator.clipboard.readText()
+          if (url) return setClipboardEntityUrl(url)
+        }
+        // If we get here, we have failed to get the url from the clipboard
+        onEntityLoadFailed(null)
       })
       .catch(() => {
         clipboardPermission.value = 'unaccessible'
