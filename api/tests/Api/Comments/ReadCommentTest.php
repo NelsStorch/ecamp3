@@ -34,7 +34,9 @@ class ReadCommentTest extends ECampApiTestCase {
 
     public function testGetSingleCommentIsAllowedForCollaborator() {
         $comment = static::getFixture('comment1');
-        static::createClientWithCredentials()->request('GET', '/comments/'.$comment->getId());
+        static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
+            ->request('GET', '/comments/'.$comment->getId())
+        ;
 
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
