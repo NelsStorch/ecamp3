@@ -92,7 +92,7 @@ class Comment extends BaseEntity implements BelongsToCampInterface {
      * The actual comment.
      */
     #[InputFilter\Trim]
-    #[InputFilter\CleanText]
+    #[InputFilter\CleanHTML]
     #[Assert\NotBlank]
     #[Assert\Length(max: 1024)]
     #[ApiProperty(example: 'This activity is great!')]
