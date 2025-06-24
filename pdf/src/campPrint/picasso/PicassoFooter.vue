@@ -101,7 +101,7 @@ export default {
   align-items: flex-start;
   justify-content: flex-start;
   gap: 6pt;
-  line-height: 1.1;
+  line-height: 0.5;
   padding: 2pt 3pt 3pt;
 }
 .picasso-footer-field {

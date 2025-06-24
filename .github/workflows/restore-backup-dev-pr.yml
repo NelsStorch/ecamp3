@@ -7,7 +7,8 @@ on:
         type: string
         description: |
           The sourceFile of the backup in the bucket to restore, e.g.
-          ecamp3-dev/2023-07-17-12-55-33-ecamp3-dev.sql.gz.gpg
+          ecamp3-dev/2023-07-17-12-55-33-ecamp3-dev.sql.gz.gpg.
+          Use "latest" for the latest backup.
         required: true
         default: latest
       pr-number:

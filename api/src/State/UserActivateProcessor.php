@@ -5,6 +5,7 @@ namespace App\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\User;
+use App\Service\ClaimInvitationService;
 use App\State\Util\AbstractPersistProcessor;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -13,7 +14,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class UserActivateProcessor extends AbstractPersistProcessor {
     public function __construct(
-        ProcessorInterface $decorated
+        ProcessorInterface $decorated,
+        private readonly ClaimInvitationService $claimInvitationService,
     ) {
         parent::__construct($decorated);
     }
@@ -31,5 +33,11 @@ class UserActivateProcessor extends AbstractPersistProcessor {
         }
 
         return $data;
+    }
+
+    public function onAfter($data, Operation $operation, array $uriVariables = [], array $context = []): void {
+        /** @var User $user */
+        $user = $data;
+        $this->claimInvitationService->claimInvitations($user, $user->getEmail());
     }
 }

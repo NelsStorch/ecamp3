@@ -42,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new Delete(
             processor: CampRemoveProcessor::class,
-            security: 'object.owner == user'
+            security: 'is_granted("CAMP_MANAGER", object)',
         ),
         new GetCollection(
             security: 'is_authenticated()'
@@ -145,6 +145,12 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public Collection $materialLists;
 
     /**
+     * List of MaterialItems that belong to this Camp.
+     */
+    #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    public Collection $materialItems;
+
+    /**
      * List of all Checklists of this Camp.
      * Each Checklist is a List of ChecklistItems.
      */
@@ -186,7 +192,8 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public bool $isPrototype = false;
 
     /**
-     * A short title for the camp.
+     * An optional short title for the camp. Can be used in the UI where space is tight. If
+     * not present, frontends may auto-shorten the title if the shortTitle is not set.
      */
     #[InputFilter\Trim]
     #[InputFilter\CleanText]
@@ -197,7 +204,9 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public ?string $shortTitle;
 
     /**
-     * The full title of the camp.
+     * The full title of the camp. Used for identifying the camp in lists of camps, so
+     * this should include all necessary information to distinguish this camp from
+     * other camps that the collaborators are part of.
      */
     #[InputFilter\Trim]
     #[InputFilter\CleanText]
@@ -402,6 +411,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
         $this->progressLabels = new ArrayCollection();
         $this->activities = new ArrayCollection();
         $this->materialLists = new ArrayCollection();
+        $this->materialItems = new ArrayCollection();
         $this->checklists = new ArrayCollection();
         $this->campRootContentNodes = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -615,6 +625,32 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
         if ($this->materialLists->removeElement($materialList)) {
             if ($materialList->camp === $this) {
                 $materialList->camp = null;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return MaterialItem[]
+     */
+    public function getMaterialItems(): array {
+        return $this->materialItems->getValues();
+    }
+
+    public function addMaterialItem(MaterialItem $materialItem): self {
+        if (!$this->materialItems->contains($materialItem)) {
+            $this->materialItems[] = $materialItem;
+            $materialItem->camp = $this;
+        }
+
+        return $this;
+    }
+
+    public function removeMaterialItem(MaterialItem $materialItem): self {
+        if ($this->materialItems->removeElement($materialItem)) {
+            if ($materialItem->camp === $this) {
+                $materialItem->camp = null;
             }
         }
 

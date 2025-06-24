@@ -96,8 +96,9 @@ class Profile extends BaseEntity {
     // addresses received from Oauth providers are trusted in the sense that email ownership has
     // previously been verified by the corresponding service. When adding more providers, either
     // - validate this assumption for the new provider, or
-    // - remove the logic setting the user state to active for existing non-activated user profiles
-    //   in the new authenticator implementation (api/src/Security/OAuth/*Authenticator.php)
+    // - remove the logic setting the user state to active and claiming personal camp invitations
+    //   for existing non-activated user profiles in the new authenticator implementation
+    //   (api/src/Security/OAuth/*Authenticator.php)
 
     /**
      * Google id of the user.

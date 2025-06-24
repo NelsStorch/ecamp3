@@ -3,6 +3,7 @@ describe('The filters in the dashboard', () => {
     cy.login('test@example.com')
     cy.visit('/camps')
     cy.get('a:contains("GRGR")').click()
+    cy.contains('Hauptlager')
   })
 
   afterEach(() => {

@@ -119,8 +119,8 @@ describe('cache test: /camps/{campId}/activities', () => {
       scheduleEntries: [
         {
           period: '/periods/76be24bce434',
-          start: '2025-05-10T08:00:00+00:00',
-          end: '2025-05-10T09:00:00+00:00',
+          start: '2026-05-10T08:00:00+00:00',
+          end: '2026-05-10T09:00:00+00:00',
         },
       ],
     }).then((response) => {
@@ -152,9 +152,9 @@ describe('cache test: /camps/{campId}/activities', () => {
     // add new scheduleEntry
     cy.apiPost('/api/schedule_entries', {
       activity: '/activities/ffd08c52288c',
-      end: '2025-05-11T06:00:00+00:00',
+      end: '2026-05-11T06:00:00+00:00',
       period: '/periods/76be24bce434',
-      start: '2025-05-11T05:00:00+00:00',
+      start: '2026-05-11T05:00:00+00:00',
     }).then((response) => {
       const newScheduleEntryUri = response.body._links.self.href
 
@@ -238,8 +238,8 @@ describe('cache test: /camps/{campId}/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-09',
-      end: '2025-05-12',
+      start: '2026-05-09',
+      end: '2026-05-12',
       moveScheduleEntries: true,
     })
 
@@ -249,8 +249,8 @@ describe('cache test: /camps/{campId}/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-10',
-      end: '2025-05-13',
+      start: '2026-05-10',
+      end: '2026-05-13',
       moveScheduleEntries: true,
     })
 
@@ -271,7 +271,7 @@ describe('cache test: /camps/{campId}/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-09',
+      start: '2026-05-09',
       moveScheduleEntries: false,
     })
 
@@ -281,7 +281,7 @@ describe('cache test: /camps/{campId}/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-10',
+      start: '2026-05-10',
       moveScheduleEntries: false,
     })
 

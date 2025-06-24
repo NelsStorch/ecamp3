@@ -90,6 +90,7 @@ import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import IconWithTooltip from '@/components/generic/IconWithTooltip.vue'
 import ApiForm from '@/components/form/api/ApiForm.vue'
 import ApiTextField from '@/components/form/api/ApiTextField.vue'
+import contentTypeIcons from '../contentTypeIcons.js'
 
 export default {
   name: 'ContentNodeCard',
@@ -118,7 +119,7 @@ export default {
       return this.$tc(`contentNode.${camelCase(this.contentNode.contentTypeName)}.name`)
     },
     icon() {
-      return this.$tc(`contentNode.${camelCase(this.contentNode.contentTypeName)}.icon`)
+      return contentTypeIcons[camelCase(this.contentNode.contentTypeName)]
     },
   },
   methods: {

@@ -17,11 +17,13 @@
 
 <script>
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
+import { filterMatchScheduleEntry } from '../common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   mixins: [dateHelperUTCFormatted],
   props: {
     day: { type: Object, required: true },
+    filter: { type: Object, default: () => ({}) },
     showDailySummary: { type: Boolean, required: true },
     showActivities: { type: Boolean, required: true },
     index: { type: Number, required: true },
@@ -33,7 +35,10 @@ export default {
         .period()
         .scheduleEntries()
         .items.filter((scheduleEntry) => {
-          return scheduleEntry.day()._meta.self === this.day._meta.self
+          return (
+            scheduleEntry.day()._meta.self === this.day._meta.self &&
+            filterMatchScheduleEntry(scheduleEntry, this.filter)
+          )
         })
     },
   },

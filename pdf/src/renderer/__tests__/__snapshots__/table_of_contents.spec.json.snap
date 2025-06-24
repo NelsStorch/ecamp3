@@ -71,11 +71,11 @@
           "parent": [Circular],
           "props": {
             "style": {
-              "line-height": "1.6",
+              "line-height": "1",
             },
           },
           "style": {
-            "lineHeight": "1.6",
+            "lineHeight": "1",
           },
           "type": "VIEW",
         },

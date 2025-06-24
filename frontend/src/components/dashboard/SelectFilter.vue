@@ -28,6 +28,7 @@
       >
         <v-list-item-title>
           <slot name="item" v-bind="{ item, self }">{{ item.text }}</slot>
+          <CountBadge v-if="item.resultCount !== null" :count="item.resultCount" />
         </v-list-item-title>
         <v-list-item-action v-if="multiple && !item.exclusiveNone">
           <v-checkbox v-model="item.selected" dense />
@@ -44,9 +45,11 @@
 
 <script>
 import { get, keyBy } from 'lodash-es'
+import CountBadge from '@/components/dashboard/CountBadge.vue'
 
 export default {
   name: 'SelectFilter',
+  components: { CountBadge },
   props: {
     label: { type: String, required: true },
     multiple: { type: Boolean, default: false },
@@ -65,11 +68,12 @@ export default {
         Object.values(this.items).map((item) => {
           const text = this.displayValue(item)
           const value = get(item, this.valueField)
+          const resultCount = get(item, 'resultCount', null)
           const exclusiveNone = get(item, 'exclusiveNone')
           const selected = this.multiple
             ? this.value?.includes(value)
             : this.value === value
-          return { text, value, selected, exclusiveNone }
+          return { text, resultCount, value, selected, exclusiveNone }
         }),
         'value'
       )
@@ -124,5 +128,3 @@ export default {
   },
 }
 </script>
-
-<style scoped></style>

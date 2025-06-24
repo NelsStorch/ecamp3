@@ -98,6 +98,13 @@ describe('rendering a full camp', () => {
                 options: {
                   periods: ['/periods/16b2fcffdd8e'],
                   orientation: 'L',
+                  filter: {
+                    period: null,
+                    responsible: [],
+                    day: [],
+                    progressLabel: [],
+                    category: [],
+                  },
                 },
               },
             ],

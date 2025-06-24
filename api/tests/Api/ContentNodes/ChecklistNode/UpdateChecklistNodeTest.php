@@ -41,9 +41,7 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
         $this->assertJsonContains([
             '_links' => [
                 'checklistItems' => [
-                    1 => [
-                        'href' => '/checklist_items/'.$checklistItemId,
-                    ],
+                    'href' => '/checklist_items?checklistNodes=%2Fcontent_node%2Fchecklist_nodes%2F'.$this->defaultEntity->getId(),
                 ],
             ],
         ]);
@@ -59,9 +57,7 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
         $this->assertJsonContains([
             '_links' => [
                 'checklistItems' => [
-                    1 => [
-                        'href' => '/checklist_items/'.$checklistItemId,
-                    ],
+                    'href' => '/checklist_items?checklistNodes=%2Fcontent_node%2Fchecklist_nodes%2F'.$this->defaultEntity->getId(),
                 ],
             ],
         ]);

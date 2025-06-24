@@ -6,6 +6,7 @@
       :period="period"
       :config="config"
       :content-type-names="['LearningObjectives', 'LearningTopics', 'Checklist']"
+      :filter="content.options.filter"
     />
   </Page>
 </template>
