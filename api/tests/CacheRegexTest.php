@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tests;
+
 use PHPUnit\Framework\Attributes\TestWith;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
