@@ -81,21 +81,23 @@ export default {
         const activities = await Promise.all(
           camp.activities().items.map(async (a) => ({
             activity: a,
-            rootContentNodeId: await a.$href('rootContentNode'),
+            rootContentNodeUri: await a.$href('rootContentNode'),
           }))
         )
 
         const checklistNodes = await Promise.all(
           checklistItem.checklistNodes().items.map(async (cn) => ({
             checklistNode: cn,
-            rootId: await cn.$href('root'),
+            rootUri: await cn.$href('root'),
           }))
         )
 
-        // Activities ordered first ScheduleEntry start-time
+        // Activities ordered by first ScheduleEntry start time
         const res = sortBy(
           activities
-            .filter((a) => checklistNodes.some((cn) => cn.rootId == a.rootContentNodeId))
+            .filter((a) =>
+              checklistNodes.some((cn) => cn.rootUri == a.rootContentNodeUri)
+            )
             .map((a) => a.activity),
           (activity) =>
             activity
