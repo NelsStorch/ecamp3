@@ -8,8 +8,7 @@
 
             <e-select
               v-model="localCamp.campPrototype"
-              :vee-rules="{ required: false, excluded: ['', 'other', false, true] }"
-              :error-messages="prototypeSelectErrors"
+              :vee-rules="{ required: true }"
               :skip-if-empty="false"
               :label="$tc('entity.camp.prototype')"
               :hint="prototypeHint"
@@ -22,7 +21,9 @@
               class="e-form-container d-flex gap-2"
             >
               <e-text-field
+                ref="copyCampUrlInput"
                 v-model="copyCampUrl"
+                :vee-rules="{ required: true }"
                 :label="$tc('components.campCreate.campCreateStep2.prototypeCampUrl')"
                 class="flex-grow-1"
                 @input="setClipboardEntityUrl"
@@ -148,7 +149,7 @@
               </v-list>
             </div>
             <v-alert
-              v-if="localCamp.campPrototype === null"
+              v-if="localCamp.campPrototype === 'none'"
               color="#0661ab"
               elevation="0"
               text
@@ -283,7 +284,7 @@ export default {
           text: this.$tc('components.campCreate.campCreateStep2.otherPrototype'),
         },
         {
-          value: null,
+          value: 'none',
           text: this.$tc('components.campCreate.campCreateStep2.noPrototype'),
         },
       ])
@@ -293,7 +294,7 @@ export default {
       switch (this.localCamp.campPrototype) {
         case '':
           return this.$tc('components.campCreate.campCreateStep2.prototypeHint')
-        case null:
+        case 'none':
           return this.$tc('components.campCreate.campCreateStep2.prototypeHintEmpty')
         case 'other':
           return ''
@@ -305,7 +306,10 @@ export default {
       }
     },
     prototypePreview() {
-      if (this.localCamp.campPrototype === 'other') {
+      if (
+        this.localCamp.campPrototype === 'none' ||
+        this.localCamp.campPrototype === 'other'
+      ) {
         return null
       }
       if (this.localCamp.campPrototype) {
@@ -323,12 +327,6 @@ export default {
           object: ct,
         }))
     },
-    prototypeSelectErrors() {
-      if (this.localCamp.campPrototype !== 'other') return []
-      return [
-        this.$tc('components.campCreate.campCreateStep2.pleasePasteUrlInTheFieldBelow'),
-      ]
-    },
     copyableMaterialLists() {
       if (!this.prototypePreview) return []
       return this.prototypePreview.materialLists().items.filter((materialList) => {
@@ -339,15 +337,13 @@ export default {
   watch: {
     'localCamp.campPrototype'(newPrototype) {
       if (newPrototype === 'other') {
-        if (this.$refs.popoverPrompt) {
-          this.$refs.popoverPrompt.setOpen(true)
-        }
-        if (this.$refs.clipboardInfoDialog) {
-          this.$refs.clipboardInfoDialog.setOpen(true)
-        }
-        if (this.$refs.pasteButton) {
-          this.attemptLoadingEntityFromClipboard()
-        }
+        this.$nextTick(() => {
+          if (this.$refs.clipboardInfoDialog) {
+            this.$refs.clipboardInfoDialog.setOpen(true)
+          } else if (this.clipboardAccessDenied) {
+            this.$refs.copyCampUrlInput.focus()
+          }
+        })
       }
     },
   },
