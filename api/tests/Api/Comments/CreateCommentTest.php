@@ -96,6 +96,22 @@ class CreateCommentTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateCommentRejectsActivityCampMismatch() {
+        static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload(['camp' => $this->getIriFor('camp2')])]);
+
+        $this->assertResponseStatusCodeSame(422);
+        $this->assertJsonContains([
+            'detail' => 'activity: Must belong to the same camp.',
+        ]);
+    }
+
+    public function testCreateCommentFiltersMaliciousHtml() {
+        static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload(['textHtml' => '<b>testText</b><script>alert(1)</script>'])]);
+
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertJsonContains($this->getExampleReadPayload(['textHtml' => '<b>testText</b>']));
+    }
+
     public function getExampleWritePayload($attributes = [], $except = []) {
         return $this->getExamplePayload(
             Comment::class,
