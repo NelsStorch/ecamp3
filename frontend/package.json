@@ -27,8 +27,6 @@
     "@react-pdf/pdfkit": "4.0.3",
     "@react-pdf/primitives": "4.1.1",
     "@react-pdf/render": "4.3.0",
-    "@sentry/browser": "9.22.0",
-    "@sentry/vue": "9.22.0",
     "@sentry/browser": "9.31.0",
     "@sentry/vue": "9.31.0",
     "@tiptap/extension-bold": "2.22.3",
