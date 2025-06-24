@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use App\InputFilter;
+use App\Validator\AssertBelongsToSameCamp;
 use App\Repository\CommentRepository;
 use App\State\CommentCreateProcessor;
 use Doctrine\ORM\Mapping as ORM;
@@ -70,7 +71,7 @@ class Comment extends BaseEntity implements BelongsToCampInterface {
     /**
      * The activity this comment belongs to.
      */
-    #[Assert\Expression('this.activity.camp == this.camp', 'The activity must belong to the camp.')]
+    #[AssertBelongsToSameCamp]
     #[ApiProperty(example: '/activities/1a2b3c4d')]
     #[Groups(['read', 'create'])]
     #[ORM\ManyToOne(targetEntity: Activity::class, inversedBy: 'comments')]
