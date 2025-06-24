@@ -35,6 +35,7 @@ export const dayjsLocaleMap = {
   en: 'en-gb',
   it: 'it-ch',
   fr: 'fr-ch',
+  rm: 'de-ch',
 }
 
 /**

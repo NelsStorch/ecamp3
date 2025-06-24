@@ -26,7 +26,12 @@ export const renderPdfInWorker = async (data) => {
 
   // We need to set the locale again here. Otherwise dayjs falls back to the default
   // on production deployments
-  dayjs.locale(Object.keys(dayjsLocaleMap).includes(lang) ? dayjsLocaleMap[lang] : lang)
+  const twoLetterLocale = lang.substring(0, 2)
+  dayjs.locale(
+    Object.keys(dayjsLocaleMap).includes(twoLetterLocale)
+      ? dayjsLocaleMap[twoLetterLocale]
+      : lang
+  )
 
   const result = { ...(await renderPdf(data)) }
   if (result.error) {

@@ -23,8 +23,11 @@ export const mutations = {
 
     state.language = lang
     VueI18n.locale = lang
+    const twoLetterLocale = lang.substring(0, 2)
     Vue.dayjs.locale(
-      Object.keys(dayjsLocaleMap).includes(lang) ? dayjsLocaleMap[lang] : lang
+      Object.keys(dayjsLocaleMap).includes(twoLetterLocale)
+        ? dayjsLocaleMap[twoLetterLocale]
+        : lang
     )
     localeChanged()
     axios.defaults.headers.common['Accept-Language'] = lang
