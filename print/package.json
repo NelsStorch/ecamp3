@@ -3,10 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxt dev",
-    "dev-debug": "node --inspect node_modules/.bin/nuxt",
+    "dev": "NODE_OPTIONS='--max-http-header-size=128000' nuxt dev",
+    "dev-debug": "NODE_OPTIONS='--max-http-header-size=128000' node --inspect node_modules/.bin/nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "NODE_OPTIONS='--max-http-header-size=128000' nuxt start",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint --fix .",
     "lint:prettier": "prettier --write --ignore-path .gitignore **/*.{css,scss,json,md}",
