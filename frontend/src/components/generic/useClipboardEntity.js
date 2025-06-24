@@ -1,9 +1,10 @@
 import { computed, ref } from 'vue'
 
-export function useClipboardEntity(
-  apiGet,
-  { fetchClipboardEntity, onEntityLoaded, onEntityLoadFailed }
-) {
+export function useClipboardEntity({
+  fetchClipboardEntity,
+  onEntityLoaded,
+  onEntityLoadFailed,
+}) {
   const clipboardPermission = ref('unknown')
   const clipboardEntity = ref(null)
   const _clipoardEntityUrl = ref(null)

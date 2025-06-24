@@ -139,7 +139,7 @@ export default {
     // getCurrentInstance here is the lesser evil right now.
     const currentInstance = getCurrentInstance()
 
-    const clipboard = useClipboardEntity(api, {
+    const clipboard = useClipboardEntity({
       fetchClipboardEntity: async (url) => {
         if (url?.startsWith(window.location.origin)) {
           url = url.substring(window.location.origin.length)

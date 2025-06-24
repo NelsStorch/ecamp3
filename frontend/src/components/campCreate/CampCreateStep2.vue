@@ -237,7 +237,7 @@ export default {
     const localCamp = reactive(camp)
     const copyCampUrl = ref('')
 
-    const clipboard = useClipboardEntity(api, {
+    const clipboard = useClipboardEntity({
       fetchClipboardEntity: async (url) => {
         if (url?.startsWith(window.location.origin)) {
           url = url.substring(window.location.origin.length)
