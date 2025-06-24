@@ -133,6 +133,7 @@ export function useMaterialViewHelper(camp, list) {
         })
         .$loadItems(),
       ...collection.value.map(({ materialItems }) => materialItems.$reload()),
+      camp.categories().$loadItems(),
     ])
   })
 
