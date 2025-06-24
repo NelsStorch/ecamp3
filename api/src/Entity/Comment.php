@@ -19,7 +19,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * A Comment.
+ * A Comment someone left on an activity, to give feedback on the planned programme,
+ * for notes which are only relevant during camp planning, or for other communication.
  */
 #[ApiResource(
     operations: [
