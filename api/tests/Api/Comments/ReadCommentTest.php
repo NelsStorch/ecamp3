@@ -28,7 +28,7 @@ class ReadCommentTest extends ECampApiTestCase {
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
             'id' => $comment->getId(),
-            'text' => $comment->text,
+            'textHtml' => $comment->textHtml,
         ]);
     }
 
@@ -41,7 +41,7 @@ class ReadCommentTest extends ECampApiTestCase {
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
             'id' => $comment->getId(),
-            'text' => $comment->text,
+            'textHtml' => $comment->textHtml,
         ]);
     }
 

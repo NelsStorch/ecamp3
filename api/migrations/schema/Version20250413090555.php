@@ -18,7 +18,7 @@ final class Version20250413090555 extends AbstractMigration {
     public function up(Schema $schema): void {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            CREATE TABLE comment (id VARCHAR(16) NOT NULL, createTime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updateTime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, text TEXT NOT NULL, orphanDescription TEXT DEFAULT NULL, campId VARCHAR(16) NOT NULL, activityId VARCHAR(16) DEFAULT NULL, authorId VARCHAR(16) NOT NULL, PRIMARY KEY(id))
+            CREATE TABLE comment (id VARCHAR(16) NOT NULL, createTime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updateTime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, textHtml TEXT NOT NULL, orphanDescription TEXT DEFAULT NULL, campId VARCHAR(16) NOT NULL, activityId VARCHAR(16) DEFAULT NULL, authorId VARCHAR(16) NOT NULL, PRIMARY KEY(id))
         SQL);
         $this->addSql(<<<'SQL'
             CREATE INDEX IDX_9474526C6D299429 ON comment (campId)

@@ -98,7 +98,7 @@ class Comment extends BaseEntity implements BelongsToCampInterface {
     #[ApiProperty(example: 'This activity is great!')]
     #[Groups(['read', 'create'])]
     #[ORM\Column(type: 'text', nullable: false)]
-    public ?string $text = null;
+    public ?string $textHtml = null;
 
     /**
      * Persisted description of the context where the comment was originally writen.

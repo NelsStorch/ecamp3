@@ -58,13 +58,13 @@ class CreateCommentTest extends ECampApiTestCase {
     }
 
     public function testCreateCommentValidatesMissingText() {
-        static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload([], ['text'])]);
+        static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload([], ['textHtml'])]);
 
         $this->assertResponseStatusCodeSame(422);
         $this->assertJsonContains([
             'violations' => [
                 [
-                    'propertyPath' => 'text',
+                    'propertyPath' => 'textHtml',
                     'message' => 'This value should not be blank.',
                 ],
             ],
@@ -73,14 +73,14 @@ class CreateCommentTest extends ECampApiTestCase {
 
     public function testCreateCommentValidatesTextMaxLength() {
         static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload([
-            'text' => str_repeat('a', 1025),
+            'textHtml' => str_repeat('a', 1025),
         ])]);
 
         $this->assertResponseStatusCodeSame(422);
         $this->assertJsonContains([
             'violations' => [
                 [
-                    'propertyPath' => 'text',
+                    'propertyPath' => 'textHtml',
                     'message' => 'This value is too long. It should have 1024 characters or less.',
                 ],
             ],
