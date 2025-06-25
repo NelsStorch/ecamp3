@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250413090555 extends AbstractMigration {
+final class Version20250625090555 extends AbstractMigration {
     public function getDescription(): string {
         return 'Add comment entity';
     }
