@@ -10116,7 +10116,9 @@ components:
       type: object
     Comment-create_write:
       deprecated: false
-      description: 'A Comment.'
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
       properties:
         activity:
           description: 'The activity this comment belongs to.'
@@ -10144,18 +10146,20 @@ components:
           type:
             - 'null'
             - string
-        text:
+        textHtml:
           description: 'The actual comment.'
           example: 'This activity is great!'
           maxLength: 1024
           type: string
       required:
         - camp
-        - text
+        - textHtml
       type: object
     Comment-read:
       deprecated: false
-      description: 'A Comment.'
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
       properties:
         activity:
           description: 'The activity this comment belongs to.'
@@ -10189,18 +10193,20 @@ components:
           type:
             - 'null'
             - string
-        text:
+        textHtml:
           description: 'The actual comment.'
           example: 'This activity is great!'
           maxLength: 1024
           type: string
       required:
         - camp
-        - text
+        - textHtml
       type: object
     Comment.jsonapi:
       deprecated: false
-      description: 'A Comment.'
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
       properties:
         data:
           properties:
@@ -10218,14 +10224,14 @@ components:
                   maxLength: 32
                   readOnly: true
                   type: ['null', string]
-                text:
+                textHtml:
                   description: 'The actual comment.'
                   example: 'This activity is great!'
                   maxLength: 1024
                   readOnly: true
                   type: string
               required:
-                - text
+                - textHtml
               type: object
             id:
               type: string
@@ -10263,7 +10269,9 @@ components:
       type: object
     Comment.jsonhal-create_write:
       deprecated: false
-      description: 'A Comment.'
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
       properties:
         _links:
           properties:
@@ -10300,18 +10308,20 @@ components:
           type:
             - 'null'
             - string
-        text:
+        textHtml:
           description: 'The actual comment.'
           example: 'This activity is great!'
           maxLength: 1024
           type: string
       required:
         - camp
-        - text
+        - textHtml
       type: object
     Comment.jsonhal-read:
       deprecated: false
-      description: 'A Comment.'
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
       properties:
         _links:
           properties:
@@ -10354,18 +10364,20 @@ components:
           type:
             - 'null'
             - string
-        text:
+        textHtml:
           description: 'The actual comment.'
           example: 'This activity is great!'
           maxLength: 1024
           type: string
       required:
         - camp
-        - text
+        - textHtml
       type: object
     Comment.jsonld-create_write:
       deprecated: false
-      description: 'A Comment.'
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
       properties:
         activity:
           description: 'The activity this comment belongs to.'
@@ -10393,18 +10405,20 @@ components:
           type:
             - 'null'
             - string
-        text:
+        textHtml:
           description: 'The actual comment.'
           example: 'This activity is great!'
           maxLength: 1024
           type: string
       required:
         - camp
-        - text
+        - textHtml
       type: object
     Comment.jsonld-read:
       deprecated: false
-      description: 'A Comment.'
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
       properties:
         '@context':
           oneOf:
@@ -10461,14 +10475,14 @@ components:
           type:
             - 'null'
             - string
-        text:
+        textHtml:
           description: 'The actual comment.'
           example: 'This activity is great!'
           maxLength: 1024
           type: string
       required:
         - camp
-        - text
+        - textHtml
       type: object
     ConstraintViolation-json:
       deprecated: false
@@ -34751,7 +34765,9 @@ tags:
       Tree-Structure with ChecklistItems.
     name: Checklist
   -
-    description: 'A Comment.'
+    description: |-
+      A Comment someone left on an activity, to give feedback on the planned programme,
+      for notes which are only relevant during camp planning, or for other communication.
     name: Comment
   -
     description: |-
