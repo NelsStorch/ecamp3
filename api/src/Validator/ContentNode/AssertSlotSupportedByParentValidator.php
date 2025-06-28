@@ -31,7 +31,7 @@ class AssertSlotSupportedByParentValidator extends ConstraintValidator {
             return;
         }
         $supportedSlotNames = $parent->getSupportedSlotNames();
-        if (0 === sizeof($supportedSlotNames)) {
+        if (0 === count($supportedSlotNames)) {
             $this->context->buildViolation($constraint->parentDoesNotSupportChildrenMessage)->addViolation();
 
             return;

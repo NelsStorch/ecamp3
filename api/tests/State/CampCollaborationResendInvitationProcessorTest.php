@@ -15,7 +15,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 /**
  * @internal
@@ -29,11 +28,6 @@ class CampCollaborationResendInvitationProcessorTest extends TestCase {
 
     private CampCollaboration $campCollaboration;
     private User $user;
-    private Profile $profile;
-    private Camp $camp;
-
-    private MockObject|Security $security;
-    private MockObject|PasswordHasherFactoryInterface $pwHashFactory;
     private MailService|MockObject $mailService;
 
     private CampCollaborationResendInvitationProcessor $processor;
@@ -42,31 +36,31 @@ class CampCollaborationResendInvitationProcessorTest extends TestCase {
      * @throws \ReflectionException
      */
     protected function setUp(): void {
-        $this->camp = new Camp();
-        $this->camp->title = 'title';
+        $camp = new Camp();
+        $camp->title = 'title';
 
         $this->campCollaboration = new CampCollaboration();
         $this->campCollaboration->user = self::INITIAL_USER;
         $this->campCollaboration->inviteEmail = self::INITIAL_INVITE_EMAIL;
         $this->campCollaboration->inviteKey = self::INITIAL_INVITE_KEY;
-        $this->campCollaboration->camp = $this->camp;
+        $this->campCollaboration->camp = $camp;
 
-        $this->profile = new Profile();
-        $this->profile->email = 'e@mail.com';
+        $profile = new Profile();
+        $profile->email = 'e@mail.com';
         $this->user = new User();
-        $this->profile->user = $this->user;
-        $this->user->profile = $this->profile;
+        $profile->user = $this->user;
+        $this->user->profile = $profile;
 
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
-        $this->security = $this->createMock(Security::class);
-        $this->security->expects(self::any())->method('getUser')->willReturn($this->user);
-        $this->pwHashFactory = $this->createMock(PasswordHasherFactory::class);
+        $security = $this->createMock(Security::class);
+        $security->expects(self::any())->method('getUser')->willReturn($this->user);
+        $pwHashFactory = $this->createMock(PasswordHasherFactory::class);
         $this->mailService = $this->createMock(MailService::class);
 
         $this->processor = new CampCollaborationResendInvitationProcessor(
             $decoratedProcessor,
-            $this->security,
-            $this->pwHashFactory,
+            $security,
+            $pwHashFactory,
             $this->mailService,
         );
     }

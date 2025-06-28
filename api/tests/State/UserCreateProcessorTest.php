@@ -19,7 +19,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserCreateProcessorTest extends TestCase {
     private UserCreateProcessor $processor;
-    private MockObject|ReCaptchaWrapper $recaptcha;
     private MockObject|Response $recaptchaResponse;
     private MockObject|UserPasswordHasherInterface $userPasswordHasher;
     private MailService|MockObject $mailService;
@@ -32,8 +31,8 @@ class UserCreateProcessorTest extends TestCase {
         $this->user = new User();
 
         $this->recaptchaResponse = $this->createMock(Response::class);
-        $this->recaptcha = $this->createMock(ReCaptchaWrapper::class);
-        $this->recaptcha->expects(self::any())
+        $recaptcha = $this->createMock(ReCaptchaWrapper::class);
+        $recaptcha->expects(self::any())
             ->method('verify')
             ->willReturn($this->recaptchaResponse)
         ;
@@ -43,7 +42,7 @@ class UserCreateProcessorTest extends TestCase {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
         $this->processor = new UserCreateProcessor(
             $decoratedProcessor,
-            $this->recaptcha,
+            $recaptcha,
             $this->userPasswordHasher,
             $this->mailService
         );

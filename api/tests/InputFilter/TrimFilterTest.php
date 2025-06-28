@@ -22,20 +22,25 @@ class TrimFilterTest extends TestCase {
         $result = $trim->applyTo($data, 'key');
 
         // then
-        $this->assertEquals($outputData, $result);
+        $this->assertSame($outputData, $result);
     }
 
-    public static function getExamples() {
-        return [
-            ['', ''],
-            ['abc', 'abc'],
-            [' abc', 'abc'],
-            ['abc def', 'abc def'],
-            ['abc ', 'abc'],
-            ["\tabc", 'abc'],
-            ['  abc', 'abc'],
-            ["\t abc ", 'abc'],
-        ];
+    public static function getExamples(): \Iterator {
+        yield ['', ''];
+
+        yield ['abc', 'abc'];
+
+        yield [' abc', 'abc'];
+
+        yield ['abc def', 'abc def'];
+
+        yield ['abc ', 'abc'];
+
+        yield ["\tabc", 'abc'];
+
+        yield ['  abc', 'abc'];
+
+        yield ["\t abc ", 'abc'];
     }
 
     public function testDoesNothingWhenKeyIsMissing() {
@@ -47,7 +52,7 @@ class TrimFilterTest extends TestCase {
         $result = $trim->applyTo($data, 'key');
 
         // then
-        $this->assertEquals($data, $result);
+        $this->assertSame($data, $result);
     }
 
     public function testDoesNothingWhenValueIsNull() {
@@ -71,6 +76,6 @@ class TrimFilterTest extends TestCase {
         $this->expectException(UnexpectedValueException::class);
 
         // when
-        $result = $trim->applyTo($data, 'key');
+        $trim->applyTo($data, 'key');
     }
 }

@@ -2,34 +2,57 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
-use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Php74\Rector\Property\TypedPropertyRector;
-use Rector\Set\ValueObject\SetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\CodeQuality\Rector\Catch_\ThrowWithPreviousExceptionRector;
+use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodeQuality\Rector\Equal\UseIdenticalOverEqualWithSameTypeRector;
+use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
+use Rector\CodeQuality\Rector\If_\CombineIfRector;
+use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
+use Rector\CodeQuality\Rector\If_\SimplifyIfElseToTernaryRector;
+use Rector\CodeQuality\Rector\If_\SimplifyIfReturnBoolRector;
+use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\If_\RemoveDeadInstanceOfRector;
+use Rector\Doctrine\Bundle230\Rector\Class_\AddAnnotationToRepositoryRector;
+use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
+use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\AddInstanceofAssertForNullableInstanceRector;
+use Rector\PHPUnit\CodeQuality\Rector\MethodCall\AssertEmptyNullableObjectToAssertInstanceofRector;
+use Rector\Privatization\Rector\Class_\FinalizeTestCaseClassRector;
+use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
+use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::PATHS, [
+// @noinspection PhpUnhandledExceptionInspection
+return RectorConfig::configure()
+    ->withPaths([
+        __DIR__.'/public',
+        __DIR__.'/config',
+        __DIR__.'/migrations',
         __DIR__.'/src',
         __DIR__.'/tests',
-    ]);
-    $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
-    $parameters->set(Option::APPLY_AUTO_IMPORT_NAMES_ON_CHANGED_FILES_ONLY, true);
-
-    // Define what rule sets will be applied
-    $containerConfigurator->import(DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES);
-
-    // $containerConfigurator->import(SetList::DEAD_CODE);
-    // $containerConfigurator->import(SetList::CODE_QUALITY);
-    // $containerConfigurator->import(SetList::CODING_STYLE);
-    // $containerConfigurator->import(SetList::PHP_80);
-
-    // get services (needed for register a single rule)
-    // $services = $containerConfigurator->services();
-
-    // register a single rule
-    // $services->set(TypedPropertyRector::class);
-};
+    ])
+    ->withComposerBased(doctrine: true, phpunit: true, symfony: true)
+    ->withPreparedSets(deadCode: true, codeQuality: true, privatization: true, rectorPreset: true, phpunitCodeQuality: true, symfonyCodeQuality: true)
+    ->withAttributesSets(all: true)
+    ->withConfiguredRule(RenameFunctionRector::class, [
+        'implode' => 'join',
+        'join' => 'join',
+    ])
+    ->withSkip([
+        AddAnnotationToRepositoryRector::class,
+        AddInstanceofAssertForNullableInstanceRector::class,
+        AssertEmptyNullableObjectToAssertInstanceofRector::class,
+        CombineIfRector::class,
+        DeclareStrictTypesRector::class,
+        DisallowedEmptyRuleFixerRector::class,
+        ExplicitBoolCompareRector::class,
+        FinalizeTestCaseClassRector::class,
+        FlipTypeControlToUseExclusiveTypeRector::class,
+        LocallyCalledStaticMethodToNonStaticRector::class,
+        PreferPHPUnitThisCallRector::class,
+        RemoveDeadInstanceOfRector::class,
+        SimplifyIfElseToTernaryRector::class,
+        SimplifyIfReturnBoolRector::class,
+        ThrowWithPreviousExceptionRector::class,
+        UseIdenticalOverEqualWithSameTypeRector::class,
+    ])
+;

@@ -10,7 +10,6 @@ use App\Entity\ContentNode\Storyboard;
 use App\InputFilter\CleanHTMLFilter;
 use App\InputFilter\CleanTextFilter;
 use App\State\ContentNode\StoryboardPersistProcessor;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,34 +17,28 @@ use PHPUnit\Framework\TestCase;
  */
 class StoryboardPersistProcessorTest extends TestCase {
     private StoryboardPersistProcessor $processor;
-    private CleanHTMLFilter|MockObject $cleanHTMLFilter;
-    private CleanTextFilter|MockObject $cleanTextFilter;
     private ColumnLayout $root;
     private Storyboard $contentNode;
 
     protected function setUp(): void {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
 
-        $this->cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
-        $this->cleanHTMLFilter->method('applyTo')->will(
-            $this->returnCallback(
-                function ($object, $property) {
-                    $object[$property] = '***sanitizedHTML***';
+        $cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
+        $cleanHTMLFilter->method('applyTo')->willReturnCallback(
+            function (array $object, string $property): array {
+                $object[$property] = '***sanitizedHTML***';
 
-                    return $object;
-                }
-            )
+                return $object;
+            }
         );
 
-        $this->cleanTextFilter = $this->createMock(CleanTextFilter::class);
-        $this->cleanTextFilter->method('applyTo')->will(
-            $this->returnCallback(
-                function ($object, $property) {
-                    $object[$property] = '***sanitizedText***';
+        $cleanTextFilter = $this->createMock(CleanTextFilter::class);
+        $cleanTextFilter->method('applyTo')->willReturnCallback(
+            function (array $object, string $property): array {
+                $object[$property] = '***sanitizedText***';
 
-                    return $object;
-                }
-            )
+                return $object;
+            }
         );
 
         $this->contentNode = new Storyboard();
@@ -68,7 +61,7 @@ class StoryboardPersistProcessorTest extends TestCase {
         $this->contentNode->parent = new ColumnLayout();
         $this->contentNode->parent->root = $this->root;
 
-        $this->processor = new StoryboardPersistProcessor($decoratedProcessor, $this->cleanHTMLFilter, $this->cleanTextFilter);
+        $this->processor = new StoryboardPersistProcessor($decoratedProcessor, $cleanHTMLFilter, $cleanTextFilter);
     }
 
     public function testSetsRootFromParentOnCreate() {

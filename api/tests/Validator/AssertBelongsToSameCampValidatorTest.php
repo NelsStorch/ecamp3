@@ -177,7 +177,7 @@ class ParentTestClass extends BaseEntity implements BelongsToCampInterface {
     #[AssertBelongsToSameCamp]
     public ?ChildTestClass $child;
 
-    public function __construct(public Camp $camp, ?ChildTestClass $child = null) {}
+    public function __construct(public Camp $camp) {}
 
     public function getCamp(): ?Camp {
         return $this->camp;

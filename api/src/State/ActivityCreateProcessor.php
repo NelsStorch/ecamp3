@@ -30,7 +30,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
         if (!isset($data->category?->rootContentNode)) {
             throw new \UnexpectedValueException('Property rootContentNode of provided category is null. Object of type '.ColumnLayout::class.' expected.');
         }
-        if (!is_a($data->category->rootContentNode, ColumnLayout::class)) {
+        if (!$data->category->rootContentNode instanceof ColumnLayout) {
             throw new \UnexpectedValueException('Property rootContentNode of provided category is of wrong type. Object of type '.ColumnLayout::class.' expected.');
         }
 

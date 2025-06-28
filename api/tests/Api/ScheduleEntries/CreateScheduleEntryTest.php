@@ -210,7 +210,7 @@ class CreateScheduleEntryTest extends ECampApiTestCase {
     }
 
     public function testCreateScheduleEntryWithReversedPropertyOrder() {
-        $result = static::createClientWithCredentials()->request('POST', '/schedule_entries', ['json' => [
+        static::createClientWithCredentials()->request('POST', '/schedule_entries', ['json' => [
             'start' => '2023-05-01T04:00:00+00:00',
             'end' => '2023-05-01T05:00:00+00:00',
             'period' => $this->getIriFor('period1'),

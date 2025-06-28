@@ -354,7 +354,7 @@ class CreateActivityTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('POST', '/activities', ['json' => $this->getExampleWritePayload()]);
 
         $id = $response->toArray()['id'];
-        $newActivity = $this->getEntityManager()->getRepository(Activity::class)->find($id);
+        $this->getEntityManager()->getRepository(Activity::class)->find($id);
 
         $this->assertResponseStatusCodeSame(201);
         $this->assertJsonContains(['_embedded' => [

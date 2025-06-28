@@ -12,7 +12,6 @@ use App\Entity\ContentType;
 use App\State\ActivityCreateProcessor;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,11 +20,10 @@ use PHPUnit\Framework\TestCase;
 class ActivityCreateProcessorTest extends TestCase {
     private ActivityCreateProcessor $processor;
     private Activity $activity;
-    private EntityManagerInterface|MockObject $em;
 
     protected function setUp(): void {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
+        $em = $this->createMock(EntityManagerInterface::class);
 
         $this->activity = new Activity();
         $this->activity->category = new Category();
@@ -43,10 +41,10 @@ class ActivityCreateProcessorTest extends TestCase {
 
         // EntityManager
         $repository = $this->createMock(EntityRepository::class);
-        $this->em->method('getRepository')->willReturn($repository);
+        $em->method('getRepository')->willReturn($repository);
         $repository->method('findOneBy')->willReturn($contentType);
 
-        $this->processor = new ActivityCreateProcessor($decoratedProcessor, $this->em);
+        $this->processor = new ActivityCreateProcessor($decoratedProcessor, $em);
     }
 
     public function testSetsCampFromCategory() {
@@ -78,7 +76,7 @@ class ActivityCreateProcessorTest extends TestCase {
         $this->expectException(\UnexpectedValueException::class);
 
         // when
-        /** @var Activity $data */
-        $data = $this->processor->onBefore($this->activity, new Post());
+        // @var Activity $data
+        $this->processor->onBefore($this->activity, new Post());
     }
 }

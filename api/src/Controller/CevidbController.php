@@ -12,7 +12,7 @@ class CevidbController extends AbstractController {
      * Link to this controller to start the "connect" process.
      */
     #[Route('/auth/cevidb', name: 'connect_cevidb_start')]
-    public function connectAction(Request $request, ClientRegistry $clientRegistry) {
+    public function connect(Request $request, ClientRegistry $clientRegistry) {
         return $clientRegistry
             ->getClient('cevidb') // key used in config/packages/knpu_oauth2_client.yaml
             ->redirect([], ['additionalData' => ['callback' => $request->get('callback')]])
@@ -25,7 +25,7 @@ class CevidbController extends AbstractController {
      * in config/packages/knpu_oauth2_client.yaml.
      */
     #[Route('/auth/cevidb/callback', name: 'connect_cevidb_check')]
-    public function connectCheckAction(Request $request, ClientRegistry $clientRegistry) {
+    public function connectCheck(ClientRegistry $clientRegistry) {
         // ** if you want to *authenticate* the user, then
         // leave this method blank and create a custom authenticator
     }

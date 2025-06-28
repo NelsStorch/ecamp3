@@ -34,7 +34,7 @@ class CategoryCreateProcessorTest extends TestCase {
     public function testCreatesNewContentNodeBeforeCreate() {
         // given
         $repositoryMock = $this->createMock(EntityRepository::class);
-        $repositoryMock->method('findOneBy')->willReturnCallback(function ($criteria) {
+        $repositoryMock->method('findOneBy')->willReturnCallback(function (array $criteria): ?object {
             $result = new ContentType();
             $result->name = $criteria['name'];
 

@@ -411,9 +411,9 @@ at position 10: Trailing data',
         // Period has now 4 days
         $this->assertCount(4, $period->days);
 
-        $day1 = $this->getEntityManager()->getRepository(Day::class)->find($day1->getId());
-        $day2 = $this->getEntityManager()->getRepository(Day::class)->find($day2->getId());
-        $day3 = $this->getEntityManager()->getRepository(Day::class)->find($day3->getId());
+        $this->getEntityManager()->getRepository(Day::class)->find($day1->getId());
+        $this->getEntityManager()->getRepository(Day::class)->find($day2->getId());
+        $this->getEntityManager()->getRepository(Day::class)->find($day3->getId());
 
         $day1_resp = $this->getEntityManager()->getRepository(DayResponsible::class)->find($day1_resp->getId());
         $day2_resp = $this->getEntityManager()->getRepository(DayResponsible::class)->find($day2_resp->getId());

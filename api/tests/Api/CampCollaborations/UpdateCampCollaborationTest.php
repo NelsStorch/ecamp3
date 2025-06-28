@@ -399,26 +399,31 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         ]);
     }
 
-    public static function usersWhichCanEditCampCollaborations(): array {
-        return ['user1manager' => ['user1manager'], 'user2member' => ['user2member']];
+    public static function usersWhichCanEditCampCollaborations(): \Iterator {
+        yield 'user1manager' => ['user1manager'];
+
+        yield 'user2member' => ['user2member'];
     }
 
-    public static function invalidAbbreviations(): array {
-        return [
-            ['ABC'],
-            ['D3C'],
-            ['🧑🏿‍🚀🙋🏼‍♀️😊'],
-        ];
+    public static function invalidAbbreviations(): \Iterator {
+        yield ['ABC'];
+
+        yield ['D3C'];
+
+        yield ['🧑🏿‍🚀🙋🏼‍♀️😊'];
     }
 
-    public static function validAbbreviations(): array {
-        return [
-            ['A'],
-            ['33'],
-            ['X4'],
-            ['✅😊'],
-            ['🧑🏿‍🚀🧑🏼‍🔧'],
-            ['⚜️'],
-        ];
+    public static function validAbbreviations(): \Iterator {
+        yield ['A'];
+
+        yield ['33'];
+
+        yield ['X4'];
+
+        yield ['✅😊'];
+
+        yield ['🧑🏿‍🚀🧑🏼‍🔧'];
+
+        yield ['⚜️'];
     }
 }

@@ -32,50 +32,50 @@ class TranslationInfoOfConstraintViolationTest extends TestCase {
         assertThat($translationInfo->parameters, equalTo($parametersWithoutCurlyBraces));
     }
 
-    public static function constraintViolations(): array {
-        return [
-            AssertAllowTransitions::class => [
-                'violation' => new ConstraintViolation(
-                    message: 'value must be one of inactive, was established',
-                    messageTemplate: 'value must be one of {{ to }}, was {{ value }}',
-                    parameters: ['{{ to }}' => 'inactive', '{{ value }}' => 'established'],
-                    root: new CampCollaboration(),
-                    propertyPath: 'status',
-                    invalidValue: 'established',
-                    plural: null,
-                    code: null,
-                    constraint: new AssertAllowTransitions(transitions: [])
-                ),
-                'key' => 'app.validator.allowtransition.assertallowtransitions',
-            ],
-            NotBlank::class => [
-                'violation' => new ConstraintViolation(
-                    message: 'This value should not be blank.',
-                    messageTemplate: 'This value should not be blank.',
-                    parameters: ['{{ value }}' => '""'],
-                    root: new CampCollaboration(),
-                    propertyPath: 'name',
-                    invalidValue: '',
-                    plural: null,
-                    code: 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
-                    constraint: new NotBlank()
-                ),
-                'key' => 'symfony.component.validator.constraints.notblank',
-            ],
-            NotBlank::class.' without parameters' => [
-                'violation' => new ConstraintViolation(
-                    message: 'This value should not be blank.',
-                    messageTemplate: 'This value should not be blank.',
-                    parameters: [],
-                    root: new CampCollaboration(),
-                    propertyPath: 'name',
-                    invalidValue: '',
-                    plural: null,
-                    code: 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
-                    constraint: new NotBlank()
-                ),
-                'key' => 'symfony.component.validator.constraints.notblank',
-            ],
+    public static function constraintViolations(): \Iterator {
+        yield AssertAllowTransitions::class => [
+            new ConstraintViolation(
+                message: 'value must be one of inactive, was established',
+                messageTemplate: 'value must be one of {{ to }}, was {{ value }}',
+                parameters: ['{{ to }}' => 'inactive', '{{ value }}' => 'established'],
+                root: new CampCollaboration(),
+                propertyPath: 'status',
+                invalidValue: 'established',
+                plural: null,
+                code: null,
+                constraint: new AssertAllowTransitions(transitions: [])
+            ),
+            'app.validator.allowtransition.assertallowtransitions',
+        ];
+
+        yield NotBlank::class => [
+            new ConstraintViolation(
+                message: 'This value should not be blank.',
+                messageTemplate: 'This value should not be blank.',
+                parameters: ['{{ value }}' => '""'],
+                root: new CampCollaboration(),
+                propertyPath: 'name',
+                invalidValue: '',
+                plural: null,
+                code: 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                constraint: new NotBlank()
+            ),
+            'symfony.component.validator.constraints.notblank',
+        ];
+
+        yield NotBlank::class.' without parameters' => [
+            new ConstraintViolation(
+                message: 'This value should not be blank.',
+                messageTemplate: 'This value should not be blank.',
+                parameters: [],
+                root: new CampCollaboration(),
+                propertyPath: 'name',
+                invalidValue: '',
+                plural: null,
+                code: 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                constraint: new NotBlank()
+            ),
+            'symfony.component.validator.constraints.notblank',
         ];
     }
 }

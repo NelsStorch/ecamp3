@@ -30,11 +30,11 @@ class AssertBelongsToSameCampValidator extends ConstraintValidator {
         }
 
         $object = $this->context->getObject();
-        if (!($object instanceof BelongsToCampInterface || $object instanceof BelongsToContentNodeTreeInterface)) {
+        if (!$object instanceof BelongsToCampInterface && !$object instanceof BelongsToContentNodeTreeInterface) {
             throw new UnexpectedValueException($value, BelongsToCampInterface::class.' or '.BelongsToContentNodeTreeInterface::class);
         }
 
-        if (!($value instanceof BelongsToCampInterface || $value instanceof BelongsToContentNodeTreeInterface)) {
+        if (!$value instanceof BelongsToCampInterface && !$value instanceof BelongsToContentNodeTreeInterface) {
             throw new UnexpectedValueException($value, BelongsToCampInterface::class.' or '.BelongsToContentNodeTreeInterface::class);
         }
 

@@ -31,7 +31,7 @@ class SingleTextPersistProcessorTest extends TestCase {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
         $cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
         $cleanHTMLFilter->method('applyTo')->willReturnCallback(
-            function ($object, $property) {
+            function (array $object, string $property): array {
                 $object[$property] = '***sanitizedHTML***';
 
                 return $object;

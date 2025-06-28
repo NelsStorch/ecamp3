@@ -57,7 +57,7 @@ class CampTest extends TestCase {
         $camp = new Camp();
         $camp->copyFromPrototype($this->campPrototype, new EntityMap($camp));
 
-        $this->assertEquals($this->campPrototype->getId(), $camp->campPrototypeId);
+        $this->assertSame($this->campPrototype->getId(), $camp->campPrototypeId);
 
         $this->assertCount(1, $camp->categories);
 

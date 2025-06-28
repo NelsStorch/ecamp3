@@ -303,9 +303,8 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
         if ($num >= 26) {
             $alphaNum .= $this->getAlphaNum(floor($num / 26));
         }
-        $alphaNum .= chr(97 + ($num % 26));
 
-        return $alphaNum;
+        return $alphaNum.chr(97 + ($num % 26));
     }
 
     private function getRomanNum($num): string {

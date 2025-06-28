@@ -829,11 +829,10 @@ class CreateUserTest extends ECampApiTestCase {
         ]);
     }
 
-    public static function notWriteableUserProperties(): array {
-        return [
-            'activationKeyHash' => ['activationKeyHash'],
-            'passwordResetKeyHash' => ['passwordResetKeyHash'],
-        ];
+    public static function notWriteableUserProperties(): \Iterator {
+        yield 'activationKeyHash' => ['activationKeyHash'];
+
+        yield 'passwordResetKeyHash' => ['passwordResetKeyHash'];
     }
 
     #[DataProvider('notWriteableProfileProperties')]
@@ -859,15 +858,18 @@ class CreateUserTest extends ECampApiTestCase {
         ]);
     }
 
-    public static function notWriteableProfileProperties(): array {
-        return [
-            'untrustedEmailKey' => ['untrustedEmailKey'],
-            'untrustedEmailKeyHash' => ['untrustedEmailKeyHash'],
-            'googleId' => ['googleId'],
-            'pbsmidataId' => ['pbsmidataId'],
-            'roles' => ['roles'],
-            'user' => ['user'],
-        ];
+    public static function notWriteableProfileProperties(): \Iterator {
+        yield 'untrustedEmailKey' => ['untrustedEmailKey'];
+
+        yield 'untrustedEmailKeyHash' => ['untrustedEmailKeyHash'];
+
+        yield 'googleId' => ['googleId'];
+
+        yield 'pbsmidataId' => ['pbsmidataId'];
+
+        yield 'roles' => ['roles'];
+
+        yield 'user' => ['user'];
     }
 
     /**

@@ -226,7 +226,7 @@ class ChecklistItem extends BaseEntity implements BelongsToCampInterface, CopyFr
         return 1 + $this->children->reduce(function (int $max, ChecklistItem $child): int {
             $depth = $child->getSubtreeDepth();
 
-            return ($depth > $max) ? $depth : $max;
+            return max($depth, $max);
         }, 0);
     }
 

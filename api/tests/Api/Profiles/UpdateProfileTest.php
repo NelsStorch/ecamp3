@@ -544,31 +544,35 @@ class UpdateProfileTest extends ECampApiTestCase {
         ]);
     }
 
-    public static function notWriteableProfileProperties(): array {
-        return [
-            'untrustedEmailKeyHash' => ['untrustedEmailKeyHash'],
-            'googleId' => ['googleId'],
-            'pbsmidataId' => ['pbsmidataId'],
-            'roles' => ['roles'],
-            'user' => ['user'],
-        ];
+    public static function notWriteableProfileProperties(): \Iterator {
+        yield 'untrustedEmailKeyHash' => ['untrustedEmailKeyHash'];
+
+        yield 'googleId' => ['googleId'];
+
+        yield 'pbsmidataId' => ['pbsmidataId'];
+
+        yield 'roles' => ['roles'];
+
+        yield 'user' => ['user'];
     }
 
-    public static function invalidAbbreviations(): array {
-        return [
-            ['ABC'],
-            ['D3C'],
-            ['🧑🏿‍🚀🙋🏼‍♀️😊'],
-        ];
+    public static function invalidAbbreviations(): \Iterator {
+        yield ['ABC'];
+
+        yield ['D3C'];
+
+        yield ['🧑🏿‍🚀🙋🏼‍♀️😊'];
     }
 
-    public static function validAbbreviations(): array {
-        return [
-            ['AB'],
-            ['33'],
-            ['X4'],
-            ['✅😊'],
-            ['🧑🏿‍🚀🧑🏼‍🔧'],
-        ];
+    public static function validAbbreviations(): \Iterator {
+        yield ['AB'];
+
+        yield ['33'];
+
+        yield ['X4'];
+
+        yield ['✅😊'];
+
+        yield ['🧑🏿‍🚀🧑🏼‍🔧'];
     }
 }

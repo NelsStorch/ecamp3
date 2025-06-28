@@ -80,7 +80,7 @@ class ListActivitiesTest extends ECampApiTestCase {
 
     public function testListActivitiesAsCampSubresourceIsDeniedForUnrelatedUser() {
         $camp = static::getFixture('camp1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('GET', "/camps/{$camp->getId()}/activities");
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('GET', "/camps/{$camp->getId()}/activities");
         $this->assertResponseStatusCodeSame(404);
     }
 

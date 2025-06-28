@@ -64,7 +64,7 @@ class UpdateChecklistItemTest extends ECampApiTestCase {
 
     public function testPatchChecklistItemIsAllowedForMember() {
         $checklistItem = static::getFixture('checklistItem1_1_1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
             ->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
                 'text' => 'Ziel 2',
             ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
@@ -77,7 +77,7 @@ class UpdateChecklistItemTest extends ECampApiTestCase {
 
     public function testPatchChecklistItemIsAllowedForManager() {
         $checklistItem = static::getFixture('checklistItem1_1_1');
-        $response = static::createClientWithCredentials()->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
+        static::createClientWithCredentials()->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
             'text' => 'Ziel 2',
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
         $this->assertResponseStatusCodeSame(200);
@@ -88,7 +88,7 @@ class UpdateChecklistItemTest extends ECampApiTestCase {
 
     public function testPatchChecklistItemInCampPrototypeIsDeniedForUnrelatedUser() {
         $checklistItem = static::getFixture('checklistItemPrototype_1_1');
-        $response = static::createClientWithCredentials()->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
+        static::createClientWithCredentials()->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
             'text' => 'Ziel 2',
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
         $this->assertResponseStatusCodeSame(403);

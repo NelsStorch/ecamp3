@@ -41,7 +41,7 @@ class CreateColumnLayoutTest extends CreateContentNodeTestCase {
     }
 
     public function testCreateColumnLayoutAcceptsNonExistingJson() {
-        $response = $this->create($this->getExampleWritePayload([], ['data']));
+        $this->create($this->getExampleWritePayload([], ['data']));
 
         $this->assertResponseStatusCodeSame(201);
         $this->assertJsonContains(['data' => [

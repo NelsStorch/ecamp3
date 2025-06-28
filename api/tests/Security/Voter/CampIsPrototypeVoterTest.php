@@ -42,7 +42,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, new Period(), ['CAMP_IS_SOMETHING_ELSE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_ABSTAIN, $result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
     public function testDoesntVoteWhenSubjectDoesNotBelongToCamp() {
@@ -52,7 +52,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, new CampIsPrototypeVoterTestDummy(), ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_ABSTAIN, $result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
     public function testDoesntVoteWhenSubjectIsNull() {
@@ -62,7 +62,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, null, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_ABSTAIN, $result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
     public function testDeniesAccessWhenGetCampYieldsNull() {
@@ -75,7 +75,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_DENIED, $result);
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 
     public function testDeniesAccessWhenCampIsntPrototype() {
@@ -92,7 +92,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_DENIED, $result);
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 
     public function testGrantsAccessViaBelongsToCampInterface() {
@@ -111,7 +111,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_GRANTED, $result);
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 
     public function testGrantsAccessViaBelongsToContentNodeTreeInterface() {
@@ -134,7 +134,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_GRANTED, $result);
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 }
 

@@ -38,11 +38,11 @@ class ExpressionDateTimeFilterTest extends TestCase {
 
         $this->queryNameGeneratorInterfaceMock
             ->method('generateParameterName')
-            ->willReturnCallback(fn ($field) => $field.'_a1')
+            ->willReturnCallback(fn (string $field): string => $field.'_a1')
         ;
         $this->queryNameGeneratorInterfaceMock
             ->method('generateJoinAlias')
-            ->willReturnCallback(fn ($field) => $field.'_j1')
+            ->willReturnCallback(fn (string $field): string => $field.'_j1')
         ;
 
         $classMetadata = $this->createStub(ClassMetadata::class);
@@ -62,7 +62,7 @@ class ExpressionDateTimeFilterTest extends TestCase {
         $description = $filter->getDescription('Dummy');
 
         // then
-        $this->assertEquals([], $description);
+        $this->assertSame([], $description);
     }
 
     public function testGetDescription() {
@@ -105,7 +105,7 @@ class ExpressionDateTimeFilterTest extends TestCase {
         $description = $filter->getDescription('Dummy');
 
         // then
-        $this->assertEquals([], $description);
+        $this->assertSame([], $description);
     }
 
     public function testApplyChecksForDefinedFilters() {
@@ -293,12 +293,13 @@ class ExpressionDateTimeFilterTest extends TestCase {
         ]]);
     }
 
-    public static function getOperators() {
-        return [
-            'before' => ['before', '<='],
-            'strictly_before' => ['strictly_before', '<'],
-            'after' => ['after', '>='],
-            'strictly_after' => ['strictly_after', '>'],
-        ];
+    public static function getOperators(): \Iterator {
+        yield 'before' => ['before', '<='];
+
+        yield 'strictly_before' => ['strictly_before', '<'];
+
+        yield 'after' => ['after', '>='];
+
+        yield 'strictly_after' => ['strictly_after', '>'];
     }
 }
