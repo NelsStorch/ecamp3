@@ -7,21 +7,21 @@
 namespace App\Tests\Types\Doctrine;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseDateTypeTestCase extends TestCase {
-    protected AbstractPlatform&MockObject $platform;
+    protected AbstractPlatform $platform;
     protected Type $type;
 
     /** @var non-empty-string */
     private string $currentTimezone;
 
     protected function setUp(): void {
-        $this->platform = $this->getMockForAbstractClass(AbstractPlatform::class);
+        $this->platform = new PostgreSQLPlatform();
         $this->currentTimezone = \date_default_timezone_get();
     }
 
