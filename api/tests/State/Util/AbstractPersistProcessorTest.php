@@ -2,12 +2,14 @@
 
 namespace App\Tests\State\Util;
 
+use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\BaseEntity;
 use App\State\Util\AbstractPersistProcessor;
 use App\State\Util\PropertyChangeListener;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +21,14 @@ class AbstractPersistProcessorTest extends TestCase {
     private MockableClosure|MockObject $closure;
     private PropertyChangeListener $propertyChangeListener;
     private AbstractPersistProcessor|MockObject $processor;
+    private MockableClosure|MockObject $onBefore;
+    private MockableClosure|MockObject $onAfter;
 
+    /**
+     * @throws WarningException
+     * @throws Exception
+     * @throws \ReflectionException
+     */
     protected function setUp(): void {
         $this->decoratedProcessor = $this->createMock(ProcessorInterface::class);
         $this->decoratedProcessor->method('process')->willReturnArgument(0);
@@ -32,16 +41,18 @@ class AbstractPersistProcessorTest extends TestCase {
             afterAction: fn ($data) => $this->closure->call($data),
         );
 
-        $this->processor = $this->getMockForAbstractClass(
-            AbstractPersistProcessor::class,
-            [
-                $this->decoratedProcessor,
-                [$this->propertyChangeListener],
-            ],
-            mockedMethods: ['onBefore', 'onAfter']
-        );
+        $this->onBefore = $this->createMock(MockableClosure::class);
+        $this->onBefore->method('call')->willReturnArgument(0);
 
-        $this->processor->method('onBefore')->willReturnArgument(0);
+        $this->onAfter = $this->createMock(MockableClosure::class);
+        $this->onAfter->method('call');
+
+        $this->processor = new MyEntityPersistProcessor(
+            decorated: $this->decoratedProcessor,
+            propertyChangeListeners: [$this->propertyChangeListener],
+            onBefore: $this->onBefore,
+            onAfter: $this->onAfter,
+        );
 
         set_error_handler(
             /**
@@ -58,22 +69,20 @@ class AbstractPersistProcessorTest extends TestCase {
         restore_error_handler();
     }
 
+    /**
+     * @throws Exception
+     */
     public function testThrowsIfOnePropertyChangeListenerIsOfWrongType() {
         $this->expectException(\InvalidArgumentException::class);
-        $this->getMockForAbstractClass(
-            AbstractPersistProcessor::class,
-            [
-                $this->decoratedProcessor,
-                [$this->propertyChangeListener, new \stdClass()],
-            ]
-        );
+
+        new MyEntityPersistProcessor($this->createMock(ProcessorInterface::class), [$this->propertyChangeListener, new \stdClass()], $this->onBefore, $this->onAfter);
     }
 
     public function testCallsOnBeforeCreateAndOnAfterCreateOnPost() {
         $toPersist = new MyEntity();
 
-        $this->processor->expects(self::once())->method('onBefore')->willReturnArgument(0);
-        $this->processor->expects(self::once())->method('onAfter');
+        $this->onBefore->expects(self::once())->method('call')->willReturnArgument(0);
+        $this->onAfter->expects(self::once())->method('call');
         $this->decoratedProcessor->expects(self::once())->method('process')->willReturnArgument(0);
 
         $processResult = $this->processor->process($toPersist, new Post());
@@ -156,11 +165,30 @@ class AbstractPersistProcessorTest extends TestCase {
             ->method('call')
             ->willReturnOnConsecutiveCalls($newData, null)
         ;
-        $this->processor->expects(self::once())->method('onBefore')->willReturnArgument(0);
-        $this->processor->expects(self::once())->method('onAfter');
 
         $processResult = $this->processor->process($newData, new Patch(), [], $context);
         self::assertThat($processResult, self::equalTo($newData));
+    }
+}
+
+class MyEntityPersistProcessor extends AbstractPersistProcessor {
+    public function __construct(
+        ProcessorInterface $decorated,
+        array $propertyChangeListeners = [],
+        private readonly ?MockableClosure $onBefore = null,
+        private readonly ?MockableClosure $onAfter = null,
+    ) {
+        parent::__construct($decorated, $propertyChangeListeners);
+    }
+
+    public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []) {
+        // @noinspection PhpMethodParametersCountMismatchInspection
+        return $this->onBefore->call($data, $operation, $uriVariables, $context);
+    }
+
+    public function onAfter($data, Operation $operation, array $uriVariables = [], array $context = []): void {
+        // @noinspection PhpMethodParametersCountMismatchInspection
+        $this->onAfter->call($data, $operation, $uriVariables, $context);
     }
 }
 
