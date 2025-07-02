@@ -1,18 +1,20 @@
 <template>
   <v-list class="mx-n2">
-    <transition-group v-if="isManager" name="list">
+    <transition-group name="list">
       <div v-for="collaborator in sortedCollaborators" :key="collaborator._meta.self">
-        <CollaboratorEdit :collaborator="collaborator" :inactive="inactive" />
+        <CollaboratorEdit
+          v-if="isManager || isOwnCollaborationMap[collaborator._meta.self]"
+          :collaborator="collaborator"
+          :inactive="inactive"
+        />
+        <CollaboratorListItem
+          v-else
+          :key="collaborator._meta.self"
+          :collaborator="collaborator"
+          :inactive="inactive"
+        />
       </div>
     </transition-group>
-    <template v-else>
-      <CollaboratorListItem
-        v-for="collaborator in sortedCollaborators"
-        :key="collaborator._meta.self"
-        :collaborator="collaborator"
-        :inactive="inactive"
-      />
-    </template>
   </v-list>
 </template>
 
@@ -23,6 +25,26 @@ import { sortBy } from 'lodash-es'
 import campCollaborationDisplayName from '@/common/helpers/campCollaborationDisplayName.js'
 
 const ROLE_ORDER = ['manager', 'member', 'guest']
+
+/**
+ * @typedef Collaborator {
+ *   user: () => { id: string },
+ * }
+ *
+ * @typedef Auth {
+ *   user: { id: string },
+ * }
+ *
+ * @param {Collaborator} collaborator
+ * @param {Auth} auth
+ * @returns {boolean}
+ */
+function isOwnCampCollaboration(collaborator, auth) {
+  if (!(typeof collaborator.user === 'function')) {
+    return false
+  }
+  return auth.user?.id === collaborator.user().id
+}
 
 export default {
   name: 'CollaboratorList',
@@ -43,6 +65,17 @@ export default {
           String(ROLE_ORDER.indexOf(c.role)).padStart(3, '0') +
           campCollaborationDisplayName(c, this.$tc.bind(this)).toLowerCase()
       )
+    },
+
+    isOwnCollaborationMap() {
+      const result = {}
+      this.collaborators.forEach((collaborator) => {
+        result[collaborator._meta.self] = isOwnCampCollaboration(
+          collaborator,
+          this.$store.state.auth
+        )
+      })
+      return result
     },
   },
 }

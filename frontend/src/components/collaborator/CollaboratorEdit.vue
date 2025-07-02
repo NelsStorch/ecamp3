@@ -65,7 +65,7 @@
     <CollaboratorForm
       :collaboration="entityData"
       :status="collaborator.status"
-      :readonly-role="isLastManager"
+      :readonly-role="isLastManager || !isManager"
       :initial-collaboration="collaborator"
     >
       <template #statusChange>
