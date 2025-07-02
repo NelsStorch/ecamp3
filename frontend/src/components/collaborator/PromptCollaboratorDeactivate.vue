@@ -35,6 +35,7 @@ import DialogBase from '@/components/dialog/DialogBase.vue'
 import campCollaborationDisplayName from '@/common/helpers/campCollaborationDisplayName.js'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
+import isOwnCampCollaboration from './isOwnCampCollaboration.js'
 
 export default {
   name: 'PromptCollaboratorDeactivate',
@@ -45,10 +46,7 @@ export default {
   },
   computed: {
     isOwnCampCollaboration() {
-      if (!(typeof this.entity.user === 'function')) {
-        return false
-      }
-      return this.$store.state.auth.user?.id === this.entity.user().id
+      return isOwnCampCollaboration(this.entity, this.$store.state.auth)
     },
     displayName() {
       return campCollaborationDisplayName(this.entity, this.$tc.bind(this))

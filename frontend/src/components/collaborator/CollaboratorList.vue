@@ -23,28 +23,9 @@ import CollaboratorEdit from '@/components/collaborator/CollaboratorEdit.vue'
 import CollaboratorListItem from '@/components/collaborator/CollaboratorListItem.vue'
 import { sortBy } from 'lodash-es'
 import campCollaborationDisplayName from '@/common/helpers/campCollaborationDisplayName.js'
+import isOwnCampCollaboration from './isOwnCampCollaboration.js'
 
 const ROLE_ORDER = ['manager', 'member', 'guest']
-
-/**
- * @typedef Collaborator {
- *   user: () => { id: string },
- * }
- *
- * @typedef Auth {
- *   user: { id: string },
- * }
- *
- * @param {Collaborator} collaborator
- * @param {Auth} auth
- * @returns {boolean}
- */
-function isOwnCampCollaboration(collaborator, auth) {
-  if (!(typeof collaborator.user === 'function')) {
-    return false
-  }
-  return auth.user?.id === collaborator.user().id
-}
 
 export default {
   name: 'CollaboratorList',
