@@ -63,9 +63,13 @@ export default {
         .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
 
       // User left camp -> navigate to camp-overview
-      promise.then(
-        () => this.isOwnCampCollaboration && this.$router.push({ name: 'camps' })
-      )
+      promise.then(() => {
+        if (!this.isOwnCampCollaboration) {
+          return
+        }
+        this.api.get().camps().$reload()
+        this.$router.push({ name: 'camps' })
+      })
 
       return promise
     },
