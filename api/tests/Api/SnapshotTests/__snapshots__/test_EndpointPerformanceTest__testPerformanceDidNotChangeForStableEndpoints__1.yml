@@ -45,3 +45,12 @@
 '/material_lists?camp=': 7
 '/profiles?user.collaboration.camp=': 6
 '/schedule_entries?period=': 13
+'/camps/{id}/activities': 15
+'/camps/{id}/activity_progress_labels': 8
+'/camps/{id}/camp_collaborations': 11
+'/camps/{id}/categories': 11
+'/camps/{id}/checklists': 8
+'/checklists/{id}/checklist_items': 8
+'/days/{id}/day_responsibles': 9
+'/periods/{id}/days': 14
+'/periods/{id}/schedule_entries': 14

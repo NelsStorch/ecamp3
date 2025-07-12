@@ -60,6 +60,13 @@ class EndpointPerformanceTest extends ECampApiTestCase {
             $queryExecutionTime[$url] = $executionTimeSeconds;
         }
 
+        foreach ($this->getSubresourceUrls() as $url => $id) {
+            list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor(preg_replace('/\{id}/', $id, $url));
+            $responseCodes[$url] = $statusCode;
+            $numberOfQueries[$url] = $queryCount;
+            $queryExecutionTime[$url] = $executionTimeSeconds;
+        }
+
         $not200Responses = array_filter($responseCodes, fn ($value) => 200 != $value);
         assertThat($not200Responses, equalTo([]));
 
@@ -255,6 +262,25 @@ class EndpointPerformanceTest extends ECampApiTestCase {
             '/material_lists?camp=' => urlencode($this->getIriFor('camp1')),
             '/profiles?user.collaboration.camp=' => urlencode($this->getIriFor('camp1')),
             '/schedule_entries?period=' => urlencode($this->getIriFor('period1')),
+        ];
+    }
+
+    private function getSubresourceUrls(): array {
+        $camp1Id = $this->getFixture('camp1')->getId();
+        $checklist1Id = $this->getFixture('checklist1')->getId();
+        $dayId = $this->getFixture('day1period1')->getId();
+        $periodId = $this->getFixture('period1')->getId();
+
+        return [
+            '/camps/{id}/activities' => $camp1Id,
+            '/camps/{id}/activity_progress_labels' => $camp1Id,
+            '/camps/{id}/camp_collaborations' => $camp1Id,
+            '/camps/{id}/categories' => $camp1Id,
+            '/camps/{id}/checklists' => $camp1Id,
+            '/checklists/{id}/checklist_items' => $checklist1Id,
+            '/days/{id}/day_responsibles' => $dayId,
+            '/periods/{id}/days' => $periodId,
+            '/periods/{id}/schedule_entries' => $periodId,
         ];
     }
 
