@@ -32,7 +32,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -114,7 +114,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -189,7 +189,7 @@ components:
           readOnly: true
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -267,7 +267,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -423,7 +423,7 @@ components:
           type: array
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -440,6 +440,10 @@ components:
                   maxLength: 16
                   readOnly: true
                   type: string
+                contentNodes:
+                  items: { type: unknown_type }
+                  readOnly: true
+                  type: array
                 location:
                   default: ''
                   description: "The physical location where this activity's programme will be carried out."
@@ -465,8 +469,6 @@ components:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 category:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
-                contentNodes:
-                  properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabel:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 rootContentNode:
@@ -490,7 +492,6 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
-              - []
               -
                 $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
@@ -547,7 +548,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -638,7 +639,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -722,7 +723,7 @@ components:
           readOnly: true
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -809,7 +810,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -979,7 +980,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -1067,7 +1068,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -1165,7 +1166,7 @@ components:
           readOnly: true
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -1266,7 +1267,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -6793,7 +6794,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -6856,7 +6857,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -6941,7 +6942,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7023,7 +7024,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7233,6 +7234,12 @@ components:
                   maxLength: 8
                   pattern: '^(#[0-9a-zA-Z]{6})$'
                   type: string
+                contentNodes:
+                  description: 'All the content nodes that make up the tree of programme content.'
+                  example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+                  items: { example: 'https://example.com/', format: iri-reference, type: string }
+                  readOnly: true
+                  type: array
                 name:
                   description: 'The full name of the category.'
                   example: Lagersport
@@ -7266,8 +7273,6 @@ components:
               properties:
                 camp:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
-                contentNodes:
-                  properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 preferredContentTypes:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 rootContentNode:
@@ -7288,7 +7293,6 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
-              - []
               -
                 $ref: '#/components/schemas/Camp.jsonapi'
               -
@@ -7326,7 +7330,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7398,7 +7402,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7492,7 +7496,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7583,7 +7587,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7764,7 +7768,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7850,7 +7854,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7941,7 +7945,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -8046,7 +8050,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
