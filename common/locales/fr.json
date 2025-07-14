@@ -2,14 +2,14 @@
   "components": {
     "summary": {
       "summaryDay": {
-        "noContent": ""
+        "noContent": "Les activités de cette journée ne contiennent aucun contenu {contentType}."
       }
     }
   },
   "contentNode": {
     "checklist": {
-      "info": "",
-      "name": ""
+      "info": "Sélectionnez les éléments pertinents de la check-list qui sont couverts par cette activité (objectifs du cours, etc.).",
+      "name": "Check-lists"
     },
     "columnLayout": {
       "entity": {
@@ -52,12 +52,12 @@
       "name": "Domaine thématique AC"
     },
     "learningObjectives": {
-      "info": "",
-      "name": ""
+      "info": "Formuler en objectifs les compétences que les participant·e·s auront après cette activité.",
+      "name": "Objectifs d’apprentissage"
     },
     "learningTopics": {
-      "info": "",
-      "name": ""
+      "info": "Lister les sujets sur lesquels les participant·e·s apprendront quelque chose dans cette activité.",
+      "name": "Sujets d'apprentissage"
     },
     "material": {
       "info": "Tu peux saisir ici les besoins en matériel pour ce bloc.{br}Tu peux gérer les listes de matériel dans le menu 'Admin'.{br}Tu peux trouver un résumé des achats dans le menu 'Matériel'.",
@@ -74,8 +74,8 @@
       "printBelowMainContent": "Imprimer sous le contenu principal"
     },
     "safetyConsiderations": {
-      "info": "",
-      "name": ""
+      "info": "Certains blocs nécessitent de réfléchir aux risques. Tu peux enregistrer ces réflexions ici.{br}Enregistre les risques que tu as identifiés - et comment tu peux y faire face.",
+      "name": "Considérations sur la sécurité"
     },
     "storyboard": {
       "entity": {
