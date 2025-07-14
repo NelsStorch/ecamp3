@@ -125,15 +125,15 @@
         "addressName": "Nom",
         "addressStreet": "Rue",
         "addressZipcode": "Code postal",
-        "coachName": "Nom du coach J+S",
-        "courseKind": "",
-        "courseNumber": "",
+        "coachName": "Nom du·de la coach J+S",
+        "courseKind": "Type de cours (pour les cours J+S : terminologie J+S)",
+        "courseNumber": "Numéro de cours",
         "kind": "Type de camp (chalet, tente, itinérant, été, automne)",
-        "motto": "",
+        "motto": "Fil rouge / Thème",
         "organizer": "Organisateur",
-        "printYSLogoOnPicasso": "",
-        "shortTitle": "",
-        "title": "",
+        "printYSLogoOnPicasso": "Imprimer le logo J+S sur le programme général (requis pour les cours J+S)",
+        "shortTitle": "Nom du camp court",
+        "title": "Nom du camp",
         "trainingAdvisorName": "Nom du coach J+S"
       },
       "name": "Camp",
@@ -162,7 +162,7 @@
       },
       "name": "Catégories d'activités",
       "numberingStyles": {
-        "-": "",
+        "-": "pas de numérotation",
         "1": "1, 2, 3 - numéros",
         "A": "A, B, C - lettres majuscules",
         "I": "I, II, III - chiffres romains majuscules",
@@ -172,16 +172,16 @@
     },
     "checklist": {
       "fields": {
-        "copyChecklistSource": "",
-        "name": ""
+        "copyChecklistSource": "Exemple",
+        "name": "Nom"
       },
-      "name": ""
+      "name": "Check-list | Check-lists"
     },
     "checklistItem": {
       "fields": {
-        "text": ""
+        "text": "Texte"
       },
-      "name": ""
+      "name": "Elément de check-list"
     },
     "contentType": {
       "name": "Type de contenu | Types de contenu"
@@ -259,14 +259,14 @@
       "hourLong": "LT",
       "hourShort": "H:mm"
     },
-    "shortScheduleEntryDescription": ""
+    "shortScheduleEntryDescription": "jour{dayNumber} {startTime}"
   },
   "print": {
     "activityList": {
-      "title": ""
+      "title": "Liste d'activités"
     },
     "config": {
-      "periods": ""
+      "periods": "Période(s) du camp"
     },
     "cover": {
       "title": "Page de couverture"
@@ -285,10 +285,10 @@
     },
     "summary": {
       "safetyConsiderations": {
-        "title": ""
+        "title": "Considérations sur la sécurité"
       },
       "storycontext": {
-        "title": ""
+        "title": "Histoire"
       }
     },
     "toc": {
