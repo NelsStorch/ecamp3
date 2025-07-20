@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbf0b85e0aad64d731ba206e32285afb",
+    "content-hash": "9dd9c843d23be3c7f5fbed9bacb04c9a",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3817,16 +3817,16 @@
         },
         {
             "name": "phpmyadmin/sql-parser",
-            "version": "5.11.0",
+            "version": "5.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmyadmin/sql-parser.git",
-                "reference": "07044bc8c13abd542756c3fd34dc66a5d6dee8e4"
+                "reference": "1b70d03526df92bd1e170e2670b7d3510e1b722b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/07044bc8c13abd542756c3fd34dc66a5d6dee8e4",
-                "reference": "07044bc8c13abd542756c3fd34dc66a5d6dee8e4",
+                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/1b70d03526df92bd1e170e2670b7d3510e1b722b",
+                "reference": "1b70d03526df92bd1e170e2670b7d3510e1b722b",
                 "shasum": ""
             },
             "require": {
@@ -3902,7 +3902,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-02-22T20:00:59+00:00"
+            "time": "2025-07-20T15:49:56+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
