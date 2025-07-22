@@ -112,6 +112,9 @@ export default {
     },
   },
   methods: {
+    setOpen(open) {
+      this.open = open
+    },
     async doSubmit() {
       this.isSaving = true
       await this.submitAction()

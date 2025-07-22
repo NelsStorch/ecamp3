@@ -149,7 +149,7 @@ class CreateCampCollaborationTest extends ECampApiTestCase {
         $client->request('GET', '/material_lists?camp='.$this->getIriFor('camp1'));
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 3,
+            'totalItems' => 4,
             '_links' => [
                 'items' => [],
             ],
@@ -176,7 +176,7 @@ class CreateCampCollaborationTest extends ECampApiTestCase {
         $client->request('GET', '/material_lists?camp='.$this->getIriFor('camp1'));
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 4,
+            'totalItems' => 5,
             '_links' => [
                 'items' => [],
             ],

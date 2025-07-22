@@ -2,7 +2,7 @@
   <dialog-form
     v-model="showDialog"
     icon="mdi-content-copy"
-    :title="$tc('components.category.copyCategoryInfoDialog.title')"
+    :title="title"
     :cancel-action="cancel"
     :cancel-label="$tc('global.button.close')"
   >
@@ -10,22 +10,14 @@
       <slot name="activator" v-bind="scope" />
     </template>
 
-    <p>
-      {{ $tc('components.category.copyCategoryInfoDialog.description') }}
-    </p>
+    <p>{{ description }}</p>
     <p v-if="clipboardReadState === 'prompt'">
       <center>
-        <v-btn color="success" @click="requestClipboardAccess">
-          {{ $tc('components.category.copyCategoryInfoDialog.allow') }}
-        </v-btn>
+        <v-btn color="success" @click="requestClipboardAccess">{{ allow }}</v-btn>
       </center>
     </p>
-    <p v-if="clipboardReadState === 'granted'">
-      {{ $tc('components.category.copyCategoryInfoDialog.granted') }}
-    </p>
-    <p v-if="clipboardReadState === 'denied'">
-      {{ $tc('components.category.copyCategoryInfoDialog.denied') }}
-    </p>
+    <p v-if="clipboardReadState === 'granted'">{{ granted }}</p>
+    <p v-if="clipboardReadState === 'denied'">{{ denied }}</p>
   </dialog-form>
 </template>
 
@@ -34,15 +26,35 @@ import DialogForm from '@/components/dialog/DialogForm.vue'
 import DialogBase from '@/components/dialog/DialogBase.vue'
 
 export default {
-  name: 'CopyCategoryInfoDialog',
+  name: 'ClipboardInfoDialog',
   components: {
     DialogForm,
   },
   extends: DialogBase,
+  props: {
+    translationContextI18nKey: { type: String, required: true },
+  },
   data() {
     return {
       clipboardReadState: 'unknown',
     }
+  },
+  computed: {
+    title() {
+      return this.$tc(this.translationContextI18nKey + '.title')
+    },
+    description() {
+      return this.$tc(this.translationContextI18nKey + '.description')
+    },
+    allow() {
+      return this.$tc(this.translationContextI18nKey + '.allow')
+    },
+    granted() {
+      return this.$tc(this.translationContextI18nKey + '.granted')
+    },
+    denied() {
+      return this.$tc(this.translationContextI18nKey + '.denied')
+    },
   },
   async mounted() {
     try {

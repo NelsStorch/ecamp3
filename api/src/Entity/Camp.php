@@ -686,6 +686,12 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
 
         // copy MaterialLists
         foreach ($prototype->getMaterialLists() as $materialListPrototype) {
+            // Do not copy personal material lists, because the collaborations might not be
+            // the same in the new camp
+            if (null !== $materialListPrototype->campCollaboration) {
+                continue;
+            }
+
             $materialList = new MaterialList();
             $this->addMaterialList($materialList);
 
