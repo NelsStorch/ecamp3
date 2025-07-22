@@ -141,7 +141,8 @@
         ],
         "psalm": [
             "psalm.phar"
-        ]
+        ],
+        "rector": "vendor/bin/rector"
     },
     "conflict": {
         "symfony/dependency-injection": "5.3.7",

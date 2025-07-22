@@ -39,7 +39,7 @@ class Hitobito extends AbstractProvider {
 
         $separator = $this->getScopeSeparator();
         $headers = [
-            'X-Scope' => implode($separator, $this->getDefaultScopes()),
+            'X-Scope' => join($separator, $this->getDefaultScopes()),
         ];
 
         $request = $this->getAuthenticatedRequest(self::METHOD_GET, $url, $token, ['headers' => $headers]);

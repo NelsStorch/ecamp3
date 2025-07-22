@@ -19,14 +19,13 @@ class ContentTypeNormalizerTest extends TestCase {
     private ContentTypeNormalizer $normalizer;
 
     private MockObject|NormalizerInterface $decoratedMock;
-    private IriConverterInterface|MockObject $iriConverter;
     private MockObject|UriTemplate $uriTemplate;
     private MockObject|UriTemplateFactory $uriTemplateFactory;
 
     protected function setUp(): void {
         $this->decoratedMock = $this->createMock(NormalizerInterface::class);
 
-        $this->iriConverter = $this->createMock(IriConverterInterface::class);
+        $iriConverter = $this->createMock(IriConverterInterface::class);
         $this->uriTemplate = $this->createMock(UriTemplate::class);
         $this->uriTemplateFactory = $this->createMock(UriTemplateFactory::class);
 
@@ -34,7 +33,7 @@ class ContentTypeNormalizerTest extends TestCase {
             $this->decoratedMock,
             $this->uriTemplate,
             $this->uriTemplateFactory,
-            $this->iriConverter,
+            $iriConverter,
         );
         $this->normalizer->setSerializer($this->createMock(SerializerInterface::class));
     }
@@ -65,7 +64,7 @@ class ContentTypeNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, ['resource_class' => \stdClass::class]);
 
         // then
-        $this->assertEquals($delegatedResult, $result);
+        $this->assertSame($delegatedResult, $result);
     }
 
     public function testNormalizeAddsEntityPath() {
@@ -102,6 +101,6 @@ class ContentTypeNormalizerTest extends TestCase {
                 ],
             ],
         ];
-        $this->assertEquals($expectedResult, $result);
+        $this->assertSame($expectedResult, $result);
     }
 }

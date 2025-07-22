@@ -78,7 +78,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
 
         $this->assertMatchesSnapshot($numberOfQueries, new ECampYamlSnapshotDriver());
         if ([] !== $endpointsWithTooLongExecutionTime) {
-            self::markTestSkipped('Some endpoints have too long execution time, were: '.implode(',', array_keys($endpointsWithTooLongExecutionTime)));
+            self::markTestSkipped('Some endpoints have too long execution time, were: '.join(',', array_keys($endpointsWithTooLongExecutionTime)));
         }
     }
 
@@ -169,7 +169,11 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         // times below 0.03.
         $executionTimeSeconds = max(0.03, round($collector->getTime(), 2));
 
-        return [$statusCode, $queryCount, $executionTimeSeconds];
+        return [
+            $statusCode,
+            $queryCount,
+            $executionTimeSeconds,
+        ];
     }
 
     public static function getContentNodeEndpoints(): array {
@@ -226,7 +230,8 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         $responseArray = $response->toArray();
         $onlyUrls = array_map(fn (array $item) => $item['href'], $responseArray['_links']);
         $withoutParameters = array_map(fn (string $uriTemplate) => preg_replace('/\{[^}]*}/', '', $uriTemplate), $onlyUrls);
-        $normalEndpoints = array_filter($withoutParameters, function (string $endpoint) {
+
+        return array_filter($withoutParameters, function (string $endpoint) {
             // @noinspection PhpDuplicateMatchArmBodyInspection
             return match ($endpoint) {
                 '/' => false,
@@ -242,8 +247,6 @@ class EndpointPerformanceTest extends ECampApiTestCase {
                 default => true
             };
         });
-
-        return $normalEndpoints;
     }
 
     private function getPerformanceCriticalUrls(): array {

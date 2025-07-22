@@ -98,7 +98,7 @@ class UriTemplateFactory {
     protected function getQueryParameters(string $resourceClass, ResourceMetadataCollection $resourceMetadataCollection): string {
         $parameters = array_merge($this->getFilterParameters($resourceClass, $resourceMetadataCollection), $this->getPaginationParameters($resourceMetadataCollection));
 
-        return empty($parameters) ? '' : '{?'.implode(',', $parameters).'}';
+        return [] === $parameters ? '' : '{?'.join(',', $parameters).'}';
     }
 
     /**

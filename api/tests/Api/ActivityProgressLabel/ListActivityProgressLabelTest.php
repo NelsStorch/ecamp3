@@ -91,7 +91,7 @@ class ListActivityProgressLabelTest extends ECampApiTestCase {
 
     public function testListActivityProgressLabelsAsSubresourceOfCampIsDeniedForUnrelatedUser() {
         $camp = static::getFixture('camp1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
             ->request('GET', "/camps/{$camp->getId()}/activity_progress_labels")
         ;
         $this->assertResponseStatusCodeSame(404);

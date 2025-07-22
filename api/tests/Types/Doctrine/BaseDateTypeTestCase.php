@@ -50,21 +50,30 @@ abstract class BaseDateTypeTestCase extends TestCase {
         self::assertSame($date, $this->type->convertToPHPValue($date, $this->platform));
     }
 
-    /** @return mixed[][] */
-    public static function invalidPHPValuesProvider(): iterable {
-        return [
-            [0],
-            [''],
-            ['foo'],
-            ['10:11:12'],
-            ['2015-01-31'],
-            ['2015-01-31 10:11:12'],
-            [new \stdClass()],
-            [27],
-            [-1],
-            [1.2],
-            [[]],
-            [['an array']],
-        ];
+    /** @return \Iterator<(int | string), array<mixed>> */
+    public static function invalidPHPValuesProvider(): \Iterator {
+        yield [0];
+
+        yield [''];
+
+        yield ['foo'];
+
+        yield ['10:11:12'];
+
+        yield ['2015-01-31'];
+
+        yield ['2015-01-31 10:11:12'];
+
+        yield [new \stdClass()];
+
+        yield [27];
+
+        yield [-1];
+
+        yield [1.2];
+
+        yield [[]];
+
+        yield [['an array']];
     }
 }

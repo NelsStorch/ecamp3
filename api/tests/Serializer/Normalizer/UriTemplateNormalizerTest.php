@@ -21,15 +21,14 @@ class UriTemplateNormalizerTest extends TestCase {
     private UriTemplateNormalizer $uriTemplateNormalizer;
     private MockObject|NormalizerInterface $decorated;
     private MockObject|UriTemplateFactory $uriTemplateFactory;
-    private EnglishInflector $englishInflector;
     private array $loginAndOauthLinks;
 
     protected function setUp(): void {
         $this->decorated = $this->createMock(NormalizerInterface::class);
         $this->uriTemplateFactory = $this->createMock(UriTemplateFactory::class);
-        $this->englishInflector = new EnglishInflector();
+        $englishInflector = new EnglishInflector();
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $urlGenerator->method('generate')->willReturnCallback(function (string $arg) {
+        $urlGenerator->method('generate')->willReturnCallback(function (string $arg): string {
             switch ($arg) {
                 case 'authentication_token':
                     return '/authentication_token';
@@ -59,7 +58,7 @@ class UriTemplateNormalizerTest extends TestCase {
 
         $this->uriTemplateNormalizer = new UriTemplateNormalizer(
             $this->decorated,
-            $this->englishInflector,
+            $englishInflector,
             $this->uriTemplateFactory,
             $urlGenerator,
         );

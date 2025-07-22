@@ -51,9 +51,9 @@ class UriTemplateFactoryTest extends TestCase {
             ),
         ]));
 
-        $this->resourceNameCollectionFactory->method('create')->willReturnCallback(fn () => $this->resourceNameCollection);
+        $this->resourceNameCollectionFactory->method('create')->willReturnCallback(fn (): ResourceNameCollection => $this->resourceNameCollection);
         $this->resourceMetadataCollectionFactory->method('create')->with('Dummy')->willReturnCallback(fn () => $this->resourceMetadataCollection);
-        $this->iriConverter->method('getIriFromResource')->willReturnCallback(function ($resourceClass) {
+        $this->iriConverter->method('getIriFromResource')->willReturnCallback(function (object|string $resourceClass): ?string {
             return '/'.lcfirst($resourceClass).'s';
         });
     }

@@ -29,7 +29,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $cookieName = JWTStateOAuth2Client::getCookieName('test_com_');
 
         // then
-        $this->assertEquals('test_com_oauth_state_jwt', $cookieName);
+        $this->assertSame('test_com_oauth_state_jwt', $cookieName);
     }
 
     public function testRedirect() {
@@ -71,7 +71,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $response = $client->redirect([], ['additionalData' => ['foo' => 'bar']]);
 
         // then
-        $this->assertEquals(1, count($response->headers->getCookies()));
+        $this->assertCount(1, $response->headers->getCookies());
         $this->assertEquals('test_prefix_oauth_state_jwt', $response->headers->getCookies()[0]->getName());
         $this->assertEquals('lax', $response->headers->getCookies()[0]->getSameSite());
         $this->assertTrue($response->headers->getCookies()[0]->isHttpOnly());

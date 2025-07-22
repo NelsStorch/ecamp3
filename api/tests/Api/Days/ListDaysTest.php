@@ -145,7 +145,7 @@ class ListDaysTest extends ECampApiTestCase {
 
     public function testListDaysAsPeriodSubresourceIsDeniedForUnrelatedUser() {
         $period = static::getFixture('period1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
             ->request('GET', '/periods/'.$period->getId().'/days')
         ;
 

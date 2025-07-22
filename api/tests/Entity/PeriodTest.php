@@ -28,7 +28,7 @@ class PeriodTest extends TestCase {
         $period2->addDay(new Day());
         $period2->addDay(new Day());
 
-        $this->assertEquals(3, $period1->getFirstDayNumber());
-        $this->assertEquals(1, $period2->getFirstDayNumber());
+        $this->assertSame(3, $period1->getFirstDayNumber());
+        $this->assertSame(1, $period2->getFirstDayNumber());
     }
 }

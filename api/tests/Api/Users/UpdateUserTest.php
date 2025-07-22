@@ -101,10 +101,9 @@ class UpdateUserTest extends ECampApiTestCase {
         ]);
     }
 
-    public static function notWriteableUserProperties(): array {
-        return [
-            'activationKeyHash' => ['activationKeyHash'],
-            'passwordResetKeyHash' => ['passwordResetKeyHash'],
-        ];
+    public static function notWriteableUserProperties(): \Iterator {
+        yield 'activationKeyHash' => ['activationKeyHash'];
+
+        yield 'passwordResetKeyHash' => ['passwordResetKeyHash'];
     }
 }

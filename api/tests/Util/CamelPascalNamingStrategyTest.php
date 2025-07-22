@@ -23,16 +23,17 @@ class CamelPascalNamingStrategyTest extends TestCase {
         $result = $strategy->classToTableName($className);
 
         // then
-        $this->assertEquals($output, $result);
+        $this->assertSame($output, $result);
     }
 
-    public static function getTableNameExamples() {
-        return [
-            ['', ''],
-            [User::class, 'user'],
-            [CampCollaboration::class, 'camp_collaboration'],
-            ['CampCollaboration', 'camp_collaboration'],
-        ];
+    public static function getTableNameExamples(): \Iterator {
+        yield ['', ''];
+
+        yield [User::class, 'user'];
+
+        yield [CampCollaboration::class, 'camp_collaboration'];
+
+        yield ['CampCollaboration', 'camp_collaboration'];
     }
 
     #[DataProvider('getPropertyExamples')]
@@ -44,15 +45,15 @@ class CamelPascalNamingStrategyTest extends TestCase {
         $result = $strategy->propertyToColumnName($input, '');
 
         // then
-        $this->assertEquals($output, $result);
+        $this->assertSame($output, $result);
     }
 
-    public static function getPropertyExamples() {
-        return [
-            ['', ''],
-            ['camp', 'camp'],
-            ['campCollaboration', 'campCollaboration'],
-        ];
+    public static function getPropertyExamples(): \Iterator {
+        yield ['', ''];
+
+        yield ['camp', 'camp'];
+
+        yield ['campCollaboration', 'campCollaboration'];
     }
 
     #[DataProvider('getEmbeddedFieldExamples')]
@@ -64,14 +65,13 @@ class CamelPascalNamingStrategyTest extends TestCase {
         $result = $strategy->embeddedFieldToColumnName($propertyName, $embeddedColumnName);
 
         // then
-        $this->assertEquals($output, $result);
+        $this->assertSame($output, $result);
     }
 
-    public static function getEmbeddedFieldExamples() {
-        return [
-            ['', '', ''],
-            ['address', 'street', 'addressStreet'],
-        ];
+    public static function getEmbeddedFieldExamples(): \Iterator {
+        yield ['', '', ''];
+
+        yield ['address', 'street', 'addressStreet'];
     }
 
     #[DataProvider('getJoinColumnExamples')]
@@ -83,15 +83,15 @@ class CamelPascalNamingStrategyTest extends TestCase {
         $result = $strategy->joinColumnName($propertyName);
 
         // then
-        $this->assertEquals($output, $result);
+        $this->assertSame($output, $result);
     }
 
-    public static function getJoinColumnExamples() {
-        return [
-            ['', 'Id'],
-            ['camp', 'campId'],
-            ['campCollaboration', 'campCollaborationId'],
-        ];
+    public static function getJoinColumnExamples(): \Iterator {
+        yield ['', 'Id'];
+
+        yield ['camp', 'campId'];
+
+        yield ['campCollaboration', 'campCollaborationId'];
     }
 
     #[DataProvider('getJoinKeyColumnExamples')]
@@ -103,17 +103,20 @@ class CamelPascalNamingStrategyTest extends TestCase {
         $result = $strategy->joinKeyColumnName($entityName, $referencedColumnName);
 
         // then
-        $this->assertEquals($output, $result);
+        $this->assertSame($output, $result);
     }
 
-    public static function getJoinKeyColumnExamples() {
-        return [
-            ['', null, 'Id'],
-            ['', 'email', 'Email'],
-            [Camp::class, null, 'campId'],
-            [CampCollaboration::class, null, 'campCollaborationId'],
-            [User::class, 'name', 'userName'],
-            [DayResponsible::class, 'name', 'dayResponsibleName'],
-        ];
+    public static function getJoinKeyColumnExamples(): \Iterator {
+        yield ['', null, 'Id'];
+
+        yield ['', 'email', 'Email'];
+
+        yield [Camp::class, null, 'campId'];
+
+        yield [CampCollaboration::class, null, 'campCollaborationId'];
+
+        yield [User::class, 'name', 'userName'];
+
+        yield [DayResponsible::class, 'name', 'dayResponsibleName'];
     }
 }

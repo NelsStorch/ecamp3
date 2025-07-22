@@ -39,7 +39,7 @@ class CreateSingleTextTest extends CreateContentNodeTestCase {
     }
 
     public function testCreateSingleTextAcceptsNonExistingJson() {
-        $response = $this->create($this->getExampleWritePayload([], ['data']));
+        $this->create($this->getExampleWritePayload([], ['data']));
 
         $this->assertResponseStatusCodeSame(201);
 

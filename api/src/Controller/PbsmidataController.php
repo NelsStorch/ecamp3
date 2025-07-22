@@ -12,7 +12,7 @@ class PbsmidataController extends AbstractController {
      * Link to this controller to start the "connect" process.
      */
     #[Route('/auth/pbsmidata', name: 'connect_pbsmidata_start')]
-    public function connectAction(Request $request, ClientRegistry $clientRegistry) {
+    public function connect(Request $request, ClientRegistry $clientRegistry) {
         return $clientRegistry
             ->getClient('pbsmidata') // key used in config/packages/knpu_oauth2_client.yaml
             ->redirect([], ['additionalData' => ['callback' => $request->get('callback')]])
@@ -25,7 +25,7 @@ class PbsmidataController extends AbstractController {
      * in config/packages/knpu_oauth2_client.yaml.
      */
     #[Route('/auth/pbsmidata/callback', name: 'connect_pbsmidata_check')]
-    public function connectCheckAction(Request $request, ClientRegistry $clientRegistry) {
+    public function connectCheck(ClientRegistry $clientRegistry) {
         // ** if you want to *authenticate* the user, then
         // leave this method blank and create a custom authenticator
     }

@@ -76,7 +76,7 @@ class ClaimInvitationServiceTest extends KernelTestCase {
         // then
         $this->assertEquals($invitation->user, $this->user);
         $this->assertNull($invitation->inviteEmail);
-        $this->assertEquals($invitation->inviteKeyHash, 'asdfasdfasdf');
+        $this->assertSame('asdfasdfasdf', $invitation->inviteKeyHash);
         $this->assertEquals($invitation->camp, $camp);
     }
 
@@ -119,8 +119,8 @@ class ClaimInvitationServiceTest extends KernelTestCase {
 
         // then
         $this->assertNull($invitation->user);
-        $this->assertEquals($invitation->inviteEmail, 'new@example.com');
-        $this->assertEquals($invitation->inviteKeyHash, 'asdfasdfasdf');
+        $this->assertSame('new@example.com', $invitation->inviteEmail);
+        $this->assertSame('asdfasdfasdf', $invitation->inviteKeyHash);
         $this->assertEquals($invitation->camp, $camp);
     }
 
@@ -163,8 +163,8 @@ class ClaimInvitationServiceTest extends KernelTestCase {
 
         // then
         $this->assertNull($invitation->user);
-        $this->assertEquals($invitation->inviteEmail, 'new@example.com');
-        $this->assertEquals($invitation->inviteKeyHash, 'asdfasdfasdf');
+        $this->assertSame('new@example.com', $invitation->inviteEmail);
+        $this->assertSame('asdfasdfasdf', $invitation->inviteKeyHash);
         $this->assertEquals($invitation->camp, $camp);
     }
 
@@ -220,7 +220,7 @@ class ClaimInvitationServiceTest extends KernelTestCase {
         // then
         $this->assertEquals($invitation2->user, $this->user);
         $this->assertNull($invitation2->inviteEmail);
-        $this->assertEquals($invitation2->inviteKeyHash, 'asdfasdfasdf');
+        $this->assertSame('asdfasdfasdf', $invitation2->inviteKeyHash);
         $this->assertEquals($invitation2->camp, $camp);
     }
 }

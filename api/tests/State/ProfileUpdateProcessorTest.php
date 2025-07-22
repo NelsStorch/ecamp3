@@ -21,7 +21,6 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
  */
 class ProfileUpdateProcessorTest extends TestCase {
     private ProfileUpdateProcessor $processor;
-    private MockObject|PasswordHasherFactoryInterface $pwHasherFactory;
     private MockObject|PasswordHasherInterface $pwHasher;
     private MailService|MockObject $mailService;
     private Profile $profile;
@@ -33,19 +32,19 @@ class ProfileUpdateProcessorTest extends TestCase {
         $this->profile = new Profile();
         $this->profile->user = new User();
 
-        $this->pwHasherFactory = $this->createMock(PasswordHasherFactoryInterface::class);
+        $pwHasherFactory = $this->createMock(PasswordHasherFactoryInterface::class);
         $this->pwHasher = $this->createMock(PasswordHasherInterface::class);
         $this->mailService = $this->createMock(MailService::class);
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
 
-        $this->pwHasherFactory->expects(self::any())
+        $pwHasherFactory->expects(self::any())
             ->method('getPasswordHasher')
             ->willReturn($this->pwHasher)
         ;
 
         $this->processor = new ProfileUpdateProcessor(
             $decoratedProcessor,
-            $this->pwHasherFactory,
+            $pwHasherFactory,
             $this->mailService,
             $this->createMock(Security::class),
             $this->createMock(UserRepository::class),
@@ -65,7 +64,7 @@ class ProfileUpdateProcessorTest extends TestCase {
         $this->processor->onBefore($this->profile, new Patch());
 
         // then
-        $this->assertEquals('new@mail.com', $this->profile->untrustedEmail);
+        $this->assertSame('new@mail.com', $this->profile->untrustedEmail);
         $this->assertNotNull($this->profile->untrustedEmailKey);
         $this->assertNotNull($this->profile->untrustedEmailKeyHash);
     }
@@ -97,7 +96,7 @@ class ProfileUpdateProcessorTest extends TestCase {
         $this->processor->onBefore($this->profile, new Patch());
 
         // then
-        $this->assertEquals('new@mail.com', $this->profile->email);
+        $this->assertSame('new@mail.com', $this->profile->email);
         $this->assertNull($this->profile->untrustedEmail);
         $this->assertNull($this->profile->untrustedEmailKey);
         $this->assertNull($this->profile->untrustedEmailKeyHash);

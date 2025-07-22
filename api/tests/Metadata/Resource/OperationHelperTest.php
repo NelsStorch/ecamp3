@@ -39,7 +39,7 @@ class OperationHelperTest extends TestCase {
         $operation = OperationHelper::findOneByType($this->resourceMetadataCollection, Get::class);
 
         // then
-        $this->assertEquals('get', $operation->getName());
+        $this->assertSame('get', $operation->getName());
     }
 
     public function testReturnsNullForMissingOperation() {
@@ -75,7 +75,7 @@ class OperationHelperTest extends TestCase {
         $operation = OperationHelper::findOneByType($this->resourceMetadataCollection, Get::class);
 
         // then
-        $this->assertEquals('get1', $operation->getName());
+        $this->assertSame('get1', $operation->getName());
     }
 
     public function testFindsOperationInMultipleResources() {
@@ -100,7 +100,7 @@ class OperationHelperTest extends TestCase {
         $operation = OperationHelper::findOneByType($this->resourceMetadataCollection, Get::class);
 
         // then
-        $this->assertEquals('get1', $operation->getName());
+        $this->assertSame('get1', $operation->getName());
     }
 
     public function testFindGraphQlOperation() {
@@ -115,6 +115,6 @@ class OperationHelperTest extends TestCase {
         $operation = OperationHelper::findOneByType($this->resourceMetadataCollection, QueryCollection::class);
 
         // then
-        $this->assertEquals('queryCollection', $operation->getName());
+        $this->assertSame('queryCollection', $operation->getName());
     }
 }

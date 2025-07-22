@@ -32,7 +32,7 @@ class UTCDateTimeTypeTest extends BaseDateTypeTestCase {
         // Birthday of jwage and also birthday of Doctrine. Send him a present ;)
         $date = $this->type->convertToPHPValue('1985-09-01 00:00:00', $this->platform);
         self::assertInstanceOf(\DateTime::class, $date);
-        self::assertEquals('1985-09-01 00:00:00', $date->format('Y-m-d H:i:s'));
+        self::assertSame('1985-09-01 00:00:00', $date->format('Y-m-d H:i:s'));
     }
 
     public function testInvalidDateTimeFormatConversion(): void {
@@ -61,6 +61,6 @@ class UTCDateTimeTypeTest extends BaseDateTypeTestCase {
         $date = $this->type->convertToPHPValue('1985-09-01 00:00:00', $this->platform);
 
         self::assertInstanceOf(\DateTime::class, $date);
-        self::assertEquals('1985-09-01T00:00:00+00:00', $date->format('c'));
+        self::assertSame('1985-09-01T00:00:00+00:00', $date->format('c'));
     }
 }

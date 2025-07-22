@@ -26,12 +26,12 @@ class ArrayDeepSortTest extends TestCase {
         $this->assertMatchesJsonSnapshot($sortedArray);
     }
 
-    public static function getJsonFiles() {
-        return [
-            'json_to_sort_1.json' => ['json_to_sort_1.json'],
-            'json_to_sort_2.json' => ['json_to_sort_2.json'],
-            'json_to_sort_3.json' => ['json_to_sort_3.json'],
-        ];
+    public static function getJsonFiles(): \Iterator {
+        yield 'json_to_sort_1.json' => ['json_to_sort_1.json'];
+
+        yield 'json_to_sort_2.json' => ['json_to_sort_2.json'];
+
+        yield 'json_to_sort_3.json' => ['json_to_sort_3.json'];
     }
 
     public function testSortsAssocArrayByKey() {

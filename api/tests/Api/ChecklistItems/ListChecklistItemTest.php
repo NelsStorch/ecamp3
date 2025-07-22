@@ -9,7 +9,7 @@ use App\Tests\Api\ECampApiTestCase;
  */
 class ListChecklistItemTest extends ECampApiTestCase {
     public function testListChecklistItemsIsDeniedForAnonymousUser() {
-        $response = static::createBasicClient()->request('GET', '/checklist_items');
+        static::createBasicClient()->request('GET', '/checklist_items');
         $this->assertResponseStatusCodeSame(401);
         $this->assertJsonContains([
             'code' => 401,

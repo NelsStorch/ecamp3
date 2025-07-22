@@ -43,13 +43,13 @@ class ProfileUpdateProcessor extends AbstractPersistProcessor {
         $this->emailAddressVerificationPerformed = false;
 
         /** @var Profile $data */
-        if (isset($data->newEmail)) {
+        if (null !== $data->newEmail) {
             $verificationKey = IdGenerator::generateRandomHexString(64);
             $data->untrustedEmail = $data->newEmail;
             $data->untrustedEmailKey = $verificationKey;
             $data->untrustedEmailKeyHash = $this->getResetKeyHasher()->hash($verificationKey);
-        } elseif (isset($data->untrustedEmailKey)) {
-            if (!isset($data->untrustedEmailKeyHash)) {
+        } elseif (null !== $data->untrustedEmailKey) {
+            if (null === $data->untrustedEmailKeyHash) {
                 throw new HttpException(422, 'Email verification failed A');
             }
 
@@ -70,7 +70,7 @@ class ProfileUpdateProcessor extends AbstractPersistProcessor {
 
     public function onAfter($data, Operation $operation, array $uriVariables = [], array $context = []): void {
         /** @var Profile $data */
-        if (isset($data->untrustedEmailKey)) {
+        if (null !== $data->untrustedEmailKey) {
             $this->mailService->sendEmailVerificationMail($data->user, $data);
             $data->untrustedEmailKey = null;
         }

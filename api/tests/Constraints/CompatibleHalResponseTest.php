@@ -22,90 +22,93 @@ class CompatibleHalResponseTest extends TestCase {
         assertThat($array2, CompatibleHalResponse::isHalCompatibleWith($array1));
     }
 
-    public static function compatibleArrays() {
-        return [
-            'empty' => [[], []],
-            'one_key' => [['one' => 1], ['one' => 1]],
-            'two_keys' => [
-                ['one' => 1, 'two' => 2],
-                ['one' => 1, 'two' => 2],
-            ],
-            'different_values' => [['one' => 1], ['one' => 2]],
-            'one_embedded_one_not' => [
-                [
-                    '_links' => [
-                        'one' => 'value',
-                    ],
-                ],
-                [
-                    '_links' => [
-                        'one' => 'value',
-                    ],
-                    '_embedded' => [
-                        'one' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
-                        ],
-                    ],
+    public static function compatibleArrays(): \Iterator {
+        yield 'empty' => [[], []];
+
+        yield 'one_key' => [['one' => 1], ['one' => 1]];
+
+        yield 'two_keys' => [
+            ['one' => 1, 'two' => 2],
+            ['one' => 1, 'two' => 2],
+        ];
+
+        yield 'different_values' => [['one' => 1], ['one' => 2]];
+
+        yield 'one_embedded_one_not' => [
+            [
+                '_links' => [
+                    'one' => 'value',
                 ],
             ],
-            'recursive' => [
-                [
-                    '_links' => [
-                        'one' => 'value',
-                    ],
-                    '_embedded' => [
-                        'one' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
-                            '_embedded' => [
-                                'one' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
-                                ],
-                                'two' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
-                                ],
-                            ],
-                        ],
-                        'two' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
+            [
+                '_links' => [
+                    'one' => 'value',
+                ],
+                '_embedded' => [
+                    'one' => [
+                        '_links' => [
+                            'self' => 1,
                         ],
                     ],
                 ],
-                [
-                    '_links' => [
-                        'one' => 'value',
-                    ],
-                    '_embedded' => [
-                        'one' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
-                            '_embedded' => [
-                                'one' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
+            ],
+        ];
+
+        yield 'recursive' => [
+            [
+                '_links' => [
+                    'one' => 'value',
+                ],
+                '_embedded' => [
+                    'one' => [
+                        '_links' => [
+                            'self' => 1,
+                        ],
+                        '_embedded' => [
+                            'one' => [
+                                '_links' => [
+                                    'self' => 1,
                                 ],
-                                'two' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
+                            ],
+                            'two' => [
+                                '_links' => [
+                                    'self' => 1,
                                 ],
                             ],
                         ],
-                        'two' => [
-                            '_links' => [
-                                'self' => 1,
+                    ],
+                    'two' => [
+                        '_links' => [
+                            'self' => 1,
+                        ],
+                    ],
+                ],
+            ],
+            [
+                '_links' => [
+                    'one' => 'value',
+                ],
+                '_embedded' => [
+                    'one' => [
+                        '_links' => [
+                            'self' => 1,
+                        ],
+                        '_embedded' => [
+                            'one' => [
+                                '_links' => [
+                                    'self' => 1,
+                                ],
                             ],
+                            'two' => [
+                                '_links' => [
+                                    'self' => 1,
+                                ],
+                            ],
+                        ],
+                    ],
+                    'two' => [
+                        '_links' => [
+                            'self' => 1,
                         ],
                     ],
                 ],
@@ -123,89 +126,91 @@ class CompatibleHalResponseTest extends TestCase {
         assertThat($array2, logicalNot(CompatibleHalResponse::isHalCompatibleWith($array1)));
     }
 
-    public static function notCompatibleArrays() {
-        return [
-            'empty_and_not_empty' => [[], [2]],
-            'one_key' => [['one' => 1], ['two' => 1]],
-            'two_keys' => [
-                ['one' => 1, 'three' => 2],
-                ['one' => 1, 'two' => 2],
-            ],
-            'one_embedded_one_not' => [
-                [
-                    '_links' => [
-                        'two' => 'value',
-                    ],
-                ],
-                [
-                    '_links' => [
-                        'one' => 'value',
-                    ],
-                    '_embedded' => [
-                        'one' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
-                        ],
-                    ],
+    public static function notCompatibleArrays(): \Iterator {
+        yield 'empty_and_not_empty' => [[], [2]];
+
+        yield 'one_key' => [['one' => 1], ['two' => 1]];
+
+        yield 'two_keys' => [
+            ['one' => 1, 'three' => 2],
+            ['one' => 1, 'two' => 2],
+        ];
+
+        yield 'one_embedded_one_not' => [
+            [
+                '_links' => [
+                    'two' => 'value',
                 ],
             ],
-            'recursive' => [
-                [
-                    '_links' => [
-                        'one' => 'value',
-                    ],
-                    '_embedded' => [
-                        'one' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
-                            '_embedded' => [
-                                'one' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
-                                ],
-                                'two' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
-                                ],
-                            ],
-                        ],
-                        'two' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
+            [
+                '_links' => [
+                    'one' => 'value',
+                ],
+                '_embedded' => [
+                    'one' => [
+                        '_links' => [
+                            'self' => 1,
                         ],
                     ],
                 ],
-                [
-                    '_links' => [
-                        'one' => 'value',
-                    ],
-                    '_embedded' => [
-                        'one' => [
-                            '_links' => [
-                                'self' => 1,
-                            ],
-                            '_embedded' => [
-                                'one' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
+            ],
+        ];
+
+        yield 'recursive' => [
+            [
+                '_links' => [
+                    'one' => 'value',
+                ],
+                '_embedded' => [
+                    'one' => [
+                        '_links' => [
+                            'self' => 1,
+                        ],
+                        '_embedded' => [
+                            'one' => [
+                                '_links' => [
+                                    'self' => 1,
                                 ],
-                                'three' => [
-                                    '_links' => [
-                                        'self' => 1,
-                                    ],
+                            ],
+                            'two' => [
+                                '_links' => [
+                                    'self' => 1,
                                 ],
                             ],
                         ],
-                        'two' => [
-                            '_links' => [
-                                'self' => 1,
+                    ],
+                    'two' => [
+                        '_links' => [
+                            'self' => 1,
+                        ],
+                    ],
+                ],
+            ],
+            [
+                '_links' => [
+                    'one' => 'value',
+                ],
+                '_embedded' => [
+                    'one' => [
+                        '_links' => [
+                            'self' => 1,
+                        ],
+                        '_embedded' => [
+                            'one' => [
+                                '_links' => [
+                                    'self' => 1,
+                                ],
                             ],
+                            'three' => [
+                                '_links' => [
+                                    'self' => 1,
+                                ],
+                            ],
+                        ],
+                    ],
+                    'two' => [
+                        '_links' => [
+                            'self' => 1,
                         ],
                     ],
                 ],

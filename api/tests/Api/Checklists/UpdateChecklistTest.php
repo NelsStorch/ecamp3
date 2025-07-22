@@ -39,7 +39,7 @@ class UpdateChecklistTest extends ECampApiTestCase {
 
     public function testPatchPrototypeChecklistIsAllowedForAdmin() {
         $checklist = static::getFixture('checklistPrototype');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['admin']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['admin']->getEmail()])
             ->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
                 'name' => 'ChecklistName',
             ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
@@ -108,7 +108,7 @@ class UpdateChecklistTest extends ECampApiTestCase {
 
     public function testPatchChecklistIsAllowedForMember() {
         $checklist = static::getFixture('checklist1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
             ->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
                 'name' => 'ChecklistName',
             ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
@@ -121,7 +121,7 @@ class UpdateChecklistTest extends ECampApiTestCase {
 
     public function testPatchChecklistIsAllowedForManager() {
         $checklist = static::getFixture('checklist1');
-        $response = static::createClientWithCredentials()->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
+        static::createClientWithCredentials()->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
             'name' => 'ChecklistName',
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
         $this->assertResponseStatusCodeSame(200);
@@ -132,7 +132,7 @@ class UpdateChecklistTest extends ECampApiTestCase {
 
     public function testPatchChecklistInCampPrototypeIsDeniedForUnrelatedUser() {
         $checklist = static::getFixture('checklist1campPrototype');
-        $response = static::createClientWithCredentials()->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
+        static::createClientWithCredentials()->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
             'name' => 'ChecklistName',
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
         $this->assertResponseStatusCodeSame(403);

@@ -32,14 +32,11 @@ final class ContentNodeCampFilter extends AbstractFilter {
 
     // This function is only used to hook in documentation generators (supported by Swagger and Hydra)
     public function getDescription(string $resourceClass): array {
-        $description = [];
-        $description['camp'] = [
+        return ['camp' => [
             'property' => self::CAMP_QUERY_NAME,
             'type' => Type::BUILTIN_TYPE_STRING,
             'required' => false,
-        ];
-
-        return $description;
+        ]];
     }
 
     protected function filterProperty(
