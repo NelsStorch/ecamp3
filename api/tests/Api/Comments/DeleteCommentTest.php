@@ -33,6 +33,19 @@ class DeleteCommentTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testDeleteCommentIsDeniedForManagerInSameCamp() {
+        $comment = static::getFixture('comment1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user7manager']->getEmail()])
+            ->request('DELETE', '/comments/'.$comment->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testDeleteCommentIsAllowedForAuthor() {
         $comment = static::getFixture('comment1');
         static::createClientWithCredentials()->request('DELETE', '/comments/'.$comment->getId());
