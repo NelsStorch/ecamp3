@@ -39,7 +39,7 @@
         "changeLayout": "Layout ändern",
         "clipboardInfoDialog": {
           "allow": "Jetzt erlauben",
-          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
+          "denied": "Du hast das Lesen aus der Zwischenablage untersagt. Du kannst daher kopierte Aktivitäten nicht einfügen.",
           "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
           "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
           "title": "Aktivität kopieren & einfügen"
@@ -181,6 +181,8 @@
         "category": "Block-Kategorien",
         "checklistItemCount": "Keine Einträge | Ein Eintrag | {count} Einträge",
         "checklists": "Checklisten",
+        "clearClipboard": "Zwischenablage leeren",
+        "clipboard": "Zwischenablage",
         "clipboardInfoDialog": {
           "allow": "Jetzt erlauben",
           "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Bitte füge den Link zum Vorlage-Lager stattdessen von Hand ein.",
@@ -201,10 +203,10 @@
         "preview": "Vorschau der Lagervorlage",
         "progressLabels": "Blockstatus",
         "prototypeCampUrl": "Link zum gewünschten Vorlage-Lager",
-        "prototypeHint": "Kopiere Kategorien, Blockvorlagen, Blockstatus, Material- und Checklisten von einer Lagervorlage",
-        "prototypeHintEmpty": "Keine Kategorien, Blockvorlagen, Blockstatus, Material- und Checklisten aus einer Lagervorlage kopieren",
+        "prototypeHint": "Kopiere Kategorien, Blockvorlagen und Blockstatus von einer Lagervorlage",
+        "prototypeHintEmpty": "Keine Kategorien, Blockvorlagen und Blockstatus aus einer Lagervorlage kopieren",
         "prototypeHintOther": "Kopiere Kategorien, Blockvorlagen, Blockstatus, unpersönliche Material- und Checklisten von diesem anderen Lager. Es werden keine Aktivitäten kopiert.",
-        "prototypeHintSelected": "Kopiere Kategorien, Blockvorlagen, Blockstatus und Materiallisten von dieser Lagervorlage",
+        "prototypeHintSelected": "Kopiere Kategorien, Blockvorlagen und Blockstatus von dieser Lagervorlage",
         "submitTooltipPrototype": "Du musst noch auswählen, ob und welche Lagervorlage du verwenden möchtest."
       }
     },
@@ -431,7 +433,7 @@
         "clipboard": "Zwischenablage",
         "clipboardInfoDialog": {
           "allow": "Jetzt erlauben",
-          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
+          "denied": "Du hast das Lesen aus der Zwischenablage untersagt. Du kannst daher kopierte Aktivitäten nicht einfügen.",
           "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
           "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
           "title": "Aktivität kopieren & einfügen"
@@ -462,7 +464,7 @@
         "picassoEntry": {
           "clipboardInfoDialog": {
             "allow": "Jetzt erlauben",
-            "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
+            "denied": "Du hast das Lesen aus der Zwischenablage untersagt. Du kannst daher kopierte Aktivitäten nicht einfügen.",
             "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
             "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
             "title": "Aktivität kopieren & einfügen"
