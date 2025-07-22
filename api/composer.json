@@ -58,7 +58,7 @@
         "justinrainbow/json-schema": "6.4.2",
         "php-coveralls/php-coveralls": "2.8.0",
         "phpspec/prophecy-phpunit": "2.4.0",
-        "phpstan/phpstan": "2.1.18",
+        "phpstan/phpstan": "2.1.19",
         "phpunit/phpunit": "11.5.22",
         "rector/rector": "2.1.1",
         "psalm/phar": "6.12.1",
