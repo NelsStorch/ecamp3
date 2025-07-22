@@ -28,7 +28,7 @@ const collectionXKeys =
   /* embedded activitiy responsibles: */
   '06743ccfeedd 06743ccfeedd#activity 06743ccfeedd#campCollaboration ' +
   '21bc6661c569 21bc6661c569#activity 21bc6661c569#campCollaboration ' +
-  'a13fadc97610#embeddedActivityResponsibles a13fadc97610#contentNodes ' +
+  'a13fadc97610#embeddedActivityResponsibles a13fadc97610#emptyContentNodesForIriGeneration ' +
   /**
    * activity "Skifahren"
    */
@@ -43,7 +43,7 @@ const collectionXKeys =
   /* embedded activitiy responsibles: */
   'b29d387cc403#embeddedScheduleEntries ' +
   'a9a760e36fd8 a9a760e36fd8#activity a9a760e36fd8#campCollaboration b29d387cc403#embeddedActivityResponsibles ' +
-  'b29d387cc403#contentNodes ' +
+  'b29d387cc403#emptyContentNodesForIriGeneration ' +
   /* collection URI (for detecting addition of new activities) */
   '/api/camps/70ca971c992f/activities'
 
