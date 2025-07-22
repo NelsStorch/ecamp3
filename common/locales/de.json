@@ -2,14 +2,14 @@
   "components": {
     "summary": {
       "summaryDay": {
-        "noContent": "Die Blöcke an diesem Tag enthalten keine '{contentType}' Inhalte."
+        "noContent": "Die Blöcke an diesem Tag enthalten keine {contentType} Inhalte."
       }
     }
   },
   "contentNode": {
     "checklist": {
-      "info": "Wähle die relevanten Checklistenpunkte, welche durch diese Aktivität abgedeckt werden (Ausbildungsziele, J+S-Checklisten, etc.).",
-      "name": "Checkliste"
+      "info": "Wähle die relevanten Checklisten-Einträge aus, die von dieser Aktivität abgedeckt werden (Kursziele, etc.).",
+      "name": "Checklisten"
     },
     "columnLayout": {
       "entity": {
@@ -181,7 +181,7 @@
       "fields": {
         "text": "Text"
       },
-      "name": "Checklisteneintrag"
+      "name": "Checklisten-Eintrag"
     },
     "contentType": {
       "name": "Inhalttyp | Inhalttypen"
@@ -259,11 +259,11 @@
       "hourLong": "LT",
       "hourShort": "H:mm"
     },
-    "shortScheduleEntryDescription": "Tag\u202f{dayNumber} {startTime}"
+    "shortScheduleEntryDescription": "Tag {dayNumber} {startTime}"
   },
   "print": {
     "activityList": {
-      "title": "Aktivitätsübersicht"
+      "title": "Aktivitätsliste"
     },
     "config": {
       "periods": "Lagerabschnitt(e)"
@@ -288,7 +288,7 @@
         "title": "Sicherheitsüberlegungen"
       },
       "storycontext": {
-        "title": "Roter Faden"
+        "title": "Geschichte"
       }
     },
     "toc": {
