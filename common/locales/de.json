@@ -8,7 +8,7 @@
   },
   "contentNode": {
     "checklist": {
-      "info": "Wählen Sie die relevanten Checklisten-Einträge aus, die von dieser Aktivität abgedeckt werden (Kursziele, etc.).",
+      "info": "Wähle die relevanten Checklisten-Einträge aus, die von dieser Aktivität abgedeckt werden (Kursziele, etc.).",
       "name": "Checklisten"
     },
     "columnLayout": {
