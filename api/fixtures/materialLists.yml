@@ -8,6 +8,9 @@ App\Entity\MaterialList:
   materialList3Manager:
     camp: '@camp1'
     campCollaboration: '@campCollaboration1manager'
+  materialList4Member:
+    camp: '@camp1'
+    campCollaboration: '@campCollaboration2member'
   materialList1camp2:
     camp: '@camp2'
     name: Baumarkt

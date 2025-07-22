@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use App\Doctrine\Filter\ContentNodeCampFilter;
+use App\Doctrine\Filter\ContentNodeIsRootFilter;
 use App\Doctrine\Filter\ContentNodePeriodFilter;
 use App\Entity\ContentNode\ColumnLayout;
 use App\InputFilter;
@@ -47,11 +48,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['contentType', 'root'])]
 #[ApiFilter(filterClass: ContentNodeCampFilter::class)]
 #[ApiFilter(filterClass: ContentNodePeriodFilter::class)]
+#[ApiFilter(filterClass: ContentNodeIsRootFilter::class)]
 #[ORM\Entity(repositoryClass: ContentNodeRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'strategy', type: 'string')]
 #[ORM\UniqueConstraint(name: 'contentnode_parentid_slot_position_unique', columns: ['parentid', 'slot', 'position'])]
-abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTreeInterface, CopyFromPrototypeInterface, HasParentInterface {
+abstract class ContentNode extends BaseEntity implements BelongsToCampInterface, BelongsToContentNodeTreeInterface, CopyFromPrototypeInterface, HasParentInterface {
     use ClassInfoTrait;
 
     /**
@@ -62,7 +64,7 @@ abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTre
     #[Gedmo\SortableGroup] // this is needed to avoid that all root nodes are in the same sort group (parent:null, slot: '')
     #[Groups(['read'])]
     #[ORM\ManyToOne(targetEntity: ColumnLayout::class, inversedBy: 'rootDescendants')]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')] // TODO make not null in the DB using a migration, and get fixtures to run
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     public ?ColumnLayout $root = null;
 
     /**
@@ -184,6 +186,22 @@ abstract class ContentNode extends BaseEntity implements BelongsToContentNodeTre
 
     public function getParent(): ?HasParentInterface {
         return $this->parent;
+    }
+
+    public function setParent(?ContentNode $parent) {
+        $this->parent = $parent;
+        $this->root ??= $parent?->root;
+    }
+
+    public function getCamp(): ?Camp {
+        if (null == $this->getRoot()) {
+            return null;
+        }
+        if ($this->getRoot()->campRootContentNodes->count() > 0) {
+            return $this->getRoot()->campRootContentNodes[0]->camp;
+        }
+
+        return null;
     }
 
     /**

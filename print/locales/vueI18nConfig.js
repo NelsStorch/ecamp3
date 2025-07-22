@@ -25,7 +25,7 @@ import rmCHScoutCommon from '@/common/locales/rm-CH-scout.json'
 export default defineI18nConfig(() => ({
   fallbackLocale: {
     rm: ['de'],
-    default: 'en',
+    default: ['en'],
   },
   messages: deepmerge(
     {

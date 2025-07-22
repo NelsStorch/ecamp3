@@ -6,7 +6,10 @@
     <v-expansion-panel-content>
       <template v-if="entriesWithStory.length">
         <template v-for="{ scheduleEntry, storyChapters } in entriesWithStory">
-          <div v-for="chapter in storyChapters" :key="chapter._meta.self">
+          <div
+            v-for="chapter in storyChapters"
+            :key="scheduleEntry._meta.self + chapter._meta.self"
+          >
             <h4 class="mt-3 mt-sm-5">
               <span class="d-inline-flex align-center">
                 <span v-if="scheduleEntry.number" class="tabular-nums">{{
@@ -24,6 +27,7 @@
                   name: 'camp/activity',
                   params: {
                     campId: day.period().camp().id,
+                    activityId: scheduleEntry.activity().id,
                     scheduleEntryId: scheduleEntry.id,
                   },
                 }"

@@ -42,6 +42,11 @@ export default {
       hasHistory: false,
     }
   },
+  head() {
+    return {
+      title: '404',
+    }
+  },
   mounted() {
     if (window.history.length && window.history.length >= 1) {
       this.hasHistory = true
@@ -58,7 +63,8 @@ export default {
 
 .sky {
   height: 100%;
-  background-image: radial-gradient(circle at bottom, #607d8b, #0c3c4c, #0e1c22),
+  background-image:
+    radial-gradient(circle at bottom, #607d8b, #0c3c4c, #0e1c22),
     url('../assets/tents/stars.svg');
   background-blend-mode: screen;
   background-size: contain, 1470px;

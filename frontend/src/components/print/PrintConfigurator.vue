@@ -1,5 +1,5 @@
 <template>
-  <v-skeleton-loader v-if="camp._meta.loading" type="article" />
+  <v-skeleton-loader v-if="loading" type="article" />
   <div v-else>
     <PagesOverview v-model="cnf.contents" @input="onChange">
       <PagesConfig
@@ -39,7 +39,7 @@
             @click="
               addContent({
                 type: idx,
-                options: component.defaultOptions(),
+                options: component.defaultOptions(camp),
               })
             "
           >
@@ -110,7 +110,7 @@ import PagesConfig from './configurator/PagesConfig.vue'
 import DownloadNuxtPdfButton from '@/components/print/print-nuxt/DownloadNuxtPdfButton.vue'
 import DownloadClientPdfButton from '@/components/print/print-client/DownloadClientPdfButton.vue'
 import { getEnv } from '@/environment.js'
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 import VueI18n from '../../plugins/i18n/index.js'
 import repairConfig from './repairPrintConfig.js'
 import StoryConfig from '@/components/print/config/StoryConfig.vue'
@@ -143,6 +143,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       contentComponents: {
         Cover: CoverConfig,
         Picasso: PicassoConfig,
@@ -182,11 +183,19 @@ export default {
       immediate: true,
     },
   },
-  mounted() {
-    this.camp.periods().items.forEach((period) => {
-      period.days().$reload()
-      period.contentNodes().$reload()
-    })
+  async mounted() {
+    await this.camp.periods().$reload()
+    await Promise.all([
+      ...this.camp
+        .periods()
+        .items.flatMap((period) => [
+          period.days().$reload(),
+          period.contentNodes().$reload(),
+        ]),
+      this.camp.activities().$reload(),
+      this.camp.categories().$reload(),
+    ])
+    this.loading = false
   },
   methods: {
     resetConfig() {

@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']]
 )]
-#[ApiFilter(filterClass: SearchFilter::class, properties: ['user.collaborations.camp'])]
+#[ApiFilter(filterClass: SearchFilter::class, properties: ['user.collaborations.camp', 'user'])]
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 #[ORM\Table(name: '`profile`')]
 class Profile extends BaseEntity {
@@ -96,8 +96,9 @@ class Profile extends BaseEntity {
     // addresses received from Oauth providers are trusted in the sense that email ownership has
     // previously been verified by the corresponding service. When adding more providers, either
     // - validate this assumption for the new provider, or
-    // - remove the logic setting the user state to active for existing non-activated user profiles
-    //   in the new authenticator implementation (api/src/Security/OAuth/*Authenticator.php)
+    // - remove the logic setting the user state to active and claiming personal camp invitations
+    //   for existing non-activated user profiles in the new authenticator implementation
+    //   (api/src/Security/OAuth/*Authenticator.php)
 
     /**
      * Google id of the user.
@@ -199,7 +200,7 @@ class Profile extends BaseEntity {
     #[ORM\Column(type: 'json')]
     public array $roles = ['ROLE_USER'];
 
-    #[ApiProperty(writable: false, example: '/users/1a2b3c4d')]
+    #[ApiProperty(writable: false, readableLink: true, example: '/users/1a2b3c4d')]
     #[Groups(['read'])]
     #[ORM\OneToOne(targetEntity: User::class, mappedBy: 'profile')]
     public User $user;

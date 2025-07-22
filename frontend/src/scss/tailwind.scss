@@ -24,6 +24,10 @@
   gap: 16px;
 }
 
+.gap-x-4 {
+  column-gap: 16px;
+}
+
 .flex-wrap-reverse {
   flex-wrap: wrap-reverse;
 }
@@ -34,4 +38,8 @@
 
 .justify-content-between {
   justify-content: space-between;
+}
+
+.opacity-60 {
+  opacity: 0.6;
 }

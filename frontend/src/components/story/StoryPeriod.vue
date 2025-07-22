@@ -1,7 +1,7 @@
 <template>
   <v-skeleton-loader v-if="loading" class="mt-2 mt-sm-3" type="list-item-three-line" />
   <v-expansion-panels v-else v-model="expandedDays" accordion flat multiple>
-    <story-day
+    <StoryDay
       v-for="day in sortedDays"
       :key="day._meta.self"
       :day="day"
@@ -11,7 +11,7 @@
   </v-expansion-panels>
 </template>
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import StoryDay from './StoryDay.vue'
 
 export default {
@@ -77,6 +77,13 @@ export default {
         this.period.days().$loadItems(),
         this.period.camp().activities().$loadItems(),
         this.period.camp().categories().$loadItems(),
+        this.api
+          .get()
+          .contentNodes({
+            isRoot: 'true',
+            period: this.period._meta.self,
+          })
+          .$loadItems(),
       ])
 
       this.loading = false

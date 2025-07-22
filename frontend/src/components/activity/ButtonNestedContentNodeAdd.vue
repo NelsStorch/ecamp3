@@ -58,9 +58,10 @@
   </v-row>
 </template>
 <script>
-import { camelCase } from 'lodash'
+import { camelCase } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import { getEnv } from '@/environment.js'
+import contentTypeIcons from './content/contentTypeIcons.js'
 
 export default {
   name: 'ButtonNestedContentNodeAdd',
@@ -114,7 +115,7 @@ export default {
       return 'contentNode.' + camelCase(contentType.name) + '.name'
     },
     contentTypeIconKey(contentType) {
-      return 'contentNode.' + camelCase(contentType.name) + '.icon'
+      return contentTypeIcons[camelCase(contentType.name)]
     },
     filterContentType(contentType) {
       switch (contentType.name) {

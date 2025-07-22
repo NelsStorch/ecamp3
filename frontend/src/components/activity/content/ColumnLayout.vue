@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { keyBy, mapValues } from 'lodash'
+import { keyBy, mapValues } from 'lodash-es'
 import { contentNodeMixin } from '@/mixins/contentNodeMixin.js'
 import ResizableColumn from '@/components/activity/content/columnLayout/ResizableColumn.vue'
 import DraggableContentNodes from '@/components/activity/DraggableContentNodes.vue'
@@ -66,7 +66,7 @@ import { idToColor } from '@/common/helpers/colors.js'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import MenuCardlessContentNode from '@/components/activity/MenuCardlessContentNode.vue'
 import LayoutNodeCard from '@/components/activity/content/layout/LayoutNodeCard.vue'
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash-es/camelCase.js'
 
 function cumulativeSumReducer(cumSum, nextElement) {
   cumSum.push(cumSum[cumSum.length - 1] + nextElement)

@@ -22,7 +22,7 @@ class TagCollector implements TagCollectorInterface {
     /**
      * Collect cache tags for cache invalidation.
      *
-     * @param array<string, mixed>&array{iri?: string, data?: mixed, object?: mixed, property_metadata?: \ApiPlatform\Metadata\ApiProperty, api_attribute?: string, resources?: array<string, string>, request_uri?: string, root_operation?: Operation} $context
+     * @param array<string, mixed>&array{iri?: string, data?: mixed, object?: mixed, property_metadata?: ApiProperty, api_attribute?: string, resources?: array<string, string>, request_uri?: string, root_operation?: Operation} $context
      */
     public function collect(array $context = []): void {
         $iri = $context['iri'] ?? null;
@@ -48,6 +48,11 @@ class TagCollector implements TagCollectorInterface {
         }
 
         $this->addCacheTagForResource($iri);
+
+        // add resource specific tags
+        if ($object instanceof CanGenerateTagsInterface) {
+            $this->responseTagger->addTags($object->getCacheTags());
+        }
     }
 
     private function addCacheTagForResource(string $iri): void {

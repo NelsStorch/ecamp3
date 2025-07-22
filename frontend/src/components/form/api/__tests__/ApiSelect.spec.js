@@ -10,7 +10,7 @@ import ApiSelect from '../ApiSelect.vue'
 import flushPromises from 'flush-promises'
 import ApiWrapper from '@/components/form/api/ApiWrapper.vue'
 import { i18n } from '@/plugins'
-import merge from 'lodash/merge'
+import merge from 'lodash-es/merge'
 import { ApiMock } from '@/components/form/api/__tests__/ApiMock'
 import { waitForDebounce } from '@/test/util'
 

@@ -41,7 +41,7 @@
 
 <script>
 import draggable from 'vuedraggable'
-import { isEqual } from 'lodash'
+import { isEqual } from 'lodash-es'
 import StoryboardRowDense from './StoryboardRowDense.vue'
 import StoryboardRowDefault from './StoryboardRowDefault.vue'
 

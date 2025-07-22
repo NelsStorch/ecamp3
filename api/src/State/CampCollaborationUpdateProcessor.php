@@ -4,11 +4,13 @@ namespace App\State;
 
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\CampCollaboration;
+use App\Entity\User;
 use App\Service\MailService;
 use App\State\Util\AbstractPersistProcessor;
 use App\State\Util\PropertyChangeListener;
 use App\Util\IdGenerator;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 /**
@@ -29,9 +31,17 @@ class CampCollaborationUpdateProcessor extends AbstractPersistProcessor {
             afterAction: fn (CampCollaboration $data) => $this->onAfterStatusChange($data)
         );
 
+        $roleChangeListener = PropertyChangeListener::of(
+            extractProperty: fn (CampCollaboration $data) => $data->role,
+            beforeAction: fn (CampCollaboration $data, CampCollaboration $previous) => $this->onBeforeRoleChange($data, $previous),
+        );
+
         parent::__construct(
             $decorated,
-            propertyChangeListeners: [$statusChangeListener]
+            propertyChangeListeners: [
+                $statusChangeListener,
+                $roleChangeListener,
+            ]
         );
     }
 
@@ -42,6 +52,20 @@ class CampCollaborationUpdateProcessor extends AbstractPersistProcessor {
         }
 
         return $data;
+    }
+
+    public function onBeforeRoleChange(CampCollaboration $data, CampCollaboration $previous): CampCollaboration {
+        /** @var User $user */
+        $user = $this->security->getUser();
+        // If the update does not affect the own collaboration, the voter works.
+        if ($data->user->getId() !== $user->getId()) {
+            return $data;
+        }
+        if (in_array($previous->role, [CampCollaboration::ROLE_MANAGER, CampCollaboration::ROLE_MEMBER], true)) {
+            return $data;
+        }
+
+        throw new HttpException(403, 'Not authorized to change role');
     }
 
     public function onAfterStatusChange(CampCollaboration $data): void {

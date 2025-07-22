@@ -9,6 +9,7 @@
       :camp="camp"
       :orientation="options.orientation"
       :landscape="landscape"
+      :filter="options.filter"
       :index="index"
     />
   </div>

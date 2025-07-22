@@ -64,9 +64,7 @@ final class ContentNodeCampFilter extends AbstractFilter {
 
         // generate alias to avoid interference with other filters
         $campParameterName = $queryNameGenerator->generateParameterName($property);
-        $periodJoinAlias = $queryNameGenerator->generateJoinAlias('period');
         $activityJoinAlias = $queryNameGenerator->generateJoinAlias('activity');
-        $scheduleEntryJoinAlias = $queryNameGenerator->generateJoinAlias('scheduleEntry');
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
@@ -74,9 +72,7 @@ final class ContentNodeCampFilter extends AbstractFilter {
         $rootQry
             ->select("identity({$activityJoinAlias}.rootContentNode)")
             ->from(Activity::class, $activityJoinAlias)
-            ->join("{$activityJoinAlias}.scheduleEntries", $scheduleEntryJoinAlias)
-            ->join("{$scheduleEntryJoinAlias}.period", $periodJoinAlias)
-            ->where($queryBuilder->expr()->eq("{$periodJoinAlias}.camp", ":{$campParameterName}"))
+            ->where($queryBuilder->expr()->eq("{$activityJoinAlias}.camp", ":{$campParameterName}"))
         ;
 
         $queryBuilder->andWhere($queryBuilder->expr()->in("{$rootAlias}.root", $rootQry->getDQL()));

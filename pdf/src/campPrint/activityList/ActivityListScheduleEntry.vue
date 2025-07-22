@@ -13,7 +13,7 @@
 import PdfComponent from '@/PdfComponent.js'
 import ScheduleEntryTitle from '../scheduleEntry/ScheduleEntryTitle.vue'
 import ContentNode from '../scheduleEntry/contentNode/ContentNode.vue'
-import sortBy from 'lodash/sortBy.js'
+import sortBy from 'lodash-es/sortBy.js'
 
 export default {
   name: 'ScheduleEntry',

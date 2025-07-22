@@ -23,12 +23,10 @@
           }
         }
       },
-      "copyActivityInfoDialog": {
-        "allow": "Autoriser maintenant",
-        "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
-        "description": "Pour coller une activité copiée, vous devez autoriser eCamp à lire votre presse-papiers.",
-        "granted": "Vous pouvez maintenant coller les activités copiées.",
-        "title": "Copier et coller une activité"
+      "dialog": {
+        "dialogActivityEdit": {
+          "title": "Modifier l'activité"
+        }
       },
       "dialog": {
         "dialogActivityEdit": {
@@ -44,6 +42,13 @@
       "scheduleEntry": {
         "backToContents": "Retour à l'édition du contenu",
         "changeLayout": "Changer la mise en page",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
+          "description": "Pour coller une activité copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+          "granted": "Vous pouvez maintenant coller les activités copiées.",
+          "title": "Copier et coller une activité"
+        },
         "copyScheduleEntry": "Copier une activité",
         "deleteWarning": "Veux-tu vraiment supprimer cette activité ? Tout le contenu de cette activité sera supprimé."
       },
@@ -126,13 +131,13 @@
         "title": "Modifier le statut"
       },
       "dialogCategoryCreate": {
-        "clearClipboard": "Vider le presse-papiers",
-        "clipboard": "Presse-papiers",
-        "copyCategoryOrActivity": "Copier la catégorie ou l'activité",
-        "copyContent": "Copier le contenu",
-        "copyPasteCategory": "Copier et coller la catégorie",
-        "copySourceInfo": "Tu peux coller ici l'URL d'une catégorie ou d'une activité pour copier son contenu.",
-        "pasteCategory": "Copier la catégorie ou l'activité",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les catégories copiées.",
+          "description": "Pour coller une catégorie copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+          "granted": "Vous pouvez maintenant coller les catégories copiées.",
+          "title": "Copier et coller une catégorie"
+        },
         "title": "Créer une catégorie d'activité"
       },
       "dialogMaterialListCreate": {
@@ -180,7 +185,7 @@
           "title": "Attention : Vous avez choisi \"Pas de modèle\"."
         },
         "preview": "Aperçu du modèle du camp",
-        "progressStates": "États d'activités",
+        "progressLabels": "États d'activités",
         "prototypeHint": "Copie les catégories, les modèles de blocs et les états de blocs d'un modèle de camp.",
         "prototypeHintEmpty": "Ne pas copier de catégories, de modèles de blocs et de statuts de blocs à partir d'un modèle de camp.",
         "prototypeHintSelected": "Copie les catégories, les modèles de blocs et les statuts de blocs de ce modèle de camp.",
@@ -413,6 +418,13 @@
       "dialogActivityCreate": {
         "clearClipboard": "Vider le presse-papier",
         "clipboard": "Presse-papier",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
+          "description": "Pour coller une activité copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+          "granted": "Vous pouvez maintenant coller les activités copiées.",
+          "title": "Copier et coller une activité"
+        },
         "copyActivity": "Copier une activité",
         "copyActivityContent": "Copier le contenu depuis une activité",
         "copyPasteActivity": "Copier et coller une activité",
@@ -437,6 +449,13 @@
           }
         },
         "picassoEntry": {
+          "clipboardInfoDialog": {
+            "allow": "Autoriser maintenant",
+            "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
+            "description": "Pour coller une activité copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+            "granted": "Vous pouvez maintenant coller les activités copiées.",
+            "title": "Copier et coller une activité"
+          },
           "location": "Lieu:",
           "responsible": "Responsable:"
         }
@@ -672,8 +691,14 @@
       },
       "category": {
         "category": {
-          "copyCategory": "Copier la catégorie",
-          "deleteCategory": "Supprimer la catégorie",
+          "clipboardInfoDialog": {
+            "allow": "Autoriser maintenant",
+            "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les catégories copiées.",
+            "description": "Pour coller une catégorie copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+            "granted": "Vous pouvez maintenant coller les catégories copiées.",
+            "title": "Copier et coller une catégorie"
+          },
+          "deleteCategory": "Supprimer l'activité",
           "properties": "Propriétés",
           "template": "Modèle pour les nouvelles activités"
         },

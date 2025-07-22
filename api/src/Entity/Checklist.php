@@ -65,6 +65,9 @@ use Symfony\Component\Validator\Constraints as Assert;
                     security: 'is_granted("CAMP_COLLABORATOR", camp) or is_granted("CAMP_IS_PROTOTYPE", camp)'
                 ),
             ],
+            extraProperties: [
+                'filter_by_current_user' => false,
+            ]
         ),
     ],
     denormalizationContext: ['groups' => ['write']],
@@ -114,6 +117,13 @@ class Checklist extends BaseEntity implements BelongsToCampInterface, CopyFromPr
     #[Assert\Length(max: 32)]
     #[ORM\Column(type: 'text')]
     public string $name;
+
+    /**
+     * The id of the checklist that was used as a template for creating this checklist. Internal for now, is
+     * not published through the API.
+     */
+    #[ORM\Column(type: 'string', length: 16, nullable: true)]
+    public ?string $checklistPrototypeId = null;
 
     /**
      * Whether this checklist is a template.
@@ -167,6 +177,8 @@ class Checklist extends BaseEntity implements BelongsToCampInterface, CopyFromPr
      */
     public function copyFromPrototype($prototype, $entityMap): void {
         $entityMap->add($prototype, $this);
+
+        $this->checklistPrototypeId = $prototype->getId();
 
         // copy Checklist base properties
         $this->name ??= $prototype->name;

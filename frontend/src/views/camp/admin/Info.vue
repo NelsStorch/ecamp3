@@ -48,6 +48,11 @@ export default {
   data: () => ({
     openPanels: [],
   }),
+  head() {
+    return {
+      title: this.$tc('views.camp.admin.info.title'),
+    }
+  },
   mounted() {
     this.camp._meta.load.then((camp) => {
       if (

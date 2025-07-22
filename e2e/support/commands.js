@@ -24,6 +24,8 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+import 'cypress-wait-until'
+
 Cypress.Commands.add('login', (identifier) => {
   cy.session(identifier, () => {
     cy.request({
@@ -56,6 +58,22 @@ Cypress.Commands.add('expectCachePass', (uri) => {
   cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
     const headers = response.headers
     expect(headers['x-cache']).to.eq('PASS')
+  })
+})
+
+Cypress.Commands.add('waitForCacheMiss', (uri) => {
+  cy.waitUntil(() =>
+    cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
+      const headers = response.headers
+      return headers['x-cache'] === 'MISS'
+    })
+  ).then((result) => expect(result).to.eq(true))
+})
+
+Cypress.Commands.add('apiGet', (uri) => {
+  return cy.request({
+    method: 'GET',
+    url: Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal',
   })
 })
 

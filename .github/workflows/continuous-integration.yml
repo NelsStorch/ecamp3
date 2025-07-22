@@ -40,7 +40,7 @@ jobs:
               ".github/workflows/continuous-integration.yml"
             ]
           do_not_skip: '["workflow_dispatch", "schedule"]'
-          
+
   frontend-check-needed:
     runs-on: ubuntu-latest
     outputs:
@@ -56,7 +56,7 @@ jobs:
               ".github/workflows/continuous-integration.yml"
             ]
           do_not_skip: '["workflow_dispatch", "schedule"]'
-  
+
   e2e-check-needed:
     runs-on: ubuntu-latest
     outputs:
@@ -79,7 +79,7 @@ jobs:
               ".env.ci"
             ]
           do_not_skip: '["workflow_dispatch", "schedule"]'
-  
+
   api-cs-check:
     name: 'Lint: API (php-cs-fixer)'
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.13'
+          php-version: '8.4.10'
           tools: composer:2.8.0
           coverage: none
 
@@ -100,7 +100,7 @@ jobs:
         run: 'echo "dir=$(composer config cache-files-dir)" | tr -d "\n" >> $GITHUB_OUTPUT'
         working-directory: api
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -110,7 +110,7 @@ jobs:
       - run: composer install --no-interaction --no-plugins --no-scripts --prefer-dist
         working-directory: api
 
-      - run: php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php -v --dry-run --diff
+      - run: PHP_CS_FIXER_IGNORE_ENV=1 php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php -v --dry-run --diff
         working-directory: api
 
   frontend-eslint:
@@ -124,9 +124,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.11.0'
+          node-version: '24.4.1'
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -153,9 +153,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.11.0'
+          node-version: '24.4.1'
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -182,9 +182,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.11.0'
+          node-version: '24.4.1'
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -214,9 +214,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.11.0'
+          node-version: '24.4.1'
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -264,7 +264,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.13'
+          php-version: '8.4.10'
           extensions: intl-73.1
           tools: composer:2.8.0
           coverage: pcov
@@ -274,7 +274,7 @@ jobs:
         run: 'echo "dir=$(composer config cache-files-dir)" | tr -d "\n" >> $GITHUB_OUTPUT'
         working-directory: api
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -353,9 +353,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.11.0'
+          node-version: '24.4.1'
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -396,9 +396,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.11.0'
+          node-version: '24.4.1'
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -435,9 +435,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.11.0'
+          node-version: '24.4.1'
 
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -490,7 +490,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
-          carryforward: "api,frontend,print,pdf"
+          carryforward: 'api,frontend,print,pdf'
           fail-on-error: false
 
   workflow-success:

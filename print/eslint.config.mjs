@@ -51,7 +51,7 @@ export default [
       'prefer-const': 'error',
       'vue/multi-word-component-names': 'off',
 
-      'local-rules/matching-translation-keys': [
+      'local-rules/matchingTranslationKeys': [
         'error',
         {
           ignoreKeysRegex:

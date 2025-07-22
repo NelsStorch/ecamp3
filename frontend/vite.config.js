@@ -40,6 +40,7 @@ if (sentryAuthToken) {
 export default defineConfig(({ mode }) => ({
   server: {
     port: 3000,
+    allowedHosts: ['frontend', 'localhost:3000'],
   },
   plugins,
   worker: {
@@ -100,6 +101,7 @@ export default defineConfig(({ mode }) => ({
       'lodash/size.js',
       'runes',
       'vee-validate',
+      'vite-plugin-comlink/symbol',
       'vue',
       'vuedraggable',
       'vue-toastification',
@@ -144,9 +146,13 @@ export default defineConfig(({ mode }) => ({
   css: {
     preprocessorOptions: {
       scss: {
+        // support for legacy api will be removed in vite 7. https://vite.dev/guide/migration.html#sass-now-uses-modern-api-by-default
+        api: 'legacy',
         additionalData: '@import "./node_modules/vuetify/src/styles/styles.sass";\n', // original default variables from vuetify
       },
       sass: {
+        // support for legacy api will be removed in vite 7. https://vite.dev/guide/migration.html#sass-now-uses-modern-api-by-default
+        api: 'legacy',
         additionalData: '@import "./src/scss/variables.scss"\n', // vuetify variable overrides
       },
     },

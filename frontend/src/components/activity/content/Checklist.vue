@@ -82,7 +82,7 @@ import DetailPane from '@/components/generic/DetailPane.vue'
 import ChecklistItem from './checklist/ChecklistItem.vue'
 import ChecklistItems from './checklist/ChecklistItems.vue'
 import { serverErrorToString } from '@/helpers/serverError.js'
-import { debounce, isEqual, sortBy, uniq } from 'lodash'
+import { debounce, isEqual, sortBy, uniq } from 'lodash-es'
 import { computed } from 'vue'
 
 export default {

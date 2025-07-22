@@ -56,7 +56,6 @@
       "name": "Noti"
     },
     "responsiveLayout": {
-      "icon": "mdi-view-compact",
       "mainContent": "Contenuto principale",
       "name": "Layout di default",
       "printAboveMainContent": "Stampa sopra il contenuto principale",

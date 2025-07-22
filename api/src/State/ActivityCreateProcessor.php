@@ -26,6 +26,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
      * @param Activity $data
      */
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Activity {
+        // @phpstan-ignore nullsafe.neverNull
         if (!isset($data->category?->rootContentNode)) {
             throw new \UnexpectedValueException('Property rootContentNode of provided category is null. Object of type '.ColumnLayout::class.' expected.');
         }
@@ -33,6 +34,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
             throw new \UnexpectedValueException('Property rootContentNode of provided category is of wrong type. Object of type '.ColumnLayout::class.' expected.');
         }
 
+        $targetCamp = $data->category->camp;
         $data->camp = $data->category->camp;
         $rootContentNodePrototype = $data->category->rootContentNode;
 
@@ -49,7 +51,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
         $data->setRootContentNode($rootContentNode);
 
         // deep copy from category root node
-        $entityMap = new EntityMap();
+        $entityMap = new EntityMap($targetCamp);
         $rootContentNode->copyFromPrototype($rootContentNodePrototype, $entityMap);
 
         return $data;

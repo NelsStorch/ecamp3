@@ -6,10 +6,13 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Profile;
 use App\Entity\User;
+use App\Repository\UserRepository;
+use App\Service\ClaimInvitationService;
 use App\Service\MailService;
 use App\State\ProfileUpdateProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
@@ -43,7 +46,10 @@ class ProfileUpdateProcessorTest extends TestCase {
         $this->processor = new ProfileUpdateProcessor(
             $decoratedProcessor,
             $this->pwHasherFactory,
-            $this->mailService
+            $this->mailService,
+            $this->createMock(Security::class),
+            $this->createMock(UserRepository::class),
+            $this->createMock(ClaimInvitationService::class),
         );
     }
 

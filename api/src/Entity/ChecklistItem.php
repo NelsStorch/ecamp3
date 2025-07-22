@@ -68,13 +68,16 @@ use Symfony\Component\Validator\Constraints as Assert;
                                is_granted("CAMP_COLLABORATOR", checklist)'
                 ),
             ],
+            extraProperties: [
+                'filter_by_current_user' => false,
+            ]
         ),
     ],
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
     order: ['checklist.id', 'id'],
 )]
-#[ApiFilter(filterClass: SearchFilter::class, properties: ['checklist', 'checklist.camp'])]
+#[ApiFilter(filterClass: SearchFilter::class, properties: ['checklist', 'checklist.camp', 'checklistNodes'])]
 #[ORM\Entity(repositoryClass: ChecklistItemRepository::class)]
 #[ORM\UniqueConstraint(name: 'checklistitem_checklistid_parentid_position_unique', columns: ['checklistid', 'parentid', 'position'])]
 class ChecklistItem extends BaseEntity implements BelongsToCampInterface, CopyFromPrototypeInterface, HasParentInterface {

@@ -6,6 +6,7 @@
       v-else
       :key="period._meta.self"
       :period="period"
+      :filter="options.filter"
       :camp="camp"
       :show-daily-summary="options.dayOverview || false"
       :show-activities="true"

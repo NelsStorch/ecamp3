@@ -16,12 +16,14 @@
       :day="day"
       :all-content-nodes="data.contentNodes"
       :content-type="contentType"
+      :filter="filter"
     />
   </div>
 </template>
 
 <script setup>
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash-es/camelCase.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 const props = defineProps({
   camp: { type: Object, required: true },
@@ -31,12 +33,13 @@ const props = defineProps({
   },
   index: { type: Number, required: true },
   contentType: { type: String, default: 'Storycontext' },
+  filter: { type: Object, default: () => ({}) },
 })
 
 const { $api } = useNuxtApp()
 
 const { data, error } = await useAsyncData(
-  `SummaryPeriod-${props.period._meta.self}`,
+  `SummaryPeriod-${props.index}-${props.period._meta.self}`,
   async () => {
     const contentType = (await $api.get().contentTypes().$loadItems()).items.find(
       (contentType) => contentType.name === props.contentType
@@ -50,13 +53,30 @@ const { data, error } = await useAsyncData(
           contentType: contentType._meta.self,
         })
         .$loadItems(),
+      $api
+        .get()
+        .contentNodes({
+          isRoot: 'true',
+          period: props.period._meta.self,
+        })
+        .$loadItems(),
       props.period.days().$loadItems(),
       props.period.scheduleEntries().$loadItems(),
       props.period.camp().categories().$loadItems(),
     ])
 
     return {
-      days: props.period.days().items,
+      days: props.period.days().items.filter((day) => {
+        return (
+          props.period
+            .scheduleEntries()
+            .items.filter(
+              (scheduleEntry) =>
+                scheduleEntry.day()._meta.self === day._meta.self &&
+                filterMatchScheduleEntry(scheduleEntry, props.filter)
+            ).length > 0
+        )
+      }),
       contentNodes: contentNodes.items,
     }
   }

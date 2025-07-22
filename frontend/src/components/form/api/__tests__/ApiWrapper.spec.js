@@ -8,7 +8,7 @@ import ApiWrapper from '../ApiWrapper.vue'
 import { VBtn, VForm } from 'vuetify/lib'
 import { ValidationObserver } from 'vee-validate'
 
-const { cloneDeep } = await vi.importActual('lodash')
+const { cloneDeep } = await vi.importActual('lodash-es')
 
 Vue.use(Vuetify)
 Vue.use(veeValidatePlugin)
@@ -17,7 +17,7 @@ let vuetify
 let debounce
 const resolveDebounce = () => debounce()
 
-vi.mock('lodash', async (importOriginal) => {
+vi.mock('lodash-es', async (importOriginal) => {
   const lodash = await importOriginal()
   return {
     ...lodash,

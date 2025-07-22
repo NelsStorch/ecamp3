@@ -46,6 +46,11 @@ export default {
   props: {
     camp: { type: Object, required: true },
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.admin.collaborators.title'),
+    }
+  },
   computed: {
     collaborators() {
       return this.camp.campCollaborations().items

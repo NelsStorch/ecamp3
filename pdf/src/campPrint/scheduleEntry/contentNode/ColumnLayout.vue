@@ -9,8 +9,8 @@
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'
-import groupBy from 'lodash/groupBy.js'
-import sortBy from 'lodash/sortBy.js'
+import groupBy from 'lodash-es/groupBy.js'
+import sortBy from 'lodash-es/sortBy.js'
 
 // Workaround for circular component imports: ContentNode needs ColumnLayout, and ColumnLayout needs ContentNode.
 // The default way to do this in Vue 3 would be using defineAsyncComponent. But that requires a dynamic import,

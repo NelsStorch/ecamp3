@@ -16,7 +16,6 @@
             :key="value?._meta.self"
             :checklist-item="value"
             :depth="depth"
-            :all-checklist-nodes="allChecklistNodes"
           />
         </tbody>
       </table>
@@ -25,7 +24,7 @@
 </template>
 
 <script>
-import { flattenDeep, groupBy } from 'lodash'
+import { flattenDeep, groupBy } from 'lodash-es'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ChecklistItemParent from '@/components/checklist/ChecklistItemParent.vue'
 
@@ -42,8 +41,12 @@ export default {
   data() {
     return {
       loading: true,
-      allChecklistNodes: [],
       indexedChecklistItems: {},
+    }
+  },
+  head() {
+    return {
+      title: () => this.checklist.name,
     }
   },
   watch: {
@@ -67,22 +70,24 @@ export default {
     await Promise.all([
       this.camp.categories()._meta.load,
       this.camp.activities().$reload(),
-      this.api
-        .get()
-        .checklistNodes({ camp: this.camp._meta.self })
-        .$reload()
-        .then((cns) => {
-          this.allChecklistNodes = cns.items
-        }),
+      this.api.get().checklistNodes({ camp: this.camp._meta.self }).$reload(),
       this.api
         .get()
         .checklistItems({ 'checklist.camp': this.camp._meta.self })
         .$reload()
         .then(({ items }) => {
           this.processChecklistItems(items)
-          this.loading = false
         }),
-    ])
+      this.api
+        .get()
+        .contentNodes({
+          isRoot: 'true',
+          camp: this.camp._meta.self,
+        })
+        .$loadItems(),
+    ]).then(() => {
+      this.loading = false
+    })
   },
   methods: {
     processChecklistItems(items) {

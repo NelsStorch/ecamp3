@@ -42,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new Delete(
             processor: CampRemoveProcessor::class,
-            security: 'object.owner == user'
+            security: 'is_granted("CAMP_MANAGER", object)',
         ),
         new GetCollection(
             security: 'is_authenticated()'
@@ -113,7 +113,11 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     /**
      * All the progress labels within this camp.
      */
-    #[ApiProperty(writable: false, example: '["/progress_labels/1a2b3c4d"]')]
+    #[ApiProperty(
+        writable: false,
+        uriTemplate: ActivityProgressLabel::CAMP_SUBRESOURCE_URI_TEMPLATE,
+        example: '"/camps/1a2b3c4d/activity_progress_labels"'
+    )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: ActivityProgressLabel::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
     public Collection $progressLabels;
@@ -122,7 +126,11 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      * All the programme that will be carried out during the camp. An activity may be carried out
      * multiple times in the same camp.
      */
-    #[ApiProperty(writable: false, example: '/activities?camp=%2Fcamps%2F1a2b3c4d')]
+    #[ApiProperty(
+        writable: false,
+        uriTemplate: Activity::CAMP_SUBRESOURCE_URI_TEMPLATE,
+        example: '/camps/1a2b3c4d/activities'
+    )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'camp', orphanRemoval: true)]
     public Collection $activities;
@@ -135,6 +143,12 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: MaterialList::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
     public Collection $materialLists;
+
+    /**
+     * List of MaterialItems that belong to this Camp.
+     */
+    #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    public Collection $materialItems;
 
     /**
      * List of all Checklists of this Camp.
@@ -178,7 +192,8 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public bool $isPrototype = false;
 
     /**
-     * A short title for the camp.
+     * An optional short title for the camp. Can be used in the UI where space is tight. If
+     * not present, frontends may auto-shorten the title if the shortTitle is not set.
      */
     #[InputFilter\Trim]
     #[InputFilter\CleanText]
@@ -189,7 +204,9 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public ?string $shortTitle;
 
     /**
-     * The full title of the camp.
+     * The full title of the camp. Used for identifying the camp in lists of camps, so
+     * this should include all necessary information to distinguish this camp from
+     * other camps that the collaborators are part of.
      */
     #[InputFilter\Trim]
     #[InputFilter\CleanText]
@@ -378,6 +395,13 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[ORM\JoinColumn(nullable: false)]
     public ?User $owner = null;
 
+    /**
+     * All comments of the camp.
+     */
+    #[ApiProperty(readable: false, writable: false)]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'camp', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    public Collection $comments;
+
     public function __construct() {
         parent::__construct();
         $this->collaborations = new ArrayCollection();
@@ -387,8 +411,10 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
         $this->progressLabels = new ArrayCollection();
         $this->activities = new ArrayCollection();
         $this->materialLists = new ArrayCollection();
+        $this->materialItems = new ArrayCollection();
         $this->checklists = new ArrayCollection();
         $this->campRootContentNodes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -412,9 +438,13 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      *
      * @return CampCollaboration[]
      */
-    #[ApiProperty(writable: false, example: '["/camp_collaborations/1a2b3c4d"]')]
+    #[ApiProperty(
+        writable: false,
+        uriTemplate: CampCollaboration::CAMP_SUBRESOURCE_URI_TEMPLATE,
+        example: '["/camps/1a2b3c4d/camp_collaborations"]'
+    )]
     public function getCampCollaborations(): array {
-        return $this->collaborations->getValues();
+        return [];
     }
 
     /**
@@ -602,6 +632,32 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     }
 
     /**
+     * @return MaterialItem[]
+     */
+    public function getMaterialItems(): array {
+        return $this->materialItems->getValues();
+    }
+
+    public function addMaterialItem(MaterialItem $materialItem): self {
+        if (!$this->materialItems->contains($materialItem)) {
+            $this->materialItems[] = $materialItem;
+            $materialItem->camp = $this;
+        }
+
+        return $this;
+    }
+
+    public function removeMaterialItem(MaterialItem $materialItem): self {
+        if ($this->materialItems->removeElement($materialItem)) {
+            if ($materialItem->camp === $this) {
+                $materialItem->camp = null;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Checklist[]
      */
     public function getChecklists(): array {
@@ -638,6 +694,12 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
 
         // copy MaterialLists
         foreach ($prototype->getMaterialLists() as $materialListPrototype) {
+            // Do not copy personal material lists, because the collaborations might not be
+            // the same in the new camp
+            if (null !== $materialListPrototype->campCollaboration) {
+                continue;
+            }
+
             $materialList = new MaterialList();
             $this->addMaterialList($materialList);
 

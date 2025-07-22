@@ -1,7 +1,7 @@
 <template>
   <content-card :title="$tc('views.camp.story.title')" toolbar>
     <template #title-actions>
-      <period-switcher :period="period" :route-name="'camp/period/story'" />
+      <PeriodSwitcher :period="period" :route-name="'camp/period/story'" />
       <v-spacer />
       <LockButton
         v-model="editMode"
@@ -26,7 +26,7 @@
         </v-list>
       </v-menu>
     </template>
-    <story-period :edit-mode="editMode" :period="period" />
+    <StoryPeriod :edit-mode="editMode" :period="period" />
   </content-card>
 </template>
 
@@ -38,10 +38,12 @@ import DownloadNuxtPdf from '@/components/print/print-nuxt/DownloadNuxtPdfListIt
 import DownloadClientPdf from '@/components/print/print-client/DownloadClientPdfListItem.vue'
 import LockButton from '@/components/generic/LockButton.vue'
 import LockUnlockListItem from '@/components/generic/LockUnlockListItem.vue'
+import PeriodSwitcher from '@/components/program/PeriodSwitcher.vue'
 
 export default {
   name: 'Story',
   components: {
+    PeriodSwitcher,
     StoryPeriod,
     ContentCard,
     DownloadClientPdf,
@@ -54,6 +56,11 @@ export default {
     period: { type: Object, required: true },
     camp: { type: Object, required: true },
   },
+  head() {
+    return {
+      title: this.$tc('views.camp.story.title'),
+    }
+  },
   computed: {
     printConfig() {
       return {
@@ -64,6 +71,7 @@ export default {
           {
             type: 'Story',
             options: {
+              contentType: 'Storycontext',
               periods: [this.period._meta.self],
             },
           },

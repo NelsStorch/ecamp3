@@ -19,11 +19,9 @@ export default {
   name: 'CampListItem',
   props: {
     camp: { type: Object, required: true },
+    periods: { type: Array, default: () => [] },
   },
   computed: {
-    periods() {
-      return this.camp.periods().items
-    },
     date() {
       if (!this.periods.length) return
       const formatMY = new Intl.DateTimeFormat(this.$i18n.locale, {

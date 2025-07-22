@@ -54,7 +54,7 @@
 <script>
 import { computed } from 'vue'
 import draggable from 'vuedraggable'
-import { every, sortBy, filter } from 'lodash'
+import { every, sortBy, filter } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
 import SortableChecklistItem from '@/components/checklist/SortableChecklistItem.vue'
 import ChecklistItemCreate from '@/components/checklist/ChecklistItemCreate.vue'

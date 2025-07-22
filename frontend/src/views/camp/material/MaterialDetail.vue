@@ -87,5 +87,10 @@ export default {
   setup(props) {
     return useMaterialViewHelper(props.camp, true)
   },
+  head() {
+    return {
+      title: () => this.materialList.name,
+    }
+  },
 }
 </script>

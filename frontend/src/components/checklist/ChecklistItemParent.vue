@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import ScheduleEntryLinks from '../material/ScheduleEntryLinks.vue'
 
 export default {
@@ -66,43 +66,52 @@ export default {
   props: {
     checklistItem: { type: Object, required: true },
     depth: { type: Number, required: true },
-    allChecklistNodes: { type: Array, required: true },
   },
   data() {
     return {
-      checklistNodes: [],
+      activities: [],
     }
   },
-  computed: {
-    activities() {
-      const camp = this.checklistItem.checklist().camp()
-      const activities = camp.activities().items
-
-      // Activities ordered first ScheduleEntry start-time
-      return sortBy(
-        activities.filter((a) =>
-          this.checklistNodes.some((cn) => cn.root().id === a.rootContentNode().id)
-        ),
-        (activity) =>
-          activity
-            .scheduleEntries()
-            .items.map(
-              (s) =>
-                `${s.dayNumber}`.padStart(3, '0') +
-                `${s.scheduleEntryNumber}`.padStart(3, '0')
-            )
-            .reduce((p, v) => (p < v ? p : v))
-      )
-    },
-  },
   watch: {
-    allChecklistNodes: {
-      immediate: true,
-      handler(allChecklistNodes) {
-        this.checklistNodes = allChecklistNodes.filter((cn) =>
-          cn.checklistItems().items.some((ci) => ci.id === this.checklistItem.id)
+    checklistItem: {
+      async handler(checklistItem) {
+        const camp = checklistItem.checklist().camp()
+
+        await camp.activities()._meta.load
+        const activities = await Promise.all(
+          camp.activities().items.map(async (a) => ({
+            activity: a,
+            rootContentNodeUri: await a.$href('rootContentNode'),
+          }))
         )
+
+        const checklistNodes = await Promise.all(
+          checklistItem.checklistNodes().items.map(async (cn) => ({
+            checklistNode: cn,
+            rootUri: await cn.$href('root'),
+          }))
+        )
+
+        // Activities ordered by first ScheduleEntry start time
+        const res = sortBy(
+          activities
+            .filter((a) =>
+              checklistNodes.some((cn) => cn.rootUri == a.rootContentNodeUri)
+            )
+            .map((a) => a.activity),
+          (activity) =>
+            activity
+              .scheduleEntries()
+              .items.map(
+                (s) =>
+                  `${s.dayNumber}`.padStart(3, '0') +
+                  `${s.scheduleEntryNumber}`.padStart(3, '0')
+              )
+              .reduce((p, v) => (p < v ? p : v))
+        )
+        this.activities = res
       },
+      immediate: true,
     },
   },
 

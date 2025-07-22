@@ -13,6 +13,11 @@ export default {
   props: {
     camp: { type: Object, required: true },
   },
+  head() {
+    return {
+      title: this.$tc('entity.checklist.name', 2),
+    }
+  },
   computed: {
     checklistCollection() {
       return this.camp.checklists()

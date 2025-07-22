@@ -4,6 +4,7 @@ Displays a single scheduleEntry
 
 <template>
   <content-card
+    :key="activityId"
     class="ec-schedule-entry"
     toolbar
     back
@@ -137,7 +138,10 @@ Displays a single scheduleEntry
               {{ $tc('components.activity.scheduleEntry.copyScheduleEntry') }}
             </v-list-item-title>
           </v-list-item>
-          <CopyActivityInfoDialog ref="copyInfoDialog" />
+          <ClipboardInfoDialog
+            ref="copyInfoDialog"
+            translation-context-i18n-key="components.activity.scheduleEntry.clipboardInfoDialog"
+          />
 
           <v-divider />
 
@@ -164,11 +168,15 @@ Displays a single scheduleEntry
       <template v-else>
         <!-- Header -->
         <v-row dense class="activity-header">
-          <v-col class="col col-sm-6 col-12 px-0 pt-0">
+          <v-col class="col col-sm-6 col-12 px-0 pt-0 d-flex flex-wrap gap-x-4">
             <table>
               <thead>
                 <tr>
-                  <th scope="col" class="text-right pb-2 pr-4">
+                  <th
+                    v-if="category.numberingStyle !== '-'"
+                    scope="col"
+                    class="text-right pb-2 pr-4"
+                  >
                     {{ $tc('entity.scheduleEntry.fields.nr') }}
                   </th>
                   <th scope="col" class="text-left pb-2 pr-4">
@@ -184,8 +192,20 @@ Displays a single scheduleEntry
                   v-for="scheduleEntryItem in scheduleEntries"
                   :key="scheduleEntryItem._meta.self"
                 >
-                  <th class="text-right tabular-nums pb-2 pr-4">
-                    {{ scheduleEntryItem.number }}
+                  <th
+                    v-if="category.numberingStyle !== '-'"
+                    class="text-right tabular-nums pb-2 pr-4"
+                  >
+                    <RouterLink
+                      v-if="scheduleEntryItem._meta.self !== scheduleEntry._meta.self"
+                      :to="scheduleEntryRoute(scheduleEntryItem)"
+                      class="e-title-link"
+                    >
+                      {{ scheduleEntryItem.number }}
+                    </RouterLink>
+                    <template v-else>
+                      {{ scheduleEntryItem.number }}
+                    </template>
                   </th>
                   <td class="text-left tabular-nums pb-2 pr-4">
                     {{
@@ -196,11 +216,33 @@ Displays a single scheduleEntry
                     {{ dateShort(scheduleEntryItem.start) }}
                   </td>
                   <td class="text-left tabular-nums pb-2 pr-0">
-                    {{ rangeLongEnd(scheduleEntryItem.start, scheduleEntryItem.end) }}
+                    <RouterLink
+                      v-if="
+                        category.numberingStyle === '-' &&
+                        scheduleEntryItem._meta.self !== scheduleEntry._meta.self
+                      "
+                      :to="scheduleEntryRoute(scheduleEntryItem)"
+                      class="e-title-link"
+                    >
+                      {{ rangeLongEnd(scheduleEntryItem.start, scheduleEntryItem.end) }}
+                    </RouterLink>
+                    <template v-else>
+                      {{ rangeLongEnd(scheduleEntryItem.start, scheduleEntryItem.end) }}
+                    </template>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <DialogActivityEdit
+              v-if="scheduleEntry && isContributor"
+              :schedule-entry="scheduleEntry"
+              hide-header-fields
+              @activity-updated="activity.$reload()"
+            >
+              <template #activator="{ on }">
+                <ButtonEdit text small class="v-btn--has-bg" v-on="on" />
+              </template>
+            </DialogActivityEdit>
           </v-col>
           <v-col class="col col-sm-6 col-12 px-0">
             <api-form :entity="activity" name="activity">
@@ -247,27 +289,36 @@ Displays a single scheduleEntry
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ApiTextField from '@/components/form/api/ApiTextField.vue'
 import RootNode from '@/components/activity/RootNode.vue'
 import ActivityResponsibles from '@/components/activity/ActivityResponsibles.vue'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
 import { campRoleMixin } from '@/mixins/campRoleMixin'
-import router, { periodRoute, scheduleEntryRoute } from '@/router.js'
+import router, {
+  firstActivityScheduleEntry,
+  periodRoute,
+  scheduleEntryRoute,
+} from '@/router.js'
 import DownloadNuxtPdf from '@/components/print/print-nuxt/DownloadNuxtPdfListItem.vue'
 import DownloadClientPdf from '@/components/print/print-client/DownloadClientPdfListItem.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
-import CopyActivityInfoDialog from '@/components/activity/CopyActivityInfoDialog.vue'
 import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import ApiForm from '@/components/form/api/ApiForm.vue'
 import ApiSelect from '@/components/form/api/ApiSelect.vue'
+import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
+import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
+import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
+import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
 
 export default {
   name: 'ScheduleEntry',
   components: {
+    DialogActivityEdit,
+    ButtonEdit,
     ApiForm,
     ApiSelect,
     TogglePaperSize,
@@ -279,7 +330,7 @@ export default {
     DownloadClientPdf,
     DownloadNuxtPdf,
     CategoryChip,
-    CopyActivityInfoDialog,
+    ClipboardInfoDialog,
   },
   mixins: [campRoleMixin, dateHelperUTCFormatted],
   provide() {
@@ -290,10 +341,17 @@ export default {
       isPaperDisplaySize: () => this.isPaperDisplaySize,
     }
   },
+  async beforeRouteUpdate(to, from, next) {
+    return scheduleEntryRouteChange(this.activityId, to, from, next)
+  },
   props: {
-    scheduleEntry: {
-      type: Object,
+    activityId: {
+      type: String,
       required: true,
+    },
+    scheduleEntryId: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -301,12 +359,22 @@ export default {
       layoutMode: false,
       editActivityTitle: false,
       categoryChangeState: null,
+      scheduleEntry: null,
       loading: true,
+    }
+  },
+  head() {
+    return {
+      title: () =>
+        `${this.scheduleEntry.number ? this.scheduleEntry.number + ' ' : ''}[${this.category.short}]: ${this.activity.title}`,
+      templateParams: {
+        section: this.camp.shortTitle,
+      },
     }
   },
   computed: {
     activity() {
-      return this.scheduleEntry.activity()
+      return this.api.get().activities({ id: this.activityId })
     },
     camp() {
       return this.activity.camp()
@@ -366,14 +434,26 @@ export default {
     },
   },
 
+  watch: {
+    scheduleEntryId: {
+      async handler(id) {
+        try {
+          this.scheduleEntry = this.api.get().scheduleEntries({ id })
+        } catch {
+          this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
+        }
+      },
+      immediate: true,
+    },
+  },
+
   // reload data every time user navigates to Activity view
   async mounted() {
     this.loading = true
     await this.scheduleEntry.activity()._meta.load // wait if activity is being loaded as part of a collection
     this.loading = false
 
-    // to avoid stale data, trigger reload (which includes embedded contentNode data). However, don't await in order to render early with cached data.
-    this.scheduleEntry.activity().$reload()
+    // no refresh of activity here because the requireActivityScheduleEntry guard already does a refresh
   },
 
   methods: {
@@ -390,6 +470,7 @@ export default {
           this.$toast.error(errorToMultiLineToast(e))
         })
     },
+    scheduleEntryRoute,
     countContentNodes(contentType) {
       return this.contentNodes.items.filter((cn) => {
         return cn.contentType().id === contentType.id

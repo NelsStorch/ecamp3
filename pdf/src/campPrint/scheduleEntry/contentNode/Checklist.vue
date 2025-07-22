@@ -17,8 +17,8 @@
 </template>
 
 <script setup>
-import uniqWith from 'lodash/uniqWith.js'
-import sortBy from 'lodash/sortBy.js'
+import uniqWith from 'lodash-es/uniqWith.js'
+import sortBy from 'lodash-es/sortBy.js'
 
 const props = defineProps({
   contentNode: { type: Object, required: true },

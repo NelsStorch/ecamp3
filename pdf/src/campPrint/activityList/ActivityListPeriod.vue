@@ -16,7 +16,8 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import ActivityListScheduleEntry from './ActivityListScheduleEntry.vue'
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash-es/camelCase.js'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'ActivityListPeriod',
@@ -26,10 +27,15 @@ export default {
     period: { type: Object, required: true },
     contentTypeNames: { type: Array, required: true },
     config: { type: Object, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     scheduleEntries() {
-      return this.period.scheduleEntries().items
+      return this.period
+        .scheduleEntries()
+        .items.filter((scheduleEntry) =>
+          filterMatchScheduleEntry(scheduleEntry, this.filter)
+        )
     },
     allContentTypes() {
       return this.api.get('/content_types').items

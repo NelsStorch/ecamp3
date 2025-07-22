@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 import DetailPane from '@/components/generic/DetailPane.vue'
 import DialogBase from '@/components/dialog/DialogBase.vue'
 import PromptEntityDelete from '@/components/prompt/PromptEntityDelete.vue'

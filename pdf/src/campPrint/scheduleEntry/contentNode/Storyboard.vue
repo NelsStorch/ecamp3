@@ -29,7 +29,7 @@
 import PdfComponent from '@/PdfComponent.js'
 import InstanceName from '../InstanceName.vue'
 import RichText from '../../RichText.vue'
-import sortBy from 'lodash/sortBy.js'
+import sortBy from 'lodash-es/sortBy.js'
 import { isEmptyHtml } from '../../helpers.js'
 
 export default {
@@ -79,11 +79,11 @@ export default {
   flex-direction: row;
 }
 .storyboard-header-cell {
-  line-height: 1.4;
+  line-height: 0.8;
   font-weight: semibold;
 }
 .storyboard-cell {
-  line-height: 1.5;
+  line-height: 0.8;
   padding-top: 1pt;
   padding-bottom: 3pt;
 }

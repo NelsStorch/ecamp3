@@ -21,7 +21,7 @@ component to render ContentNode with actual content (non-layout nodes)
 </template>
 
 <script>
-import camelCase from 'lodash/camelCase'
+import camelCase from 'lodash-es/camelCase'
 import SvgIcon from '@jamescoyle/vue-icon'
 
 export default {

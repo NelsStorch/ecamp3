@@ -17,40 +17,6 @@
             }
         ],
         "category": {
-            "_embedded": {
-                "rootContentNode": {
-                    "_links": {
-                        "children": [
-                            {
-                                "href": "escaped_value"
-                            }
-                        ],
-                        "contentType": {
-                            "href": "escaped_value"
-                        },
-                        "parent": "escaped_value",
-                        "root": {
-                            "href": "escaped_value"
-                        },
-                        "self": {
-                            "href": "escaped_value"
-                        }
-                    },
-                    "contentTypeName": "escaped_value",
-                    "data": {
-                        "columns": [
-                            {
-                                "slot": "escaped_value",
-                                "width": "escaped_value"
-                            }
-                        ]
-                    },
-                    "id": "escaped_value",
-                    "instanceName": "escaped_value",
-                    "position": "escaped_value",
-                    "slot": "escaped_value"
-                }
-            },
             "_links": {
                 "camp": {
                     "href": "escaped_value"
@@ -80,6 +46,9 @@
                     "materialItems": [
                         {
                             "_links": {
+                                "camp": {
+                                    "href": "escaped_value"
+                                },
                                 "materialList": {
                                     "href": "escaped_value"
                                 },
@@ -125,11 +94,9 @@
             },
             {
                 "_links": {
-                    "checklistItems": [
-                        {
-                            "href": "escaped_value"
-                        }
-                    ],
+                    "checklistItems": {
+                        "href": "escaped_value"
+                    },
                     "children": [],
                     "contentType": {
                         "href": "escaped_value"
@@ -492,41 +459,6 @@
             }
         ],
         "progressLabel": "escaped_value",
-        "rootContentNode": {
-            "_links": {
-                "children": [
-                    {
-                        "href": "escaped_value"
-                    },
-                    {
-                        "href": "escaped_value"
-                    }
-                ],
-                "contentType": {
-                    "href": "escaped_value"
-                },
-                "parent": "escaped_value",
-                "root": {
-                    "href": "escaped_value"
-                },
-                "self": {
-                    "href": "escaped_value"
-                }
-            },
-            "contentTypeName": "escaped_value",
-            "data": {
-                "columns": [
-                    {
-                        "slot": "escaped_value",
-                        "width": "escaped_value"
-                    }
-                ]
-            },
-            "id": "escaped_value",
-            "instanceName": "escaped_value",
-            "position": "escaped_value",
-            "slot": "escaped_value"
-        },
         "scheduleEntries": [
             {
                 "_links": {

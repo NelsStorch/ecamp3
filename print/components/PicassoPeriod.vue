@@ -6,7 +6,7 @@
       v-for="(pageDays, i) in pages"
       :key="i"
       :period="period"
-      :schedule-entries="period.scheduleEntries().items"
+      :schedule-entries="scheduleEntries"
       :index="index"
       :landscape="landscape"
       :days="pageDays"
@@ -20,6 +20,7 @@ const props = defineProps({
   period: { type: Object, required: true },
   camp: { type: Object, required: true },
   landscape: { type: Boolean, required: true },
+  filter: { type: Object, default: () => ({}) },
   index: { type: Number, required: true },
 })
 
@@ -72,14 +73,23 @@ const { error } = await useAsyncData(
 
 <script>
 import { splitDaysIntoPages, calculateBedtime, times } from '@/common/helpers/picasso.js'
-import sortBy from 'lodash/sortBy.js'
+import sortBy from 'lodash-es/sortBy.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   computed: {
     days() {
       return sortBy(this.period.days().items, (day) =>
         this.$date.utc(day.start).valueOf()
-      )
+      ).filter((day) => {
+        if (!this.filter.day || this.filter.day.length === 0) return true
+        return this.filter.day.includes(day._meta.self)
+      })
+    },
+    scheduleEntries() {
+      return this.period.scheduleEntries().items.filter((scheduleEntry) => {
+        return filterMatchScheduleEntry(scheduleEntry, this.filter)
+      })
     },
     pages() {
       const maxDaysPerPage = this.landscape ? 7 : 4
@@ -91,7 +101,7 @@ export default {
     },
     bedtimes() {
       return calculateBedtime(
-        this.period.scheduleEntries().items,
+        this.scheduleEntries,
         this.$date,
         this.$date.utc(this.days[0].start),
         this.$date.utc(this.days[this.days.length - 1].end),

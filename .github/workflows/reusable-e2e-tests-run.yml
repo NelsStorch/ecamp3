@@ -42,7 +42,7 @@ jobs:
           docker image ls -a --digests
 
       - name: Restore cache volumes (npm, composer)
-        uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: .cache
           key: docker-compose-${{ hashFiles('frontend/package-lock.json', 'print/package-lock.json', 'api/composer.lock') }}-${{ matrix.browser }}
@@ -64,10 +64,12 @@ jobs:
       - run: docker compose -f docker-compose.yml run --rm api migrate-database
 
       # start necessary containers
-      - run: docker compose -f docker-compose.yml up -d api frontend pdf print browserless database docker-host http-cache mail pg-admin reverse-proxy
+      - run: docker compose -f docker-compose.yml up -d api frontend pdf print browserless database docker-host http-cache http-cache-logs mail pg-admin reverse-proxy
 
       # pull cypress while container are starting up
       - run: docker compose pull e2e
+        
+      - run: docker compose run --entrypoint="npm ci" --rm e2e
 
       - run: sh -x wait-for-container-startup.sh
 

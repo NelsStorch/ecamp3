@@ -18,7 +18,7 @@ exports[`An ETextArea > looks like a textarea > mountAsInControls 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label v-label--active theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div auto-grow
                                    class="editor editor--editable"
                                    id
@@ -51,7 +51,7 @@ exports[`An ETextArea > looks like a textarea > multiline 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label v-label--active theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div class="editor editor--editable"
                                    id
                                    multi-line>
@@ -75,7 +75,7 @@ exports[`An ETextArea > looks like a textarea > notext 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div class="editor editor--editable"
                                    id>
                                    <!---->
@@ -105,13 +105,12 @@ exports[`An ETextArea > looks like a textarea > withtext 1`] = `
                          <div class="v-text-field__slot">
                               <label class="v-label v-label--active theme--light"
                                      for
-                                     style="left: 0px; position: absolute;">test</label>
+                                     style="left: 0px; right: auto; position: absolute;">test</label>
                               <div class="editor editor--editable"
                                    id>
                                    <!---->
                                    <div class="editor__content">
-                                        <div aria-label="Rich-Text Editor"
-                                             class="tiptap ProseMirror"
+                                        <div class="tiptap ProseMirror"
                                              contenteditable="true"
                                              role="textbox"
                                              tabindex="0"

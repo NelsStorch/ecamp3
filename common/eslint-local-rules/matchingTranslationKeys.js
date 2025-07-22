@@ -1,5 +1,7 @@
-module.exports = (path, utils, fs) => {
-  const { packageDirectory } = require('./packageDirectory.js')(path, fs)
+import { packageDirectory } from "./packageDirectory.js"
+import path from "path"
+
+export default function createMatchingTranslationKeys(utils) {
 
   /**
    * Convert a file path to our convention for translation key structures

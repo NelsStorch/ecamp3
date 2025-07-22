@@ -31,7 +31,7 @@ import {
   positionStyles,
 } from '../../../common/helpers/picasso.js'
 
-import keyBy from 'lodash/keyBy.js'
+import keyBy from 'lodash-es/keyBy.js'
 
 export default {
   name: 'DayColumn',

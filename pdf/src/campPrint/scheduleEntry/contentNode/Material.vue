@@ -6,7 +6,7 @@
         <Text>{{ item.quantity }} {{ item.unit }} {{ item.article }}</Text>
       </View>
       <View class="material-item-column material-item-column-2">
-        <Text>{{ item.materialList().name }}</Text>
+        <Text>{{ item.materialList ? item.materialList()?.name : '' }}</Text>
       </View>
     </View>
   </View>
@@ -14,7 +14,7 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import InstanceName from '../InstanceName.vue'
-import sortBy from 'lodash/sortBy.js'
+import sortBy from 'lodash-es/sortBy.js'
 
 export default {
   name: 'Material',
@@ -25,9 +25,8 @@ export default {
   },
   computed: {
     sortedMaterialItems() {
-      return sortBy(
-        this.contentNode.materialItems().items,
-        (item) => item.materialList().name
+      return sortBy(this.contentNode.materialItems().items, (item) =>
+        item.materialList ? item.materialList()?.name : ''
       )
     },
   },

@@ -10,6 +10,7 @@ use App\Tests\Spatie\Snapshots\Driver\ECampYamlSnapshotDriver;
 use App\Util\ArrayDeepSort;
 use Hautelook\AliceBundle\PhpUnit\FixtureStore;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
@@ -212,9 +213,36 @@ class ResponseSnapshotTest extends ECampApiTestCase {
                 '/content_types' => false,
                 '/days' => false,
                 '/day_responsibles' => false,
+                '/comments' => false,
                 default => true,
             };
         });
+    }
+
+    /**
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     */
+    #[TestWith(['/camps', '/activities'], '/camps_{campId}_activities')]
+    #[TestWith(['/camps', '/activity_progress_labels'], '/camps_{campId}_activity_progress_labels')]
+    #[TestWith(['/camps', '/camp_collaborations'], '/camps_{campId}_camp_collaborations')]
+    #[TestWith(['/camps', '/checklists'], '/camps_{campId}_checklists')]
+    #[TestWith(['/camps', '/categories'], '/camps_{campId}_categories')]
+    #[TestWith(['/checklists', '/checklist_items'], '/checklists_{campId}_checklist_items')]
+    #[TestWith(['/days', '/day_responsibles'], '/days_{campId}_day_responsibles')]
+    #[TestWith(['/periods', '/days'], '/periods_{campId}_days')]
+    #[TestWith(['/periods', '/schedule_entries'], '/periods_{campId}_schedule_entries')]
+    public function testSubResourceUrlMatchesSnapshot(string $endpoint, string $subresource) {
+        $fixture = $this->getFixtureFor($endpoint);
+        $uri = "{$endpoint}/{$fixture->getId()}{$subresource}";
+
+        $response = static::createClientWithCredentials()->request('GET', $uri);
+
+        assertThat($response->getStatusCode(), equalTo(200));
+        $this->assertMatchesEscapedResponseSnapshot($response);
     }
 
     private function getFixtureFor(string $collectionEndpoint) {

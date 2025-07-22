@@ -1,6 +1,9 @@
 import dayjs from '../dayjs'
 import { HTML5_FMT } from '../dateFormat'
 
+/**
+ * Source: https://github.com/sbb-design-systems/sbb-angular/blob/24d4a804a55fa671cdf441a4556741ecfa2c638c/src/angular/time-input/time-input.ts
+ */
 const REGEX_WITH_COLON = /([0-9]{1,2})[.:,\-;_hH]?([0-9]{1,2})?/
 const REGEX_WITHOUT_COLON = /([0-9]{1,2})([0-9]{2})/
 

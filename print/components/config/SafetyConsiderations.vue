@@ -5,6 +5,7 @@
       v-for="period in periods"
       :key="period._meta.self"
       :period="period"
+      :filter="options.filter"
       :camp="camp"
       :index="index"
       :content-type="options.contentType"

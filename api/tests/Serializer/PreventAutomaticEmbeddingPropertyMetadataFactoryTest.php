@@ -16,33 +16,36 @@ class PreventAutomaticEmbeddingPropertyMetadataFactoryTest extends TestCase {
         // given
         $decorated = $this->createMock(PropertyMetadataFactoryInterface::class);
         $apiProperty = new ApiProperty(
-            'description',
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            'default',
-            ['example'],
-            'deprecationReason',
-            true,
-            true,
-            ['jsonldContext'],
-            ['openapiContext'],
-            ['jsonSchemaContext'],
-            true,
-            true,
-            'securityPostDenormalize',
-            ['types'],
-            [new PropertyInfoType(builtinType: PropertyInfoType::BUILTIN_TYPE_INT)],
-            ['schema'],
-            true,
-            ['iris'],
-            true,
-            'uriTemplate',
-            'property',
-            ['extraProperties']
+            description: 'description',
+            readable: true,
+            writable: true,
+            readableLink: true,
+            writableLink: true,
+            required: true,
+            identifier: true,
+            default: 'default',
+            example: ['example'],
+            deprecationReason: 'deprecationReason',
+            fetchable: true,
+            fetchEager: true,
+            jsonldContext: ['jsonldContext'],
+            openapiContext: ['openapiContext'],
+            jsonSchemaContext: ['jsonSchemaContext'],
+            push: true,
+            security: true,
+            securityPostDenormalize: 'securityPostDenormalize',
+            types: ['types'],
+            builtinTypes: [new PropertyInfoType(builtinType: PropertyInfoType::BUILTIN_TYPE_INT)],
+            schema: ['schema'],
+            initializable: true,
+            iris: ['iris'],
+            genId: true,
+            uriTemplate: 'uriTemplate',
+            property: 'property',
+            policy: 'policy',
+            serialize: ['serialize'],
+            hydra: true,
+            extraProperties: ['extraProperties'],
         );
         $decorated->expects($this->once())
             ->method('create')
@@ -83,6 +86,9 @@ class PreventAutomaticEmbeddingPropertyMetadataFactoryTest extends TestCase {
         $this->assertEquals($apiProperty->getGenId(), $result->getGenId());
         $this->assertEquals($apiProperty->getUriTemplate(), $result->getUriTemplate());
         $this->assertEquals($apiProperty->getProperty(), $result->getProperty());
+        $this->assertEquals($apiProperty->getPolicy(), $result->getPolicy());
+        $this->assertEquals($apiProperty->getSerialize(), $result->getSerialize());
+        $this->assertEquals($apiProperty->getHydra(), $result->getHydra());
         $this->assertEquals($apiProperty->getExtraProperties(), $result->getExtraProperties());
     }
 }

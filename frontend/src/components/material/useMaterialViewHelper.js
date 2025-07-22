@@ -55,7 +55,7 @@ async function getSheets(camp, collection, materialList) {
             materialItem.quantity,
             materialItem.unit,
             materialItem.article,
-            ...(!materialList ? [materialItem.materialList().name] : []),
+            ...(!materialList ? [materialItem.materialList?.().name] : []),
             activity?.title
               ? `${activity.category().short} ${activity?.title}: ${scheduleEntries}`
               : period.description,
@@ -123,8 +123,18 @@ export function useMaterialViewHelper(camp, list) {
   const downloadXlsx = downloadMaterialList(camp, collection, computedList.value?.name)
   const openPeriods = loadPeriods(camp)
 
-  onMounted(() => {
-    collection.value.map(({ materialItems }) => materialItems.$reload())
+  onMounted(async () => {
+    await Promise.all([
+      apiStore
+        .get()
+        .contentNodes({
+          isRoot: 'true',
+          camp: camp._meta.self,
+        })
+        .$loadItems(),
+      ...collection.value.map(({ materialItems }) => materialItems.$reload()),
+      camp.categories().$loadItems(),
+    ])
   })
 
   return {

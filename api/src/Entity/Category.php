@@ -66,6 +66,10 @@ use Symfony\Component\Validator\Constraints as Assert;
                     security: 'is_granted("CAMP_COLLABORATOR", camp) or is_granted("CAMP_IS_PROTOTYPE", camp)'
                 ),
             ],
+            extraProperties: [
+                'filter_by_current_user' => false,
+            ],
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
         ),
     ],
     denormalizationContext: ['groups' => ['write']],
@@ -79,6 +83,14 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
     use HasRootContentNodeTrait;
 
     public const CAMP_SUBRESOURCE_URI_TEMPLATE = '/camps/{campId}/categories{._format}';
+
+    public const array COLLECTION_NORMALIZATION_CONTEXT = [
+        'groups' => [
+            'read',
+            'Category:PreferredContentTypes',
+        ],
+        'swagger_definition_name' => 'read',
+    ];
 
     public const ITEM_NORMALIZATION_CONTEXT = [
         'groups' => [

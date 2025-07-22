@@ -31,7 +31,10 @@
                 {{ $tc('views.camp.category.category.copyCategory') }}
               </v-list-item-title>
             </v-list-item>
-            <CopyCategoryInfoDialog ref="copyInfoDialog" />
+            <ClipboardInfoDialog
+              ref="copyInfoDialog"
+              translation-context-i18n-key="views.camp.category.category.clipboardInfoDialog"
+            />
             <DialogEntityDelete
               v-if="isManager"
               :entity="category"
@@ -105,12 +108,12 @@ import CategoryProperties from '@/components/category/CategoryProperties.vue'
 import CategoryTemplate from '@/components/category/CategoryTemplate.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import router, { categoryRoute } from '@/router.js'
-import CopyCategoryInfoDialog from '@/components/category/CopyCategoryInfoDialog.vue'
+import ClipboardInfoDialog from '@/components/generic/ClipboardInfoDialog.vue'
 
 export default {
   name: 'Category',
   components: {
-    CopyCategoryInfoDialog,
+    ClipboardInfoDialog,
     TogglePaperSize,
     CategoryTemplate,
     CategoryProperties,
@@ -145,6 +148,11 @@ export default {
       layoutMode: true,
       loading: true,
       openPanels: [0, 1],
+    }
+  },
+  head() {
+    return {
+      title: () => this.category.short + ': ' + this.category.title,
     }
   },
   computed: {

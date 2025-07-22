@@ -26,7 +26,11 @@
       <v-icon x-small color="white">mdi-content-copy</v-icon>
     </v-btn>
 
-    <CopyActivityInfoDialog v-if="isEditable" ref="copyInfoDialog" />
+    <ClipboardInfoDialog
+      v-if="isEditable"
+      ref="copyInfoDialog"
+      translation-context-i18n-key="components.program.picasso.picassoEntry.clipboardInfoDialog"
+    />
 
     <!-- edit button & dialog -->
     <DialogActivityEdit
@@ -46,6 +50,11 @@
           @mouseup.stop=""
         >
           <v-icon x-small color="white">mdi-pencil</v-icon>
+        </v-btn>
+      </template>
+      <template #moreActions>
+        <v-btn color="primary" :to="scheduleEntryRoute">
+          {{ $tc('global.button.open') }}
         </v-btn>
       </template>
     </DialogActivityEdit>
@@ -128,22 +137,21 @@
   </router-link>
 </template>
 <script>
-import { ref, toRefs, computed } from 'vue'
-import DialogActivityEdit from '../DialogActivityEdit.vue'
+import { computed, ref, toRefs } from 'vue'
+import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
 import campCollaborationDisplayName from '@/common/helpers/campCollaborationDisplayName.js'
 import { timestampToUtcString } from './dateHelperVCalendar.js'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
-import { scheduleEntryRoute } from '@/router.js'
-import router from '@/router.js'
+import router, { scheduleEntryRoute } from '@/router.js'
 import { contrastColor } from '@/common/helpers/colors.js'
 import { useClickDetector } from './useClickDetector.js'
 import AvatarRow from '@/components/generic/AvatarRow.vue'
 import { ONE_MINUTE_IN_MILLISECONDS } from '@/helpers/vCalendarDragAndDrop.js'
-import CopyActivityInfoDialog from '@/components/activity/CopyActivityInfoDialog.vue'
+import ClipboardInfoDialog from '@/components/generic/ClipboardInfoDialog.vue'
 
 export default {
   name: 'PicassoEntry',
-  components: { AvatarRow, DialogActivityEdit, CopyActivityInfoDialog },
+  components: { AvatarRow, DialogActivityEdit, ClipboardInfoDialog },
   mixins: [dateHelperUTCFormatted],
   props: {
     editable: { type: Boolean, required: true },

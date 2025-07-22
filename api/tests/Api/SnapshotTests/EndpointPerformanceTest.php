@@ -60,6 +60,13 @@ class EndpointPerformanceTest extends ECampApiTestCase {
             $queryExecutionTime[$url] = $executionTimeSeconds;
         }
 
+        foreach ($this->getSubresourceUrls() as $url => $id) {
+            list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor(preg_replace('/\{id}/', $id, $url));
+            $responseCodes[$url] = $statusCode;
+            $numberOfQueries[$url] = $queryCount;
+            $queryExecutionTime[$url] = $executionTimeSeconds;
+        }
+
         $not200Responses = array_filter($responseCodes, fn ($value) => 200 != $value);
         assertThat($not200Responses, equalTo([]));
 
@@ -186,9 +193,9 @@ class EndpointPerformanceTest extends ECampApiTestCase {
 
     private static function getContentNodeEndpointQueryCountRanges(): array {
         return [
-            '/content_nodes' => [8, 11],
+            '/content_nodes' => [10, 12],
             '/content_node/column_layouts' => [6, 6],
-            '/content_node/column_layouts/item' => [10, 10],
+            '/content_node/column_layouts/item' => [9, 9],
             '/content_node/checklist_nodes' => [6, 7],
             '/content_node/checklist_nodes/item' => [9, 9],
             '/content_node/material_nodes' => [6, 7],
@@ -255,6 +262,25 @@ class EndpointPerformanceTest extends ECampApiTestCase {
             '/material_lists?camp=' => urlencode($this->getIriFor('camp1')),
             '/profiles?user.collaboration.camp=' => urlencode($this->getIriFor('camp1')),
             '/schedule_entries?period=' => urlencode($this->getIriFor('period1')),
+        ];
+    }
+
+    private function getSubresourceUrls(): array {
+        $camp1Id = $this->getFixture('camp1')->getId();
+        $checklist1Id = $this->getFixture('checklist1')->getId();
+        $dayId = $this->getFixture('day1period1')->getId();
+        $periodId = $this->getFixture('period1')->getId();
+
+        return [
+            '/camps/{id}/activities' => $camp1Id,
+            '/camps/{id}/activity_progress_labels' => $camp1Id,
+            '/camps/{id}/camp_collaborations' => $camp1Id,
+            '/camps/{id}/categories' => $camp1Id,
+            '/camps/{id}/checklists' => $camp1Id,
+            '/checklists/{id}/checklist_items' => $checklist1Id,
+            '/days/{id}/day_responsibles' => $dayId,
+            '/periods/{id}/days' => $periodId,
+            '/periods/{id}/schedule_entries' => $periodId,
         ];
     }
 

@@ -145,6 +145,7 @@ class MaterialList extends BaseEntity implements BelongsToCampInterface, CopyFro
     public function getName(): ?string {
         return $this->name
             ?? $this->campCollaboration?->user?->getDisplayName()
+            // @phpstan-ignore nullsafe.neverNull
             ?? $this->campCollaboration?->inviteEmail
             ?? 'NoName';
     }

@@ -92,6 +92,7 @@ import AvatarRow from '@/components/generic/AvatarRow.vue'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
 import TextAlignBaseline from '@/components/layout/TextAlignBaseline.vue'
+import { scheduleEntryRoute } from '@/router.js'
 
 export default {
   name: 'ActivityRow',
@@ -135,13 +136,7 @@ export default {
       return this.timeDurationShort(this.scheduleEntry.start, this.scheduleEntry.end)
     },
     routerLink() {
-      return {
-        name: 'camp/activity',
-        params: {
-          campId: this.scheduleEntry.period().camp().id,
-          scheduleEntryId: this.scheduleEntry.id,
-        },
-      }
+      return scheduleEntryRoute(this.scheduleEntry)
     },
   },
 }

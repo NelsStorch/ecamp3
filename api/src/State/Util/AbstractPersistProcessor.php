@@ -39,7 +39,7 @@ abstract class AbstractPersistProcessor implements ProcessorInterface {
                 $propertyBefore = call_user_func($listener->getExtractProperty(), $dataBefore);
                 $propertyNow = call_user_func($listener->getExtractProperty(), $data);
                 if ($propertyBefore !== $propertyNow) {
-                    $data = call_user_func($listener->getBeforeAction(), $data);
+                    $data = call_user_func($listener->getBeforeAction(), $data, $dataBefore);
                 }
             }
         }
@@ -53,7 +53,7 @@ abstract class AbstractPersistProcessor implements ProcessorInterface {
                 $propertyBefore = call_user_func($listener->getExtractProperty(), $dataBefore);
                 $propertyNow = call_user_func($listener->getExtractProperty(), $data);
                 if ($propertyBefore !== $propertyNow) {
-                    call_user_func($listener->getAfterAction(), $data);
+                    call_user_func($listener->getAfterAction(), $data, $dataBefore);
                 }
             }
         }

@@ -5,11 +5,9 @@
 	{$CADDY_GLOBAL_OPTIONS}
 
 	frankenphp {
+		num_threads {$NUM_THREADS}
 		{$FRANKENPHP_CONFIG}
 	}
-
-	# https://caddyserver.com/docs/caddyfile/directives#sorting-algorithm
-	order php_server before file_server
 
 	http_port 3001
 	https_port 3443
@@ -20,9 +18,7 @@
 	# due to https://github.com/caddyserver/caddy/commit/f5ccb904a3db2bffd980feee685afaa762224cb2
 	admin 0.0.0.0:2019
 	# enable Prometheus metrics endpoint https://caddyserver.com/docs/metrics
-	servers {
-		metrics
-	}
+	metrics
 }
 
 {$CADDY_EXTRA_CONFIG}
@@ -32,24 +28,7 @@
 
 	root * /app/public
 
-	encode {
-		zstd
-		br
-		gzip
-
-		match {
-			header Content-Type text/*
-			header Content-Type application/json*
-			header Content-Type application/javascript*
-			header Content-Type application/xhtml+xml*
-			header Content-Type application/atom+xml*
-			header Content-Type application/rss+xml*
-			header Content-Type image/svg+xml*
-			# Custom formats supported
-			header Content-Type application/ld+json*
-			header Content-Type application/hal+json*
-		}
-	}
+	encode zstd br gzip
 
 	# Add links to the API docs if not set explicitly (e.g. the PWA)
 	header ?Link `</docs.jsonld>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation"`

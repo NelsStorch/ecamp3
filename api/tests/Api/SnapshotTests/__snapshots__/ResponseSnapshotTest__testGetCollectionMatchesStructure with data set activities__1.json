@@ -5,38 +5,6 @@
                 "_embedded": {
                     "activityResponsibles": [],
                     "progressLabel": "escaped_value",
-                    "rootContentNode": {
-                        "_links": {
-                            "children": [
-                                {
-                                    "href": "escaped_value"
-                                }
-                            ],
-                            "contentType": {
-                                "href": "escaped_value"
-                            },
-                            "parent": "escaped_value",
-                            "root": {
-                                "href": "escaped_value"
-                            },
-                            "self": {
-                                "href": "escaped_value"
-                            }
-                        },
-                        "contentTypeName": "escaped_value",
-                        "data": {
-                            "columns": [
-                                {
-                                    "slot": "escaped_value",
-                                    "width": "escaped_value"
-                                }
-                            ]
-                        },
-                        "id": "escaped_value",
-                        "instanceName": "escaped_value",
-                        "position": "escaped_value",
-                        "slot": "escaped_value"
-                    },
                     "scheduleEntries": [
                         {
                             "_links": {
@@ -111,34 +79,6 @@
                         }
                     ],
                     "progressLabel": "escaped_value",
-                    "rootContentNode": {
-                        "_links": {
-                            "children": [],
-                            "contentType": {
-                                "href": "escaped_value"
-                            },
-                            "parent": "escaped_value",
-                            "root": {
-                                "href": "escaped_value"
-                            },
-                            "self": {
-                                "href": "escaped_value"
-                            }
-                        },
-                        "contentTypeName": "escaped_value",
-                        "data": {
-                            "columns": [
-                                {
-                                    "slot": "escaped_value",
-                                    "width": "escaped_value"
-                                }
-                            ]
-                        },
-                        "id": "escaped_value",
-                        "instanceName": "escaped_value",
-                        "position": "escaped_value",
-                        "slot": "escaped_value"
-                    },
                     "scheduleEntries": [
                         {
                             "_links": {
@@ -237,41 +177,6 @@
                         }
                     ],
                     "progressLabel": "escaped_value",
-                    "rootContentNode": {
-                        "_links": {
-                            "children": [
-                                {
-                                    "href": "escaped_value"
-                                },
-                                {
-                                    "href": "escaped_value"
-                                }
-                            ],
-                            "contentType": {
-                                "href": "escaped_value"
-                            },
-                            "parent": "escaped_value",
-                            "root": {
-                                "href": "escaped_value"
-                            },
-                            "self": {
-                                "href": "escaped_value"
-                            }
-                        },
-                        "contentTypeName": "escaped_value",
-                        "data": {
-                            "columns": [
-                                {
-                                    "slot": "escaped_value",
-                                    "width": "escaped_value"
-                                }
-                            ]
-                        },
-                        "id": "escaped_value",
-                        "instanceName": "escaped_value",
-                        "position": "escaped_value",
-                        "slot": "escaped_value"
-                    },
                     "scheduleEntries": [
                         {
                             "_links": {
@@ -381,38 +286,6 @@
                         "id": "escaped_value",
                         "position": "escaped_value",
                         "title": "escaped_value"
-                    },
-                    "rootContentNode": {
-                        "_links": {
-                            "children": [
-                                {
-                                    "href": "escaped_value"
-                                }
-                            ],
-                            "contentType": {
-                                "href": "escaped_value"
-                            },
-                            "parent": "escaped_value",
-                            "root": {
-                                "href": "escaped_value"
-                            },
-                            "self": {
-                                "href": "escaped_value"
-                            }
-                        },
-                        "contentTypeName": "escaped_value",
-                        "data": {
-                            "columns": [
-                                {
-                                    "slot": "escaped_value",
-                                    "width": "escaped_value"
-                                }
-                            ]
-                        },
-                        "id": "escaped_value",
-                        "instanceName": "escaped_value",
-                        "position": "escaped_value",
-                        "slot": "escaped_value"
                     },
                     "scheduleEntries": [
                         {

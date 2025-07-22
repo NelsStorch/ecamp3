@@ -29,7 +29,7 @@ Wrapper component for form components to save data back to API
 </template>
 
 <script>
-import { debounce, set, get } from 'lodash'
+import { debounce, set, get } from 'lodash-es'
 import { apiPropsMixin } from '@/mixins/apiPropsMixin.js'
 import { ValidationObserver } from 'vee-validate'
 import { serverErrorToString } from '@/helpers/serverError.js'
@@ -52,16 +52,14 @@ export default {
     return {
       localValue: null,
       parsedLocalValue: null,
-      isSaving: false,
       isPreSaving: false,
       isLoading: false,
       isMounted: false,
       showIconSuccess: false,
       dirty: false,
-      hasServerError: false,
-      hasLoadingError: false,
-      serverErrorMessage: '',
-      loadingErrorMessage: '',
+      savingRequestCount: 0,
+      serverErrorMessage: null,
+      loadingErrorMessage: null,
       validationErrorMessages: [],
       eventHandlers: {
         save: this.save,
@@ -81,6 +79,15 @@ export default {
       if (this.hasLoadingError) errors.push(this.loadingErrorMessage)
       if (this.hasServerError) errors.push(this.serverErrorMessage)
       return errors
+    },
+    isSaving() {
+      return this.savingRequestCount > 0
+    },
+    hasLoadingError() {
+      return this.loadingErrorMessage != null
+    },
+    hasServerError() {
+      return this.serverErrorMessage != null
     },
     status: function () {
       if (this.isSaving) {
@@ -151,7 +158,7 @@ export default {
         }
 
         // clear dirty if outside value changes to same as local value (e.g. after save operation)
-        if (this.parsedLocalValue === newValue) {
+        if (this.parsedLocalValue === newValue && !this.isSaving) {
           this.dirty = false
         }
       },
@@ -176,7 +183,7 @@ export default {
     async onInput(newValue) {
       this.localValue = newValue
       this.parsedLocalValue = this.parse ? this.parse(newValue) : newValue
-      this.dirty = this.parsedLocalValue !== this.apiValue
+      this.dirty = this.isSaving || this.parsedLocalValue !== this.apiValue
       this.isPreSaving = true
 
       if (this.autoSave) {
@@ -185,6 +192,7 @@ export default {
     },
     async onBlur() {
       if (!(this.isSaving || this.isPreSaving) && this.autoSave) {
+        this.dirty = this.parsedLocalValue !== this.apiValue
         this.localValue = this.apiValue
         this.parsedLocalValue = this.parse ? this.parse(this.apiValue) : this.apiValue
       }
@@ -197,13 +205,11 @@ export default {
 
       // initial data load from API
       obj._meta.load
-        .then(() => {
-          this.isLoading = false
-        })
         .catch((error) => {
-          this.isLoading = false
-          this.hasLoadingError = true
           this.loadingErrorMessage = error.message
+        })
+        .finally(() => {
+          this.isLoading = false
         })
     },
     reset() {
@@ -214,8 +220,7 @@ export default {
       this.$emit('finished')
     },
     resetErrors() {
-      this.hasLoadingError = false
-      this.hasServerError = false
+      this.loadingErrorMessage = null
       this.serverErrorMessage = null
       if (this.isMounted) {
         this.$refs.validationObserver.reset()
@@ -242,28 +247,32 @@ export default {
       // reset all dirty flags and start saving
       this.resetErrors()
       this.isPreSaving = false
-      this.isSaving = true
+
+      this.savingRequestCount++
 
       // construct payload (nested path allowed)
       const payload = {}
       set(payload, this.path, this.parsedLocalValue)
 
-      this.api.patch(this.uri, payload).then(
-        () => {
-          this.isSaving = false
+      this.api
+        .patch(this.uri, payload)
+        .then(() => {
           this.showIconSuccess = true
           this.$emit('saved')
           this.$emit('finished')
           setTimeout(() => {
             this.showIconSuccess = false
           }, 2000)
-        },
-        (error) => {
-          this.isSaving = false
+        })
+        .catch((error) => {
           this.serverErrorMessage = serverErrorToString(error, this.path)
-          this.hasServerError = true
-        }
-      )
+        })
+        .finally(() => {
+          this.savingRequestCount--
+          if (!this.isSaving && this.parsedLocalValue === this.apiValue) {
+            this.dirty = false
+          }
+        })
     },
   },
 }

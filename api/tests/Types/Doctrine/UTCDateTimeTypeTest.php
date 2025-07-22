@@ -1,4 +1,5 @@
 <?php
+
 /**
  * mostly copied 1:1 from https://github.com/doctrine/dbal/blob/3.2.x/tests/Types/DateTimeTest.php.
  */
@@ -21,7 +22,7 @@ class UTCDateTimeTypeTest extends BaseDateTypeTestCase {
     public function testDateTimeConvertsToDatabaseValue(): void {
         $date = new \DateTime('1985-09-01 10:10:10');
 
-        $expected = $date->format($this->platform->getDateTimeTzFormatString());
+        $expected = $date->format($this->platform->getDateTimeFormatString());
         $actual = $this->type->convertToDatabaseValue($date, $this->platform);
 
         self::assertEquals($expected, $actual);

@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\InputFilter;
@@ -43,15 +44,23 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
         ),
         new GetCollection(
-            normalizationContext: [
-                'groups' => [
-                    'read',
-                    'Activity:ActivityProgressLabel',
-                    'Activity:ActivityResponsibles',
-                    'Activity:ScheduleEntries',
-                ],
-            ],
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
             security: 'is_authenticated()'
+        ),
+        new GetCollection(
+            uriTemplate: self::CAMP_SUBRESOURCE_URI_TEMPLATE,
+            uriVariables: [
+                'campId' => new Link(
+                    toProperty: 'camp',
+                    fromClass: Camp::class,
+                    security: 'is_granted("CAMP_COLLABORATOR", camp) or is_granted("CAMP_IS_PROTOTYPE", camp)'
+                ),
+            ],
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
+            security: 'is_fully_authenticated()',
+            extraProperties: [
+                'filter_by_current_user' => false,
+            ]
         ),
         new Post(
             processor: ActivityCreateProcessor::class,
@@ -68,6 +77,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity extends BaseEntity implements BelongsToCampInterface {
     use HasRootContentNodeTrait;
+
+    public const CAMP_SUBRESOURCE_URI_TEMPLATE = '/camps/{campId}/activities{._format}';
+
+    public const COLLECTION_NORMALIZATION_CONTEXT = [
+        'groups' => [
+            'read',
+            'Activity:ActivityProgressLabel',
+            'Activity:ActivityResponsibles',
+            'Activity:ScheduleEntries',
+        ],
+    ];
 
     public const ITEM_NORMALIZATION_CONTEXT = [
         'groups' => [
@@ -158,6 +178,17 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
     public string $location = '';
 
     /**
+     * All comments of the activity.
+     */
+    #[ApiProperty(
+        writable: false,
+        uriTemplate: Comment::ACTIVITY_SUBRESOURCE_URI_TEMPLATE,
+        example: '/activities/1a2b3c4d/comments'
+    )]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'activity')]
+    public Collection $comments;
+
+    /**
      * The list of people that are responsible for planning or carrying out this activity.
      */
     #[ApiProperty(writable: false)]
@@ -169,6 +200,7 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
         parent::__construct();
         $this->scheduleEntries = new ArrayCollection();
         $this->activityResponsibles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getCamp(): ?Camp {
@@ -265,6 +297,16 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
         if ($this->activityResponsibles->removeElement($activityResponsible)) {
             if ($activityResponsible->activity === $this) {
                 $activityResponsible->activity = null;
+            }
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->activity === $this) {
+                $comment->activity = null;
             }
         }
 

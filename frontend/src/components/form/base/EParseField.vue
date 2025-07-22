@@ -47,7 +47,7 @@ Displays a field as a textfield (can be used with v-model)
 </template>
 
 <script>
-import { debounce } from 'lodash'
+import { debounce } from 'lodash-es'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { ValidationProvider } from 'vee-validate'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
@@ -159,7 +159,7 @@ export default {
         }
         this.serializedValue = val
         this.internalValue = this.deserialize?.(val) ?? val
-        this.stringValue = this.format?.(val) ?? val
+        this.stringValue = this.format?.(this.internalValue) ?? val
       },
       immediate: true,
     },

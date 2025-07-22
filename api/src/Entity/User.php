@@ -166,11 +166,19 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
     #[ORM\JoinColumn(nullable: false, unique: true, onDelete: 'restrict')]
     public Profile $profile;
 
+    /**
+     * All comments of the user.
+     */
+    #[ApiProperty(readable: false, writable: false)]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'author')]
+    public Collection $comments;
+
     public function __construct() {
         parent::__construct();
         $this->ownedCamps = new ArrayCollection();
         $this->collaborations = new ArrayCollection();
         $this->userCamps = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
