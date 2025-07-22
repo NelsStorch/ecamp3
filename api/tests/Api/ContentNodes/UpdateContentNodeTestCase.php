@@ -75,6 +75,24 @@ abstract class UpdateContentNodeTestCase extends ECampApiTestCase {
         ]);
     }
 
+    public static function getContentNodesWhichCannotHaveChildren(): \Iterator {
+        yield ContentNode\MaterialNode::class => [
+            'materialNode1',
+        ];
+
+        yield ContentNode\MultiSelect::class => [
+            'multiSelect1',
+        ];
+
+        yield ContentNode\SingleText::class => [
+            'singleText1',
+        ];
+
+        yield ContentNode\StoryBoard::class => [
+            'storyboard1',
+        ];
+    }
+
     public function testPatchValidatesThatParentSupportsSlotName() {
         $this->patch(payload: ['slot' => 'invalidSlot']);
 
@@ -191,23 +209,5 @@ abstract class UpdateContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContains([
             'instanceName' => 'control',
         ]);
-    }
-
-    public static function getContentNodesWhichCannotHaveChildren(): \Iterator {
-        yield ContentNode\MaterialNode::class => [
-            'materialNode1',
-        ];
-
-        yield ContentNode\MultiSelect::class => [
-            'multiSelect1',
-        ];
-
-        yield ContentNode\SingleText::class => [
-            'singleText1',
-        ];
-
-        yield ContentNode\StoryBoard::class => [
-            'storyboard1',
-        ];
     }
 }

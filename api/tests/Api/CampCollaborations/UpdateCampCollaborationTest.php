@@ -403,6 +403,14 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         ]);
     }
 
+    public static function invalidAbbreviations(): \Iterator {
+        yield ['ABC'];
+
+        yield ['D3C'];
+
+        yield ['🧑🏿‍🚀🙋🏼‍♀️😊'];
+    }
+
     #[DataProvider('validAbbreviations')]
     public function testPatchCampCollaborationValidatesValidAbbreviation($abbreviation) {
         $campCollaboration = static::getFixture('campCollaboration5inactive');
@@ -413,6 +421,20 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'abbreviation' => $abbreviation,
         ]);
+    }
+
+    public static function validAbbreviations(): \Iterator {
+        yield ['A'];
+
+        yield ['33'];
+
+        yield ['X4'];
+
+        yield ['✅😊'];
+
+        yield ['🧑🏿‍🚀🧑🏼‍🔧'];
+
+        yield ['⚜️'];
     }
 
     #[DataProvider('usersWhichCanEditCampCollaborations')]
@@ -506,27 +528,5 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         yield 'user1manager' => ['user1manager'];
 
         yield 'user2member' => ['user2member'];
-    }
-
-    public static function invalidAbbreviations(): \Iterator {
-        yield ['ABC'];
-
-        yield ['D3C'];
-
-        yield ['🧑🏿‍🚀🙋🏼‍♀️😊'];
-    }
-
-    public static function validAbbreviations(): \Iterator {
-        yield ['A'];
-
-        yield ['33'];
-
-        yield ['X4'];
-
-        yield ['✅😊'];
-
-        yield ['🧑🏿‍🚀🧑🏼‍🔧'];
-
-        yield ['⚜️'];
     }
 }

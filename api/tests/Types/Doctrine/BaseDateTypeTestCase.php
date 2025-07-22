@@ -40,16 +40,6 @@ abstract class BaseDateTypeTestCase extends TestCase {
         $this->type->convertToDatabaseValue($value, $this->platform);
     }
 
-    public function testNullConversion(): void {
-        self::assertNull($this->type->convertToPHPValue(null, $this->platform));
-    }
-
-    public function testConvertDateTimeToPHPValue(): void {
-        $date = new \DateTime('now');
-
-        self::assertSame($date, $this->type->convertToPHPValue($date, $this->platform));
-    }
-
     /** @return \Iterator<(int | string), array<mixed>> */
     public static function invalidPHPValuesProvider(): \Iterator {
         yield [0];
@@ -75,5 +65,15 @@ abstract class BaseDateTypeTestCase extends TestCase {
         yield [[]];
 
         yield [['an array']];
+    }
+
+    public function testNullConversion(): void {
+        self::assertNull($this->type->convertToPHPValue(null, $this->platform));
+    }
+
+    public function testConvertDateTimeToPHPValue(): void {
+        $date = new \DateTime('now');
+
+        self::assertSame($date, $this->type->convertToPHPValue($date, $this->platform));
     }
 }
