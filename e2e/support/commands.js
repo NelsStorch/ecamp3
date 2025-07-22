@@ -70,6 +70,13 @@ Cypress.Commands.add('waitForCacheMiss', (uri) => {
   ).then((result) => expect(result).to.eq(true))
 })
 
+Cypress.Commands.add('apiGet', (uri) => {
+  return cy.request({
+    method: 'GET',
+    url: Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal',
+  })
+})
+
 Cypress.Commands.add('apiPatch', (uri, body) => {
   cy.request({
     method: 'PATCH',
