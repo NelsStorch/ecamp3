@@ -21,7 +21,7 @@ class ListMaterialItemsTest extends ECampApiTestCase {
         // precondition: There is a material item that the user doesn't have access to
         $this->assertNotEmpty(static::$fixtures['materialItem1period1campUnrelated']);
 
-        $response = static::createClientWithCredentials()->request('GET', '/material_items');
+        static::createClientWithCredentials()->request('GET', '/material_items');
         $this->assertResponseStatusCodeSame(400);
     }
 

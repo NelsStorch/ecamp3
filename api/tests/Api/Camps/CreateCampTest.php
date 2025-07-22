@@ -683,7 +683,6 @@ class CreateCampTest extends ECampApiTestCase {
     }
 
     public function testCreateCampFromSharedCamp() {
-        /** @var Camp $campPrototype */
         $campShared = self::getFixture('campShared');
 
         $response = static::createClientWithCredentials()->request('POST', '/camps', ['json' => $this->getExampleWritePayload([

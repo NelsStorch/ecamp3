@@ -156,7 +156,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
         static::bootKernel();
         $client = static::createClientWithCredentials();
         $client->disableReboot();
-        $response = $client->request('GET', '/');
+        $client->request('GET', '/');
 
         return [
             [$client, '/content_nodes?camp=/camps/'.self::getFixtureFor('/camps')->getId()],

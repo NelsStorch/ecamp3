@@ -53,7 +53,7 @@ class UriTemplateFactoryTest extends TestCase {
 
         $this->resourceNameCollectionFactory->method('create')->willReturnCallback(fn (): ResourceNameCollection => $this->resourceNameCollection);
         $this->resourceMetadataCollectionFactory->method('create')->with('Dummy')->willReturnCallback(fn () => $this->resourceMetadataCollection);
-        $this->iriConverter->method('getIriFromResource')->willReturnCallback(function (object|string $resourceClass): ?string {
+        $this->iriConverter->method('getIriFromResource')->willReturnCallback(function (object|string $resourceClass): string {
             return '/'.lcfirst($resourceClass).'s';
         });
     }
@@ -116,8 +116,8 @@ class UriTemplateFactoryTest extends TestCase {
                 name: '_api_/dummys/{id}{._format}_get'
             ),
             new GetCollection(
-                name: '_api_/dummys{._format}_get_collection',
-                filters: ['some_filter_identifier']
+                filters: ['some_filter_identifier'],
+                name: '_api_/dummys{._format}_get_collection'
             ),
         ])));
         $filter = $this->createMock(FilterInterface::class);
@@ -157,9 +157,9 @@ class UriTemplateFactoryTest extends TestCase {
                 name: '_api_/dummys/{id}{._format}_get'
             ),
             new GetCollection(
-                name: '_api_/dummys{._format}_get_collection',
                 paginationClientEnabled: true,
-                paginationClientItemsPerPage: true
+                paginationClientItemsPerPage: true,
+                name: '_api_/dummys{._format}_get_collection'
             ),
         ])));
         $this->createFactory();
@@ -181,12 +181,12 @@ class UriTemplateFactoryTest extends TestCase {
                 name: '_api_/dummys/{id}{._format}_get'
             ),
             new Get(
-                name: '_api_/dummys/{id}/find{._format}_get',
                 uriTemplate: '/dummys/{inviteKey}/find{._format}',
+                name: '_api_/dummys/{id}/find{._format}_get',
             ),
             new Patch(
-                name: '_api_/dummys/{id}/accept{._format}_get',
                 uriTemplate: '/dummys/{inviteKey}/accept{._format}',
+                name: '_api_/dummys/{id}/accept{._format}_get',
             ),
         ])));
         $this->createFactory();

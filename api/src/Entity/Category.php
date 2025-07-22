@@ -39,39 +39,39 @@ use Symfony\Component\Validator\Constraints as Assert;
                        is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Patch(
-            denormalizationContext: ['groups' => ['write', 'update']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write', 'update']],
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
         ),
         new Delete(
-            processor: CategoryRemoveProcessor::class,
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            validate: true,
             validationContext: ['groups' => ['delete']],
+            validate: true,
+            processor: CategoryRemoveProcessor::class,
         ),
         new GetCollection(
             security: 'is_authenticated()'
         ),
         new Post(
-            processor: CategoryCreateProcessor::class,
-            denormalizationContext: ['groups' => ['write', 'create']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null'
+            denormalizationContext: ['groups' => ['write', 'create']],
+            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null',
+            processor: CategoryCreateProcessor::class
         ),
         new GetCollection(
             uriTemplate: self::CAMP_SUBRESOURCE_URI_TEMPLATE,
             uriVariables: [
                 'campId' => new Link(
-                    fromClass: Camp::class,
                     toProperty: 'camp',
+                    fromClass: Camp::class,
                     security: 'is_granted("CAMP_COLLABORATOR", camp) or
                                is_granted("CAMP_IS_PUBLIC", camp)'
                 ),
             ],
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
             extraProperties: [
                 'filter_by_current_user' => false,
             ],
-            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

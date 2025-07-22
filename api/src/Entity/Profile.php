@@ -27,9 +27,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_authenticated()'
         ),
         new Patch(
-            processor: ProfileUpdateProcessor::class,
             denormalizationContext: ['groups' => ['write', 'update']],
-            security: 'object.user === user'
+            security: 'object.user === user',
+            processor: ProfileUpdateProcessor::class
         ),
         new GetCollection(
             security: 'is_authenticated()'

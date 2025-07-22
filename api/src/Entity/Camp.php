@@ -34,29 +34,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
+            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
             security: 'is_granted("CAMP_COLLABORATOR", object) or
                        is_granted("CAMP_IS_PUBLIC", object)',
-            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
         ),
         new Patch(
-            processor: CampUpdateProcessor::class,
-            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            denormalizationContext: ['groups' => ['write', 'update']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write', 'update']],
+            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
+            processor: CampUpdateProcessor::class,
         ),
         new Delete(
-            processor: CampRemoveProcessor::class,
             security: 'is_granted("CAMP_MANAGER", object)',
+            processor: CampRemoveProcessor::class,
         ),
         new GetCollection(
             security: 'is_authenticated()'
         ),
         new Post(
-            processor: CampCreateProcessor::class,
+            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write', 'create']],
             security: 'is_authenticated()',
             validationContext: ['groups' => ['Default', 'create', 'Camp:create']],
-            denormalizationContext: ['groups' => ['write', 'create']],
-            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            processor: CampCreateProcessor::class,
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

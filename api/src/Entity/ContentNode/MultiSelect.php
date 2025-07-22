@@ -26,10 +26,10 @@ use Symfony\Component\Validator\Constraints as Assert;
                        is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Patch(
-            processor: ContentNodePersistProcessor::class,
             denormalizationContext: ['groups' => ['write', 'update']],
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            validationContext: ['groups' => ['Default', 'update']]
+            validationContext: ['groups' => ['Default', 'update']],
+            processor: ContentNodePersistProcessor::class
         ),
         new Delete(
             security: '(is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)) and object.parent !== null' // disallow delete when contentNode is a root node
@@ -39,10 +39,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             provider: ContentNodeCollectionProvider::class
         ),
         new Post(
-            processor: MultiSelectCreateProcessor::class,
             denormalizationContext: ['groups' => ['write', 'create']],
             securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.parent === null',
-            validationContext: ['groups' => ['Default', 'create']]
+            validationContext: ['groups' => ['Default', 'create']],
+            processor: MultiSelectCreateProcessor::class
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

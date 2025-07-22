@@ -30,17 +30,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Patch(
-            processor: UserActivateProcessor::class,
             uriTemplate: 'users/{id}/activate{._format}',
             denormalizationContext: ['groups' => ['activate']],
-            output: User::class
+            output: User::class,
+            processor: UserActivateProcessor::class
         ),
         new Get(
             security: 'is_authenticated()'
         ),
         new Patch(
-            processor: UserUpdateProcessor::class,
-            security: 'object === user'
+            security: 'object === user',
+            processor: UserUpdateProcessor::class
         ),
         new Delete(
             security: 'false'
@@ -49,11 +49,12 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'false'
         ),
         new Post(
-            processor: UserCreateProcessor::class,
-            security: 'true', // allow unauthenticated clients to create (register) users
-            validationContext: ['groups' => ['Default', 'create']],
             normalizationContext: ['groups' => ['read', 'User:create']],
-            denormalizationContext: ['groups' => ['write', 'create']]
+            denormalizationContext: ['groups' => ['write', 'create']],
+            security: 'true',
+            // allow unauthenticated clients to create (register) users
+            validationContext: ['groups' => ['Default', 'create']],
+            processor: UserCreateProcessor::class
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

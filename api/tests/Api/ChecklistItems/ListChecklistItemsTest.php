@@ -21,7 +21,7 @@ class ListChecklistItemsTest extends ECampApiTestCase {
         // precondition: There is a checklist-item that the user doesn't have access to
         $this->assertNotEmpty(static::$fixtures['checklistItemUnrelated_1_1']);
 
-        $response = static::createClientWithCredentials()->request('GET', '/checklist_items');
+        static::createClientWithCredentials()->request('GET', '/checklist_items');
         $this->assertResponseStatusCodeSame(400);
     }
 

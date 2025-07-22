@@ -43,18 +43,18 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: '(is_granted("CHECKLIST_IS_PROTOTYPE", object) and is_granted("ROLE_ADMIN")) or
                        (is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object))
                       ',
-            validate: true,
             validationContext: ['groups' => ['delete']],
+            validate: true,
         ),
         new GetCollection(
             security: 'is_authenticated()'
         ),
         new Post(
-            processor: ChecklistCreateProcessor::class,
             denormalizationContext: ['groups' => ['write', 'create']],
             securityPostDenormalize: '(is_granted("CHECKLIST_IS_PROTOTYPE", object) and is_granted("ROLE_ADMIN")) or
                                       (!is_granted("CHECKLIST_IS_PROTOTYPE", object) and (is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null))
-                                     '
+                                     ',
+            processor: ChecklistCreateProcessor::class
         ),
         new GetCollection(
             uriTemplate: self::CAMP_SUBRESOURCE_URI_TEMPLATE,

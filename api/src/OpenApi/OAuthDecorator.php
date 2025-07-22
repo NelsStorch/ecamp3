@@ -20,6 +20,12 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
             get: new Model\Operation(
                 operationId: 'oauthGoogleRedirect',
                 tags: ['OAuth'],
+                responses: [
+                    '302' => [
+                        'description' => 'Redirect to the Google OAuth authorization endpoint',
+                    ],
+                ],
+                summary: 'Log in using Google Oauth.',
                 parameters: [
                     new Model\Parameter(
                         name: 'callback',
@@ -29,12 +35,6 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
                         ]
                     ),
                 ],
-                responses: [
-                    '302' => [
-                        'description' => 'Redirect to the Google OAuth authorization endpoint',
-                    ],
-                ],
-                summary: 'Log in using Google Oauth.',
             ),
         );
         $openApi->getPaths()->addPath('/auth/google', $pathItemGoogle);
@@ -44,6 +44,12 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
             get: new Model\Operation(
                 operationId: 'oauthPbsmidataRedirect',
                 tags: ['OAuth'],
+                responses: [
+                    '302' => [
+                        'description' => 'Redirect to the PBS MiData OAuth authorization endpoint',
+                    ],
+                ],
+                summary: 'Log in using PBS MiData Oauth.',
                 parameters: [
                     new Model\Parameter(
                         name: 'callback',
@@ -53,12 +59,6 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
                         ]
                     ),
                 ],
-                responses: [
-                    '302' => [
-                        'description' => 'Redirect to the PBS MiData OAuth authorization endpoint',
-                    ],
-                ],
-                summary: 'Log in using PBS MiData Oauth.',
             ),
         );
         $openApi->getPaths()->addPath('/auth/pbsmidata', $pathItemPbsmidata);
@@ -68,6 +68,12 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
             get: new Model\Operation(
                 operationId: 'oauthCevidbRedirect',
                 tags: ['OAuth'],
+                responses: [
+                    '302' => [
+                        'description' => 'Redirect to the CeviDB OAuth authorization endpoint',
+                    ],
+                ],
+                summary: 'Log in using CeviDB Oauth.',
                 parameters: [
                     new Model\Parameter(
                         name: 'callback',
@@ -77,12 +83,6 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
                         ]
                     ),
                 ],
-                responses: [
-                    '302' => [
-                        'description' => 'Redirect to the CeviDB OAuth authorization endpoint',
-                    ],
-                ],
-                summary: 'Log in using CeviDB Oauth.',
             ),
         );
         $openApi->getPaths()->addPath('/auth/cevidb', $pathItemCevidb);
@@ -92,6 +92,12 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
             get: new Model\Operation(
                 operationId: 'oauthJubladbRedirect',
                 tags: ['OAuth'],
+                responses: [
+                    '302' => [
+                        'description' => 'Redirect to the JublaDB OAuth authorization endpoint',
+                    ],
+                ],
+                summary: 'Log in using JublaDB Oauth.',
                 parameters: [
                     new Model\Parameter(
                         name: 'callback',
@@ -101,12 +107,6 @@ final class OAuthDecorator implements OpenApiFactoryInterface {
                         ]
                     ),
                 ],
-                responses: [
-                    '302' => [
-                        'description' => 'Redirect to the JublaDB OAuth authorization endpoint',
-                    ],
-                ],
-                summary: 'Log in using JublaDB Oauth.',
             ),
         );
         $openApi->getPaths()->addPath('/auth/jubladb', $pathItemJubladb);

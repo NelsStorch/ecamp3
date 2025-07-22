@@ -58,7 +58,7 @@ class FilterEagerLoadingExtensionIntegrationTest extends ECampApiTestCase {
                     $queryBuilder->expr()->lte('a2.title', ':text'),
                     $queryBuilder->expr()->orX(
                         $queryBuilder->expr()->in('a2.title', [':text']),
-                        $queryBuilder->expr()->eq($queryBuilder->expr()->lower('a2.title'), ':text')
+                        $queryBuilder->expr()->eq((string) $queryBuilder->expr()->lower('a2.title'), ':text')
                     )
                 )
             )

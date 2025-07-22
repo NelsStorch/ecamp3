@@ -21,35 +21,36 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            provider: InvitationProvider::class,
-            uriTemplate: '/invitations/{inviteKey}/find{._format}', // TO DISCUSS: Wouldn't '/{inviteKey}{._format}' be more REST-like
+            // TO DISCUSS: Wouldn't '/{inviteKey}{._format}' be more REST-like
+            uriTemplate: '/invitations/{inviteKey}/find{._format}',
+            openapi: new OpenApiOperation(description: 'Use myInviteKey to find an invitation in the dev environment.'),
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            openapi: new OpenApiOperation(description: 'Use myInviteKey to find an invitation in the dev environment.')
+            provider: InvitationProvider::class
         ),
         new Patch(
-            provider: InvitationProvider::class,
-            processor: InvitationAcceptProcessor::class,
-            output: Invitation::class,
-            security: 'is_authenticated()',
             uriTemplate: '/invitations/{inviteKey}/'.self::ACCEPT.'{._format}',
-            denormalizationContext: ['groups' => ['write']],
-            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
             openapi: new OpenApiOperation(summary: 'Accept an Invitation.', description: 'Use myInviteKey2 to accept an invitation in dev environment.'),
-            validationContext: ['groups' => ['Default', 'accept']]
+            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write']],
+            security: 'is_authenticated()',
+            validationContext: ['groups' => ['Default', 'accept']],
+            output: Invitation::class,
+            provider: InvitationProvider::class,
+            processor: InvitationAcceptProcessor::class
         ),
         new Patch(
-            provider: InvitationProvider::class,
-            processor: InvitationRejectProcessor::class,
-            output: Invitation::class,
             uriTemplate: '/invitations/{inviteKey}/'.self::REJECT.'{._format}',
-            denormalizationContext: ['groups' => ['write']],
+            openapi: new OpenApiOperation(summary: 'Reject an Invitation.', description: 'Use myInviteKey to reject an invitation in dev environment.'),
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            openapi: new OpenApiOperation(summary: 'Reject an Invitation.', description: 'Use myInviteKey to reject an invitation in dev environment.')
+            denormalizationContext: ['groups' => ['write']],
+            output: Invitation::class,
+            provider: InvitationProvider::class,
+            processor: InvitationRejectProcessor::class
         ),
         new GetCollection(
-            provider: InvitationProvider::class,
+            openapi: false,
             security: 'false',
-            openapi: false
+            provider: InvitationProvider::class
         ),
     ],
 )]

@@ -20,7 +20,7 @@ class ListContentNodesTest extends ECampApiTestCase {
     }
 
     public function testListContentNodesWithoutFilterIsNotAllowedForLoggedInUser() {
-        $response = static::createClientWithCredentials()->request('GET', '/content_nodes');
+        static::createClientWithCredentials()->request('GET', '/content_nodes');
         $this->assertResponseStatusCodeSame(400);
     }
 
