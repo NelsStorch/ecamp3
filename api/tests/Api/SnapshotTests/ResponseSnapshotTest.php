@@ -213,6 +213,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
                 '/content_types' => false,
                 '/days' => false,
                 '/day_responsibles' => false,
+                '/comments' => false,
                 default => true,
             };
         });
