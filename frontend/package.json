@@ -123,6 +123,7 @@
     "vue-template-compiler": "2.7.15"
   },
   "overrides": {
+    "stylus": "github:stylus/stylus#0.57.0",
     "uri-js": "npm:uri-js-replace"
   },
   "postcss": {
