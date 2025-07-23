@@ -195,7 +195,7 @@
         "noContent": "No Content",
         "noPrototype": "No template",
         "noPrototypeAlert": {
-          "description": "You must make all settings manually. There are no block templates & layouts available. This is only suitable for experienced users.",
+          "description": "You must make all settings manually. There are no activity templates & layouts available. This is only suitable for experienced users.",
           "title": "Attention: You chose \"No template\"."
         },
         "otherPrototype": "Copy the settings from another camp…",
@@ -203,10 +203,10 @@
         "preview": "Preview of camp template",
         "progressLabels": "Activity states",
         "prototypeCampUrl": "Link of desired template camp",
-        "prototypeHint": "Copy categories, activity templates and states from a template.",
-        "prototypeHintEmpty": "Don't copy categories, activity templates and states.",
+        "prototypeHint": "Copy categories, activity templates, states, material lists and checklists from a template.",
+        "prototypeHintEmpty": "Don't copy any categories, activity templates, states, material lists or checklists.",
         "prototypeHintOther": "Copy categories, activity templates, states, unpersonal material lists and checklists from this other camp. No activities are copied.",
-        "prototypeHintSelected": "Copy categories, activity templates and states from this template.",
+        "prototypeHintSelected": "Copy categories, activity templates, states and material lists from this template.",
         "submitTooltipPrototype": "You need to choose if and which template you want."
       }
     },
