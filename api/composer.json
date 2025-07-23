@@ -52,14 +52,14 @@
         "webonyx/graphql-php": "15.21.3"
     },
     "require-dev": {
-        "brianium/paratest": "v7.8.3",
+        "brianium/paratest": "v7.8.4",
         "friendsofphp/php-cs-fixer": "3.77.0",
         "hautelook/alice-bundle": "2.15.1",
         "justinrainbow/json-schema": "6.4.2",
         "php-coveralls/php-coveralls": "2.8.0",
         "phpspec/prophecy-phpunit": "2.4.0",
         "phpstan/phpstan": "2.1.19",
-        "phpunit/phpunit": "11.5.22",
+        "phpunit/phpunit": "11.5.27",
         "rector/rector": "2.1.2",
         "psalm/phar": "6.13.0",
         "spatie/phpunit-snapshot-assertions": "5.2.1",
