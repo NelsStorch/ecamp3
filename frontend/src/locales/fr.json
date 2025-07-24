@@ -26,11 +26,6 @@
       "dialog": {
         "dialogActivityEdit": {
           "title": "Modifier l'activité"
-        }
-      },
-      "dialog": {
-        "dialogActivityEdit": {
-          "title": "Modifier l'activité"
         },
         "formScheduleEntryList": {
           "name": "Dates planifiées"
@@ -131,13 +126,20 @@
         "title": "Modifier le statut"
       },
       "dialogCategoryCreate": {
+        "clearClipboard": "Vider le presse-papiers",
+        "clipboard": "Presse-papiers",
         "clipboardInfoDialog": {
           "allow": "Autoriser maintenant",
-          "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les catégories copiées.",
+          "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu ne peux pas coller les catégories copiées.",
           "description": "Pour coller une catégorie copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
-          "granted": "Vous pouvez maintenant coller les catégories copiées.",
-          "title": "Copier et coller une catégorie"
+          "granted": "Tu peux maintenant coller les catégories copiées.",
+          "title": "Copier et coller la catégorie"
         },
+        "copyCategoryOrActivity": "Copier la catégorie ou l'activité",
+        "copyContent": "Copier le contenu",
+        "copyPasteCategory": "Copier et coller la catégorie",
+        "copySourceInfo": "Tu peux coller ici l'URL d'une catégorie ou d'une activité pour copier son contenu.",
+        "pasteCategory": "Copier la catégorie ou l'activité",
         "title": "Créer une catégorie d'activité"
       },
       "dialogMaterialListCreate": {
@@ -177,17 +179,33 @@
       },
       "campCreateStep2": {
         "category": "Catégories d'activités",
+        "checklistItemCount": "Aucune entrée | Une entrée | {count} entrées",
+        "checklists": "Check-lists",
+        "clearClipboard": "Vider le presse-papier",
+        "clipboard": "Presse-papier",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu dois entrer le lien vers le modèle de camp manuellement.",
+          "description": "Pour coller les paramètres d'un camp copié, tu dois autoriser eCamp v3 à lire ton presse-papiers.",
+          "granted": "Tu peux maintenant coller les paramètres de camp copiés.",
+          "title": "Copier et coller les paramètres du camp"
+        },
         "create": "Créer le camp",
+        "materialLists": "Listes de matériel",
         "noContent": "Pas de contenu",
         "noPrototype": "Pas de modèle",
         "noPrototypeAlert": {
           "description": "Tu dois effectuer tous les réglages manuellement. Il n'y a pas de modèles de blocs ni de mises en page. Ceci ne convient qu'aux utilisateurs expérimentés.",
           "title": "Attention : Vous avez choisi \"Pas de modèle\"."
         },
+        "otherPrototype": "Copier les paramètres d'un autre camp…",
+        "pasteCamp": "Coller les paramètres du camp copié",
         "preview": "Aperçu du modèle du camp",
         "progressLabels": "États d'activités",
+        "prototypeCampUrl": "Lien du modèle de camp désiré",
         "prototypeHint": "Copie les catégories, les modèles de blocs et les états de blocs d'un modèle de camp.",
         "prototypeHintEmpty": "Ne pas copier de catégories, de modèles de blocs et de statuts de blocs à partir d'un modèle de camp.",
+        "prototypeHintOther": "Copier les catégories, les modèles d'activités, les statuts, les listes de documents non personnels et les check-lists de cet autre camp. Aucune activité n'est copiée.",
         "prototypeHintSelected": "Copie les catégories, les modèles de blocs et les statuts de blocs de ce modèle de camp.",
         "submitTooltipPrototype": "Tu dois encore choisir si tu veux utiliser un modèle de champ et lequel."
       }
@@ -198,13 +216,6 @@
         "createLayoutHelp": "Ici, vous pouvez définir le modèle pour de nouvelles activités {categoryShort}.{br}Le contenu et la mise en page des activités {categoryShort} déjà créées ne seront pas ajustés.",
         "layout": "Layout",
         "noTemplate": "Pas de modèle"
-      },
-      "copyCategoryInfoDialog": {
-        "allow": "Autoriser maintenant",
-        "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu ne peux pas coller les catégories copiées.",
-        "description": "Pour coller une catégorie copiée, tu dois autoriser eCamp à lire ton presse-papiers.",
-        "granted": "Tu peux maintenant coller les catégories copiées.",
-        "title": "Copier et coller la catégorie"
       }
     },
     "checklist": {
@@ -693,12 +704,13 @@
         "category": {
           "clipboardInfoDialog": {
             "allow": "Autoriser maintenant",
-            "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les catégories copiées.",
+            "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu ne peux pas coller les catégories copiées.",
             "description": "Pour coller une catégorie copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
-            "granted": "Vous pouvez maintenant coller les catégories copiées.",
-            "title": "Copier et coller une catégorie"
+            "granted": "Tu peux maintenant coller les catégories copiées.",
+            "title": "Copier et coller la catégorie"
           },
-          "deleteCategory": "Supprimer l'activité",
+          "copyCategory": "Copier la catégorie",
+          "deleteCategory": "Supprimer la catégorie",
           "properties": "Propriétés",
           "template": "Modèle pour les nouvelles activités"
         },
