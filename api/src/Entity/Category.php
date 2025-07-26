@@ -89,7 +89,6 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
             'read',
             'Category:PreferredContentTypes',
         ],
-        'swagger_definition_name' => 'read',
     ];
 
     public const ITEM_NORMALIZATION_CONTEXT = [
