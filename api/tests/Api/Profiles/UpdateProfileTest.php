@@ -475,6 +475,14 @@ class UpdateProfileTest extends ECampApiTestCase {
         ]);
     }
 
+    public static function invalidAbbreviations(): \Iterator {
+        yield ['ABC'];
+
+        yield ['D3C'];
+
+        yield ['🧑🏿‍🚀🙋🏼‍♀️😊'];
+    }
+
     #[DataProvider('validAbbreviations')]
     public function testPatchCampCollaborationValidatesValidAbbreviation($abbreviation) {
         $profile = static::getFixture('profile1manager');
@@ -485,6 +493,18 @@ class UpdateProfileTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'abbreviation' => $abbreviation,
         ]);
+    }
+
+    public static function validAbbreviations(): \Iterator {
+        yield ['AB'];
+
+        yield ['33'];
+
+        yield ['X4'];
+
+        yield ['✅😊'];
+
+        yield ['🧑🏿‍🚀🧑🏼‍🔧'];
     }
 
     public function testPatchProfileValidatesInvalidLanguage() {
@@ -554,25 +574,5 @@ class UpdateProfileTest extends ECampApiTestCase {
         yield 'roles' => ['roles'];
 
         yield 'user' => ['user'];
-    }
-
-    public static function invalidAbbreviations(): \Iterator {
-        yield ['ABC'];
-
-        yield ['D3C'];
-
-        yield ['🧑🏿‍🚀🙋🏼‍♀️😊'];
-    }
-
-    public static function validAbbreviations(): \Iterator {
-        yield ['AB'];
-
-        yield ['33'];
-
-        yield ['X4'];
-
-        yield ['✅😊'];
-
-        yield ['🧑🏿‍🚀🧑🏼‍🔧'];
     }
 }

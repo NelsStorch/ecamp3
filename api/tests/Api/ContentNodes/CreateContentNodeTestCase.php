@@ -107,6 +107,24 @@ abstract class CreateContentNodeTestCase extends ECampApiTestCase {
         ]);
     }
 
+    public static function getContentNodesWhichCannotHaveChildren(): \Iterator {
+        yield ContentNode\MaterialNode::class => [
+            'materialNode1',
+        ];
+
+        yield ContentNode\MultiSelect::class => [
+            'multiSelect1',
+        ];
+
+        yield ContentNode\SingleText::class => [
+            'singleText1',
+        ];
+
+        yield ContentNode\StoryBoard::class => [
+            'storyboard1',
+        ];
+    }
+
     public function testCreateValidatesIncompatibleContentType() {
         // given
         /** @var ContentType $contentType */
@@ -266,24 +284,6 @@ abstract class CreateContentNodeTestCase extends ECampApiTestCase {
             $this->defaultParent->getRoot()->getId().'#rootDescendants',
             $this->defaultParent->getId().'#children',
         ], $cacheManager->getInvalidatedTags());
-    }
-
-    public static function getContentNodesWhichCannotHaveChildren(): \Iterator {
-        yield ContentNode\MaterialNode::class => [
-            'materialNode1',
-        ];
-
-        yield ContentNode\MultiSelect::class => [
-            'multiSelect1',
-        ];
-
-        yield ContentNode\SingleText::class => [
-            'singleText1',
-        ];
-
-        yield ContentNode\StoryBoard::class => [
-            'storyboard1',
-        ];
     }
 
     protected function getExampleWritePayload($attributes = [], $except = []) {

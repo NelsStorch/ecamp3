@@ -150,6 +150,21 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         }
     }
 
+    public static function getContentNodeEndpoints(): array {
+        $collectionEndpoints = self::getCollectionEndpoints();
+        $normalEndpoints = array_filter($collectionEndpoints, function (string $endpoint) {
+            return str_contains($endpoint, '/content_node');
+        });
+
+        // @noinspection PhpUnnecessaryLocalVariableInspection
+        return array_reduce($normalEndpoints, function (?array $left, string $right) {
+            $newArray = $left ?? [];
+            $newArray[$right] = [$right];
+
+            return $newArray;
+        });
+    }
+
     /**
      * @param mixed $collectionEndpoint
      *
@@ -174,21 +189,6 @@ class EndpointPerformanceTest extends ECampApiTestCase {
             $queryCount,
             $executionTimeSeconds,
         ];
-    }
-
-    public static function getContentNodeEndpoints(): array {
-        $collectionEndpoints = self::getCollectionEndpoints();
-        $normalEndpoints = array_filter($collectionEndpoints, function (string $endpoint) {
-            return str_contains($endpoint, '/content_node');
-        });
-
-        // @noinspection PhpUnnecessaryLocalVariableInspection
-        return array_reduce($normalEndpoints, function (?array $left, string $right) {
-            $newArray = $left ?? [];
-            $newArray[$right] = [$right];
-
-            return $newArray;
-        });
     }
 
     protected function getSnapshotId(): string {
