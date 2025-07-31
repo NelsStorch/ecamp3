@@ -4,9 +4,17 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Choose environment'
+        description: "Choose environment"
         type: environment
         required: true
+      action:
+        description: "Choose action"
+        type: choice
+        required: true
+        default: diff
+        options:
+          - diff
+          - deploy
 
 jobs:
   deploy-ecamp3-logging:
@@ -61,6 +69,7 @@ jobs:
         working-directory: .ops/ecamp3-logging
 
       - name: Deploy
+        if: ${{ github.event.inputs.action == 'deploy' }}
         run: |
           ./deploy.sh deploy
         working-directory: .ops/ecamp3-logging
