@@ -2,8 +2,8 @@ fluent-operator:
   containerRuntime: containerd
   operator: 
     annotations: 
-      trigger-recreate: ${RANDOM_STRING}
-    container: 
+      trigger-recreate: {{ exec "uuidgen" (list) }}
+    container:
       tag: 3.3.0
   fluentbit:
     enable: true
@@ -26,7 +26,7 @@ fluent-operator:
       - ingress-nginx
     envVars: 
       - name: TRIGGER_FLUENTD_RECREATE
-        value: ${RANDOM_STRING}
+        value: {{ exec "uuidgen" (list) }}
     enable: true
 
 fluentd:
@@ -46,16 +46,16 @@ elasticsearch:
   elasticNode:
     resources:
       requests:
-        memory: ${ELASTIC_NODE_REQUESTS_MEMORY}
+        memory: {{ .Environment.Values | get "ELASTIC_NODE_REQUESTS_MEMORY" "1000Mi" }}
       limits:
-        memory: ${ELASTIC_NODE_LIMITS_MEMORY}
+        memory: {{ .Environment.Values | get "ELASTIC_NODE_LIMITS_MEMORY" "1000Mi"}}
   persistence:
     storageClassName: do-block-storage
     resources:
       requests:
-        storage: ${ELASTIC_NODE_STORAGE_SIZE}
+        storage: {{ .Environment.Values | get "ELASTIC_NODE_STORAGE_SIZE" nil | required "Please define ELASTIC_NODE_STORAGE_SIZE. There is no good default value." }}
   removeOldIndexes:
-    maxIndexAge: ${ELASTIC_NODE_MAX_INDEX_AGE}
+    maxIndexAge: {{ .Environment.Values | get "ELASTIC_NODE_MAX_INDEX_AGE" "15" }}
     image: node:24.4.1
 
 kibana:

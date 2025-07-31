@@ -1,3 +1,5 @@
 .env
 /deploy.sh
-/values.out.yaml
+/values.yaml
+/values.yaml.gotmpl
+/env.yaml
