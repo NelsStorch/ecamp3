@@ -68,6 +68,21 @@ async function getSheets(camp, collection, materialList) {
 }
 
 /**
+ * @param sheets {array} array of {sheetName: string, data: array}
+ * @returns {object} an XLSX workbook
+ */
+function toWorkbook(sheets) {
+  const workbook = XLSX.utils.book_new();
+  sheets.forEach(({ sheetName, data }) => {
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+    const validSheetName = sheetName.replaceAll(/[?*[\]/\\:]/g, "");
+    workbook.SheetNames.push(validSheetName);
+    workbook.Sheets[validSheetName] = worksheet;
+  });
+  return workbook;
+}
+
+/**
  * @param {object} camp
  * @param {{value: {period: object, materialItems: {items: array}}[]}} collection
  * @param {string} materialList materialList name if set
@@ -76,14 +91,8 @@ function downloadMaterialList(camp, collection, materialList) {
   return async () => {
     await camp.activities().$loadItems()
 
-    const workbook = XLSX.utils.book_new()
     const sheets = await getSheets(camp, collection.value, materialList)
-    sheets.forEach(({ sheetName, data }) => {
-      const worksheet = XLSX.utils.aoa_to_sheet(data)
-      const validSheetName = sheetName.replaceAll(/[?*[\]/\\:]/g, '')
-      workbook.SheetNames.push(validSheetName)
-      workbook.Sheets[validSheetName] = worksheet
-    })
+    const workbook = toWorkbook(sheets);
     XLSX.writeFile(workbook, generateFilename(camp, materialList))
   }
 }
