@@ -10,7 +10,12 @@ Displays details on a single camp and allows to edit them.
     <v-skeleton-loader v-if="camp._meta.loading" type="article" />
     <div v-else class="mt-3">
       <api-form :entity="camp" name="camp">
-        <api-text-field path="title" vee-rules="required|max:32" :disabled="disabled" />
+        <api-text-field
+          path="title"
+          vee-rules="required|max:32"
+          :disabled="disabled"
+          data-testid="title"
+        />
 
         <api-text-field
           path="shortTitle"

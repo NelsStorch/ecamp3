@@ -15,6 +15,7 @@
               persistent-hint
               :items="campTemplates"
               :menu-props="{ offsetY: true }"
+              data-testid="prototype-select"
             />
             <div
               v-if="selectedPrototypeValue === 'other'"
@@ -177,7 +178,12 @@
             </v-btn>
             <div class="ml-auto">
               <ButtonCancel :disabled="isSaving" @click="$router.go(-1)" />
-              <ButtonAdd v-if="valid" type="submit" :loading="isSaving">
+              <ButtonAdd
+                v-if="valid"
+                type="submit"
+                :loading="isSaving"
+                data-testid="create-camp-button"
+              >
                 {{ $tc('components.campCreate.campCreateStep2.create') }}
               </ButtonAdd>
               <v-tooltip v-else top>
