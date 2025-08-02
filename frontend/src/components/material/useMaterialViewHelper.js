@@ -67,19 +67,28 @@ async function getSheets(camp, collection, materialList) {
   )
 }
 
+function randomString(len) {
+  const p = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  return [...Array(len)].reduce((a) => a + p[~~(Math.random() * p.length)], '')
+}
+
 /**
  * @param sheets {array} array of {sheetName: string, data: array}
  * @returns {object} an XLSX workbook
  */
-function toWorkbook(sheets) {
-  const workbook = XLSX.utils.book_new();
+export function toWorkbook(sheets) {
+  const workbook = XLSX.utils.book_new()
   sheets.forEach(({ sheetName, data }) => {
-    const worksheet = XLSX.utils.aoa_to_sheet(data);
-    const validSheetName = sheetName.replaceAll(/[?*[\]/\\:]/g, "");
-    workbook.SheetNames.push(validSheetName);
-    workbook.Sheets[validSheetName] = worksheet;
-  });
-  return workbook;
+    const worksheet = XLSX.utils.aoa_to_sheet(data)
+    const validSheetName = sheetName.replaceAll(/[?*[\]/\\:]/g, '')
+    let slicedSheetName = validSheetName.slice(0, 31)
+    if (workbook.SheetNames.includes(slicedSheetName)) {
+      slicedSheetName = validSheetName.slice(0, 28) + randomString(3)
+    }
+    workbook.SheetNames.push(slicedSheetName)
+    workbook.Sheets[slicedSheetName] = worksheet
+  })
+  return workbook
 }
 
 /**
@@ -92,7 +101,7 @@ function downloadMaterialList(camp, collection, materialList) {
     await camp.activities().$loadItems()
 
     const sheets = await getSheets(camp, collection.value, materialList)
-    const workbook = toWorkbook(sheets);
+    const workbook = toWorkbook(sheets)
     XLSX.writeFile(workbook, generateFilename(camp, materialList))
   }
 }
