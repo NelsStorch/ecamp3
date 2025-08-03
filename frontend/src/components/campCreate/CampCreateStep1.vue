@@ -9,10 +9,19 @@
               path="title"
               :placeholder="$tc('components.campCreate.campCreateStep1.titlePlaceholder')"
               vee-rules="required|max:32"
+              data-testid="create-camp-title-input"
               required
             />
-            <e-text-field v-model="localCamp.organizer" path="organizer" />
-            <e-text-field v-model="localCamp.motto" path="motto" />
+            <e-text-field
+              v-model="localCamp.organizer"
+              path="organizer"
+              data-testid="create-camp-organizer"
+            />
+            <e-text-field
+              v-model="localCamp.motto"
+              path="motto"
+              data-testid="create-camp-motto"
+            />
             <CreateCampPeriods
               :add-period="addPeriod"
               :periods="localCamp.periods"
@@ -24,7 +33,11 @@
           <ContentActions>
             <v-spacer />
             <ButtonCancel :disabled="isSaving" @click="$router.go(-1)" />
-            <ButtonContinue v-if="valid" @click="$emit('next-step')" />
+            <ButtonContinue
+              v-if="valid"
+              data-testid="create-camp-next-step"
+              @click="$emit('next-step')"
+            />
             <v-tooltip v-else top>
               <template #activator="{ attrs, on }">
                 <v-btn

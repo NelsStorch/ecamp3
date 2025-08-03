@@ -7,7 +7,7 @@
             <server-error :server-error="serverError" />
 
             <e-select
-              v-model="localCamp.campPrototype"
+              v-model="selectedPrototypeValue"
               :vee-rules="{ required: true }"
               :skip-if-empty="false"
               :label="$tc('entity.camp.prototype')"
@@ -15,9 +15,10 @@
               persistent-hint
               :items="campTemplates"
               :menu-props="{ offsetY: true }"
+              data-testid="prototype-select"
             />
             <div
-              v-if="localCamp.campPrototype === 'other'"
+              v-if="selectedPrototypeValue === 'other'"
               class="e-form-container d-flex gap-2"
             >
               <e-text-field
@@ -177,7 +178,12 @@
             </v-btn>
             <div class="ml-auto">
               <ButtonCancel :disabled="isSaving" @click="$router.go(-1)" />
-              <ButtonAdd v-if="valid" type="submit" :loading="isSaving">
+              <ButtonAdd
+                v-if="valid"
+                type="submit"
+                :loading="isSaving"
+                data-testid="create-camp-button"
+              >
                 {{ $tc('components.campCreate.campCreateStep2.create') }}
               </ButtonAdd>
               <v-tooltip v-else top>
@@ -213,7 +219,7 @@ import ClipboardInfoDialog from '@/components/generic/ClipboardInfoDialog.vue'
 import { useClipboardEntity } from '@/components/generic/useClipboardEntity.js'
 import router from '@/router.js'
 import { apiStore as api } from '@/plugins/store/index.js'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watchEffect } from 'vue'
 
 export default {
   name: 'CampCreateStep2',
@@ -237,6 +243,14 @@ export default {
   setup({ camp }) {
     const localCamp = reactive(camp)
     const copyCampUrl = ref('')
+    const selectedPrototypeValue = ref(null)
+    watchEffect(() => {
+      if (['other', 'none', null].includes(selectedPrototypeValue.value)) {
+        localCamp.campPrototype = null
+      } else {
+        localCamp.campPrototype = selectedPrototypeValue.value
+      }
+    })
 
     const clipboard = useClipboardEntity({
       fetchClipboardEntity: async (url) => {
@@ -248,11 +262,11 @@ export default {
         return await api.get().camps({ id: match.params.campId })
       },
       onEntityLoaded(entity) {
-        localCamp.campPrototype = entity._meta.self
+        selectedPrototypeValue.value = entity._meta.self
       },
       onEntityLoadFailed() {
         // If "other" is selected, leave the selection as it is, so the user can try again
-        if (localCamp.campPrototype !== 'other') localCamp.campPrototype = ''
+        if (selectedPrototypeValue.value !== 'other') selectedPrototypeValue.value = ''
       },
     })
 
@@ -266,6 +280,7 @@ export default {
       setClipboardEntityUrl,
       localCamp,
       copyCampUrl,
+      selectedPrototypeValue,
     }
   },
   computed: {
@@ -291,7 +306,7 @@ export default {
     },
     prototypeHint() {
       const campPrototypeUris = this.campPrototypes.map((prototype) => prototype.value)
-      switch (this.localCamp.campPrototype) {
+      switch (this.selectedPrototypeValue) {
         case '':
           return this.$tc('components.campCreate.campCreateStep2.prototypeHint')
         case 'none':
@@ -299,7 +314,7 @@ export default {
         case 'other':
           return ''
         default:
-          if (!campPrototypeUris.includes(this.localCamp.campPrototype)) {
+          if (!campPrototypeUris.includes(this.selectedPrototypeValue)) {
             return this.$tc('components.campCreate.campCreateStep2.prototypeHintOther')
           }
           return this.$tc('components.campCreate.campCreateStep2.prototypeHintSelected')
@@ -307,12 +322,12 @@ export default {
     },
     prototypePreview() {
       if (
-        this.localCamp.campPrototype === 'none' ||
-        this.localCamp.campPrototype === 'other'
+        this.selectedPrototypeValue === 'none' ||
+        this.selectedPrototypeValue === 'other'
       ) {
         return null
       }
-      if (this.localCamp.campPrototype) {
+      if (this.localCamp?.campPrototype) {
         return this.api.get(this.localCamp.campPrototype)
       }
       return null
@@ -335,7 +350,7 @@ export default {
     },
   },
   watch: {
-    'localCamp.campPrototype'(newPrototype) {
+    selectedPrototypeValue(newPrototype) {
       if (newPrototype === 'other') {
         this.$nextTick(() => {
           if (this.$refs.clipboardInfoDialog) {

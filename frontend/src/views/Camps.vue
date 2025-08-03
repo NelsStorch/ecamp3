@@ -20,7 +20,11 @@
         <v-list-item>
           <v-list-item-content />
           <v-list-item-action>
-            <button-add icon="mdi-plus" :to="{ name: 'camps/create' }">
+            <button-add
+              data-testid="create-camp-button"
+              icon="mdi-plus"
+              :to="{ name: 'camps/create' }"
+            >
               {{ $tc('views.camps.create') }}
             </button-add>
           </v-list-item-action>
