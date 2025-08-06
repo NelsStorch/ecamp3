@@ -1,31 +1,26 @@
 import { includeIgnoreFile } from '@eslint/compat'
 import localRules from 'eslint-plugin-local-rules'
+import vueEslint from 'eslint-plugin-vue'
+import vueScopedCssEslint from 'eslint-plugin-vue-scoped-css'
+import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-})
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
-export default [
+export default createConfigForNuxt().append([
   {
     files: ['**/*.ts'],
   },
-  ...compat.extends(
-    'plugin:vue/vue3-recommended',
-    'plugin:vue-scoped-css/vue3-recommended',
-    '@nuxt/eslint-config',
-    'eslint:recommended',
-    'plugin:prettier/recommended'
-  ),
+  ...vueEslint.configs['flat/recommended'],
+  ...vueScopedCssEslint.configs['flat/recommended'],
+  js.configs.recommended,
+  prettierRecommended,
   {
     ignores: ['common/**/*', '.nuxt/', '.output/', 'coverage/'],
   },
@@ -45,6 +40,7 @@ export default [
     },
 
     rules: {
+      'import/first': 'off',
       'no-undef': 'off',
       'no-console': 'off',
       'prettier/prettier': 'error',
@@ -61,4 +57,4 @@ export default [
       ],
     },
   },
-]
+])
