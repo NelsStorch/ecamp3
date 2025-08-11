@@ -11,13 +11,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  continuous-integration:
-    name: 'Continuous integration'
-    uses: ./.github/workflows/continuous-integration.yml
-
   build-and-push:
     name: Build and push docker images
-    needs: continuous-integration
     uses: ./.github/workflows/reusable-build-and-push.yml
     with:
       tag: ${{ github.ref_name }}
