@@ -132,7 +132,9 @@ export default {
     pastCamps() {
       return Object.values(
         groupBy(
-          this.periods.items.filter((p) => !dayjs(p.end).endOf('day').isAfter(dayjs())),
+          this.periods.items
+            .filter((p) => !dayjs(p.end).endOf('day').isAfter(dayjs()))
+            .sort((p1, p2) => dayjs(p2.start).unix() - dayjs(p1.start).unix()),
           (p) => p.camp()._meta.self
         )
       )
