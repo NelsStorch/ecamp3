@@ -145,7 +145,6 @@ mail:
       cpu: 10m
       memory: 10Mi
 
-# Full configuration: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
 postgresql:
   url:
   dropDBOnUninstall: false
