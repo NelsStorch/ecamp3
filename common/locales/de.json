@@ -195,6 +195,7 @@
     "materialItem": {
       "fields": {
         "article": "Artikel",
+        "done": "Erledigt",
         "list": "Materialliste",
         "quantity": "Menge",
         "reference": "Aktivität / Lagerabschnitt",

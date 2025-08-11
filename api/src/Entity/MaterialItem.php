@@ -144,6 +144,14 @@ class MaterialItem extends BaseEntity implements BelongsToCampInterface, CopyFro
     #[ORM\Column(type: 'text', nullable: true)]
     public ?string $unit = null;
 
+    /**
+     * Whether the item has been prepared and is ready to be brought to the camp.
+     */
+    #[ApiProperty(example: true)]
+    #[Groups(['read', 'write'])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    public bool $done = false;
+
     public function __construct() {
         parent::__construct();
         $this->periodMaterialItems = new ArrayCollection();
