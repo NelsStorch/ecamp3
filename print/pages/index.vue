@@ -16,6 +16,8 @@
 </template>
 
 <script setup>
+import { toDayjsLocale } from '@/common/helpers/dayjs.js'
+
 // parse query config
 const route = useRoute()
 const query = route.query
@@ -26,7 +28,9 @@ const { setLocale, fallbackLocale } = useI18n()
 const { $date } = useNuxtApp()
 const locale = config.language || fallbackLocale.value
 await setLocale(locale) // i18n
-$date.locale(locale) //dayjs
+
+//dayjs
+$date.locale(toDayjsLocale(locale))
 
 // load camp
 const { $api } = useNuxtApp()

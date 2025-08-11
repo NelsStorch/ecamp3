@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser'
 import { renderPdf } from './renderPdf.js'
-import dayjs, { dayjsLocaleMap } from '@/common/helpers/dayjs.js'
+import dayjs, { toDayjsLocale } from '@/common/helpers/dayjs.js'
 
 // Work around an incompatibility between comlink, vite and react-pdf...
 // Comlink works with a globally defined function 'start'. And apparently the way we import
@@ -26,7 +26,7 @@ export const renderPdfInWorker = async (data) => {
 
   // We need to set the locale again here. Otherwise dayjs falls back to the default
   // on production deployments
-  dayjs.locale(Object.keys(dayjsLocaleMap).includes(lang) ? dayjsLocaleMap[lang] : lang)
+  dayjs.locale(toDayjsLocale(lang))
 
   const result = { ...(await renderPdf(data)) }
   if (result.error) {
