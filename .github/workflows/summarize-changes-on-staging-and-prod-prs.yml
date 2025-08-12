@@ -24,11 +24,11 @@ jobs:
           echo "$SUMMARY" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Comment summary on PR
-        uses: thollander/actions-comment-pull-request@v3
+      - name: Update PR description with summary
+        uses: kt3k/update-pr-description@8077af9ce93a5ea30878f27eb2d6f4ae02a211ba # v2
         with:
-          pr-number: ${{ github.event.pull_request.number }}
-          message: |
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_body: |
             ### <span aria-hidden="true">🏗️</span> Changes in this deployment
 
             Includes the following non-renovate PRs:
@@ -43,5 +43,3 @@ jobs:
             ```
 
             </details>
-
-          comment-tag: deployment-pr-summary
