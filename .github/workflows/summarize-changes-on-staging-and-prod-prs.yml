@@ -25,7 +25,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Update PR description with summary
-        uses: kt3k/update-pr-description@8077af9ce93a5ea30878f27eb2d6f4ae02a211ba # v2
+        uses: kt3k/update-pr-description@46409be4b4fb57502e7a0c40a317d79b21a548dd # v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_body: |
