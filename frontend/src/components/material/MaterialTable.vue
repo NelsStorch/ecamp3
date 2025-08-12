@@ -32,7 +32,7 @@
         :disabled="layoutMode || doneChecklistDisabled || disabled"
         :uri="item.uri"
         path="done"
-       />
+      />
     </template>
 
     <template #[`item.quantity`]="{ item }">
