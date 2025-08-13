@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/k6": "1.1.1"
+    "@types/k6": "1.2.0"
   }
 }
