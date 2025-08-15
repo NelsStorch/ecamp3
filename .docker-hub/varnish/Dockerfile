@@ -1,4 +1,4 @@
-ARG VERSION=7.7.1
+ARG VERSION=7.7.2
 
 FROM varnish:${VERSION}
 
