@@ -145,6 +145,11 @@ jobs:
           ${{ env.repo-owner }}
           HEREDOC
 
+          if [ ! echo "${{ matrix.build-config.image }}" | grep -Eq '^[a-zA-Z0-9._/-]+$' ]; then
+            echo "Error: Invalid Docker image name '${{ matrix.build-config.image }}'."
+            exit 1
+          fi
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
