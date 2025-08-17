@@ -154,6 +154,7 @@ import {
   transformValuesToHalId,
 } from '@/helpers/querySyncHelper.js'
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
+import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default {
   name: 'CampProgram',
@@ -206,7 +207,7 @@ export default {
       return {
         camp: this.camp._meta.self,
         language: this.$store.state.lang.language,
-        documentName: this.camp.title + '-picasso.pdf',
+        documentName: campShortTitle(this.camp) + '-' + this.period.description,
         contents: [
           {
             type: 'Picasso',

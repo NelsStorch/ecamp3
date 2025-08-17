@@ -39,6 +39,7 @@ import DownloadClientPdf from '@/components/print/print-client/DownloadClientPdf
 import LockButton from '@/components/generic/LockButton.vue'
 import LockUnlockListItem from '@/components/generic/LockUnlockListItem.vue'
 import PeriodSwitcher from '@/components/program/PeriodSwitcher.vue'
+import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default {
   name: 'Story',
@@ -66,7 +67,8 @@ export default {
       return {
         camp: this.camp._meta.self,
         language: this.$store.state.lang.language,
-        documentName: this.camp.title + '-StorySummary.pdf',
+        documentName:
+          campShortTitle(this.camp) + '-' + this.$tc('views.camp.story.title'),
         contents: [
           {
             type: 'Story',
