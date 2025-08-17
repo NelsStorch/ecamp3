@@ -18,6 +18,14 @@ on:
           and restore the database with the given backup file?
           Repeat the branch name to confirm. (e.g. staging or prod)
         required: true
+      action:
+        description: "Choose action"
+        type: choice
+        required: true
+        default: diff
+        options:
+          - diff
+          - deploy
 
 jobs:
   check-parameters:
@@ -49,4 +57,6 @@ jobs:
     uses: ./.github/workflows/reusable-stage-prod-deployment.yml
     with:
       restoreSourceFile: ${{ inputs.restoreSourceFile }}
+      env: ${{ github.ref_name }}
+      action: ${{ github.event.inputs.action }}
     secrets: inherit

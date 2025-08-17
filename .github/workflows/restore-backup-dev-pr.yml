@@ -21,6 +21,14 @@ on:
         description: The environment, if name is dev then dev, else feature-branch
         required: true
         default: dev
+      action:
+        description: "Choose action"
+        type: choice
+        required: true
+        default: diff
+        options:
+          - diff
+          - deploy
 
 
 jobs:
@@ -44,4 +52,5 @@ jobs:
       pr-number: ${{ inputs.pr-number }}
       dropDBOnUninstall: ${{ inputs.pr-number != null }}
       restoreSourceFile: ${{ inputs.restoreSourceFile }}
+      action: ${{ github.event.inputs.action }}
     secrets: inherit
