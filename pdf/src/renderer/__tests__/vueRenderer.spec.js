@@ -55,6 +55,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -91,6 +92,7 @@ describe('rendering a full camp', () => {
           config: {
             language: 'de',
             documentName: 'Pfila 2023.pdf',
+            options: { pageNumbers: false },
             camp: store.get('/camps/c4cca3a51342'),
             contents: [
               {
@@ -129,6 +131,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -157,6 +160,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -185,6 +189,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -214,6 +219,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -263,6 +269,7 @@ describe('renders a single activity', () => {
       config: {
         language: 'de',
         documentName: 'Morgenturnen.pdf',
+        options: { pageNumbers: false },
         camp: store.get(campIri),
         contents: [
           {

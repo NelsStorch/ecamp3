@@ -1,5 +1,6 @@
 <template>
   <Page size="A4" class="page">
+    <slot></slot>
     <Text :id="id" :bookmark="$tc('print.toc.title')" class="toc-title">{{
       $tc('print.toc.title')
     }}</Text>

@@ -69,6 +69,7 @@ export default {
         language: this.$store.state.lang.language,
         documentName:
           campShortTitle(this.camp) + '-' + this.$tc('views.camp.story.title'),
+        options: { pageNumbers: false },
         contents: [
           {
             type: 'Story',

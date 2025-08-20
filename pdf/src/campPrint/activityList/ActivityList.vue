@@ -1,5 +1,6 @@
 <template>
   <Page :id="id" class="page">
+    <slot></slot>
     <ActivityListPeriod
       v-for="period in periods"
       :id="id"

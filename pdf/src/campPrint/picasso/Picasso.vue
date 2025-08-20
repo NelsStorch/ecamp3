@@ -5,7 +5,9 @@
     :config="config"
     :content="content"
     :period="period"
-  />
+  >
+    <slot></slot>
+  </PicassoPeriod>
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'

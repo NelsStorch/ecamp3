@@ -1,5 +1,6 @@
 <template>
   <Page :id="id" class="page activity-page">
+    <slot></slot>
     <ScheduleEntry :id="`${id}-${scheduleEntry.id}`" :schedule-entry="scheduleEntry" />
   </Page>
 </template>

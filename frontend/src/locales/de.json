@@ -403,7 +403,9 @@
           "SafetyConsiderations": "Sicherheits­überlegungen",
           "Story": "Geschichte",
           "Toc": "Inhaltsverzeichnis"
-        }
+        },
+        "options": "Einstellungen",
+        "pageNumbers": "Seitenzahlen"
       },
       "printNuxt": {
         "downloadNuxtPdfButton": {

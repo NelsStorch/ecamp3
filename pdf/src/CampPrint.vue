@@ -7,7 +7,14 @@
         :id="`entry-${idx}`"
         :config="config"
         :content="content"
-      ></component>
+      >
+        <Text
+          v-if="config.options.pageNumbers"
+          :render="({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`"
+          fixed
+          class="page-number"
+        />
+      </component>
     </template>
   </Document>
 </template>
@@ -122,5 +129,14 @@ export const prepare = async (config) => {
   font-size: 12;
   font-weight: semibold;
   margin: 8pt 0 3pt;
+}
+.page-number {
+  position: absolute;
+  bottom: 15;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10;
 }
 </pdf-style>
