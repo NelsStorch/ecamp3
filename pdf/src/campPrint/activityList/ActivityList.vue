@@ -1,6 +1,7 @@
 <template>
   <Page :id="id" class="page">
     <slot></slot>
+    <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
     <ActivityListPeriod
       v-for="period in periods"
       :id="id"

@@ -1,4 +1,5 @@
 <template>
+  <View :render="({ pageNumber }) => ($toc[`${id}-${period.id}`] = pageNumber)" />
   <Text
     :id="`${id}-${period.id}`"
     :bookmark="{ title: title + ': ' + period.description, fit: true }"

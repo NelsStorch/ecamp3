@@ -6,6 +6,16 @@
       "children": [
         {
           "box": {},
+          "children": [],
+          "parent": [Circular],
+          "props": {
+            "render": [Function],
+          },
+          "style": {},
+          "type": "VIEW",
+        },
+        {
+          "box": {},
           "children": [
             {
               "box": {},

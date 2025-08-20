@@ -1,6 +1,7 @@
 <template>
   <Page size="A4" :orientation="orientation" class="page">
     <slot></slot>
+    <View :render="({ pageNumber }) => ($toc[`${id}-${period.id}`] = pageNumber)" />
     <View class="picasso-title-container">
       <YSLogo
         v-if="period.camp().printYSLogoOnPicasso"

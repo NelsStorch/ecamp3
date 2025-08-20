@@ -1,16 +1,18 @@
 <template>
   <Page size="A4" class="page">
     <slot></slot>
+    <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
     <Text :id="id" :bookmark="$tc('print.toc.title')" class="toc-title">{{
       $tc('print.toc.title')
     }}</Text>
-    <View style="line-height: 1">
+    <View>
       <template v-for="(entry, index) in config.contents">
         <component
           :is="entryComponents[entry.type]"
           v-if="entry.type in entryComponents"
           :id="`entry-${index}`"
           :entry="entry"
+          :config="config"
         ></component>
         <Text v-else>{{ entry.type }}</Text>
       </template>
@@ -26,6 +28,7 @@ import Program from './entry/Program.vue'
 import Activity from './entry/Activity.vue'
 import SafetyConsiderations from './entry/SafetyConsiderations.vue'
 import Story from './entry/Story.vue'
+import ActivityList from './entry/ActivityList.vue'
 
 export default {
   name: 'Cover',
@@ -44,6 +47,7 @@ export default {
         Activity,
         SafetyConsiderations,
         Story,
+        ActivityList,
       }
     },
   },
@@ -63,8 +67,11 @@ export default {
   justify-content: space-between;
   color: black;
   text-decoration: none;
+  width: 100%;
+  margin-bottom: 6pt;
 }
 .toc-sub-entry {
-  margin-left: 10pt;
+  padding-left: 10pt;
+  margin-bottom: 4pt;
 }
 </pdf-style>

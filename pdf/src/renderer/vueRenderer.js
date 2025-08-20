@@ -16,6 +16,7 @@ export function renderVueToPdfStructure(root, props = {}) {
         app.config.globalProperties.api = options.store
         app.config.globalProperties.$tc = options.$tc
         app.config.globalProperties.$date = dayjs
+        app.config.globalProperties.$toc = {}
       },
     },
     props

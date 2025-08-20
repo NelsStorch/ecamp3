@@ -6,6 +6,26 @@
       "children": [
         {
           "box": {},
+          "children": [],
+          "parent": [Circular],
+          "props": {
+            "render": [Function],
+          },
+          "style": {},
+          "type": "VIEW",
+        },
+        {
+          "box": {},
+          "children": [],
+          "parent": [Circular],
+          "props": {
+            "render": [Function],
+          },
+          "style": {},
+          "type": "VIEW",
+        },
+        {
+          "box": {},
           "children": [
             {
               "box": {},
@@ -54,7 +74,7 @@
                       "props": {
                         "bookmark": "LS 2.1 Morgenturnen",
                         "class": "schedule-entry-number-and-title",
-                        "id": "",
+                        "id": "entry-0-51c110ddd923",
                       },
                       "style": {
                         "margin": "4pt 4pt",

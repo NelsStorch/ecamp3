@@ -1,6 +1,9 @@
 <template>
   <Page :id="id" class="page activity-page">
     <slot></slot>
+    <View
+      :render="({ pageNumber }) => ($toc[`${id}-${scheduleEntry.id}`] = pageNumber)"
+    />
     <ScheduleEntry :id="`${id}-${scheduleEntry.id}`" :schedule-entry="scheduleEntry" />
   </Page>
 </template>

@@ -1,4 +1,5 @@
 <template>
+  <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
   <View :wrap="false" :min-presence-ahead="75">
     <View
       class="schedule-entry-header-title"

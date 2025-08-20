@@ -6,6 +6,26 @@
       "children": [
         {
           "box": {},
+          "children": [],
+          "parent": [Circular],
+          "props": {
+            "render": [Function],
+          },
+          "style": {},
+          "type": "VIEW",
+        },
+        {
+          "box": {},
+          "children": [],
+          "parent": [Circular],
+          "props": {
+            "render": [Function],
+          },
+          "style": {},
+          "type": "VIEW",
+        },
+        {
+          "box": {},
           "children": [
             {
               "box": {},
@@ -54,7 +74,7 @@
                       "props": {
                         "bookmark": "LS 1.1 Stadt Game 🐭",
                         "class": "schedule-entry-number-and-title",
-                        "id": "",
+                        "id": "entry-0-4bc1873a73f2",
                       },
                       "style": {
                         "margin": "4pt 4pt",
