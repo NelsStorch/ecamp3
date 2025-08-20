@@ -5,8 +5,24 @@ import renderPDF from '@react-pdf/render'
 
 const fontStore = new FontStore()
 
-export async function renderPdfStructureToReactPdf(pdfStructure, compress = true) {
+export async function renderPdfStructureToReactPdf(
+  pdfStructure,
+  compress = true,
+  onProgress = () => {}
+) {
+  await onProgress('layoutDocument')
+
+  let page = 0
+  addEventListener('layoutPage', () => {
+    page++
+    onProgress('layoutPage', { page })
+  })
+
   const layout = await layoutDocument(pdfStructure, fontStore)
+
+  const totalPages = layout.children.length
+  page = 0
+  await onProgress('renderingPdfPage', { page, totalPages })
 
   const documentProps = pdfStructure.props || {}
   const { pdfVersion, language, pageLayout, pageMode } = documentProps
@@ -19,6 +35,11 @@ export async function renderPdfStructureToReactPdf(pdfStructure, compress = true
     autoFirstPage: false,
     pageLayout,
     pageMode,
+  })
+
+  ctx.on('pageAdded', () => {
+    page++
+    onProgress('renderingPdfPage', { page, totalPages })
   })
 
   return renderPDF(ctx, layout)

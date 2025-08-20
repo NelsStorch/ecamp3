@@ -5,7 +5,7 @@
       v-for="period in periods"
       :id="id"
       :period="period"
-      :content-type="content.options.contentType"
+      :content-type="content.type"
       :filter="content.options.filter"
     />
   </Page>

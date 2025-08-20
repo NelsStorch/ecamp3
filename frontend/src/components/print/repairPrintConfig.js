@@ -85,5 +85,6 @@ export function repairPrintFilterConfig(config, camp, knownPeriods) {
       return knownProgressLabels.includes(progressLabel) || 'none' === progressLabel
     }
   )
+  if (!config.options.filter.activityCount) config.options.filter.activityCount = 0
   return config
 }

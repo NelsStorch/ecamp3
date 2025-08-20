@@ -1,9 +1,6 @@
 <template>
   <Link v-for="period in periods" class="toc-entry" :href="`#${id}-${period.id}`">
-    <Text
-      >{{ $tc('print.summary.safetyConsiderations.title') }}:
-      {{ period.description }}</Text
-    >
+    <Text>{{ $tc('print.safetyConsiderations.title') }}: {{ period.description }}</Text>
     <TocEntryPageNumber v-if="config.options.pageNumbers" :id="`${id}-${period.id}`" />
   </Link>
 </template>
