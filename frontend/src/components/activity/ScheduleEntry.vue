@@ -409,7 +409,7 @@ export default {
       return {
         camp: this.camp._meta.self,
         language: this.$store.state.lang.language,
-        documentName: this.activity.title + '.pdf',
+        documentName: this.activity.title,
         contents: [
           {
             type: 'Activity',
