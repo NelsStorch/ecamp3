@@ -8,14 +8,14 @@ export default {
     totalContents: { type: Number, default: 0 },
     type: { type: String, default: '' },
   },
-  beforeCreate() {
+  async beforeCreate() {
     Object.entries(this.$options?.pdfStyle || []).forEach(([selector, rules]) => {
       styleStore[selector] = styleStore[selector] || {}
       Object.assign(styleStore[selector], rules)
     })
 
     if (this.index !== -1) {
-      this.$onProgress('assembleContent', {
+      await this.$onProgress('assembleContent', {
         content: this.index + 1,
         totalContents: this.totalContents,
         type: this.$tc(`print.${camelCase(this.type)}.title`),

@@ -8,14 +8,14 @@ const fontStore = new FontStore()
 export async function renderPdfStructureToReactPdf(
   pdfStructure,
   compress = true,
-  onProgress = () => {}
+  onProgress = async () => {}
 ) {
   await onProgress('layoutDocument')
 
   let page = 0
-  addEventListener('layoutPage', () => {
+  addEventListener('layoutPage', async () => {
     page++
-    onProgress('layoutPage', { page })
+    await onProgress('layoutPage', { page })
   })
 
   const layout = await layoutDocument(pdfStructure, fontStore)
@@ -37,9 +37,9 @@ export async function renderPdfStructureToReactPdf(
     pageMode,
   })
 
-  ctx.on('pageAdded', () => {
+  ctx.on('pageAdded', async () => {
     page++
-    onProgress('renderingPdfPage', { page, totalPages })
+    await onProgress('renderingPdfPage', { page, totalPages })
   })
 
   return renderPDF(ctx, layout)
