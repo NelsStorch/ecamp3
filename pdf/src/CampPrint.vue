@@ -75,8 +75,15 @@ const registerFonts = async () => {
   })
 
   Font.registerEmojiSource({
-    formag: 'png',
-    url: '/twemoji/assets/72x72/',
+    withVariationSelectors: true,
+    builder(code) {
+      // If the code point does not contain 200d, remove any fe0f
+      // https://github.com/twitter/twemoji/issues/419#issuecomment-637360325
+      const filename = code.includes('200d')
+        ? code
+        : code.replaceAll('fe0f', '').replaceAll(/--|^-|-$/g, '')
+      return '/twemoji/assets/72x72/' + filename + '.png'
+    },
   })
 
   return await Promise.all([
