@@ -436,12 +436,8 @@ export default {
 
   watch: {
     scheduleEntryId: {
-      async handler(id) {
-        try {
-          this.scheduleEntry = this.api.get().scheduleEntries({ id })
-        } catch {
-          this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
-        }
+      async handler() {
+        await this.loadScheduleEntry()
       },
       immediate: true,
     },
@@ -452,11 +448,17 @@ export default {
     this.loading = true
     await this.scheduleEntry.activity()._meta.load // wait if activity is being loaded as part of a collection
     this.loading = false
-
     // no refresh of activity here because the requireActivityScheduleEntry guard already does a refresh
   },
 
   methods: {
+    async loadScheduleEntry() {
+      try {
+        this.scheduleEntry = this.api.get().scheduleEntries({ id: this.scheduleEntryId })
+      } catch {
+        this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
+      }
+    },
     changeCategory(category) {
       this.categoryChangeState = 'saving'
       this.activity
@@ -464,11 +466,33 @@ export default {
           category: category._meta.self,
         })
         .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
-        .then(() => (this.categoryChangeState = null))
+        .then(() => {
+          this.categoryChangeState = null
+          if (category.numberingStyle !== this.scheduleEntry.numberingStyle) {
+            // When changing numbering styles, the schedule entry numbers of all schedule
+            // entries in the whole period may change
+            this.reloadAllScheduleEntriesInRelatedPeriods()
+          }
+        })
         .catch((e) => {
           this.categoryChangeState = 'error'
           this.$toast.error(errorToMultiLineToast(e))
         })
+    },
+    async reloadAllScheduleEntriesInRelatedPeriods() {
+      const periods = [
+        ...new Set(
+          this.activity.scheduleEntries().items.map((scheduleEntry) => {
+            return scheduleEntry.period()
+          })
+        ),
+      ]
+      await Promise.all(
+        periods.map(async (period) => {
+          period.scheduleEntries().$reload()
+        })
+      )
+      this.loadScheduleEntry()
     },
     scheduleEntryRoute,
     countContentNodes(contentType) {
