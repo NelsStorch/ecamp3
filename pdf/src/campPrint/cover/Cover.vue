@@ -1,6 +1,5 @@
 <template>
   <Page :id="id" size="A4" :bookmark="$tc('print.cover.title')" class="page">
-    <slot></slot>
     <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
     <View class="cover-camp-wrapper">
       <Text v-if="config.camp.organizer" class="cover-camp-organizer cover-center">
