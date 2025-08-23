@@ -1,6 +1,6 @@
 <template>
   <View class="toc-dotted-line" />
-  <Text :render="() => $toc[id]" class="toc-entry-page-number" />
+  <Text :render="() => $toc[id] ?? ''" class="toc-entry-page-number" />
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'
@@ -8,6 +8,9 @@ import PdfComponent from '@/PdfComponent.js'
 export default {
   name: 'TocEntryPageNumber',
   extends: PdfComponent,
+  props: {
+    id: { type: String, required: true },
+  },
 }
 </script>
 <pdf-style>
