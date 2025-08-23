@@ -1,7 +1,7 @@
 <template>
   <Page size="A4" class="page">
     <slot></slot>
-    <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
+    <TocSectionStartMarker :id="id" />
     <Text :id="id" :bookmark="$tc('print.toc.title')" class="toc-title">{{
       $tc('print.toc.title')
     }}</Text>
@@ -29,9 +29,11 @@ import Activity from './entry/Activity.vue'
 import SafetyConsiderations from './entry/SafetyConsiderations.vue'
 import Story from './entry/Story.vue'
 import ActivityList from './entry/ActivityList.vue'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'Cover',
+  components: { TocSectionStartMarker },
   extends: PdfComponent,
   props: {
     content: { type: Object, required: true },

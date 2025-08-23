@@ -1,5 +1,5 @@
 <template>
-  <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
+  <TocSectionStartMarker :id="id" />
   <View :wrap="false" :min-presence-ahead="75">
     <View
       class="schedule-entry-header-title"
@@ -42,10 +42,11 @@
 import PdfComponent from '@/PdfComponent.js'
 import CategoryLabel from '../CategoryLabel.vue'
 import Responsibles from '../Responsibles.vue'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'ScheduleEntryTitle',
-  components: { Responsibles, CategoryLabel },
+  components: { TocSectionStartMarker, Responsibles, CategoryLabel },
   extends: PdfComponent,
   props: {
     scheduleEntry: { type: Object, required: true },

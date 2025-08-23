@@ -1,7 +1,7 @@
 <template>
   <Page :id="id" class="page">
     <slot></slot>
-    <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
+    <TocSectionStartMarker :id="id" />
     <ActivityListPeriod
       v-for="period in periods"
       :id="id"
@@ -15,10 +15,11 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import ActivityListPeriod from './ActivityListPeriod.vue'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'ActivityList',
-  components: { ActivityListPeriod },
+  components: { TocSectionStartMarker, ActivityListPeriod },
   extends: PdfComponent,
   props: {
     content: { type: Object, required: true },

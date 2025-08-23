@@ -1,6 +1,6 @@
 <template>
   <Page :id="id" size="A4" :bookmark="$tc('print.cover.title')" class="page">
-    <View :render="({ pageNumber }) => ($toc[id] = pageNumber)" />
+    <TocSectionStartMarker :id="id" />
     <View class="cover-camp-wrapper">
       <Text v-if="config.camp.organizer" class="cover-camp-organizer cover-center">
         {{ config.camp.organizer }}
@@ -14,9 +14,11 @@
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'Cover',
+  components: { TocSectionStartMarker },
   extends: PdfComponent,
   props: {
     content: { type: Object, required: true },

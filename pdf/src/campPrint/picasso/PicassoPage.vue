@@ -1,7 +1,7 @@
 <template>
   <Page size="A4" :orientation="orientation" class="page">
     <slot></slot>
-    <View :render="({ pageNumber }) => ($toc[`${id}-${period.id}`] = pageNumber)" />
+    <TocSectionStartMarker :id="`${id}-${period.id}`" />
     <View class="picasso-title-container">
       <YSLogo
         v-if="period.camp().printYSLogoOnPicasso"
@@ -52,10 +52,12 @@ import PicassoFooter from './PicassoFooter.vue'
 import { filterDayResponsiblesByDay } from '@/../common/helpers/dayResponsibles.js'
 import { times } from '@/../common/helpers/picasso.js'
 import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'PicassoPage',
   components: {
+    TocSectionStartMarker,
     YSLogo,
     TimeColumnSpacer,
     DayHeader,
