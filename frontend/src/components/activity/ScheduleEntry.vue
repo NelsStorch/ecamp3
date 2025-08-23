@@ -480,9 +480,16 @@ export default {
         })
     },
     async reloadAllScheduleEntriesInRelatedPeriods() {
+      const periods = [
+        ...new Set(
+          this.activity.scheduleEntries().items.map((scheduleEntry) => {
+            return scheduleEntry.period()
+          })
+        ),
+      ]
       await Promise.all(
-        this.activity.scheduleEntries().items.map((scheduleEntry) => {
-          return scheduleEntry.period().scheduleEntries().$reload()
+        periods.map(async (period) => {
+          period.scheduleEntries().$reload()
         })
       )
       this.loadScheduleEntry()
