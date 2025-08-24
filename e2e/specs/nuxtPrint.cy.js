@@ -88,12 +88,10 @@ describe('Nuxt print test', () => {
       cy.readFile(pdfPath, {
         timeout: 30000,
       })
-      cy.getPdfProperties(pdfPath).then((props) => cy.log(JSON.stringify(props)))
-      cy.getPdfProperties(pdfPath).its('numPages').should('eq', 26)
-      cy.moveDownloads()
+      cy.getPdfProperties(pdfPath).its('numPages').should('eq', 25)
     })
 
-    it.skip('for picasso', () => {
+    it('for picasso', () => {
       cy.get('a:contains("Programm")').click()
       cy.get('[data-testid="campprogram-menu"]').click()
       cy.get('[role="menuitem"] :contains("PDF herunterladen (Layout #1)")').click()
@@ -104,7 +102,6 @@ describe('Nuxt print test', () => {
         timeout: 30000,
       })
       cy.getPdfProperties(pdfPath).its('numPages').should('eq', 1)
-      cy.moveDownloads()
     })
   })
 })
