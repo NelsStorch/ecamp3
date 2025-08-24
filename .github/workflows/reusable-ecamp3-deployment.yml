@@ -178,3 +178,7 @@ jobs:
             |<span aria-hidden="true">🔍</span> Latest deploy log | [${{ steps.job-url.outputs.html_url }}](${{ steps.job-url.outputs.html_url }}) |
             ---
           comment-tag: feature-branch-deployment-status
+
+      - name: Cleanup temp files
+        if: always()
+        run: rm -f /tmp/secrets.json /tmp/vars.json .helm/ecamp3/env.yaml
