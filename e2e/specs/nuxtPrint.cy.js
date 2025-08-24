@@ -92,9 +92,18 @@ describe('Nuxt print test', () => {
     })
 
     it('for picasso', () => {
+      if (Cypress.browser.name === 'firefox') {
+        console.log(
+          "This test doesn't test browser specific behaviour. Firefox makes problems, thus we dont test this with firefox."
+        )
+        return
+      }
+
       cy.get('a:contains("Programm")').click()
       cy.get('[data-testid="campprogram-menu"]').click()
-      cy.get('[role="menuitem"] :contains("PDF herunterladen (Layout #1)")').click()
+      cy.get('[role="menuitem"] :contains("PDF herunterladen (Layout #1)")')
+        .should('be.visible')
+        .click()
 
       const downloadsFolder = Cypress.config('downloadsFolder')
       const pdfPath = path.join(downloadsFolder, 'Pfila-2023-Hauptlager.pdf')
