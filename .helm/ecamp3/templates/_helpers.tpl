@@ -57,6 +57,19 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end }}
 
 {{/*
+Name for all print+browserless resources.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "print-browserless.name" -}}
+{{- $name := default .Chart.Name .Values.chartNameOverride }}
+{{- if contains $name (include "app.name" .) }}
+{{- printf "%s-print-browserless" (include "app.name" .) | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- printf "%s-%s-print-browserless" (include "app.name" .) $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+
+{{/*
 Name for all dummy-mailserver-related resources.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
@@ -266,3 +279,28 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Reuse existing secret value, else generate new one
+Parameters:
+- namespace
+- secretName: name of the secret to lookup
+- key: the key within the secret to retrieve/generate
+*/}}
+{{- define "gen.secret" }}
+{{- $namespace := .namespace }}
+{{- $secretName := .secretName }}
+{{- $key := .key }}
+{{- $secret := lookup "v1" "Secret" $namespace $secretName }}
+{{- if $secret -}}
+{{/*
+   Reusing existing secret data
+*/}}
+{{- $key }}: {{ index $secret.data $key }}
+{{- else -}}
+{{/*
+    Generate new data
+*/}}
+{{- $key }}: {{ randAlphaNum 20 | b64enc }}
+{{- end -}}
+{{- end -}}
