@@ -28,6 +28,15 @@ function measurePerformance(performanceMeasurements, key) {
   performanceMeasurements.lastTime = now
 }
 
+function pageFooterTemplate(config) {
+  let pageNumberTemplate = ''
+  if (config.options?.pageNumbers) {
+    pageNumberTemplate =
+      '<span class="pageNumber"></span> / <span class="totalPages"></span>'
+  }
+  return `<div id="footer-template" style="font-size:7pt; text-align: center; width: 100%; font-family: Helvetica, sans-serif; font-weight: 500">${pageNumberTemplate}</div>`
+}
+
 export default defineEventHandler(async (event) => {
   const {
     basicAuthToken,
@@ -121,10 +130,6 @@ export default defineEventHandler(async (event) => {
     })
     measurePerformance(performanceMeasurements, 'load_content')
 
-    const footerTemplate = JSON.parse(queryParams.config).options?.pageNumbers
-      ? `<div id="footer-template" style="font-size:7pt; text-align: center; width: 100%; font-family: Helvetica, sans-serif; font-weight: 500"><span class="pageNumber"></span> / <span class="totalPages"></span></div>`
-      : '<div id="footer-template" style="font-size:7pt; text-align: center; width: 100%; font-family: Helvetica, sans-serif; font-weight: 500"></div>'
-
     // print pdf
     const pdf = await page.pdf({
       printBackground: true,
@@ -132,7 +137,7 @@ export default defineEventHandler(async (event) => {
       scale: 1,
       displayHeaderFooter: true,
       headerTemplate: `<div id="header-template" style="font-size:7pt; text-align: center; width: 100%; font-family: Helvetica, sans-serif; font-weight: 500"><span>eCamp v3</span></div>`,
-      footerTemplate,
+      footerTemplate: pageFooterTemplate(JSON.parse(queryParams.config)),
       margin: {
         bottom: '15mm',
         left: '15mm',
