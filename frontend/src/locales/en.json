@@ -405,7 +405,9 @@
           "SafetyConsiderations": "Safety considerations",
           "Story": "Story",
           "Toc": "Table of contents"
-        }
+        },
+        "options": "Einstellungen",
+        "pageNumbers": "Seitenzahlen"
       },
       "printNuxt": {
         "downloadNuxtPdfButton": {

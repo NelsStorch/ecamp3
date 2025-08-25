@@ -208,6 +208,7 @@ export default {
         camp: this.camp._meta.self,
         language: this.$store.state.lang.language,
         documentName: campShortTitle(this.camp) + '-' + this.period.description,
+        options: { pageNumbers: false },
         contents: [
           {
             type: 'Picasso',

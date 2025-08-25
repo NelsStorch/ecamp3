@@ -4,6 +4,7 @@
     :id="id"
     :period="period"
     :filter="entry.options.filter"
+    :config="config"
   />
 </template>
 <script>
@@ -16,6 +17,7 @@ export default {
   extends: PdfComponent,
   props: {
     entry: { type: Object, required: true },
+    config: { type: Object, required: true },
   },
   computed: {
     periods() {

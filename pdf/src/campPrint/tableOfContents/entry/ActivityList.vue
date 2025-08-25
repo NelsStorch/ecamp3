@@ -1,6 +1,6 @@
 <template>
   <Link class="toc-entry" :href="`#${id}`">
-    <Text>{{ $tc('print.toc.title') }}</Text>
+    <Text>{{ $tc('print.activityList.title') }}</Text>
     <TocEntryPageNumber v-if="config.options.pageNumbers" :id="id" />
   </Link>
 </template>
@@ -9,7 +9,7 @@ import PdfComponent from '@/PdfComponent.js'
 import TocEntryPageNumber from '../TocEntryPageNumber.vue'
 
 export default {
-  name: 'Toc',
+  name: 'ActivityList',
   components: { TocEntryPageNumber },
   extends: PdfComponent,
   props: {

@@ -18,6 +18,7 @@ describe('Nuxt print test', () => {
         const printConfig = {
           language: 'en',
           documentName: 'camp',
+          options: { pageNumbers: false },
           camp: campUri,
           contents: [
             {

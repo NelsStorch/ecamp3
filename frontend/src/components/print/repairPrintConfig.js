@@ -20,6 +20,15 @@ export default function repairConfig(
   }
   if (!configClone.documentName) configClone.documentName = campShortTitle(camp)
   if (configClone.camp !== camp._meta.self) configClone.camp = camp._meta.self
+  if (!configClone.options || typeof configClone.options !== 'object') {
+    configClone.options = {}
+  }
+  if (
+    configClone.options.pageNumbers !== true &&
+    configClone.options.pageNumbers !== false
+  ) {
+    configClone.options.pageNumbers = false
+  }
   if (typeof configClone.contents?.map !== 'function') {
     configClone.contents = defaultContents
   }
