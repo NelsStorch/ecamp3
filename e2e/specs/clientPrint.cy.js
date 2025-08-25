@@ -14,9 +14,11 @@ describe('Client print test', () => {
     cy.get('button:contains("PDF herunterladen (Layout #2)")').click()
 
     const downloadsFolder = Cypress.config('downloadsFolder')
-    cy.readFile(path.join(downloadsFolder, 'Pfila-2023.pdf'), {
+    const filePath = path.join(downloadsFolder, 'Pfila-2023.pdf')
+    cy.readFile(filePath, {
       timeout: 30000,
     })
+    cy.getPdfProperties(filePath).its('numPages').should('eq', 18)
     cy.moveDownloads()
   })
 })

@@ -23,6 +23,7 @@
     "eslint-plugin-cypress": "4.3.0",
     "eslint-plugin-prettier": "5.5.4",
     "globals": "16.3.0",
+    "pdfjs-dist": "5.4.54",
     "prettier": "3.6.2"
   },
   "overrides": {

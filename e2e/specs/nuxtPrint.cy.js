@@ -66,20 +66,52 @@ describe('Nuxt print test', () => {
     })
   })
 
-  it('downloads PDF', () => {
-    cy.task('deleteDownloads')
-    cy.login('test@example.com')
+  describe('downloads PDF', () => {
+    beforeEach(() => {
+      cy.task('deleteDownloads')
+      cy.login('test@example.com')
 
-    cy.visit('/camps')
-    cy.get('a:contains("GRGR")').click()
-    cy.get('a:contains("Admin")').click()
-    cy.get('a:contains("Drucken")').click()
-    cy.get('button:contains("PDF herunterladen (Layout #1)")').click()
-
-    const downloadsFolder = Cypress.config('downloadsFolder')
-    cy.readFile(path.join(downloadsFolder, 'Pfila-2023.pdf'), {
-      timeout: 30000,
+      cy.visit('/camps')
+      cy.get('a:contains("GRGR")').click()
     })
-    cy.moveDownloads()
+
+    afterEach(() => {
+      cy.moveDownloads()
+    })
+
+    it('for whole camp', () => {
+      cy.get('a:contains("Admin")').click()
+      cy.get('a:contains("Drucken")').click()
+      cy.get('button:contains("PDF herunterladen (Layout #1)")').click()
+
+      const downloadsFolder = Cypress.config('downloadsFolder')
+      const pdfPath = path.join(downloadsFolder, 'Pfila-2023.pdf')
+      cy.readFile(pdfPath, {
+        timeout: 30000,
+      })
+      cy.getPdfProperties(pdfPath).its('numPages').should('eq', 25)
+    })
+
+    it('for picasso', () => {
+      if (Cypress.browser.name === 'firefox') {
+        console.log(
+          "This test doesn't test browser specific behaviour. Firefox makes problems, thus we dont test this with firefox."
+        )
+        return
+      }
+
+      cy.get('a:contains("Programm")').click()
+      cy.get('[data-testid="campprogram-menu"]').click()
+      cy.get('[role="menuitem"] :contains("PDF herunterladen (Layout #1)")')
+        .should('be.visible')
+        .click()
+
+      const downloadsFolder = Cypress.config('downloadsFolder')
+      const pdfPath = path.join(downloadsFolder, 'Pfila-2023-Hauptlager.pdf')
+      cy.readFile(pdfPath, {
+        timeout: 30000,
+      })
+      cy.getPdfProperties(pdfPath).its('numPages').should('eq', 1)
+    })
   })
 })
