@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-break-after-page">
+  <div class="tw-break-after-page" :class="pageSize">
     <h1
       :id="`content_${index}_period_${period.id}`"
       class="tw-text-center tw-font-semibold tw-mb-6"
@@ -24,6 +24,7 @@
 <script setup>
 import camelCase from 'lodash-es/camelCase.js'
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
+import SummaryDay from './SummaryDay.vue'
 
 const props = defineProps({
   camp: { type: Object, required: true },
@@ -34,6 +35,7 @@ const props = defineProps({
   index: { type: Number, required: true },
   contentType: { type: String, default: 'Storycontext' },
   filter: { type: Object, default: () => ({}) },
+  pageSize: { type: String, default: 'a4' },
 })
 
 const { $api } = useNuxtApp()

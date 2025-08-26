@@ -9,6 +9,7 @@
       :camp="camp"
       :index="index"
       :content-type-names="['LearningObjectives', 'LearningTopics', 'Checklist']"
+      :page-size="pageSize"
     />
   </div>
 </template>
@@ -19,6 +20,7 @@ const props = defineProps({
   camp: { type: Object, required: true },
   config: { type: Object, required: true },
   index: { type: Number, required: true },
+  pageSize: { type: String, default: 'a4' },
 })
 
 const { $api } = useNuxtApp()

@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-break-after-page">
+  <div class="tw-break-after-page" :class="pageSize">
     <generic-error-message v-if="error" :error="error" />
     <program-period
       v-for="period in periods"
@@ -11,6 +11,7 @@
       :show-daily-summary="options.dayOverview || false"
       :show-activities="true"
       :index="index"
+      :page-size="pageSize"
     />
   </div>
 </template>
@@ -21,6 +22,7 @@ const props = defineProps({
   camp: { type: Object, required: true },
   config: { type: Object, required: true },
   index: { type: Number, required: true },
+  pageSize: { type: String, default: 'a4' },
 })
 
 const { $api } = useNuxtApp()

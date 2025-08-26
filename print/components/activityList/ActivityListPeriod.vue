@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-break-after-page">
+  <div class="tw-break-after-page" :class="pageSize">
     <h1
       :id="`content_${index}_period_${period.id}`"
       class="tw-text-center tw-font-semibold tw-mb-6"
@@ -36,6 +36,7 @@ const props = defineProps({
   },
   index: { type: Number, required: true },
   filter: { type: Object, default: () => ({}) },
+  pageSize: { type: String, default: 'a4' },
 })
 
 const { $api } = useNuxtApp()

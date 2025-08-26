@@ -8,6 +8,7 @@
           :options="content.options"
           :camp="camp"
           :config="config"
+          :page-size="pageSize"
           :index="idx"
         />
       </div>
@@ -17,6 +18,7 @@
 
 <script setup>
 import { toDayjsLocale } from '@/common/helpers/dayjs.js'
+import toLower from 'lodash-es/toLower.js'
 
 // parse query config
 const route = useRoute()
@@ -28,6 +30,9 @@ const { setLocale, fallbackLocale } = useI18n()
 const { $date } = useNuxtApp()
 const locale = config.language || fallbackLocale.value
 await setLocale(locale) // i18n
+
+// page size
+const pageSize = toLower(config.options?.pageSize ?? 'A4')
 
 //dayjs
 $date.locale(toDayjsLocale(locale))

@@ -33,6 +33,7 @@ export default {
   props: {
     scheduleEntry: { type: Object, required: true },
     percentageHeight: { type: Number, default: 10 },
+    config: { type: Object, required: true },
   },
   computed: {
     color() {
@@ -50,8 +51,18 @@ export default {
     linkTarget() {
       return `#scheduleEntry_${this.scheduleEntry.id}`
     },
+    fontSizeScalingFactor() {
+      switch (this.config.options?.pageSize) {
+        case 'A3':
+          return 5
+        case 'A5':
+          return 2.5
+        default:
+          return 3
+      }
+    },
     fontSize() {
-      return Math.min(8, 3 * this.percentageHeight) + 'pt'
+      return Math.min(8, this.fontSizeScalingFactor * this.percentageHeight) + 'pt'
     },
   },
 }
