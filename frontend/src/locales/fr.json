@@ -181,8 +181,6 @@
         "category": "Catégories d'activités",
         "checklistItemCount": "Aucune entrée | Une entrée | {count} entrées",
         "checklists": "Check-lists",
-        "clearClipboard": "Vider le presse-papier",
-        "clipboard": "Presse-papier",
         "clipboardInfoDialog": {
           "allow": "Autoriser maintenant",
           "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu dois entrer le lien vers le modèle de camp manuellement.",

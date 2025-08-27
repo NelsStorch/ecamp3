@@ -39,7 +39,7 @@
         "changeLayout": "Layout ändern",
         "clipboardInfoDialog": {
           "allow": "Jetzt erlauben",
-          "denied": "Du hast das Lesen aus der Zwischenablage untersagt. Du kannst daher kopierte Aktivitäten nicht einfügen.",
+          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
           "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
           "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
           "title": "Aktivität kopieren & einfügen"
@@ -181,8 +181,6 @@
         "category": "Block-Kategorien",
         "checklistItemCount": "Keine Einträge | Ein Eintrag | {count} Einträge",
         "checklists": "Checklisten",
-        "clearClipboard": "Zwischenablage leeren",
-        "clipboard": "Zwischenablage",
         "clipboardInfoDialog": {
           "allow": "Jetzt erlauben",
           "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Bitte füge den Link zum Vorlage-Lager stattdessen von Hand ein.",
@@ -433,7 +431,7 @@
         "clipboard": "Zwischenablage",
         "clipboardInfoDialog": {
           "allow": "Jetzt erlauben",
-          "denied": "Du hast das Lesen aus der Zwischenablage untersagt. Du kannst daher kopierte Aktivitäten nicht einfügen.",
+          "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
           "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
           "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
           "title": "Aktivität kopieren & einfügen"
@@ -464,7 +462,7 @@
         "picassoEntry": {
           "clipboardInfoDialog": {
             "allow": "Jetzt erlauben",
-            "denied": "Du hast das Lesen aus der Zwischenablage untersagt. Du kannst daher kopierte Aktivitäten nicht einfügen.",
+            "denied": "Du hast den Zugriff auf die Zwischenablage verweigert. Kopierte Aktivitäten können daher nicht eingefügt werden.",
             "description": "Damit du eine kopierte Aktivität einfügen kannst, musst du eCamp v3 erlauben, deine Zwischenablage zu lesen.",
             "granted": "Du kannst nun kopierte Aktivitäten einfügen.",
             "title": "Aktivität kopieren & einfügen"
