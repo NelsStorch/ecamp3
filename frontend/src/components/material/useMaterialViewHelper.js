@@ -158,6 +158,7 @@ export function useMaterialViewHelper(camp, list) {
   return {
     collection,
     downloadXlsx,
+    downloadMaterialList,
     openPeriods,
   }
 }

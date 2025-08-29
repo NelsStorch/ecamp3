@@ -314,7 +314,8 @@
       },
       "materialLists": {
         "materialsCount": "Keine Einträge | 1 Eintrag | {count} Einträge",
-        "overview": "Gesamtübersicht"
+        "overview": "Gesamtübersicht",
+        "unassigned": "Nicht zugewiesen"
       },
       "materialTable": {
         "addNewItem": "Eintrag hinzufügen",
@@ -757,6 +758,10 @@
           "createNewList": "Materialliste erstellen",
           "download": "Übersicht herunterladen",
           "title": "Gesamtübersicht"
+        },
+        "materialUnassigned": {
+          "excelTitle": "nicht zugewiesen",
+          "title": "Nicht zugewiesenes Material"
         },
         "sideBarMaterialLists": {
           "title": "Materiallisten"

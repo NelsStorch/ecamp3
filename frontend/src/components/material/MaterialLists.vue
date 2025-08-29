@@ -8,6 +8,29 @@
         <v-icon color="blue-grey lighten-3">mdi-chevron-right</v-icon>
       </v-list-item-icon>
     </v-list-item>
+    <v-list-item
+      v-if="unassignedCount > 0"
+      :to="materialListRoute(camp, '/unassigned', { isDetail: true })"
+      exact-path
+    >
+      <v-list-item-content>
+        <v-list-item-title>
+          <span class="unassigned">{{
+            $tc('components.material.materialLists.unassigned')
+          }}</span>
+        </v-list-item-title>
+        <v-list-item-subtitle
+          >{{
+            $tc('components.material.materialLists.materialsCount', unassignedCount, {
+              count: unassignedCount,
+            })
+          }}
+        </v-list-item-subtitle>
+      </v-list-item-content>
+      <v-list-item-icon>
+        <v-icon color="blue-grey lighten-3">mdi-chevron-right</v-icon>
+      </v-list-item-icon>
+    </v-list-item>
     <v-skeleton-loader v-if="materialLists._meta.loading" type="list-item@3" />
     <v-list-item
       v-for="materialList in materailListsSorted"
@@ -49,8 +72,22 @@ export default {
     materialLists() {
       return this.camp.materialLists()
     },
+    materialItems() {
+      return this.camp.periods().items.flatMap((period) => period.materialItems().items)
+    },
     materailListsSorted() {
       return materialListsSorted(this.materialLists.allItems)
+    },
+    unassignedCount() {
+      if (this.materialItems.length === 0 || this.materialLists._meta.loading) {
+        return 0
+      }
+      return (
+        this.materialItems.length -
+        this.materialLists.items.reduce((sum, list) => {
+          return sum + list.itemCount
+        }, 0)
+      )
     },
   },
   mounted() {
@@ -61,3 +98,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.unassigned {
+  font-style: italic;
+}
+</style>

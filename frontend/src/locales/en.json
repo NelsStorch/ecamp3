@@ -314,7 +314,8 @@
       },
       "materialLists": {
         "materialsCount": "No entries | 1 entry | {count} entries",
-        "overview": "General overview"
+        "overview": "General overview",
+        "unassigned": "Not assigned"
       },
       "materialTable": {
         "addNewItem": "Add new item",
@@ -757,6 +758,10 @@
           "createNewList": "Create material list",
           "download": "Download overview",
           "title": "General overview"
+        },
+        "materialUnassigned": {
+          "excelTitle": "unassigned",
+          "title": "Unassigned material"
         },
         "sideBarMaterialLists": {
           "title": "Material lists"
