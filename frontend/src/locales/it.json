@@ -650,13 +650,10 @@
       "navigation": {
         "desktop": {
           "navTopbar": {
-            "admin": "Admin",
             "campIsLoading": "Il campo sta caricando",
             "material": "Material",
-            "print": "Stampa",
             "program": "Programm",
-            "story": "Storia",
-            "team": "Team"
+            "story": "Storia"
           }
         },
         "mobile": {

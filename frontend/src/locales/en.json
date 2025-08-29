@@ -116,6 +116,20 @@
       "campSettings": {
         "title": "Settings"
       },
+      "campSharingSettings": {
+        "copyCampLink": "Copy public link to the camp",
+        "notShared": {
+          "description": "Link sharing is not active. Only people in the {team} can see the programme and data in this camp.",
+          "title": "Share camp publicly"
+        },
+        "publicCampUrl": "Public camp link",
+        "shared": {
+          "description": "All people who know the link to the camp can see the programme, team, material lists, responsibilities and all other data in this camp. Only people in the {team} can change data.",
+          "title": "Camp is shared publicly"
+        },
+        "team": "team",
+        "title": "Sharing settings"
+      },
       "createCampPeriods": {
         "add": "Add a period"
       },
@@ -786,14 +800,11 @@
       "navigation": {
         "desktop": {
           "navTopbar": {
-            "admin": "Admin",
             "campIsLoading": "Camp is loading",
             "checklist": "Checklist",
             "material": "Materials",
-            "print": "Print",
             "program": "Program",
-            "story": "Story",
-            "team": "Team"
+            "story": "Story"
           }
         },
         "mobile": {

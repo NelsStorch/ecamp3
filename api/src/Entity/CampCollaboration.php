@@ -67,7 +67,9 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'campId' => new Link(
                     toProperty: 'camp',
                     fromClass: Camp::class,
-                    security: 'is_granted("CAMP_COLLABORATOR", camp) or is_granted("CAMP_IS_PROTOTYPE", camp)'
+                    security: 'is_granted("CAMP_COLLABORATOR", camp) or
+                               is_granted("CAMP_IS_SHARED", camp) or
+                               is_granted("CAMP_IS_PROTOTYPE", camp)'
                 ),
             ],
             security: 'is_fully_authenticated()',

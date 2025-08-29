@@ -38,7 +38,9 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'dayId' => new Link(
                     toProperty: 'day',
                     fromClass: Day::class,
-                    security: 'is_granted("CAMP_COLLABORATOR", day) or is_granted("CAMP_IS_PROTOTYPE", day)'
+                    security: 'is_granted("CAMP_COLLABORATOR", day) or
+                               is_granted("CAMP_IS_SHARED", day) or
+                               is_granted("CAMP_IS_PROTOTYPE", day)'
                 ),
             ],
             extraProperties: [

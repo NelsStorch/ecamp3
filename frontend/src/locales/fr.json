@@ -763,14 +763,11 @@
       "navigation": {
         "desktop": {
           "navTopbar": {
-            "admin": "Admin",
             "campIsLoading": "Le camp est en cours de chargement",
             "checklist": "Check-list",
             "material": "Matériel",
-            "print": "Imprimer",
             "program": "Programme",
-            "story": "Histoire",
-            "team": "Team"
+            "story": "Histoire"
           }
         },
         "mobile": {

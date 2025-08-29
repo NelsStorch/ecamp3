@@ -32,7 +32,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)',
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)',
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
         ),
         new Patch(
@@ -62,6 +64,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['isPrototype'])]
 #[ORM\Entity(repositoryClass: CampRepository::class)]
 #[ORM\Index(columns: ['isPrototype'])]
+#[ORM\Index(columns: ['isShared'])]
+#[ORM\Index(columns: ['updateTime'])] // TODO unclear why this is necessary, but doctrine forgot about this index from BaseEntity...
 class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototypeInterface {
     public const ITEM_NORMALIZATION_CONTEXT = [
         'groups' => ['read', 'Camp:Periods', 'Period:Days', 'Camp:CampCollaborations', 'CampCollaboration:User'],
@@ -180,6 +184,17 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[ApiProperty(readable: false, example: '/camps/1a2b3c4d')]
     #[Groups(['create'])]
     public ?Camp $campPrototype = null;
+
+    /**
+     * Whether the programme of this camp is publicly available to anyone (except for
+     * personal data such as camp collaborations, personal material lists,
+     * responsibilities and comments).
+     */
+    #[Assert\Type('bool')]
+    #[ApiProperty(example: true)]
+    #[Groups(['read', 'write'])]
+    #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => false])]
+    public bool $isShared = false;
 
     /**
      * Whether this camp may serve as a template for creating other camps.

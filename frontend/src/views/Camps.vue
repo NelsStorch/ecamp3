@@ -78,7 +78,6 @@
 
 <script>
 import dayjs from '@/common/helpers/dayjs.js'
-import { campRoute } from '@/router.js'
 import { isAdmin } from '@/plugins/auth'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
@@ -127,7 +126,16 @@ export default {
           camp: periods[0].camp(),
           periods: periods,
         }))
-        .filter(({ camp }) => !camp.isPrototype)
+        .filter(({ camp }) => {
+          const currentUserLink = this.$store.getters.getLoggedInUser?._meta.self
+          const currentUserCampCollaboration = camp
+            .campCollaborations()
+            .items.filter((coll) => typeof coll.user === 'function')
+            .find((coll) => coll.user()._meta.self === currentUserLink)
+          return (
+            currentUserCampCollaboration && !currentUserCampCollaboration._meta.loading
+          )
+        })
     },
     pastCamps() {
       return Object.values(
@@ -153,7 +161,6 @@ export default {
     this.isAdmin = isAdmin()
   },
   methods: {
-    campRoute,
     async loadCamps() {
       // Only reload camps if they were loaded before, to avoid console error
       if (this.camps._meta.self !== null) {
