@@ -360,7 +360,9 @@
         },
         "picassoConfig": {
           "orientation": "Seitenlayout",
-          "periods": "Lagerabschnitt(e)"
+          "landscape": "Querformat",
+          "periods": "Lagerabschnitt(e)",
+          "portrait": "Hochformat"
         },
         "programConfig": {
           "dayOverview": "Tagesübersicht"
