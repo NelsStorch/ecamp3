@@ -1,5 +1,5 @@
 import { parse } from 'css'
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash-es/camelCase.js'
 
 const vuePdfStylePlugin = {
   name: 'vue-pdf-style-plugin',

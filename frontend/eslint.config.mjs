@@ -33,6 +33,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.node,
+        ...globals.browser,
       },
 
       parserOptions: {
@@ -45,7 +46,7 @@ export default [
       'prefer-const': 'error',
       'prettier/prettier': 'error',
 
-      'vue/component-tags-order': [
+      'vue/block-order': [
         'error',
         {
           order: ['template', 'script', 'style'],
@@ -53,6 +54,7 @@ export default [
       ],
 
       'vue/multi-word-component-names': 'off',
+      'vue/no-deprecated-delete-set': 'warn',
       'vue/no-deprecated-destroyed-lifecycle': 'off',
       'vue/no-deprecated-dollar-listeners-api': 'off',
       'vue/no-deprecated-dollar-scopedslots-api': 'off',
