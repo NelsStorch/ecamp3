@@ -20,10 +20,6 @@ for (const config of vueRecommendedFlatConfigs) {
     Object.assign(allVueRecommendedRules, config.rules)
   }
 }
-// we now have a mix between eslint-plugin-vue v9 and 10
-// (@nuxt/eslint pulls in eslint-plugin-vue v10, we have v9)
-// v10 does not support this rule anymore.
-delete allVueRecommendedRules['vue/component-tags-order']
 
 export default createConfigForNuxt().append([
   {

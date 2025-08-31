@@ -32,6 +32,7 @@ export default [
       globals: {
         ...globals.node,
         ...globals.jest,
+        self: 'writable',
       },
 
       parserOptions: {
@@ -43,7 +44,7 @@ export default [
       'prefer-const': 'error',
       'prettier/prettier': 'error',
 
-      'vue/component-tags-order': [
+      'vue/block-order': [
         'error',
         {
           order: ['template', 'script', 'style'],
