@@ -29,9 +29,10 @@
       vee-rules="required"
     />
 
-    <e-select
+    <EAutocomplete
       v-model="entityData.copyChecklistSource"
       path="copyChecklistSource"
+      clearable
       :items="prototypeChecklists"
     />
   </DetailPane>
