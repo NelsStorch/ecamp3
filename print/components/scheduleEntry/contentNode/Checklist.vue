@@ -3,13 +3,17 @@
     <generic-error-message v-if="error" :error="error" />
 
     <div v-for="entry in checklistsWithItems" :key="entry.checklist.id" class="tw-mb-2">
-      <div class="tw-font-bold">{{ entry.checklist.name }}</div>
+      <div class="tw-font-bold">
+        {{ entry.checklist.name }}
+      </div>
       <table>
         <tr v-for="item in entry.items" :key="item.id" class="tw-align-baseline">
           <th class="tw-tabular-nums tw-pr-1 tw-font-normal tw-text-start">
             {{ item.number }}
           </th>
-          <td class="tw-pb-1">{{ item.text }}</td>
+          <td class="tw-pb-1">
+            {{ item.text }}
+          </td>
         </tr>
       </table>
     </div>
