@@ -1,6 +1,8 @@
 <template>
   <div class="tw-break-after-page tw-text-center">
-    <p class="tw-font-medium tw-mt-20 tw-text-3xl">{{ camp.organizer }}</p>
+    <p class="tw-font-medium tw-mt-20 tw-text-3xl">
+      {{ camp.organizer }}
+    </p>
 
     <h1 :id="`content_${index}_cover`" class="tw-my-16 tw-text-6xl tw-font-semibold">
       {{ camp.title }}

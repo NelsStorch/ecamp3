@@ -13,11 +13,27 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
+const vueRecommendedFlatConfigs = vueEslint.configs['flat/recommended']
+const allVueRecommendedRules = {}
+for (const config of vueRecommendedFlatConfigs) {
+  if (config.rules) {
+    Object.assign(allVueRecommendedRules, config.rules)
+  }
+}
+// we now have a mix between eslint-plugin-vue v9 and 10
+// (@nuxt/eslint pulls in eslint-plugin-vue v10, we have v9)
+// v10 does not support this rule anymore.
+delete allVueRecommendedRules['vue/component-tags-order']
+
 export default createConfigForNuxt().append([
   {
     files: ['**/*.ts'],
   },
-  ...vueEslint.configs['flat/recommended'],
+  {
+    rules: {
+      ...allVueRecommendedRules,
+    },
+  },
   ...vueScopedCssEslint.configs['flat/recommended'],
   js.configs.recommended,
   prettierRecommended,
