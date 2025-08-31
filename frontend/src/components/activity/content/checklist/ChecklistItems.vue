@@ -44,8 +44,7 @@ export default {
 <style scoped>
 .e-checklist-item-parent-name {
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: wrap;
 }
 
 .ec-checklist--item-title {
