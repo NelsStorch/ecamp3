@@ -88,7 +88,10 @@ const registerFonts = async () => {
       // https://github.com/twitter/twemoji/issues/419#issuecomment-637360325
       const filename = code.includes('200d')
         ? code
-        : code.replaceAll('fe0f', '').replaceAll(/--|^-|-$/g, '')
+        : code
+            .split('-')
+            .filter((part) => part && part !== 'fe0f')
+            .join('-')
       return '/twemoji/assets/72x72/' + filename + '.png'
     },
   })
