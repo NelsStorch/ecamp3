@@ -29,7 +29,7 @@
       vee-rules="required"
     />
 
-    <EAutocomplete
+    <e-autocomplete
       v-model="entityData.copyChecklistSource"
       path="copyChecklistSource"
       clearable
