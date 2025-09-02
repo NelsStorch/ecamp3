@@ -17,7 +17,7 @@
     "test:unit": "vitest run --coverage",
     "test:unit:debug": "node --inspect-brk=0.0.0.0:9229 ./node_modules/.bin/vitest --no-cache --runInBand",
     "test:unit:watch": "vitest --watch",
-    "postinstall": "./scripts/install-twemoji.sh"
+    "postinstall": "./scripts/install-twemoji.sh && patch-package"
   },
   "dependencies": {
     "@intlify/core": "11.1.11",
@@ -111,6 +111,7 @@
     "jest-serializer-vue-tjw": "3.20.0",
     "jsdom": "26.1.0",
     "lint-staged": "16.1.6",
+    "patch-package": "8.0.0",
     "prettier": "3.6.2",
     "sass": "1.78.0",
     "source-map": "0.7.4",

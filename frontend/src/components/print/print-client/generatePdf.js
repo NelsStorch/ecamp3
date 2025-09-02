@@ -1,7 +1,8 @@
 import { prepareInMainThread } from '@/pdf/prepareInMainThread.js'
 import cloneDeep from 'lodash-es/cloneDeep.js'
+import { proxy } from 'comlink'
 
-export const generatePdf = async (data) => {
+export const generatePdf = async (data, onProgress) => {
   await prepareInMainThread(data.config)
 
   const serializableData = prepareDataForSerialization(data)
@@ -10,9 +11,9 @@ export const generatePdf = async (data) => {
     // ComlinkWorker is provided by vite-plugin-comlink
     // eslint-disable-next-line no-undef
     const instance = new ComlinkWorker(new URL('./renderPdf.worker.js', import.meta.url))
-    return await instance.renderPdfInWorker(serializableData)
+    return await instance.renderPdfInWorker(serializableData, proxy(onProgress))
   } else {
-    return await (await import('./renderPdf.js')).renderPdf(serializableData)
+    return await (await import('./renderPdf.js')).renderPdf(serializableData, onProgress)
   }
 }
 

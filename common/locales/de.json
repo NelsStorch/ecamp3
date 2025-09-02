@@ -262,8 +262,11 @@
     "shortScheduleEntryDescription": "Tag {dayNumber} {startTime}"
   },
   "print": {
+    "activity": {
+      "title": "Einzelne Aktivität"
+    },
     "activityList": {
-      "title": "Aktivitätsliste"
+      "title": "Aktivitätenliste"
     },
     "config": {
       "periods": "Lagerabschnitt(e)"
@@ -283,13 +286,11 @@
     "program": {
       "title": "Detailprogramm"
     },
-    "summary": {
-      "safetyConsiderations": {
-        "title": "Sicherheitsüberlegungen"
-      },
-      "storycontext": {
-        "title": "Geschichte"
-      }
+    "safetyConsiderations": {
+      "title": "Sicherheitsüberlegungen"
+    },
+    "story": {
+      "title": "Geschichte"
     },
     "toc": {
       "title": "Inhaltsverzeichnis"

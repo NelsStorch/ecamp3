@@ -4,7 +4,7 @@
       :id="`content_${index}_period_${period.id}`"
       class="tw-text-center tw-font-semibold tw-mb-6"
     >
-      {{ $t('print.summary.' + camelCase(contentType) + '.title') }}:
+      {{ $t('print.' + camelCase(contentType) + '.title') }}:
       {{ period.description }}
     </h1>
 
