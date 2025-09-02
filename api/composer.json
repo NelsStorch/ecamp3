@@ -5,7 +5,15 @@
         "php": ">=8.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/core": "4.1.20",
+        "api-platform/doctrine-orm": "4.1.20",
+        "api-platform/http-cache": "4.1.20",
+        "api-platform/json-api": "4.1.20",
+        "api-platform/json-hal": "4.1.20",
+        "api-platform/metadata": "4.1.20",
+        "api-platform/openapi": "4.1.20",
+        "api-platform/serializer": "4.1.20",
+        "api-platform/state": "4.1.20",
+        "api-platform/symfony": "4.1.20",
         "composer/package-versions-deprecated": "1.11.99",
         "cweagans/composer-patches": "1.7.3",
         "doctrine/common": "3.5.0",
@@ -52,6 +60,7 @@
         "webonyx/graphql-php": "15.24.0"
     },
     "require-dev": {
+        "api-platform/graphql": "4.1.20",
         "brianium/paratest": "v7.11.0",
         "friendsofphp/php-cs-fixer": "3.86.0",
         "hautelook/alice-bundle": "2.15.1",
@@ -151,7 +160,7 @@
     "extra": {
         "composer-exit-on-patch-failure": true,
         "patches": {
-            "api-platform/core": {
+            "api-platform/json-hal": {
                 "Allow NULL-Links": "patch/api-plattform-allow-null-links.patch"
             }
         }
