@@ -13,7 +13,7 @@ export async function renderPdfStructureToReactPdf(
   await onProgress('layoutDocument')
 
   let page = 0
-  addEventListener('layoutPage', async () => {
+  globalThis.addEventListener('layoutPage', async () => {
     page++
     await onProgress('layoutPage', { page })
   })
