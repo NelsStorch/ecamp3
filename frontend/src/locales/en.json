@@ -360,7 +360,9 @@
         },
         "picassoConfig": {
           "orientation": "Page layout",
-          "periods": "Period(s)"
+          "landscape": "Landscape",
+          "periods": "Period(s)",
+          "portrait": "Portrait"
         },
         "programConfig": {
           "dayOverview": "print day overview"
