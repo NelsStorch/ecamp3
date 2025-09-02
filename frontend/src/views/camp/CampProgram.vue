@@ -44,7 +44,7 @@ Show all activity schedule entries of a single period.
       />
       <v-menu offset-y>
         <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on" data-testid="campprogram-menu">
+          <v-btn icon v-bind="attrs" data-testid="campprogram-menu" v-on="on">
             <v-badge
               v-if="!$vuetify.breakpoint.smAndUp && filteredPropertiesCount > 0"
               overlap

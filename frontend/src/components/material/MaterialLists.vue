@@ -73,9 +73,7 @@ export default {
       return this.camp.materialLists()
     },
     allMaterialItems() {
-      return this.camp
-        .periods()
-        .items.flatMap((period) => period.materialItems().items)
+      return this.camp.periods().items.flatMap((period) => period.materialItems().items)
     },
     materailListsSorted() {
       return materialListsSorted(this.materialLists.allItems)
