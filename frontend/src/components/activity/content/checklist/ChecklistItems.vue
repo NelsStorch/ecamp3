@@ -5,7 +5,7 @@
       <v-list-item
         v-for="{ item, parents } in items"
         :key="item._meta.self"
-        class="min-h-0"
+        class="min-h-0 d-grid"
         :disabled="layoutMode"
       >
         <v-list-item-content class="py-2">
@@ -44,7 +44,8 @@ export default {
 <style scoped>
 .e-checklist-item-parent-name {
   min-width: 0;
-  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ec-checklist--item-title {
