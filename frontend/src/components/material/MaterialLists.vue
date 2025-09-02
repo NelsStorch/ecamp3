@@ -15,7 +15,7 @@
     >
       <v-list-item-content>
         <v-list-item-title>
-          <span class="unassigned">{{
+          <span class="italic">{{
             $tc('components.material.materialLists.unassigned')
           }}</span>
         </v-list-item-title>
@@ -72,18 +72,20 @@ export default {
     materialLists() {
       return this.camp.materialLists()
     },
-    materialItems() {
-      return this.camp.periods().items.flatMap((period) => period.materialItems().items)
+    allMaterialItems() {
+      return this.camp
+        .periods()
+        .items.flatMap((period) => period.materialItems().items)
     },
     materailListsSorted() {
       return materialListsSorted(this.materialLists.allItems)
     },
     unassignedCount() {
-      if (this.materialItems.length === 0 || this.materialLists._meta.loading) {
+      if (this.allMaterialItems.length === 0 || this.materialLists._meta.loading) {
         return 0
       }
       return (
-        this.materialItems.length -
+        this.allMaterialItems.length -
         this.materialLists.items.reduce((sum, list) => {
           return sum + list.itemCount
         }, 0)
@@ -98,8 +100,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-.unassigned {
-  font-style: italic;
-}
-</style>
