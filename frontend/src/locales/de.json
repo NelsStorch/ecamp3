@@ -246,6 +246,7 @@
         "cannotRemoveLastManager": "Du kannst die letzte Person mit administrativen Rechten nicht deaktivieren",
         "deactivate": "Deaktivieren",
         "delete": "Möchtest du die Person '{name}' wirklich entfernen?",
+        "leaveCamp": "Lager verlassen",
         "inviteAgain": "Erneut einladen",
         "resendEmail": "E-Mail erneut senden",
         "resentEmail": "Einladung gesendet",
@@ -257,7 +258,9 @@
       },
       "promptCollaboratorDeactivate": {
         "deactivate": "Deaktivieren",
-        "warningText": "Möchtest du '{name}' wirklich deaktivieren?"
+        "leaveCamp": "Lager verlassen",
+        "warningText": "Möchtest du '{name}' wirklich deaktivieren?",
+        "warningTextLeaveCamp": "Möchtest du das Lager '{camp}' wirklich verlassen?"
       }
     },
     "dashboard": {
