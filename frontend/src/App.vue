@@ -9,7 +9,9 @@
       <router-view />
     </v-main>
 
-    <v-footer v-if="offline" app>
+    <FooterSharedCamp />
+
+    <v-footer v-if="offline" app class="offline">
       <p class="mb-0">
         <strong>{{ $tc('global.info.offline.title') }}</strong>
         {{ $tc('global.info.offline.description') }}
@@ -149,7 +151,7 @@ export default {
 <style scoped>
 /* <v-footer> is transformed to <footer class="v-footer"> */
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-.v-footer {
+.v-footer.offline {
   border-top: 3px solid #c80d0d;
   z-index: 4;
   background: #fbdfdf;

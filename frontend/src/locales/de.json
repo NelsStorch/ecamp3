@@ -58,6 +58,12 @@
       },
       "campMembers": {
         "title": "Mitglieder"
+      },
+      "footerSharedCamp": {
+        "outsider": "Du arbeitest in diesem Lager nicht mit:",
+        "outsiderDescription": "Du kannst keine Daten ändern, aber das Programm anschauen und kopieren.",
+        "shared": "Lager ist öffentlich freigegeben:",
+        "sharedDescription": "Alle Personen, die über den Link verfügen, können sämtliche Daten im Lager einsehen."
       }
     },
     "campAdmin": {

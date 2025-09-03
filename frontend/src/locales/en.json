@@ -58,6 +58,12 @@
       },
       "campMembers": {
         "title": "Members"
+      },
+      "footerSharedCamp": {
+        "outsider": "Not participating in this camp:",
+        "outsiderDescription": "You cannot change any data, but you may look at and copy the programme.",
+        "shared": "Camp is shared publicly:",
+        "sharedDescription": "Any person who has the link can see all data in this camp."
       }
     },
     "campAdmin": {
