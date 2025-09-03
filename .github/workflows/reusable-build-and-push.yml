@@ -40,6 +40,8 @@ jobs:
             return context.repo.owner.toLowerCase()
 
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          ref: ${{ inputs.sha }}
 
       - name: Set nightly tag if commit was on main
         id: add-nightly-tag
@@ -122,6 +124,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
+          ref: ${{ inputs.sha }}
           fetch-depth: 100
 
       - run: |
