@@ -8,7 +8,6 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
 use App\Entity\Activity;
 use App\Entity\ContentNode;
-use App\Repository\FiltersByCampCollaboration;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,8 +16,6 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\TypeInfo\Type;
 
 final class ContentNodePeriodFilter extends AbstractFilter {
-    use FiltersByCampCollaboration;
-
     public const PERIOD_QUERY_NAME = 'period';
 
     public function __construct(

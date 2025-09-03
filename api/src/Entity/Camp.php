@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use App\Doctrine\Filter\CampCollaboratorFilter;
 use App\InputFilter;
 use App\Repository\CampRepository;
 use App\Serializer\Normalizer\RelatedCollectionLink;
@@ -64,6 +65,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['isPrototype'])]
+#[ApiFilter(filterClass: CampCollaboratorFilter::class)]
 #[ORM\Entity(repositoryClass: CampRepository::class)]
 #[ORM\Index(columns: ['isPrototype'])]
 #[ORM\Index(columns: ['isShared'])]

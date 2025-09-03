@@ -106,14 +106,17 @@ export default {
     }
   },
   computed: {
+    currentUserLink() {
+      return this.$store.getters.getLoggedInUser?._meta.self
+    },
     camps() {
-      return this.api.get().camps()
+      return this.api.get().camps({ campCollaborator: this.currentUserLink })
     },
     periods() {
-      return this.api.get().periods()
+      return this.api.get().periods({ campCollaborator: this.currentUserLink })
     },
     prototypeCamps() {
-      return this.camps.items.filter((c) => c.isPrototype)
+      return this.api.get().camps({ isPrototype: true }).items
     },
     upcomingCamps() {
       return Object.values(
@@ -121,21 +124,10 @@ export default {
           this.periods.items.filter((p) => dayjs(p.end).endOf('day').isAfter(dayjs())),
           (p) => p.camp()._meta.self
         )
-      )
-        .map((periods) => ({
-          camp: periods[0].camp(),
-          periods: periods,
-        }))
-        .filter(({ camp }) => {
-          const currentUserLink = this.$store.getters.getLoggedInUser?._meta.self
-          const currentUserCampCollaboration = camp
-            .campCollaborations()
-            .items.filter((coll) => typeof coll.user === 'function')
-            .find((coll) => coll.user()._meta.self === currentUserLink)
-          return (
-            currentUserCampCollaboration && !currentUserCampCollaboration._meta.loading
-          )
-        })
+      ).map((periods) => ({
+        camp: periods[0].camp(),
+        periods: periods,
+      }))
     },
     pastCamps() {
       return Object.values(
@@ -162,6 +154,7 @@ export default {
   },
   methods: {
     async loadCamps() {
+      await this.$auth.loadUser()
       // Only reload camps if they were loaded before, to avoid console error
       if (this.camps._meta.self !== null) {
         this.api.reload(this.camps)

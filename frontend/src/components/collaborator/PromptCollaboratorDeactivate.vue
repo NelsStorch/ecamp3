@@ -78,7 +78,10 @@ export default {
         if (!this.isOwnCampCollaboration) {
           return
         }
-        this.api.get().camps().$reload()
+        this.api
+          .get()
+          .camps({ campCollaborator: this.$store.getters.getLoggedInUser?._meta.self })
+          .$reload()
         this.$router.push({ name: 'camps' })
       })
 

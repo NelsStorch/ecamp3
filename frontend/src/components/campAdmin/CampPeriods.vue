@@ -4,7 +4,7 @@ Displays all periods of a single camp and allows to edit them & create new ones
 
 <template>
   <content-group
-    :title="$tc('components.campAdmin.campPeriods.title', api.get().camps().items.length)"
+    :title="$tc('components.campAdmin.campPeriods.title', camp.periods().items.length)"
     icon="mdi-calendar-multiple"
   >
     <template #title-actions>
