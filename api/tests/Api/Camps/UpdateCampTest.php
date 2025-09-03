@@ -98,6 +98,42 @@ class UpdateCampTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchSharedCampIsDeniedForUnrelatedUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials()->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'title' => 'Hello World',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchSharedCampIsDeniedForInactiveUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'title' => 'Hello World',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchSharedCampIsDeniedForInvitedUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'title' => 'Hello World',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchCampDisallowsEditingPeriods() {
         $camp = static::getFixture('camp1');
         static::createClientWithCredentials()->request('PATCH', '/camps/'.$camp->getId(), ['json' => [

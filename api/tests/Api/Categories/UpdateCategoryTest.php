@@ -163,6 +163,63 @@ class UpdateCategoryTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchCategoryInSharedCampIsDeniedForUnrelatedUser() {
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/categories/'.$category->getId(), ['json' => [
+            'short' => 'LP',
+            'name' => 'Lagerprogramm',
+            'color' => '#FFFF00',
+            'numberingStyle' => 'I',
+            'preferredContentTypes' => [
+                $this->getIriFor('contentTypeColumnLayout'),
+                $this->getIriFor('contentTypeSafetyConsiderations'),
+            ],
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchCategoryInSharedCampIsDeniedForInactiveUser() {
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/categories/'.$category->getId(), ['json' => [
+            'short' => 'LP',
+            'name' => 'Lagerprogramm',
+            'color' => '#FFFF00',
+            'numberingStyle' => 'I',
+            'preferredContentTypes' => [
+                $this->getIriFor('contentTypeColumnLayout'),
+                $this->getIriFor('contentTypeSafetyConsiderations'),
+            ],
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchCategoryInSharedCampIsDeniedForInvitedUser() {
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/categories/'.$category->getId(), ['json' => [
+            'short' => 'LP',
+            'name' => 'Lagerprogramm',
+            'color' => '#FFFF00',
+            'numberingStyle' => 'I',
+            'preferredContentTypes' => [
+                $this->getIriFor('contentTypeColumnLayout'),
+                $this->getIriFor('contentTypeSafetyConsiderations'),
+            ],
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchCategoryDisallowsChangingCamp() {
         $category = static::getFixture('category1');
         static::createClientWithCredentials()->request('PATCH', '/categories/'.$category->getId(), ['json' => [

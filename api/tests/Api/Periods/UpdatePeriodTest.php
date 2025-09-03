@@ -123,6 +123,48 @@ class UpdatePeriodTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchPeriodInSharedCampIsDeniedForUnrelatedUser() {
+        $period = static::getFixture('period1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/periods/'.$period->getId(), ['json' => [
+            'description' => 'Vorweekend',
+            'start' => '2023-01-01',
+            'end' => '2023-01-02',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchPeriodInSharedCampIsDeniedForInactiveUser() {
+        $period = static::getFixture('period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/periods/'.$period->getId(), ['json' => [
+            'description' => 'Vorweekend',
+            'start' => '2023-01-01',
+            'end' => '2023-01-02',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchPeriodInSharedCampIsDeniedForInvitedUser() {
+        $period = static::getFixture('period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/periods/'.$period->getId(), ['json' => [
+            'description' => 'Vorweekend',
+            'start' => '2023-01-01',
+            'end' => '2023-01-02',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchPeriodDisallowsChangingCamp() {
         $period = static::getFixture('period1');
         static::createClientWithCredentials()->request('PATCH', '/periods/'.$period->getId(), ['json' => [

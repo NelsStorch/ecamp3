@@ -25,11 +25,13 @@ class ListPersonalInvitationsTest extends ECampApiTestCase {
         $client->request('GET', '/personal_invitations');
         $this->assertResponseStatusCodeSame(200);
         $invitation = static::getFixture('campCollaboration6invitedWithUser');
+        $invitation2 = static::getFixture('campCollaboration2invitedCampShared');
         $this->assertJsonContains([
-            'totalItems' => 1,
+            'totalItems' => 2,
             '_links' => [
                 'items' => [
                     ['href' => "/personal_invitations/{$invitation->getId()}"],
+                    ['href' => "/personal_invitations/{$invitation2->getId()}"],
                 ],
             ],
             '_embedded' => [

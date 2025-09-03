@@ -25,11 +25,18 @@ class ListCommentsTest extends ECampApiTestCase {
 
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 3,
+            'totalItems' => 5,
             '_embedded' => [
                 'items' => [],
             ],
         ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('comment1')],
+            ['href' => $this->getIriFor('comment2')],
+            ['href' => $this->getIriFor('comment3')],
+            ['href' => $this->getIriFor('comment1campPrototype')],
+            ['href' => $this->getIriFor('comment1campShared')],
+        ], $response->toArray()['_links']['items']);
     }
 
     public function testListCommentsSortyByCreateTime() {
@@ -58,7 +65,7 @@ class ListCommentsTest extends ECampApiTestCase {
 
     public function testListCommentsFilteredByActivity() {
         $activity = static::getFixture('activity1');
-        $response = static::createClientWithCredentials()->request('GET', '/comments?activity='.$this->getIriFor($activity));
+        static::createClientWithCredentials()->request('GET', '/comments?activity='.$this->getIriFor($activity));
 
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
@@ -68,7 +75,7 @@ class ListCommentsTest extends ECampApiTestCase {
 
     public function testListCommentsActivitySubresource() {
         $activity = static::getFixture('activity1');
-        $response = static::createClientWithCredentials()->request('GET', $this->getIriFor($activity).'/comments');
+        static::createClientWithCredentials()->request('GET', $this->getIriFor($activity).'/comments');
 
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
@@ -78,12 +85,56 @@ class ListCommentsTest extends ECampApiTestCase {
 
     public function testListCommentsActivitySubresourceIsDeniedForUnrelatedUser() {
         $activity = static::getFixture('activity1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('GET', $this->getIriFor($activity).'/comments');
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('GET', $this->getIriFor($activity).'/comments');
 
         $this->assertResponseStatusCodeSame(404);
         $this->assertJsonContains([
             'title' => 'An error occurred',
             'detail' => 'Relation for link security not found.',
+        ]);
+    }
+
+    public function testListCommentsActivitySubresourceInCampPrototypeIsAllowedForUnrelatedUser() {
+        $activity = static::getFixture('activity1campPrototype');
+        static::createClientWithCredentials()->request('GET', $this->getIriFor($activity).'/comments');
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 1,
+        ]);
+    }
+
+    public function testListCommentsActivitySubresourceInSharedCampIsAllowedForUnrelatedUser() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials()->request('GET', $this->getIriFor($activity).'/comments');
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 1,
+        ]);
+    }
+
+    public function testListCommentsActivitySubresourceInSharedCampIsAllowedForInactiveUser() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', $this->getIriFor($activity).'/comments')
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 1,
+        ]);
+    }
+
+    public function testListCommentsActivitySubresourceInSharedCampIsAllowedForInvitedUser() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', $this->getIriFor($activity).'/comments')
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 1,
         ]);
     }
 }

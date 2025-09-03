@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Api\ActivityProgressLabel;
+namespace App\Tests\Api\ActivityProgressLabels;
 
 use App\Entity\ActivityProgressLabel;
 use App\Tests\Api\ECampApiTestCase;
@@ -89,6 +89,66 @@ class ReadActivityProgressLabelTest extends ECampApiTestCase {
             'id' => $activityProgressLabel->getId(),
             '_links' => [
                 'camp' => ['href' => $this->getIriFor('camp1')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityProgressLabelFromCampPrototypeIsAllowedForUnrelatedUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campPrototype');
+        static::createClientWithCredentials()
+            ->request('GET', '/activity_progress_labels/'.$activityProgressLabel->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activityProgressLabel->getId(),
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campPrototype')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityProgressLabelFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials()
+            ->request('GET', '/activity_progress_labels/'.$activityProgressLabel->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activityProgressLabel->getId(),
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityProgressLabelFromSharedCampIsAllowedForInactiveUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/activity_progress_labels/'.$activityProgressLabel->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activityProgressLabel->getId(),
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityProgressLabelFromSharedCampIsAllowedForInvitedUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/activity_progress_labels/'.$activityProgressLabel->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activityProgressLabel->getId(),
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
             ],
         ]);
     }

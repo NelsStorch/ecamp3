@@ -43,3 +43,10 @@ App\Entity\Category:
     color: '#4DBB52'
     numberingStyle: 1
     rootContentNode: '@columnLayout2campPrototype'
+  category1campShared:
+    camp: '@campShared'
+    short: LS
+    name: Lagersport
+    color: '#4DBB52'
+    numberingStyle: 1
+    rootContentNode: '@columnLayout2campShared'

@@ -24,7 +24,7 @@ class ListMaterialListsTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/material_lists');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 6,
+            'totalItems' => 8,
             '_links' => [
                 'items' => [],
             ],
@@ -39,6 +39,8 @@ class ListMaterialListsTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('materialList4Member')],
             ['href' => $this->getIriFor('materialList1camp2')],
             ['href' => $this->getIriFor('materialList1campPrototype')],
+            ['href' => $this->getIriFor('materialList1campShared')],
+            ['href' => $this->getIriFor('materialList2campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -102,6 +104,67 @@ class ListMaterialListsTest extends ECampApiTestCase {
         ]);
         $this->assertEqualsCanonicalizing([
             ['href' => $this->getIriFor('materialList1campPrototype')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListMaterialListsFilteredByCampIsAllowedForUnrelatedUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/material_lists?camp=%2Fcamps%2F'.$camp->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('materialList1campShared')],
+            ['href' => $this->getIriFor('materialList2campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListMaterialListsFilteredByCampIsAllowedForInactiveUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/material_lists?camp=%2Fcamps%2F'.$camp->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('materialList1campShared')],
+            ['href' => $this->getIriFor('materialList2campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListMaterialListsFilteredByCampIsAllowedForInvitedUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/material_lists?camp=%2Fcamps%2F'.$camp->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('materialList1campShared')],
+            ['href' => $this->getIriFor('materialList2campShared')],
         ], $response->toArray()['_links']['items']);
     }
 }

@@ -13,3 +13,17 @@ App\Entity\ContentNode\MaterialNode:
     position: 2
     instanceName: <word()>
     contentType: '@contentTypeMaterial'
+  materialNodeCampPrototype:
+    root: '@columnLayout1campPrototype'
+    parent: '@columnLayout1campPrototype'
+    slot: '1'
+    position: 2
+    instanceName: <word()>
+    contentType: '@contentTypeMaterial'
+  materialNodeCampShared:
+    root: '@columnLayout1campShared'
+    parent: '@columnLayout1campShared'
+    slot: '1'
+    position: 2
+    instanceName: <word()>
+    contentType: '@contentTypeMaterial'

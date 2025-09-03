@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Api\ActivityProgressLabel;
+namespace App\Tests\Api\ActivityProgressLabels;
 
 use App\Tests\Api\ECampApiTestCase;
 
 /**
  * @internal
  */
-class ListActivityProgressLabelTest extends ECampApiTestCase {
+class ListActivityProgressLabelsTest extends ECampApiTestCase {
     public function testListActivityProgressLabelsIsDeniedForAnonymousUser() {
         static::createBasicClient()
             ->request('GET', '/activity_progress_labels')
@@ -28,7 +28,7 @@ class ListActivityProgressLabelTest extends ECampApiTestCase {
         ;
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 7,
+            'totalItems' => 9,
             '_links' => [
                 'items' => [],
             ],
@@ -44,6 +44,8 @@ class ListActivityProgressLabelTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('activityProgressLabel1campPrototype')],
             ['href' => $this->getIriFor('activityProgressLabel2campPrototype')],
             ['href' => $this->getIriFor('activityProgressLabel3campPrototype')],
+            ['href' => $this->getIriFor('activityProgressLabel1campShared')],
+            ['href' => $this->getIriFor('activityProgressLabel2campShared')],
         ], $response->toArray()['_links']['items']);
     }
 

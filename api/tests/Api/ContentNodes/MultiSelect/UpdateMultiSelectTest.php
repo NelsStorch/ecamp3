@@ -13,6 +13,8 @@ class UpdateMultiSelectTest extends UpdateContentNodeTestCase {
 
         $this->endpoint = '/content_node/multi_selects';
         $this->defaultEntity = static::getFixture('multiSelect1');
+        $this->campPrototypeEntity = static::getFixture('multiSelectCampPrototype');
+        $this->sharedCampEntity = static::getFixture('multiSelectCampShared');
     }
 
     public function testPatchMultiSelectAcceptsValidJson() {

@@ -35,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
+            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_SHARED", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
         ),
         new Patch(
             processor: CampCollaborationUpdateProcessor::class,

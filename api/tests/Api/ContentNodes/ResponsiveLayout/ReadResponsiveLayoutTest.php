@@ -14,6 +14,8 @@ class ReadResponsiveLayoutTest extends ReadContentNodeTestCase {
 
         $this->endpoint = '/content_node/responsive_layouts';
         $this->defaultEntity = static::getFixture('responsiveLayout1');
+        $this->campPrototypeEntity = static::getFixture('responsiveLayoutCampPrototype');
+        $this->sharedCampEntity = static::getFixture('responsiveLayoutCampShared');
     }
 
     public function testGetResponsiveLayout() {

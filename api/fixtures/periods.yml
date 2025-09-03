@@ -24,3 +24,8 @@ App\Entity\Period:
     description: Hauptlager
     start: '<(new DateTime("2021-01-01"))>'
     end: '<(new DateTime("2021-01-01"))>'
+  period1campShared:
+    camp: '@campShared'
+    description: Hauptlager
+    start: '<(new DateTime("2025-06-07"))>'
+    end: '<(new DateTime("2025-06-09"))>'

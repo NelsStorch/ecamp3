@@ -120,6 +120,48 @@ class UpdateActivityTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchActivityFromSharedCampIsDeniedForUnrelatedUser() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/activities/'.$activity->getId(), ['json' => [
+            'title' => 'Hello World',
+            'location' => 'Stoos',
+            'category' => $this->getIriFor('category2'),
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchActivityFromSharedCampIsDeniedForInactiveUser() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/activities/'.$activity->getId(), ['json' => [
+            'title' => 'Hello World',
+            'location' => 'Stoos',
+            'category' => $this->getIriFor('category2'),
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchActivityFromSharedCampIsDeniedForInvitedUser() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/activities/'.$activity->getId(), ['json' => [
+            'title' => 'Hello World',
+            'location' => 'Stoos',
+            'category' => $this->getIriFor('category2'),
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchActivityValidatesCategoryFromSameCamp() {
         $activity = static::getFixture('activity1');
         static::createClientWithCredentials()->request('PATCH', '/activities/'.$activity->getId(), ['json' => [

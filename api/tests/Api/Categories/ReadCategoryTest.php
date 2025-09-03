@@ -124,7 +124,64 @@ class ReadCategoryTest extends ECampApiTestCase {
             '_links' => [
                 'camp' => ['href' => $this->getIriFor('campPrototype')],
                 'rootContentNode' => ['href' => $this->getIriFor('columnLayout2campPrototype')],
-                // 'contentNodes' => ['href' => '/content_nodes?owner=%2Fcategories%2F'.$category->getId()],
+            ],
+        ]);
+    }
+
+    public function testGetSingleCategoryFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var Category $category */
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials()->request('GET', '/categories/'.$category->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $category->getId(),
+            'short' => $category->short,
+            'name' => $category->name,
+            'color' => $category->color,
+            'numberingStyle' => $category->numberingStyle,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout2campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleCategoryFromSharedCampIsAllowedForInactiveUser() {
+        /** @var Category $category */
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/categories/'.$category->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $category->getId(),
+            'short' => $category->short,
+            'name' => $category->name,
+            'color' => $category->color,
+            'numberingStyle' => $category->numberingStyle,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout2campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleCategoryFromSharedCampIsAllowedForInvitedUser() {
+        /** @var Category $category */
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/categories/'.$category->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $category->getId(),
+            'short' => $category->short,
+            'name' => $category->name,
+            'color' => $category->color,
+            'numberingStyle' => $category->numberingStyle,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout2campShared')],
             ],
         ]);
     }

@@ -26,7 +26,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or object.author === user',
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object) or
+                       object.author === user',
         ),
         new Delete(
             security: 'object.author === user',

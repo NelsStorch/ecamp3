@@ -95,6 +95,45 @@ class CreateScheduleEntryTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateScheduleEntryInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/schedule_entries', ['json' => $this->getExampleWritePayload([
+            'period' => $this->getIriFor('period1campShared'),
+            'activity' => $this->getIriFor('activity1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateScheduleEntryInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/schedule_entries', ['json' => $this->getExampleWritePayload([
+            'period' => $this->getIriFor('period1campShared'),
+            'activity' => $this->getIriFor('activity1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateScheduleEntryInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/schedule_entries', ['json' => $this->getExampleWritePayload([
+            'period' => $this->getIriFor('period1campShared'),
+            'activity' => $this->getIriFor('activity1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testCreateScheduleEntryValidatesMissingPeriod() {
         static::createClientWithCredentials()->request('POST', '/schedule_entries', ['json' => $this->getExampleWritePayload([], ['period'])]);
 

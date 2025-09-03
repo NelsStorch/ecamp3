@@ -105,4 +105,50 @@ class ReadDayResponsibleTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleDayResponsibleInSharedCampIsAllowedForUnrelatedUser() {
+        /** @var DayResponsible $dayResponsible */
+        $dayResponsible = static::getFixture('dayResponsible1day1period1campShared');
+        static::createClientWithCredentials()->request('GET', '/day_responsibles/'.$dayResponsible->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $dayResponsible->getId(),
+            '_links' => [
+                'day' => ['href' => $this->getIriFor('day1period1campShared')],
+                'campCollaboration' => ['href' => $this->getIriFor('campCollaboration1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleDayResponsibleInSharedCampIsAllowedForInactiveUser() {
+        /** @var DayResponsible $dayResponsible */
+        $dayResponsible = static::getFixture('dayResponsible1day1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/day_responsibles/'.$dayResponsible->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $dayResponsible->getId(),
+            '_links' => [
+                'day' => ['href' => $this->getIriFor('day1period1campShared')],
+                'campCollaboration' => ['href' => $this->getIriFor('campCollaboration1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleDayResponsibleInSharedCampIsAllowedForInvitedUser() {
+        /** @var DayResponsible $dayResponsible */
+        $dayResponsible = static::getFixture('dayResponsible1day1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/day_responsibles/'.$dayResponsible->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $dayResponsible->getId(),
+            '_links' => [
+                'day' => ['href' => $this->getIriFor('day1period1campShared')],
+                'campCollaboration' => ['href' => $this->getIriFor('campCollaboration1campShared')],
+            ],
+        ]);
+    }
 }

@@ -90,4 +90,37 @@ class DeleteCampCollaborationTest extends ECampApiTestCase {
             'detail' => 'Access Denied.',
         ]);
     }
+
+    public function testDeleteCampCollaborationFromSharedCampIsDeniedForUnrelatedUser() {
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/camp_collaborations/'.$campCollaboration->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteCampCollaborationFromSharedCampIsDeniedForInactiveUser() {
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('DELETE', '/camp_collaborations/'.$campCollaboration->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteCampCollaborationFromSharedCampIsDeniedForInvitedUser() {
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('DELETE', '/camp_collaborations/'.$campCollaboration->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
 }

@@ -78,7 +78,7 @@ abstract class ContentNode extends BaseEntity implements BelongsToCampInterface,
     #[AssertAttachedToRoot(groups: ['update'])]
     #[Assert\Type(
         type: SupportsContentNodeChildren::class,
-        message: 'This parent does not support children, only content_nodes of type column_layout support children.'
+        message: 'This parent does not support children, only content_nodes of type column_layout or responsive_layout support children.'
     )]
     #[ApiProperty(example: '/content_nodes/1a2b3c4d')]
     #[Gedmo\SortableGroup]

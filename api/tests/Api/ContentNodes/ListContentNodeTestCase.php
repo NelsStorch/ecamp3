@@ -20,7 +20,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
     protected array $contentNodesCampUnrelated = [];
 
     // content nodes visible for everyone
-    protected array $contentNodesCampPrototypes = [];
+    protected array $contentNodesPublicCamps = [];
 
     public function setUp(): void {
         parent::setUp();
@@ -38,36 +38,36 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
     public function testListForInvitedCollaborator() {
         $response = $this->list(user: static::$fixtures['user6invited']);
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContainsItems($response, $this->contentNodesCampPrototypes);
+        $this->assertJsonContainsItems($response, $this->contentNodesPublicCamps);
     }
 
     public function testListForInactiveCollaborator() {
         $response = $this->list(user: static::$fixtures['user5inactive']);
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContainsItems($response, $this->contentNodesCampPrototypes);
+        $this->assertJsonContainsItems($response, $this->contentNodesPublicCamps);
     }
 
     public function testListForUnrelatedUser() {
         $response = $this->list(user: static::$fixtures['user4unrelated']);
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCampUnrelated, $this->contentNodesCampPrototypes));
+        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCampUnrelated, $this->contentNodesPublicCamps));
     }
 
     public function testListForGuest() {
         $response = $this->list(user: static::$fixtures['user3guest']);
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCamp1and2, $this->contentNodesCampPrototypes));
+        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCamp1and2, $this->contentNodesPublicCamps));
     }
 
     public function testListForMember() {
         $response = $this->list(user: static::$fixtures['user2member']);
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCamp1and2, $this->contentNodesCampPrototypes));
+        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCamp1and2, $this->contentNodesPublicCamps));
     }
 
     public function testListForManager() {
         $response = $this->list(user: static::$fixtures['user1manager']);
         $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCamp1and2, $this->contentNodesCampPrototypes));
+        $this->assertJsonContainsItems($response, array_merge($this->contentNodesCamp1and2, $this->contentNodesPublicCamps));
     }
 }

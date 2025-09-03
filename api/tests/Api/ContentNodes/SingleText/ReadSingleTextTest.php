@@ -14,6 +14,8 @@ class ReadSingleTextTest extends ReadContentNodeTestCase {
 
         $this->endpoint = '/content_node/single_texts';
         $this->defaultEntity = static::getFixture('singleText1');
+        $this->campPrototypeEntity = static::getFixture('singleTextCampPrototype');
+        $this->sharedCampEntity = static::getFixture('singleTextCampShared');
     }
 
     public function testGetSingleText() {

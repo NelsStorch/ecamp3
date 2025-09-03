@@ -132,4 +132,55 @@ class ReadActivityTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials()->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForInactiveUser() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForInvitedUser() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
 }

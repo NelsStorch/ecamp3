@@ -53,4 +53,14 @@ class DeleteCommentTest extends ECampApiTestCase {
         $this->assertResponseStatusCodeSame(204);
         $this->assertNull($this->getEntityManager()->getRepository(Comment::class)->find($comment->getId()));
     }
+
+    public function testDeleteCommentIsAllowedForAuthorEvenWhenAuthorIsNotCampCollaboratorInCampAnymore() {
+        $comment = static::getFixture('comment2');
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
+            ->request('DELETE', '/comments/'.$comment->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(204);
+        $this->assertNull($this->getEntityManager()->getRepository(Comment::class)->find($comment->getId()));
+    }
 }

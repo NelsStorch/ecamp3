@@ -23,3 +23,6 @@ App\Entity\DayResponsible:
   dayResponsible1day1period1campPrototype:
     campCollaboration: '@campCollaboration1campPrototype'
     day: '@day1period1campPrototype'
+  dayResponsible1day1period1campShared:
+    campCollaboration: '@campCollaboration1campShared'
+    day: '@day1period1campShared'

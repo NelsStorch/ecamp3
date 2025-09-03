@@ -682,6 +682,24 @@ class CreateCampTest extends ECampApiTestCase {
         $this->assertCount(3, $camp->progressLabels);
     }
 
+    public function testCreateCampFromSharedCamp() {
+        /** @var Camp $campPrototype */
+        $campShared = self::getFixture('campShared');
+
+        $response = static::createClientWithCredentials()->request('POST', '/camps', ['json' => $this->getExampleWritePayload([
+            'campPrototype' => $this->getIriFor($campShared),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(201);
+
+        $camp = $this->getEntityManager()->getRepository(Camp::class)->find($response->toArray()['id']);
+        $this->assertEquals($campShared->getId(), $camp->campPrototypeId);
+        $this->assertCount(1, $camp->categories);
+        $this->assertCount(2, $camp->materialLists);
+        $this->assertCount(1, $camp->checklists);
+        $this->assertCount(2, $camp->progressLabels);
+    }
+
     public function testCopiesCampSettingsFromNonPrototypeCamp() {
         /** @var Camp $otherCamp */
         $otherCamp = self::getFixture('camp1');
@@ -815,7 +833,7 @@ class CreateCampTest extends ECampApiTestCase {
             Camp::class,
             Get::class,
             $attributes,
-            ['periods'],
+            ['periods', 'sharedBy', 'sharedSince'],
             $except
         );
     }

@@ -2496,6 +2496,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -2560,6 +2568,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -2593,6 +2616,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp-read_Camp.Periods_Period.Days_Camp.CampCollaborations_CampCollaboration.User:
@@ -2698,6 +2722,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -2755,6 +2787,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -2788,6 +2835,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp-read_CampCollaboration.Camp_CampCollaboration.User:
@@ -2889,6 +2937,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -2953,6 +3009,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -2986,6 +3057,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp-read_Period.Camp_Period.Days:
@@ -3087,6 +3159,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3151,6 +3231,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -3184,6 +3279,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp-write_create:
@@ -3249,6 +3345,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3370,6 +3474,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3489,6 +3601,14 @@ components:
                   example: true
                   readOnly: true
                   type: boolean
+                isShared:
+                  default: false
+                  description: |-
+                    Whether the programme of this camp is publicly available to anyone (except for
+                    personal data such as camp collaborations, personal material lists,
+                    responsibilities and comments).
+                  example: true
+                  type: boolean
                 kind:
                   description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
                   example: Zeltlager
@@ -3509,6 +3629,12 @@ components:
                   description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
                   example: true
                   type: boolean
+                sharedSince:
+                  description: 'Date and time when the camp was last set to be shared publicly.'
+                  example: '2025-10-01T00:00:00+00:00'
+                  format: date-time
+                  readOnly: true
+                  type: ['null', string]
                 shortTitle:
                   description: |-
                     An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -3531,6 +3657,7 @@ components:
                   type: ['null', string]
               required:
                 - printYSLogoOnPicasso
+                - sharedSince
                 - title
               type: object
             id:
@@ -3553,6 +3680,8 @@ components:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabels:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
+                sharedBy:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
               required:
                 - activities
                 - campCollaborations
@@ -3574,6 +3703,8 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
+              -
+                $ref: '#/components/schemas/CampCollaboration.jsonapi'
               -
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
               -
@@ -3717,6 +3848,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3781,6 +3920,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -3814,6 +3968,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonhal-read_Camp.Periods_Period.Days_Camp.CampCollaborations_CampCollaboration.User:
@@ -3928,6 +4083,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3985,6 +4148,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4018,6 +4196,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User:
@@ -4128,6 +4307,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4192,6 +4379,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4225,6 +4427,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonhal-read_Period.Camp_Period.Days:
@@ -4335,6 +4538,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4399,6 +4610,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4432,6 +4658,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonhal-write_create:
@@ -4506,6 +4733,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4696,6 +4931,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4760,6 +5003,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4793,6 +5051,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonld-read_Camp.Periods_Period.Days_Camp.CampCollaborations_CampCollaboration.User:
@@ -4921,6 +5180,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4978,6 +5245,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -5011,6 +5293,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonld-read_CampCollaboration.Camp_CampCollaboration.User:
@@ -5135,6 +5418,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -5199,6 +5490,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -5232,6 +5538,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonld-read_Period.Camp_Period.Days:
@@ -5356,6 +5663,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -5420,6 +5735,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -5453,6 +5783,7 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
+        - sharedSince
         - title
       type: object
     Camp.jsonld-write_create:
@@ -5518,6 +5849,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (except for
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -25379,6 +25718,18 @@ paths:
           description: ''
           explode: false
           in: query
+          name: campCollaborator
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
           name: isPrototype
           required: false
           schema:
@@ -32995,6 +33346,18 @@ paths:
           explode: false
           in: query
           name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: campCollaborator
           required: false
           schema:
             type: string

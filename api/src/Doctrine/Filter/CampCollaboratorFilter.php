@@ -21,7 +21,6 @@ final class CampCollaboratorFilter extends AbstractFilter {
 
     public function __construct(
         private IriConverterInterface $iriConverter,
-        private QueryBuilderHelper $queryBuilderHelper,
         ManagerRegistry $managerRegistry,
         ?LoggerInterface $logger = null,
         ?array $properties = null,
@@ -48,7 +47,7 @@ final class CampCollaboratorFilter extends AbstractFilter {
         ?Operation $operation = null,
         array $context = []
     ): void {
-        if (!class_implements($resourceClass, BelongsToCampInterface::class)) {
+        if (!is_a($resourceClass, BelongsToCampInterface::class, true)) {
             throw new \Exception("CampCollaboratorFilter can only be applied to entities which implement BelongsToCampInterface (received: {$resourceClass}).");
         }
 
@@ -56,9 +55,9 @@ final class CampCollaboratorFilter extends AbstractFilter {
             return;
         }
 
-        $campAlias = Camp::class === $resourceClass ?
-            $queryBuilder->getRootAliases()[0] :
-            $this->queryBuilderHelper->findOrAddInnerRootJoinAlias($queryBuilder, $queryNameGenerator, 'camp');
+        $campAlias = Camp::class === $resourceClass
+            ? $queryBuilder->getRootAliases()[0]
+            : QueryBuilderHelper::findOrAddInnerRootJoinAlias($queryBuilder, $queryNameGenerator, 'camp');
 
         // load user from query parameter value
         $collaborator = $this->iriConverter->getResourceFromIri($value);

@@ -5,6 +5,7 @@ namespace App\State;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Camp;
 use App\Entity\CampCollaboration;
+use App\Entity\User;
 use App\State\Util\AbstractPersistProcessor;
 use App\State\Util\PropertyChangeListener;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -19,7 +20,7 @@ class CampUpdateProcessor extends AbstractPersistProcessor {
     ) {
         $sharingChangeListener = PropertyChangeListener::of(
             extractProperty: fn (Camp $data) => $data->isShared,
-            beforeAction: fn (Camp $data) => $this->onBeforeStatusChange($data),
+            beforeAction: fn (Camp $data) => $this->onBeforeSharingStatusChange($data),
         );
 
         parent::__construct(
@@ -30,10 +31,13 @@ class CampUpdateProcessor extends AbstractPersistProcessor {
         );
     }
 
-    public function onBeforeStatusChange(Camp $data): Camp {
-        if (true == $data->isShared) {
+    public function onBeforeSharingStatusChange(Camp $data): Camp {
+        if ($data->isShared) {
             $data->sharedSince = new \DateTime();
-            $data->sharedBy = $this->security->getUser();
+
+            /** @var User $user */
+            $user = $this->security->getUser();
+            $data->sharedBy = $user;
         }
 
         return $data;

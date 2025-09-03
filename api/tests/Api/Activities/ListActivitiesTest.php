@@ -24,7 +24,7 @@ class ListActivitiesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/activities');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 4,
+            'totalItems' => 5,
             '_links' => [
                 'items' => [],
             ],
@@ -37,6 +37,7 @@ class ListActivitiesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('activity2')],
             ['href' => $this->getIriFor('activity1camp2')],
             ['href' => $this->getIriFor('activity1campPrototype')],
+            ['href' => $this->getIriFor('activity1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
