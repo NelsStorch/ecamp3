@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@intlify/core": "11.1.11",
+    "@leeoniya/ufuzzy": "^1.0.19",
     "@mdi/font": "7.4.47",
     "@react-pdf/font": "4.0.2",
     "@react-pdf/layout": "4.4.0",
