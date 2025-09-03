@@ -149,6 +149,9 @@ export default {
       user: 'getLoggedInUser',
     }),
     currentCampCollaboration() {
+      if (typeof this.camp?.campCollaborations !== 'function') {
+        return undefined
+      }
       return this.camp
         ?.campCollaborations()
         .items.find(

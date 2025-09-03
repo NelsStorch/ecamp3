@@ -37,6 +37,7 @@ Show all activity schedule entries of a single period.
         </v-chip>
       </template>
       <LockButton
+        v-if="!isOutsider"
         v-model="editMode"
         :shake="showReminder"
         :disabled-for-guest="!isContributor"
@@ -58,6 +59,7 @@ Show all activity schedule entries of a single period.
         </template>
         <v-list class="py-0">
           <LockUnlockListItem
+            v-if="!isOutsider"
             v-model="editMode"
             :disabled="!isContributor"
             @click="editMode = !editMode"
@@ -91,6 +93,7 @@ Show all activity schedule entries of a single period.
       :loading-endpoints="loadingEndpoints"
       :camp="camp"
       :filter-fn="filterFn"
+      :hide-self-filter="isOutsider"
       hide-period-filter
       hide-day-filter
       @height-changed="scheduleEntryFiltersHeightChanged"
@@ -279,6 +282,7 @@ export default {
   },
   methods: {
     showUnlockReminder(move) {
+      if (this.isOutsider) return
       this.reminderText = move
         ? this.$tc('views.camp.campProgram.reminderLockedMove')
         : this.$tc('views.camp.campProgram.reminderLockedCreate')

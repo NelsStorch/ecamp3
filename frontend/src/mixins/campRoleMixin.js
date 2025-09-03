@@ -12,6 +12,9 @@ export const campRoleMixin = {
     isMember() {
       return this.role === 'member'
     },
+    isOutsider() {
+      return !this.role
+    },
     role() {
       const currentUserLink = this.$store.getters.getLoggedInUser?._meta.self
       const result = this._campCollaborations
@@ -22,8 +25,10 @@ export const campRoleMixin = {
       return result?.role
     },
     _campCollaborations() {
-      const campCollaborations = this._camp?.campCollaborations()
-      return campCollaborations?.items
+      if (typeof this.camp.campCollaborations !== 'function') {
+        return []
+      }
+      return this._camp?.campCollaborations()?.items
     },
     _camp() {
       if (typeof this.camp === 'function') {

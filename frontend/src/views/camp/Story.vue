@@ -4,6 +4,7 @@
       <PeriodSwitcher :period="period" :route-name="'camp/period/story'" />
       <v-spacer />
       <LockButton
+        v-if="!isOutsider"
         v-model="editMode"
         :disabled-for-guest="!isContributor"
         @click="editMode = !editMode"
@@ -16,6 +17,7 @@
         </template>
         <v-list class="py-0">
           <LockUnlockListItem
+            v-if="!isOutsider"
             v-model="editMode"
             :disabled="!isContributor"
             @click="editMode = !editMode"

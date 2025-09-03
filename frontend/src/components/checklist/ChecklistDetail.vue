@@ -11,7 +11,7 @@
         {{ checklist.name }}
       </v-toolbar-title>
       <v-btn
-        v-if="!editChecklistName"
+        v-if="!editChecklistName && !isOutsider"
         icon
         class="ml-1 visible-on-hover"
         width="24"
@@ -32,9 +32,9 @@
       </api-form>
     </template>
     <template #title-actions>
-      <ChecklistItemCreate :checklist="checklist" />
+      <ChecklistItemCreate v-if="isContributor" :checklist="checklist" />
       <!-- hamburger menu -->
-      <v-menu offset-y>
+      <v-menu v-if="isContributor" offset-y>
         <template #activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
             <v-icon>mdi-dots-vertical</v-icon>
@@ -67,6 +67,7 @@
         v-if="checklist && !checklist._meta.deleting"
         :parent="null"
         :checklist="checklist"
+        :disabled="isOutsider"
       />
     </v-list>
   </content-card>
@@ -79,6 +80,7 @@ import SortableChecklist from '@/components/checklist/SortableChecklist.vue'
 import ApiForm from '@/components/form/api/ApiForm.vue'
 import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import { checklistRoute } from '@/router.js'
+import { campRoleMixin } from '@/mixins/campRoleMixin.js'
 
 export default {
   name: 'ChecklistDetail',
@@ -89,6 +91,7 @@ export default {
     ApiForm,
     DialogEntityDelete,
   },
+  mixins: [campRoleMixin],
   props: {
     camp: {
       type: Object,
