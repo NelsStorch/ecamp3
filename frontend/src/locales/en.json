@@ -56,6 +56,9 @@
       "campInvitations": {
         "title": "Invite"
       },
+      "campListItem": {
+        "public": "public"
+      },
       "campMembers": {
         "title": "Members"
       },

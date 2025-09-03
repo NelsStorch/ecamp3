@@ -3,6 +3,16 @@
     <v-list-item-content>
       <v-list-item-title class="d-flex gap-x-2 justify-space-between">
         <strong class="whitespace-normal">{{ camp.title }}</strong>
+        <v-chip
+          v-if="camp.isShared === true"
+          x-small
+          outlined
+          color="primary"
+          :to="adminRoute(camp)"
+          class="align-self-center px-1"
+          >{{ $tc('components.camp.campListItem.public') }}</v-chip
+        >
+        <span class="flex-grow-1"></span>
         <span>{{ date }}</span>
       </v-list-item-title>
       <v-list-item-subtitle class="d-flex gap-2 flex-wrap-reverse justify-space-between">
@@ -14,7 +24,7 @@
 </template>
 
 <script>
-import { campRoute } from '@/router.js'
+import { campRoute, adminRoute } from '@/router.js'
 export default {
   name: 'CampListItem',
   props: {
@@ -36,7 +46,7 @@ export default {
         .join(' | ')
     },
   },
-  methods: { campRoute },
+  methods: { campRoute, adminRoute },
 }
 </script>
 
