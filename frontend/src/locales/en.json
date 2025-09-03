@@ -247,6 +247,7 @@
         "deactivate": "Deactivate",
         "delete": "Do you really want to remove collaborator '{name}'?",
         "inviteAgain": "Invite again",
+        "leaveCamp": "Leave camp",
         "resendEmail": "Resend invite",
         "resentEmail": "Invitation sent",
         "title": "Edit {user}"
@@ -257,7 +258,9 @@
       },
       "promptCollaboratorDeactivate": {
         "deactivate": "Deactivate",
-        "warningText": "Do you want to deactivate '{name}'?"
+        "leaveCamp": "Leave camp",
+        "warningText": "Do you want to deactivate '{name}'?",
+        "warningTextLeaveCamp": "Do you want to leave the camp '{camp}'?"
       }
     },
     "dashboard": {
