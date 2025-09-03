@@ -136,6 +136,7 @@
           "description": "All people who know the link to the camp can see the programme, team, material lists, responsibilities and all other data in this camp. Only people in the {team} can change data.",
           "title": "Camp is shared publicly"
         },
+        "sharedSince": "Currently shared since {sharedSince} by {sharedBy}",
         "team": "team",
         "title": "Sharing settings"
       },

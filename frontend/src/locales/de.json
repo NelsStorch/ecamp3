@@ -136,6 +136,7 @@
           "description": "Alle Personen, die den Link zum Lager kennen, können das Programm, das Team, die Materiallisten und Verantwortlichkeiten und alles andere in diesem Lager ansehen. Nur Personen im {team} können Daten ändern.",
           "title": "Lager ist öffentlich freigegeben"
         },
+        "sharedSince": "Zuletzt freigegeben am {sharedSince} von {sharedBy}",
         "team": "Team",
         "title": "Lager teilen"
       },

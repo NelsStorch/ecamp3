@@ -16,6 +16,7 @@ use App\Repository\CampRepository;
 use App\Serializer\Normalizer\RelatedCollectionLink;
 use App\State\CampCreateProcessor;
 use App\State\CampRemoveProcessor;
+use App\State\CampUpdateProcessor;
 use App\Util\EntityMap;
 use App\Validator\AssertContainsAtLeastOneManager;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -38,6 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
         ),
         new Patch(
+            processor: CampUpdateProcessor::class,
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
             denormalizationContext: ['groups' => ['write', 'update']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
@@ -195,6 +197,24 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[Groups(['read', 'write'])]
     #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => false])]
     public bool $isShared = false;
+
+    /**
+     * Date and time when the camp was last set to be shared publicly.
+     */
+    #[ApiProperty(example: '2025-10-01T00:00:00+00:00', required: true, openapiContext: ['format' => 'date-time'])]
+    #[Groups(['read'])]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    public ?\DateTimeInterface $sharedSince = null;
+
+    /**
+     * The person who last set the camp to be shared publicly.
+     */
+    #[Assert\DisableAutoMapping]
+    #[ApiProperty(writable: false)]
+    #[Groups(['read'])]
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    public ?User $sharedBy = null;
 
     /**
      * Whether this camp may serve as a template for creating other camps.

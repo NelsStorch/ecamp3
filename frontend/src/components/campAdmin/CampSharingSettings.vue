@@ -24,6 +24,12 @@
               }}</router-link>
             </template>
           </i18n>
+          <v-list-item-subtitle v-if="camp.isShared" class="pb-1 whitespace-normal">{{
+            $tc('components.campAdmin.campSharingSettings.sharedSince', 1, {
+              sharedSince,
+              sharedBy,
+            })
+          }}</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action v-if="camp.isShared" class="align-self-start">
           <v-tooltip top>
@@ -61,6 +67,7 @@ import ContentGroup from '@/components/layout/ContentGroup.vue'
 import ApiForm from '../form/api/ApiForm.vue'
 import router, { adminRoute, campRoute } from '@/router.js'
 import { campRoleMixin } from '@/mixins/campRoleMixin.js'
+import userDisplayName from '@/common/helpers/userDisplayName.js'
 
 export default {
   name: 'CampSharingSettings',
@@ -82,6 +89,14 @@ export default {
     },
     campUrl() {
       return window.location.origin + router.resolve(campRoute(this.camp)).href
+    },
+    sharedSince() {
+      return this.$date(this.camp.sharedSince).format(
+        this.$tc('global.datetime.dateTimeLong')
+      )
+    },
+    sharedBy() {
+      return userDisplayName(this.camp.sharedBy())
     },
   },
   methods: {

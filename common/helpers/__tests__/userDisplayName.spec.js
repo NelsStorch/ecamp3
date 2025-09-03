@@ -7,6 +7,8 @@ describe('userDisplayName', () => {
     [{ displayName: 'test' }, 'test'],
     [{ displayName: 'test', _meta: {} }, 'test'],
     [{ _meta: { loading: true } }, ''],
+    [null, ''],
+    [undefined, ''],
   ])('maps %p to %p', (input, expected) => {
     expect(userDisplayName(input)).toEqual(expected)
   })
