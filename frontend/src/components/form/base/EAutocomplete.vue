@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     tokensFilter(item, queryText, itemText) {
-      const [idxs, info, order] = this.fuzzy.search([itemText], queryText, true, 1e3)
+      const [idxs, info] = this.fuzzy.search([itemText], queryText, true, 1e3)
       this.searchInfos.set(item.value, info)
       return idxs && idxs.length > 0
     },
