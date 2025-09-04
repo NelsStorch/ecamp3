@@ -64,16 +64,16 @@ export default {
     return {
       fuzzy: new uFuzzy({ intraMode: 1 }),
       search: null,
-      searchInfos: new Map()
+      searchInfos: new Map(),
     }
   },
   methods: {
     tokensFilter(item, queryText, itemText) {
       const [idxs, info, order] = this.fuzzy.search([itemText], queryText, true, 1e3)
-      this.searchInfos.set(item.value, info);
+      this.searchInfos.set(item.value, info)
       return idxs && idxs.length > 0
     },
-    
+
     renderHighlighted(item) {
       if (this.search) {
         if (this.searchInfos.has(item.value)) {
@@ -82,18 +82,19 @@ export default {
             return uFuzzy.highlight(
               item.text,
               info.ranges[0],
-              (p, m) => ({ h:m, text:p }),
+              (p, m) => ({ h: m, text: p }),
               [],
-              (a, p) => { a.push(p) }
+              (a, p) => {
+                a.push(p)
+              }
             )
           }
         }
       }
-      return [{ h:false, text: item.text }]
-    }
-  }
+      return [{ h: false, text: item.text }]
+    },
+  },
 }
-
 </script>
 
 <style scoped>
