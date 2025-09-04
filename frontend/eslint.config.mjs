@@ -33,6 +33,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.node,
+        ...globals.browser,
       },
 
       parserOptions: {
@@ -45,7 +46,7 @@ export default [
       'prefer-const': 'error',
       'prettier/prettier': 'error',
 
-      'vue/component-tags-order': [
+      'vue/block-order': [
         'error',
         {
           order: ['template', 'script', 'style'],
@@ -53,6 +54,7 @@ export default [
       ],
 
       'vue/multi-word-component-names': 'off',
+      'vue/no-deprecated-delete-set': 'warn',
       'vue/no-deprecated-destroyed-lifecycle': 'off',
       'vue/no-deprecated-dollar-listeners-api': 'off',
       'vue/no-deprecated-dollar-scopedslots-api': 'off',
@@ -77,7 +79,7 @@ export default [
         'error',
         {
           ignoreKeysRegex:
-            '^(global|entity|contentNode\\.[a-z][a-zA-Z]+|print\\.(global|activity|cover|picasso|program|config|summary|toc|activityList))\\..+',
+            '^(global|entity|contentNode\\.[a-z][a-zA-Z]+|print\\.(global|activity|cover|picasso|program|config|story|safetyConsiderations|toc|activityList))\\..+',
           translationKeyPropRegex: '[a-zA-Z0-9]-i18n-key$',
         },
       ],

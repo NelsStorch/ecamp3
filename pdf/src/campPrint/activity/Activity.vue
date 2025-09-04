@@ -1,15 +1,18 @@
 <template>
   <Page :id="id" class="page activity-page">
+    <slot></slot>
+    <TocSectionStartMarker :id="`${id}-${scheduleEntry.id}`" />
     <ScheduleEntry :id="`${id}-${scheduleEntry.id}`" :schedule-entry="scheduleEntry" />
   </Page>
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import ScheduleEntry from '../scheduleEntry/ScheduleEntry.vue'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'Activity',
-  components: { ScheduleEntry },
+  components: { TocSectionStartMarker, ScheduleEntry },
   extends: PdfComponent,
   props: {
     content: { type: Object, required: true },

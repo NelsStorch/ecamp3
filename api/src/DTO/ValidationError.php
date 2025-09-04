@@ -2,8 +2,8 @@
 
 namespace App\DTO;
 
-use ApiPlatform\ApiResource\Error;
 use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\State\ApiResource\Error;
 
 class ValidationError extends Error {
     public function __construct(

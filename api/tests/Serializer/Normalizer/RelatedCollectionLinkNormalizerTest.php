@@ -48,7 +48,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     private MockObject|PropertyAccessorInterface $propertyAccessor;
     private EntityManagerInterface|MockObject $entityManager;
 
-    private null|DateFilter|SearchFilterInterface $filterInstance;
+    private DateFilter|SearchFilterInterface|null $filterInstance;
 
     protected function setUp(): void {
         $filterLocatorMock = $this->createMock(ServiceLocator::class);

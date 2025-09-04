@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: node:24.6.0
+    image: node:24.7.0
     container_name: 'ecamp3-frontend'
     ports:
       - '9229:9229' # jest debug
@@ -25,7 +25,7 @@ services:
       - pdf
 
   api:
-    image: ecamp/ecamp3-dev-api
+    image: ${REGISTRY:-docker.io}/${REPO_OWNER:-ecamp}/ecamp3-api:${VERSION:-latest}
     build:
       context: ./api
       target: frankenphp_prod
@@ -56,7 +56,7 @@ services:
       - 'host.docker.internal:host-gateway'
 
   http-cache:
-    image: varnish:7.7.2
+    image: varnish:7.7.3
     container_name: 'ecamp3-http-cache'
     depends_on:
       - api
@@ -70,7 +70,7 @@ services:
       - VARNISH_HTTP_PORT=8080
   
   http-cache-logs:
-    image: varnish:7.7.2
+    image: varnish:7.7.3
     container_name: 'ecamp3-http-cache-logs'
     depends_on:
       - http-cache
@@ -79,7 +79,7 @@ services:
     command: varnishncsa
 
   pdf:
-    image: node:24.6.0
+    image: node:24.7.0
     container_name: 'ecamp3-pdf'
     stdin_open: true
     tty: true
@@ -98,7 +98,7 @@ services:
       - CI=${CI}
 
   print:
-    image: node:24.6.0
+    image: node:24.7.0
     container_name: 'ecamp3-print'
     user: ${USER_ID:-1000}
     volumes:
@@ -181,7 +181,7 @@ services:
       - FUNCTION_ENABLE_INCOGNITO_MODE=true
 
   e2e:
-    image: cypress/included:14.5.2@sha256:e9d61bf5df4c08df6cfa47d3f77dd1fd6debc7a9fa34be158c6ef813dcba3ccd
+    image: cypress/included:15.0.0@sha256:3ef29611956c9b1f3dc191615c05430e1db0da9eff6235c2d402d9263658df2c
     profiles: ['e2e']
     container_name: 'ecamp3-e2e'
     environment:
@@ -210,7 +210,7 @@ services:
         protocol: tcp
 
   translation:
-    image: node:24.6.0
+    image: node:24.7.0
     profiles: ['translation']
     container_name: 'ecamp3-translation'
     volumes:

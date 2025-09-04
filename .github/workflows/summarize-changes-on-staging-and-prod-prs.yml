@@ -9,7 +9,7 @@ jobs:
     name: Summarize changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
@@ -25,10 +25,11 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Update PR description with summary
-        uses: kt3k/update-pr-description@46409be4b4fb57502e7a0c40a317d79b21a548dd # v2
+        uses: nefrob/pr-description@4dcc9f3ad5ec06b2a197c5f8f93db5e69d2fdca7 # v1.2.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_body: |
+          token: ${{ secrets.GITHUB_TOKEN }}
+          regex: ".*"
+          content: |
             ### <span aria-hidden="true">🏗️</span> Changes in this deployment
 
             Includes the following non-renovate PRs:

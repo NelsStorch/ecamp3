@@ -26,7 +26,7 @@ class ValidationErrorProvider implements ProviderInterface {
     /**
      * @psalm-suppress InvalidReturnStatement
      */
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): null|array|object {
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|object|null {
         $request = $context['request'];
         $exception = $request?->attributes->get('exception');
         if (!($request ?? null) || !$operation instanceof HttpOperation || null === $exception) {

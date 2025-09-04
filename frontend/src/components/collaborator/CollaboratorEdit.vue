@@ -94,7 +94,7 @@
                         : onDialog
                     "
                   >
-                    {{ $tc('components.collaborator.collaboratorEdit.deactivate') }}
+                    {{ deactivateLabel }}
                   </IconButton>
                 </template>
               </PromptCollaboratorDeactivate>
@@ -178,6 +178,11 @@ export default {
     },
     name() {
       return campCollaborationDisplayName(this.collaborator, this.$tc.bind(this), false)
+    },
+    deactivateLabel() {
+      return this.isOwnCampCollaboration
+        ? this.$tc('components.collaborator.collaboratorEdit.leaveCamp')
+        : this.$tc('components.collaborator.collaboratorEdit.deactivate')
     },
   },
   watch: {

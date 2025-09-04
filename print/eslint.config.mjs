@@ -13,11 +13,23 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 
+const vueRecommendedFlatConfigs = vueEslint.configs['flat/recommended']
+const allVueRecommendedRules = {}
+for (const config of vueRecommendedFlatConfigs) {
+  if (config.rules) {
+    Object.assign(allVueRecommendedRules, config.rules)
+  }
+}
+
 export default createConfigForNuxt().append([
   {
     files: ['**/*.ts'],
   },
-  ...vueEslint.configs['flat/recommended'],
+  {
+    rules: {
+      ...allVueRecommendedRules,
+    },
+  },
   ...vueScopedCssEslint.configs['flat/recommended'],
   js.configs.recommended,
   prettierRecommended,
@@ -51,7 +63,7 @@ export default createConfigForNuxt().append([
         'error',
         {
           ignoreKeysRegex:
-            '^(global|entity|contentNode\\.[a-z][a-zA-Z]+|print\\.(global|activity|cover|picasso|program|config|summary|toc|activityList))\\..+',
+            '^(global|entity|contentNode\\.[a-z][a-zA-Z]+|print\\.(global|activity|cover|picasso|program|config|story|safetyConsiderations|toc|activityList))\\..+',
           translationKeyPropRegex: '[a-zA-Z0-9]-i18n-key$',
         },
       ],

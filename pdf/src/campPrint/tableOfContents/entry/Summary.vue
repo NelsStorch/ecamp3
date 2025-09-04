@@ -6,6 +6,7 @@ export default {
   extends: PdfComponent,
   props: {
     entry: { type: Object, required: true },
+    config: { type: Object, required: true },
   },
   computed: {
     periods() {

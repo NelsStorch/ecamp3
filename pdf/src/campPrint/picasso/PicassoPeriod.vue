@@ -10,7 +10,9 @@
     :get-up-time="bedtimes.getUpTime"
     :time-step="timeStep"
     :filter="filter"
-  />
+  >
+    <slot></slot>
+  </PicassoPage>
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'

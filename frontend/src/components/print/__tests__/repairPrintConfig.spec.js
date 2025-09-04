@@ -95,6 +95,7 @@ describe('repairConfig', () => {
     category: [],
     progressLabel: [],
     responsible: [],
+    activityCount: 0,
   }
   const defaultContents = [
     {
@@ -136,6 +137,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -155,6 +157,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -175,6 +178,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -194,6 +198,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'de-CH-scout',
     }
 
@@ -214,6 +219,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'de-CH-scout',
     })
   })
@@ -233,6 +239,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'definitely-not-a-supported-language',
     }
 
@@ -260,6 +267,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'de-CH-scout',
     })
   })
@@ -279,6 +287,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'definitely-not-a-supported-language',
     }
 
@@ -306,6 +315,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -325,6 +335,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'foobar',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -345,6 +356,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'foobar',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -364,6 +376,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: '',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -384,6 +397,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -403,6 +417,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -423,6 +438,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -433,6 +449,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: {},
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -453,6 +470,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -463,6 +481,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: null,
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -483,6 +502,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -493,6 +513,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: [],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -504,6 +525,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: [],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -519,6 +541,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     }
 
@@ -530,6 +553,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: [],
       documentName: 'test camp',
+      options: { pageNumbers: false },
       language: 'en-GB',
     })
   })
@@ -546,6 +570,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -562,6 +587,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -579,6 +605,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -595,6 +622,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -611,6 +639,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -631,6 +660,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -650,6 +680,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -670,6 +701,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -689,6 +721,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -709,6 +742,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -724,6 +758,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -740,6 +775,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -755,6 +791,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -775,6 +812,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -794,6 +832,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -814,6 +853,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -833,6 +873,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -853,6 +894,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -869,6 +911,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -889,6 +932,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -907,6 +951,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -927,6 +972,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -946,6 +992,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -966,6 +1013,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -985,6 +1033,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1005,6 +1054,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1024,6 +1074,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1044,6 +1095,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1063,6 +1115,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1083,6 +1136,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1104,11 +1158,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1130,11 +1186,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1153,6 +1211,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1173,6 +1232,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1192,11 +1252,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1217,6 +1279,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1237,11 +1300,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1262,6 +1327,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1281,11 +1347,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1306,6 +1374,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1326,11 +1395,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: ['/camp_collaborations/00000000'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1351,6 +1422,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1370,11 +1442,13 @@ describe('repairConfig', () => {
                   day: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1395,6 +1469,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1415,11 +1490,13 @@ describe('repairConfig', () => {
                   category: ['/categories/00000000'],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1440,6 +1517,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1459,11 +1537,13 @@ describe('repairConfig', () => {
                   category: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1484,6 +1564,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1504,11 +1585,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1529,6 +1612,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1548,11 +1632,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1573,6 +1659,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1593,6 +1680,7 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: ['/progress_labels/00000000'],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
@@ -1618,6 +1706,54 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        })
+      })
+
+      test('adds dummy activityCount if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Program',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                dayOverview: false,
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1635,6 +1771,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1655,6 +1792,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1670,6 +1808,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1686,6 +1825,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1705,6 +1845,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1725,6 +1866,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1744,6 +1886,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1764,6 +1907,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1783,6 +1927,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -1803,6 +1948,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -1824,11 +1970,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1850,11 +1998,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1873,6 +2023,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1893,6 +2044,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1912,11 +2064,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1937,6 +2091,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -1957,11 +2112,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -1982,6 +2139,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2001,11 +2159,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2026,6 +2186,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2046,11 +2207,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: ['/camp_collaborations/00000000'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2071,6 +2234,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2090,11 +2254,13 @@ describe('repairConfig', () => {
                   day: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2115,6 +2281,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2135,11 +2302,13 @@ describe('repairConfig', () => {
                   category: ['/categories/00000000'],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2160,6 +2329,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2179,11 +2349,13 @@ describe('repairConfig', () => {
                   category: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2204,6 +2376,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2224,11 +2397,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2249,6 +2424,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2268,11 +2444,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2293,6 +2471,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2313,6 +2492,7 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: ['/progress_labels/00000000'],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
@@ -2338,6 +2518,54 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        })
+      })
+
+      test('adds dummy activityCount if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'Story',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'Storycontext',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2355,6 +2583,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -2375,6 +2604,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -2394,6 +2624,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -2414,6 +2645,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -2433,6 +2665,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -2453,6 +2686,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -2472,6 +2706,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -2492,6 +2727,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -2511,6 +2747,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -2531,6 +2768,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -2552,11 +2790,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2578,11 +2818,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2601,6 +2843,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2621,6 +2864,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2640,11 +2884,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2665,6 +2911,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2685,11 +2932,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2710,6 +2959,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2729,11 +2979,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2754,6 +3006,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2774,11 +3027,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: ['/camp_collaborations/00000000'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2799,6 +3054,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2818,11 +3074,13 @@ describe('repairConfig', () => {
                   day: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2843,6 +3101,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2863,11 +3122,13 @@ describe('repairConfig', () => {
                   category: ['/categories/00000000'],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2888,6 +3149,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2907,11 +3169,13 @@ describe('repairConfig', () => {
                   category: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2932,6 +3196,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2952,11 +3217,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -2977,6 +3244,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -2996,11 +3264,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3021,6 +3291,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3041,6 +3312,7 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: ['/progress_labels/00000000'],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
@@ -3066,6 +3338,54 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        })
+      })
+
+      test('adds dummy activityCount if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'SafetyConsiderations',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                contentType: 'SafetyConsiderations',
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3084,6 +3404,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -3100,6 +3421,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -3116,6 +3438,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -3132,6 +3455,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -3147,6 +3471,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -3163,6 +3488,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -3178,6 +3504,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -3197,6 +3524,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -3215,6 +3543,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       }
 
@@ -3234,6 +3563,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
+        options: { pageNumbers: false },
         language: 'en-GB',
       })
     })
@@ -3254,11 +3584,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3279,11 +3611,13 @@ describe('repairConfig', () => {
                   category: ['/categories/1a2b3c4d'],
                   progressLabel: ['/progress_labels/1a2b3c4d'],
                   responsible: ['/camp_collaborations/1a2b3c4d'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3301,6 +3635,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3320,6 +3655,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3338,11 +3674,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3362,6 +3700,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3381,11 +3720,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3405,6 +3746,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3423,11 +3765,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3447,6 +3791,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3466,11 +3811,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: ['/camp_collaborations/00000000'],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3490,6 +3837,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3508,11 +3856,13 @@ describe('repairConfig', () => {
                   day: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3532,6 +3882,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3551,11 +3902,13 @@ describe('repairConfig', () => {
                   category: ['/categories/00000000'],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3575,6 +3928,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3593,11 +3947,13 @@ describe('repairConfig', () => {
                   category: [],
                   responsible: [],
                   progressLabel: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3617,6 +3973,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3636,11 +3993,13 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3660,6 +4019,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3678,11 +4038,13 @@ describe('repairConfig', () => {
                   day: [],
                   category: [],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         }
 
@@ -3702,6 +4064,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })
@@ -3721,6 +4084,7 @@ describe('repairConfig', () => {
                   category: [],
                   progressLabel: ['/progress_labels/00000000'],
                   responsible: [],
+                  activityCount: 0,
                 },
               },
             },
@@ -3745,6 +4109,52 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        })
+      })
+
+      test('adds dummy activityCount if missing', () => {
+        // given
+        const config = {
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: {
+                  period: null,
+                  day: [],
+                  category: [],
+                  progressLabel: [],
+                  responsible: [],
+                },
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
+          language: 'en-GB',
+        }
+
+        // when
+        const result = repairConfig(config, ...args)
+
+        // then
+        expect(result).toEqual({
+          camp: '/camps/1a2b3c4d',
+          contents: [
+            {
+              type: 'ActivityList',
+              options: {
+                periods: ['/periods/1a2b3c4d'],
+                filter: defaultFilter,
+              },
+            },
+          ],
+          documentName: 'test camp',
+          options: { pageNumbers: false },
           language: 'en-GB',
         })
       })

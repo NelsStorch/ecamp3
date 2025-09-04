@@ -150,7 +150,7 @@
               </v-list>
             </div>
             <v-alert
-              v-if="localCamp.campPrototype === 'none'"
+              v-if="selectedPrototypeValue === 'none'"
               color="#0661ab"
               elevation="0"
               text

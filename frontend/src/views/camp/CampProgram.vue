@@ -44,7 +44,7 @@ Show all activity schedule entries of a single period.
       />
       <v-menu offset-y>
         <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
+          <v-btn icon v-bind="attrs" data-testid="campprogram-menu" v-on="on">
             <v-badge
               v-if="!$vuetify.breakpoint.smAndUp && filteredPropertiesCount > 0"
               overlap
@@ -154,6 +154,7 @@ import {
   transformValuesToHalId,
 } from '@/helpers/querySyncHelper.js'
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
+import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default {
   name: 'CampProgram',
@@ -206,7 +207,8 @@ export default {
       return {
         camp: this.camp._meta.self,
         language: this.$store.state.lang.language,
-        documentName: this.camp.title + '-picasso.pdf',
+        documentName: campShortTitle(this.camp) + '-' + this.period.description,
+        options: { pageNumbers: false },
         contents: [
           {
             type: 'Picasso',

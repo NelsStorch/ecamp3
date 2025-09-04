@@ -1,5 +1,9 @@
 <template>
-  <ScheduleEntryTitle :schedule-entry="scheduleEntry" :show-header="false" />
+  <ScheduleEntryTitle
+    :id="`${id}-${scheduleEntry.id}`"
+    :schedule-entry="scheduleEntry"
+    :show-header="false"
+  />
 
   <View style="margin-top: 10pt; padding-bottom: 20pt; font-size: 10pt">
     <ContentNode

@@ -262,6 +262,9 @@
     "shortScheduleEntryDescription": "jour{dayNumber} {startTime}"
   },
   "print": {
+    "activity": {
+      "title": "Activité"
+    },
     "activityList": {
       "title": "Liste d'activités"
     },
@@ -283,13 +286,11 @@
     "program": {
       "title": "Programme"
     },
-    "summary": {
-      "safetyConsiderations": {
-        "title": "Considérations sur la sécurité"
-      },
-      "storycontext": {
-        "title": "Histoire"
-      }
+    "safetyConsiderations": {
+      "title": "Considérations sur la sécurité"
+    },
+    "story": {
+      "title": "Histoire"
     },
     "toc": {
       "title": "Table des matières"

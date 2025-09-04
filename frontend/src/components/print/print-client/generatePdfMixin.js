@@ -15,7 +15,41 @@ export const generatePdfMixin = {
   data() {
     return {
       loading: false,
+      progress: 0,
+      state: '',
     }
+  },
+  computed: {
+    progressBarGrowthFactor() {
+      return 1 - Math.pow(0.01, 1 / this.estimatedNumberOfSteps)
+    },
+    estimatedNumberOfSteps() {
+      // Rough estimate of the number of progress bar steps
+      return (
+        Math.max(this.estimatedNumberOfPages, 1) * 2 + this.config.contents.length + 5
+      )
+    },
+    estimatedNumberOfPages() {
+      return this.config.contents
+        .map((content) => {
+          const activityCount = content.options.filter?.activityCount || 10
+          switch (content.type) {
+            case 'Picasso':
+              return 2
+            case 'Story':
+              return Math.ceil(0.1 * activityCount)
+            case 'ActivityList':
+              return Math.ceil(0.1 * activityCount)
+            case 'SafetyConsiderations':
+              return Math.ceil(0.1 * activityCount)
+            case 'Program':
+              return Math.ceil(0.5 * activityCount)
+            default:
+              return 1
+          }
+        })
+        .reduce((sum, pages) => sum + pages, 0)
+    },
   },
   methods: {
     async generatePdf() {
@@ -24,20 +58,27 @@ export const generatePdfMixin = {
       }
 
       this.loading = true
+      this.setProgress(0, 'loadingData')
 
-      const { blob, error } = await generatePdf({
-        config: { ...this.config, apiGet: this.api.get.bind(this) },
-        storeData: this.$store.state,
-        translationData: this.$i18n.messages,
-        renderInWorker: RENDER_IN_WORKER,
-      })
+      const { blob, error } = await generatePdf(
+        {
+          config: { ...this.config, apiGet: this.api.get.bind(this) },
+          storeData: this.$store.state,
+          translationData: this.$i18n.messages,
+          renderInWorker: RENDER_IN_WORKER,
+        },
+        this.onProgress.bind(this)
+      )
 
       if (error) {
         this.$toast.error(this.$tc('components.print.printClient.generatePdfMixin.error'))
         Sentry.captureException(new Error(error))
+        this.setProgress(100, 'failed')
         this.loading = false
         return
       }
+
+      this.onProgress('downloadingPdf')
 
       saveAs(
         blob,
@@ -46,7 +87,22 @@ export const generatePdfMixin = {
         }) + '.pdf'
       )
 
+      this.setProgress(100, 'done')
       this.loading = false
+    },
+    onProgress(state, params = {}) {
+      const progress =
+        100 * this.progressBarGrowthFactor +
+        this.progress * (1 - this.progressBarGrowthFactor)
+      this.setProgress(progress, state, params)
+    },
+    setProgress(progress, state = null, params = {}) {
+      this.progress = progress
+      this.state = this.$tc(
+        'components.print.printClient.generatePdfMixin.progress.' + state,
+        1,
+        params
+      )
     },
   },
 }

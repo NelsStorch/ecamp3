@@ -13,7 +13,7 @@ class ValidationErrorNormalizer implements NormalizerInterface {
         self::TITLE => 'An error occurred',
     ];
 
-    public function normalize(mixed $data, ?string $format = null, array $context = []): null|array|\ArrayObject|bool|float|int|string {
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|\ArrayObject|bool|float|int|string|null {
         return [
             'type' => $context[self::TYPE] ?? $this->defaultContext[self::TYPE],
             'title' => $context[self::TITLE] ?? $this->defaultContext[self::TITLE],

@@ -181,8 +181,6 @@
         "category": "Activity categories",
         "checklistItemCount": "No entries | One entry | {count} entries",
         "checklists": "Checklists",
-        "clearClipboard": "Clear clipboard",
-        "clipboard": "Clipboard",
         "clipboardInfoDialog": {
           "allow": "Allow now",
           "denied": "You have denied access to your clipboard. Therefore, you have to enter the link to the template camp manually.",
@@ -249,6 +247,7 @@
         "deactivate": "Deactivate",
         "delete": "Do you really want to remove collaborator '{name}'?",
         "inviteAgain": "Invite again",
+        "leaveCamp": "Leave camp",
         "resendEmail": "Resend invite",
         "resentEmail": "Invitation sent",
         "title": "Edit {user}"
@@ -259,7 +258,9 @@
       },
       "promptCollaboratorDeactivate": {
         "deactivate": "Deactivate",
-        "warningText": "Do you want to deactivate '{name}'?"
+        "leaveCamp": "Leave camp",
+        "warningText": "Do you want to deactivate '{name}'?",
+        "warningTextLeaveCamp": "Do you want to leave the camp '{camp}'?"
       }
     },
     "dashboard": {
@@ -316,7 +317,8 @@
       },
       "materialLists": {
         "materialsCount": "No entries | 1 entry | {count} entries",
-        "overview": "General overview"
+        "overview": "General overview",
+        "unassigned": "Not assigned"
       },
       "materialTable": {
         "addNewItem": "Add new item",
@@ -362,7 +364,9 @@
         },
         "picassoConfig": {
           "orientation": "Page layout",
-          "periods": "Period(s)"
+          "landscape": "Landscape",
+          "periods": "Period(s)",
+          "portrait": "Portrait"
         },
         "programConfig": {
           "dayOverview": "print day overview"
@@ -387,7 +391,18 @@
           "label": "Download PDF (layout #2)"
         },
         "generatePdfMixin": {
-          "error": "Something did not work. Please try again, or try reloading the page."
+          "error": "Something did not work. Please try again, or try reloading the page.",
+          "progress": {
+            "loadingData": "Loading the latest data of the camp…",
+            "setupTranslationsAndFonts": "Loading fonts and static texts…",
+            "assembleContent": "Assembling {type} ({content} of {totalContents})…",
+            "layoutDocument": "Calculating document layout…",
+            "layoutPage": "Calculating layout of page {page}…",
+            "renderingPdfPage": "Rendering pdf page {page} of {totalPages}…",
+            "downloadingPdf": "Downloading pdf file…",
+            "done": "Done",
+            "failed": "Failed"
+          }
         },
         "printPreviewClient": {
           "previewError": "Something did not work. Please try again with different printing settings, or reload the page.",
@@ -405,7 +420,9 @@
           "SafetyConsiderations": "Safety considerations",
           "Story": "Story",
           "Toc": "Table of contents"
-        }
+        },
+        "options": "Einstellungen",
+        "pageNumbers": "Seitenzahlen"
       },
       "printNuxt": {
         "downloadNuxtPdfButton": {
@@ -757,6 +774,10 @@
           "createNewList": "Create material list",
           "download": "Download overview",
           "title": "General overview"
+        },
+        "materialUnassigned": {
+          "excelTitle": "unassigned",
+          "title": "Unassigned material"
         },
         "sideBarMaterialLists": {
           "title": "Material lists"

@@ -28,21 +28,9 @@
 </template>
 
 <script>
-import cloneDeep from 'lodash-es/cloneDeep'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 import { repairPrintFilterConfig } from '../repairPrintConfig.js'
-
-const ORIENTATIONS = [
-  {
-    value: 'L',
-    text: 'Landscape',
-  },
-  {
-    value: 'P',
-    text: 'Portrait',
-  },
-]
 
 export default {
   name: 'PicassoConfig',
@@ -53,7 +41,16 @@ export default {
   },
   data() {
     return {
-      orientations: cloneDeep(ORIENTATIONS),
+      orientations: [
+        {
+          value: 'L',
+          text: this.$tc('components.print.config.picassoConfig.landscape'),
+        },
+        {
+          value: 'P',
+          text: this.$tc('components.print.config.picassoConfig.portrait'),
+        },
+      ],
     }
   },
   computed: {
@@ -111,7 +108,7 @@ export default {
         return knownPeriods.includes(period)
       })
     }
-    if (!ORIENTATIONS.map((o) => o.value).includes(config.options.orientation)) {
+    if (!['L', 'P'].includes(config.options.orientation)) {
       config.options.orientation = 'L'
     }
     return repairPrintFilterConfig(config, camp, knownPeriods)

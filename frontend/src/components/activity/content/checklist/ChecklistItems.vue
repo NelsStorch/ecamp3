@@ -5,7 +5,7 @@
       <v-list-item
         v-for="{ item, parents } in items"
         :key="item._meta.self"
-        class="min-h-0"
+        class="min-h-0 d-grid"
         :disabled="layoutMode"
       >
         <v-list-item-content class="py-2">

@@ -56,13 +56,16 @@ export default {
     }
   },
   computed: {
+    filteredCount() {
+      return this.filterFn(this.localFilter).length
+    },
     activatorLabel() {
       if (this.anyFilter)
         return this.$tc(
           'components.print.config.dialogScheduleEntryFilter.filterActive',
           1,
           {
-            filtered: this.filterFn(this.localFilter).length,
+            filtered: this.filteredCount,
             total: this.filterFn({}).length,
           }
         )
@@ -79,7 +82,7 @@ export default {
         'components.print.config.dialogScheduleEntryFilter.resultCount',
         1,
         {
-          filtered: this.filterFn(this.localFilter).length,
+          filtered: this.filteredCount,
           total: this.filterFn({}).length,
         }
       )
@@ -94,6 +97,15 @@ export default {
         (this.localFilter.progressLabel != null &&
           this.localFilter.progressLabel.length > 0)
       )
+    },
+  },
+  watch: {
+    filteredCount: {
+      handler(val) {
+        this.localFilter.activityCount = val
+        this.$emit('input', this.localFilter)
+      },
+      immediate: true,
     },
   },
   methods: {

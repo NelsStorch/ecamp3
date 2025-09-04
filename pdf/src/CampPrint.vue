@@ -5,9 +5,19 @@
         :is="components[content.type]"
         v-if="content.type in components"
         :id="`entry-${idx}`"
+        :index="idx"
+        :total-contents="config.contents.length"
+        :type="content.type"
         :config="config"
         :content="content"
-      ></component>
+      >
+        <Text
+          v-if="config.options.pageNumbers"
+          :render="({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`"
+          fixed
+          class="page-number"
+        />
+      </component>
     </template>
   </Document>
 </template>
@@ -75,8 +85,18 @@ const registerFonts = async () => {
   })
 
   Font.registerEmojiSource({
-    formag: 'png',
-    url: '/twemoji/assets/72x72/',
+    withVariationSelectors: true,
+    builder(code) {
+      // If the code point does not contain 200d, remove any fe0f
+      // https://github.com/twitter/twemoji/issues/419#issuecomment-637360325
+      const filename = code.includes('200d')
+        ? code
+        : code
+            .split('-')
+            .filter((part) => part && part !== 'fe0f')
+            .join('-')
+      return '/twemoji/assets/72x72/' + filename + '.png'
+    },
   })
 
   return await Promise.all([
@@ -115,5 +135,14 @@ export const prepare = async (config) => {
   font-size: 12;
   font-weight: semibold;
   margin: 8pt 0 3pt;
+}
+.page-number {
+  position: absolute;
+  bottom: 15;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10;
 }
 </pdf-style>

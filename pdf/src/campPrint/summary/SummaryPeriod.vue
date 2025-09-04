@@ -1,4 +1,5 @@
 <template>
+  <TocSectionStartMarker :id="`${id}-${period.id}`" />
   <Text
     :id="`${id}-${period.id}`"
     :bookmark="{ title: title + ': ' + period.description, fit: true }"
@@ -20,10 +21,11 @@ import SummaryDay from './SummaryDay.vue'
 import sortBy from 'lodash-es/sortBy.js'
 import camelCase from 'lodash-es/camelCase.js'
 import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'SummaryPeriod',
-  components: { SummaryDay },
+  components: { TocSectionStartMarker, SummaryDay },
   extends: PdfComponent,
   props: {
     period: { type: Object, required: true },
@@ -46,7 +48,7 @@ export default {
       return sortBy(days, (day) => this.$date.utc(day.start).unix())
     },
     title() {
-      return this.$tc('print.summary.' + this.camelCase(this.contentType) + '.title')
+      return this.$tc('print.' + this.camelCase(this.contentType) + '.title')
     },
   },
   methods: { camelCase },

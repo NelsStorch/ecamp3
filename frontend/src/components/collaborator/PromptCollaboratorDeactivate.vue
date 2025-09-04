@@ -5,7 +5,7 @@
     :error="error"
     :submit-action="deactivateUser"
     :submit-enabled="!$slots.error"
-    :submit-label="$tc('components.collaborator.promptCollaboratorDeactivate.deactivate')"
+    :submit-label="submitLabel"
     submit-color="error"
     submit-icon="mdi-cancel"
     cancel-icon=""
@@ -16,11 +16,7 @@
       <slot name="activator" v-bind="scope" />
     </template>
     <slot>
-      {{
-        $tc('components.collaborator.promptCollaboratorDeactivate.warningText', 1, {
-          name: displayName,
-        })
-      }}
+      {{ warningText }}
     </slot>
     <template v-if="$slots.error || error" #error>
       <slot name="error">
@@ -36,6 +32,7 @@ import campCollaborationDisplayName from '@/common/helpers/campCollaborationDisp
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
 import isOwnCampCollaboration from './isOwnCampCollaboration.js'
+import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default {
   name: 'PromptCollaboratorDeactivate',
@@ -50,6 +47,20 @@ export default {
     },
     displayName() {
       return campCollaborationDisplayName(this.entity, this.$tc.bind(this))
+    },
+    submitLabel() {
+      return this.isOwnCampCollaboration
+        ? this.$tc('components.collaborator.promptCollaboratorDeactivate.leaveCamp')
+        : this.$tc('components.collaborator.promptCollaboratorDeactivate.deactivate')
+    },
+    warningText() {
+      const key = this.isOwnCampCollaboration
+        ? 'components.collaborator.promptCollaboratorDeactivate.warningTextLeaveCamp'
+        : 'components.collaborator.promptCollaboratorDeactivate.warningText'
+      return this.$tc(key, 1, {
+        name: this.displayName,
+        camp: campShortTitle(this.entity.camp()),
+      })
     },
   },
   created() {

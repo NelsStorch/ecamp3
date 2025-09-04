@@ -1,5 +1,5 @@
 <template>
-  <ScheduleEntryTitle :schedule-entry="scheduleEntry" />
+  <ScheduleEntryTitle :id="id" :schedule-entry="scheduleEntry" />
   <View style="padding-bottom: 20pt; font-size: 10pt">
     <ContentNode :content-node="activity.rootContentNode()" />
   </View>

@@ -16,7 +16,7 @@ self.start = (...args) => {
   return originalStart(...args)
 }
 
-export const renderPdfInWorker = async (data) => {
+export const renderPdfInWorker = async (data, onProgress) => {
   const lang = data?.config?.language
   if (!lang) {
     const error = 'language was undefined in react print config'
@@ -28,7 +28,7 @@ export const renderPdfInWorker = async (data) => {
   // on production deployments
   dayjs.locale(toDayjsLocale(lang))
 
-  const result = { ...(await renderPdf(data)) }
+  const result = { ...(await renderPdf(data, onProgress)) }
   if (result.error) {
     Sentry.captureException(result.error)
     result.error = `Error in PDF worker code. To get the full stack trace, set RENDER_IN_WORKER to false. Error message was: ${result.error.message}`
