@@ -27,13 +27,10 @@
         <v-list-item v-bind="attrs" v-on="on">
           <v-list-item-content>
             <v-list-item-title>
-              <span v-html="renderHighlighted(item.text)" />
-              <!--
-                <span v-for="(part, idx) in renderHighlighted(item.text)" :key="idx">
-                  <span v-if="part.h" style="background: yellowgreen">{{ part.text }}</span>
-                  <span v-else>{{ part.text }}</span>
-                </span>
-                -->
+              <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
+                <span v-if="part.h" style="background: yellowgreen">{{ part.text }}</span>
+                <span v-else>{{ part.text }}</span>
+              </span>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -65,31 +62,38 @@ export default {
   },
   data() {
     return {
-      fuzzy: new uFuzzy({ intraMode: 1  }),
+      fuzzy: new uFuzzy({ intraMode: 1 }),
       search: null,
+      searchInfos: new Map()
     }
   },
   methods: {
     tokensFilter(item, queryText, itemText) {
-      const idxs = this.fuzzy.filter([itemText], queryText)
+      const [idxs, info, order] = this.fuzzy.search([itemText], queryText, true, 1e3)
+      this.searchInfos.set(item.value, info);
       return idxs && idxs.length > 0
     },
-
-    renderHighlighted(text) {
-      if (!this.search) return text
-
-      const info = this.fuzzy.info([0], [text], this.search)
-      return uFuzzy.highlight(
-        text, info.ranges[0], (s, m) => {
-          return m
-            ? '<span style="background: yellowgreen">' + s + '</span>'
-            : '<span>' + s + '</span>'
+    
+    renderHighlighted(item) {
+      if (this.search) {
+        if (this.searchInfos.has(item.value)) {
+          const info = this.searchInfos.get(item.value)
+          if (info) {
+            return uFuzzy.highlight(
+              item.text,
+              info.ranges[0],
+              (p, m) => ({ h:m, text:p }),
+              [],
+              (a, p) => { a.push(p) }
+            )
+          }
         }
-      )
-      
-    },
+      }
+      return [{ h:false, text: item.text }]
+    }
   }
 }
+
 </script>
 
 <style scoped>
