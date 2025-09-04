@@ -247,6 +247,7 @@
         "deactivate": "Deaktivieren",
         "delete": "Möchtest du die Person '{name}' wirklich entfernen?",
         "inviteAgain": "Erneut einladen",
+        "leaveCamp": "Lager verlassen",
         "resendEmail": "E-Mail erneut senden",
         "resentEmail": "Einladung gesendet",
         "title": "{user} bearbeiten"
@@ -257,7 +258,9 @@
       },
       "promptCollaboratorDeactivate": {
         "deactivate": "Deaktivieren",
-        "warningText": "Möchtest du '{name}' wirklich deaktivieren?"
+        "leaveCamp": "Lager verlassen",
+        "warningText": "Möchtest du '{name}' wirklich deaktivieren?",
+        "warningTextLeaveCamp": "Möchtest du das Lager '{camp}' wirklich verlassen?"
       }
     },
     "dashboard": {
@@ -388,7 +391,18 @@
           "label": "PDF herunterladen (Layout #2)"
         },
         "generatePdfMixin": {
-          "error": "Etwas hat nicht geklappt. Probiere es nochmals, oder lade die Seite neu."
+          "error": "Etwas hat nicht geklappt. Probiere es nochmals, oder lade die Seite neu.",
+          "progress": {
+            "loadingData": "Lade die aktuellsten Daten des Lagers…",
+            "setupTranslationsAndFonts": "Lade Schriftarten und Texte…",
+            "assembleContent": "Stelle {type} zusammen ({content} von {totalContents})…",
+            "layoutDocument": "Berechne Dokument-Layout…",
+            "layoutPage": "Berechne Layout von Seite {page}…",
+            "renderingPdfPage": "Rendere PDF-Seite {page} von {totalPages}…",
+            "downloadingPdf": "Lade die PDF-Datei herunter…",
+            "done": "Fertig",
+            "failed": "Abgebrochen"
+          }
         },
         "printPreviewClient": {
           "previewError": "Etwas hat nicht geklappt. Probiere es nochmals mit anderen Druckeinstellungen, oder lade die Seite neu.",

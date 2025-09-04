@@ -48,7 +48,7 @@ export default {
       return sortBy(days, (day) => this.$date.utc(day.start).unix())
     },
     title() {
-      return this.$tc('print.summary.' + this.camelCase(this.contentType) + '.title')
+      return this.$tc('print.' + this.camelCase(this.contentType) + '.title')
     },
   },
   methods: { camelCase },

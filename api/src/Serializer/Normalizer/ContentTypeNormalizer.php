@@ -25,7 +25,7 @@ class ContentTypeNormalizer implements NormalizerInterface, SerializerAwareInter
         return $this->decorated->supportsNormalization($data, $format, $context);
     }
 
-    public function normalize($data, $format = null, array $context = []): null|array|\ArrayObject|bool|float|int|string {
+    public function normalize($data, $format = null, array $context = []): array|\ArrayObject|bool|float|int|string|null {
         $normalized_data = $this->decorated->normalize($data, $format, $context);
 
         if ($data instanceof ContentType && null !== $data->entityClass) {

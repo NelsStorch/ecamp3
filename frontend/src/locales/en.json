@@ -247,6 +247,7 @@
         "deactivate": "Deactivate",
         "delete": "Do you really want to remove collaborator '{name}'?",
         "inviteAgain": "Invite again",
+        "leaveCamp": "Leave camp",
         "resendEmail": "Resend invite",
         "resentEmail": "Invitation sent",
         "title": "Edit {user}"
@@ -257,7 +258,9 @@
       },
       "promptCollaboratorDeactivate": {
         "deactivate": "Deactivate",
-        "warningText": "Do you want to deactivate '{name}'?"
+        "leaveCamp": "Leave camp",
+        "warningText": "Do you want to deactivate '{name}'?",
+        "warningTextLeaveCamp": "Do you want to leave the camp '{camp}'?"
       }
     },
     "dashboard": {
@@ -388,7 +391,18 @@
           "label": "Download PDF (layout #2)"
         },
         "generatePdfMixin": {
-          "error": "Something did not work. Please try again, or try reloading the page."
+          "error": "Something did not work. Please try again, or try reloading the page.",
+          "progress": {
+            "loadingData": "Loading the latest data of the camp…",
+            "setupTranslationsAndFonts": "Loading fonts and static texts…",
+            "assembleContent": "Assembling {type} ({content} of {totalContents})…",
+            "layoutDocument": "Calculating document layout…",
+            "layoutPage": "Calculating layout of page {page}…",
+            "renderingPdfPage": "Rendering pdf page {page} of {totalPages}…",
+            "downloadingPdf": "Downloading pdf file…",
+            "done": "Done",
+            "failed": "Failed"
+          }
         },
         "printPreviewClient": {
           "previewError": "Something did not work. Please try again with different printing settings, or reload the page.",

@@ -222,6 +222,9 @@
     }
   },
   "print": {
+    "activity": {
+      "title": "Attività"
+    },
     "config": {
       "periods": "Sezione/i portante/i"
     },
@@ -234,13 +237,11 @@
     "program": {
       "title": "Programma"
     },
-    "summary": {
-      "safetyConsiderations": {
-        "title": "Considerazioni sulla sicurezza"
-      },
-      "storycontext": {
-        "title": "Storia"
-      }
+    "safetyConsiderations": {
+      "title": "Considerazioni sulla sicurezza"
+    },
+    "story": {
+      "title": "Storia"
     },
     "toc": {
       "title": "Indice dei contenuti"
