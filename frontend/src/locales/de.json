@@ -246,8 +246,8 @@
         "cannotRemoveLastManager": "Du kannst die letzte Person mit administrativen Rechten nicht deaktivieren",
         "deactivate": "Deaktivieren",
         "delete": "Möchtest du die Person '{name}' wirklich entfernen?",
-        "leaveCamp": "Lager verlassen",
         "inviteAgain": "Erneut einladen",
+        "leaveCamp": "Lager verlassen",
         "resendEmail": "E-Mail erneut senden",
         "resentEmail": "Einladung gesendet",
         "title": "{user} bearbeiten"
