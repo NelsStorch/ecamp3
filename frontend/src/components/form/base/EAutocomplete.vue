@@ -28,7 +28,7 @@
           <v-list-item-content>
             <v-list-item-title>
               <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
-                <span v-if="part.h" style="background: yellowgreen">{{ part.text }}</span>
+                <mark v-if="part.h">{{ part.text }}</mark>
                 <span v-else>{{ part.text }}</span>
               </span>
             </v-list-item-title>
