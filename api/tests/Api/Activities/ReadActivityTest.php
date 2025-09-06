@@ -64,6 +64,7 @@ class ReadActivityTest extends ECampApiTestCase {
                 'camp' => ['href' => $this->getIriFor('camp1')],
                 'scheduleEntries' => ['href' => '/schedule_entries?activity=%2Factivities%2F'.$activity->getId()],
                 'activityResponsibles' => ['href' => '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId()],
+                'comments' => ['href' => '/activities/'.$activity->getId().'/comments'],
             ],
         ]);
     }
@@ -86,6 +87,7 @@ class ReadActivityTest extends ECampApiTestCase {
                 'camp' => ['href' => $this->getIriFor('camp1')],
                 'scheduleEntries' => ['href' => '/schedule_entries?activity=%2Factivities%2F'.$activity->getId()],
                 'activityResponsibles' => ['href' => '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId()],
+                'comments' => ['href' => '/activities/'.$activity->getId().'/comments'],
             ],
         ]);
 
@@ -109,6 +111,7 @@ class ReadActivityTest extends ECampApiTestCase {
                 'camp' => ['href' => $this->getIriFor('camp1')],
                 'scheduleEntries' => ['href' => '/schedule_entries?activity=%2Factivities%2F'.$activity->getId()],
                 'activityResponsibles' => ['href' => '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId()],
+                'comments' => ['href' => '/activities/'.$activity->getId().'/comments'],
             ],
         ]);
     }

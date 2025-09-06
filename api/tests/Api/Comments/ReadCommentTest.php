@@ -29,6 +29,7 @@ class ReadCommentTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'id' => $comment->getId(),
             'textHtml' => $comment->textHtml,
+            'createTime' => $comment->getCreateTime()->format(\DateTime::W3C),
         ]);
     }
 
@@ -42,6 +43,7 @@ class ReadCommentTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'id' => $comment->getId(),
             'textHtml' => $comment->textHtml,
+            'createTime' => $comment->getCreateTime()->format(\DateTime::W3C),
         ]);
     }
 

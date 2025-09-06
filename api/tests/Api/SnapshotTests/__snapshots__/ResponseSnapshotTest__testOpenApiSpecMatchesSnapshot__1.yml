@@ -90,13 +90,95 @@ components:
         - scheduleEntries
         - title
       type: object
-    Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    Activity-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: 'A piece of programme that will be carried out once or multiple times in a camp.'
       properties:
         activityResponsibles:
           items:
-            $ref: '#/components/schemas/ActivityResponsible-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+            $ref: '#/components/schemas/ActivityResponsible-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+          readOnly: true
+          type: array
+        camp:
+          description: 'The camp to which this activity belongs.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        category:
+          anyOf:
+            -
+              $ref: '#/components/schemas/Category-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+            -
+              type: 'null'
+          readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
+        contentNodes:
+          description: 'All the content nodes that make up the tree of programme content.'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+          items:
+            example: 'https://example.com/'
+            format: iri-reference
+            type: string
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        location:
+          default: ''
+          description: "The physical location where this activity's programme will be carried out."
+          example: Spielwiese
+          maxLength: 64
+          type: string
+        progressLabel:
+          anyOf:
+            -
+              $ref: '#/components/schemas/ActivityProgressLabel-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+            -
+              type: 'null'
+          readOnly: true
+        rootContentNode:
+          description: |-
+            The programme contents, organized as a tree of content nodes. The root content node cannot be
+            exchanged, but all the contents attached to it can.
+          example: /content_nodes/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        scheduleEntries:
+          items:
+            $ref: '#/components/schemas/ScheduleEntry-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+          readOnly: true
+          type: array
+        title:
+          description: 'The title of this activity that is shown in the picasso.'
+          example: Sportolympiade
+          maxLength: 32
+          type: string
+      required:
+        - activityResponsibles
+        - category
+        - comments
+        - location
+        - scheduleEntries
+        - title
+      type: object
+    Activity-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+      deprecated: false
+      description: 'A piece of programme that will be carried out once or multiple times in a camp.'
+      properties:
+        activityResponsibles:
+          items:
+            $ref: '#/components/schemas/ActivityResponsible-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
           readOnly: true
           type: array
         camp:
@@ -112,6 +194,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -136,7 +224,7 @@ components:
         progressLabel:
           anyOf:
             -
-              $ref: '#/components/schemas/ActivityProgressLabel-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+              $ref: '#/components/schemas/ActivityProgressLabel-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
             -
               type: 'null'
           readOnly: true
@@ -150,7 +238,7 @@ components:
           type: string
         scheduleEntries:
           items:
-            $ref: '#/components/schemas/ScheduleEntry-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+            $ref: '#/components/schemas/ScheduleEntry-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
           readOnly: true
           type: array
         title:
@@ -161,81 +249,7 @@ components:
       required:
         - activityResponsibles
         - category
-        - location
-        - scheduleEntries
-        - title
-      type: object
-    Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
-      deprecated: false
-      description: 'A piece of programme that will be carried out once or multiple times in a camp.'
-      properties:
-        activityResponsibles:
-          items:
-            $ref: '#/components/schemas/ActivityResponsible-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-          readOnly: true
-          type: array
-        camp:
-          description: 'The camp to which this activity belongs.'
-          example: /camps/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        category:
-          anyOf:
-            -
-              $ref: '#/components/schemas/Category-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-            -
-              type: 'null'
-          readOnly: true
-        contentNodes:
-          description: 'All the content nodes that make up the tree of programme content.'
-          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        location:
-          default: ''
-          description: "The physical location where this activity's programme will be carried out."
-          example: Spielwiese
-          maxLength: 64
-          type: string
-        progressLabel:
-          anyOf:
-            -
-              $ref: '#/components/schemas/ActivityProgressLabel-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-            -
-              type: 'null'
-          readOnly: true
-        rootContentNode:
-          description: |-
-            The programme contents, organized as a tree of content nodes. The root content node cannot be
-            exchanged, but all the contents attached to it can.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        scheduleEntries:
-          items:
-            $ref: '#/components/schemas/ScheduleEntry-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-          readOnly: true
-          type: array
-        title:
-          description: 'The title of this activity that is shown in the picasso.'
-          example: Sportolympiade
-          maxLength: 32
-          type: string
-      required:
-        - activityResponsibles
-        - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -469,6 +483,8 @@ components:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 category:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                comments:
+                  properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabel:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 rootContentNode:
@@ -478,6 +494,7 @@ components:
               required:
                 - activityResponsibles
                 - category
+                - comments
                 - scheduleEntries
               type: object
             type:
@@ -492,6 +509,8 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
+              -
+                $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
                 $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
@@ -606,7 +625,7 @@ components:
         - scheduleEntries
         - title
       type: object
-    Activity.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    Activity.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: 'A piece of programme that will be carried out once or multiple times in a camp.'
       properties:
@@ -621,7 +640,98 @@ components:
           type: object
         activityResponsibles:
           items:
-            $ref: '#/components/schemas/ActivityResponsible.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+            $ref: '#/components/schemas/ActivityResponsible.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+          readOnly: true
+          type: array
+        camp:
+          description: 'The camp to which this activity belongs.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        category:
+          anyOf:
+            -
+              $ref: '#/components/schemas/Category.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+            -
+              type: 'null'
+          readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
+        contentNodes:
+          description: 'All the content nodes that make up the tree of programme content.'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+          items:
+            example: 'https://example.com/'
+            format: iri-reference
+            type: string
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        location:
+          default: ''
+          description: "The physical location where this activity's programme will be carried out."
+          example: Spielwiese
+          maxLength: 64
+          type: string
+        progressLabel:
+          anyOf:
+            -
+              $ref: '#/components/schemas/ActivityProgressLabel.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+            -
+              type: 'null'
+          readOnly: true
+        rootContentNode:
+          description: |-
+            The programme contents, organized as a tree of content nodes. The root content node cannot be
+            exchanged, but all the contents attached to it can.
+          example: /content_nodes/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        scheduleEntries:
+          items:
+            $ref: '#/components/schemas/ScheduleEntry.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+          readOnly: true
+          type: array
+        title:
+          description: 'The title of this activity that is shown in the picasso.'
+          example: Sportolympiade
+          maxLength: 32
+          type: string
+      required:
+        - activityResponsibles
+        - category
+        - comments
+        - location
+        - scheduleEntries
+        - title
+      type: object
+    Activity.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+      deprecated: false
+      description: 'A piece of programme that will be carried out once or multiple times in a camp.'
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        activityResponsibles:
+          items:
+            $ref: '#/components/schemas/ActivityResponsible.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
           readOnly: true
           type: array
         camp:
@@ -637,6 +747,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -661,7 +777,7 @@ components:
         progressLabel:
           anyOf:
             -
-              $ref: '#/components/schemas/ActivityProgressLabel.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+              $ref: '#/components/schemas/ActivityProgressLabel.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
             -
               type: 'null'
           readOnly: true
@@ -675,7 +791,7 @@ components:
           type: string
         scheduleEntries:
           items:
-            $ref: '#/components/schemas/ScheduleEntry.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+            $ref: '#/components/schemas/ScheduleEntry.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
           readOnly: true
           type: array
         title:
@@ -686,90 +802,7 @@ components:
       required:
         - activityResponsibles
         - category
-        - location
-        - scheduleEntries
-        - title
-      type: object
-    Activity.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
-      deprecated: false
-      description: 'A piece of programme that will be carried out once or multiple times in a camp.'
-      properties:
-        _links:
-          properties:
-            self:
-              properties:
-                href:
-                  format: iri-reference
-                  type: string
-              type: object
-          type: object
-        activityResponsibles:
-          items:
-            $ref: '#/components/schemas/ActivityResponsible.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-          readOnly: true
-          type: array
-        camp:
-          description: 'The camp to which this activity belongs.'
-          example: /camps/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        category:
-          anyOf:
-            -
-              $ref: '#/components/schemas/Category.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-            -
-              type: 'null'
-          readOnly: true
-        contentNodes:
-          description: 'All the content nodes that make up the tree of programme content.'
-          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        location:
-          default: ''
-          description: "The physical location where this activity's programme will be carried out."
-          example: Spielwiese
-          maxLength: 64
-          type: string
-        progressLabel:
-          anyOf:
-            -
-              $ref: '#/components/schemas/ActivityProgressLabel.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-            -
-              type: 'null'
-          readOnly: true
-        rootContentNode:
-          description: |-
-            The programme contents, organized as a tree of content nodes. The root content node cannot be
-            exchanged, but all the contents attached to it can.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        scheduleEntries:
-          items:
-            $ref: '#/components/schemas/ScheduleEntry.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
-          readOnly: true
-          type: array
-        title:
-          description: 'The title of this activity that is shown in the picasso.'
-          example: Sportolympiade
-          maxLength: 32
-          type: string
-      required:
-        - activityResponsibles
-        - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1038,88 +1071,7 @@ components:
         - scheduleEntries
         - title
       type: object
-    Activity.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
-      deprecated: false
-      description: 'A piece of programme that will be carried out once or multiple times in a camp.'
-      properties:
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        activityResponsibles:
-          items:
-            $ref: '#/components/schemas/ActivityResponsible.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
-          readOnly: true
-          type: array
-        camp:
-          description: 'The camp to which this activity belongs.'
-          example: /camps/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        category:
-          description: |-
-            The category to which this activity belongs. The category determines color and numbering scheme
-            of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
-          example: /categories/1a2b3c4d
-          format: iri-reference
-          type: string
-        contentNodes:
-          description: 'All the content nodes that make up the tree of programme content.'
-          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
-          items:
-            example: 'https://example.com/'
-            format: iri-reference
-            type: string
-          readOnly: true
-          type: array
-        id:
-          description: 'An internal, unique, randomly generated identifier of this entity.'
-          example: 1a2b3c4d
-          maxLength: 16
-          readOnly: true
-          type: string
-        location:
-          default: ''
-          description: "The physical location where this activity's programme will be carried out."
-          example: Spielwiese
-          maxLength: 64
-          type: string
-        progressLabel:
-          anyOf:
-            -
-              $ref: '#/components/schemas/ActivityProgressLabel.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
-            -
-              type: 'null'
-          readOnly: true
-        rootContentNode:
-          description: |-
-            The programme contents, organized as a tree of content nodes. The root content node cannot be
-            exchanged, but all the contents attached to it can.
-          example: /content_nodes/1a2b3c4d
-          format: iri-reference
-          readOnly: true
-          type: string
-        scheduleEntries:
-          items:
-            $ref: '#/components/schemas/ScheduleEntry.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
-          readOnly: true
-          type: array
-        title:
-          description: 'The title of this activity that is shown in the picasso.'
-          example: Sportolympiade
-          maxLength: 32
-          type: string
-      required:
-        - activityResponsibles
-        - category
-        - location
-        - scheduleEntries
-        - title
-      type: object
-    Activity.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    Activity.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: 'A piece of programme that will be carried out once or multiple times in a camp.'
       properties:
@@ -1148,7 +1100,7 @@ components:
           type: string
         activityResponsibles:
           items:
-            $ref: '#/components/schemas/ActivityResponsible.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+            $ref: '#/components/schemas/ActivityResponsible.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           readOnly: true
           type: array
         camp:
@@ -1160,10 +1112,16 @@ components:
         category:
           anyOf:
             -
-              $ref: '#/components/schemas/Category.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+              $ref: '#/components/schemas/Category.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             -
               type: 'null'
           readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -1188,7 +1146,7 @@ components:
         progressLabel:
           anyOf:
             -
-              $ref: '#/components/schemas/ActivityProgressLabel.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+              $ref: '#/components/schemas/ActivityProgressLabel.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             -
               type: 'null'
           readOnly: true
@@ -1202,7 +1160,7 @@ components:
           type: string
         scheduleEntries:
           items:
-            $ref: '#/components/schemas/ScheduleEntry.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+            $ref: '#/components/schemas/ScheduleEntry.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           readOnly: true
           type: array
         title:
@@ -1213,6 +1171,95 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
+        - location
+        - scheduleEntries
+        - title
+      type: object
+    Activity.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+      deprecated: false
+      description: 'A piece of programme that will be carried out once or multiple times in a camp.'
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        activityResponsibles:
+          items:
+            $ref: '#/components/schemas/ActivityResponsible.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+          readOnly: true
+          type: array
+        camp:
+          description: 'The camp to which this activity belongs.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        category:
+          description: |-
+            The category to which this activity belongs. The category determines color and numbering scheme
+            of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
+          example: /categories/1a2b3c4d
+          format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
+        contentNodes:
+          description: 'All the content nodes that make up the tree of programme content.'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+          items:
+            example: 'https://example.com/'
+            format: iri-reference
+            type: string
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        location:
+          default: ''
+          description: "The physical location where this activity's programme will be carried out."
+          example: Spielwiese
+          maxLength: 64
+          type: string
+        progressLabel:
+          anyOf:
+            -
+              $ref: '#/components/schemas/ActivityProgressLabel.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+            -
+              type: 'null'
+          readOnly: true
+        rootContentNode:
+          description: |-
+            The programme contents, organized as a tree of content nodes. The root content node cannot be
+            exchanged, but all the contents attached to it can.
+          example: /content_nodes/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        scheduleEntries:
+          items:
+            $ref: '#/components/schemas/ScheduleEntry.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+          readOnly: true
+          type: array
+        title:
+          description: 'The title of this activity that is shown in the picasso.'
+          example: Sportolympiade
+          maxLength: 32
+          type: string
+      required:
+        - activityResponsibles
+        - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1408,7 +1455,7 @@ components:
         - position
         - title
       type: object
-    ActivityProgressLabel-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ActivityProgressLabel-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -1436,7 +1483,7 @@ components:
         - position
         - title
       type: object
-    ActivityProgressLabel-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ActivityProgressLabel-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -1599,7 +1646,7 @@ components:
         - position
         - title
       type: object
-    ActivityProgressLabel.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ActivityProgressLabel.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -1636,7 +1683,7 @@ components:
         - position
         - title
       type: object
-    ActivityProgressLabel.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ActivityProgressLabel.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -1759,7 +1806,7 @@ components:
         - position
         - title
       type: object
-    ActivityProgressLabel.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ActivityProgressLabel.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -1810,7 +1857,7 @@ components:
         - position
         - title
       type: object
-    ActivityProgressLabel.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ActivityProgressLabel.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -1909,7 +1956,7 @@ components:
         - activity
         - campCollaboration
       type: object
-    ActivityResponsible-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ActivityResponsible-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -1933,7 +1980,7 @@ components:
         - activity
         - campCollaboration
       type: object
-    ActivityResponsible-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ActivityResponsible-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -2054,7 +2101,7 @@ components:
         - activity
         - campCollaboration
       type: object
-    ActivityResponsible.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ActivityResponsible.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -2087,7 +2134,7 @@ components:
         - activity
         - campCollaboration
       type: object
-    ActivityResponsible.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ActivityResponsible.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -2194,7 +2241,7 @@ components:
         - activity
         - campCollaboration
       type: object
-    ActivityResponsible.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ActivityResponsible.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -2241,7 +2288,7 @@ components:
         - activity
         - campCollaboration
       type: object
-    ActivityResponsible.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ActivityResponsible.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -6840,7 +6887,7 @@ components:
           example: LS
           type: string
       type: object
-    Category-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    Category-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -7376,7 +7423,7 @@ components:
           example: LS
           type: string
       type: object
-    Category.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    Category.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -7814,7 +7861,7 @@ components:
           example: LS
           type: string
       type: object
-    Category.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    Category.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -10444,6 +10491,10 @@ components:
           example: /camps/1a2b3c4d
           format: iri-reference
           type: string
+        createTime:
+          format: date-time
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -10481,6 +10532,10 @@ components:
                   description: 'An internal, unique, randomly generated identifier of this entity.'
                   example: 1a2b3c4d
                   maxLength: 16
+                  readOnly: true
+                  type: string
+                createTime:
+                  format: date-time
                   readOnly: true
                   type: string
                 orphanDescription:
@@ -10615,6 +10670,10 @@ components:
           example: /camps/1a2b3c4d
           format: iri-reference
           type: string
+        createTime:
+          format: date-time
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -10725,6 +10784,10 @@ components:
           description: 'The camp this comment belongs to.'
           example: /camps/1a2b3c4d
           format: iri-reference
+          type: string
+        createTime:
+          format: date-time
+          readOnly: true
           type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
@@ -10942,7 +11005,7 @@ components:
         - position
         - root
       type: object
-    ContentNode-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ContentNode-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -11322,7 +11385,7 @@ components:
         - position
         - root
       type: object
-    ContentNode.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ContentNode.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -11621,7 +11684,7 @@ components:
         - position
         - root
       type: object
-    ContentNode.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ContentNode.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -19215,7 +19278,7 @@ components:
         - end
         - start
       type: object
-    ScheduleEntry-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ScheduleEntry-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -19305,7 +19368,7 @@ components:
         - end
         - start
       type: object
-    ScheduleEntry-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ScheduleEntry-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -19795,7 +19858,7 @@ components:
         - end
         - start
       type: object
-    ScheduleEntry.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ScheduleEntry.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -19894,7 +19957,7 @@ components:
         - end
         - start
       type: object
-    ScheduleEntry.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ScheduleEntry.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -20272,7 +20335,7 @@ components:
         - end
         - start
       type: object
-    ScheduleEntry.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
+    ScheduleEntry.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
       deprecated: false
       description: ''
       properties:
@@ -20385,7 +20448,7 @@ components:
         - end
         - start
       type: object
-    ScheduleEntry.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes:
+    ScheduleEntry.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries:
       deprecated: false
       description: ''
       properties:
@@ -23149,7 +23212,7 @@ paths:
             application/hal+json:
               schema:
                 properties:
-                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Activity.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array } }, type: object }, { type: object }] }
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array } }, type: object }, { type: object }] }
                   _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
                   itemsPerPage: { minimum: 0, type: integer }
                   totalItems: { minimum: 0, type: integer }
@@ -23160,12 +23223,12 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                  $ref: '#/components/schemas/Activity-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
                 type: array
             application/ld+json:
               schema:
                 properties:
-                  member: { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
+                  member: { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
                   search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
                   totalItems: { minimum: 0, type: integer }
                   view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
@@ -23180,7 +23243,7 @@ paths:
             text/html:
               schema:
                 items:
-                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                  $ref: '#/components/schemas/Activity-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
                 type: array
           description: 'Activity collection'
         403:
@@ -23228,19 +23291,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Activity.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Activity.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: 'Activity resource created'
           links: []
         400:
@@ -23470,19 +23533,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Activity.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Activity.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: 'Activity resource'
         403:
           content:
@@ -23545,19 +23608,19 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Activity.jsonld-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity.jsonld-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Activity.jsonapi'
             text/html:
               schema:
-                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
+                $ref: '#/components/schemas/Activity-read_Activity.Category_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries_Activity.ContentNodes'
           description: 'Activity resource updated'
           links: []
         400:
@@ -25485,7 +25548,7 @@ paths:
             application/hal+json:
               schema:
                 properties:
-                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Activity.jsonhal-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array } }, type: object }, { type: object }] }
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Activity.jsonhal-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array } }, type: object }, { type: object }] }
                   _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
                   itemsPerPage: { minimum: 0, type: integer }
                   totalItems: { minimum: 0, type: integer }
@@ -25496,12 +25559,12 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                  $ref: '#/components/schemas/Activity-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
                 type: array
             application/ld+json:
               schema:
                 properties:
-                  member: { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
+                  member: { items: { $ref: '#/components/schemas/Activity.jsonld-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries' }, type: array }
                   search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
                   totalItems: { minimum: 0, type: integer }
                   view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
@@ -25516,7 +25579,7 @@ paths:
             text/html:
               schema:
                 items:
-                  $ref: '#/components/schemas/Activity-read_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
+                  $ref: '#/components/schemas/Activity-read_Activity.Comments_Activity.ActivityProgressLabel_Activity.ActivityResponsibles_Activity.ScheduleEntries'
                 type: array
           description: 'Activity collection'
         403:
