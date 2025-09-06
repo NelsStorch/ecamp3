@@ -7,15 +7,18 @@
     border="left"
     colored-border="blue"
   >
+    <v-card-text class="px-3 pt-2 pb-2 ec-comment__text">
+      <slot />
+    </v-card-text>
     <PromptEntityDelete
-      v-if="deletable"
-      entity="/gugus"
+      v-if="isDeletable()"
+      :entity="comment._meta.self"
       class="ec-comment__delete"
       warning-text-entity="Kommentar"
     >
       <template #activator="{ attrs, on }">
         <v-btn
-          v-if="deletable"
+          v-if="isDeletable()"
           class="ec-comment__delete"
           icon
           absolute
@@ -27,24 +30,33 @@
         </v-btn>
       </template>
     </PromptEntityDelete>
-    <v-card-text class="px-3 pt-2 pb-2 ec-comment__text">
-      <slot />
-    </v-card-text>
   </v-sheet>
 </template>
 
 <script>
 import PromptEntityDelete from '@/components/prompt/PromptEntityDelete.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Comment',
   components: { PromptEntityDelete },
   props: {
-    deletable: {
-      type: Boolean,
-      default: false,
+    comment: {
+      type: Object,
+      required: false,
     },
   },
+
+  methods: {
+    isDeletable() {
+      return this.comment !== undefined && this.comment.author().id === this.authUser.id
+    },
+  },
+  computed: {
+    ...mapGetters({
+      authUser: 'getLoggedInUser',
+    })
+  }
 }
 </script>
 
@@ -52,10 +64,16 @@ export default {
 .ec-comment {
   background-color: #cfe2f1 !important;
   border-color: #e3edfc #cfe2f1 #588ebc !important;
+  position: relative;
 }
 
 .ec-comment:not(:hover) .ec-comment__delete {
   display: none;
+}
+
+.ec-comment button.ec-comment__delete {
+  top: 0;
+  right: 0rem;
 }
 
 .ec-comment__text :deep(p) {
@@ -64,10 +82,5 @@ export default {
   font-weight: 400;
   line-height: 1.375rem;
   letter-spacing: -0.006em;
-}
-
-.ec-comment__text :deep(.editor) {
-  padding-top: 10px;
-  padding-bottom: 2px;
 }
 </style>
