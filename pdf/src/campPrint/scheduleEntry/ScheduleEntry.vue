@@ -18,12 +18,20 @@ export default {
   name: 'ScheduleEntry',
   components: { ScheduleEntryTitle, ContentNode },
   extends: PdfComponent,
+  provide() {
+    return {
+      camp: this.camp,
+    }
+  },
   props: {
     scheduleEntry: { type: Object, required: true },
   },
   computed: {
     activity() {
       return this.scheduleEntry.activity()
+    },
+    camp() {
+      return this.activity.camp()
     },
   },
 }
