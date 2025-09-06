@@ -6,6 +6,16 @@
       "children": [
         {
           "box": {},
+          "children": [],
+          "parent": [Circular],
+          "props": {
+            "render": [Function],
+          },
+          "style": {},
+          "type": "VIEW",
+        },
+        {
+          "box": {},
           "children": [
             {
               "parent": [Circular],
@@ -63,20 +73,16 @@
                 "display": "flex",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "marginBottom": "6pt",
                 "textDecoration": "none",
+                "width": "100%",
               },
               "type": "LINK",
             },
           ],
           "parent": [Circular],
-          "props": {
-            "style": {
-              "line-height": "1.6",
-            },
-          },
-          "style": {
-            "lineHeight": "1.6",
-          },
+          "props": {},
+          "style": {},
           "type": "VIEW",
         },
       ],

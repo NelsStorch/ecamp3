@@ -23,7 +23,7 @@ class UriTemplateNormalizer implements NormalizerInterface {
         return $this->decorated->supportsNormalization($data, $format, $context);
     }
 
-    public function normalize($data, $format = null, array $context = []): null|array|\ArrayObject|bool|float|int|string {
+    public function normalize($data, $format = null, array $context = []): array|\ArrayObject|bool|float|int|string|null {
         $result = $this->decorated->normalize($data, $format, $context);
 
         foreach ($result['_links'] as $rel => $link) {
@@ -51,6 +51,7 @@ class UriTemplateNormalizer implements NormalizerInterface {
         $result['_links']['oauthPbsmidata'] = ['href' => $this->urlGenerator->generate('connect_pbsmidata_start').'{?callback}', 'templated' => true];
         $result['_links']['oauthCevidb'] = ['href' => $this->urlGenerator->generate('connect_cevidb_start').'{?callback}', 'templated' => true];
         $result['_links']['oauthJubladb'] = ['href' => $this->urlGenerator->generate('connect_jubladb_start').'{?callback}', 'templated' => true];
+        $result['_links']['refreshToken'] = ['href' => $this->urlGenerator->generate('api_refresh_token')];
         $result['_links']['resetPassword'] = ['href' => $this->urlGenerator->generate('_api_/auth/reset_password{._format}_post').'{/id}', 'templated' => true];
         $result['_links']['resendActivation'] = ['href' => $this->urlGenerator->generate('_api_/auth/resend_activation{._format}_post'), 'templated' => false];
 

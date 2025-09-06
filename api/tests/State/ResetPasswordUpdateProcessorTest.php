@@ -14,7 +14,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReCaptcha\Response;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
 /**
@@ -25,12 +24,8 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
     public const EMAILBASE64 = 'YUBiLmNvbQ==';
 
     private ResetPassword $resetPassword;
-
-    private MockObject|ReCaptchaWrapper $recaptcha;
     private MockObject|Response $recaptchaResponse;
-    private EntityManagerInterface|MockObject $entityManager;
     private MockObject|UserRepository $userRepository;
-    private MockObject|PasswordHasherFactoryInterface $pwHasherFactory;
     private MockObject|PasswordHasherInterface $pwHasher;
 
     private ResetPasswordUpdateProcessor $processor;
@@ -42,27 +37,27 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         $this->resetPassword = new ResetPassword();
 
         $this->recaptchaResponse = $this->createMock(Response::class);
-        $this->recaptcha = $this->createMock(ReCaptchaWrapper::class);
-        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $recaptcha = $this->createMock(ReCaptchaWrapper::class);
+        $entityManager = $this->createMock(EntityManagerInterface::class);
         $this->userRepository = $this->createMock(UserRepository::class);
-        $this->pwHasherFactory = $this->createMock(PasswordHasherFactory::class);
+        $pwHasherFactory = $this->createMock(PasswordHasherFactory::class);
         $this->pwHasher = $this->createMock(PasswordHasherInterface::class);
 
-        $this->recaptcha->expects(self::any())
+        $recaptcha->expects(self::any())
             ->method('verify')
             ->willReturn($this->recaptchaResponse)
         ;
 
-        $this->pwHasherFactory->expects(self::any())
+        $pwHasherFactory->expects(self::any())
             ->method('getPasswordHasher')
             ->willReturn($this->pwHasher)
         ;
 
         $this->processor = new ResetPasswordUpdateProcessor(
-            $this->recaptcha,
-            $this->entityManager,
+            $recaptcha,
+            $entityManager,
             $this->userRepository,
-            $this->pwHasherFactory
+            $pwHasherFactory
         );
     }
 

@@ -200,8 +200,10 @@ class RequestTransactionListenerTest extends TestCase {
     }
 
     /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
-    public static function methodsWhichDontChangeState(): array {
-        return ['GET' => ['GET'], 'OPTIONS' => ['OPTIONS']];
+    public static function methodsWhichDontChangeState(): \Iterator {
+        yield 'GET' => ['GET'];
+
+        yield 'OPTIONS' => ['OPTIONS'];
     }
 
     /**
@@ -231,8 +233,12 @@ class RequestTransactionListenerTest extends TestCase {
     }
 
     /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
-    public static function methodsWhichChangeState(): array {
-        return ['PUT' => ['PUT'], 'POST' => ['POST'], 'DELETE' => ['DELETE']];
+    public static function methodsWhichChangeState(): \Iterator {
+        yield 'PUT' => ['PUT'];
+
+        yield 'POST' => ['POST'];
+
+        yield 'DELETE' => ['DELETE'];
     }
 
     /**

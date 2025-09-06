@@ -4,6 +4,7 @@ namespace App\Tests\Security\Voter;
 
 use App\Entity\Activity;
 use App\Entity\BaseEntity;
+use App\Entity\BelongsToContentNodeTreeInterface;
 use App\Entity\Camp;
 use App\Entity\ContentNode\ColumnLayout;
 use App\Entity\Period;
@@ -41,7 +42,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, new Period(), ['CAMP_IS_SOMETHING_ELSE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_ABSTAIN, $result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
     public function testDoesntVoteWhenSubjectDoesNotBelongToCamp() {
@@ -51,7 +52,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, new CampIsPrototypeVoterTestDummy(), ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_ABSTAIN, $result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
     public function testDoesntVoteWhenSubjectIsNull() {
@@ -61,7 +62,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, null, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_ABSTAIN, $result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
     public function testDeniesAccessWhenGetCampYieldsNull() {
@@ -74,7 +75,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_DENIED, $result);
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 
     public function testDeniesAccessWhenCampIsntPrototype() {
@@ -91,7 +92,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_DENIED, $result);
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 
     public function testGrantsAccessViaBelongsToCampInterface() {
@@ -110,7 +111,7 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_GRANTED, $result);
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 
     public function testGrantsAccessViaBelongsToContentNodeTreeInterface() {
@@ -122,8 +123,9 @@ class CampIsPrototypeVoterTest extends TestCase {
         $camp->isPrototype = true;
         $activity = $this->createMock(Activity::class);
         $activity->method('getCamp')->willReturn($camp);
-        $subject = $this->createMock(ColumnLayout::class);
-        $subject->method('getRoot')->willReturn($subject);
+        $root = $this->createMock(ColumnLayout::class);
+        $subject = $this->createMock(ContentNodeTreeDummy1::class);
+        $subject->method('getRoot')->willReturn($root);
         $repository = $this->createMock(EntityRepository::class);
         $this->em->method('getRepository')->willReturn($repository);
         $repository->method('findOneBy')->willReturn($activity);
@@ -132,8 +134,14 @@ class CampIsPrototypeVoterTest extends TestCase {
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PROTOTYPE']);
 
         // then
-        $this->assertEquals(VoterInterface::ACCESS_GRANTED, $result);
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 }
 
 class CampIsPrototypeVoterTestDummy extends BaseEntity {}
+
+class ContentNodeTreeDummy1 implements BelongsToContentNodeTreeInterface {
+    public function getRoot(): ?ColumnLayout {
+        return null;
+    }
+}

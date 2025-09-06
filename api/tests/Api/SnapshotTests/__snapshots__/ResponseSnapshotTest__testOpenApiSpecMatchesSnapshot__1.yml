@@ -32,7 +32,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -46,6 +46,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -113,7 +114,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -127,6 +128,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -187,7 +189,7 @@ components:
           readOnly: true
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -201,6 +203,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -264,7 +267,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -278,6 +281,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -333,6 +337,7 @@ components:
           format: iri-reference
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -373,6 +378,7 @@ components:
             - 'null'
             - string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -417,7 +423,7 @@ components:
           type: array
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -434,7 +440,12 @@ components:
                   maxLength: 16
                   readOnly: true
                   type: string
+                contentNodes:
+                  items: { type: unknown_type }
+                  readOnly: true
+                  type: array
                 location:
+                  default: ''
                   description: "The physical location where this activity's programme will be carried out."
                   example: Spielwiese
                   maxLength: 64
@@ -458,8 +469,6 @@ components:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 category:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
-                contentNodes:
-                  properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabel:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 rootContentNode:
@@ -483,7 +492,6 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
-              - []
               -
                 $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
@@ -540,7 +548,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -554,6 +562,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -630,7 +639,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -644,6 +653,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -713,7 +723,7 @@ components:
           readOnly: true
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -727,6 +737,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -799,7 +810,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -813,6 +824,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -884,6 +896,7 @@ components:
             - 'null'
             - string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -967,7 +980,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -981,6 +994,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -1054,7 +1068,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -1068,6 +1082,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -1151,7 +1166,7 @@ components:
           readOnly: true
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -1165,6 +1180,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -1251,7 +1267,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -1265,6 +1281,7 @@ components:
           readOnly: true
           type: string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -1327,6 +1344,7 @@ components:
             - 'null'
             - string
         location:
+          default: ''
           description: "The physical location where this activity's programme will be carried out."
           example: Spielwiese
           maxLength: 64
@@ -1379,7 +1397,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1407,7 +1425,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1435,7 +1453,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1454,7 +1472,7 @@ components:
       properties:
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1477,7 +1495,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1506,7 +1524,7 @@ components:
                   type: string
                 position:
                   default: -1
-                  example: -1
+                  example: 0
                   type: integer
                 title:
                   example: Planned
@@ -1570,7 +1588,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1607,7 +1625,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1644,7 +1662,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1677,7 +1695,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1730,7 +1748,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1781,7 +1799,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1832,7 +1850,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -1856,7 +1874,7 @@ components:
           type: string
         position:
           default: -1
-          example: -1
+          example: 0
           type: integer
         title:
           example: Planned
@@ -2384,6 +2402,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -2433,6 +2452,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -2452,14 +2472,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -2579,6 +2604,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -2621,6 +2647,7 @@ components:
           readOnly: true
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -2640,14 +2667,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -2763,6 +2795,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -2812,6 +2845,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -2831,14 +2865,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -2954,6 +2993,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -3003,6 +3043,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -3022,14 +3063,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3147,18 +3193,24 @@ components:
           minItems: 1
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3251,18 +3303,24 @@ components:
             - 'null'
             - string
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3337,6 +3395,7 @@ components:
                   maxLength: 64
                   type: ['null', string]
                 isPrototype:
+                  default: false
                   description: 'Whether this camp may serve as a template for creating other camps.'
                   example: true
                   readOnly: true
@@ -3357,16 +3416,22 @@ components:
                   maxLength: 64
                   type: ['null', string]
                 printYSLogoOnPicasso:
+                  default: false
                   description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
                   example: true
                   type: boolean
                 shortTitle:
-                  description: 'A short title for the camp.'
+                  description: |-
+                    An optional short title for the camp. Can be used in the UI where space is tight. If
+                    not present, frontends may auto-shorten the title if the shortTitle is not set.
                   example: 'SoLa 2022'
                   maxLength: 32
                   type: ['null', string]
                 title:
-                  description: 'The full title of the camp.'
+                  description: |-
+                    The full title of the camp. Used for identifying the camp in lists of camps, so
+                    this should include all necessary information to distinguish this camp from
+                    other camps that the collaborators are part of.
                   example: 'Abteilungs-Sommerlager 2022'
                   maxLength: 32
                   type: string
@@ -3558,6 +3623,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -3607,6 +3673,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -3626,14 +3693,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3762,6 +3834,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -3804,6 +3877,7 @@ components:
           readOnly: true
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -3823,14 +3897,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -3955,6 +4034,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -4004,6 +4084,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -4023,14 +4104,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4155,6 +4241,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -4204,6 +4291,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -4223,14 +4311,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4357,18 +4450,24 @@ components:
           minItems: 1
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4503,6 +4602,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -4552,6 +4652,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -4571,14 +4672,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4721,6 +4827,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -4763,6 +4870,7 @@ components:
           readOnly: true
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -4782,14 +4890,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -4928,6 +5041,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -4977,6 +5091,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -4996,14 +5111,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -5142,6 +5262,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this camp may serve as a template for creating other camps.'
           example: true
           readOnly: true
@@ -5191,6 +5312,7 @@ components:
             type: string
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
@@ -5210,14 +5332,19 @@ components:
           readOnly: true
           type: string
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -5335,18 +5462,24 @@ components:
           minItems: 1
           type: array
         printYSLogoOnPicasso:
+          default: false
           description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
           example: true
           type: boolean
         shortTitle:
-          description: 'A short title for the camp.'
+          description: |-
+            An optional short title for the camp. Can be used in the UI where space is tight. If
+            not present, frontends may auto-shorten the title if the shortTitle is not set.
           example: 'SoLa 2022'
           maxLength: 32
           type:
             - 'null'
             - string
         title:
-          description: 'The full title of the camp.'
+          description: |-
+            The full title of the camp. Used for identifying the camp in lists of camps, so
+            this should include all necessary information to distinguish this camp from
+            other camps that the collaborators are part of.
           example: 'Abteilungs-Sommerlager 2022'
           maxLength: 32
           type: string
@@ -6661,7 +6794,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -6724,7 +6857,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -6788,6 +6921,88 @@ components:
         - preferredContentTypes
         - short
       type: object
+    Category-read_Category.PreferredContentTypes:
+      deprecated: false
+      description: |-
+        A type of programme, such as sports activities or meal times, is called a category. A category
+        determines color and numbering scheme of the associated activities, and is used for marking
+        "similar" activities. A category may contain some skeleton programme which is used as a blueprint
+        when creating a new activity in the category.
+      properties:
+        camp:
+          description: 'The camp to which this category belongs. May not be changed once the category is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the activities in this category, as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type: string
+        contentNodes:
+          description: 'All the content nodes that make up the tree of programme content.'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+          items:
+            example: 'https://example.com/'
+            format: iri-reference
+            type: string
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        name:
+          description: 'The full name of the category.'
+          example: Lagersport
+          maxLength: 32
+          type: string
+        numberingStyle:
+          default: '1'
+          description: |-
+            Specifies whether the schedule entries of the activities in this category should be numbered
+            using arabic numbers, roman numerals or letters.
+          enum:
+            - '-'
+            - '1'
+            - A
+            - I
+            - a
+            - i
+          example: '1'
+          maxLength: 1
+          type: string
+        preferredContentTypes:
+          items:
+            $ref: '#/components/schemas/ContentType-read_Category.PreferredContentTypes'
+          readOnly: true
+          type: array
+        rootContentNode:
+          description: |-
+            The programme contents, organized as a tree of content nodes. The root content node cannot be
+            exchanged, but all the contents attached to it can.
+          example: /content_nodes/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        short:
+          description: |-
+            An abbreviated name of the category, for display in tight spaces, often together with the day and
+            schedule entry number, e.g. LS 3.a, where LS is the category's short name.
+          example: LS
+          maxLength: 16
+          type: string
+      required:
+        - camp
+        - color
+        - name
+        - numberingStyle
+        - preferredContentTypes
+        - short
+      type: object
     Category-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
       description: |-
@@ -6809,7 +7024,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7019,6 +7234,12 @@ components:
                   maxLength: 8
                   pattern: '^(#[0-9a-zA-Z]{6})$'
                   type: string
+                contentNodes:
+                  description: 'All the content nodes that make up the tree of programme content.'
+                  example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+                  items: { example: 'https://example.com/', format: iri-reference, type: string }
+                  readOnly: true
+                  type: array
                 name:
                   description: 'The full name of the category.'
                   example: Lagersport
@@ -7052,8 +7273,6 @@ components:
               properties:
                 camp:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
-                contentNodes:
-                  properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 preferredContentTypes:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 rootContentNode:
@@ -7074,7 +7293,6 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
-              - []
               -
                 $ref: '#/components/schemas/Camp.jsonapi'
               -
@@ -7112,7 +7330,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7184,7 +7402,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7248,6 +7466,97 @@ components:
         - preferredContentTypes
         - short
       type: object
+    Category.jsonhal-read_Category.PreferredContentTypes:
+      deprecated: false
+      description: |-
+        A type of programme, such as sports activities or meal times, is called a category. A category
+        determines color and numbering scheme of the associated activities, and is used for marking
+        "similar" activities. A category may contain some skeleton programme which is used as a blueprint
+        when creating a new activity in the category.
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        camp:
+          description: 'The camp to which this category belongs. May not be changed once the category is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the activities in this category, as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type: string
+        contentNodes:
+          description: 'All the content nodes that make up the tree of programme content.'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+          items:
+            example: 'https://example.com/'
+            format: iri-reference
+            type: string
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        name:
+          description: 'The full name of the category.'
+          example: Lagersport
+          maxLength: 32
+          type: string
+        numberingStyle:
+          default: '1'
+          description: |-
+            Specifies whether the schedule entries of the activities in this category should be numbered
+            using arabic numbers, roman numerals or letters.
+          enum:
+            - '-'
+            - '1'
+            - A
+            - I
+            - a
+            - i
+          example: '1'
+          maxLength: 1
+          type: string
+        preferredContentTypes:
+          items:
+            $ref: '#/components/schemas/ContentType.jsonhal-read_Category.PreferredContentTypes'
+          readOnly: true
+          type: array
+        rootContentNode:
+          description: |-
+            The programme contents, organized as a tree of content nodes. The root content node cannot be
+            exchanged, but all the contents attached to it can.
+          example: /content_nodes/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        short:
+          description: |-
+            An abbreviated name of the category, for display in tight spaces, often together with the day and
+            schedule entry number, e.g. LS 3.a, where LS is the category's short name.
+          example: LS
+          maxLength: 16
+          type: string
+      required:
+        - camp
+        - color
+        - name
+        - numberingStyle
+        - preferredContentTypes
+        - short
+      type: object
     Category.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
       description: |-
@@ -7278,7 +7587,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7459,7 +7768,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7545,7 +7854,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7585,6 +7894,94 @@ components:
             example: 'https://example.com/'
             format: iri-reference
             type: string
+          type: array
+        rootContentNode:
+          description: |-
+            The programme contents, organized as a tree of content nodes. The root content node cannot be
+            exchanged, but all the contents attached to it can.
+          example: /content_nodes/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        short:
+          description: |-
+            An abbreviated name of the category, for display in tight spaces, often together with the day and
+            schedule entry number, e.g. LS 3.a, where LS is the category's short name.
+          example: LS
+          maxLength: 16
+          type: string
+      required:
+        - camp
+        - color
+        - name
+        - numberingStyle
+        - preferredContentTypes
+        - short
+      type: object
+    Category.jsonld-read_Category.PreferredContentTypes:
+      deprecated: false
+      description: |-
+        A type of programme, such as sports activities or meal times, is called a category. A category
+        determines color and numbering scheme of the associated activities, and is used for marking
+        "similar" activities. A category may contain some skeleton programme which is used as a blueprint
+        when creating a new activity in the category.
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp to which this category belongs. May not be changed once the category is created.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        color:
+          description: 'The color of the activities in this category, as a hex color string.'
+          example: '#4DBB52'
+          maxLength: 8
+          pattern: '^(#[0-9a-zA-Z]{6})$'
+          type: string
+        contentNodes:
+          description: 'All the content nodes that make up the tree of programme content.'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
+          items:
+            example: 'https://example.com/'
+            format: iri-reference
+            type: string
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        name:
+          description: 'The full name of the category.'
+          example: Lagersport
+          maxLength: 32
+          type: string
+        numberingStyle:
+          default: '1'
+          description: |-
+            Specifies whether the schedule entries of the activities in this category should be numbered
+            using arabic numbers, roman numerals or letters.
+          enum:
+            - '-'
+            - '1'
+            - A
+            - I
+            - a
+            - i
+          example: '1'
+          maxLength: 1
+          type: string
+        preferredContentTypes:
+          items:
+            $ref: '#/components/schemas/ContentType.jsonld-read_Category.PreferredContentTypes'
+          readOnly: true
           type: array
         rootContentNode:
           description: |-
@@ -7653,7 +8050,7 @@ components:
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
-          example: '["/content_nodes/1a2b3c4d"]'
+          example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
           items:
             example: 'https://example.com/'
             format: iri-reference
@@ -7809,6 +8206,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this checklist is a template.'
           example: true
           type: boolean
@@ -7856,6 +8254,7 @@ components:
             - 'null'
             - string
         isPrototype:
+          default: false
           description: 'Whether this checklist is a template.'
           example: true
           type: boolean
@@ -7884,6 +8283,7 @@ components:
                   readOnly: true
                   type: string
                 isPrototype:
+                  default: false
                   description: 'Whether this checklist is a template.'
                   example: true
                   type: boolean
@@ -7960,6 +8360,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this checklist is a template.'
           example: true
           type: boolean
@@ -8002,6 +8403,7 @@ components:
             - 'null'
             - string
         isPrototype:
+          default: false
           description: 'Whether this checklist is a template.'
           example: true
           type: boolean
@@ -8062,6 +8464,7 @@ components:
           readOnly: true
           type: string
         isPrototype:
+          default: false
           description: 'Whether this checklist is a template.'
           example: true
           type: boolean
@@ -8095,6 +8498,7 @@ components:
             - 'null'
             - string
         isPrototype:
+          default: false
           description: 'Whether this checklist is a template.'
           example: true
           type: boolean
@@ -8153,7 +8557,7 @@ components:
         position:
           default: -1
           description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-          example: -1
+          example: '0'
           type: integer
         text:
           description: 'The human readable text of the checklist-item.'
@@ -8186,7 +8590,7 @@ components:
         position:
           default: -1
           description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-          example: -1
+          example: '0'
           type: integer
         text:
           description: 'The human readable text of the checklist-item.'
@@ -8221,7 +8625,7 @@ components:
         position:
           default: -1
           description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-          example: -1
+          example: '0'
           type: integer
         text:
           description: 'The human readable text of the checklist-item.'
@@ -8252,7 +8656,7 @@ components:
                 position:
                   default: -1
                   description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-                  example: -1
+                  example: '0'
                   type: integer
                 text:
                   description: 'The human readable text of the checklist-item.'
@@ -8359,7 +8763,7 @@ components:
         position:
           default: -1
           description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-          example: -1
+          example: '0'
           type: integer
         text:
           description: 'The human readable text of the checklist-item.'
@@ -8406,7 +8810,7 @@ components:
         position:
           default: -1
           description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-          example: -1
+          example: '0'
           type: integer
         text:
           description: 'The human readable text of the checklist-item.'
@@ -8488,7 +8892,7 @@ components:
         position:
           default: -1
           description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-          example: -1
+          example: '0'
           type: integer
         text:
           description: 'The human readable text of the checklist-item.'
@@ -8526,7 +8930,7 @@ components:
         position:
           default: -1
           description: 'A whole number used for ordering multiple checklist items that are in the same parent.'
-          example: -1
+          example: '0'
           type: integer
         text:
           description: 'The human readable text of the checklist-item.'
@@ -8611,7 +9015,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -8689,7 +9093,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         removeChecklistItemIds:
           example: '["1a2b3c4d"]'
@@ -8756,7 +9160,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         removeChecklistItemIds:
           example: '["1a2b3c4d"]'
@@ -8860,7 +9264,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         removeChecklistItemIds:
           example: '["1a2b3c4d"]'
@@ -8976,7 +9380,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -9063,7 +9467,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         removeChecklistItemIds:
           example: '["1a2b3c4d"]'
@@ -9182,7 +9586,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -9260,7 +9664,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         removeChecklistItemIds:
           example: '["1a2b3c4d"]'
@@ -9354,7 +9758,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -9431,7 +9835,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -9491,7 +9895,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -9578,7 +9982,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -9684,7 +10088,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -9770,7 +10174,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -9881,7 +10285,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -9958,7 +10362,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -9974,6 +10378,376 @@ components:
         - data
         - parent
         - position
+      type: object
+    Comment-create_write:
+      deprecated: false
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
+      properties:
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        textHtml:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - textHtml
+      type: object
+    Comment-read:
+      deprecated: false
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
+      properties:
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        textHtml:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - textHtml
+      type: object
+    Comment.jsonapi:
+      deprecated: false
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
+      properties:
+        data:
+          properties:
+            attributes:
+              properties:
+                _id:
+                  description: 'An internal, unique, randomly generated identifier of this entity.'
+                  example: 1a2b3c4d
+                  maxLength: 16
+                  readOnly: true
+                  type: string
+                orphanDescription:
+                  description: 'Persisted description of the context where the comment was originally writen.'
+                  example: Sportolympiade
+                  maxLength: 32
+                  readOnly: true
+                  type: ['null', string]
+                textHtml:
+                  description: 'The actual comment.'
+                  example: 'This activity is great!'
+                  maxLength: 1024
+                  readOnly: true
+                  type: string
+              required:
+                - textHtml
+              type: object
+            id:
+              type: string
+            relationships:
+              properties:
+                activity:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                author:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                camp:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+              required:
+                - camp
+              type: object
+            type:
+              type: string
+          required:
+            - id
+            - type
+          type: object
+        included:
+          description: 'Related resources requested via the "include" query parameter.'
+          externalDocs:
+            url: 'https://jsonapi.org/format/#fetching-includes'
+          items:
+            anyOf:
+              -
+                $ref: '#/components/schemas/Comment.jsonapi'
+              -
+                $ref: '#/components/schemas/Comment.jsonapi'
+              -
+                $ref: '#/components/schemas/Comment.jsonapi'
+          readOnly: true
+          type: array
+      type: object
+    Comment.jsonhal-create_write:
+      deprecated: false
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        textHtml:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - textHtml
+      type: object
+    Comment.jsonhal-read:
+      deprecated: false
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        textHtml:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - textHtml
+      type: object
+    Comment.jsonld-create_write:
+      deprecated: false
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
+      properties:
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        textHtml:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - textHtml
+      type: object
+    Comment.jsonld-read:
+      deprecated: false
+      description: |-
+        A Comment someone left on an activity, to give feedback on the planned programme,
+        for notes which are only relevant during camp planning, or for other communication.
+      properties:
+        '@context':
+          oneOf:
+            -
+              additionalProperties: true
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+                  type: string
+              required:
+                - '@vocab'
+                - hydra
+              type: object
+            -
+              type: string
+          readOnly: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        activity:
+          description: 'The activity this comment belongs to.'
+          example: /activities/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        author:
+          description: 'The author of the comment.'
+          example: /users/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
+        camp:
+          description: 'The camp this comment belongs to.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          type: string
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        orphanDescription:
+          description: 'Persisted description of the context where the comment was originally writen.'
+          example: Sportolympiade
+          maxLength: 32
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        textHtml:
+          description: 'The actual comment.'
+          example: 'This activity is great!'
+          maxLength: 1024
+          type: string
+      required:
+        - camp
+        - textHtml
       type: object
     ConstraintViolation-json:
       deprecated: false
@@ -10143,7 +10917,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10233,7 +11007,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10323,7 +11097,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10419,7 +11193,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10523,7 +11297,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10622,7 +11396,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10721,7 +11495,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10822,7 +11596,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -10935,7 +11709,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -11048,7 +11822,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -11079,6 +11853,40 @@ components:
         Defines a type of content that can be present in a content node tree. A content type
         determines what data can be stored in content nodes of this type, as well as validation,
         available slots and jsonConfig settings.
+      properties:
+        active:
+          default: true
+          description: 'Whether this content type is still maintained and recommended for use in new camps.'
+          example: 'true'
+          readOnly: true
+          type: boolean
+        contentNodes:
+          description: 'API endpoint link for creating new entities of type entityClass.'
+          example: '/content_node/column_layouts?contentType=%2Fcontent_types%2F1a2b3c4d'
+          format: iri-reference
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        name:
+          description: |-
+            A name in UpperCamelCase of the content type. This value may be used as a technical
+            identifier of this content type, it is guaranteed to stay fixed.
+          example: SafetyConsiderations
+          maxLength: 32
+          readOnly: true
+          type: string
+      required:
+        - active
+        - name
+      type: object
+    ContentType-read_Category.PreferredContentTypes:
+      deprecated: false
+      description: ''
       properties:
         active:
           default: true
@@ -11271,6 +12079,49 @@ components:
         - active
         - name
       type: object
+    ContentType.jsonhal-read_Category.PreferredContentTypes:
+      deprecated: false
+      description: ''
+      properties:
+        _links:
+          properties:
+            self:
+              properties:
+                href:
+                  format: iri-reference
+                  type: string
+              type: object
+          type: object
+        active:
+          default: true
+          description: 'Whether this content type is still maintained and recommended for use in new camps.'
+          example: 'true'
+          readOnly: true
+          type: boolean
+        contentNodes:
+          description: 'API endpoint link for creating new entities of type entityClass.'
+          example: '/content_node/column_layouts?contentType=%2Fcontent_types%2F1a2b3c4d'
+          format: iri-reference
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        name:
+          description: |-
+            A name in UpperCamelCase of the content type. This value may be used as a technical
+            identifier of this content type, it is guaranteed to stay fixed.
+          example: SafetyConsiderations
+          maxLength: 32
+          readOnly: true
+          type: string
+      required:
+        - active
+        - name
+      type: object
     ContentType.jsonhal-read_Category.PreferredContentTypes_Category.ContentNodes:
       deprecated: false
       description: ''
@@ -11320,6 +12171,63 @@ components:
         Defines a type of content that can be present in a content node tree. A content type
         determines what data can be stored in content nodes of this type, as well as validation,
         available slots and jsonConfig settings.
+      properties:
+        '@context':
+          oneOf:
+            -
+              additionalProperties: true
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+                  type: string
+              required:
+                - '@vocab'
+                - hydra
+              type: object
+            -
+              type: string
+          readOnly: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        active:
+          default: true
+          description: 'Whether this content type is still maintained and recommended for use in new camps.'
+          example: 'true'
+          readOnly: true
+          type: boolean
+        contentNodes:
+          description: 'API endpoint link for creating new entities of type entityClass.'
+          example: '/content_node/column_layouts?contentType=%2Fcontent_types%2F1a2b3c4d'
+          format: iri-reference
+          readOnly: true
+          type: array
+        id:
+          description: 'An internal, unique, randomly generated identifier of this entity.'
+          example: 1a2b3c4d
+          maxLength: 16
+          readOnly: true
+          type: string
+        name:
+          description: |-
+            A name in UpperCamelCase of the content type. This value may be used as a technical
+            identifier of this content type, it is guaranteed to stay fixed.
+          example: SafetyConsiderations
+          maxLength: 32
+          readOnly: true
+          type: string
+      required:
+        - active
+        - name
+      type: object
+    ContentType.jsonld-read_Category.PreferredContentTypes:
+      deprecated: false
+      description: ''
       properties:
         '@context':
           oneOf:
@@ -11445,6 +12353,7 @@ components:
       description: ''
       properties:
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -11510,6 +12419,7 @@ components:
         creating or updating periods, and are not writable through the API directly.
       properties:
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -11570,6 +12480,7 @@ components:
       description: ''
       properties:
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -11645,6 +12556,7 @@ components:
                   readOnly: true
                   type: string
                 dayOffset:
+                  default: 0
                   description: "The 0-based offset in days from the period's start date when this day starts."
                   example: '1'
                   readOnly: true
@@ -11718,6 +12630,7 @@ components:
               type: object
           type: object
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -11792,6 +12705,7 @@ components:
               type: object
           type: object
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -11861,6 +12775,7 @@ components:
               type: object
           type: object
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -11945,6 +12860,7 @@ components:
           readOnly: true
           type: string
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -12033,6 +12949,7 @@ components:
           readOnly: true
           type: string
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -12116,6 +13033,7 @@ components:
           readOnly: true
           type: string
         dayOffset:
+          default: 0
           description: "The 0-based offset in days from the period's start date when this day starts."
           example: '1'
           readOnly: true
@@ -12507,7 +13425,8 @@ components:
             - string
         status:
           default: 400
-          example: 404
+          examples:
+            - 404
           type: number
         title:
           description: 'A short, human-readable summary of the problem.'
@@ -12566,7 +13485,8 @@ components:
             - string
         status:
           default: 400
-          example: 404
+          examples:
+            - 404
           type: number
         title:
           description: 'A short, human-readable summary of the problem.'
@@ -12601,6 +13521,7 @@ components:
           description: |-
             Indicates whether the logged in user is already collaborating in the camp, and
             can therefore not accept the invitation.
+          example: false
           type:
             - boolean
             - 'null'
@@ -12645,6 +13566,7 @@ components:
                   description: |-
                     Indicates whether the logged in user is already collaborating in the camp, and
                     can therefore not accept the invitation.
+                  example: false
                   type: [boolean, 'null']
                 userDisplayName:
                   description: |-
@@ -12693,6 +13615,7 @@ components:
           description: |-
             Indicates whether the logged in user is already collaborating in the camp, and
             can therefore not accept the invitation.
+          example: false
           type:
             - boolean
             - 'null'
@@ -12750,6 +13673,7 @@ components:
           description: |-
             Indicates whether the logged in user is already collaborating in the camp, and
             can therefore not accept the invitation.
+          example: false
           type:
             - boolean
             - 'null'
@@ -12771,6 +13695,12 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        camp:
+          description: 'The Camp to which this item belongs.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12783,7 +13713,9 @@ components:
             responsible to prepare and bring the item to the camp.
           example: /material_lists/1a2b3c4d
           format: iri-reference
-          type: string
+          type:
+            - 'null'
+            - string
         materialNode:
           description: 'The content node to which this item belongs, if it does not belong to a period.'
           example: /content_node/material_nodes/1a2b3c4d
@@ -12830,7 +13762,9 @@ components:
             responsible to prepare and bring the item to the camp.
           example: /material_lists/1a2b3c4d
           format: iri-reference
-          type: string
+          type:
+            - 'null'
+            - string
         materialNode:
           description: 'The content node to which this item belongs, if it does not belong to a period.'
           example: /content_node/material_nodes/1a2b3c4d
@@ -12857,6 +13791,56 @@ components:
           type:
             - 'null'
             - string
+      type: object
+    MaterialItem-write_create:
+      deprecated: false
+      description: 'A physical item that is needed for carrying out a programme or camp.'
+      properties:
+        article:
+          description: 'The name of the item that is required.'
+          example: Volleyball
+          maxLength: 64
+          type: string
+        materialList:
+          description: |-
+            The list to which this item belongs. Lists are used to keep track of who is
+            responsible to prepare and bring the item to the camp.
+          example: /material_lists/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        materialNode:
+          description: 'The content node to which this item belongs, if it does not belong to a period.'
+          example: /content_node/material_nodes/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        period:
+          description: 'The period to which this item belongs, if it does not belong to a content node.'
+          example: /periods/1a2b3c4d
+          format: iri-reference
+          type:
+            - 'null'
+            - string
+        quantity:
+          description: 'The number of items or the amount in the unit of items that are required.'
+          example: 1.5
+          exclusiveMinimum: 0
+          type:
+            - 'null'
+            - number
+        unit:
+          description: 'An optional unit for measuring the amount of items required.'
+          example: kg
+          maxLength: 32
+          type:
+            - 'null'
+            - string
+      required:
+        - article
+        - materialList
       type: object
     MaterialItem.jsonapi:
       deprecated: false
@@ -12894,6 +13878,8 @@ components:
               type: string
             relationships:
               properties:
+                camp:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 materialList:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 materialNode:
@@ -12916,11 +13902,13 @@ components:
           items:
             anyOf:
               -
-                $ref: '#/components/schemas/MaterialList.jsonapi'
+                $ref: '#/components/schemas/Camp.jsonapi'
               -
-                $ref: '#/components/schemas/MaterialList.jsonapi'
+                $ref: '#/components/schemas/Camp.jsonapi'
               -
-                $ref: '#/components/schemas/MaterialList.jsonapi'
+                $ref: '#/components/schemas/Camp.jsonapi'
+              -
+                $ref: '#/components/schemas/Camp.jsonapi'
           readOnly: true
           type: array
       type: object
@@ -12942,6 +13930,12 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        camp:
+          description: 'The Camp to which this item belongs.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -12954,7 +13948,9 @@ components:
             responsible to prepare and bring the item to the camp.
           example: /material_lists/1a2b3c4d
           format: iri-reference
-          type: string
+          type:
+            - 'null'
+            - string
         materialNode:
           description: 'The content node to which this item belongs, if it does not belong to a period.'
           example: /content_node/material_nodes/1a2b3c4d
@@ -12987,7 +13983,7 @@ components:
         - article
         - materialList
       type: object
-    MaterialItem.jsonhal-write:
+    MaterialItem.jsonhal-write_create:
       deprecated: false
       description: 'A physical item that is needed for carrying out a programme or camp.'
       properties:
@@ -13011,7 +14007,9 @@ components:
             responsible to prepare and bring the item to the camp.
           example: /material_lists/1a2b3c4d
           format: iri-reference
-          type: string
+          type:
+            - 'null'
+            - string
         materialNode:
           description: 'The content node to which this item belongs, if it does not belong to a period.'
           example: /content_node/material_nodes/1a2b3c4d
@@ -13076,6 +14074,12 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        camp:
+          description: 'The Camp to which this item belongs.'
+          example: /camps/1a2b3c4d
+          format: iri-reference
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -13088,7 +14092,9 @@ components:
             responsible to prepare and bring the item to the camp.
           example: /material_lists/1a2b3c4d
           format: iri-reference
-          type: string
+          type:
+            - 'null'
+            - string
         materialNode:
           description: 'The content node to which this item belongs, if it does not belong to a period.'
           example: /content_node/material_nodes/1a2b3c4d
@@ -13121,7 +14127,7 @@ components:
         - article
         - materialList
       type: object
-    MaterialItem.jsonld-write:
+    MaterialItem.jsonld-write_create:
       deprecated: false
       description: 'A physical item that is needed for carrying out a programme or camp.'
       properties:
@@ -13136,7 +14142,9 @@ components:
             responsible to prepare and bring the item to the camp.
           example: /material_lists/1a2b3c4d
           format: iri-reference
-          type: string
+          type:
+            - 'null'
+            - string
         materialNode:
           description: 'The content node to which this item belongs, if it does not belong to a period.'
           example: /content_node/material_nodes/1a2b3c4d
@@ -13574,7 +14582,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -13645,7 +14653,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -13698,7 +14706,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -13783,7 +14791,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -13887,7 +14895,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -13967,7 +14975,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -14075,7 +15083,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -14146,7 +15154,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -14233,7 +15241,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -14309,7 +15317,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -14368,7 +15376,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -14455,7 +15463,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -14560,7 +15568,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -14645,7 +15653,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -14755,7 +15763,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -14831,7 +15839,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -17475,7 +18483,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -17555,7 +18563,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -17618,7 +18626,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -17708,7 +18716,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -17817,7 +18825,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -17906,7 +18914,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -18020,7 +19028,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -18100,7 +19108,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -18154,6 +19162,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18242,6 +19251,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18331,6 +19341,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18422,6 +19433,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18487,6 +19499,7 @@ components:
           format: date-time
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18541,6 +19554,7 @@ components:
           format: date-time
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18604,6 +19618,7 @@ components:
                   format: date-time
                   type: string
                 left:
+                  default: 0
                   description: |-
                     When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
                     should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18727,6 +19742,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18824,6 +19840,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -18922,6 +19939,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19022,6 +20040,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19103,6 +20122,7 @@ components:
           format: date-time
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19199,6 +20219,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19310,6 +20331,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19422,6 +20444,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19536,6 +20559,7 @@ components:
           readOnly: true
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19608,6 +20632,7 @@ components:
           format: date-time
           type: string
         left:
+          default: 0
           description: |-
             When rendering a period in a calendar view: Specifies how far offset the rendered calendar event
             should be from the left border of the day column, as a fractional amount of the width of the whole
@@ -19712,7 +20737,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -19786,7 +20811,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -19843,7 +20868,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -19927,7 +20952,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -20030,7 +21055,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -20113,7 +21138,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -20221,7 +21246,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -20295,7 +21320,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -20384,7 +21409,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -20461,7 +21486,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -20521,7 +21546,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -20609,7 +21634,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -20715,7 +21740,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -20801,7 +21826,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -20912,7 +21937,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         root:
           description: |-
@@ -20989,7 +22014,7 @@ components:
           description: |-
             A whole number used for ordering multiple content nodes that are in the same slot of the
             same parent. The API does not guarantee the uniqueness of parent+slot+position.
-          example: -1
+          example: '0'
           type: integer
         slot:
           description: |-
@@ -22247,6 +23272,132 @@ paths:
       summary: 'Creates a Activity resource.'
       tags:
         - Activity
+  '/activities/{activityId}/comments':
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of Comment resources.'
+      operationId: api_activities_activityIdcomments_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: activity
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'activity[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Comment identifier'
+          explode: false
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Comment.jsonhal-read' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  member: { items: { $ref: '#/components/schemas/Comment.jsonld-read' }, type: array }
+                  search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
+                  totalItems: { minimum: 0, type: integer }
+                  view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
+                required:
+                  - member
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+          description: 'Comment collection'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+      summary: 'Retrieves the collection of Comment resources.'
+      tags:
+        - Comment
   '/activities/{id}':
     delete:
       deprecated: false
@@ -24660,7 +25811,7 @@ paths:
             application/hal+json:
               schema:
                 properties:
-                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Category.jsonhal-read' }, type: array } }, type: object }, { type: object }] }
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Category.jsonhal-read_Category.PreferredContentTypes' }, type: array } }, type: object }, { type: object }] }
                   _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
                   itemsPerPage: { minimum: 0, type: integer }
                   totalItems: { minimum: 0, type: integer }
@@ -24671,12 +25822,12 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Category-read'
+                  $ref: '#/components/schemas/Category-read_Category.PreferredContentTypes'
                 type: array
             application/ld+json:
               schema:
                 properties:
-                  member: { items: { $ref: '#/components/schemas/Category.jsonld-read' }, type: array }
+                  member: { items: { $ref: '#/components/schemas/Category.jsonld-read_Category.PreferredContentTypes' }, type: array }
                   search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
                   totalItems: { minimum: 0, type: integer }
                   view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
@@ -24691,7 +25842,7 @@ paths:
             text/html:
               schema:
                 items:
-                  $ref: '#/components/schemas/Category-read'
+                  $ref: '#/components/schemas/Category-read_Category.PreferredContentTypes'
                 type: array
           description: 'Category collection'
       summary: 'Retrieves the collection of Category resources.'
@@ -25440,9 +26591,35 @@ paths:
           allowReserved: false
           deprecated: false
           description: ''
+          explode: false
+          in: query
+          name: checklistNodes
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
           explode: true
           in: query
           name: 'checklist.camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'checklistNodes[]'
           required: false
           schema:
             items:
@@ -26031,9 +27208,35 @@ paths:
           allowReserved: false
           deprecated: false
           description: ''
+          explode: false
+          in: query
+          name: checklistNodes
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
           explode: true
           in: query
           name: 'checklist.camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'checklistNodes[]'
           required: false
           schema:
             items:
@@ -26326,6 +27529,308 @@ paths:
       summary: 'Updates the Checklist resource.'
       tags:
         - Checklist
+  /comments:
+    get:
+      deprecated: false
+      description: 'Retrieves the collection of Comment resources.'
+      operationId: api_comments_get_collection
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: activity
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'activity[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                properties:
+                  _embedded: { anyOf: [{ properties: { item: { items: { $ref: '#/components/schemas/Comment.jsonhal-read' }, type: array } }, type: object }, { type: object }] }
+                  _links: { properties: { first: { properties: { href: { format: iri-reference, type: string } }, type: object }, last: { properties: { href: { format: iri-reference, type: string } }, type: object }, next: { properties: { href: { format: iri-reference, type: string } }, type: object }, previous: { properties: { href: { format: iri-reference, type: string } }, type: object }, self: { properties: { href: { format: iri-reference, type: string } }, type: object } }, type: object }
+                  itemsPerPage: { minimum: 0, type: integer }
+                  totalItems: { minimum: 0, type: integer }
+                required:
+                  - _embedded
+                  - _links
+                type: object
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  member: { items: { $ref: '#/components/schemas/Comment.jsonld-read' }, type: array }
+                  search: { properties: { '@type': { type: string }, mapping: { items: { properties: { '@type': { type: string }, property: { type: ['null', string] }, required: { type: boolean }, variable: { type: string } }, type: object }, type: array }, template: { type: string }, variableRepresentation: { type: string } }, type: object }
+                  totalItems: { minimum: 0, type: integer }
+                  view: { example: { '@id': string, first: string, last: string, next: string, previous: string, type: string }, properties: { '@id': { format: iri-reference, type: string }, '@type': { type: string }, first: { format: iri-reference, type: string }, last: { format: iri-reference, type: string }, next: { format: iri-reference, type: string }, previous: { format: iri-reference, type: string } }, type: object }
+                required:
+                  - member
+                type: object
+            application/vnd.api+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment.jsonapi'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment-read'
+                type: array
+          description: 'Comment collection'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+      summary: 'Retrieves the collection of Comment resources.'
+      tags:
+        - Comment
+    post:
+      deprecated: false
+      description: 'Creates a Comment resource.'
+      operationId: api_comments_post
+      parameters: []
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Comment.jsonhal-create_write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment-create_write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Comment.jsonld-create_write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Comment.jsonapi'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Comment-create_write'
+        description: 'The new Comment resource'
+        required: true
+      responses:
+        201:
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonhal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonapi'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+          description: 'Comment resource created'
+          links: []
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'Invalid input'
+          links: []
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation-json'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation-json'
+          description: 'An error occurred'
+          links: []
+      summary: 'Creates a Comment resource.'
+      tags:
+        - Comment
+  '/comments/{id}':
+    delete:
+      deprecated: false
+      description: 'Removes the Comment resource.'
+      operationId: api_comments_id_delete
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Comment identifier'
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        204:
+          description: 'Comment resource deleted'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'Not found'
+          links: []
+      summary: 'Removes the Comment resource.'
+      tags:
+        - Comment
+    get:
+      deprecated: false
+      description: 'Retrieves a Comment resource.'
+      operationId: api_comments_id_get
+      parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: 'Comment identifier'
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        200:
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonhal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Comment.jsonapi'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Comment-read'
+          description: 'Comment resource'
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+          links: []
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'Not found'
+          links: []
+      summary: 'Retrieves a Comment resource.'
+      tags:
+        - Comment
   /content_node/checklist_nodes:
     get:
       deprecated: false
@@ -30564,6 +32069,18 @@ paths:
           description: ''
           explode: false
           in: query
+          name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
           name: materialList
           required: false
           schema:
@@ -30592,6 +32109,20 @@ paths:
           required: false
           schema:
             type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: true
+          in: query
+          name: 'camp[]'
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
           style: form
         -
           allowEmptyValue: false
@@ -30686,19 +32217,19 @@ paths:
         content:
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/MaterialItem.jsonhal-write'
+              $ref: '#/components/schemas/MaterialItem.jsonhal-write_create'
           application/json:
             schema:
-              $ref: '#/components/schemas/MaterialItem-write'
+              $ref: '#/components/schemas/MaterialItem-write_create'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/MaterialItem.jsonld-write'
+              $ref: '#/components/schemas/MaterialItem.jsonld-write_create'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/MaterialItem.jsonapi'
           text/html:
             schema:
-              $ref: '#/components/schemas/MaterialItem-write'
+              $ref: '#/components/schemas/MaterialItem-write_create'
         description: 'The new MaterialItem resource'
         required: true
       responses:
@@ -33161,6 +34692,16 @@ paths:
       summary: 'Updates the ScheduleEntry resource.'
       tags:
         - ScheduleEntry
+  /token/refresh:
+    post:
+      operationId: postRefreshToken
+      responses:
+        204:
+          description: 'Get a refreshed JWT token split across the two cookies example_com_jwt_hp and example_com_jwt_s. Also returns a new refresh token example_com_refresh_token.'
+      summary: 'Refresh token.'
+      tags:
+        - 'JWT Refresh'
+    ref: 'JWT Token Refresh'
   /users:
     get:
       deprecated: false
@@ -33632,6 +35173,11 @@ tags:
       A Checklist
       Tree-Structure with ChecklistItems.
     name: Checklist
+  -
+    description: |-
+      A Comment someone left on an activity, to give feedback on the planned programme,
+      for notes which are only relevant during camp planning, or for other communication.
+    name: Comment
   -
     description: |-
       A calendar event in a period of the camp, at which some activity will take place. The start time

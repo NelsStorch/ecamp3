@@ -40,6 +40,10 @@ Cypress.Commands.add('moveDownloads', () => {
   cy.task('moveDownloads', `${Cypress.spec.name}/${Cypress.currentTest.title}`)
 })
 
+Cypress.Commands.add('getPdfProperties', (path) => {
+  return cy.task('getPdfProperties', path)
+})
+
 Cypress.Commands.add('expectCacheHit', (uri) => {
   cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
     const headers = response.headers
@@ -68,6 +72,13 @@ Cypress.Commands.add('waitForCacheMiss', (uri) => {
       return headers['x-cache'] === 'MISS'
     })
   ).then((result) => expect(result).to.eq(true))
+})
+
+Cypress.Commands.add('apiGet', (uri) => {
+  return cy.request({
+    method: 'GET',
+    url: Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal',
+  })
 })
 
 Cypress.Commands.add('apiPatch', (uri, body) => {

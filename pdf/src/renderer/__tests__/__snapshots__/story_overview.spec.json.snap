@@ -6,18 +6,28 @@
       "children": [
         {
           "box": {},
+          "children": [],
+          "parent": [Circular],
+          "props": {
+            "render": [Function],
+          },
+          "style": {},
+          "type": "VIEW",
+        },
+        {
+          "box": {},
           "children": [
             {
               "parent": [Circular],
               "type": "TEXT_INSTANCE",
-              "value": "print.summary..title: Hauptlager",
+              "value": "Story: Hauptlager",
             },
           ],
           "parent": [Circular],
           "props": {
             "bookmark": {
               "fit": true,
-              "title": "print.summary..title: Hauptlager",
+              "title": "Story: Hauptlager",
             },
             "class": "summary-period-title",
             "id": "entry-0-16b2fcffdd8e",

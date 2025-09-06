@@ -1,4 +1,5 @@
 <template>
+  <TocSectionStartMarker :id="`${id}-${period.id}`" />
   <Text
     :id="`${id}-${period.id}`"
     :bookmark="{ title: period.description, fit: true }"
@@ -14,17 +15,22 @@
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import ScheduleEntry from '../scheduleEntry/ScheduleEntry.vue'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'ProgramPeriod',
-  components: { ScheduleEntry },
+  components: { TocSectionStartMarker, ScheduleEntry },
   extends: PdfComponent,
   props: {
     period: { type: Object, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     scheduleEntries() {
-      return this.period.scheduleEntries().items
+      return this.period.scheduleEntries().items.filter((scheduleEntry) => {
+        return filterMatchScheduleEntry(scheduleEntry, this.filter)
+      })
     },
   },
 }

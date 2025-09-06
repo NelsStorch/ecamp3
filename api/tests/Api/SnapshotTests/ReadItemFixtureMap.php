@@ -17,6 +17,7 @@ class ReadItemFixtureMap {
             '/content_node/column_layouts' => $fixtures['columnLayout2'],
             '/content_node/responsive_layouts' => $fixtures['responsiveLayout1'],
             '/content_types' => $fixtures['contentTypeSafetyConsiderations'],
+            '/comments' => $fixtures['comment1'],
             '/day_responsibles' => $fixtures['dayResponsible1'],
             '/days' => $fixtures['day1period1'],
             '/material_items' => $fixtures['materialItem1'],

@@ -37,13 +37,6 @@
         </div>
       </template>
     </template>
-    <p v-else>
-      {{
-        $t('components.summary.summaryDay.noContent', {
-          contentType: $t(`contentNode.${camelCase(contentType)}.name`),
-        })
-      }}
-    </p>
   </div>
 </template>
 
@@ -52,6 +45,7 @@ import CategoryLabel from '@/components/generic/CategoryLabel.vue'
 import RichText from '@/components/generic/RichText.vue'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
 import camelCase from 'lodash-es/camelCase.js'
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 
 function isEmptyHtml(html) {
   if (html === null) {
@@ -69,6 +63,7 @@ export default {
     index: { type: Number, required: true },
     allContentNodes: { type: Array, required: true },
     contentType: { type: String, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     // returns scheduleEntries of current day without the need for an additional API call
@@ -77,7 +72,10 @@ export default {
         .period()
         .scheduleEntries()
         .items.filter((scheduleEntry) => {
-          return scheduleEntry.day()._meta.self === this.day._meta.self
+          return (
+            scheduleEntry.day()._meta.self === this.day._meta.self &&
+            filterMatchScheduleEntry(scheduleEntry, this.filter)
+          )
         })
     },
 

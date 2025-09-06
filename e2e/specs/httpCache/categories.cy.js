@@ -9,22 +9,24 @@ import {
 } from '../constants'
 import collectionResponse from './responses/categories_collection.json'
 
+const grgrLACategoryId = '1a869b162875'
+
 const collectionXKeys =
   /* campCollaboration for bipiUser */
   'b0bdb7202a9d ' +
   /* Category ES */
-  'ebfd46a1c181 ebfd46a1c181#camp ebfd46a1c181#preferredContentTypes ebfd46a1c181#rootContentNode ebfd46a1c181#contentNodes ' +
+  'ebfd46a1c181 ebfd46a1c181#camp ebfd46a1c181#preferredContentTypes ebfd46a1c181#rootContentNode ebfd46a1c181#embeddedPreferredContentTypes ebfd46a1c181#emptyContentNodesForIriGeneration ' +
   /* Category LA */
-  '1a869b162875 1a869b162875#camp 1a869b162875#preferredContentTypes 1a869b162875#rootContentNode 1a869b162875#contentNodes ' +
+  '1a869b162875 1a869b162875#camp 1a869b162875#preferredContentTypes 1a869b162875#rootContentNode f17470519474 1a0f84e322c8 3ef17bd1df72 4f0c657fecef a4211c112939 44dcc7493c65 cfccaecd4bad 318e064ea0c9 1a869b162875#embeddedPreferredContentTypes 1a869b162875#emptyContentNodesForIriGeneration ' +
   /* Category LP */
-  'dfa531302823 dfa531302823#camp dfa531302823#preferredContentTypes dfa531302823#rootContentNode dfa531302823#contentNodes ' +
+  'dfa531302823 dfa531302823#camp dfa531302823#preferredContentTypes dfa531302823#rootContentNode dfa531302823#embeddedPreferredContentTypes dfa531302823#emptyContentNodesForIriGeneration ' +
   /* Category LS */
-  'a023e85227ac a023e85227ac#camp a023e85227ac#preferredContentTypes a023e85227ac#rootContentNode a023e85227ac#contentNodes ' +
+  'a023e85227ac a023e85227ac#camp a023e85227ac#preferredContentTypes a023e85227ac#rootContentNode a023e85227ac#embeddedPreferredContentTypes a023e85227ac#emptyContentNodesForIriGeneration ' +
   /* collection URI (for detecting addition of new categories) */
   '/api/camps/3c79b99ab424/categories'
 
-describe('cache test: /camps/categories', () => {
-  it('caches /camp/{campId}/categories separately for each login', () => {
+describe('cache test: /camps/{campId}/categories', () => {
+  it('caches /camps/{campId}/categories separately for each login', () => {
     const uri = `/api/camps/${grgrCampId}/categories`
 
     Cypress.session.clearAllSavedSessions()
@@ -46,7 +48,7 @@ describe('cache test: /camps/categories', () => {
     cy.expectCacheMiss(uri)
   })
 
-  it('invalidates /camp/{campId}/categories for all users on category patch', () => {
+  it('invalidates /camps/{campId}/categories for all users on category patch', () => {
     const uri = `/api/camps/${loremIpsumCampId}/categories`
 
     // bring data into defined state
@@ -77,7 +79,7 @@ describe('cache test: /camps/categories', () => {
     cy.expectCacheMiss(uri)
   })
 
-  it('invalidates /camp/{campId}/categories for new category', () => {
+  it('invalidates /camps/{campId}/categories for new category', () => {
     const uri = `/api/camps/${grgrCampId}/categories`
 
     Cypress.session.clearAllSavedSessions()
@@ -169,6 +171,81 @@ describe('cache test: /camps/categories', () => {
       cy.wait('@invitations')
       cy.visit('/camps')
       cy.contains('GRGR')
+    })
+  })
+
+  describe('invalidates /camps/{campId}/categories', () => {
+    let categoryBefore
+    function preferredContentTypeIrisBefore() {
+      return categoryBefore._embedded.preferredContentTypes.map(
+        (contentType) => contentType._links.self.href
+      )
+    }
+
+    beforeEach(() => {
+      cy.login(bipiUser)
+
+      cy.apiGet(`/api/categories/${grgrLACategoryId}`).then((response) => {
+        categoryBefore = response.body
+        expect(preferredContentTypeIrisBefore()).to.not.be.empty
+      })
+    })
+
+    afterEach(() => {
+      cy.login(bipiUser)
+
+      cy.apiPatch(`/api/categories/${grgrLACategoryId}`, {
+        preferredContentTypes: preferredContentTypeIrisBefore(),
+        short: categoryBefore.short,
+        name: categoryBefore.name,
+        color: categoryBefore.color,
+        numberingStyle: categoryBefore.numberingStyle,
+      }).then((response) => {
+        expect(response.status).to.eq(200)
+      })
+    })
+
+    it('when preferredContentTypes are removed', () => {
+      const uri = `/api/camps/${grgrCampId}/categories`
+
+      Cypress.session.clearAllSavedSessions()
+      cy.login(bipiUser)
+
+      // warm up cache
+      cy.expectCacheMiss(uri)
+      cy.expectCacheHit(uri)
+
+      // set the preferredContentTypes to empty
+      cy.apiPatch(`/api/categories/${grgrLACategoryId}`, {
+        preferredContentTypes: [],
+      }).then(() => {
+        // ensure cache was invalidated
+        cy.waitForCacheMiss(uri)
+        cy.expectCacheHit(uri)
+      })
+    })
+
+    it('when preferredContentType is added', () => {
+      const uri = `/api/camps/${grgrCampId}/categories`
+
+      Cypress.session.clearAllSavedSessions()
+      cy.login(bipiUser)
+
+      // warm up cache
+      cy.expectCacheMiss(uri)
+      cy.expectCacheHit(uri)
+
+      // add new preferredContentType
+      cy.apiPatch(`/api/categories/${grgrLACategoryId}`, {
+        preferredContentTypes: [
+          ...preferredContentTypeIrisBefore(),
+          '/api/content_types/a4211c11211c',
+        ],
+      }).then(() => {
+        // ensure cache was invalidated
+        cy.waitForCacheMiss(uri)
+        cy.expectCacheHit(uri)
+      })
     })
   })
 })

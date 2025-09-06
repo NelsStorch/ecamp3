@@ -25,7 +25,7 @@
             "templated": true
         },
         "checklistItems": {
-            "href": "/checklist_items{/id}{?checklist,checklist[],checklist.camp,checklist.camp[]}",
+            "href": "/checklist_items{/id}{?checklist,checklist[],checklist.camp,checklist.camp[],checklistNodes,checklistNodes[]}",
             "templated": true
         },
         "checklistNodes": {
@@ -38,6 +38,10 @@
         },
         "columnLayouts": {
             "href": "/content_node/column_layouts{/id}{?contentType,contentType[],root,root[],camp,period,isRoot}",
+            "templated": true
+        },
+        "comments": {
+            "href": "/comments{/id}{?camp,camp[],activity,activity[]}",
             "templated": true
         },
         "contentNodes": {
@@ -64,7 +68,7 @@
             "href": "/authentication_token"
         },
         "materialItems": {
-            "href": "/material_items{/id}{?materialList,materialList[],materialNode,materialNode[],period}",
+            "href": "/material_items{/id}{?camp,camp[],materialList,materialList[],materialNode,materialNode[],period}",
             "templated": true
         },
         "materialLists": {
@@ -106,6 +110,9 @@
         "profiles": {
             "href": "/profiles{/id}{?user.collaborations.camp,user.collaborations.camp[],user,user[]}",
             "templated": true
+        },
+        "refreshToken": {
+            "href": "/token/refresh"
         },
         "resendActivation": {
             "href": "/auth/resend_activation",

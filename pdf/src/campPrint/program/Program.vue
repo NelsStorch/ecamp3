@@ -1,11 +1,18 @@
 <template>
   <Page :id="id" class="page program-page">
-    <ProgramPeriod v-for="period in periods" :id="id" :period="period" />
+    <slot></slot>
+    <ProgramPeriod
+      v-for="period in periods"
+      :id="id"
+      :period="period"
+      :filter="content.options.filter"
+    />
   </Page>
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'
 import ProgramPeriod from './ProgramPeriod.vue'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
 
 export default {
   name: 'Program',
@@ -19,7 +26,13 @@ export default {
     periods() {
       return this.content.options.periods
         .map((periodUri) => this.api.get(periodUri))
-        .filter((period) => period.scheduleEntries().items.length)
+        .filter((period) => {
+          return period
+            .scheduleEntries()
+            .items.filter((scheduleEntry) =>
+              filterMatchScheduleEntry(scheduleEntry, this.content.options.filter)
+            ).length
+        })
     },
   },
 }

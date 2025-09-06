@@ -38,19 +38,23 @@ class CleanHTMLFilterTest extends KernelTestCase {
         $result = $this->inputFilter->applyTo($data, 'key');
 
         // then
-        $this->assertEquals($outputData, $result);
+        $this->assertSame($outputData, $result);
     }
 
-    public static function getExamples() {
-        return [
-            ['', ''],
-            ['abc', 'abc'],
-            ['<b>abc</b>', '<b>abc</b>'],
-            ['<3', '&lt;3'],
-            ['<script>alert(1)</script>', ''],
-            ['<span onload="alert(1)">123</span>', '<span>123</span>'],
-            ['abc<li>def', 'abcdef'],
-        ];
+    public static function getExamples(): \Iterator {
+        yield ['', ''];
+
+        yield ['abc', 'abc'];
+
+        yield ['<b>abc</b>', '<b>abc</b>'];
+
+        yield ['<3', '&lt;3'];
+
+        yield ['<script>alert(1)</script>', ''];
+
+        yield ['<span onload="alert(1)">123</span>', '<span>123</span>'];
+
+        yield ['abc<li>def', 'abcdef'];
     }
 
     public function testDoesNothingWhenKeyIsMissing() {
@@ -61,7 +65,7 @@ class CleanHTMLFilterTest extends KernelTestCase {
         $result = $this->inputFilter->applyTo($data, 'key');
 
         // then
-        $this->assertEquals($data, $result);
+        $this->assertSame($data, $result);
     }
 
     public function testDoesNothingWhenValueIsNull() {
@@ -83,6 +87,6 @@ class CleanHTMLFilterTest extends KernelTestCase {
         $this->expectException(UnexpectedValueException::class);
 
         // when
-        $result = $this->inputFilter->applyTo($data, 'key');
+        $this->inputFilter->applyTo($data, 'key');
     }
 }

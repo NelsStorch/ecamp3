@@ -166,8 +166,16 @@ class AcceptPersonalInvitationTest extends ECampApiTestCase {
         $this->assertResponseStatusCodeSame(405);
     }
 
-    public static function invalidMethods(): array {
-        return ['GET' => ['GET'], 'PUT' => ['PUT'], 'POST' => ['POST'], 'DELETE' => ['DELETE'], 'OPTIONS' => ['OPTIONS']];
+    public static function invalidMethods(): \Iterator {
+        yield 'GET' => ['GET'];
+
+        yield 'PUT' => ['PUT'];
+
+        yield 'POST' => ['POST'];
+
+        yield 'DELETE' => ['DELETE'];
+
+        yield 'OPTIONS' => ['OPTIONS'];
     }
 
     /**

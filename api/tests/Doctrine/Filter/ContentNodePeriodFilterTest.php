@@ -20,7 +20,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ContentNodePeriodFilterTest extends TestCase {
     private ManagerRegistry|MockObject $managerRegistryMock;
-    private EntityManager|MockObject $entityManagerMock;
     private MockObject|QueryBuilder $queryBuilderMock;
     private MockObject|QueryNameGeneratorInterface $queryNameGeneratorInterfaceMock;
     private IriConverterInterface|MockObject $iriConverterMock;
@@ -28,39 +27,34 @@ class ContentNodePeriodFilterTest extends TestCase {
     public function setUp(): void {
         parent::setUp();
         $this->managerRegistryMock = $this->createMock(ManagerRegistry::class);
-        $this->entityManagerMock = $this->createMock(EntityManager::class);
+        $entityManagerMock = $this->createMock(EntityManager::class);
         $this->queryBuilderMock = $this->createMock(QueryBuilder::class);
         $this->queryNameGeneratorInterfaceMock = $this->createMock(QueryNameGeneratorInterface::class);
         $this->iriConverterMock = $this->createMock(IriConverterInterface::class);
 
-        $this->entityManagerMock
+        $entityManagerMock
             ->method('createQueryBuilder')
-            ->will($this->returnValue($this->queryBuilderMock))
+            ->willReturn($this->queryBuilderMock)
         ;
 
         $this->queryBuilderMock
-            ->method('from')
-            ->will($this->returnSelf())
+            ->method('from')->willReturnSelf()
         ;
 
         $this->queryBuilderMock
-            ->method('select')
-            ->will($this->returnSelf())
+            ->method('select')->willReturnSelf()
         ;
 
         $this->queryBuilderMock
-            ->method('innerJoin')
-            ->will($this->returnSelf())
+            ->method('innerJoin')->willReturnSelf()
         ;
 
         $this->queryBuilderMock
-            ->method('join')
-            ->will($this->returnSelf())
+            ->method('join')->willReturnSelf()
         ;
 
         $this->queryBuilderMock
-            ->method('andWhere')
-            ->will($this->returnSelf())
+            ->method('andWhere')->willReturnSelf()
         ;
 
         $this->queryBuilderMock
@@ -76,21 +70,21 @@ class ContentNodePeriodFilterTest extends TestCase {
         $expr = new Expr();
         $this->queryBuilderMock
             ->method('expr')
-            ->will($this->returnValue($expr))
+            ->willReturn($expr)
         ;
 
         $this->queryBuilderMock
             ->method('getEntityManager')
-            ->will($this->returnValue($this->entityManagerMock))
+            ->willReturn($entityManagerMock)
         ;
 
         $this->queryNameGeneratorInterfaceMock
             ->method('generateParameterName')
-            ->willReturnCallback(fn ($field) => $field.'_a1')
+            ->willReturnCallback(fn (string $field): string => $field.'_a1')
         ;
         $this->queryNameGeneratorInterfaceMock
             ->method('generateJoinAlias')
-            ->willReturnCallback(fn ($field) => $field.'_j1')
+            ->willReturnCallback(fn (string $field): string => $field.'_j1')
         ;
     }
 
@@ -161,7 +155,7 @@ class ContentNodePeriodFilterTest extends TestCase {
             ->expects($this->once())
             ->method('getResourceFromIri')
             ->with('/period/123')
-            ->will($this->returnValue($period))
+            ->willReturn($period)
         ;
 
         $this->queryBuilderMock

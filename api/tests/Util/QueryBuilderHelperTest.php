@@ -24,7 +24,7 @@ class QueryBuilderHelperTest extends KernelTestCase {
 
         $this->queryNameGeneratorInterfaceMock
             ->method('generateJoinAlias')
-            ->willReturnCallback(fn ($field) => $field.'_alias')
+            ->willReturnCallback(fn (string $field): string => $field.'_alias')
         ;
     }
 

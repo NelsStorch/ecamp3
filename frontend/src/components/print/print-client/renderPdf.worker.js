@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser'
 import { renderPdf } from './renderPdf.js'
-import dayjs, { dayjsLocaleMap } from '@/common/helpers/dayjs.js'
+import dayjs, { toDayjsLocale } from '@/common/helpers/dayjs.js'
 
 // Work around an incompatibility between comlink, vite and react-pdf...
 // Comlink works with a globally defined function 'start'. And apparently the way we import
@@ -16,7 +16,7 @@ self.start = (...args) => {
   return originalStart(...args)
 }
 
-export const renderPdfInWorker = async (data) => {
+export const renderPdfInWorker = async (data, onProgress) => {
   const lang = data?.config?.language
   if (!lang) {
     const error = 'language was undefined in react print config'
@@ -26,9 +26,9 @@ export const renderPdfInWorker = async (data) => {
 
   // We need to set the locale again here. Otherwise dayjs falls back to the default
   // on production deployments
-  dayjs.locale(Object.keys(dayjsLocaleMap).includes(lang) ? dayjsLocaleMap[lang] : lang)
+  dayjs.locale(toDayjsLocale(lang))
 
-  const result = { ...(await renderPdf(data)) }
+  const result = { ...(await renderPdf(data, onProgress)) }
   if (result.error) {
     Sentry.captureException(result.error)
     result.error = `Error in PDF worker code. To get the full stack trace, set RENDER_IN_WORKER to false. Error message was: ${result.error.message}`

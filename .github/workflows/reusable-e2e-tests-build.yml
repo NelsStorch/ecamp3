@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Set up Docker Buildx
         id: buildx
@@ -25,7 +25,7 @@ jobs:
           load: true
           target: frankenphp_prod
           builder: ${{ steps.buildx.outputs.name }}
-          tags: ecamp/ecamp3-dev-api
+          tags:  docker.io/ecamp/ecamp3-api:latest
           cache-from: type=gha,scope=api
           cache-to: type=gha,scope=api,mode=max
           outputs: type=docker,dest=/tmp/ecamp3-dev-api.tar

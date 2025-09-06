@@ -25,19 +25,14 @@ class InputFilterDenormalizerTest extends TestCase {
      */
     private $decoratedMock;
 
-    /**
-     * @var MockObject|ServiceLocator
-     */
-    private $inputFilterLocatorMock;
-
     protected function setUp(): void {
-        $this->inputFilterLocatorMock = $this->createMock(ServiceLocator::class);
-        $this->inputFilterLocatorMock->method('get')->willReturnCallback(function ($name) {
+        $inputFilterLocatorMock = $this->createMock(ServiceLocator::class);
+        $inputFilterLocatorMock->method('get')->willReturnCallback(function (string $name): mixed {
             return new $name();
         });
 
         $this->decoratedMock = $this->createMock(DenormalizerInterface::class);
-        $this->denormalizer = new InputFilterDenormalizer($this->inputFilterLocatorMock);
+        $this->denormalizer = new InputFilterDenormalizer($inputFilterLocatorMock);
         $this->denormalizer->setDenormalizer($this->decoratedMock);
     }
 

@@ -50,6 +50,7 @@
               :max="period.end"
               :my="2"
               :filled="false"
+              data-testid="start-date-picker"
               required
             />
           </v-col>
@@ -62,6 +63,7 @@
               :min="period.start"
               :my="2"
               :filled="false"
+              data-testid="end-date-picker"
               required
             />
           </v-col>

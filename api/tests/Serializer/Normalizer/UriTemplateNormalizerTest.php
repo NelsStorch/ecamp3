@@ -21,15 +21,14 @@ class UriTemplateNormalizerTest extends TestCase {
     private UriTemplateNormalizer $uriTemplateNormalizer;
     private MockObject|NormalizerInterface $decorated;
     private MockObject|UriTemplateFactory $uriTemplateFactory;
-    private EnglishInflector $englishInflector;
     private array $loginAndOauthLinks;
 
     protected function setUp(): void {
         $this->decorated = $this->createMock(NormalizerInterface::class);
         $this->uriTemplateFactory = $this->createMock(UriTemplateFactory::class);
-        $this->englishInflector = new EnglishInflector();
+        $englishInflector = new EnglishInflector();
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $urlGenerator->method('generate')->willReturnCallback(function (string $arg) {
+        $urlGenerator->method('generate')->willReturnCallback(function (string $arg): string {
             switch ($arg) {
                 case 'authentication_token':
                     return '/authentication_token';
@@ -46,6 +45,9 @@ class UriTemplateNormalizerTest extends TestCase {
                 case 'connect_jubladb_start':
                     return '/auth/jubladb';
 
+                case 'api_refresh_token':
+                    return '/token/refresh';
+
                 case '_api_/auth/resend_activation{._format}_post':
                     return '/auth/resend_activation';
 
@@ -59,7 +61,7 @@ class UriTemplateNormalizerTest extends TestCase {
 
         $this->uriTemplateNormalizer = new UriTemplateNormalizer(
             $this->decorated,
-            $this->englishInflector,
+            $englishInflector,
             $this->uriTemplateFactory,
             $urlGenerator,
         );
@@ -91,6 +93,9 @@ class UriTemplateNormalizerTest extends TestCase {
             'resetPassword' => [
                 'href' => '/auth/reset_password{/id}',
                 'templated' => true,
+            ],
+            'refreshToken' => [
+                'href' => '/token/refresh',
             ],
         ];
     }

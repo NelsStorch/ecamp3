@@ -5,6 +5,7 @@
       v-for="period in periods"
       :key="period._meta.self"
       :period="period"
+      :filter="options.filter"
       :camp="camp"
       :index="index"
       :content-type-names="['LearningObjectives', 'LearningTopics', 'Checklist']"
@@ -30,6 +31,11 @@ const { data: periods, error } = await useAsyncData(
       props.camp.periods().$loadItems(),
       props.camp.activities().$loadItems(),
       props.camp.categories().$loadItems(),
+      Promise.all(
+        props.options.periods.map((period) =>
+          $api.get().columnLayouts({ period }).$loadItems()
+        )
+      ),
       props.camp.checklists().$loadItems(),
       $api
         .get()

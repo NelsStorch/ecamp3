@@ -8,7 +8,6 @@
   },
   "contentNode": {
     "checklist": {
-      "icon": "mdi-clipboard-list-outline",
       "info": "Select the relevant checklist items, which are covered by this activity (course objectives, etc.).",
       "name": "Checklists"
     },
@@ -18,7 +17,6 @@
           "name": "Column|Column {name}"
         }
       },
-      "icon": "mdi-view-column",
       "name": "Column layout"
     },
     "laThematicArea": {
@@ -50,39 +48,32 @@
           }
         }
       },
-      "icon": "mdi-shape",
       "info": "A Y+S camp activity must address at least one of the listed topics.{br}Select what topics are covered in this block.",
       "name": "LA thematic area"
     },
     "learningObjectives": {
-      "icon": "mdi-school",
       "info": "Formulate as goals the competences which the participants will have after this activity.",
       "name": "Learning objectives"
     },
     "learningTopics": {
-      "icon": "mdi-school",
       "info": "List the topics about which the participants will learn something in this activity.",
       "name": "Learning topics"
     },
     "material": {
-      "icon": "mdi-package-variant",
       "info": "Here you can enter the material requirements for this block.{br}You can manage the material lists in the menu 'Admin'.{br}You can find a summary for the purchase in the menu 'Material'.",
       "name": "Material"
     },
     "notes": {
-      "icon": "mdi-pen",
       "info": "Here you can enter any notes.{br}e.g. ideas, todo's, open questions, contacts, public transport connections, etc.",
       "name": "Notes"
     },
     "responsiveLayout": {
-      "icon": "mdi-view-compact",
       "mainContent": "Main content",
       "name": "Default layout",
       "printAboveMainContent": "Print above main content",
       "printBelowMainContent": "Print below main content"
     },
     "safetyConsiderations": {
-      "icon": "mdi-security",
       "info": "Some blocks require to think about the risks. Here you can record these thoughts.{br}Record what risks you have identified - and how you can address them.",
       "name": "Safety considerations"
     },
@@ -97,12 +88,10 @@
           "name": "Storyboard | Storyboards"
         }
       },
-      "icon": "mdi-script-text-outline",
       "info": "Here you can plan the content of this block.{br}In the left column [Time] you can record the duration of the individual elements.{br}In the right column [Responsible] you can assign persons.",
       "name": "Storyboard"
     },
     "storycontext": {
-      "icon": "mdi-book-open-variant",
       "info": "Describe how this block fits into the story of the camp.{br}You can find a summary of all story elements in the menu 'Story'.{br}You can also first work out a continuous story in the 'Story' menu - so that you can perfectly embed the block content into the story.",
       "name": "Story"
     }
@@ -256,7 +245,7 @@
   "global": {
     "datetime": {
       "dateLong": "dd L",
-      "dateShort": "dd M/D",
+      "dateShort": "dd D/M",
       "dateTimeLong": "dd L LT",
       "duration": {
         "daysAndHours": "{days} d {hours} h",
@@ -273,6 +262,9 @@
     "shortScheduleEntryDescription": "day {dayNumber} {startTime}"
   },
   "print": {
+    "activity": {
+      "title": "Single activity"
+    },
     "activityList": {
       "title": "Activity list"
     },
@@ -294,13 +286,11 @@
     "program": {
       "title": "Program"
     },
-    "summary": {
-      "safetyConsiderations": {
-        "title": "Safety considerations"
-      },
-      "storycontext": {
-        "title": "Story"
-      }
+    "safetyConsiderations": {
+      "title": "Safety considerations"
+    },
+    "story": {
+      "title": "Story"
     },
     "toc": {
       "title": "Table of contents"

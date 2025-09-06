@@ -55,6 +55,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -91,6 +92,7 @@ describe('rendering a full camp', () => {
           config: {
             language: 'de',
             documentName: 'Pfila 2023.pdf',
+            options: { pageNumbers: false },
             camp: store.get('/camps/c4cca3a51342'),
             contents: [
               {
@@ -98,6 +100,13 @@ describe('rendering a full camp', () => {
                 options: {
                   periods: ['/periods/16b2fcffdd8e'],
                   orientation: 'L',
+                  filter: {
+                    period: null,
+                    responsible: [],
+                    day: [],
+                    progressLabel: [],
+                    category: [],
+                  },
                 },
               },
             ],
@@ -122,6 +131,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -150,6 +160,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -178,6 +189,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -207,6 +219,7 @@ describe('rendering a full camp', () => {
       config: {
         language: 'de',
         documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
         camp: store.get('/camps/c4cca3a51342'),
         contents: [
           {
@@ -256,6 +269,7 @@ describe('renders a single activity', () => {
       config: {
         language: 'de',
         documentName: 'Morgenturnen.pdf',
+        options: { pageNumbers: false },
         camp: store.get(campIri),
         contents: [
           {

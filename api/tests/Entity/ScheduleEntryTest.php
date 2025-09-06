@@ -17,7 +17,6 @@ class ScheduleEntryTest extends TestCase {
     private ScheduleEntry $scheduleEntry1;
     private ScheduleEntry $scheduleEntry2;
     private ScheduleEntry $scheduleEntry3;
-    private Camp $camp;
     private Period $period;
     private Day $day1;
     private Day $day2;
@@ -34,8 +33,8 @@ class ScheduleEntryTest extends TestCase {
         $this->period->addDay($this->day1);
         $this->period->addDay($this->day2);
 
-        $this->camp = new Camp();
-        $this->camp->addPeriod($this->period);
+        $camp = new Camp();
+        $camp->addPeriod($this->period);
 
         $this->scheduleEntry2 = new ScheduleEntry();
         $this->scheduleEntry2->startOffset = 960;
@@ -76,21 +75,21 @@ class ScheduleEntryTest extends TestCase {
     }
 
     public function testGetDayNumber() {
-        $this->assertEquals(1, $this->scheduleEntry1->getDayNumber());
-        $this->assertEquals(1, $this->scheduleEntry2->getDayNumber());
-        $this->assertEquals(2, $this->scheduleEntry3->getDayNumber());
+        $this->assertSame(1, $this->scheduleEntry1->getDayNumber());
+        $this->assertSame(1, $this->scheduleEntry2->getDayNumber());
+        $this->assertSame(2, $this->scheduleEntry3->getDayNumber());
     }
 
     public function testGetScheduleEntryNumber() {
-        $this->assertEquals(1, $this->scheduleEntry1->getScheduleEntryNumber());
-        $this->assertEquals(2, $this->scheduleEntry2->getScheduleEntryNumber());
-        $this->assertEquals(1, $this->scheduleEntry3->getScheduleEntryNumber());
+        $this->assertSame(1, $this->scheduleEntry1->getScheduleEntryNumber());
+        $this->assertSame(2, $this->scheduleEntry2->getScheduleEntryNumber());
+        $this->assertSame(1, $this->scheduleEntry3->getScheduleEntryNumber());
     }
 
     public function testGetNumber() {
-        $this->assertEquals('1.1', $this->scheduleEntry1->getNumber());
-        $this->assertEquals('1.2', $this->scheduleEntry2->getNumber());
-        $this->assertEquals('2.1', $this->scheduleEntry3->getNumber());
+        $this->assertSame('1.1', $this->scheduleEntry1->getNumber());
+        $this->assertSame('1.2', $this->scheduleEntry2->getNumber());
+        $this->assertSame('2.1', $this->scheduleEntry3->getNumber());
     }
 
     public function testGetNumberInDifferentNumberingStyle() {
@@ -99,9 +98,9 @@ class ScheduleEntryTest extends TestCase {
         $activity = new Activity();
         $activity->category = $category;
         $this->scheduleEntry2->activity = $activity;
-        $this->assertEquals('1.1', $this->scheduleEntry1->getNumber());
-        $this->assertEquals('1.i', $this->scheduleEntry2->getNumber());
-        $this->assertEquals('2.1', $this->scheduleEntry3->getNumber());
+        $this->assertSame('1.1', $this->scheduleEntry1->getNumber());
+        $this->assertSame('1.i', $this->scheduleEntry2->getNumber());
+        $this->assertSame('2.1', $this->scheduleEntry3->getNumber());
     }
 
     public function testGetEmptyValueWhenNumberingStyleIsNone() {
@@ -110,9 +109,9 @@ class ScheduleEntryTest extends TestCase {
         $activity = new Activity();
         $activity->category = $category;
         $this->scheduleEntry2->activity = $activity;
-        $this->assertEquals('1.1', $this->scheduleEntry1->getNumber());
-        $this->assertEquals('', $this->scheduleEntry2->getNumber());
-        $this->assertEquals('2.1', $this->scheduleEntry3->getNumber());
+        $this->assertSame('1.1', $this->scheduleEntry1->getNumber());
+        $this->assertSame('', $this->scheduleEntry2->getNumber());
+        $this->assertSame('2.1', $this->scheduleEntry3->getNumber());
     }
 
     public function testGetNumberOrdersSamePeriodOffsetByLeft() {
@@ -120,8 +119,8 @@ class ScheduleEntryTest extends TestCase {
         $this->scheduleEntry1->left = 0.5;
         $this->scheduleEntry2->left = 0;
 
-        $this->assertEquals('1.1', $this->scheduleEntry2->getNumber());
-        $this->assertEquals('1.2', $this->scheduleEntry1->getNumber());
+        $this->assertSame('1.1', $this->scheduleEntry2->getNumber());
+        $this->assertSame('1.2', $this->scheduleEntry1->getNumber());
     }
 
     public function testGetNumberOrdersSamePeriodOffsetAndLeftByLength() {
@@ -130,8 +129,8 @@ class ScheduleEntryTest extends TestCase {
         $this->scheduleEntry1->endOffset = $this->scheduleEntry1->startOffset + 60;
         $this->scheduleEntry2->endOffset = $this->scheduleEntry1->startOffset + 120;
 
-        $this->assertEquals('1.1', $this->scheduleEntry2->getNumber());
-        $this->assertEquals('1.2', $this->scheduleEntry1->getNumber());
+        $this->assertSame('1.1', $this->scheduleEntry2->getNumber());
+        $this->assertSame('1.2', $this->scheduleEntry1->getNumber());
     }
 
     public function testGetNumberOrdersSamePeriodOffsetAndLeftAndLengthById() {
@@ -140,11 +139,11 @@ class ScheduleEntryTest extends TestCase {
         $this->scheduleEntry1->endOffset = $this->scheduleEntry2->endOffset;
 
         if ($this->scheduleEntry1->getId() < $this->scheduleEntry2->getId()) {
-            $this->assertEquals('1.1', $this->scheduleEntry1->getNumber());
-            $this->assertEquals('1.2', $this->scheduleEntry2->getNumber());
+            $this->assertSame('1.1', $this->scheduleEntry1->getNumber());
+            $this->assertSame('1.2', $this->scheduleEntry2->getNumber());
         } else {
-            $this->assertEquals('1.1', $this->scheduleEntry2->getNumber());
-            $this->assertEquals('1.2', $this->scheduleEntry1->getNumber());
+            $this->assertSame('1.1', $this->scheduleEntry2->getNumber());
+            $this->assertSame('1.2', $this->scheduleEntry1->getNumber());
         }
     }
 

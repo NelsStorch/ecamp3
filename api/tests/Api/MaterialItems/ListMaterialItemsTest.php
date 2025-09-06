@@ -121,7 +121,7 @@ class ListMaterialItemsTest extends ECampApiTestCase {
 
     public function testListMaterialItemsFilteredByPeriodIsDeniedForUnrelatedUser() {
         $period = static::getFixture('period1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
             ->request('GET', '/material_items?period=%2Fperiods%2F'.$period->getId())
         ;
 
@@ -135,7 +135,7 @@ class ListMaterialItemsTest extends ECampApiTestCase {
 
     public function testListMaterialItemsFilteredByPeriodIsDeniedForInactiveCollaborator() {
         $period = static::getFixture('period1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
             ->request('GET', '/material_items?period=%2Fperiods%2F'.$period->getId())
         ;
 

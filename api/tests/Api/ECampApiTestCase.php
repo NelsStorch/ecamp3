@@ -288,7 +288,7 @@ abstract class ECampApiTestCase extends ApiTestCase {
             'totalItems' => count($items),
         ]);
 
-        if (!empty($items)) {
+        if ([] !== $items) {
             $this->assertJsonContains([
                 '_links' => [
                     'items' => [],

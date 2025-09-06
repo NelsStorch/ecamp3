@@ -23,4 +23,16 @@ App\Entity\ActivityProgressLabel:
     camp: '@campUnrelated'
     position: 1
     title: 'Geplant'
+  activityProgressLabel1campPrototype:
+    camp: '@campPrototype'
+    position: 0
+    title: 'Vorüberlegungen gemacht'
+  activityProgressLabel2campPrototype:
+    camp: '@campPrototype'
+    position: 1
+    title: 'In Arbeit'
+  activityProgressLabel3campPrototype:
+    camp: '@campPrototype'
+    position: 2
+    title: 'Überprüft'
   

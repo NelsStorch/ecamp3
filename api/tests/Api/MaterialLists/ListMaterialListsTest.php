@@ -24,7 +24,7 @@ class ListMaterialListsTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/material_lists');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 5,
+            'totalItems' => 6,
             '_links' => [
                 'items' => [],
             ],
@@ -36,6 +36,7 @@ class ListMaterialListsTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('materialList1')],
             ['href' => $this->getIriFor('materialList2WithNoItems')],
             ['href' => $this->getIriFor('materialList3Manager')],
+            ['href' => $this->getIriFor('materialList4Member')],
             ['href' => $this->getIriFor('materialList1camp2')],
             ['href' => $this->getIriFor('materialList1campPrototype')],
         ], $response->toArray()['_links']['items']);
@@ -46,7 +47,7 @@ class ListMaterialListsTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/material_lists?camp=%2Fcamps%2F'.$camp->getId());
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 3,
+            'totalItems' => 4,
             '_links' => [
                 'items' => [],
             ],
@@ -58,6 +59,7 @@ class ListMaterialListsTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('materialList1')],
             ['href' => $this->getIriFor('materialList2WithNoItems')],
             ['href' => $this->getIriFor('materialList3Manager')],
+            ['href' => $this->getIriFor('materialList4Member')],
         ], $response->toArray()['_links']['items']);
     }
 

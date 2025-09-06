@@ -2,6 +2,9 @@
   "components": {
     "activity": {
       "content": {
+        "checklist": {
+          "title": "Modifier la check-list"
+        },
         "columnLayout": {
           "columnOperations": {
             "addColumn": "Ajouter une colonne",
@@ -20,16 +23,12 @@
           }
         }
       },
-      "copyActivityInfoDialog": {
-        "allow": "Autoriser maintenant",
-        "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
-        "description": "Pour coller une activité copiée, vous devez autoriser eCamp à lire votre presse-papiers.",
-        "granted": "Vous pouvez maintenant coller les activités copiées.",
-        "title": "Copier et coller une activité"
-      },
       "dialog": {
         "dialogActivityEdit": {
           "title": "Modifier l'activité"
+        },
+        "formScheduleEntryList": {
+          "name": "Dates planifiées"
         }
       },
       "menuCardlessContentNode": {
@@ -38,6 +37,13 @@
       "scheduleEntry": {
         "backToContents": "Retour à l'édition du contenu",
         "changeLayout": "Changer la mise en page",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
+          "description": "Pour coller une activité copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+          "granted": "Vous pouvez maintenant coller les activités copiées.",
+          "title": "Copier et coller une activité"
+        },
         "copyScheduleEntry": "Copier une activité",
         "deleteWarning": "Veux-tu vraiment supprimer cette activité ? Tout le contenu de cette activité sera supprimé."
       },
@@ -70,6 +76,7 @@
       },
       "campCategories": {
         "create": "Créer une catégorie d'activité",
+        "pasteCategory": "Coller la catégorie",
         "title": "Catégories d'activités"
       },
       "campConditionalFields": {
@@ -84,8 +91,8 @@
       "campDangerZone": {
         "deleteCamp": {
           "description": "Une fois un camp supprimé, il est impossible de revenir en arrière. Ne continue que si tu es sûr.",
-          "explanation": "Cette action ne peut pas être annulée. Cette action supprimera définitivement le camp \"{campTitle}\", les activités, les listes de matériel et supprimera toutes les associations de collaborateurs.",
-          "label": "Veuillez taper \"{campTitle}\" pour confirmer.",
+          "explanation": "Cette action ne peut pas être annulée. Cette action supprimera définitivement le camp \"{campTitle}\", les activités, les listes de matériel et les personnes ajoutées.",
+          "label": "Veuillez saisir \"{campTitle}\" pour confirmer.",
           "title": "Supprimer le camp"
         },
         "title": "Zone à risque"
@@ -119,6 +126,20 @@
         "title": "Modifier le statut"
       },
       "dialogCategoryCreate": {
+        "clearClipboard": "Vider le presse-papiers",
+        "clipboard": "Presse-papiers",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu ne peux pas coller les catégories copiées.",
+          "description": "Pour coller une catégorie copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+          "granted": "Tu peux maintenant coller les catégories copiées.",
+          "title": "Copier et coller la catégorie"
+        },
+        "copyCategoryOrActivity": "Copier la catégorie ou l'activité",
+        "copyContent": "Copier le contenu",
+        "copyPasteCategory": "Copier et coller la catégorie",
+        "copySourceInfo": "Tu peux coller ici l'URL d'une catégorie ou d'une activité pour copier son contenu.",
+        "pasteCategory": "Copier la catégorie ou l'activité",
         "title": "Créer une catégorie d'activité"
       },
       "dialogMaterialListCreate": {
@@ -153,21 +174,36 @@
         }
       },
       "campCreateStep1": {
-        "submitTooltip": "Remplis tous les champs obligatoires."
+        "submitTooltip": "Remplis tous les champs obligatoires.",
+        "titlePlaceholder": "Camp d'été 2024"
       },
       "campCreateStep2": {
         "category": "Catégories d'activités",
+        "checklistItemCount": "Aucune entrée | Une entrée | {count} entrées",
+        "checklists": "Check-lists",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu dois entrer le lien vers le modèle de camp manuellement.",
+          "description": "Pour coller les paramètres d'un camp copié, tu dois autoriser eCamp v3 à lire ton presse-papiers.",
+          "granted": "Tu peux maintenant coller les paramètres de camp copiés.",
+          "title": "Copier et coller les paramètres du camp"
+        },
         "create": "Créer le camp",
+        "materialLists": "Listes de matériel",
         "noContent": "Pas de contenu",
         "noPrototype": "Pas de modèle",
         "noPrototypeAlert": {
           "description": "Tu dois effectuer tous les réglages manuellement. Il n'y a pas de modèles de blocs ni de mises en page. Ceci ne convient qu'aux utilisateurs expérimentés.",
           "title": "Attention : Vous avez choisi \"Pas de modèle\"."
         },
+        "otherPrototype": "Copier les paramètres d'un autre camp…",
+        "pasteCamp": "Coller les paramètres du camp copié",
         "preview": "Aperçu du modèle du camp",
-        "progressStates": "États d'activités",
+        "progressLabels": "États d'activités",
+        "prototypeCampUrl": "Lien du modèle de camp désiré",
         "prototypeHint": "Copie les catégories, les modèles de blocs et les états de blocs d'un modèle de camp.",
         "prototypeHintEmpty": "Ne pas copier de catégories, de modèles de blocs et de statuts de blocs à partir d'un modèle de camp.",
+        "prototypeHintOther": "Copier les catégories, les modèles d'activités, les statuts, les listes de documents non personnels et les check-lists de cet autre camp. Aucune activité n'est copiée.",
         "prototypeHintSelected": "Copie les catégories, les modèles de blocs et les statuts de blocs de ce modèle de camp.",
         "submitTooltipPrototype": "Tu dois encore choisir si tu veux utiliser un modèle de champ et lequel."
       }
@@ -178,6 +214,26 @@
         "createLayoutHelp": "Ici, vous pouvez définir le modèle pour de nouvelles activités {categoryShort}.{br}Le contenu et la mise en page des activités {categoryShort} déjà créées ne seront pas ajustés.",
         "layout": "Layout",
         "noTemplate": "Pas de modèle"
+      }
+    },
+    "checklist": {
+      "checklistCreate": {
+        "title": "Créer une check-list"
+      },
+      "checklistDetail": {
+        "deleteError": "La check-list n'a pas pu être supprimée. Assure-toi que la check-list n'est pas utilisée dans les activités avant d'essayer de la supprimer.",
+        "deleteWarning": "Veux-tu vraiment supprimer cette check-list ? Tout le contenu de cette check-list sera supprimé."
+      },
+      "checklistItemCreate": {
+        "add": "Créer un point de check-list",
+        "title": "Ajouter un point de check-list"
+      },
+      "checklistItemEdit": {
+        "delete": "Veux-tu vraiment supprimer cet élément ?",
+        "title": "Modifier le point de check-list"
+      },
+      "sortableChecklist": {
+        "add": "Ajouter à \"{parent}\""
       }
     },
     "collaborator": {
@@ -216,6 +272,9 @@
     },
     "form": {
       "base": {
+        "eColorField": {
+          "parseError": "Merci de saisir une couleur valide."
+        },
         "eColorPicker": {
           "closePicker": "Fermer le dialogue",
           "openPicker": "Ouvre un dialogue pour sélectionner une couleur pour {label}"
@@ -270,6 +329,7 @@
     },
     "navigation": {
       "userMeta": {
+        "admin": "Admin",
         "invitations": "Invitations",
         "logOut": "Se déconnecter",
         "myCamps": "Mes camps",
@@ -282,7 +342,9 @@
         "warningText": "Tu veux vraiment refuser l'invitation au camp \"{campTitle}\" ?"
       },
       "personalInvitations": {
-        "noOpenInvitations": "Aucune invitation ouverte. L'invitation a-t-elle été envoyée à une autre adresse que \"{email}\" ?"
+        "accept": "Accepter",
+        "noOpenInvitations": "Aucune invitation ouverte. L'invitation a-t-elle été envoyée à une autre adresse que \"{email}\" ?",
+        "reject": "Refuser"
       }
     },
     "print": {
@@ -290,8 +352,15 @@
         "activityConfig": {
           "activity": "Activité"
         },
+        "dialogScheduleEntryFilter": {
+          "filterActive": "Filtre: {filtered} activités sur {total}",
+          "filterActivities": "Filtre: {total} activités",
+          "resultCount": "Résultat: {filtered} des activités sur {total}",
+          "title": "Filtrer les activités"
+        },
         "picassoConfig": {
-          "orientation": "Mise en page"
+          "orientation": "Mise en page",
+          "periods": "Période(s) du camp"
         },
         "programConfig": {
           "dayOverview": "Aperçu des jours"
@@ -327,10 +396,11 @@
         "add": "Ajouter du contenu",
         "config": {
           "Activity": "Activité unique",
+          "ActivityList": "Liste des blocs (cours)",
           "Cover": "Page de couverture",
           "Picasso": "Picasso",
           "Program": "Programme",
-          "SafetyConsiderations": "Considérations de sécurité",
+          "SafetyConsiderations": "Considérations sur la sécurité",
           "Story": "Histoire",
           "Toc": "Table des matières"
         }
@@ -357,6 +427,13 @@
       "dialogActivityCreate": {
         "clearClipboard": "Vider le presse-papier",
         "clipboard": "Presse-papier",
+        "clipboardInfoDialog": {
+          "allow": "Autoriser maintenant",
+          "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
+          "description": "Pour coller une activité copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+          "granted": "Vous pouvez maintenant coller les activités copiées.",
+          "title": "Copier et coller une activité"
+        },
         "copyActivity": "Copier une activité",
         "copyActivityContent": "Copier le contenu depuis une activité",
         "copyPasteActivity": "Copier et coller une activité",
@@ -381,6 +458,13 @@
           }
         },
         "picassoEntry": {
+          "clipboardInfoDialog": {
+            "allow": "Autoriser maintenant",
+            "denied": "Vous avez refusé l'accès à votre presse-papiers. Par conséquent, vous ne pouvez pas coller les activités copiées.",
+            "description": "Pour coller une activité copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+            "granted": "Vous pouvez maintenant coller les activités copiées.",
+            "title": "Copier et coller une activité"
+          },
           "location": "Lieu:",
           "responsible": "Responsable:"
         }
@@ -388,6 +472,8 @@
       "scheduleEntryFilters": {
         "category": "Catégorie",
         "clearFilters": "Effacer les filtres",
+        "day": "Date",
+        "dayLabel": "Jour {dayNumber} ({date})",
         "onlyMyActivities": "Seulement mes activités",
         "period": "Période",
         "progressLabel": "Statut",
@@ -492,7 +578,7 @@
       "copied": "{source} copié"
     },
     "validation": {
-      "greaterThan": "{_field_} doit être superieur à {min}",
+      "greaterThan": "{_field_} doit être supérieur à {min}",
       "greaterThanOrEqual_date": "{_field_} ne peut pas être antérieure à {min}",
       "greaterThan_time": "{_field_} doit être postérieure à {min}",
       "lessThanOrEqual_date": "{_field_} ne peut pas être postérieure à {max}",
@@ -519,6 +605,7 @@
         "loginCallback": {
           "loginInProgress": "Vous allez être connecté"
         },
+        "notActivated": "Pas activité ?",
         "or": "ou avec",
         "password": "Mot de passe",
         "passwordForgotten": "Tu as oublié ton mot de passe ?",
@@ -530,6 +617,8 @@
           "midata": "MiData"
         },
         "registernow": "Inscrivez-vous maintenant",
+        "resendActivation": "Envoyer à nouveau l'e-mail d'activation",
+        "resetPassword": "Réinitialiser le mot de passe",
         "termsOfServiceLink": "conditions d'utilisation"
       },
       "register": {
@@ -544,6 +633,12 @@
         "message": "Nous t'avons envoyé un e-mail. Merci de compléter ton inscription en cliquant sur le lien d'activation dans l'email.",
         "success": "Enregistré avec succès",
         "title": "Créer un compte"
+      },
+      "resendActivation": {
+        "errorMessage": "L'envoi de l'e-mail d'activation a échoué à nouveau.",
+        "send": "Envoyer",
+        "successMessage": "Un e-mail avec le lien pour réinitialiser le mot de passe sera envoyé.",
+        "title": "Envoyer à nouveau l'e-mail d'activation"
       },
       "resetPassword": {
         "errorMessage": "La réinitialisation du mot de passe a échoué.",
@@ -573,27 +668,27 @@
           "title": "Paramètres d'activité"
         },
         "adminMaterialLists": {
-          "title": "Liste de matériel"
+          "title": "Listes de matériel"
         },
         "collaborators": {
           "email": "Adresse e-mail",
           "inactiveCollaborators": "Inactif",
           "members": "Membres",
           "openInvitations": "Invitations ouvertes",
-          "title": "Team"
+          "title": "Equipe"
         },
         "info": {
           "title": "Infos sur le camp"
         },
         "print": {
-          "title": "Imprimer un camp"
+          "title": "Imprimer le camp"
         },
         "sideBarAdmin": {
           "itemActivity": "Activités",
-          "itemActivitySubtitle": "Catégorie, modèle & statut",
-          "itemCollaborators": "Team",
+          "itemActivitySubtitle": "Catégorie, modèles et statut",
+          "itemCollaborators": "Equipe",
           "itemInfos": "Infos sur le camp",
-          "itemMaterialLists": "Liste de matériel",
+          "itemMaterialLists": "Listes de matériel",
           "itemPrint": "PDF / Imprimer"
         },
         "title": "Admin"
@@ -605,12 +700,25 @@
       },
       "category": {
         "category": {
-          "deleteCategory": "Supprimer l'activité",
+          "clipboardInfoDialog": {
+            "allow": "Autoriser maintenant",
+            "denied": "Tu as refusé l'accès à ton presse-papiers. Par conséquent, tu ne peux pas coller les catégories copiées.",
+            "description": "Pour coller une catégorie copiée, vous devez autoriser eCamp v3 à lire votre presse-papiers.",
+            "granted": "Tu peux maintenant coller les catégories copiées.",
+            "title": "Copier et coller la catégorie"
+          },
+          "copyCategory": "Copier la catégorie",
+          "deleteCategory": "Supprimer la catégorie",
           "properties": "Propriétés",
-          "template": "Modèle pour nouvelles activités"
+          "template": "Modèle pour les nouvelles activités"
         },
         "sideBarCategory": {
           "title": "Catégories"
+        }
+      },
+      "checklistOverview": {
+        "checklistLists": {
+          "title": "Vue d'ensemble de la check-list"
         }
       },
       "dashboard": {
@@ -641,7 +749,7 @@
       },
       "material": {
         "materialLists": {
-          "title": "Liste de matériel"
+          "title": "Listes de matériel"
         },
         "materialOverview": {
           "createNewList": "Créer une liste de matériel",
@@ -657,6 +765,7 @@
           "navTopbar": {
             "admin": "Admin",
             "campIsLoading": "Le camp est en cours de chargement",
+            "checklist": "Check-list",
             "material": "Matériel",
             "print": "Imprimer",
             "program": "Programme",
@@ -675,6 +784,7 @@
             "itemActivity": "Activités",
             "itemActivitySubtitle": "Catégorie, modèle & statut",
             "itemCamps": "Mes Camps",
+            "itemChecklists": "Vue d'ensemble de la check-list",
             "itemClose": "Fermer le menu",
             "itemCollaborators": "Team",
             "itemInfos": "Infos sur le camp",

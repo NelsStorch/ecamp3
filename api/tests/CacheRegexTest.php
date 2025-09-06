@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tests;
+
 use PHPUnit\Framework\Attributes\TestWith;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -19,9 +21,12 @@ class CacheRegexTest extends KernelTestCase {
     #[TestWith(name: '', data: [''])]
     #[TestWith(name: '/', data: ['/'])]
     #[TestWith(name: '/index.jsonhal', data: ['index.jsonhal'])]
+    #[TestWith(name: '/camps/25a82475e0b7/activities', data: ['/camps/25a82475e0b7/activities'])]
+    #[TestWith(name: '/camps/25a82475e0b7/categories', data: ['/camps/25a82475e0b7/categories'])]
+    #[TestWith(name: '/camps/25a82475e0b7/checklists', data: ['/camps/25a82475e0b7/checklists'])]
     #[TestWith(name: '/content_types', data: ['/content_types'])]
     #[TestWith(name: '/content_types/25a82375a0b6', data: ['/content_types/25a82375a0b6'])]
-    #[TestWith(name: '/camps/25a82475e0b7/categories', data: ['/camps/25a82475e0b7/categories'])]
+    #[TestWith(name: '/periods/25a82475e0b7/schedule_entries', data: ['/periods/25a82475e0b7/schedule_entries'])]
     public function testIncludesUrls(string $url) {
         assertMatchesRegularExpression($this->cacheRegex, $url);
     }

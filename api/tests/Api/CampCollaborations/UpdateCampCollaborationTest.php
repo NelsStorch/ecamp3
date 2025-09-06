@@ -6,6 +6,11 @@ use App\Entity\CampCollaboration;
 use App\Entity\User;
 use App\Tests\Api\ECampApiTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 /**
  * @internal
@@ -26,7 +31,7 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
 
     public function testPatchCampCollaborationIsDeniedForUnrelatedUser() {
         $campCollaboration = static::getFixture('campCollaboration1manager');
-        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
+        static::createClientWithCredentials(['email' => static::getFixture('user4unrelated')->getEmail()])
             ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
                 'status' => 'inactive',
                 'role' => 'guest',
@@ -41,7 +46,7 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
 
     public function testPatchCampCollaborationIsDeniedForInactiveCollaborator() {
         $campCollaboration = static::getFixture('campCollaboration1manager');
-        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+        static::createClientWithCredentials(['email' => static::getFixture('user5inactive')->getEmail()])
             ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
                 'status' => 'inactive',
                 'role' => 'guest',
@@ -56,7 +61,7 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
 
     public function testPatchCampCollaborationIsDeniedForGuest() {
         $campCollaboration = static::getFixture('campCollaboration1manager');
-        static::createClientWithCredentials(['email' => static::$fixtures['user3guest']->getEmail()])
+        static::createClientWithCredentials(['email' => static::getFixture('user3guest')->getEmail()])
             ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
                 'status' => 'inactive',
                 'role' => 'guest',
@@ -69,9 +74,9 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testOwnPatchCampCollaborationIsAllowedForGuest() {
+    public function testPatchOwnCampCollaborationIsAllowedForGuest() {
         $campCollaboration = static::getFixture('campCollaboration3guest');
-        static::createClientWithCredentials(['email' => static::$fixtures['user3guest']->getEmail()])
+        static::createClientWithCredentials(['email' => $campCollaboration->getEmail()])
             ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
                 'status' => 'inactive',
                 'role' => 'guest',
@@ -82,11 +87,31 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
             'status' => 'inactive',
             'role' => 'guest',
         ]);
+    }
+
+    public function testPatchOwnCampCollaborationToMemberIsRejectedForGuest() {
+        $campCollaboration = static::getFixture('campCollaboration3guest');
+        static::createClientWithCredentials(['email' => $campCollaboration->getEmail()])
+            ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+                'role' => 'member',
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function testPatchOwnCampCollaborationToManagerIsRejectedForGuest() {
+        $campCollaboration = static::getFixture('campCollaboration3guest');
+        static::createClientWithCredentials(['email' => $campCollaboration->getEmail()])
+            ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+                'role' => 'manager',
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(403);
     }
 
     public function testPatchCampCollaborationIsAllowedForMember() {
         $campCollaboration = static::getFixture('campCollaboration1manager');
-        static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
+        static::createClientWithCredentials(['email' => static::getFixture('user2member')->getEmail()])
             ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
                 'status' => 'inactive',
                 'role' => 'guest',
@@ -99,8 +124,86 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testPatchCampCollaborationIsAllowedForManager() {
+    /**
+     * Silly, but for now members can change the collaborations in the api.
+     *
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws DecodingExceptionInterface|TransportExceptionInterface
+     */
+    public function testPatchOwnCampCollaborationToManagerIsAllowedForMember() {
+        $campCollaboration = static::getFixture('campCollaboration2member');
+        static::createClientWithCredentials(['email' => $campCollaboration->getEmail()])
+            ->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+                'role' => 'manager',
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'role' => 'manager',
+        ]);
+    }
+
+    public function testPatchOwnStatusOfCampCollaborationIsAllowedForManager() {
         $campCollaboration = static::getFixture('campCollaboration1manager');
+        static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'status' => 'inactive',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'status' => 'inactive',
+        ]);
+    }
+
+    public function testPatchOwnRoleToMemberOfCampCollaborationIsAllowedForManager() {
+        $campCollaboration = static::getFixture('campCollaboration1manager');
+        static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'role' => 'member',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'role' => 'member',
+        ]);
+    }
+
+    public function testPatchOwnRoleToGuestOfCampCollaborationIsAllowedForMember() {
+        $campCollaboration = static::getFixture('campCollaboration1manager');
+        static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'role' => CampCollaboration::ROLE_GUEST,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'role' => 'guest',
+        ]);
+    }
+
+    public function testPatchOwnRoleToGuestOfCampCollaborationIsAllowedForManager() {
+        $campCollaboration = static::getFixture('campCollaboration1manager');
+        static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'role' => 'guest',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'role' => 'guest',
+        ]);
+    }
+
+    public function testPatchOwnStatusAndRoleCampCollaborationIsAcceptedForManager() {
+        $campCollaboration = static::getFixture('campCollaboration1manager');
+        static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'status' => 'inactive',
+            'role' => 'guest',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'status' => 'inactive',
+            'role' => 'guest',
+        ]);
+    }
+
+    public function testPatchOwnStatusAndRoleOfCampCollaborationIsAcceptedForMember() {
+        $campCollaboration = static::getFixture('campCollaboration2member');
         static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
             'status' => 'inactive',
             'role' => 'guest',
@@ -300,6 +403,14 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         ]);
     }
 
+    public static function invalidAbbreviations(): \Iterator {
+        yield ['ABC'];
+
+        yield ['D3C'];
+
+        yield ['🧑🏿‍🚀🙋🏼‍♀️😊'];
+    }
+
     #[DataProvider('validAbbreviations')]
     public function testPatchCampCollaborationValidatesValidAbbreviation($abbreviation) {
         $campCollaboration = static::getFixture('campCollaboration5inactive');
@@ -310,6 +421,20 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'abbreviation' => $abbreviation,
         ]);
+    }
+
+    public static function validAbbreviations(): \Iterator {
+        yield ['A'];
+
+        yield ['33'];
+
+        yield ['X4'];
+
+        yield ['✅😊'];
+
+        yield ['🧑🏿‍🚀🧑🏼‍🔧'];
+
+        yield ['⚜️'];
     }
 
     #[DataProvider('usersWhichCanEditCampCollaborations')]
@@ -399,26 +524,9 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         ]);
     }
 
-    public static function usersWhichCanEditCampCollaborations(): array {
-        return ['user1manager' => ['user1manager'], 'user2member' => ['user2member']];
-    }
+    public static function usersWhichCanEditCampCollaborations(): \Iterator {
+        yield 'user1manager' => ['user1manager'];
 
-    public static function invalidAbbreviations(): array {
-        return [
-            ['ABC'],
-            ['D3C'],
-            ['🧑🏿‍🚀🙋🏼‍♀️😊'],
-        ];
-    }
-
-    public static function validAbbreviations(): array {
-        return [
-            ['A'],
-            ['33'],
-            ['X4'],
-            ['✅😊'],
-            ['🧑🏿‍🚀🧑🏼‍🔧'],
-            ['⚜️'],
-        ];
+        yield 'user2member' => ['user2member'];
     }
 }

@@ -56,7 +56,7 @@ describe('cache test: /periods/{periodId}/scheduleEntries', () => {
     Cypress.session.clearAllSavedSessions()
     cy.login(bipiUser)
     cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
-      start: '2025-05-10T16:00:00+00:00',
+      start: '2026-05-10T16:00:00+00:00',
     })
 
     // warm up cache
@@ -69,7 +69,7 @@ describe('cache test: /periods/{periodId}/scheduleEntries', () => {
 
     // touch scheduleEntry
     cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
-      start: '2025-05-10T17:00:00+00:00',
+      start: '2026-05-10T17:00:00+00:00',
     })
 
     // ensure cache was invalidated
@@ -92,8 +92,8 @@ describe('cache test: /periods/{periodId}/scheduleEntries', () => {
 
     // add new scheduleEntry to period
     cy.apiPost('/api/schedule_entries', {
-      start: '2025-05-10T10:00:00+00:00',
-      end: '2025-05-10T11:00:00+00:00',
+      start: '2026-05-10T10:00:00+00:00',
+      end: '2026-05-10T11:00:00+00:00',
       period: `/api/periods/${grgrPeriodId}`,
       activity: `/api/activities/ffd08c52288c`,
     }).then((response) => {
@@ -128,8 +128,8 @@ describe('cache test: /periods/{periodId}/scheduleEntries', () => {
 
     // move scheduleEntry to 2nd period
     cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
-      start: '2025-08-09T15:00:00+00:00',
-      end: '2025-08-09T17:00:00+00:00',
+      start: '2026-08-09T15:00:00+00:00',
+      end: '2026-08-09T17:00:00+00:00',
       period: `/periods/${harrySecondPeriodId}`,
     })
 
@@ -141,8 +141,8 @@ describe('cache test: /periods/{periodId}/scheduleEntries', () => {
 
     // move scheduleEntry back
     cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
-      start: '2025-07-20T15:00:00+00:00',
-      end: '2025-07-20T17:00:00+00:00',
+      start: '2026-07-20T15:00:00+00:00',
+      end: '2026-07-20T17:00:00+00:00',
       period: `/periods/${harryMainPeriodId}`,
     })
 
@@ -165,8 +165,8 @@ describe('cache test: /periods/{periodId}/scheduleEntries', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-09',
-      end: '2025-05-12',
+      start: '2026-05-09',
+      end: '2026-05-12',
       moveScheduleEntries: true,
     })
 
@@ -176,8 +176,8 @@ describe('cache test: /periods/{periodId}/scheduleEntries', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-10',
-      end: '2025-05-13',
+      start: '2026-05-10',
+      end: '2026-05-13',
       moveScheduleEntries: true,
     })
 

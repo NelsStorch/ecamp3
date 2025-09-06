@@ -30,10 +30,11 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
         if (!isset($data->category?->rootContentNode)) {
             throw new \UnexpectedValueException('Property rootContentNode of provided category is null. Object of type '.ColumnLayout::class.' expected.');
         }
-        if (!is_a($data->category->rootContentNode, ColumnLayout::class)) {
+        if (!$data->category->rootContentNode instanceof ColumnLayout) {
             throw new \UnexpectedValueException('Property rootContentNode of provided category is of wrong type. Object of type '.ColumnLayout::class.' expected.');
         }
 
+        $targetCamp = $data->category->camp;
         $data->camp = $data->category->camp;
         $rootContentNodePrototype = $data->category->rootContentNode;
 
@@ -50,7 +51,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
         $data->setRootContentNode($rootContentNode);
 
         // deep copy from category root node
-        $entityMap = new EntityMap();
+        $entityMap = new EntityMap($targetCamp);
         $rootContentNode->copyFromPrototype($rootContentNodePrototype, $entityMap);
 
         return $data;

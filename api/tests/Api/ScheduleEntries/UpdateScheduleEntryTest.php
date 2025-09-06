@@ -84,7 +84,7 @@ class UpdateScheduleEntryTest extends ECampApiTestCase {
 
     public function testPatchScheduleEntryIsAllowedForMember() {
         $scheduleEntry = static::getFixture('scheduleEntry1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
             ->request('PATCH', '/schedule_entries/'.$scheduleEntry->getId(), ['json' => [
                 'period' => $this->getIriFor('period2'),
                 'start' => '2023-04-15T00:10:00+00:00',
@@ -185,7 +185,7 @@ class UpdateScheduleEntryTest extends ECampApiTestCase {
 
     public function testPatchScheduleEntryValidatesStartBeforePeriodStart() {
         $scheduleEntry = static::getFixture('scheduleEntry1');
-        $response = static::createClientWithCredentials()->request('PATCH', '/schedule_entries/'.$scheduleEntry->getId(), ['json' => [
+        static::createClientWithCredentials()->request('PATCH', '/schedule_entries/'.$scheduleEntry->getId(), ['json' => [
             'start' => '2023-04-30T23:59:59+00:00',
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
 

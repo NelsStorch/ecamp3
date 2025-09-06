@@ -2,14 +2,14 @@
   "components": {
     "summary": {
       "summaryDay": {
-        "noContent": "Die Blöcke an diesem Tag enthalten keine '{contentType}' Inhalte."
+        "noContent": "Die Blöcke an diesem Tag enthalten keine {contentType} Inhalte."
       }
     }
   },
   "contentNode": {
     "checklist": {
-      "info": "Wähle die relevanten Checklistenpunkte, welche durch diese Aktivität abgedeckt werden (Ausbildungsziele, J+S-Checklisten, etc.).",
-      "name": "Checkliste"
+      "info": "Wähle die relevanten Checklisten-Einträge aus, die von dieser Aktivität abgedeckt werden (Kursziele, etc.).",
+      "name": "Checklisten"
     },
     "columnLayout": {
       "entity": {
@@ -52,12 +52,10 @@
       "name": "LA Themenbereich"
     },
     "learningObjectives": {
-      "icon": "mdi-school",
       "info": "Formuliere die Kompetenzen, über welche die Teilnehmenden nach diesem Block verfügen, in der Form von Lernzielen.",
       "name": "Blockziele"
     },
     "learningTopics": {
-      "icon": "mdi-school",
       "info": "Liste die Ausbildungs-Themen auf, mit welchen die Teilnehmenden sich in diesem Block auseinandersetzen werden.",
       "name": "Blockinhalte"
     },
@@ -70,7 +68,6 @@
       "name": "Notizen"
     },
     "responsiveLayout": {
-      "icon": "mdi-view-compact",
       "mainContent": "Hauptinhalt",
       "name": "Standardlayout",
       "printAboveMainContent": "Über dem Hauptinhalt drucken",
@@ -184,7 +181,7 @@
       "fields": {
         "text": "Text"
       },
-      "name": "Checklisteneintrag"
+      "name": "Checklisten-Eintrag"
     },
     "contentType": {
       "name": "Inhalttyp | Inhalttypen"
@@ -262,11 +259,14 @@
       "hourLong": "LT",
       "hourShort": "H:mm"
     },
-    "shortScheduleEntryDescription": "Tag\u202f{dayNumber} {startTime}"
+    "shortScheduleEntryDescription": "Tag {dayNumber} {startTime}"
   },
   "print": {
+    "activity": {
+      "title": "Einzelne Aktivität"
+    },
     "activityList": {
-      "title": "Aktivitätsübersicht"
+      "title": "Aktivitätenliste"
     },
     "config": {
       "periods": "Lagerabschnitt(e)"
@@ -286,13 +286,11 @@
     "program": {
       "title": "Detailprogramm"
     },
-    "summary": {
-      "safetyConsiderations": {
-        "title": "Sicherheitsüberlegungen"
-      },
-      "storycontext": {
-        "title": "Roter Faden"
-      }
+    "safetyConsiderations": {
+      "title": "Sicherheitsüberlegungen"
+    },
+    "story": {
+      "title": "Geschichte"
     },
     "toc": {
       "title": "Inhaltsverzeichnis"

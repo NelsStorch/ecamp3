@@ -60,7 +60,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
     protected function setUp(): void {
         $this->cacheManagerProphecy = $this->prophesize(CacheManager::class);
-        $this->cacheManagerProphecy->flush(Argument::any())->willReturn(0);
+        $this->cacheManagerProphecy->flush()->willReturn(0);
 
         $this->resourceClassResolverProphecy = $this->prophesize(ResourceClassResolverInterface::class);
         $this->resourceClassResolverProphecy->isResourceClass(Argument::type('string'))->willReturn(true);
@@ -140,7 +140,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $cacheManagerProphecy->invalidateTags(['/dummies'])->willReturn($cacheManagerProphecy)->shouldBeCalled();
         $cacheManagerProphecy->invalidateTags(['/dummies/3'])->willReturn($cacheManagerProphecy)->shouldBeCalled();
         $cacheManagerProphecy->invalidateTags(['/dummies/4'])->willReturn($cacheManagerProphecy)->shouldBeCalled();
-        $cacheManagerProphecy->flush(Argument::any())->willReturn(0);
+        $cacheManagerProphecy->flush()->willReturn(0);
 
         $metadataFactoryProphecy = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
         $operation = (new GetCollection())->withShortName('Dummy')->withClass(Dummy::class);
@@ -184,7 +184,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $emProphecy->getClassMetadata(Dummy::class)->willReturn($dummyClassMetadata)->shouldBeCalled();
         $emProphecy->getClassMetadata(DummyNoGetOperation::class)->willReturn(new ClassMetadata(DummyNoGetOperation::class))->shouldBeCalled();
-        $eventArgs = new OnFlushEventArgs($emProphecy->reveal());
+        $em = $emProphecy->reveal();
 
         $propertyAccessorProphecy = $this->prophesize(PropertyAccessorInterface::class);
         $propertyAccessorProphecy->isReadable(Argument::type(Dummy::class), 'relatedDummy')->willReturn(true);
@@ -192,8 +192,15 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $propertyAccessorProphecy->getValue(Argument::type(Dummy::class), 'relatedDummy')->willReturn(null);
         $propertyAccessorProphecy->getValue(Argument::type(Dummy::class), 'relatedOwningDummy')->willReturn(null);
 
-        $listener = new PurgeHttpCacheListener($iriConverterProphecy->reveal(), $resourceClassResolverProphecy->reveal(), $propertyAccessorProphecy->reveal(), $metadataFactoryProphecy->reveal(), $cacheManagerProphecy->reveal());
-        $listener->onFlush($eventArgs);
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $iriConverterProphecy->reveal(),
+            resourceClassResolver: $resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $metadataFactoryProphecy->reveal(),
+            cacheManager: $cacheManagerProphecy->reveal(),
+            em: $em,
+        );
+        $listener->onFlush();
         $listener->postFlush();
     }
 
@@ -210,7 +217,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $cacheManagerProphecy = $this->prophesize(CacheManager::class);
         $cacheManagerProphecy->invalidateTags(['/related_dummies/old#dummies'])->shouldBeCalled()->willReturn($cacheManagerProphecy);
         $cacheManagerProphecy->invalidateTags(['/related_dummies/new#dummies'])->shouldBeCalled()->willReturn($cacheManagerProphecy);
-        $cacheManagerProphecy->flush(Argument::any())->willReturn(0);
+        $cacheManagerProphecy->flush()->willReturn(0);
 
         $metadataFactoryProphecy = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
 
@@ -228,11 +235,19 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $emProphecy->getClassMetadata(Dummy::class)->willReturn($classMetadata)->shouldBeCalled();
 
         $changeSet = ['relatedDummy' => [$oldRelatedDummy, $newRelatedDummy]];
-        $eventArgs = new PreUpdateEventArgs($dummy, $emProphecy->reveal(), $changeSet);
+        $em = $emProphecy->reveal();
+        $eventArgs = new PreUpdateEventArgs($dummy, $em, $changeSet);
 
         $propertyAccessorProphecy = $this->prophesize(PropertyAccessorInterface::class);
 
-        $listener = new PurgeHttpCacheListener($iriConverterProphecy->reveal(), $resourceClassResolverProphecy->reveal(), $propertyAccessorProphecy->reveal(), $metadataFactoryProphecy->reveal(), $cacheManagerProphecy->reveal());
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $iriConverterProphecy->reveal(),
+            resourceClassResolver: $resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $metadataFactoryProphecy->reveal(),
+            cacheManager: $cacheManagerProphecy->reveal(),
+            em: $em,
+        );
         $listener->preUpdate($eventArgs);
         $listener->postFlush();
     }
@@ -246,7 +261,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $cacheManagerProphecy = $this->prophesize(CacheManager::class);
         $cacheManagerProphecy->invalidateTags(Argument::any())->shouldNotBeCalled();
-        $cacheManagerProphecy->flush(Argument::any())->willReturn(0);
+        $cacheManagerProphecy->flush()->willReturn(0);
 
         $metadataFactoryProphecy = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
 
@@ -260,11 +275,19 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $emProphecy->getClassMetadata(DummyNoGetOperation::class)->willReturn($classMetadata)->shouldBeCalled();
 
         $changeSet = ['lorem' => 'ipsum'];
-        $eventArgs = new PreUpdateEventArgs($dummyNoGetOperation, $emProphecy->reveal(), $changeSet);
+        $em = $emProphecy->reveal();
+        $eventArgs = new PreUpdateEventArgs($dummyNoGetOperation, $em, $changeSet);
 
         $propertyAccessorProphecy = $this->prophesize(PropertyAccessorInterface::class);
 
-        $listener = new PurgeHttpCacheListener($iriConverterProphecy->reveal(), $resourceClassResolverProphecy->reveal(), $propertyAccessorProphecy->reveal(), $metadataFactoryProphecy->reveal(), $cacheManagerProphecy->reveal());
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $iriConverterProphecy->reveal(),
+            resourceClassResolver: $resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $metadataFactoryProphecy->reveal(),
+            cacheManager: $cacheManagerProphecy->reveal(),
+            em: $em,
+        );
         $listener->preUpdate($eventArgs);
         $listener->postFlush();
     }
@@ -274,7 +297,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $cacheManagerProphecy = $this->prophesize(CacheManager::class);
         $cacheManagerProphecy->invalidateTags(Argument::any())->shouldNotBeCalled();
-        $cacheManagerProphecy->flush(Argument::any())->willReturn(0);
+        $cacheManagerProphecy->flush()->willReturn(0);
 
         $iriConverterProphecy = $this->prophesize(IriConverterInterface::class);
         $iriConverterProphecy->getIriFromResource($nonResource)->shouldNotBeCalled();
@@ -296,12 +319,20 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $dummyClassMetadata = new ClassMetadata(ContainNonResource::class);
         $emProphecy->getClassMetadata(NotAResource::class)->willReturn($dummyClassMetadata);
-        $eventArgs = new OnFlushEventArgs($emProphecy->reveal());
+        $em = $emProphecy->reveal();
+        $eventArgs = new OnFlushEventArgs($em);
 
         $propertyAccessorProphecy = $this->prophesize(PropertyAccessorInterface::class);
 
-        $listener = new PurgeHttpCacheListener($iriConverterProphecy->reveal(), $resourceClassResolverProphecy->reveal(), $propertyAccessorProphecy->reveal(), $metadataFactoryProphecy->reveal(), $cacheManagerProphecy->reveal());
-        $listener->onFlush($eventArgs);
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $iriConverterProphecy->reveal(),
+            resourceClassResolver: $resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $metadataFactoryProphecy->reveal(),
+            cacheManager: $cacheManagerProphecy->reveal(),
+            em: $em,
+        );
+        $listener->onFlush();
     }
 
     public function testPropertyIsNotAResourceClass(): void {
@@ -310,7 +341,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $cacheManagerProphecy = $this->prophesize(CacheManager::class);
         $cacheManagerProphecy->invalidateTags(Argument::any())->shouldNotBeCalled();
-        $cacheManagerProphecy->flush(Argument::any())->willReturn(0);
+        $cacheManagerProphecy->flush()->willReturn(0);
 
         $metadataFactoryProphecy = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
         $metadataFactoryProphecy->create(ContainNonResource::class)->willReturn(new ResourceMetadataCollection('ContainNonResource', [
@@ -341,7 +372,8 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $dummyClassMetadata->mapManyToOne(['fieldName' => 'notAResource', 'targetEntity' => NotAResource::class, 'inversedBy' => 'resources']);
         $dummyClassMetadata->mapOneToMany(['fieldName' => 'collectionOfNotAResource', 'targetEntity' => NotAResource::class, 'mappedBy' => 'resource']);
         $emProphecy->getClassMetadata(ContainNonResource::class)->willReturn($dummyClassMetadata);
-        $eventArgs = new OnFlushEventArgs($emProphecy->reveal());
+        $em = $emProphecy->reveal();
+        $eventArgs = new OnFlushEventArgs($em);
 
         $propertyAccessorProphecy = $this->prophesize(PropertyAccessorInterface::class);
         $propertyAccessorProphecy->isReadable(Argument::type(ContainNonResource::class), 'notAResource')->willReturn(true);
@@ -349,8 +381,15 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $propertyAccessorProphecy->getValue(Argument::type(ContainNonResource::class), 'notAResource')->shouldNotBeCalled();
         $propertyAccessorProphecy->getValue(Argument::type(ContainNonResource::class), 'collectionOfNotAResource')->shouldNotBeCalled();
 
-        $listener = new PurgeHttpCacheListener($iriConverterProphecy->reveal(), $resourceClassResolverProphecy->reveal(), $propertyAccessorProphecy->reveal(), $metadataFactoryProphecy->reveal(), $cacheManagerProphecy->reveal());
-        $listener->onFlush($eventArgs);
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $iriConverterProphecy->reveal(),
+            resourceClassResolver: $resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $metadataFactoryProphecy->reveal(),
+            cacheManager: $cacheManagerProphecy->reveal(),
+            em: $em,
+        );
+        $listener->onFlush();
     }
 
     /**
@@ -375,8 +414,17 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $this->cacheManagerProphecy->invalidateTags(['/related_dummies/100/dummies'])->willReturn($this->cacheManagerProphecy)->shouldBeCalled();
 
         // when
-        $listener = new PurgeHttpCacheListener($this->iriConverterProphecy->reveal(), $this->resourceClassResolverProphecy->reveal(), $this->propertyAccessorProphecy->reveal(), $this->metadataFactoryProphecy->reveal(), $this->cacheManagerProphecy->reveal());
-        $listener->onFlush(new OnFlushEventArgs($this->emProphecy->reveal()));
+
+        $em = $this->emProphecy->reveal();
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $this->iriConverterProphecy->reveal(),
+            resourceClassResolver: $this->resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $this->propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $this->metadataFactoryProphecy->reveal(),
+            cacheManager: $this->cacheManagerProphecy->reveal(),
+            em: $em,
+        );
+        $listener->onFlush();
         $listener->postFlush();
     }
 
@@ -404,8 +452,17 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $this->cacheManagerProphecy->invalidateTags(['/related_dummies/100/dummies'])->willReturn($this->cacheManagerProphecy)->shouldBeCalled();
 
         // when
-        $listener = new PurgeHttpCacheListener($this->iriConverterProphecy->reveal(), $this->resourceClassResolverProphecy->reveal(), $this->propertyAccessorProphecy->reveal(), $this->metadataFactoryProphecy->reveal(), $this->cacheManagerProphecy->reveal());
-        $listener->onFlush(new OnFlushEventArgs($this->emProphecy->reveal()));
+
+        $em = $this->emProphecy->reveal();
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $this->iriConverterProphecy->reveal(),
+            resourceClassResolver: $this->resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $this->propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $this->metadataFactoryProphecy->reveal(),
+            cacheManager: $this->cacheManagerProphecy->reveal(),
+            em: $em,
+        );
+        $listener->onFlush();
         $listener->postFlush();
     }
 
@@ -436,8 +493,17 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $this->cacheManagerProphecy->invalidateTags(['/related_dummies/99/dummies'])->willReturn($this->cacheManagerProphecy)->shouldBeCalled();
 
         // when
-        $listener = new PurgeHttpCacheListener($this->iriConverterProphecy->reveal(), $this->resourceClassResolverProphecy->reveal(), $this->propertyAccessorProphecy->reveal(), $this->metadataFactoryProphecy->reveal(), $this->cacheManagerProphecy->reveal());
-        $listener->onFlush(new OnFlushEventArgs($this->emProphecy->reveal()));
+
+        $em = $this->emProphecy->reveal();
+        $listener = new PurgeHttpCacheListener(
+            iriConverter: $this->iriConverterProphecy->reveal(),
+            resourceClassResolver: $this->resourceClassResolverProphecy->reveal(),
+            propertyAccessor: $this->propertyAccessorProphecy->reveal(),
+            resourceMetadataCollectionFactory: $this->metadataFactoryProphecy->reveal(),
+            cacheManager: $this->cacheManagerProphecy->reveal(),
+            em: $em,
+        );
+        $listener->onFlush();
         $listener->postFlush();
     }
 }

@@ -77,7 +77,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['read']],
     order: ['checklist.id', 'id'],
 )]
-#[ApiFilter(filterClass: SearchFilter::class, properties: ['checklist', 'checklist.camp'])]
+#[ApiFilter(filterClass: SearchFilter::class, properties: ['checklist', 'checklist.camp', 'checklistNodes'])]
 #[ORM\Entity(repositoryClass: ChecklistItemRepository::class)]
 #[ORM\UniqueConstraint(name: 'checklistitem_checklistid_parentid_position_unique', columns: ['checklistid', 'parentid', 'position'])]
 class ChecklistItem extends BaseEntity implements BelongsToCampInterface, CopyFromPrototypeInterface, HasParentInterface {
@@ -226,7 +226,7 @@ class ChecklistItem extends BaseEntity implements BelongsToCampInterface, CopyFr
         return 1 + $this->children->reduce(function (int $max, ChecklistItem $child): int {
             $depth = $child->getSubtreeDepth();
 
-            return ($depth > $max) ? $depth : $max;
+            return max($depth, $max);
         }, 0);
     }
 

@@ -27,7 +27,7 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getDisplayName();
 
         // then
-        $this->assertEquals('Bi-Pi', $displayName);
+        $this->assertSame('Bi-Pi', $displayName);
     }
 
     public function testDisplayNameUsesFullName() {
@@ -38,7 +38,7 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getDisplayName();
 
         // then
-        $this->assertEquals('Robert Baden-Powell', $displayName);
+        $this->assertSame('Robert Baden-Powell', $displayName);
     }
 
     public function testDisplayNameUsesFirstname() {
@@ -50,7 +50,7 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getDisplayName();
 
         // then
-        $this->assertEquals('Robert', $displayName);
+        $this->assertSame('Robert', $displayName);
     }
 
     public function testDisplayNameUsesEmailHashAsFallback() {
@@ -62,7 +62,7 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getDisplayName();
 
         // then
-        $this->assertEquals('Noname-b642', $displayName);
+        $this->assertSame('Noname-b642', $displayName);
     }
 
     public function testLegalNameUsesFullNameIfPresent() {
@@ -72,7 +72,7 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getLegalName();
 
         // then
-        $this->assertEquals('Robert Baden-Powell', $displayName);
+        $this->assertSame('Robert Baden-Powell', $displayName);
     }
 
     public function testLegalNameUsesNicknameWhenFirstnameMissing() {
@@ -83,7 +83,7 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getLegalName();
 
         // then
-        $this->assertEquals('Bi-Pi', $displayName);
+        $this->assertSame('Bi-Pi', $displayName);
     }
 
     public function testLegalNameUsesNicknameWhenSurnameMissing() {
@@ -94,7 +94,7 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getLegalName();
 
         // then
-        $this->assertEquals('Bi-Pi', $displayName);
+        $this->assertSame('Bi-Pi', $displayName);
     }
 
     public function testLegalNameUsesEmailHashAsFallback() {
@@ -106,6 +106,6 @@ class ProfileTest extends TestCase {
         $displayName = $this->profile->getLegalName();
 
         // then
-        $this->assertEquals('Noname-b642', $displayName);
+        $this->assertSame('Noname-b642', $displayName);
     }
 }

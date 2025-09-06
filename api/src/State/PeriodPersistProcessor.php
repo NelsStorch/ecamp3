@@ -66,7 +66,7 @@ class PeriodPersistProcessor extends AbstractPersistProcessor {
         $days = $period->getDays();
 
         foreach ($days as $day) {
-            if ($day->dayOffset < 0 or $day->dayOffset >= $length) {
+            if ($day->dayOffset < 0 || $day->dayOffset >= $length) {
                 $period->removeDay($day);
             }
         }

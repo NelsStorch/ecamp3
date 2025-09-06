@@ -28,7 +28,7 @@ const collectionXKeys =
   /* embedded activitiy responsibles: */
   '06743ccfeedd 06743ccfeedd#activity 06743ccfeedd#campCollaboration ' +
   '21bc6661c569 21bc6661c569#activity 21bc6661c569#campCollaboration ' +
-  'a13fadc97610#embeddedActivityResponsibles a13fadc97610#contentNodes ' +
+  'a13fadc97610#embeddedActivityResponsibles a13fadc97610#emptyContentNodesForIriGeneration ' +
   /**
    * activity "Skifahren"
    */
@@ -43,12 +43,12 @@ const collectionXKeys =
   /* embedded activitiy responsibles: */
   'b29d387cc403#embeddedScheduleEntries ' +
   'a9a760e36fd8 a9a760e36fd8#activity a9a760e36fd8#campCollaboration b29d387cc403#embeddedActivityResponsibles ' +
-  'b29d387cc403#contentNodes ' +
+  'b29d387cc403#emptyContentNodesForIriGeneration ' +
   /* collection URI (for detecting addition of new activities) */
   '/api/camps/70ca971c992f/activities'
 
-describe('cache test: /camps/activities', () => {
-  it('caches /camp/{campId}/activities separately for each login', () => {
+describe('cache test: /camps/{campId}/activities', () => {
+  it('caches /camps/{campId}/activities separately for each login', () => {
     const uri = `/api/camps/${skilagerCampId}/activities`
 
     Cypress.session.clearAllSavedSessions()
@@ -70,7 +70,7 @@ describe('cache test: /camps/activities', () => {
     cy.expectCacheMiss(uri)
   })
 
-  it('invalidates /camp/{campId}/activities for all users on activity patch', () => {
+  it('invalidates /camps/{campId}/activities for all users on activity patch', () => {
     const uri = `/api/camps/${loremIpsumCampId}/activities`
     const activityId = '3d1e5c91ceb2'
 
@@ -102,7 +102,7 @@ describe('cache test: /camps/activities', () => {
     cy.expectCacheMiss(uri)
   })
 
-  it('invalidates /camp/{campId}/activities for new activity', () => {
+  it('invalidates /camps/{campId}/activities for new activity', () => {
     const uri = `/api/camps/${grgrCampId}/activities`
 
     Cypress.session.clearAllSavedSessions()
@@ -119,8 +119,8 @@ describe('cache test: /camps/activities', () => {
       scheduleEntries: [
         {
           period: '/periods/76be24bce434',
-          start: '2025-05-10T08:00:00+00:00',
-          end: '2025-05-10T09:00:00+00:00',
+          start: '2026-05-10T08:00:00+00:00',
+          end: '2026-05-10T09:00:00+00:00',
         },
       ],
     }).then((response) => {
@@ -139,7 +139,7 @@ describe('cache test: /camps/activities', () => {
     })
   })
 
-  it('invalidates /camp/{campId}/activities when adding a scheduleEntry', () => {
+  it('invalidates /camps/{campId}/activities when adding a scheduleEntry', () => {
     const uri = `/api/camps/${grgrCampId}/activities`
 
     Cypress.session.clearAllSavedSessions()
@@ -152,9 +152,9 @@ describe('cache test: /camps/activities', () => {
     // add new scheduleEntry
     cy.apiPost('/api/schedule_entries', {
       activity: '/activities/ffd08c52288c',
-      end: '2025-05-11T06:00:00+00:00',
+      end: '2026-05-11T06:00:00+00:00',
       period: '/periods/76be24bce434',
-      start: '2025-05-11T05:00:00+00:00',
+      start: '2026-05-11T05:00:00+00:00',
     }).then((response) => {
       const newScheduleEntryUri = response.body._links.self.href
 
@@ -171,7 +171,7 @@ describe('cache test: /camps/activities', () => {
     })
   })
 
-  it('invalidates /camp/{campId}/activities when patching a progress label', () => {
+  it('invalidates /camps/{campId}/activities when patching a progress label', () => {
     const uri = `/api/camps/${grgrCampId}/activities`
     const progressLabelId = '82547049ea38'
 
@@ -196,7 +196,7 @@ describe('cache test: /camps/activities', () => {
     cy.expectCacheHit(uri)
   })
 
-  it('invalidates /camp/{campId}/activities when adding an activity responsible', () => {
+  it('invalidates /camps/{campId}/activities when adding an activity responsible', () => {
     const uri = `/api/camps/${grgrCampId}/activities`
 
     Cypress.session.clearAllSavedSessions()
@@ -238,8 +238,8 @@ describe('cache test: /camps/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-09',
-      end: '2025-05-12',
+      start: '2026-05-09',
+      end: '2026-05-12',
       moveScheduleEntries: true,
     })
 
@@ -249,8 +249,8 @@ describe('cache test: /camps/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-10',
-      end: '2025-05-13',
+      start: '2026-05-10',
+      end: '2026-05-13',
       moveScheduleEntries: true,
     })
 
@@ -271,7 +271,7 @@ describe('cache test: /camps/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-09',
+      start: '2026-05-09',
       moveScheduleEntries: false,
     })
 
@@ -281,7 +281,7 @@ describe('cache test: /camps/activities', () => {
 
     // move period start date
     cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
-      start: '2025-05-10',
+      start: '2026-05-10',
       moveScheduleEntries: false,
     })
 

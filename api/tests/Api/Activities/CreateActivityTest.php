@@ -354,7 +354,7 @@ class CreateActivityTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('POST', '/activities', ['json' => $this->getExampleWritePayload()]);
 
         $id = $response->toArray()['id'];
-        $newActivity = $this->getEntityManager()->getRepository(Activity::class)->find($id);
+        $this->getEntityManager()->getRepository(Activity::class)->find($id);
 
         $this->assertResponseStatusCodeSame(201);
         $this->assertJsonContains(['_embedded' => [
@@ -519,7 +519,7 @@ class CreateActivityTest extends ECampApiTestCase {
     }
 
     public function testCreateActivityFromCopySourceAcrossCamp() {
-        static::createClientWithCredentials()->request(
+        $response = static::createClientWithCredentials()->request(
             'POST',
             '/activities',
             ['json' => $this->getExampleWritePayload(
@@ -540,6 +540,21 @@ class CreateActivityTest extends ECampApiTestCase {
 
         // Activity created
         $this->assertResponseStatusCodeSame(201);
+
+        // Embedded MaterialNode -> MaterialItems
+        // Test MaterialList is nulled
+        $responseArray = $response->toArray();
+        $contentNodes = $responseArray['_embedded']['contentNodes'];
+
+        $materialNodes = array_filter($contentNodes, fn ($cn) => 'Material' == $cn['contentTypeName']);
+        $this->assertCount(1, $materialNodes);
+
+        $materialNode = reset($materialNodes);
+        $materialItems = $materialNode['_embedded']['materialItems'];
+        $this->assertCount(1, $materialItems);
+
+        $materailItem = reset($materialItems);
+        $this->assertNull($materailItem['_links']['materialList']);
     }
 
     /**

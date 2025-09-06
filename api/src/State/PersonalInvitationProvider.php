@@ -29,7 +29,7 @@ class PersonalInvitationProvider implements ProviderInterface {
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): null|array|PersonalInvitation {
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|PersonalInvitation|null {
         if (isset($uriVariables['id'])) {
             $id = $uriVariables['id'];
 

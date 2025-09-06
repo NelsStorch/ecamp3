@@ -1,6 +1,7 @@
 const { defineConfig } = require('cypress')
 const { moveDownloads } = require('./tasks/moveDownloads')
 const { deleteDownloads } = require('./tasks/deleteDownloads')
+const { getPdfProperties } = require('./tasks/getPdfProperties')
 
 module.exports = defineConfig({
   video: false,
@@ -11,9 +12,11 @@ module.exports = defineConfig({
   downloadsFolder: 'data/downloads',
   trashAssetsBeforeRuns: false,
   e2e: {
+    experimentalStudio: true,
     setupNodeEvents(on, config) {
       on('task', {
         deleteDownloads: () => deleteDownloads(config),
+        getPdfProperties: async (path) => getPdfProperties(path),
         moveDownloads: (destSubDir) => moveDownloads(config, destSubDir),
       })
       const cypressTerminalReportOptions = {

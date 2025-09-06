@@ -22,6 +22,8 @@
 </template>
 
 <script setup>
+import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
+
 const props = defineProps({
   camp: { type: Object, required: true },
   period: {
@@ -33,6 +35,7 @@ const props = defineProps({
     required: true,
   },
   index: { type: Number, required: true },
+  filter: { type: Object, default: () => ({}) },
 })
 
 const { $api } = useNuxtApp()
@@ -62,7 +65,9 @@ const { data, error } = await useAsyncData(
     ])
 
     return {
-      scheduleEntries: scheduleEntries.items,
+      scheduleEntries: scheduleEntries.items.filter((scheduleEntry) =>
+        filterMatchScheduleEntry(scheduleEntry, props.filter)
+      ),
       contentNodes,
       contentTypes,
     }

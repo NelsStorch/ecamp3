@@ -46,6 +46,9 @@
                     "materialItems": [
                         {
                             "_links": {
+                                "camp": {
+                                    "href": "escaped_value"
+                                },
                                 "materialList": {
                                     "href": "escaped_value"
                                 },
@@ -91,11 +94,9 @@
             },
             {
                 "_links": {
-                    "checklistItems": [
-                        {
-                            "href": "escaped_value"
-                        }
-                    ],
+                    "checklistItems": {
+                        "href": "escaped_value"
+                    },
                     "children": [],
                     "contentType": {
                         "href": "escaped_value"

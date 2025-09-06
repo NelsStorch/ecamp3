@@ -138,7 +138,10 @@ Displays a single scheduleEntry
               {{ $tc('components.activity.scheduleEntry.copyScheduleEntry') }}
             </v-list-item-title>
           </v-list-item>
-          <CopyActivityInfoDialog ref="copyInfoDialog" />
+          <ClipboardInfoDialog
+            ref="copyInfoDialog"
+            translation-context-i18n-key="components.activity.scheduleEntry.clipboardInfoDialog"
+          />
 
           <v-divider />
 
@@ -302,7 +305,6 @@ import DownloadNuxtPdf from '@/components/print/print-nuxt/DownloadNuxtPdfListIt
 import DownloadClientPdf from '@/components/print/print-client/DownloadClientPdfListItem.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
-import CopyActivityInfoDialog from '@/components/activity/CopyActivityInfoDialog.vue'
 import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import ApiForm from '@/components/form/api/ApiForm.vue'
@@ -310,6 +312,7 @@ import ApiSelect from '@/components/form/api/ApiSelect.vue'
 import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
 import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
 import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
+import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
 
 export default {
   name: 'ScheduleEntry',
@@ -327,7 +330,7 @@ export default {
     DownloadClientPdf,
     DownloadNuxtPdf,
     CategoryChip,
-    CopyActivityInfoDialog,
+    ClipboardInfoDialog,
   },
   mixins: [campRoleMixin, dateHelperUTCFormatted],
   provide() {
@@ -406,7 +409,8 @@ export default {
       return {
         camp: this.camp._meta.self,
         language: this.$store.state.lang.language,
-        documentName: this.activity.title + '.pdf',
+        documentName: this.activity.title,
+        options: { pageNumbers: false },
         contents: [
           {
             type: 'Activity',
@@ -433,12 +437,8 @@ export default {
 
   watch: {
     scheduleEntryId: {
-      async handler(id) {
-        try {
-          this.scheduleEntry = this.api.get().scheduleEntries({ id })
-        } catch {
-          this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
-        }
+      async handler() {
+        await this.loadScheduleEntry()
       },
       immediate: true,
     },
@@ -449,11 +449,17 @@ export default {
     this.loading = true
     await this.scheduleEntry.activity()._meta.load // wait if activity is being loaded as part of a collection
     this.loading = false
-
     // no refresh of activity here because the requireActivityScheduleEntry guard already does a refresh
   },
 
   methods: {
+    async loadScheduleEntry() {
+      try {
+        this.scheduleEntry = this.api.get().scheduleEntries({ id: this.scheduleEntryId })
+      } catch {
+        this.scheduleEntry = await firstActivityScheduleEntry(this.activityId)
+      }
+    },
     changeCategory(category) {
       this.categoryChangeState = 'saving'
       this.activity
@@ -461,11 +467,33 @@ export default {
           category: category._meta.self,
         })
         .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
-        .then(() => (this.categoryChangeState = null))
+        .then(() => {
+          this.categoryChangeState = null
+          if (category.numberingStyle !== this.scheduleEntry.numberingStyle) {
+            // When changing numbering styles, the schedule entry numbers of all schedule
+            // entries in the whole period may change
+            this.reloadAllScheduleEntriesInRelatedPeriods()
+          }
+        })
         .catch((e) => {
           this.categoryChangeState = 'error'
           this.$toast.error(errorToMultiLineToast(e))
         })
+    },
+    async reloadAllScheduleEntriesInRelatedPeriods() {
+      const periods = [
+        ...new Set(
+          this.activity.scheduleEntries().items.map((scheduleEntry) => {
+            return scheduleEntry.period()
+          })
+        ),
+      ]
+      await Promise.all(
+        periods.map(async (period) => {
+          period.scheduleEntries().$reload()
+        })
+      )
+      this.loadScheduleEntry()
     },
     scheduleEntryRoute,
     countContentNodes(contentType) {

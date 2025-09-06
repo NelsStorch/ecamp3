@@ -1,5 +1,7 @@
 <template>
   <Page size="A4" :orientation="orientation" class="page">
+    <slot></slot>
+    <TocSectionStartMarker :id="`${id}-${period.id}`" />
     <View class="picasso-title-container">
       <YSLogo
         v-if="period.camp().printYSLogoOnPicasso"
@@ -47,12 +49,15 @@ import TimeColumn from './TimeColumn.vue'
 import DayColumn from './DayColumn.vue'
 import Categories from './Categories.vue'
 import PicassoFooter from './PicassoFooter.vue'
-import { filterDayResponsiblesByDay } from '../../../common/helpers/dayResponsibles.js'
-import { times } from '../../../common/helpers/picasso.js'
+import { filterDayResponsiblesByDay } from '@/../common/helpers/dayResponsibles.js'
+import { times } from '@/../common/helpers/picasso.js'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'PicassoPage',
   components: {
+    TocSectionStartMarker,
     YSLogo,
     TimeColumnSpacer,
     DayHeader,
@@ -90,7 +95,9 @@ export default {
       return this.days.some((day) => filterDayResponsiblesByDay(day).length > 0)
     },
     scheduleEntries() {
-      return this.period.scheduleEntries().items
+      return this.period.scheduleEntries().items.filter((scheduleEntry) => {
+        return filterMatchScheduleEntry(scheduleEntry, this.content.options.filter)
+      })
     },
   },
 }
@@ -123,14 +130,13 @@ export default {
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  line-height: 1;
+  line-height: 0.8;
 }
 .picasso-calendar-container {
   border: 1pt solid grey;
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  line-height: 1;
 }
 .picasso-day-header {
   border-right: 1pt solid white;

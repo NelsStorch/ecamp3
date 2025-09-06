@@ -1,10 +1,12 @@
 <template>
   <Page :id="id" class="page">
+    <slot></slot>
     <SummaryPeriod
       v-for="period in periods"
       :id="id"
       :period="period"
       :content-type="content.options.contentType"
+      :filter="content.options.filter"
     />
   </Page>
 </template>

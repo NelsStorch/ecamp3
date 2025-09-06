@@ -20,7 +20,11 @@
         <v-list-item>
           <v-list-item-content />
           <v-list-item-action>
-            <button-add icon="mdi-plus" :to="{ name: 'camps/create' }">
+            <button-add
+              data-testid="create-camp-button"
+              icon="mdi-plus"
+              :to="{ name: 'camps/create' }"
+            >
               {{ $tc('views.camps.create') }}
             </button-add>
           </v-list-item-action>
@@ -128,7 +132,9 @@ export default {
     pastCamps() {
       return Object.values(
         groupBy(
-          this.periods.items.filter((p) => !dayjs(p.end).endOf('day').isAfter(dayjs())),
+          this.periods.items
+            .filter((p) => !dayjs(p.end).endOf('day').isAfter(dayjs()))
+            .sort((p1, p2) => dayjs(p2.start).unix() - dayjs(p1.start).unix()),
           (p) => p.camp()._meta.self
         )
       )

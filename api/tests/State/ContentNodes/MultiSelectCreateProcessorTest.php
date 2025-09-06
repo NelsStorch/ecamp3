@@ -59,10 +59,10 @@ class MultiSelectCreateProcessorTest extends TestCase {
         $options = $data->data['options'];
 
         $this->assertArrayHasKey('key1', $options);
-        $this->assertEquals($options['key1']['checked'], false);
+        $this->assertEquals(false, $options['key1']['checked']);
 
         $this->assertArrayHasKey('key2', $options);
-        $this->assertEquals($options['key2']['checked'], false);
+        $this->assertEquals(false, $options['key2']['checked']);
     }
 
     public function testDoesNotSetRootFromParentOnUpdate() {

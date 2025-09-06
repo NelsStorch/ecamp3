@@ -1,6 +1,6 @@
 dependencies:
 - name: fluent-operator
   repository: https://fluent.github.io/helm-charts
-  version: 3.3.0
-digest: sha256:12259ba2fcefad2af87693250d2f5698047f8f2e47a8ca4781cacaa60cd138dd
-generated: "2025-03-07T06:10:20.245976466Z"
+  version: 3.4.2
+digest: sha256:c49298a480c72764ee4cd0b6e7e8d837d2c4231d3a8ed634ec84b9ff302f3627
+generated: "2025-07-08T13:55:28.219630056Z"

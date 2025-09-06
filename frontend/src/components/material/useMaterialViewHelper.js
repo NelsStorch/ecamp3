@@ -55,7 +55,7 @@ async function getSheets(camp, collection, materialList) {
             materialItem.quantity,
             materialItem.unit,
             materialItem.article,
-            ...(!materialList ? [materialItem.materialList().name] : []),
+            ...(!materialList ? [materialItem.materialList?.().name] : []),
             activity?.title
               ? `${activity.category().short} ${activity?.title}: ${scheduleEntries}`
               : period.description,
@@ -67,6 +67,30 @@ async function getSheets(camp, collection, materialList) {
   )
 }
 
+function randomString(len) {
+  const p = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  return [...Array(len)].reduce((a) => a + p[~~(Math.random() * p.length)], '')
+}
+
+/**
+ * @param sheets {array} array of {sheetName: string, data: array}
+ * @returns {object} an XLSX workbook
+ */
+export function toWorkbook(sheets) {
+  const workbook = XLSX.utils.book_new()
+  sheets.forEach(({ sheetName, data }) => {
+    const worksheet = XLSX.utils.aoa_to_sheet(data)
+    const validSheetName = sheetName.replaceAll(/[?*[\]/\\:]/g, '')
+    let slicedSheetName = validSheetName.slice(0, 31)
+    if (workbook.SheetNames.includes(slicedSheetName)) {
+      slicedSheetName = validSheetName.slice(0, 28) + randomString(3)
+    }
+    workbook.SheetNames.push(slicedSheetName)
+    workbook.Sheets[slicedSheetName] = worksheet
+  })
+  return workbook
+}
+
 /**
  * @param {object} camp
  * @param {{value: {period: object, materialItems: {items: array}}[]}} collection
@@ -76,14 +100,8 @@ function downloadMaterialList(camp, collection, materialList) {
   return async () => {
     await camp.activities().$loadItems()
 
-    const workbook = XLSX.utils.book_new()
     const sheets = await getSheets(camp, collection.value, materialList)
-    sheets.forEach(({ sheetName, data }) => {
-      const worksheet = XLSX.utils.aoa_to_sheet(data)
-      const validSheetName = sheetName.replaceAll(/[?*[\]/\\:]/g, '')
-      workbook.SheetNames.push(validSheetName)
-      workbook.Sheets[validSheetName] = worksheet
-    })
+    const workbook = toWorkbook(sheets)
     XLSX.writeFile(workbook, generateFilename(camp, materialList))
   }
 }
@@ -133,12 +151,14 @@ export function useMaterialViewHelper(camp, list) {
         })
         .$loadItems(),
       ...collection.value.map(({ materialItems }) => materialItems.$reload()),
+      camp.categories().$loadItems(),
     ])
   })
 
   return {
     collection,
     downloadXlsx,
+    downloadMaterialList,
     openPeriods,
   }
 }

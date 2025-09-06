@@ -99,4 +99,26 @@ class DeleteActivityTest extends ECampApiTestCase {
         $client->request('GET', $this->getIriFor(static::$fixtures['multiSelect1']));
         $this->assertResponseStatusCodeSame(404);
     }
+
+    public function testDeleteActivityAlsoNullifiesCommentReferencesAndSetsOrphanDescription() {
+        $client = static::createClientWithCredentials();
+        // Disable resetting the database between the two requests
+        $client->disableReboot();
+
+        $activity = static::$fixtures['activity1'];
+        $comments = $activity->comments;
+        $client->request('DELETE', $this->getIriFor($activity));
+        $this->assertResponseStatusCodeSame(204);
+
+        foreach (['comment1', 'comment2'] as $commentId) {
+            $client->request('GET', $this->getIriFor(static::$fixtures[$commentId]));
+            $this->assertResponseStatusCodeSame(200);
+            $this->assertJsonContains([
+                '_links' => [
+                    'activity' => null,
+                ],
+                'orphanDescription' => $activity->title,
+            ]);
+        }
+    }
 }

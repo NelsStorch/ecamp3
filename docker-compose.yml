@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: node:22.14.0
+    image: node:24.7.0
     container_name: 'ecamp3-frontend'
     ports:
       - '9229:9229' # jest debug
@@ -25,7 +25,7 @@ services:
       - pdf
 
   api:
-    image: ecamp/ecamp3-dev-api
+    image: ${REGISTRY:-docker.io}/${REPO_OWNER:-ecamp}/ecamp3-api:${VERSION:-latest}
     build:
       context: ./api
       target: frankenphp_prod
@@ -42,7 +42,7 @@ services:
         published: 2019
         protocol: tcp
     environment:
-      DATA_MIGRATIONS_DIR: dev-data
+      DATA_MIGRATIONS_DIR: ${DATA_MIGRATIONS_DIR:-dev-data}
       DATABASE_URL: "postgresql://ecamp3:ecamp3@database:5432/ecamp3dev?serverVersion=15&charset=utf8"
       LOG_LEVEL: debug
       ADDITIONAL_TRUSTED_HOSTS: '.*'
@@ -56,7 +56,7 @@ services:
       - 'host.docker.internal:host-gateway'
 
   http-cache:
-    image: varnish:7.7.0
+    image: varnish:7.7.3
     container_name: 'ecamp3-http-cache'
     depends_on:
       - api
@@ -70,8 +70,8 @@ services:
       - VARNISH_HTTP_PORT=8080
   
   http-cache-logs:
-    image: varnish:7.7.0
-    container_name: 'ecamp3-http-cache-log'
+    image: varnish:7.7.3
+    container_name: 'ecamp3-http-cache-logs'
     depends_on:
       - http-cache
     volumes:
@@ -79,7 +79,7 @@ services:
     command: varnishncsa
 
   pdf:
-    image: node:22.14.0
+    image: node:24.7.0
     container_name: 'ecamp3-pdf'
     stdin_open: true
     tty: true
@@ -98,7 +98,7 @@ services:
       - CI=${CI}
 
   print:
-    image: node:22.14.0
+    image: node:24.7.0
     container_name: 'ecamp3-print'
     user: ${USER_ID:-1000}
     volumes:
@@ -181,7 +181,7 @@ services:
       - FUNCTION_ENABLE_INCOGNITO_MODE=true
 
   e2e:
-    image: cypress/included:13.17.0@sha256:128490f34f1f2f7c0bab4dd1dbc4eaf0435ba99fe3e0f538d8ecb98b92e34d0f
+    image: cypress/included:15.1.0@sha256:ebd447b22a63c74a9f47f8b73e45d93c27eccafa8fdbe4773f42036dade7ea5b
     profiles: ['e2e']
     container_name: 'ecamp3-e2e'
     environment:
@@ -194,7 +194,7 @@ services:
     working_dir: /e2e
     
   reverse-proxy:
-    image: nginx:1.27
+    image: nginx:1.29
     container_name: 'ecamp3-reverse-proxy'
     volumes:
       - ./reverse-proxy-nginx.conf:/etc/nginx/nginx.conf
@@ -210,7 +210,7 @@ services:
         protocol: tcp
 
   translation:
-    image: node:22.14.0
+    image: node:24.7.0
     profiles: ['translation']
     container_name: 'ecamp3-translation'
     volumes:

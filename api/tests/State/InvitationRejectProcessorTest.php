@@ -5,7 +5,6 @@ namespace App\Tests\State;
 use ApiPlatform\Metadata\Patch;
 use App\DTO\Invitation;
 use App\Entity\CampCollaboration;
-use App\Entity\User;
 use App\Repository\CampCollaborationRepository;
 use App\State\InvitationRejectProcessor;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +23,6 @@ class InvitationRejectProcessorTest extends TestCase {
 
     private Invitation $invitation;
     private CampCollaboration $campCollaboration;
-    private User $user;
 
     private CampCollaborationRepository|MockObject $collaborationRepository;
     private MockObject|PasswordHasherFactoryInterface $pwHasherFactory;
@@ -38,7 +36,6 @@ class InvitationRejectProcessorTest extends TestCase {
     protected function setUp(): void {
         $this->invitation = new Invitation(self::INVITEKEY, '', '', '', false);
         $this->campCollaboration = new CampCollaboration();
-        $this->user = new User();
 
         $this->collaborationRepository = $this->createMock(CampCollaborationRepository::class);
         $this->pwHasherFactory = $this->createMock(PasswordHasherFactory::class);

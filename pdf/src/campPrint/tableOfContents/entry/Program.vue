@@ -1,5 +1,11 @@
 <template>
-  <ProgramPeriod v-for="period in periods" :id="id" :period="period" />
+  <ProgramPeriod
+    v-for="period in periods"
+    :id="id"
+    :period="period"
+    :filter="entry.options.filter"
+    :config="config"
+  />
 </template>
 <script>
 import PdfComponent from '@/PdfComponent.js'
@@ -11,6 +17,7 @@ export default {
   extends: PdfComponent,
   props: {
     entry: { type: Object, required: true },
+    config: { type: Object, required: true },
   },
   computed: {
     periods() {

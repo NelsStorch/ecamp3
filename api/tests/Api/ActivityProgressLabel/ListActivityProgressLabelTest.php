@@ -28,7 +28,7 @@ class ListActivityProgressLabelTest extends ECampApiTestCase {
         ;
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 4,
+            'totalItems' => 7,
             '_links' => [
                 'items' => [],
             ],
@@ -41,6 +41,9 @@ class ListActivityProgressLabelTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('activityProgressLabel2')],
             ['href' => $this->getIriFor('activityProgressLabel1Camp2')],
             ['href' => $this->getIriFor('activityProgressLabel2Camp2')],
+            ['href' => $this->getIriFor('activityProgressLabel1campPrototype')],
+            ['href' => $this->getIriFor('activityProgressLabel2campPrototype')],
+            ['href' => $this->getIriFor('activityProgressLabel3campPrototype')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -88,7 +91,7 @@ class ListActivityProgressLabelTest extends ECampApiTestCase {
 
     public function testListActivityProgressLabelsAsSubresourceOfCampIsDeniedForUnrelatedUser() {
         $camp = static::getFixture('camp1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
             ->request('GET', "/camps/{$camp->getId()}/activity_progress_labels")
         ;
         $this->assertResponseStatusCodeSame(404);

@@ -65,7 +65,7 @@
     <CollaboratorForm
       :collaboration="entityData"
       :status="collaborator.status"
-      :readonly-role="isLastManager"
+      :readonly-role="isLastManager || !isManager"
       :initial-collaboration="collaborator"
     >
       <template #statusChange>
@@ -94,7 +94,7 @@
                         : onDialog
                     "
                   >
-                    {{ $tc('components.collaborator.collaboratorEdit.deactivate') }}
+                    {{ deactivateLabel }}
                   </IconButton>
                 </template>
               </PromptCollaboratorDeactivate>
@@ -131,6 +131,7 @@ import { errorToMultiLineToast } from '@/components/toast/toasts.js'
 import CollaboratorListItem from '@/components/collaborator/CollaboratorListItem.vue'
 import PromptEntityDelete from '@/components/prompt/PromptEntityDelete.vue'
 import campCollaborationDisplayName from '../../../../common/helpers/campCollaborationDisplayName'
+import isOwnCampCollaboration from './isOwnCampCollaboration.js'
 
 export default {
   name: 'CollaboratorEdit',
@@ -173,13 +174,15 @@ export default {
       )
     },
     isOwnCampCollaboration() {
-      if (!(typeof this.collaborator.user === 'function')) {
-        return false
-      }
-      return this.$store.state.auth.user?.id === this.collaborator.user().id
+      return isOwnCampCollaboration(this.collaborator, this.$store.state.auth)
     },
     name() {
       return campCollaborationDisplayName(this.collaborator, this.$tc.bind(this), false)
+    },
+    deactivateLabel() {
+      return this.isOwnCampCollaboration
+        ? this.$tc('components.collaborator.collaboratorEdit.leaveCamp')
+        : this.$tc('components.collaborator.collaboratorEdit.deactivate')
     },
   },
   watch: {

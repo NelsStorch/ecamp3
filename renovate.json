@@ -5,14 +5,14 @@
     ":prConcurrentLimitNone"
   ],
   "constraints": {
-    "node": "22.14.0",
-    "php": "8.4.6"
+    "node": "24.7.0",
+    "php": "8.4.12"
   },
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["on tuesday and wednesday"]
+    "schedule": ["on wednesday and thursday"]
   },
   "vulnerabilityAlerts": {
     "automerge": true
@@ -98,7 +98,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["^api/phpunit.xml.dist$"],
+      "managerFilePatterns": ["/^api/phpunit.xml.dist$/"],
       "matchStrings": [
         "<server name=\"SYMFONY_PHPUNIT_VERSION\" value=\"(?<currentValue>[^\"]+)\" />"
       ],
@@ -107,7 +107,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^api/Dockerfile$"],
+      "managerFilePatterns": ["/^api/Dockerfile$/"],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
       ],
@@ -115,14 +115,14 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^.helm/ecamp3/values.ya?ml$"],
+      "managerFilePatterns": ["/^.helm/ecamp3/values.ya?ml$/"],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)?\\s.*tag: \"(?<currentValue>.*)\"\\s"
       ]
     },
     {
       "customType": "regex",
-      "fileMatch": ["^.github/workflows/.+\\.ya?ml$"],
+      "managerFilePatterns": ["/^.github/workflows/.+\\.ya?ml$/"],
       "matchStrings": ["php-version: '(?<currentValue>[0-9.]+)'"],
       "depNameTemplate": "php",
       "packageNameTemplate": "php/php-src",
@@ -132,7 +132,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^renovate.json$"],
+      "managerFilePatterns": ["/^renovate.json$/"],
       "matchStrings": ["\"php\": \"(?<currentValue>[^\"]+).*\".*"],
       "depNameTemplate": "php",
       "packageNameTemplate": "php/php-src",
@@ -142,7 +142,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^.github/workflows/.+\\.ya?ml$"],
+      "managerFilePatterns": ["/^.github/workflows/.+\\.ya?ml$/"],
       "matchStrings": ["tools: composer:(?<currentValue>[0-9.]+)"],
       "depNameTemplate": "composer",
       "packageNameTemplate": "composer/composer",
@@ -151,7 +151,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^.github/workflows/.+\\.ya?ml$"],
+      "managerFilePatterns": ["/^.github/workflows/.+\\.ya?ml$/"],
       "matchStrings": ["node-version: '(?<currentValue>[^']+)'.*"],
       "depNameTemplate": "node",
       "packageNameTemplate": "nodejs/node",
@@ -161,7 +161,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [".nvmrc"],
+      "managerFilePatterns": ["/.nvmrc/"],
       "matchStrings": ["(?<currentValue>[^'\n]+).*"],
       "depNameTemplate": "node",
       "packageNameTemplate": "nodejs/node",
@@ -171,7 +171,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^renovate.json$"],
+      "managerFilePatterns": ["/^renovate.json$/"],
       "matchStrings": ["\"node\": \"(?<currentValue>[^\"]+).*\".*"],
       "depNameTemplate": "node",
       "packageNameTemplate": "nodejs/node",
@@ -181,7 +181,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^.github/workflows/.+\\.ya?ml$"],
+      "managerFilePatterns": ["/^.github/workflows/.+\\.ya?ml$/"],
       "matchStrings": [
         "image:\\s+'(?<depName>.*):(?<currentValue>.*)@(?<currentDigest>.*)'\\s"
       ],

@@ -68,7 +68,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             ],
             extraProperties: [
                 'filter_by_current_user' => false,
-            ]
+            ],
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
         ),
     ],
     denormalizationContext: ['groups' => ['write']],
@@ -82,6 +83,13 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
     use HasRootContentNodeTrait;
 
     public const CAMP_SUBRESOURCE_URI_TEMPLATE = '/camps/{campId}/categories{._format}';
+
+    public const array COLLECTION_NORMALIZATION_CONTEXT = [
+        'groups' => [
+            'read',
+            'Category:PreferredContentTypes',
+        ],
+    ];
 
     public const ITEM_NORMALIZATION_CONTEXT = [
         'groups' => [
@@ -130,7 +138,7 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
      */
     #[ApiProperty(example: '/categories/1a2b3c4d')]
     #[Groups(['create'])]
-    public null|Activity|Category $copyCategorySource;
+    public Activity|Category|null $copyCategorySource;
 
     /**
      * The id of the category that was used as a template for creating this category. Internal for now, is
@@ -303,9 +311,8 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
         if ($num >= 26) {
             $alphaNum .= $this->getAlphaNum(floor($num / 26));
         }
-        $alphaNum .= chr(97 + ($num % 26));
 
-        return $alphaNum;
+        return $alphaNum.chr(97 + ($num % 26));
     }
 
     private function getRomanNum($num): string {

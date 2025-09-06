@@ -1,5 +1,6 @@
 services:
   api:
+    image: ''
     build:
       target: frankenphp_dev
     volumes:
@@ -23,5 +24,6 @@ services:
       # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
       # Then PHPStorm will use the corresponding path mappings
       PHP_IDE_CONFIG: serverName=localhost
+      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-500M}
       PERFORMANCE_TEST_DEBUG_OUTPUT: ${PERFORMANCE_TEST_DEBUG_OUTPUT:-}
     user: ${USER_ID:-1000}

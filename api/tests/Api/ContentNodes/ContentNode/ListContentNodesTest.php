@@ -91,7 +91,7 @@ class ListContentNodesTest extends ECampApiTestCase {
 
     public function testListContentNodesFilteredByPeriodIsDeniedForUnrelatedUser() {
         $period = static::getFixture('period1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
             ->request('GET', '/content_nodes?period=%2Fperiods%2F'.$period->getId())
         ;
 
@@ -105,7 +105,7 @@ class ListContentNodesTest extends ECampApiTestCase {
 
     public function testListContentNodesFilteredByPeriodIsDeniedForInactiveCollaborator() {
         $period = static::getFixture('period1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
             ->request('GET', '/content_nodes?period=%2Fperiods%2F'.$period->getId())
         ;
 

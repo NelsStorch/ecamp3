@@ -38,7 +38,6 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     private RelatedCollectionLinkNormalizer $normalizer;
 
     private MockObject|NormalizerInterface $decoratedMock;
-    private MockObject|ServiceLocator $filterLocatorMock;
     private MockObject|NameConverterInterface $nameConverterMock;
     private MockObject|UriTemplate $uriTemplate;
     private MockObject|UriTemplateFactory $uriTemplateFactory;
@@ -49,11 +48,11 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     private MockObject|PropertyAccessorInterface $propertyAccessor;
     private EntityManagerInterface|MockObject $entityManager;
 
-    private null|DateFilter|SearchFilterInterface $filterInstance;
+    private DateFilter|SearchFilterInterface|null $filterInstance;
 
     protected function setUp(): void {
-        $this->filterLocatorMock = $this->createMock(ServiceLocator::class);
-        $this->filterLocatorMock->method('get')->willReturnCallback(function ($name) {
+        $filterLocatorMock = $this->createMock(ServiceLocator::class);
+        $filterLocatorMock->method('get')->willReturnCallback(function (string $name): mixed {
             return $this->filterInstance;
         });
 
@@ -73,7 +72,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
 
         $this->normalizer = new RelatedCollectionLinkNormalizer(
             $this->decoratedMock,
-            $this->filterLocatorMock,
+            $filterLocatorMock,
             $this->nameConverterMock,
             $this->uriTemplate,
             $this->uriTemplateFactory,
@@ -115,7 +114,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, ['resource_class' => ParentEntity::class]);
 
         // then
-        $this->assertEquals($delegatedResult, $result);
+        $this->assertSame($delegatedResult, $result);
     }
 
     public function testHandlesDecoratedNormalizerReturningAnIRIString() {
@@ -131,7 +130,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, ['resource_class' => ParentEntity::class]);
 
         // then
-        $this->assertEquals($delegatedResult, $result);
+        $this->assertSame($delegatedResult, $result);
     }
 
     public function testFallsBackToObjectClassWhenResourceClassIsMissingInContext() {
@@ -152,7 +151,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, []);
 
         // then
-        $this->assertEquals($delegatedResult, $result);
+        $this->assertSame($delegatedResult, $result);
     }
 
     public function testNormalizeReplacesLinkArrayWithSingleFilteredCollectionLink() {
@@ -210,7 +209,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, ['resource_class' => ParentEntity::class]);
 
         // then
-        $this->assertEquals([
+        $this->assertSame([
             'hello' => 'world',
             '_links' => [
                 'relatedEntities' => ['href' => '/relatedEntities?test_param=value'],
@@ -250,7 +249,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, ['resource_class' => ParentEntity::class]);
 
         // then
-        $this->assertEquals([
+        $this->assertSame([
             'hello' => 'world',
             '_links' => [
                 'childrenWithSerializedName' => ['href' => '/children?parent=%2Fparents%2F123'],
@@ -531,10 +530,6 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
 }
 
 class ParentEntity {
-    private string $id = '123';
-
-    private string $hello = 'world';
-
     #[ORM\OneToMany(targetEntity: Child::class, mappedBy: 'parent')]
     private Collection $children;
 

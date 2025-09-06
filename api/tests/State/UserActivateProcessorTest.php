@@ -5,6 +5,7 @@ namespace App\Tests\State;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\User;
+use App\Service\ClaimInvitationService;
 use App\State\UserActivateProcessor;
 use PHPUnit\Framework\TestCase;
 
@@ -24,6 +25,7 @@ class UserActivateProcessorTest extends TestCase {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
         $this->processor = new UserActivateProcessor(
             $decoratedProcessor,
+            $this->createMock(ClaimInvitationService::class),
         );
     }
 

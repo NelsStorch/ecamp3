@@ -54,7 +54,7 @@ class CollectionItemsNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, []);
 
         // then
-        $this->assertEquals($delegatedResult, $result);
+        $this->assertSame($delegatedResult, $result);
     }
 
     public function testNormalizeReplacesEmbeddedAndLinkedItemWithItems() {
@@ -66,7 +66,7 @@ class CollectionItemsNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, []);
 
         // then
-        $this->assertEquals([
+        $this->assertSame([
             'hello' => 'world',
             '_links' => [
                 'items' => [
@@ -99,7 +99,7 @@ class CollectionItemsNormalizerTest extends TestCase {
         $result = $this->normalizer->normalize($resource, null, []);
 
         // then
-        $this->assertEquals([
+        $this->assertSame([
             'hello' => 'world',
             'totalItems' => 0,
             '_links' => [

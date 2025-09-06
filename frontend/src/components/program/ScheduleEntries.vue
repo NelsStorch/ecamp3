@@ -41,7 +41,7 @@ export default {
   props: {
     period: { type: Object, required: true },
     showButton: { type: Boolean, required: true },
-    matchFn: { type: Function, required: false, default: () => true },
+    filterFn: { type: Function, required: false, default: () => true },
   },
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
     filteredScheduleEntries() {
       return this.scheduleEntries.items.map((item) => ({
         ...item,
-        filterMatch: this.matchFn(item),
+        filterMatch: this.filterFn(item),
       }))
     },
     loading() {

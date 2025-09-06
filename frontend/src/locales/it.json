@@ -20,9 +20,6 @@
           }
         }
       },
-      "copyActivityInfoDialog": {
-        "allow": "Consenti ora"
-      },
       "dialog": {
         "dialogActivityEdit": {
           "title": "Modificare l'actività"
@@ -37,6 +34,9 @@
       "scheduleEntry": {
         "backToContents": "Torna alla modifica dei contenuti",
         "changeLayout": "Cambia il layout",
+        "clipboardInfoDialog": {
+          "allow": "Consenti ora"
+        },
         "deleteWarning": "Vuoi davvero cancellare questa attività? Tutti i contenuti di questa attività saranno rimossi."
       },
       "togglePaperSize": {
@@ -117,6 +117,9 @@
         "title": "Modificare il stato"
       },
       "dialogCategoryCreate": {
+        "clipboardInfoDialog": {
+          "allow": "Consenti ora"
+        },
         "title": "Creare categoria di attività"
       },
       "dialogMaterialListCreate": {
@@ -163,7 +166,7 @@
           "title": "Nota bene: avete scelto \"Nessun modello\"."
         },
         "preview": "Anteprima del modello di campo",
-        "progressStates": "Stati di attività",
+        "progressLabels": "Stati di attività",
         "prototypeHint": "Copiare le categorie, i modelli di blocco e stati di blocchi da un modello di campo.",
         "prototypeHintEmpty": "Non copiare categorie, modelli di blocco e stati di blocco da un modello di campo.",
         "prototypeHintSelected": "Copiate le categorie, i modelli di blocco e stati di blocchi da questo modello di campo.",
@@ -370,6 +373,9 @@
           }
         },
         "picassoEntry": {
+          "clipboardInfoDialog": {
+            "allow": "Consenti ora"
+          },
           "location": "Luogo:",
           "responsible": "Responsable:"
         }
@@ -591,6 +597,9 @@
       },
       "category": {
         "category": {
+          "clipboardInfoDialog": {
+            "allow": "Consenti ora"
+          },
           "deleteCategory": "Elimina la categoria",
           "properties": "Proprietà",
           "template": "Modello per le nuove attività"

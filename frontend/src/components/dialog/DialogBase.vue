@@ -44,6 +44,9 @@ export default {
       this.loading = true
       this.entityData = {}
     },
+    setOpen(open) {
+      this.showDialog = open
+    },
     loadEntityData(uri) {
       this.clearEntityData()
       if (uri) {

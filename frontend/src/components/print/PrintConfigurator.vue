@@ -1,5 +1,5 @@
 <template>
-  <v-skeleton-loader v-if="camp._meta.loading" type="article" />
+  <v-skeleton-loader v-if="loading" type="article" />
   <div v-else>
     <PagesOverview v-model="cnf.contents" @input="onChange">
       <PagesConfig
@@ -39,7 +39,7 @@
             @click="
               addContent({
                 type: idx,
-                options: component.defaultOptions(),
+                options: component.defaultOptions(camp),
               })
             "
           >
@@ -51,6 +51,20 @@
       </v-menu>
 
       <template #drawer>
+        <v-expansion-panels flat class="e-print-configurator__cnf">
+          <v-expansion-panel class="transparent rounded-0">
+            <v-expansion-panel-header class="subtitle py-2"
+              >{{ $tc('components.print.printConfigurator.options') }}
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <e-checkbox
+                v-model="cnf.options.pageNumbers"
+                :label="$tc('components.print.printConfigurator.pageNumbers')"
+                @input="onChange"
+              />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
         <v-expansion-panels v-if="isDev" flat class="e-print-configurator__cnf">
           <v-expansion-panel class="transparent rounded-0">
             <v-expansion-panel-header class="subtitle py-2"
@@ -143,6 +157,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       contentComponents: {
         Cover: CoverConfig,
         Picasso: PicassoConfig,
@@ -165,6 +180,7 @@ export default {
         this.$store.getters.getLastPrintConfig(this.camp._meta.self, {
           language: this.lang,
           documentName: campShortTitle(this.camp),
+          options: { pageNumbers: false },
           camp: this.camp._meta.self,
           contents: this.defaultContents(),
         })
@@ -182,11 +198,19 @@ export default {
       immediate: true,
     },
   },
-  mounted() {
-    this.camp.periods().items.forEach((period) => {
-      period.days().$reload()
-      period.contentNodes().$reload()
-    })
+  async mounted() {
+    await this.camp.periods().$reload()
+    await Promise.all([
+      ...this.camp
+        .periods()
+        .items.flatMap((period) => [
+          period.days().$reload(),
+          period.contentNodes().$reload(),
+        ]),
+      this.camp.activities().$reload(),
+      this.camp.categories().$reload(),
+    ])
+    this.loading = false
   },
   methods: {
     resetConfig() {

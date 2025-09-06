@@ -92,7 +92,7 @@ class UpdateCategoryTest extends ECampApiTestCase {
 
     public function testPatchCategoryIsAllowedForMember() {
         $category = static::getFixture('category1');
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
+        static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
             ->request('PATCH', '/categories/'.$category->getId(), ['json' => [
                 'short' => 'LP',
                 'name' => 'Lagerprogramm',
@@ -120,7 +120,7 @@ class UpdateCategoryTest extends ECampApiTestCase {
 
     public function testPatchCategoryIsAllowedForManager() {
         $category = static::getFixture('category1');
-        $response = static::createClientWithCredentials()->request('PATCH', '/categories/'.$category->getId(), ['json' => [
+        static::createClientWithCredentials()->request('PATCH', '/categories/'.$category->getId(), ['json' => [
             'short' => 'LP',
             'name' => 'Lagerprogramm',
             'color' => '#FFFF00',
@@ -146,7 +146,7 @@ class UpdateCategoryTest extends ECampApiTestCase {
 
     public function testPatchCategoryInCampPrototypeIsDeniedForUnrelatedUser() {
         $category = static::getFixture('category1campPrototype');
-        $response = static::createClientWithCredentials()->request('PATCH', '/categories/'.$category->getId(), ['json' => [
+        static::createClientWithCredentials()->request('PATCH', '/categories/'.$category->getId(), ['json' => [
             'short' => 'LP',
             'name' => 'Lagerprogramm',
             'color' => '#FFFF00',

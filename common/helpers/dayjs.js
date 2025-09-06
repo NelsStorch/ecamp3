@@ -35,6 +35,14 @@ export const dayjsLocaleMap = {
   en: 'en-gb',
   it: 'it-ch',
   fr: 'fr-ch',
+  rm: 'de-ch',
+}
+
+export function toDayjsLocale(locale) {
+  const twoLetterLocale = locale.substring(0, 2);
+  return Object.keys(dayjsLocaleMap).includes(twoLetterLocale)
+    ? dayjsLocaleMap[twoLetterLocale]
+    : locale;
 }
 
 /**

@@ -20,7 +20,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 /**
  * @internal
@@ -41,7 +40,6 @@ class CampCollaborationCreateProcessorTest extends TestCase {
     private EntityManagerInterface|MockObject $em;
 
     private MockObject|Security $security;
-    private MockObject|PasswordHasherFactoryInterface $pwHashFactory;
     private MailService|MockObject $mailService;
 
     private CampCollaborationCreateProcessor $processor;
@@ -68,7 +66,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         $decoratedProcessor = $this->createMock(ProcessorInterface::class);
         $this->security = $this->createMock(Security::class);
         $this->security->expects(self::any())->method('getUser')->willReturn($this->user);
-        $this->pwHashFactory = $this->createMock(PasswordHasherFactory::class);
+        $pwHashFactory = $this->createMock(PasswordHasherFactory::class);
         $this->profileRepository = $this->createMock(ProfileRepository::class);
         $this->em = $this->createMock(EntityManagerInterface::class);
         $this->mailService = $this->createMock(MailService::class);
@@ -77,7 +75,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         $this->processor = new CampCollaborationCreateProcessor(
             $decoratedProcessor,
             $this->security,
-            $this->pwHashFactory,
+            $pwHashFactory,
             $this->profileRepository,
             $this->em,
             $this->mailService,

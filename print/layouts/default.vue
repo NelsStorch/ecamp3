@@ -76,3 +76,15 @@ useHead(header)
   padding: 0;
 }
 </style>
+
+<!--
+Here we need to hack away 2 divs which nuxt generates,
+so these styles must be global.
+-->
+<!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
+<style lang="scss">
+body > div > div.container > div:not(:has(*)),
+body > div#teleports {
+  display: none;
+}
+</style>

@@ -18,9 +18,7 @@
 	# due to https://github.com/caddyserver/caddy/commit/f5ccb904a3db2bffd980feee685afaa762224cb2
 	admin 0.0.0.0:2019
 	# enable Prometheus metrics endpoint https://caddyserver.com/docs/metrics
-	servers {
-		metrics
-	}
+	metrics
 }
 
 {$CADDY_EXTRA_CONFIG}

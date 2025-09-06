@@ -75,7 +75,7 @@ class PeriodPersistProcessorTest extends TestCase {
         $this->processor->onBefore($patchData, new Patch(), [], ['previous_data' => $this->period]);
 
         // then
-        $this->assertEquals(1440 + 600, $this->scheduleEntry->startOffset);
+        $this->assertSame(1440 + 600, $this->scheduleEntry->startOffset);
         $this->assertEquals(1, $this->dayResponsible->day->dayOffset);
 
         $days = $this->period->getDaysSorted();
@@ -96,7 +96,7 @@ class PeriodPersistProcessorTest extends TestCase {
         $this->processor->onBefore($patchData, new Patch(), [], ['previous_data' => $this->period]);
 
         // then
-        $this->assertEquals(1440 + 1440 + 600, $this->scheduleEntry->startOffset);
+        $this->assertSame(1440 + 1440 + 600, $this->scheduleEntry->startOffset);
         $this->assertEquals(2, $this->dayResponsible->day->dayOffset);
 
         $days = $this->period->getDaysSorted();
@@ -117,7 +117,7 @@ class PeriodPersistProcessorTest extends TestCase {
         $this->processor->onBefore($patchData, new Patch(), [], ['previous_data' => $this->period]);
 
         // then
-        $this->assertEquals(1440 + 600, $this->scheduleEntry->startOffset);
+        $this->assertSame(1440 + 600, $this->scheduleEntry->startOffset);
         $this->assertEquals(1, $this->dayResponsible->day->dayOffset);
 
         $days = $this->period->getDaysSorted();
@@ -136,7 +136,7 @@ class PeriodPersistProcessorTest extends TestCase {
         $this->processor->onBefore($patchData, new Patch(), [], ['previous_data' => $this->period]);
 
         // then
-        $this->assertEquals(600, $this->scheduleEntry->startOffset);
+        $this->assertSame(600, $this->scheduleEntry->startOffset);
         $this->assertEquals(0, $this->dayResponsible->day->dayOffset);
 
         $days = $this->period->getDaysSorted();

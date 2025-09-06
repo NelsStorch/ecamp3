@@ -7,6 +7,7 @@ use App\Entity\ContentNode\ColumnLayout;
 use App\Serializer\Normalizer\RelatedCollectionLink;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait HasRootContentNodeTrait {
@@ -35,15 +36,20 @@ trait HasRootContentNodeTrait {
         return $this->rootContentNode;
     }
 
+    public function getContentNodes(): array {
+        return $this->rootContentNode?->getRootDescendants() ?? [];
+    }
+
     /**
      * All the content nodes that make up the tree of programme content.
      *
      * @return ContentNode[]
      */
-    #[ApiProperty(example: '["/content_nodes/1a2b3c4d"]')]
+    #[ApiProperty(example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d')]
+    #[SerializedName('contentNodes')]
     #[Groups(['read'])]
     #[RelatedCollectionLink(ContentNode::class, ['root' => 'rootContentNode'])]
-    public function getContentNodes(): array {
-        return $this->rootContentNode?->getRootDescendants() ?? [];
+    public function getEmptyContentNodesForIriGeneration(): array {
+        return [];
     }
 }

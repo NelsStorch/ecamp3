@@ -1,4 +1,5 @@
 <template>
+  <TocSectionStartMarker :id="`${id}-${period.id}`" />
   <Text
     :id="`${id}-${period.id}`"
     :bookmark="{ title: title + ': ' + period.description, fit: true }"
@@ -11,6 +12,7 @@
     :period="period"
     :day="day"
     :content-type="contentType"
+    :filter="filter"
   />
 </template>
 <script>
@@ -18,21 +20,35 @@ import PdfComponent from '@/PdfComponent.js'
 import SummaryDay from './SummaryDay.vue'
 import sortBy from 'lodash-es/sortBy.js'
 import camelCase from 'lodash-es/camelCase.js'
+import { filterMatchScheduleEntry } from '@/../common/helpers/filterMatchScheduleEntry.js'
+import TocSectionStartMarker from '../TocSectionStartMarker.vue'
 
 export default {
   name: 'SummaryPeriod',
-  components: { SummaryDay },
+  components: { TocSectionStartMarker, SummaryDay },
   extends: PdfComponent,
   props: {
     period: { type: Object, required: true },
     contentType: { type: String, required: true },
+    filter: { type: Object, default: () => ({}) },
   },
   computed: {
     days() {
-      return sortBy(this.period.days().items, (day) => this.$date.utc(day.start).unix())
+      const days = this.period.days().items.filter((day) => {
+        return (
+          this.period
+            .scheduleEntries()
+            .items.filter(
+              (scheduleEntry) =>
+                scheduleEntry.day()._meta.self === day._meta.self &&
+                filterMatchScheduleEntry(scheduleEntry, this.filter)
+            ).length > 0
+        )
+      })
+      return sortBy(days, (day) => this.$date.utc(day.start).unix())
     },
     title() {
-      return this.$tc('print.summary.' + this.camelCase(this.contentType) + '.title')
+      return this.$tc('print.' + this.camelCase(this.contentType) + '.title')
     },
   },
   methods: { camelCase },

@@ -340,6 +340,23 @@ export default new Router({
       },
     },
     {
+      name: 'camp/material/unassigned',
+      path: '/camps/:campId/:campShortTitle?/material/unassigned',
+      components: {
+        navigation: NavigationCamp,
+        default: () => import('./views/camp/material/MaterialUnassigned.vue'),
+        aside: () => import('./views/camp/material/SideBarMaterialLists.vue'),
+      },
+      beforeEnter: all([requireAuth, requireCamp]),
+      props: {
+        navigation: (route) => ({ camp: campFromRoute(route) }),
+        aside: (route) => ({ camp: campFromRoute(route) }),
+        default: (route) => ({
+          camp: campFromRoute(route),
+        }),
+      },
+    },
+    {
       name: 'camp/overview/checklists/checklist',
       path: '/camps/:campId/:campShortTitle?/overview/checklists/:checklistId/:checklistName?',
       components: {
