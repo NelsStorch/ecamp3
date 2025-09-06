@@ -270,8 +270,9 @@ export default {
 
     this.camp.periods()._meta.load.then(({ allItems }) => {
       const collection = allItems.map((entry) => entry._meta.self)
-      this.filter.period =
-        this.filter.period?.filter((value) => collection.includes(value)) ?? null
+      if (!collection.includes(this.filter.period)) {
+        this.filter.period = null
+      }
       this.loadingEndpoints.periods = false
     })
   },
