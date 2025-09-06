@@ -7,29 +7,32 @@ use ApiPlatform\Serializer\TagCollectorInterface;
 use App\HttpCache\ResponseTagger;
 use App\HttpCache\TagCollector;
 use App\Tests\HttpCache\Entity\Dummy;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+
+use function PHPUnit\Framework\exactly;
+use function PHPUnit\Framework\never;
+use function PHPUnit\Framework\once;
 
 /**
  * @internal
  */
 class TagCollectorTest extends TestCase {
-    use ProphecyTrait;
-
     private TagCollectorInterface $tagCollector;
-    private ObjectProphecy $responseTaggerProphecy;
+    private MockObject&ResponseTagger $responseTagger;
 
     protected function setUp(): void {
         // given
-        $this->responseTaggerProphecy = $this->prophesize(ResponseTagger::class);
-        $this->tagCollector = new TagCollector($this->responseTaggerProphecy->reveal());
+        $this->responseTagger = $this->createMock(ResponseTagger::class);
+        $this->tagCollector = new TagCollector($this->responseTagger);
     }
 
     public function testNoTagForEmptyContext() {
         // then
-        $this->responseTaggerProphecy->addTags(Argument::any())->shouldNotBeCalled();
+        $this->responseTagger
+            ->expects($this->never())
+            ->method('addTags')
+        ;
 
         // when
         $this->tagCollector->collect([]);
@@ -37,7 +40,11 @@ class TagCollectorTest extends TestCase {
 
     public function testWithIri() {
         // then
-        $this->responseTaggerProphecy->addTags(['/test-iri'])->shouldBeCalled();
+        $this->responseTagger
+            ->expects($this->once())
+            ->method('addTags')
+            ->with(['/test-iri'])
+        ;
 
         // when
         $this->tagCollector->collect(['iri' => '/test-iri']);
@@ -49,7 +56,11 @@ class TagCollectorTest extends TestCase {
         $object->setId('123');
 
         // then
-        $this->responseTaggerProphecy->addTags(['123'])->shouldBeCalled();
+        $this->responseTagger
+            ->expects(once())
+            ->method('addTags')
+            ->with(['123'])
+        ;
 
         // when
         $this->tagCollector->collect(['iri' => '/dummy/123', 'object' => $object]);
@@ -61,7 +72,11 @@ class TagCollectorTest extends TestCase {
         $object->setId('123');
 
         // then
-        $this->responseTaggerProphecy->addTags(['123#propertyName'])->shouldBeCalled();
+        $this->responseTagger
+            ->expects(once())
+            ->method('addTags')
+            ->with(['123#propertyName'])
+        ;
 
         // when
         $this->tagCollector->collect([
@@ -78,8 +93,19 @@ class TagCollectorTest extends TestCase {
         $object->setId('123');
 
         // then
-        $this->responseTaggerProphecy->addTags(['123#PROPERTY_NAME'])->shouldBeCalled();
-        $this->responseTaggerProphecy->addTags(['123#OTHER_DEPENDENCY'])->shouldBeCalled();
+        $seen = [];
+        $this->responseTagger
+            ->expects(exactly(2))
+            ->method('addTags')
+            ->willReturnCallback(function ($tags) use (&$seen) {
+                $valid = $tags === ['123#PROPERTY_NAME'] || $tags === ['123#OTHER_DEPENDENCY'];
+                if ($valid) {
+                    $seen[] = $tags[0];
+                }
+
+                return $valid;
+            })
+        ;
 
         // when
         $this->tagCollector->collect([
@@ -92,11 +118,17 @@ class TagCollectorTest extends TestCase {
             ),
             'api_attribute' => 'propertyName',
         ]);
+
+        $this->assertContains('123#PROPERTY_NAME', $seen);
+        $this->assertContains('123#OTHER_DEPENDENCY', $seen);
     }
 
     public function testNoTagForHalLinks() {
         // then
-        $this->responseTaggerProphecy->addTags(Argument::any())->shouldNotBeCalled();
+        $this->responseTagger
+            ->expects(never())
+            ->method('addTags')
+        ;
 
         // when
         $this->tagCollector->collect([
@@ -108,7 +140,10 @@ class TagCollectorTest extends TestCase {
 
     public function testNoTagForJsonLdLinks() {
         // then
-        $this->responseTaggerProphecy->addTags(Argument::any())->shouldNotBeCalled();
+        $this->responseTagger
+            ->expects(never())
+            ->method('addTags')
+        ;
 
         // when
         $this->tagCollector->collect([
@@ -120,7 +155,10 @@ class TagCollectorTest extends TestCase {
 
     public function testNoTagForJsonApiLinks() {
         // then
-        $this->responseTaggerProphecy->addTags(Argument::any())->shouldNotBeCalled();
+        $this->responseTagger
+            ->expects(never())
+            ->method('addTags')
+        ;
 
         // when
         $this->tagCollector->collect([
