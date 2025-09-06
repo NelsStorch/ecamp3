@@ -22,6 +22,8 @@ export function renderVueToPdfStructure(root, props = {}, onProgress = async () 
     },
     props
   )
+  app.config.throwUnhandledErrorInProduction = true
+
   app.mount(container)
 
   return container.doc
