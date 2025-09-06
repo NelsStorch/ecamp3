@@ -1,61 +1,82 @@
 <template>
   <content-group
     :title="$tc('components.campAdmin.campSharingSettings.title')"
-    icon="mdi-share-variant"
+    icon="mdi-earth"
   >
     <v-skeleton-loader v-if="camp._meta.loading" type="article" />
-    <v-list class="py-0" color="transparent">
+    <v-list class="py-0" color="transparent" two-line>
       <v-list-item class="px-0">
         <v-list-item-content>
           <v-list-item-title>
             {{ $tc(`components.campAdmin.campSharingSettings.${sharingStatus}.title`) }}
           </v-list-item-title>
-          <i18n
-            :path="`components.campAdmin.campSharingSettings.${sharingStatus}.description`"
-            tag="div"
-            class="body-2 grey--text text--darken-3"
-          >
-            <template #team>
-              <span v-if="isOutsider">{{
-                $tc('components.campAdmin.campSharingSettings.team')
-              }}</span>
-              <router-link v-else :to="teamRoute">{{
-                $tc('components.campAdmin.campSharingSettings.team')
-              }}</router-link>
-            </template>
-          </i18n>
-          <v-list-item-subtitle v-if="camp.isShared" class="pb-1 whitespace-normal">{{
-            $tc('components.campAdmin.campSharingSettings.sharedSince', 1, {
-              sharedSince,
-              sharedBy,
-            })
-          }}</v-list-item-subtitle>
+          <v-list-item-subtitle v-if="camp.isShared" class="pb-1 whitespace-normal">
+            {{
+              $tc('components.campAdmin.campSharingSettings.sharedSince', 1, {
+                sharedSince,
+                sharedBy,
+              })
+            }}
+          </v-list-item-subtitle>
         </v-list-item-content>
-        <v-list-item-action v-if="camp.isShared" class="align-self-start">
-          <v-tooltip top>
+        <v-list-item-action>
+          <DialogShare :title="$tc('components.campAdmin.campSharingSettings.title')">
             <template #activator="{ on, attrs }">
-              <v-btn
-                icon
+              <ButtonEdit
+                color="primary--text"
+                text
+                class="my-n1 v-btn--has-bg"
+                icon="mdi-earth"
                 v-bind="attrs"
-                small
                 v-on="on"
-                @click="copyCampUrlToClipboard()"
+                >{{
+                  camp.isShared ? $tc('global.button.edit') : $tc('global.button.share')
+                }}</ButtonEdit
               >
-                <v-icon>mdi-clipboard-check-multiple-outline</v-icon>
-              </v-btn>
             </template>
-            {{ $tc(`components.campAdmin.campSharingSettings.copyCampLink`) }}
-          </v-tooltip>
-        </v-list-item-action>
-        <v-list-item-action v-if="isManager" class="align-self-start">
-          <api-form :entity="camp">
-            <api-switch
-              path="isShared"
-              icon="mdi-share-variant"
-              :disabled="disabled"
-              class="mt-1"
-            />
-          </api-form>
+            <p>
+              <strong>{{
+                $tc(`components.campAdmin.campSharingSettings.${sharingStatus}.title`)
+              }}</strong
+              >{{
+                $tc(
+                  `components.campAdmin.campSharingSettings.${sharingStatus}.description`
+                )
+              }}
+            </p>
+            <p>
+              <v-btn
+                v-if="isManager"
+                :color="camp.isShared ? '' : 'error'"
+                elevation="0"
+                text
+                class="v-btn--has-bg"
+                :loading="loading"
+                @click="toggleShare"
+                ><v-icon left>mdi-alert</v-icon
+                >{{
+                  camp.isShared
+                    ? $tc('components.campAdmin.campSharingSettings.deactivate')
+                    : $tc('components.campAdmin.campSharingSettings.activate')
+                }}</v-btn
+              >
+            </p>
+            <p v-if="!camp.isShared">
+              {{ $tc('components.campAdmin.campSharingSettings.implications') }}
+            </p>
+            <template v-if="camp.isShared" #more-actions>
+              <div class="d-flex gap-2 align-center w-100">
+                <small class="flex-shrink-1 flex-grow-1 w-0"
+                  ><a :href="campUrl">{{ campUrl }}</a></small
+                >
+
+                <v-btn text class="v-btn--has-bg" @click="copyCampUrlToClipboard()">
+                  <v-icon left>mdi-clipboard-check-multiple-outline</v-icon>
+                  {{ $tc('global.button.copy') }}
+                </v-btn>
+              </div>
+            </template>
+          </DialogShare>
         </v-list-item-action>
       </v-list-item>
     </v-list>
@@ -64,28 +85,28 @@
 
 <script>
 import ContentGroup from '@/components/layout/ContentGroup.vue'
-import ApiForm from '../form/api/ApiForm.vue'
-import router, { adminRoute, campRoute } from '@/router.js'
+import router, { campRoute } from '@/router.js'
 import { campRoleMixin } from '@/mixins/campRoleMixin.js'
 import userDisplayName from '@/common/helpers/userDisplayName.js'
+import DialogShare from '@/components/campAdmin/DialogShare.vue'
+import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
 
 export default {
   name: 'CampSharingSettings',
-  components: { ApiForm, ContentGroup },
+  components: { ButtonEdit, DialogShare, ContentGroup },
   mixins: [campRoleMixin],
   props: {
     camp: { type: Object, required: true },
     disabled: { type: Boolean, default: false },
   },
   data() {
-    return {}
+    return {
+      loading: false,
+    }
   },
   computed: {
     sharingStatus() {
       return this.camp.isShared ? 'shared' : 'notShared'
-    },
-    teamRoute() {
-      return adminRoute(this.camp, 'collaborators')
     },
     campUrl() {
       return window.location.origin + router.resolve(campRoute(this.camp)).href
@@ -100,6 +121,16 @@ export default {
     },
   },
   methods: {
+    toggleShare() {
+      this.loading = true
+      this.api
+        .patch(this.camp._meta.self, {
+          isShared: !this.camp.isShared,
+        })
+        .then(() => {
+          this.loading = false
+        })
+    },
     async copyCampUrlToClipboard() {
       await navigator.clipboard.writeText(this.campUrl)
 

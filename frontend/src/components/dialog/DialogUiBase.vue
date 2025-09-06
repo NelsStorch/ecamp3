@@ -28,6 +28,7 @@ export default {
     cancelColor: { type: String, default: 'secondary', required: false },
     cancelEnabled: { type: Boolean, default: true, required: false },
     cancelVisible: { type: Boolean, default: true, required: false },
+    closeVisibleOnMobile: { type: Boolean, default: false, required: false },
 
     savingOverride: { type: Boolean, default: false, required: false },
 

@@ -6,10 +6,7 @@
         <v-chip
           v-if="camp.isShared === true"
           x-small
-          outlined
-          color="primary"
-          :to="adminRoute(camp)"
-          class="align-self-center px-1"
+          class="align-self-center px-1 v-btn--has-bg"
           >{{ $tc('components.camp.campListItem.public') }}</v-chip
         >
         <span class="flex-grow-1"></span>
@@ -24,7 +21,7 @@
 </template>
 
 <script>
-import { campRoute, adminRoute } from '@/router.js'
+import { campRoute } from '@/router.js'
 export default {
   name: 'CampListItem',
   props: {
@@ -46,7 +43,7 @@ export default {
         .join(' | ')
     },
   },
-  methods: { campRoute, adminRoute },
+  methods: { campRoute },
 }
 </script>
 

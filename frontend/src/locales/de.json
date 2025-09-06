@@ -66,7 +66,7 @@
         "outsider": "Du arbeitest in diesem Lager nicht mit:",
         "outsiderDescription": "Du kannst keine Daten ändern, aber das Programm anschauen und kopieren.",
         "shared": "Lager ist öffentlich freigegeben:",
-        "sharedDescription": "Alle Personen, die über den Link verfügen, können sämtliche Daten im Lager einsehen."
+        "sharedDescription": "Fremde Personen können sämtliche Daten im Lager einsehen und kopieren."
       }
     },
     "campAdmin": {
@@ -126,18 +126,19 @@
         "title": "Beschreibung"
       },
       "campSharingSettings": {
-        "copyCampLink": "Öffentlichen Link zum Lager kopieren",
+        "activate": "Freigabe aktivieren",
+        "deactivate": "Freigabe deaktivieren",
+        "implications": "Wenn du die Freigabe aktivierst, dann können fremde Personen das Programm, das Team, die Materiallisten und Verantwortlichkeiten und alles andere in diesem Lager ansehen und kopieren. Nur Personen im Team können Daten ändern.",
         "notShared": {
-          "description": "Link-Freigabe ist nicht aktiviert. Nur Personen im {team} können das Programm und die Daten in diesem Lager ansehen.",
-          "title": "Lager öffentlich freigeben"
+          "description": ": Nur Personen im Team können das Programm und die Daten in diesem Lager ansehen.",
+          "title": "Freigabe ist nicht aktiviert"
         },
         "publicCampUrl": "Sharing-Link zum Lager",
         "shared": {
-          "description": "Alle Personen, die den Link zum Lager kennen, können das Programm, das Team, die Materiallisten und Verantwortlichkeiten und alles andere in diesem Lager ansehen. Nur Personen im {team} können Daten ändern.",
+          "description": ": Fremde Personen können das Programm, das Team, die Materiallisten und Verantwortlichkeiten und alles andere in diesem Lager ansehen und kopieren. Nur Personen im Team können Daten ändern.",
           "title": "Lager ist öffentlich freigegeben"
         },
-        "sharedSince": "Zuletzt freigegeben am {sharedSince} von {sharedBy}",
-        "team": "Team",
+        "sharedSince": "Am {sharedSince} von {sharedBy}",
         "title": "Lager teilen"
       },
       "createCampPeriods": {
@@ -565,6 +566,7 @@
       "close": "Schliessen",
       "content": "Inhalt",
       "continue": "Weiter",
+      "copy": "Kopieren",
       "create": "Erstellen",
       "delete": "Löschen",
       "discard": "Verwerfen",
@@ -584,6 +586,7 @@
       "save": "Speichern",
       "saving": "Speichert",
       "search": "Suchen",
+      "share": "Freigeben",
       "submit": "Abschicken",
       "tryagain": "Erneut versuchen",
       "unlock": "Entsperren",

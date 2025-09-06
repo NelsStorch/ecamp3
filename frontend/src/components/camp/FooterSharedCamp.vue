@@ -1,12 +1,9 @@
 <template>
   <v-footer v-if="isOutsider || showSharedWarning" app class="shared-camp">
-    <p v-if="isOutsider" class="mb-0">
-      <strong>{{ $tc('components.camp.footerSharedCamp.outsider') }}</strong>
-      {{ $tc('components.camp.footerSharedCamp.outsiderDescription') }}
-    </p>
-    <p v-if="showSharedWarning" class="mb-0">
-      <strong>{{ $tc('components.camp.footerSharedCamp.shared') }}</strong>
-      {{ $tc('components.camp.footerSharedCamp.sharedDescription') }}
+    <p class="mb-0">
+      <v-icon left small class="currentColor--text">mdi-earth</v-icon>
+      <strong>{{ $tc(`components.camp.footerSharedCamp.${key}`) }}</strong>
+      {{ $tc(`components.camp.footerSharedCamp.${key}Description`) }}
     </p>
   </v-footer>
 </template>
@@ -21,6 +18,9 @@ export default {
   computed: {
     camp() {
       return campFromRoute(this.$route)
+    },
+    key() {
+      return this.isOutsider ? 'outsider' : this.showSharedWarning ? 'shared' : ''
     },
     showSharedWarning() {
       // The warning is intended for people with write access to the camp,
@@ -40,5 +40,10 @@ export default {
   background: #fbf0df;
   color: #7a4f0f;
   font-size: 80%;
+}
+
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
+.v-icon {
+  margin-top: -2px;
 }
 </style>
