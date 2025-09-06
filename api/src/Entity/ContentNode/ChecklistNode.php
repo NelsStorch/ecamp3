@@ -53,7 +53,7 @@ class ChecklistNode extends ContentNode {
     /**
      * List of selected ChecklistItems.
      */
-    #[ApiProperty(example: '["/checklist_items/1a2b3c4d"]', readableLink: true)]
+    #[ApiProperty(example: '["/checklist_items/1a2b3c4d"]')]
     #[Groups(['read'])]
     #[ORM\ManyToMany(targetEntity: ChecklistItem::class, inversedBy: 'checklistNodes')]
     #[ORM\JoinTable(name: 'checklistnode_checklistitem')]

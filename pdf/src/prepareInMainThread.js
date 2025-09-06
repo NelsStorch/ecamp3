@@ -93,7 +93,14 @@ export async function prepareInMainThread(config) {
         }),
       camp.materialLists().$loadItems(),
       config.apiGet().contentTypes().$loadItems(),
-      camp.checklists().$loadItems(),
+      camp
+        .checklists()
+        .$loadItems()
+        .then((checklists) => {
+          return Promise.all(
+            checklists.items.map((checklist) => checklist.checklistItems()._meta.load)
+          )
+        }),
       config
         .apiGet()
         .checklistItems({
