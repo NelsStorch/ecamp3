@@ -33,7 +33,7 @@ class CampUpdateProcessor extends AbstractPersistProcessor {
 
     public function onBeforeSharingStatusChange(Camp $data): Camp {
         if ($data->isShared) {
-            $data->sharedSince = new \DateTime();
+            $data->sharedSince = new \DateTime('now', new \DateTimeZone('UTC'));
 
             /** @var User $user */
             $user = $this->security->getUser();
