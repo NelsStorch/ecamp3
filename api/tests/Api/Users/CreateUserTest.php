@@ -784,6 +784,48 @@ class CreateUserTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateUserWithoutNickname() {
+        $exampleWritePayload = $this->getExampleWritePayload();
+        unset($exampleWritePayload['profile']['nickname']);
+        static::createBasicClient()->request(
+            'POST',
+            '/users',
+            [
+                'json' => $exampleWritePayload,
+            ]
+        );
+
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertJsonContains([
+            '_embedded' => [
+                'profile' => [
+                    'nickname' => null,
+                ],
+            ],
+        ]);
+    }
+
+    public function testCreateUserWithEmptyNickname() {
+        $exampleWritePayload = $this->getExampleWritePayload();
+        $exampleWritePayload['profile']['nickname'] = '';
+        static::createBasicClient()->request(
+            'POST',
+            '/users',
+            [
+                'json' => $exampleWritePayload,
+            ]
+        );
+
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertJsonContains([
+            '_embedded' => [
+                'profile' => [
+                    'nickname' => '',
+                ],
+            ],
+        ]);
+    }
+
     public function testCreateUserAllowsLongPassword() {
         static::createClientWithCredentials()->request('POST', '/users', ['json' => $this->getExampleWritePayload([
             'password' => 'this password has a total of 122 characters. this password has a total of 122 characters. OWASP approves of this password.',

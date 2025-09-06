@@ -25,6 +25,15 @@
           />
 
           <e-text-field
+            v-model="nickname"
+            path="nickname"
+            append-icon="mdi-account-outline"
+            dense
+            type="text"
+            autocomplete="nickname"
+          />
+
+          <e-text-field
             v-model="email"
             path="email"
             vee-rules="email|required"
@@ -158,6 +167,7 @@ export default {
       registering: false,
       firstname: '',
       surname: '',
+      nickname: '',
       email: '',
       pw1: '',
       pw2: '',
@@ -176,6 +186,7 @@ export default {
       return {
         firstname: this.firstname,
         surname: this.surname,
+        nickname: this.nickname,
         email: this.email,
         password: this.pw1,
         language: this.language,
@@ -228,6 +239,7 @@ export default {
           profile: {
             firstname: this.formData.firstname,
             surname: this.formData.surname,
+            nickname: this.formData.nickname,
             email: this.formData.email,
             language: this.formData.language,
           },

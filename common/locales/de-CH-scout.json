@@ -7,6 +7,11 @@
         "printYSLogoOnPicasso": "J+S-Logo auf Grobprogramm drucken (bei J+S-Kursen aktivieren)",
         "trainingAdvisorName": "Bürgerlicher Name von LKB"
       }
+    },
+    "profile": {
+      "fields": {
+        "nickname": "Pfadiname"
+      }
     }
   }
 }
