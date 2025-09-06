@@ -83,7 +83,6 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
     public const COLLECTION_NORMALIZATION_CONTEXT = [
         'groups' => [
             'read',
-            'Activity:Comments',
             'Activity:ActivityProgressLabel',
             'Activity:ActivityResponsibles',
             'Activity:ScheduleEntries',
@@ -94,7 +93,6 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
         'groups' => [
             'read',
             'Activity:Category',
-            'Activity:Comments',
             'Activity:ActivityProgressLabel',
             'Activity:ActivityResponsibles',
             'Activity:ScheduleEntries',
@@ -187,7 +185,7 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
         uriTemplate: Comment::ACTIVITY_SUBRESOURCE_URI_TEMPLATE,
         example: '/activities/1a2b3c4d/comments'
     )]
-    #[Groups(['Activity:Comments'])]
+    #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'activity')]
     public Collection $comments;
 
