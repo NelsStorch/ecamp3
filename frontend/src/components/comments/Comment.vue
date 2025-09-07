@@ -55,8 +55,8 @@ export default {
   computed: {
     ...mapGetters({
       authUser: 'getLoggedInUser',
-    })
-  }
+    }),
+  },
 }
 </script>
 

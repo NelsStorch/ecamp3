@@ -4,16 +4,14 @@ Displays a single activity
 
 <template>
   <v-container fluid>
-    <CommentWrapper
-      v-if="!comments._meta.loading"
-    >
+    <CommentWrapper v-if="!comments._meta.loading">
       <ScheduleEntry :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
       <template #comments>
         <Comment
-          deletable
           v-for="comment in comments.items"
-          :comment="comment"
           :key="comment._meta.self"
+          deletable
+          :comment="comment"
         >
           <e-richtext
             class="e-story-day e-story-day-readonly"
@@ -30,7 +28,9 @@ Displays a single activity
               ><UserAvatar :user="comment.author()" size="24" class="mr-1" />
               {{ comment.author().displayName }}</span
             >
-            <span>{{ $date(comment.createTime).format($tc('global.datetime.dateTimeLong')) }}</span>
+            <span>{{
+              $date(comment.createTime).format($tc('global.datetime.dateTimeLong'))
+            }}</span>
           </div>
         </Comment>
         <Comment class="relative">
@@ -46,7 +46,14 @@ Displays a single activity
               {{ authUser.displayName }}</span
             >
           </div>
-          <v-btn absolute text style="bottom: 2px; right: 1px" @click="addComment" :disabled="newComment.length === 0">Send</v-btn>
+          <v-btn
+            absolute
+            text
+            style="bottom: 2px; right: 1px"
+            :disabled="newComment.length === 0"
+            @click="addComment"
+            >Send</v-btn
+          >
         </Comment>
       </template>
     </CommentWrapper>
@@ -58,7 +65,6 @@ import ScheduleEntry from '@/components/activity/ScheduleEntry.vue'
 import CommentWrapper from '@/components/comments/CommentWrapper.vue'
 import UserAvatar from '@/components/user/UserAvatar.vue'
 import { mapGetters } from 'vuex'
-import dayjs from '@/common/helpers/dayjs.js'
 
 export default {
   name: 'Activity',
@@ -96,16 +102,19 @@ export default {
     },
     async addComment() {
       const activity = this.api.get().activities({ id: this.activityId })
-      await this.api.post(await this.api.href(this.api.get(), 'comments'), { textHtml: this.newComment, activity: activity._meta.self, camp: activity.camp()._meta.self })
+      await this.api.post(await this.api.href(this.api.get(), 'comments'), {
+        textHtml: this.newComment,
+        activity: activity._meta.self,
+        camp: activity.camp()._meta.self,
+      })
       await this.comments.$reload()
       this.newComment = ''
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
-
 .e-story-day :deep(.v-text-field) {
   margin-top: 0;
   padding-top: 0;
