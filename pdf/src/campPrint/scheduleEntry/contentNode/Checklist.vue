@@ -19,6 +19,7 @@
 <script setup>
 import uniqWith from 'lodash-es/uniqWith.js'
 import sortBy from 'lodash-es/sortBy.js'
+import { inject } from 'vue'
 
 const props = defineProps({
   contentNode: { type: Object, required: true },
@@ -31,18 +32,27 @@ function calculateItemNumber(item) {
 
   return calculateItemNumber(item.parent()) + '.' + (item.position + 1)
 }
-const items = props.contentNode.checklistItems().items.map((item) => {
-  const number = calculateItemNumber(item)
-  return {
-    ...item,
-    number,
-  }
-})
+
+const camp = inject('camp')
+const allChecklists = camp.checklists().items
+const allItems = allChecklists.flatMap((checklist) => checklist.checklistItems().items)
+const items = allItems
+  .filter((item) => {
+    const connectedChecklistNodes = item
+      .checklistNodes()
+      .items.map((checklistNode) => checklistNode._meta.self)
+    return connectedChecklistNodes.includes(props.contentNode._meta.self)
+  })
+  .map((item) => {
+    const number = calculateItemNumber(item)
+    return {
+      ...item,
+      number,
+    }
+  })
 
 const checklists = uniqWith(
-  props.contentNode
-    .checklistItems()
-    .items.map((checklistItem) => checklistItem.checklist()),
+  items.map((checklistItem) => checklistItem.checklist()),
   function (checklist1, checklist2) {
     return checklist1._meta.self === checklist2._meta.self
   }

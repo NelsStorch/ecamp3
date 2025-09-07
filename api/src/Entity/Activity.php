@@ -185,6 +185,7 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
         uriTemplate: Comment::ACTIVITY_SUBRESOURCE_URI_TEMPLATE,
         example: '/activities/1a2b3c4d/comments'
     )]
+    #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'activity')]
     public Collection $comments;
 

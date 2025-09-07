@@ -53,6 +53,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     ],
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    order: ['createTime' => 'ASC'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp', 'activity'])]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -119,5 +120,11 @@ class Comment extends BaseEntity implements BelongsToCampInterface {
 
     public function getCamp(): ?Camp {
         return $this->camp;
+    }
+
+    #[ApiProperty(writable: false)]
+    #[Groups(['read'])]
+    public function getCreateTime(): \DateTime {
+        return $this->createTime;
     }
 }

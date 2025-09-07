@@ -2,6 +2,8 @@
 
 namespace App\Tests\Api\Comments;
 
+use ApiPlatform\Metadata\Post;
+use App\Entity\Comment;
 use App\Tests\Api\ECampApiTestCase;
 
 /**
@@ -28,6 +30,30 @@ class ListCommentsTest extends ECampApiTestCase {
                 'items' => [],
             ],
         ]);
+    }
+
+    public function testListCommentsSortyByCreateTime() {
+        $client = static::createClientWithCredentials();
+        $client->disableReboot();
+
+        // create another comment so that it has a different createTime than the existing fixtures
+        $lastComment = $client->request('POST', '/comments', ['json' => $this->getExamplePayload(
+            Comment::class,
+            Post::class,
+            [
+                'camp' => $this->getIriFor('camp1'),
+                'activity' => $this->getIriFor('activity1'),
+            ],
+            [],
+            []
+        )])->toArray();
+
+        $response = $client->request('GET', '/comments');
+        $items = $response->toArray()['_embedded']['items'];
+
+        $this->assertCount(4, $items);
+        $this->assertGreaterThanOrEqual($items[0]['createTime'], $items[3]['createTime']);
+        $this->assertEquals($items[3]['createTime'], $lastComment['createTime']);
     }
 
     public function testListCommentsFilteredByActivity() {
