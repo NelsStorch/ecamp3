@@ -30,6 +30,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -86,6 +92,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -111,6 +118,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -161,6 +174,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -187,6 +201,12 @@ components:
             -
               type: 'null'
           readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -236,6 +256,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -264,6 +285,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -321,6 +348,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -469,6 +497,8 @@ components:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 category:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                comments:
+                  properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabel:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 rootContentNode:
@@ -478,6 +508,7 @@ components:
               required:
                 - activityResponsibles
                 - category
+                - comments
                 - scheduleEntries
               type: object
             type:
@@ -492,6 +523,8 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
+              -
+                $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
                 $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
@@ -546,6 +579,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -602,6 +641,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -636,6 +676,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -686,6 +732,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -721,6 +768,12 @@ components:
             -
               type: 'null'
           readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -770,6 +823,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -807,6 +861,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -864,6 +924,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -978,6 +1039,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -1034,6 +1101,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1065,6 +1133,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -1115,6 +1189,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1164,6 +1239,12 @@ components:
             -
               type: 'null'
           readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -1213,6 +1294,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1265,6 +1347,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -1321,6 +1409,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -10444,6 +10533,10 @@ components:
           example: /camps/1a2b3c4d
           format: iri-reference
           type: string
+        createTime:
+          format: date-time
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -10481,6 +10574,10 @@ components:
                   description: 'An internal, unique, randomly generated identifier of this entity.'
                   example: 1a2b3c4d
                   maxLength: 16
+                  readOnly: true
+                  type: string
+                createTime:
+                  format: date-time
                   readOnly: true
                   type: string
                 orphanDescription:
@@ -10615,6 +10712,10 @@ components:
           example: /camps/1a2b3c4d
           format: iri-reference
           type: string
+        createTime:
+          format: date-time
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -10725,6 +10826,10 @@ components:
           description: 'The camp this comment belongs to.'
           example: /camps/1a2b3c4d
           format: iri-reference
+          type: string
+        createTime:
+          format: date-time
+          readOnly: true
           type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
