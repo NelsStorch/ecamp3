@@ -34,7 +34,7 @@
         "phpmyadmin/sql-parser": "5.11.1",
         "ramsey/uuid": "4.9.1",
         "rize/uri-template": "0.4.0",
-        "sentry/sentry-symfony": "5.4.1",
+        "sentry/sentry-symfony": "5.4.0",
         "stof/doctrine-extensions-bundle": "1.14.0",
         "swaggest/json-schema": "0.12.43",
         "symfony/asset": "7.3.0",
