@@ -5,7 +5,7 @@ grafana-proxy:
     hosts:
       - {{ .Environment.Values | getOrNil "GRAFANA_PROXY_HOST" | required "GRAFANA_PROXY_HOST is required" | quote }}
   extraArgs:
-    whitelist-domain: {{ .Environment.Values | getOrNil "GRAFANA_HOST" }}
+    whitelist-domain: {{ .Environment.Values | getOrNil "GRAFANA_PROXY_HOST" | required "GRAFANA_PROXY_HOST is required" | quote }}
     provider: github
     github-org: ecamp
     upstream: http://kube-prometheus-stack-grafana.kube-prometheus-stack.svc.cluster.local:80
