@@ -1,0 +1,58 @@
+grafana-proxy:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - {{ .Environment.Values | getOrNil "GRAFANA_PROXY_HOST" | required "GRAFANA_PROXY_HOST is required" | quote }}
+  extraArgs:
+    whitelist-domain: {{ .Environment.Values | getOrNil "GRAFANA_HOST" }}
+    provider: github
+    github-org: ecamp
+    upstream: http://kube-prometheus-stack-grafana.kube-prometheus-stack.svc.cluster.local:80
+  config:
+    # OAuth client ID
+    clientID: {{ .Environment.Values | getOrNil "GRAFANA_PROXY_OAUTH_CLIENT_ID" | required "GRAFANA_PROXY_OAUTH_CLIENT_ID is required" | quote }}
+    # OAuth client secret
+    clientSecret: {{ .Environment.Values | getOrNil "GRAFANA_PROXY_OAUTH_CLIENT_SECRET" | required "GRAFANA_PROXY_OAUTH_CLIENT_SECRET is required" | quote }}
+    # Create a new secret with the following command
+    # openssl rand -base64 32 | head -c 32 | base64
+    cookieSecret: {{ .Environment.Values | getOrNil "COOKIE_SECRET" | required "COOKIE_SECRET is required" | quote }}
+kubernetes-dashboard-proxy:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_HOST" | required "KUBERNETES_DASHBOARD_PROXY_HOST is required" | quote }}
+  extraArgs:
+    whitelist-domain: {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_HOST" | required "KUBERNETES_DASHBOARD_PROXY_HOST is required" | quote }}
+    provider: github
+    github-org: ecamp
+    upstream: https://ops-dashboard-kong-proxy.ops-dashboard.svc.cluster.local
+    ssl-upstream-insecure-skip-verify: true
+  config:
+    # OAuth client ID
+    clientID: {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_ID" | required "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_ID is required" | quote }}
+    # OAuth client secret
+    clientSecret: {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_SECRET" | required "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_SECRET is required" | quote }}
+    # Create a new secret with the following command
+    # openssl rand -base64 32 | head -c 32 | base64
+    cookieSecret: {{ .Environment.Values | getOrNil "COOKIE_SECRET" | required "COOKIE_SECRET is required" | quote }}
+logging-proxy:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - {{ .Environment.Values | getOrNil "LOGGING_PROXY_HOST" | required "LOGGING_PROXY_HOST is required" | quote }}
+  extraArgs:
+    whitelist-domain: {{ .Environment.Values | getOrNil "LOGGING_PROXY_HOST" | required "LOGGING_PROXY_HOST is required" | quote }}
+    provider: github
+    github-org: ecamp
+    upstream: http://kibana.ecamp3-logging.svc.cluster.local:5601
+  config:
+    # OAuth client ID
+    clientID: {{ .Environment.Values | getOrNil "LOGGING_PROXY_OAUTH_CLIENT_ID" | required "LOGGING_PROXY_OAUTH_CLIENT_ID is required" | quote }}
+    # OAuth client secret
+    clientSecret: {{ .Environment.Values | getOrNil "LOGGING_PROXY_OAUTH_CLIENT_SECRET" | required "LOGGING_PROXY_OAUTH_CLIENT_SECRET is required" | quote }}
+    # Create a new secret with the following command
+    # openssl rand -base64 32 | head -c 32 | base64
+    cookieSecret: {{ .Environment.Values | getOrNil "COOKIE_SECRET" | required "COOKIE_SECRET is required" | quote }}
