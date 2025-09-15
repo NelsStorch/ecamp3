@@ -9,8 +9,8 @@ use App\Entity\ContentNode;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
+use Symfony\Component\TypeInfo\Type;
 
 final class ContentNodeIsRootFilter extends AbstractFilter {
     public const IS_ROOT_QUERY_NAME = 'isRoot';
@@ -28,7 +28,7 @@ final class ContentNodeIsRootFilter extends AbstractFilter {
     public function getDescription(string $resourceClass): array {
         return ['isRoot' => [
             'property' => self::IS_ROOT_QUERY_NAME,
-            'type' => Type::BUILTIN_TYPE_BOOL,
+            'type' => Type::bool()->__toString(),
             'required' => false,
         ]];
     }
