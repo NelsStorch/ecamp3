@@ -35,6 +35,8 @@ abstract class ECampApiTestCase extends ApiTestCase {
     use RefreshDatabaseTrait;
     use MatchesSnapshots;
 
+    protected static ?bool $alwaysBootKernel = false;
+
     protected string $endpoint = '';
     protected string $routePrefix = '';
     protected BaseEntity $defaultEntity;
