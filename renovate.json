@@ -10,6 +10,7 @@
   },
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
+  "minimumReleaseAge": "7 days",
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["on wednesday and thursday"]
