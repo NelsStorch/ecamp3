@@ -5,7 +5,6 @@ namespace App\Tests\Api\SnapshotTests\Extension;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGenerator;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use App\Doctrine\Orm\Extension\FilterEagerLoadingsExtension;
 use App\Entity\CampCollaboration;
 use App\Repository\CampCollaborationRepository;
@@ -30,7 +29,6 @@ class FilterEagerLoadingExtensionIntegrationTest extends ECampApiTestCase {
         $container = static::getContainer();
 
         $this->repository = $container->get(CampCollaborationRepository::class);
-        $this->resourceMetadataCollectionFactory = $container->get(ResourceMetadataCollectionFactoryInterface::class);
         $this->queryNameGenerator = new QueryNameGenerator();
         $this->entityClass = CampCollaboration::class;
         $this->operation = new GetCollection();
