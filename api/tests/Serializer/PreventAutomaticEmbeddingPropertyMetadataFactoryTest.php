@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\Property\Factory\PropertyMetadataFactoryInterface;
 use App\Serializer\PreventAutomaticEmbeddingPropertyMetadataFactory;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\PropertyInfo\Type as PropertyInfoType;
+use Symfony\Component\TypeInfo\Type;
 
 /**
  * @internal
@@ -35,7 +35,7 @@ class PreventAutomaticEmbeddingPropertyMetadataFactoryTest extends TestCase {
             security: true,
             securityPostDenormalize: 'securityPostDenormalize',
             types: ['types'],
-            builtinTypes: [new PropertyInfoType(builtinType: PropertyInfoType::BUILTIN_TYPE_INT)],
+            builtinTypes: [Type::int()],
             schema: ['schema'],
             initializable: true,
             iris: ['iris'],
