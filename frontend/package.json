@@ -22,7 +22,7 @@
   "dependencies": {
     "@intlify/core": "11.1.12",
     "@mdi/font": "7.4.47",
-    "@react-pdf/font": "4.0.2",
+    "@react-pdf/font": "4.0.3",
     "@react-pdf/layout": "4.4.0",
     "@react-pdf/pdfkit": "4.0.3",
     "@react-pdf/primitives": "4.1.1",
