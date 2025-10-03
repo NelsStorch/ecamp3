@@ -132,7 +132,6 @@ jobs:
             --set frontend.loginInfoTextKey=${{ vars.LOGIN_INFO_TEXT_KEY }} \
             --set featureToggle.developer=true \
             --set featureToggle.checklist=${{ vars.FEATURE_CHECKLIST || 'false' }} \
-            --set featureToggle.comments=${{ vars.FEATURE_COMMENTS || 'false' }} \
             --timeout ${{ vars.HELM_TIMEOUT || '5m0s' }}
 
       - name: Finish the GitHub deployment
