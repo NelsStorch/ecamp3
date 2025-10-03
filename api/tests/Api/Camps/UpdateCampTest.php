@@ -2,7 +2,11 @@
 
 namespace App\Tests\Api\Camps;
 
+use App\Entity\Camp;
+use App\Entity\ContentNode\ChecklistNode;
 use App\Tests\Api\ECampApiTestCase;
+use DateInterval;
+use DateTime;
 
 /**
  * @internal
@@ -578,6 +582,49 @@ class UpdateCampTest extends ECampApiTestCase {
                     'propertyPath' => 'addressCity',
                     'message' => 'This value is too long. It should have 128 characters or less.',
                 ],
+            ],
+        ]);
+    }
+
+    public function testPatchCampEnablesSharedAndSetsMetadata() {
+        /** @var Camp $camp */
+        $camp = static::getFixture('camp1');
+        // Precondition before the test
+        $this->assertNull($camp->sharedSince);
+
+        static::createClientWithCredentials()->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'isShared' => true,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'isShared' => true,
+            '_links' => [
+                'sharedBy' => [ 'href' => $this->getIriFor('user1manager') ],
+            ],
+        ]);
+        $camp = $this->getEntityManager()->getRepository(Camp::class)->find($camp->getId());
+        $this->assertNotNull($camp->sharedSince);
+        $shortlyAgo = new DateTime();
+        $shortlyAgo->sub(new DateInterval('PT30S'));
+        $this->assertGreaterThan($shortlyAgo, $camp->sharedSince);
+    }
+
+    public function testPatchCampDisablesSharedAndDoesNotChangeMetadata() {
+        /** @var Camp $camp */
+        $camp = static::getFixture('campShared');
+
+        static::createClientWithCredentials(['email' => static::getFixture('user4unrelated')->getEmail()])
+            ->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+                'isShared' => false,
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'isShared' => false,
+            'sharedSince' => '2025-09-03T12:00:00+00:00',
+            '_links' => [
+                'sharedBy' => [ 'href' => $this->getIriFor('admin') ],
             ],
         ]);
     }
