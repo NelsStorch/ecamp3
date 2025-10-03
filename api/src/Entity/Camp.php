@@ -190,7 +190,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     public ?Camp $campPrototype = null;
 
     /**
-     * Whether the programme of this camp is publicly available to anyone (except for
+     * Whether the programme of this camp is publicly available to anyone (including
      * personal data such as camp collaborations, personal material lists,
      * responsibilities and comments).
      */
@@ -203,7 +203,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     /**
      * Date and time when the camp was last set to be shared publicly.
      */
-    #[ApiProperty(example: '2025-10-01T00:00:00+00:00', required: true, openapiContext: ['format' => 'date-time'])]
+    #[ApiProperty(example: '2025-10-01T00:00:00+00:00', openapiContext: ['format' => 'date-time'])]
     #[Groups(['read'])]
     #[ORM\Column(type: 'datetime', nullable: true)]
     public ?\DateTimeInterface $sharedSince = null;

@@ -189,9 +189,23 @@ class ListMaterialItemsTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testListMaterialItemsFilteredByPeriodIsDeniedForInvitedCollaborator() {
+    public function testListMaterialItemsFilteredByPeriodIsDeniedForInactiveCollaborator() {
         $period = static::getFixture('period1');
         static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/material_items?period=%2Fperiods%2F'.$period->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(400);
+
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Item not found for "'.$this->getIriFor('period1').'".',
+        ]);
+    }
+
+    public function testListMaterialItemsFilteredByPeriodIsDeniedForInvitedCollaborator() {
+        $period = static::getFixture('period1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
             ->request('GET', '/material_items?period=%2Fperiods%2F'.$period->getId())
         ;
 
