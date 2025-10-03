@@ -107,6 +107,8 @@ export default {
           }))
         )
 
+        await this.loadData()
+
         const checklistNodes = await Promise.all(
           checklistItem.checklistNodes().items.map(async (cn) => ({
             checklistNode: cn,
@@ -137,9 +139,15 @@ export default {
   },
   async mounted() {
     this.api.href(this.api.get(), 'checklistItems').then((uri) => (this.entityUri = uri))
-
-    await this.api.get().checklistNodes({ camp: this.camp._meta.self })
-    await this.api.get().checklistItems({ 'checklist.camp': this.camp._meta.self })
+    this.loadData()
+  },
+  methods: {
+    async loadData() {
+      return Promise.all([
+        this.api.get().checklistNodes({ camp: this.camp._meta.self }),
+        this.api.get().checklistItems({ 'checklist.camp': this.camp._meta.self }),
+      ])
+    },
   },
 }
 </script>
