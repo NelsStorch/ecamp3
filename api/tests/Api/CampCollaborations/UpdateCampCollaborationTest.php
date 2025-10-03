@@ -228,6 +228,45 @@ class UpdateCampCollaborationTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchCampCollaborationInSharedCampIsDeniedForUnrelatedUser() {
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'status' => 'inactive',
+            'role' => 'guest',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchCampCollaborationInSharedCampIsDeniedForInactiveUser() {
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'status' => 'inactive',
+            'role' => 'guest',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchCampCollaborationInSharedCampIsDeniedForInvitedUser() {
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [
+            'status' => 'inactive',
+            'role' => 'guest',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchCampCollaborationDisallowsChangingInviteEmail() {
         $campCollaboration = static::getFixture('campCollaboration1manager');
         static::createClientWithCredentials()->request('PATCH', '/camp_collaborations/'.$campCollaboration->getId(), ['json' => [

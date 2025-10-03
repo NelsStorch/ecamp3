@@ -13,5 +13,7 @@ class DeleteChecklistNodeTest extends DeleteContentNodeTestCase {
 
         $this->endpoint = '/content_node/checklist_nodes';
         $this->defaultEntity = static::getFixture('checklistNode3');
+        $this->campPrototypeEntity = static::getFixture('checklistNodeCampPrototype');
+        $this->sharedCampEntity = static::getFixture('checklistNodeCampShared');
     }
 }

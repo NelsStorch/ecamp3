@@ -109,4 +109,53 @@ class ReadMaterialListTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleMaterialListFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var MaterialList $materialList */
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials()->request('GET', '/material_lists/'.$materialList->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $materialList->getId(),
+            'name' => $materialList->name,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'materialItems' => ['href' => '/material_items?materialList=%2Fmaterial_lists%2F'.$materialList->getId()],
+            ],
+        ]);
+    }
+
+    public function testGetSingleMaterialListFromSharedCampIsAllowedForInactiveUser() {
+        /** @var MaterialList $materialList */
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/material_lists/'.$materialList->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $materialList->getId(),
+            'name' => $materialList->name,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'materialItems' => ['href' => '/material_items?materialList=%2Fmaterial_lists%2F'.$materialList->getId()],
+            ],
+        ]);
+    }
+
+    public function testGetSingleMaterialListFromSharedCampIsAllowedForInvitedUser() {
+        /** @var MaterialList $materialList */
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/material_lists/'.$materialList->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $materialList->getId(),
+            'name' => $materialList->name,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'materialItems' => ['href' => '/material_items?materialList=%2Fmaterial_lists%2F'.$materialList->getId()],
+            ],
+        ]);
+    }
 }

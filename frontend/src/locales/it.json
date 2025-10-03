@@ -50,6 +50,12 @@
       },
       "campMembers": {
         "title": "Membri"
+      },
+      "footerSharedCamp": {
+        "outsider": "In questo campo non collabori:",
+        "outsiderDescription": "Non puoi modificare i dati, ma puoi visualizzare e copiare il programma.",
+        "shared": "Il campo è aperto al pubblico:",
+        "sharedDescription": "Persone estranee possono visionare e copiare tutti i dati presenti nel campo."
       }
     },
     "campAdmin": {
@@ -106,6 +112,21 @@
       },
       "campSettings": {
         "title": "Impostazioni"
+      },
+      "campSharingSettings": {
+        "activate": "Attiva condivisione",
+        "deactivate": "Disattiva condivisione",
+        "implications": "Se attivi la condivisione, anche persone esterne potranno visualizzare e copiare il programma, la squadra, gli elenchi dei materiali, le responsabilità e tutto il resto relativo al campo. Solo i membri della squadra possono modificare i dati.",
+        "notShared": {
+          "description": ": Solo i membri del team possono visualizzare il programma e i dati relativi a questo campo.",
+          "title": "L'autorizzazione non è attivata"
+        },
+        "shared": {
+          "description": ": Le persone esterne possono visualizzare e copiare il programma, il team, gli elenchi dei materiali, le responsabilità e tutto il resto relativo a questo campo. Solo i membri del team possono modificare i dati.",
+          "title": "il campo è aperto al pubblico"
+        },
+        "sharedSince": "Il {sharedSince} da {sharedBy}",
+        "title": "Condividere il campo"
       },
       "createCampPeriods": {
         "add": "Aggiungi un punto"
@@ -450,6 +471,7 @@
       "save": "Salvare",
       "saving": "Salvataggio",
       "search": "Ricerca",
+      "share": "Condividi",
       "submit": "Inviare",
       "tryagain": "Riprovare",
       "unlock": "Sblocca",
@@ -650,13 +672,10 @@
       "navigation": {
         "desktop": {
           "navTopbar": {
-            "admin": "Admin",
             "campIsLoading": "Il campo sta caricando",
             "material": "Material",
-            "print": "Stampa",
             "program": "Programm",
-            "story": "Storia",
-            "team": "Team"
+            "story": "Storia"
           }
         },
         "mobile": {

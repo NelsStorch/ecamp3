@@ -57,9 +57,9 @@ class DeleteChecklistTest extends ECampApiTestCase {
     }
 
     public function testDeleteChecklistIsDeniedForUnrelatedUser() {
-        $Checklist = static::getFixture('checklist2WithNoItems');
+        $checklist = static::getFixture('checklist2WithNoItems');
         static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])
-            ->request('DELETE', '/checklists/'.$Checklist->getId())
+            ->request('DELETE', '/checklists/'.$checklist->getId())
         ;
 
         $this->assertResponseStatusCodeSame(404);
@@ -70,9 +70,9 @@ class DeleteChecklistTest extends ECampApiTestCase {
     }
 
     public function testDeleteChecklistIsDeniedForInactiveCollaborator() {
-        $Checklist = static::getFixture('checklist2WithNoItems');
+        $checklist = static::getFixture('checklist2WithNoItems');
         static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
-            ->request('DELETE', '/checklists/'.$Checklist->getId())
+            ->request('DELETE', '/checklists/'.$checklist->getId())
         ;
 
         $this->assertResponseStatusCodeSame(404);
@@ -83,9 +83,9 @@ class DeleteChecklistTest extends ECampApiTestCase {
     }
 
     public function testDeleteChecklistIsDeniedForGuest() {
-        $Checklist = static::getFixture('checklist2WithNoItems');
+        $checklist = static::getFixture('checklist2WithNoItems');
         static::createClientWithCredentials(['email' => static::$fixtures['user3guest']->getEmail()])
-            ->request('DELETE', '/checklists/'.$Checklist->getId())
+            ->request('DELETE', '/checklists/'.$checklist->getId())
         ;
 
         $this->assertResponseStatusCodeSame(403);
@@ -96,24 +96,24 @@ class DeleteChecklistTest extends ECampApiTestCase {
     }
 
     public function testDeleteChecklistIsAllowedForMember() {
-        $Checklist = static::getFixture('checklist2WithNoItems');
+        $checklist = static::getFixture('checklist2WithNoItems');
         static::createClientWithCredentials(['email' => static::$fixtures['user2member']->getEmail()])
-            ->request('DELETE', '/checklists/'.$Checklist->getId())
+            ->request('DELETE', '/checklists/'.$checklist->getId())
         ;
         $this->assertResponseStatusCodeSame(204);
-        $this->assertNull($this->getEntityManager()->getRepository(Checklist::class)->find($Checklist->getId()));
+        $this->assertNull($this->getEntityManager()->getRepository(Checklist::class)->find($checklist->getId()));
     }
 
     public function testDeleteChecklistIsAllowedForManager() {
-        $Checklist = static::getFixture('checklist2WithNoItems');
-        static::createClientWithCredentials()->request('DELETE', '/checklists/'.$Checklist->getId());
+        $checklist = static::getFixture('checklist2WithNoItems');
+        static::createClientWithCredentials()->request('DELETE', '/checklists/'.$checklist->getId());
         $this->assertResponseStatusCodeSame(204);
-        $this->assertNull($this->getEntityManager()->getRepository(Checklist::class)->find($Checklist->getId()));
+        $this->assertNull($this->getEntityManager()->getRepository(Checklist::class)->find($checklist->getId()));
     }
 
     public function testDeleteChecklistFromCampPrototypeIsDeniedForUnrelatedUser() {
-        $Checklist = static::getFixture('checklist1campPrototype');
-        static::createClientWithCredentials()->request('DELETE', '/checklists/'.$Checklist->getId());
+        $checklist = static::getFixture('checklist1campPrototype');
+        static::createClientWithCredentials()->request('DELETE', '/checklists/'.$checklist->getId());
 
         $this->assertResponseStatusCodeSame(403);
         $this->assertJsonContains([
@@ -122,9 +122,46 @@ class DeleteChecklistTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteChecklisIsDeniedWhenUsedInChecklistNode() {
-        $Checklist = static::getFixture('checklist1');
-        static::createClientWithCredentials()->request('DELETE', '/checklists/'.$Checklist->getId());
+    public function testDeleteChecklistFromSharedCampIsDeniedForUnrelatedUser() {
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/checklists/'.$checklist->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteChecklistFromSharedCampIsDeniedForInactiveUser() {
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('DELETE', '/checklists/'.$checklist->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteChecklistFromSharedCampIsDeniedForInvitedUser() {
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('DELETE', '/checklists/'.$checklist->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteChecklistIsDeniedWhenUsedInChecklistNode() {
+        $checklist = static::getFixture('checklist1');
+        static::createClientWithCredentials()->request('DELETE', '/checklists/'.$checklist->getId());
         $this->assertResponseStatusCodeSame(422);
         $this->assertJsonContains([
             'title' => 'An error occurred',

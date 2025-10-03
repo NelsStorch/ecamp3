@@ -13,6 +13,8 @@ class UpdateColumnLayoutTest extends UpdateContentNodeTestCase {
 
         $this->endpoint = '/content_node/column_layouts';
         $this->defaultEntity = static::getFixture('columnLayoutChild1');
+        $this->campPrototypeEntity = static::getFixture('columnLayout3campPrototype');
+        $this->sharedCampEntity = static::getFixture('columnLayout3campShared');
     }
 
     public function testPatchColumnLayoutAcceptsValidJson() {

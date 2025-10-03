@@ -29,3 +29,12 @@ App\Entity\Day:
   day1period1campPrototype:
     period: '@period1campPrototype'
     dayOffset: 0
+  day1period1campShared:
+    period: '@period1campShared'
+    dayOffset: 0
+  day2period1campShared:
+    period: '@period1campShared'
+    dayOffset: 1
+  day3period1campShared:
+    period: '@period1campShared'
+    dayOffset: 2

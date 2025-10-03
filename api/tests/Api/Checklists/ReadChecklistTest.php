@@ -105,4 +105,50 @@ class ReadChecklistTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleChecklistFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var Checklist $checklist */
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials()->request('GET', '/checklists/'.$checklist->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $checklist->getId(),
+            'name' => $checklist->name,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleChecklistFromSharedCampIsAllowedForInactiveUser() {
+        /** @var Checklist $checklist */
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/checklists/'.$checklist->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $checklist->getId(),
+            'name' => $checklist->name,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleChecklistFromSharedCampIsAllowedForInvitedUser() {
+        /** @var Checklist $checklist */
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/checklists/'.$checklist->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $checklist->getId(),
+            'name' => $checklist->name,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
 }

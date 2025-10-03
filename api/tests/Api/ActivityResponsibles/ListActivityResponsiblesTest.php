@@ -24,7 +24,7 @@ class ListActivityResponsiblesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/activity_responsibles');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 3,
+            'totalItems' => 4,
             '_links' => [
                 'items' => [],
             ],
@@ -36,6 +36,7 @@ class ListActivityResponsiblesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('activityResponsible1')],
             ['href' => $this->getIriFor('activityResponsible2')],
             ['href' => $this->getIriFor('activityResponsible1campPrototype')],
+            ['href' => $this->getIriFor('activityResponsible1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -90,6 +91,46 @@ class ListActivityResponsiblesTest extends ECampApiTestCase {
         $this->assertJsonContains(['totalItems' => 1]);
         $this->assertEqualsCanonicalizing([
             ['href' => $this->getIriFor('activityResponsible1campPrototype')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListActivityResponsiblesFilteredByActivityInSharedCampIsAllowedForUnrelatedUser() {
+        $activity = static::getFixture('activity1campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId());
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('activityResponsible1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListActivityResponsiblesFilteredByActivityInSharedCampIsAllowedForInactiveUser() {
+        $activity = static::getFixture('activity1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('activityResponsible1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListActivityResponsiblesFilteredByActivityInSharedCampIsAllowedForInvitedUser() {
+        $activity = static::getFixture('activity1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('activityResponsible1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 

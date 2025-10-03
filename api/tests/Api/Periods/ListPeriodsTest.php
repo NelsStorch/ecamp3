@@ -24,7 +24,7 @@ class ListPeriodsTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/periods');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 4,
+            'totalItems' => 5,
             '_links' => [
                 'items' => [],
             ],
@@ -37,6 +37,7 @@ class ListPeriodsTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('period2')],
             ['href' => $this->getIriFor('period1camp2')],
             ['href' => $this->getIriFor('period1campPrototype')],
+            ['href' => $this->getIriFor('period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -92,6 +93,46 @@ class ListPeriodsTest extends ECampApiTestCase {
         $this->assertJsonContains(['totalItems' => 1]);
         $this->assertEqualsCanonicalizing([
             ['href' => $this->getIriFor('period1campPrototype')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListPeriodsFilteredBySharedCampIsAllowedForUnrelatedUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/periods?camp=%2Fcamps%2F'.$camp->getId());
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListPeriodsFilteredBySharedCampIsAllowedForInactiveUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/periods?camp=%2Fcamps%2F'.$camp->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListPeriodsFilteredBySharedCampIsAllowedForInvitedUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/periods?camp=%2Fcamps%2F'.$camp->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 }

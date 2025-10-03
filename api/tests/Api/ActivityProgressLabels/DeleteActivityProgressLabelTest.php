@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Api\ActivityProgressLabel;
+namespace App\Tests\Api\ActivityProgressLabels;
 
 use App\Entity\ActivityProgressLabel;
 use App\Tests\Api\ECampApiTestCase;
@@ -87,5 +87,49 @@ class DeleteActivityProgressLabelTest extends ECampApiTestCase {
         static::createClientWithCredentials()->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
         $this->assertResponseStatusCodeSame(204);
         $this->assertNull($this->getEntityManager()->getRepository(ActivityProgressLabel::class)->find($activityProgressLabel->getId()));
+    }
+
+    public function testDeleteActivityProgressLabelFromCampPrototypeIsDeniedForUnrelatedUser() {
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campPrototype');
+        static::createClientWithCredentials()->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteActivityProgressLabelFromSharedCampIsDeniedForUnrelatedUser() {
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteActivityProgressLabelFromSharedCampIsDeniedForInactiveUser() {
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteActivityProgressLabelFromSharedCampIsDeniedForInvitedUser() {
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
     }
 }

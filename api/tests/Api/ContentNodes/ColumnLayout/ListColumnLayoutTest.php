@@ -30,9 +30,13 @@ class ListColumnLayoutTest extends ListContentNodeTestCase {
             $this->getIriFor('columnLayout2campUnrelated'),
         ];
 
-        $this->contentNodesCampPrototypes = [
+        $this->contentNodesPublicCamps = [
             $this->getIriFor('columnLayout1campPrototype'),
             $this->getIriFor('columnLayout2campPrototype'),
+            $this->getIriFor('columnLayout3campPrototype'),
+            $this->getIriFor('columnLayout1campShared'),
+            $this->getIriFor('columnLayout2campShared'),
+            $this->getIriFor('columnLayout3campShared'),
         ];
     }
 }

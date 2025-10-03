@@ -84,4 +84,37 @@ class DeleteActivityResponsibleTest extends ECampApiTestCase {
             'detail' => 'Access Denied.',
         ]);
     }
+
+    public function testDeleteActivityResponsibleFromSharedCampIsDeniedForUnrelatedUser() {
+        $activityResponsible = static::getFixture('activityResponsible1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/activity_responsibles/'.$activityResponsible->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteActivityResponsibleFromSharedCampIsDeniedForInactiveUser() {
+        $activityResponsible = static::getFixture('activityResponsible1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('DELETE', '/activity_responsibles/'.$activityResponsible->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteActivityResponsibleFromSharedCampIsDeniedForInvitedUser() {
+        $activityResponsible = static::getFixture('activityResponsible1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('DELETE', '/activity_responsibles/'.$activityResponsible->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
 }

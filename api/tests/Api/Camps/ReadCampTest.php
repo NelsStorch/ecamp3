@@ -148,6 +148,77 @@ class ReadCampTest extends ECampApiTestCase {
             'addressZipcode' => $camp->addressZipcode,
             'addressCity' => $camp->addressCity,
             'isPrototype' => true,
+            'isShared' => false,
+            '_links' => [
+                'creator' => [],
+            ],
+        ]);
+    }
+
+    public function testGetSingleSharedCampIsAllowedForUnrelatedUser() {
+        /** @var Camp $camp */
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials()->request('GET', '/camps/'.$camp->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $camp->getId(),
+            'shortTitle' => $camp->shortTitle,
+            'title' => $camp->title,
+            'motto' => $camp->motto,
+            'addressName' => $camp->addressName,
+            'addressStreet' => $camp->addressStreet,
+            'addressZipcode' => $camp->addressZipcode,
+            'addressCity' => $camp->addressCity,
+            'isPrototype' => false,
+            'isShared' => true,
+            '_links' => [
+                'creator' => [],
+            ],
+        ]);
+    }
+
+    public function testGetSingleSharedCampIsAllowedForInactiveUser() {
+        /** @var Camp $camp */
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/camps/'.$camp->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $camp->getId(),
+            'shortTitle' => $camp->shortTitle,
+            'title' => $camp->title,
+            'motto' => $camp->motto,
+            'addressName' => $camp->addressName,
+            'addressStreet' => $camp->addressStreet,
+            'addressZipcode' => $camp->addressZipcode,
+            'addressCity' => $camp->addressCity,
+            'isPrototype' => false,
+            'isShared' => true,
+            '_links' => [
+                'creator' => [],
+            ],
+        ]);
+    }
+
+    public function testGetSingleSharedCampIsAllowedForInvitedUser() {
+        /** @var Camp $camp */
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/camps/'.$camp->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $camp->getId(),
+            'shortTitle' => $camp->shortTitle,
+            'title' => $camp->title,
+            'motto' => $camp->motto,
+            'addressName' => $camp->addressName,
+            'addressStreet' => $camp->addressStreet,
+            'addressZipcode' => $camp->addressZipcode,
+            'addressCity' => $camp->addressCity,
+            'isPrototype' => false,
+            'isShared' => true,
             '_links' => [
                 'creator' => [],
             ],

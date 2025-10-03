@@ -32,6 +32,64 @@
             },
             {
                 "_embedded": {
+                    "materialItems": []
+                },
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "materialItems": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": "escaped_value",
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_embedded": {
+                    "materialItems": []
+                },
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "materialItems": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": "escaped_value",
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_embedded": {
                     "materialItems": [
                         {
                             "_links": {
@@ -135,11 +193,16 @@
             },
             {
                 "_links": {
+                    "checklistItems": {
+                        "href": "escaped_value"
+                    },
                     "children": [],
                     "contentType": {
                         "href": "escaped_value"
                     },
-                    "parent": "escaped_value",
+                    "parent": {
+                        "href": "escaped_value"
+                    },
                     "root": {
                         "href": "escaped_value"
                     },
@@ -148,14 +211,33 @@
                     }
                 },
                 "contentTypeName": "escaped_value",
-                "data": {
-                    "columns": [
-                        {
-                            "slot": "escaped_value",
-                            "width": "escaped_value"
-                        }
-                    ]
+                "data": "escaped_value",
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "checklistItems": {
+                        "href": "escaped_value"
+                    },
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
                 },
+                "contentTypeName": "escaped_value",
+                "data": "escaped_value",
                 "id": "escaped_value",
                 "instanceName": "escaped_value",
                 "position": "escaped_value",
@@ -252,6 +334,94 @@
                         "href": "escaped_value"
                     },
                     "parent": "escaped_value",
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "columns": [
+                        {
+                            "slot": "escaped_value",
+                            "width": "escaped_value"
+                        }
+                    ]
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": "escaped_value",
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "columns": [
+                        {
+                            "slot": "escaped_value",
+                            "width": "escaped_value"
+                        }
+                    ]
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "columns": [
+                        {
+                            "slot": "escaped_value",
+                            "width": "escaped_value"
+                        }
+                    ]
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
                     "root": {
                         "href": "escaped_value"
                     },
@@ -372,6 +542,126 @@
                 "contentTypeName": "escaped_value",
                 "data": {
                     "html": "escaped_value"
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "html": "escaped_value"
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "html": "escaped_value"
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "items": [
+                        {
+                            "slot": "escaped_value"
+                        },
+                        {
+                            "slot": "escaped_value"
+                        },
+                        {
+                            "slot": "escaped_value"
+                        }
+                    ]
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "items": [
+                        {
+                            "slot": "escaped_value"
+                        },
+                        {
+                            "slot": "escaped_value"
+                        },
+                        {
+                            "slot": "escaped_value"
+                        }
+                    ]
                 },
                 "id": "escaped_value",
                 "instanceName": "escaped_value",
@@ -457,6 +747,96 @@
                 },
                 "contentTypeName": "escaped_value",
                 "data": {
+                    "options": {
+                        "key1": {
+                            "checked": "escaped_value"
+                        }
+                    }
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "options": {
+                        "key1": {
+                            "checked": "escaped_value"
+                        }
+                    }
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "sections": {
+                        "aaaaaaaa-3ccd-4d9a-ab40-dddddddddddd": {
+                            "column1": "escaped_value",
+                            "column2Html": "escaped_value",
+                            "column3": "escaped_value",
+                            "position": "escaped_value"
+                        }
+                    }
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
                     "sections": {
                         "ab9740f6-61a4-4cae-b574-a73aeb7c5ea0": {
                             "column1": "escaped_value",
@@ -496,6 +876,38 @@
                 "contentTypeName": "escaped_value",
                 "data": {
                     "sections": {
+                        "cccccccc-3ccd-4d9a-ab40-aaaaaaaaaaaa": {
+                            "column1": "escaped_value",
+                            "column2Html": "escaped_value",
+                            "column3": "escaped_value",
+                            "position": "escaped_value"
+                        }
+                    }
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": {
+                        "href": "escaped_value"
+                    },
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "sections": {
                         "ea6f1e5d-0ef7-454f-8ae0-1d9b3bfd1177": {
                             "column1": "escaped_value",
                             "column2Html": "escaped_value",
@@ -503,6 +915,106 @@
                             "position": "escaped_value"
                         }
                     }
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        }
+                    ],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": "escaped_value",
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "columns": [
+                        {
+                            "slot": "escaped_value",
+                            "width": "escaped_value"
+                        }
+                    ]
+                },
+                "id": "escaped_value",
+                "instanceName": "escaped_value",
+                "position": "escaped_value",
+                "slot": "escaped_value"
+            },
+            {
+                "_links": {
+                    "children": [
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        },
+                        {
+                            "href": "escaped_value"
+                        }
+                    ],
+                    "contentType": {
+                        "href": "escaped_value"
+                    },
+                    "parent": "escaped_value",
+                    "root": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "contentTypeName": "escaped_value",
+                "data": {
+                    "columns": [
+                        {
+                            "slot": "escaped_value",
+                            "width": "escaped_value"
+                        }
+                    ]
                 },
                 "id": "escaped_value",
                 "instanceName": "escaped_value",
@@ -742,6 +1254,54 @@
     },
     "_links": {
         "items": [
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
+            {
+                "href": "escaped_value"
+            },
             {
                 "href": "escaped_value"
             },

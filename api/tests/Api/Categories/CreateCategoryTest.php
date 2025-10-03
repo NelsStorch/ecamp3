@@ -94,6 +94,42 @@ class CreateCategoryTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateCategoryInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/categories', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateCategoryInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/categories', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateCategoryInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/categories', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testCreateCategoryCreatesNewColumnLayoutAsRootContentNode() {
         static::createClientWithCredentials()->request('POST', '/categories', ['json' => $this->getExampleWritePayload()]);
 
@@ -104,13 +140,6 @@ class CreateCategoryTest extends ECampApiTestCase {
         $this->assertJsonContains(['_links' => [
             'rootContentNode' => ['href' => $this->getIriFor($newestColumnLayout)],
         ]]);
-    }
-
-    public function testCreateCampDoesntExposeCampPrototypeId() {
-        $response = static::createClientWithCredentials()->request('POST', '/categories', ['json' => $this->getExampleWritePayload([], ['preferredContentTypes'])]);
-
-        $this->assertResponseStatusCodeSame(201);
-        $this->assertArrayNotHasKey('campPrototypeId', $response->toArray());
     }
 
     public function testCreateCategoryValidatesMissingCamp() {

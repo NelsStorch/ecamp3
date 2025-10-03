@@ -12,6 +12,7 @@
   >
     <v-autocomplete
       v-bind="$attrs"
+      :search-input.sync="search"
       :filled="filled"
       :hide-details="hideDetails"
       :error-messages="veeErrors.concat(errorMessages)"
@@ -19,9 +20,22 @@
       :class="[inputClass]"
       :readonly="readonly"
       :append-icon="readonly ? null : '$dropdown'"
-      :filter="filter"
+      :filter="tokensFilter"
       v-on="$listeners"
     >
+      <template #item="{ item, on, attrs }">
+        <v-list-item v-bind="attrs" v-on="on">
+          <v-list-item-content>
+            <v-list-item-title>
+              <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
+                <mark v-if="part.h">{{ part.text }}</mark>
+                <span v-else>{{ part.text }}</span>
+              </span>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+
       <!-- passing through all slots -->
       <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
       <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
@@ -35,6 +49,7 @@
 import { ValidationProvider } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import uFuzzy from '@leeoniya/ufuzzy'
 
 export default {
   name: 'EAutocomplete',
@@ -45,14 +60,38 @@ export default {
     skipIfEmpty: { type: Boolean, default: true },
     readonly: { type: Boolean, default: false },
   },
+  data() {
+    return {
+      fuzzy: new uFuzzy({ intraMode: 1 }),
+      search: null,
+      searchInfos: new Map(),
+    }
+  },
   methods: {
-    filter(item, queryText, itemText) {
-      return queryText
-        .toLocaleLowerCase()
-        .split(/\s+/g)
-        .every((part) => {
-          return itemText.toLocaleLowerCase().indexOf(part) > -1
-        })
+    tokensFilter(item, queryText, itemText) {
+      const [idxs, info] = this.fuzzy.search([itemText], queryText, true, 1e3)
+      this.searchInfos.set(item.value, info)
+      return idxs && idxs.length > 0
+    },
+
+    renderHighlighted(item) {
+      if (this.search) {
+        if (this.searchInfos.has(item.value)) {
+          const info = this.searchInfos.get(item.value)
+          if (info) {
+            return uFuzzy.highlight(
+              item.text,
+              info.ranges[0],
+              (p, m) => ({ h: m, text: p }),
+              [],
+              (a, p) => {
+                a.push(p)
+              }
+            )
+          }
+        }
+      }
+      return [{ h: false, text: item.text }]
     },
   },
 }

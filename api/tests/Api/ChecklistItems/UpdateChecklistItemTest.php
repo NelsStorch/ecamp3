@@ -87,8 +87,44 @@ class UpdateChecklistItemTest extends ECampApiTestCase {
     }
 
     public function testPatchChecklistItemInCampPrototypeIsDeniedForUnrelatedUser() {
-        $checklistItem = static::getFixture('checklistItemPrototype_1_1');
+        $checklistItem = static::getFixture('checklistItemCampPrototype_1_1');
         static::createClientWithCredentials()->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
+            'text' => 'Ziel 2',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchChecklistItemInSharedCampIsDeniedForUnrelatedUser() {
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials()->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
+            'text' => 'Ziel 2',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchChecklistItemInSharedCampIsDeniedForInactiveUser() {
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
+            'text' => 'Ziel 2',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchChecklistItemInSharedCampIsDeniedForInvitedUser() {
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/checklist_items/'.$checklistItem->getId(), ['json' => [
             'text' => 'Ziel 2',
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
         $this->assertResponseStatusCodeSame(403);

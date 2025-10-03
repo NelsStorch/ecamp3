@@ -20,3 +20,9 @@ App\Entity\MaterialList:
   materialList1campPrototype:
     camp: '@campPrototype'
     name: Einkaufsliste
+  materialList1campShared:
+    camp: '@campShared'
+    name: Pfadiheim
+  materialList2campShared:
+    camp: '@campShared'
+    campCollaboration: '@campCollaboration1campShared'

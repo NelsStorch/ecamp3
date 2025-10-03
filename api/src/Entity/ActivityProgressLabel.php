@@ -29,7 +29,9 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)'
         ),
         new Patch(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
@@ -50,7 +52,9 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'campId' => new Link(
                     toProperty: 'camp',
                     fromClass: Camp::class,
-                    security: 'is_granted("CAMP_COLLABORATOR", camp) or is_granted("CAMP_IS_PROTOTYPE", camp)'
+                    security: 'is_granted("CAMP_COLLABORATOR", camp) or
+                               is_granted("CAMP_IS_SHARED", camp) or
+                               is_granted("CAMP_IS_PROTOTYPE", camp)'
                 ),
             ],
             security: 'is_fully_authenticated()',

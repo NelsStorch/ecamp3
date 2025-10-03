@@ -55,6 +55,6 @@ docker compose down && docker compose up
 ```
 or
 ```shell
-docker-compsoe stop php; docker compose rm php; docker compose up
+docker compose stop api; docker compose rm api; docker compose up
 ```  
 if you don't want to restart the frontend.

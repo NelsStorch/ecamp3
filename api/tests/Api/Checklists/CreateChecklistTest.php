@@ -144,6 +144,42 @@ class CreateChecklistTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateChecklistInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/checklists', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateChecklistInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/checklists', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateChecklistInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/checklists', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testCreateChecklistValidatesMissingCamp() {
         static::createClientWithCredentials()->request('POST', '/checklists', ['json' => $this->getExampleWritePayload([], ['camp'])]);
 

@@ -10,6 +10,7 @@ framework:
     # See https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#headers
     trusted_headers:
         - 'x-forwarded-for'
+        - 'x-forwarded-host'
         - 'x-forwarded-prefix'
         - 'x-forwarded-proto'
 

@@ -5,11 +5,12 @@
     ":prConcurrentLimitNone"
   ],
   "constraints": {
-    "node": "24.7.0",
+    "node": "24.8.0",
     "php": "8.4.12"
   },
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
+  "minimumReleaseAge": "7 days",
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["on wednesday and thursday"]

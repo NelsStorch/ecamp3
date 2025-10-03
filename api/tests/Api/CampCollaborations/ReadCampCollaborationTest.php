@@ -117,4 +117,59 @@ class ReadCampCollaborationTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleCampCollaborationFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var CampCollaboration $campCollaboration */
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials()->request('GET', '/camp_collaborations/'.$campCollaboration->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $campCollaboration->getId(),
+            'role' => $campCollaboration->role,
+            'status' => $campCollaboration->status,
+            'inviteEmail' => null,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'user' => ['href' => $this->getIriFor('user4unrelated')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleCampCollaborationFromSharedCampIsAllowedForInactiveUser() {
+        /** @var CampCollaboration $campCollaboration */
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/camp_collaborations/'.$campCollaboration->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $campCollaboration->getId(),
+            'role' => $campCollaboration->role,
+            'status' => $campCollaboration->status,
+            'inviteEmail' => null,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'user' => ['href' => $this->getIriFor('user4unrelated')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleCampCollaborationFromSharedCampIsAllowedForInvitedUser() {
+        /** @var CampCollaboration $campCollaboration */
+        $campCollaboration = static::getFixture('campCollaboration1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/camp_collaborations/'.$campCollaboration->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $campCollaboration->getId(),
+            'role' => $campCollaboration->role,
+            'status' => $campCollaboration->status,
+            'inviteEmail' => null,
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+                'user' => ['href' => $this->getIriFor('user4unrelated')],
+            ],
+        ]);
+    }
 }

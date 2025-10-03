@@ -1,7 +1,11 @@
 <template>
   <content-card :title="$tc('entity.checklist.name', 2)" toolbar max-width="800">
     <template #title-actions>
-      <ChecklistCreate :camp="camp" :checklist-collection="checklistCollection" />
+      <ChecklistCreate
+        v-if="isContributor"
+        :camp="camp"
+        :checklist-collection="checklistCollection"
+      />
     </template>
     <v-card-text>
       <v-list class="mx-n2 py-0">
@@ -17,7 +21,7 @@
             </v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action style="display: inline">
+          <v-list-item-action v-if="isContributor" style="display: inline">
             <v-item-group>
               <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
             </v-item-group>
@@ -33,6 +37,7 @@ import ContentCard from '@/components/layout/ContentCard.vue'
 import ChecklistCreate from '@/components/checklist/ChecklistCreate.vue'
 import { checklistRoute } from '@/router.js'
 import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
+import { campRoleMixin } from '@/mixins/campRoleMixin.js'
 
 export default {
   name: 'ChecklistOverview',
@@ -41,6 +46,7 @@ export default {
     ChecklistCreate,
     ContentCard,
   },
+  mixins: [campRoleMixin],
   props: {
     camp: { type: Object, required: false, default: null },
     checklistCollection: { type: Object, required: true },

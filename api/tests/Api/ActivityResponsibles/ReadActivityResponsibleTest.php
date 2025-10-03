@@ -105,4 +105,50 @@ class ReadActivityResponsibleTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleActivityResponsibleFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var ActivityResponsible $activityResponsible */
+        $activityResponsible = static::getFixture('activityResponsible1campShared');
+        static::createClientWithCredentials()->request('GET', '/activity_responsibles/'.$activityResponsible->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activityResponsible->getId(),
+            '_links' => [
+                'activity' => ['href' => $this->getIriFor('activity1campShared')],
+                'campCollaboration' => ['href' => $this->getIriFor('campCollaboration1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityResponsibleFromSharedCampIsAllowedForInactiveUser() {
+        /** @var ActivityResponsible $activityResponsible */
+        $activityResponsible = static::getFixture('activityResponsible1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/activity_responsibles/'.$activityResponsible->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activityResponsible->getId(),
+            '_links' => [
+                'activity' => ['href' => $this->getIriFor('activity1campShared')],
+                'campCollaboration' => ['href' => $this->getIriFor('campCollaboration1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityResponsibleFromSharedCampIsAllowedForInvitedUser() {
+        /** @var ActivityResponsible $activityResponsible */
+        $activityResponsible = static::getFixture('activityResponsible1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/activity_responsibles/'.$activityResponsible->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activityResponsible->getId(),
+            '_links' => [
+                'activity' => ['href' => $this->getIriFor('activity1campShared')],
+                'campCollaboration' => ['href' => $this->getIriFor('campCollaboration1campShared')],
+            ],
+        ]);
+    }
 }

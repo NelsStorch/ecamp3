@@ -31,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Get(
             security: 'is_granted("CHECKLIST_IS_PROTOTYPE", object) or
                        is_granted("CAMP_IS_PROTOTYPE", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
                        is_granted("CAMP_COLLABORATOR", object)
                       '
         ),
@@ -62,7 +63,9 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'campId' => new Link(
                     toProperty: 'camp',
                     fromClass: Camp::class,
-                    security: 'is_granted("CAMP_COLLABORATOR", camp) or is_granted("CAMP_IS_PROTOTYPE", camp)'
+                    security: 'is_granted("CAMP_COLLABORATOR", camp) or
+                               is_granted("CAMP_IS_SHARED", camp) or
+                               is_granted("CAMP_IS_PROTOTYPE", camp)'
                 ),
             ],
             extraProperties: [

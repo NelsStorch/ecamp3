@@ -2,19 +2,19 @@
 
 namespace App\Tests\Api\ContentNodes\RootColumnLayout;
 
-use App\Tests\Api\ContentNodes\DeleteContentNodeTestCase;
+use App\Tests\Api\ECampApiTestCase;
 
 /**
  * Tests for deleting a root column layout.
  *
  * @internal
  */
-class DeleteRootColumnLayoutTest extends DeleteContentNodeTestCase {
+class DeleteRootColumnLayoutTest extends ECampApiTestCase {
     public function setUp(): void {
         parent::setUp();
 
         $this->endpoint = '/content_node/column_layouts';
-        $this->defaultEntity = static::getFixture('columnLayoutChild1');
+        $this->defaultEntity = static::getFixture('columnLayout1');
     }
 
     public function testDeleteColumnLayoutIsNotAllowedWhenColumnLayoutIsRoot() {

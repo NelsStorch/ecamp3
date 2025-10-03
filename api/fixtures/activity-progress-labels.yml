@@ -35,4 +35,12 @@ App\Entity\ActivityProgressLabel:
     camp: '@campPrototype'
     position: 2
     title: 'Überprüft'
+  activityProgressLabel1campShared:
+    camp: '@campShared'
+    position: 0
+    title: 'In Planung'
+  activityProgressLabel2campShared:
+    camp: '@campShared'
+    position: 1
+    title: 'Geplant'
   

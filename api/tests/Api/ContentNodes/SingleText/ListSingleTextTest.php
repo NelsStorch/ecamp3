@@ -22,5 +22,10 @@ class ListSingleTextTest extends ListContentNodeTestCase {
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('singleTextCampUnrelated'),
         ];
+
+        $this->contentNodesPublicCamps = [
+            $this->getIriFor('singleTextCampPrototype'),
+            $this->getIriFor('singleTextCampShared'),
+        ];
     }
 }

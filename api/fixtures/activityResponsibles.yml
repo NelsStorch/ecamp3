@@ -11,3 +11,6 @@ App\Entity\ActivityResponsible:
   activityResponsible1campPrototype:
     campCollaboration: '@campCollaboration1campPrototype'
     activity: '@activity1campPrototype'
+  activityResponsible1campShared:
+    campCollaboration: '@campCollaboration1campShared'
+    activity: '@activity1campShared'

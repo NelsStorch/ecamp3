@@ -14,6 +14,8 @@ class ReadStoryboardTest extends ReadContentNodeTestCase {
 
         $this->endpoint = '/content_node/storyboards';
         $this->defaultEntity = static::getFixture('storyboard1');
+        $this->campPrototypeEntity = static::getFixture('storyboardCampPrototype');
+        $this->sharedCampEntity = static::getFixture('storyboardCampShared');
     }
 
     public function testGetStoryboard() {

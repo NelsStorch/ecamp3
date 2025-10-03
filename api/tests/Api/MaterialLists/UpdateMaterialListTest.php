@@ -109,6 +109,42 @@ class UpdateMaterialListTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchMaterialListInSharedCampIsDeniedForUnrelatedUser() {
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/material_lists/'.$materialList->getId(), ['json' => [
+            'name' => 'Something',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchMaterialListInSharedCampIsDeniedForInactiveUser() {
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/material_lists/'.$materialList->getId(), ['json' => [
+            'name' => 'Something',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchMaterialListInSharedCampIsDeniedForInvitedUser() {
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/material_lists/'.$materialList->getId(), ['json' => [
+            'name' => 'Something',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchMaterialListDisallowsChangingCamp() {
         $materialList = static::getFixture('materialList1');
         static::createClientWithCredentials()->request('PATCH', '/material_lists/'.$materialList->getId(), ['json' => [
