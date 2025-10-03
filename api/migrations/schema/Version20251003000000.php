@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250811195334 extends AbstractMigration {
+final class Version20251003000000 extends AbstractMigration {
     public function getDescription(): string {
         return 'Done-Column for MaterialItem';
     }
