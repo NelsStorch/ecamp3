@@ -20,7 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)'
         ),
         new Patch(
             processor: StoryboardPersistProcessor::class,

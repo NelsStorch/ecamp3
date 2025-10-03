@@ -10,7 +10,7 @@ export const apiPropsMixin = {
     /* field path and URI for saving back to API */
     path: { type: String, required: true },
 
-    /* load devault value from apiObject (via ApiForm injection) */
+    /* load default value from apiObject (via ApiForm injection) */
     uri: {
       type: String,
       required: false,

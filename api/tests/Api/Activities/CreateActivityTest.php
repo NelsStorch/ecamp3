@@ -87,6 +87,88 @@ class CreateActivityTest extends ECampApiTestCase {
     public function testCreateActivityInCampPrototypeIsDeniedForUnrelatedUser() {
         static::createClientWithCredentials()->request('POST', '/activities', ['json' => $this->getExampleWritePayload([
             'category' => $this->getIriFor('category1campPrototype'),
+            'scheduleEntries' => [
+                [
+                    'period' => $this->getIriFor('period1campPrototype'),
+                    'start' => '2023-05-01T15:00:00+00:00',
+                    'end' => '2023-05-01T16:00:00+00:00',
+                ],
+            ],
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/activities', ['json' => $this->getExampleWritePayload([
+            'category' => $this->getIriFor('category1campShared'),
+            'scheduleEntries' => [
+                [
+                    'period' => $this->getIriFor('period1campShared'),
+                    'start' => '2023-05-01T15:00:00+00:00',
+                    'end' => '2023-05-01T16:00:00+00:00',
+                ],
+            ],
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityInSharedCampIsAllowedForManager() {
+        static::createClientWithCredentials(['email' => static::getFixture('user4unrelated')->getEmail()])
+            ->request('POST', '/activities', ['json' => $this->getExampleWritePayload([
+                'category' => $this->getIriFor('category1campShared'),
+                'scheduleEntries' => [
+                    [
+                        'period' => $this->getIriFor('period1campShared'),
+                        'start' => '2025-06-07T15:00:00+00:00',
+                        'end' => '2025-06-07T16:00:00+00:00',
+                    ],
+                ],
+            ])])
+        ;
+
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertJsonContains($this->getExampleReadPayload());
+    }
+
+    public function testCreateActivityInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/activities', ['json' => $this->getExampleWritePayload([
+            'category' => $this->getIriFor('category1campShared'),
+            'scheduleEntries' => [
+                [
+                    'period' => $this->getIriFor('period1campShared'),
+                    'start' => '2023-05-01T15:00:00+00:00',
+                    'end' => '2023-05-01T16:00:00+00:00',
+                ],
+            ],
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/activities', ['json' => $this->getExampleWritePayload([
+            'category' => $this->getIriFor('category1campShared'),
+            'scheduleEntries' => [
+                [
+                    'period' => $this->getIriFor('period1campShared'),
+                    'start' => '2023-05-01T15:00:00+00:00',
+                    'end' => '2023-05-01T16:00:00+00:00',
+                ],
+            ],
         ])]);
 
         $this->assertResponseStatusCodeSame(403);

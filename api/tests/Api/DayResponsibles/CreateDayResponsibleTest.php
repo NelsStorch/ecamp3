@@ -95,6 +95,45 @@ class CreateDayResponsibleTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateDayResponsibleInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/day_responsibles', ['json' => $this->getExampleWritePayload([
+            'day' => $this->getIriFor('day1period1campShared'),
+            'campCollaboration' => $this->getIriFor('campCollaboration1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateDayResponsibleInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/day_responsibles', ['json' => $this->getExampleWritePayload([
+            'day' => $this->getIriFor('day1period1campShared'),
+            'campCollaboration' => $this->getIriFor('campCollaboration1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateDayResponsibleInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/day_responsibles', ['json' => $this->getExampleWritePayload([
+            'day' => $this->getIriFor('day1period1campShared'),
+            'campCollaboration' => $this->getIriFor('campCollaboration1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testCreateDayResponsibleValidatesMissingDay() {
         static::createClientWithCredentials()->request('POST', '/day_responsibles', ['json' => $this->getExampleWritePayload([], ['day'])]);
 

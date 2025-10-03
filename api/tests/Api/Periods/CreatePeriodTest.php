@@ -79,9 +79,45 @@ class CreatePeriodTest extends ECampApiTestCase {
         $this->assertJsonContains($this->getExampleReadPayload());
     }
 
-    public function testCreatePeriodInCampPrototypeIsDeniedForUnrelateduser() {
+    public function testCreatePeriodInCampPrototypeIsDeniedForUnrelatedUser() {
         static::createClientWithCredentials()->request('POST', '/periods', ['json' => $this->getExampleWritePayload([
             'camp' => $this->getIriFor('campPrototype'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreatePeriodInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/periods', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreatePeriodInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/periods', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreatePeriodInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/periods', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
         ])]);
 
         $this->assertResponseStatusCodeSame(403);

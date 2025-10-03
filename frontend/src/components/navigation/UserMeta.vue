@@ -191,6 +191,12 @@ export default {
       authUser: 'getLoggedInUser',
     }),
     currentCampCollaboration() {
+      if (
+        typeof this.camp?.campCollaborations !== 'function' ||
+        this.camp.campCollaborations()._meta.loading
+      ) {
+        return undefined
+      }
       return this.camp
         ?.campCollaborations()
         .items.find(

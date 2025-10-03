@@ -28,7 +28,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     operations: [
         new Get(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)'
         ),
         new GetCollection(
             normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
@@ -40,7 +42,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
                 'periodId' => new Link(
                     toProperty: 'period',
                     fromClass: Period::class,
-                    security: 'is_granted("CAMP_COLLABORATOR", period) or is_granted("CAMP_IS_PROTOTYPE", period)'
+                    security: 'is_granted("CAMP_COLLABORATOR", period) or
+                               is_granted("CAMP_IS_SHARED", period) or
+                               is_granted("CAMP_IS_PROTOTYPE", period)'
                 ),
             ],
             normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,

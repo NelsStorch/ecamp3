@@ -142,6 +142,42 @@ class UpdateChecklistTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchChecklistInSharedCampIsDeniedForUnrelatedUser() {
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
+            'name' => 'ChecklistName',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchChecklistInSharedCampIsDeniedForInactiveUser() {
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
+            'name' => 'ChecklistName',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchChecklistInSharedCampIsDeniedForInvitedUser() {
+        $checklist = static::getFixture('checklist1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [
+            'name' => 'ChecklistName',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchChecklistDisallowsChangingCamp() {
         $checklist = static::getFixture('checklist1');
         static::createClientWithCredentials()->request('PATCH', '/checklists/'.$checklist->getId(), ['json' => [

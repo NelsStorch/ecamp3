@@ -23,7 +23,7 @@ class ListContentNodesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/content_nodes');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 23,
+            'totalItems' => 39,
             '_links' => [
                 'items' => [],
             ],
@@ -43,8 +43,15 @@ class ListContentNodesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('columnLayout5')],
             ['href' => $this->getIriFor('columnLayout1camp2')],
             ['href' => $this->getIriFor('columnLayout2camp2')],
+            ['href' => $this->getIriFor('checklistNodeCampPrototype')],
             ['href' => $this->getIriFor('columnLayout1campPrototype')],
             ['href' => $this->getIriFor('columnLayout2campPrototype')],
+            ['href' => $this->getIriFor('columnLayout3campPrototype')],
+            ['href' => $this->getIriFor('materialNodeCampPrototype')],
+            ['href' => $this->getIriFor('multiSelectCampPrototype')],
+            ['href' => $this->getIriFor('responsiveLayoutCampPrototype')],
+            ['href' => $this->getIriFor('singleTextCampPrototype')],
+            ['href' => $this->getIriFor('storyboardCampPrototype')],
             ['href' => $this->getIriFor('singleText1')],
             ['href' => $this->getIriFor('singleText2')],
             ['href' => $this->getIriFor('safetyConsiderations1')],
@@ -55,6 +62,15 @@ class ListContentNodesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('multiSelect1')],
             ['href' => $this->getIriFor('multiSelect2')],
             ['href' => $this->getIriFor('responsiveLayout1')],
+            ['href' => $this->getIriFor('checklistNodeCampShared')],
+            ['href' => $this->getIriFor('columnLayout1campShared')],
+            ['href' => $this->getIriFor('columnLayout2campShared')],
+            ['href' => $this->getIriFor('columnLayout3campShared')],
+            ['href' => $this->getIriFor('materialNodeCampShared')],
+            ['href' => $this->getIriFor('multiSelectCampShared')],
+            ['href' => $this->getIriFor('responsiveLayoutCampShared')],
+            ['href' => $this->getIriFor('singleTextCampShared')],
+            ['href' => $this->getIriFor('storyboardCampShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -117,12 +133,12 @@ class ListContentNodesTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testListContentNodesFilteredByPeriodInCampPrototypeIsAllowedForCollaborator() {
+    public function testListContentNodesFilteredByPeriodInCampPrototypeIsAllowedForUnrelatedUser() {
         $period = static::getFixture('period1campPrototype');
         $response = static::createClientWithCredentials()->request('GET', '/content_nodes?period=%2Fperiods%2F'.$period->getId());
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 1,
+            'totalItems' => 8,
             '_links' => [
                 'items' => [],
             ],
@@ -131,7 +147,93 @@ class ListContentNodesTest extends ECampApiTestCase {
             ],
         ]);
         $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('checklistNodeCampPrototype')],
             ['href' => $this->getIriFor('columnLayout1campPrototype')],
+            ['href' => $this->getIriFor('columnLayout3campPrototype')],
+            ['href' => $this->getIriFor('materialNodeCampPrototype')],
+            ['href' => $this->getIriFor('multiSelectCampPrototype')],
+            ['href' => $this->getIriFor('responsiveLayoutCampPrototype')],
+            ['href' => $this->getIriFor('singleTextCampPrototype')],
+            ['href' => $this->getIriFor('storyboardCampPrototype')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListContentNodesFilteredByPeriodInSharedCampIsAllowedForUnrelatedUser() {
+        $period = static::getFixture('period1campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/content_nodes?period=%2Fperiods%2F'.$period->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 8,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('checklistNodeCampShared')],
+            ['href' => $this->getIriFor('columnLayout1campShared')],
+            ['href' => $this->getIriFor('columnLayout3campShared')],
+            ['href' => $this->getIriFor('materialNodeCampShared')],
+            ['href' => $this->getIriFor('multiSelectCampShared')],
+            ['href' => $this->getIriFor('responsiveLayoutCampShared')],
+            ['href' => $this->getIriFor('singleTextCampShared')],
+            ['href' => $this->getIriFor('storyboardCampShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListContentNodesFilteredByPeriodInSharedCampIsAllowedForInactiveUser() {
+        $period = static::getFixture('period1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/content_nodes?period=%2Fperiods%2F'.$period->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 8,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('checklistNodeCampShared')],
+            ['href' => $this->getIriFor('columnLayout1campShared')],
+            ['href' => $this->getIriFor('columnLayout3campShared')],
+            ['href' => $this->getIriFor('materialNodeCampShared')],
+            ['href' => $this->getIriFor('multiSelectCampShared')],
+            ['href' => $this->getIriFor('responsiveLayoutCampShared')],
+            ['href' => $this->getIriFor('singleTextCampShared')],
+            ['href' => $this->getIriFor('storyboardCampShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListContentNodesFilteredByPeriodInSharedCampIsAllowedForInvitedUser() {
+        $period = static::getFixture('period1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/content_nodes?period=%2Fperiods%2F'.$period->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 8,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('checklistNodeCampShared')],
+            ['href' => $this->getIriFor('columnLayout1campShared')],
+            ['href' => $this->getIriFor('columnLayout3campShared')],
+            ['href' => $this->getIriFor('materialNodeCampShared')],
+            ['href' => $this->getIriFor('multiSelectCampShared')],
+            ['href' => $this->getIriFor('responsiveLayoutCampShared')],
+            ['href' => $this->getIriFor('singleTextCampShared')],
+            ['href' => $this->getIriFor('storyboardCampShared')],
         ], $response->toArray()['_links']['items']);
     }
 

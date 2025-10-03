@@ -2,14 +2,14 @@
 
 namespace App\Tests\Api\ContentNodes\RootColumnLayout;
 
-use App\Tests\Api\ContentNodes\UpdateContentNodeTestCase;
+use App\Tests\Api\ECampApiTestCase;
 
 /**
  * Testing functionality of ContentNode with the root.
  *
  * @internal
  */
-class UpdateRootColumnLayoutTest extends UpdateContentNodeTestCase {
+class UpdateRootColumnLayoutTest extends ECampApiTestCase {
     public function setUp(): void {
         parent::setUp();
 

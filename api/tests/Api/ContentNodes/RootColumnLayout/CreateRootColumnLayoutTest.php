@@ -2,21 +2,28 @@
 
 namespace App\Tests\Api\ContentNodes\RootColumnLayout;
 
+use App\Entity\ContentNode;
 use App\Entity\ContentNode\ColumnLayout;
-use App\Tests\Api\ContentNodes\CreateContentNodeTestCase;
+use App\Entity\ContentType;
+use App\Tests\Api\ECampApiTestCase;
 
 /**
  * Tests for creating a root column layout.
  *
  * @internal
  */
-class CreateRootColumnLayoutTest extends CreateContentNodeTestCase {
+class CreateRootColumnLayoutTest extends ECampApiTestCase {
+    protected ContentType $defaultContentType;
+
+    protected ContentNode $defaultParent;
+
     public function setUp(): void {
         parent::setUp();
 
         $this->endpoint = '/content_node/column_layouts';
         $this->entityClass = ColumnLayout::class;
         $this->defaultContentType = static::getFixture('contentTypeColumnLayout');
+        $this->defaultParent = static::getFixture('columnLayout1');
     }
 
     public function testCreateColumnLayoutSetsRootToParentsRoot() {
@@ -77,6 +84,9 @@ class CreateRootColumnLayoutTest extends CreateContentNodeTestCase {
         return parent::getExampleWritePayload(
             array_merge(
                 [
+                    'parent' => $this->getIriFor($this->defaultParent),
+                    'contentType' => $this->getIriFor($this->defaultContentType),
+                    'position' => 10,
                     'data' => [
                         'columns' => [['slot' => '1', 'width' => 12]],
                     ],

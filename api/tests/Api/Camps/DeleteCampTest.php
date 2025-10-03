@@ -70,6 +70,40 @@ class DeleteCampTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testDeleteSharedCampIsDeniedForUnrelatedUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials()->request('DELETE', '/camps/'.$camp->getId());
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteSharedCampIsDeniedForInactiveUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('DELETE', '/camps/'.$camp->getId())
+        ;
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteSharedCampIsDeniedForInvitedUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('DELETE', '/camps/'.$camp->getId())
+        ;
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testDeleteCampAlsoDeletesContentNodes() {
         $client = static::createClientWithCredentials();
         // Disable resetting the database between the two requests

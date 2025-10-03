@@ -21,5 +21,10 @@ class ListChecklistNodeTest extends ListContentNodeTestCase {
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('checklistNodeCampUnrelated'),
         ];
+
+        $this->contentNodesPublicCamps = [
+            $this->getIriFor('checklistNodeCampPrototype'),
+            $this->getIriFor('checklistNodeCampShared'),
+        ];
     }
 }

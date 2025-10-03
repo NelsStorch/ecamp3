@@ -31,7 +31,8 @@
                 },
                 "self": {
                     "href": "escaped_value"
-                }
+                },
+                "sharedBy": "escaped_value"
             },
             "addressCity": "escaped_value",
             "addressName": "escaped_value",
@@ -42,10 +43,12 @@
             "courseNumber": "escaped_value",
             "id": "escaped_value",
             "isPrototype": "escaped_value",
+            "isShared": "escaped_value",
             "kind": "escaped_value",
             "motto": "escaped_value",
             "organizer": "escaped_value",
             "printYSLogoOnPicasso": "escaped_value",
+            "sharedSince": "escaped_value",
             "shortTitle": "escaped_value",
             "title": "escaped_value",
             "trainingAdvisorName": "escaped_value"

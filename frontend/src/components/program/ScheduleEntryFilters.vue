@@ -4,20 +4,22 @@
     class="d-flex flex-wrap items-baseline"
     style="overflow-y: auto; gap: 10px"
   >
-    <BooleanFilter
-      v-if="loadingEndpoints !== true && loadingEndpoints.campCollaborations !== true"
-      v-model="showOnlyMyActivities"
-      :label="$tc('components.program.scheduleEntryFilters.onlyMyActivities')"
-      :result-count="myActivitiesCount"
-    />
-    <v-skeleton-loader
-      v-else
-      type="button"
-      class="v-skeleton-loader--inherit-size"
-      height="32"
-      width="160px"
-    />
-    <FilterDivider />
+    <template v-if="!hideSelfFilter">
+      <BooleanFilter
+        v-if="loadingEndpoints !== true && loadingEndpoints.campCollaborations !== true"
+        v-model="showOnlyMyActivities"
+        :label="$tc('components.program.scheduleEntryFilters.onlyMyActivities')"
+        :result-count="myActivitiesCount"
+      />
+      <v-skeleton-loader
+        v-else
+        type="button"
+        class="v-skeleton-loader--inherit-size"
+        height="32"
+        width="160px"
+      />
+      <FilterDivider />
+    </template>
     <template v-if="!!periods && !hidePeriodFilter">
       <template v-if="loadingEndpoints !== true && loadingEndpoints.periods !== true">
         <SelectFilter
@@ -183,6 +185,10 @@ export default {
     filterFn: {
       type: Function,
       default: () => [],
+    },
+    hideSelfFilter: {
+      type: Boolean,
+      default: false,
     },
     hidePeriodFilter: {
       type: Boolean,

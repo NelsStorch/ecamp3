@@ -11,11 +11,13 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use App\Doctrine\Filter\CampCollaboratorFilter;
 use App\InputFilter;
 use App\Repository\CampRepository;
 use App\Serializer\Normalizer\RelatedCollectionLink;
 use App\State\CampCreateProcessor;
 use App\State\CampRemoveProcessor;
+use App\State\CampUpdateProcessor;
 use App\Util\EntityMap;
 use App\Validator\AssertContainsAtLeastOneManager;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -32,10 +34,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)',
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)',
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
         ),
         new Patch(
+            processor: CampUpdateProcessor::class,
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
             denormalizationContext: ['groups' => ['write', 'update']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
@@ -60,8 +65,11 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['isPrototype'])]
+#[ApiFilter(filterClass: CampCollaboratorFilter::class)]
 #[ORM\Entity(repositoryClass: CampRepository::class)]
 #[ORM\Index(columns: ['isPrototype'])]
+#[ORM\Index(columns: ['isShared'])]
+#[ORM\Index(columns: ['updateTime'])] // TODO unclear why this is necessary, but doctrine forgot about this index from BaseEntity...
 class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototypeInterface {
     public const ITEM_NORMALIZATION_CONTEXT = [
         'groups' => ['read', 'Camp:Periods', 'Period:Days', 'Camp:CampCollaborations', 'CampCollaboration:User'],
@@ -180,6 +188,35 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[ApiProperty(readable: false, example: '/camps/1a2b3c4d')]
     #[Groups(['create'])]
     public ?Camp $campPrototype = null;
+
+    /**
+     * Whether the programme of this camp is publicly available to anyone (including
+     * personal data such as camp collaborations, personal material lists,
+     * responsibilities and comments).
+     */
+    #[Assert\Type('bool')]
+    #[ApiProperty(example: true)]
+    #[Groups(['read', 'write'])]
+    #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => false])]
+    public bool $isShared = false;
+
+    /**
+     * Date and time when the camp was last set to be shared publicly.
+     */
+    #[ApiProperty(example: '2025-10-01T00:00:00+00:00', openapiContext: ['format' => 'date-time'])]
+    #[Groups(['read'])]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    public ?\DateTimeInterface $sharedSince = null;
+
+    /**
+     * The person who last set the camp to be shared publicly.
+     */
+    #[Assert\DisableAutoMapping]
+    #[ApiProperty(writable: false)]
+    #[Groups(['read'])]
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    public ?User $sharedBy = null;
 
     /**
      * Whether this camp may serve as a template for creating other camps.

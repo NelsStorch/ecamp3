@@ -20,5 +20,10 @@ class ListResponsiveLayoutTest extends ListContentNodeTestCase {
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('responsiveLayoutCampUnrelated'),
         ];
+
+        $this->contentNodesPublicCamps = [
+            $this->getIriFor('responsiveLayoutCampPrototype'),
+            $this->getIriFor('responsiveLayoutCampShared'),
+        ];
     }
 }

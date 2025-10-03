@@ -142,6 +142,54 @@ class UpdateScheduleEntryTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchScheduleEntryInSharedCampIsDeniedForUnrelatedUser() {
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/schedule_entries/'.$scheduleEntry->getId(), ['json' => [
+            'period' => $this->getIriFor('period2'),
+            'start' => '2023-04-15T00:10:00+00:00',
+            'end' => '2023-04-15T00:40:00+00:00',
+            'left' => 0.3,
+            'width' => 0.7,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchScheduleEntryInSharedCampIsDeniedForInactiveUser() {
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/schedule_entries/'.$scheduleEntry->getId(), ['json' => [
+            'period' => $this->getIriFor('period2'),
+            'start' => '2023-04-15T00:10:00+00:00',
+            'end' => '2023-04-15T00:40:00+00:00',
+            'left' => 0.3,
+            'width' => 0.7,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchScheduleEntryInSharedCampIsDeniedForInvitedUser() {
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/schedule_entries/'.$scheduleEntry->getId(), ['json' => [
+            'period' => $this->getIriFor('period2'),
+            'start' => '2023-04-15T00:10:00+00:00',
+            'end' => '2023-04-15T00:40:00+00:00',
+            'left' => 0.3,
+            'width' => 0.7,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchScheduleEntryDisallowsChangingActivity() {
         $scheduleEntry = static::getFixture('scheduleEntry1');
         static::createClientWithCredentials()->request('PATCH', '/schedule_entries/'.$scheduleEntry->getId(), ['json' => [

@@ -78,7 +78,6 @@
 
 <script>
 import dayjs from '@/common/helpers/dayjs.js'
-import { campRoute } from '@/router.js'
 import { isAdmin } from '@/plugins/auth'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
@@ -107,14 +106,17 @@ export default {
     }
   },
   computed: {
+    currentUserLink() {
+      return this.$store.getters.getLoggedInUser?._meta.self
+    },
     camps() {
-      return this.api.get().camps()
+      return this.api.get().camps({ campCollaborator: this.currentUserLink })
     },
     periods() {
-      return this.api.get().periods()
+      return this.api.get().periods({ campCollaborator: this.currentUserLink })
     },
     prototypeCamps() {
-      return this.camps.items.filter((c) => c.isPrototype)
+      return this.api.get().camps({ isPrototype: true }).items
     },
     upcomingCamps() {
       return Object.values(
@@ -122,12 +124,10 @@ export default {
           this.periods.items.filter((p) => dayjs(p.end).endOf('day').isAfter(dayjs())),
           (p) => p.camp()._meta.self
         )
-      )
-        .map((periods) => ({
-          camp: periods[0].camp(),
-          periods: periods,
-        }))
-        .filter(({ camp }) => !camp.isPrototype)
+      ).map((periods) => ({
+        camp: periods[0].camp(),
+        periods: periods,
+      }))
     },
     pastCamps() {
       return Object.values(
@@ -153,8 +153,8 @@ export default {
     this.isAdmin = isAdmin()
   },
   methods: {
-    campRoute,
     async loadCamps() {
+      await this.$auth.loadUser()
       // Only reload camps if they were loaded before, to avoid console error
       if (this.camps._meta.self !== null) {
         this.api.reload(this.camps)

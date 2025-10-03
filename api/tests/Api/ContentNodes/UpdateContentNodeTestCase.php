@@ -2,6 +2,7 @@
 
 namespace App\Tests\Api\ContentNodes;
 
+use App\Entity\BaseEntity;
 use App\Entity\ContentNode;
 use App\Entity\ContentNode\ColumnLayout;
 use App\Entity\ContentNode\ResponsiveLayout;
@@ -16,6 +17,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * @internal
  */
 abstract class UpdateContentNodeTestCase extends ECampApiTestCase {
+    protected BaseEntity $campPrototypeEntity;
+    protected BaseEntity $sharedCampEntity;
+
     public function setUp(): void {
         parent::setUp();
     }
@@ -59,6 +63,26 @@ abstract class UpdateContentNodeTestCase extends ECampApiTestCase {
         $this->assertResponseStatusCodeSame(200);
     }
 
+    public function testPatchInCampPrototypeIsDeniedForUnrelatedUser() {
+        $this->patch($this->campPrototypeEntity);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function testPatchInSharedCampIsDeniedForUnrelatedUser() {
+        $this->patch($this->sharedCampEntity);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function testPatchInSharedCampIsDeniedForInactiveUser() {
+        $this->patch($this->sharedCampEntity, user: static::$fixtures['user5inactive']);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function testPatchInSharedCampIsDeniedForInvitedUser() {
+        $this->patch($this->sharedCampEntity, user: static::$fixtures['user6invited']);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
     #[DataProvider('getContentNodesWhichCannotHaveChildren')]
     public function testPatchRejectsParentsWhichDontSupportChildren(string $idOfParentFixture) {
         $parentIri = static::getIriFor($idOfParentFixture);
@@ -69,7 +93,7 @@ abstract class UpdateContentNodeTestCase extends ECampApiTestCase {
             'violations' => [
                 0 => [
                     'propertyPath' => 'parent',
-                    'message' => 'This parent does not support children, only content_nodes of type column_layout support children.',
+                    'message' => 'This parent does not support children, only content_nodes of type column_layout or responsive_layout support children.',
                 ],
             ],
         ]);

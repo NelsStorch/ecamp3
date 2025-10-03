@@ -12,6 +12,9 @@ export const campRoleMixin = {
     isMember() {
       return this.role === 'member'
     },
+    isOutsider() {
+      return this.camp && typeof this._campCollaborations === 'function' && !this.role
+    },
     role() {
       const currentUserLink = this.$store.getters.getLoggedInUser?._meta.self
       const result = this._campCollaborations
@@ -22,8 +25,11 @@ export const campRoleMixin = {
       return result?.role
     },
     _campCollaborations() {
-      const campCollaborations = this._camp?.campCollaborations()
-      return campCollaborations?.items
+      if (!this.camp) return []
+      if (typeof this.camp.campCollaborations !== 'function') {
+        return []
+      }
+      return this._camp?.campCollaborations()?.items
     },
     _camp() {
       if (typeof this.camp === 'function') {
@@ -31,12 +37,5 @@ export const campRoleMixin = {
       }
       return this.camp
     },
-  },
-  mounted() {
-    if (typeof this.camp !== 'object' && typeof this.camp !== 'function') {
-      throw new Error(
-        'User of the campRoleMixin must expose a camp as object proxy or function'
-      )
-    }
   },
 }

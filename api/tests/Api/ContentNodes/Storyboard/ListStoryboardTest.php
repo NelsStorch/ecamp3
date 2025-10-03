@@ -21,5 +21,10 @@ class ListStoryboardTest extends ListContentNodeTestCase {
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('storyboardCampUnrelated'),
         ];
+
+        $this->contentNodesPublicCamps = [
+            $this->getIriFor('storyboardCampPrototype'),
+            $this->getIriFor('storyboardCampShared'),
+        ];
     }
 }

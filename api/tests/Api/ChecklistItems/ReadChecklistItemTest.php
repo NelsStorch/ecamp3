@@ -94,7 +94,7 @@ class ReadChecklistItemTest extends ECampApiTestCase {
 
     public function testGetSingleChecklistItemFromCampPrototypeIsAllowedForUnrelatedUser() {
         /** @var ChecklistItem $checklistItem */
-        $checklistItem = static::getFixture('checklistItemPrototype_1_1');
+        $checklistItem = static::getFixture('checklistItemCampPrototype_1_1');
         static::createClientWithCredentials()->request('GET', '/checklist_items/'.$checklistItem->getId());
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
@@ -102,6 +102,52 @@ class ReadChecklistItemTest extends ECampApiTestCase {
             'text' => $checklistItem->text,
             '_links' => [
                 'checklist' => ['href' => $this->getIriFor('checklist1campPrototype')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleChecklistItemFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var ChecklistItem $checklistItem */
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials()->request('GET', '/checklist_items/'.$checklistItem->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $checklistItem->getId(),
+            'text' => $checklistItem->text,
+            '_links' => [
+                'checklist' => ['href' => $this->getIriFor('checklist1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleChecklistItemFromSharedCampIsAllowedForInactiveUser() {
+        /** @var ChecklistItem $checklistItem */
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/checklist_items/'.$checklistItem->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $checklistItem->getId(),
+            'text' => $checklistItem->text,
+            '_links' => [
+                'checklist' => ['href' => $this->getIriFor('checklist1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleChecklistItemFromSharedCampIsAllowedForInvitedUser() {
+        /** @var ChecklistItem $checklistItem */
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/checklist_items/'.$checklistItem->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $checklistItem->getId(),
+            'text' => $checklistItem->text,
+            '_links' => [
+                'checklist' => ['href' => $this->getIriFor('checklist1campShared')],
             ],
         ]);
     }

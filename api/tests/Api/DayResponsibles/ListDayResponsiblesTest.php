@@ -23,7 +23,7 @@ class ListDayResponsiblesTest extends ECampApiTestCase {
 
         $response = static::createClientWithCredentials()->request('GET', '/day_responsibles');
         $this->assertJsonContains([
-            'totalItems' => 7,
+            'totalItems' => 8,
             '_links' => [
                 'items' => [],
             ],
@@ -39,6 +39,7 @@ class ListDayResponsiblesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('dayResponsible1day3period2')],
             ['href' => $this->getIriFor('dayResponsible2day3period2')],
             ['href' => $this->getIriFor('dayResponsible1day1period1campPrototype')],
+            ['href' => $this->getIriFor('dayResponsible1day1period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -99,6 +100,64 @@ class ListDayResponsiblesTest extends ECampApiTestCase {
         ]);
         $this->assertEqualsCanonicalizing([
             ['href' => $this->getIriFor('dayResponsible1day1period1campPrototype')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListDayResponsiblesFilteredByDayInSharedCampIsAllowedForUnrelatedUser() {
+        $day = static::getFixture('day1period1campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/day_responsibles?day=%2Fdays%2F'.$day->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 1,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('dayResponsible1day1period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListDayResponsiblesFilteredByDayInSharedCampIsAllowedForInactiveUser() {
+        $day = static::getFixture('day1period1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/day_responsibles?day=%2Fdays%2F'.$day->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 1,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('dayResponsible1day1period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListDayResponsiblesFilteredByDayInSharedCampIsAllowedForInvitedUser() {
+        $day = static::getFixture('day1period1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/day_responsibles?day=%2Fdays%2F'.$day->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 1,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('dayResponsible1day1period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 

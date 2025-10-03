@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Api\ActivityProgressLabel;
+namespace App\Tests\Api\ActivityProgressLabels;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
@@ -82,6 +82,54 @@ class CreateActivityProgressLabelTest extends ECampApiTestCase {
 
         $this->assertResponseStatusCodeSame(201);
         $this->assertJsonContains($this->getExampleReadPayload(['position' => 2]));
+    }
+
+    public function testCreateActivityProgressLabelInCampPrototypeIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/activity_progress_labels', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campPrototype'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityProgressLabelInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/activity_progress_labels', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityProgressLabelInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/activity_progress_labels', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityProgressLabelInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/activity_progress_labels', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
     }
 
     public function testCreateActivityProgressLabelValidatesMissingCamp() {

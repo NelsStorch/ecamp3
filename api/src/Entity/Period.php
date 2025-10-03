@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use App\Doctrine\Filter\CampCollaboratorFilter;
 use App\InputFilter;
 use App\Repository\PeriodRepository;
 use App\Serializer\Normalizer\RelatedCollectionLink;
@@ -34,7 +35,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)',
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)',
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
         ),
         new Patch(
@@ -60,6 +63,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     order: ['start']
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp'])]
+#[ApiFilter(filterClass: CampCollaboratorFilter::class)]
 #[ORM\Entity(repositoryClass: PeriodRepository::class)]
 class Period extends BaseEntity implements BelongsToCampInterface {
     public const ITEM_NORMALIZATION_CONTEXT = [

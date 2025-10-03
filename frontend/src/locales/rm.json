@@ -588,13 +588,10 @@
       "navigation": {
         "desktop": {
           "navTopbar": {
-            "admin": "Admin",
             "campIsLoading": "Il champ vegn chargià",
             "material": "Material",
-            "print": "Stampar",
             "program": "Program",
-            "story": "Istorgia",
-            "team": "Team"
+            "story": "Istorgia"
           }
         },
         "mobile": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Api\ActivityProgressLabel;
+namespace App\Tests\Api\ActivityProgressLabels;
 
 use App\Tests\Api\ECampApiTestCase;
 
@@ -106,6 +106,70 @@ class UpdateActivityProgressLabelTest extends ECampApiTestCase {
                     'href' => $this->getIriFor('camp1'),
                 ],
             ],
+        ]);
+    }
+
+    public function testPatchActivityProgressLabelFromCampPrototypeIsDeniedForUnrelatedUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campPrototype');
+        static::createClientWithCredentials()
+            ->request('PATCH', '/activity_progress_labels/'.$activityProgressLabel->getId(), ['json' => [
+                'position' => 1,
+                'title' => 'NewTitle',
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchActivityProgressLabelFromSharedCampIsDeniedForUnrelatedUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials()
+            ->request('PATCH', '/activity_progress_labels/'.$activityProgressLabel->getId(), ['json' => [
+                'position' => 1,
+                'title' => 'NewTitle',
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchActivityProgressLabelFromSharedCampIsDeniedForInactiveUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('PATCH', '/activity_progress_labels/'.$activityProgressLabel->getId(), ['json' => [
+                'position' => 1,
+                'title' => 'NewTitle',
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchActivityProgressLabelFromSharedCampIsDeniedForInvitedUser() {
+        /** @var ActivityProgressLabel $activityProgressLabel */
+        $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('PATCH', '/activity_progress_labels/'.$activityProgressLabel->getId(), ['json' => [
+                'position' => 1,
+                'title' => 'NewTitle',
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
         ]);
     }
 

@@ -72,6 +72,27 @@
                     "materialList": {
                         "href": "escaped_value"
                     },
+                    "materialNode": "escaped_value",
+                    "period": {
+                        "href": "escaped_value"
+                    },
+                    "self": {
+                        "href": "escaped_value"
+                    }
+                },
+                "article": "escaped_value",
+                "id": "escaped_value",
+                "quantity": "escaped_value",
+                "unit": "escaped_value"
+            },
+            {
+                "_links": {
+                    "camp": {
+                        "href": "escaped_value"
+                    },
+                    "materialList": {
+                        "href": "escaped_value"
+                    },
                     "materialNode": {
                         "href": "escaped_value"
                     },
@@ -89,6 +110,9 @@
     },
     "_links": {
         "items": [
+            {
+                "href": "escaped_value"
+            },
             {
                 "href": "escaped_value"
             },

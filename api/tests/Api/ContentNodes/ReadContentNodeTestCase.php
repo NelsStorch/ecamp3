@@ -2,6 +2,7 @@
 
 namespace App\Tests\Api\ContentNodes;
 
+use App\Entity\BaseEntity;
 use App\Entity\ContentNode;
 use App\Tests\Api\ECampApiTestCase;
 
@@ -13,6 +14,9 @@ use App\Tests\Api\ECampApiTestCase;
  * @internal
  */
 abstract class ReadContentNodeTestCase extends ECampApiTestCase {
+    protected BaseEntity $campPrototypeEntity;
+    protected BaseEntity $sharedCampEntity;
+
     public function setUp(): void {
         parent::setUp();
     }
@@ -57,6 +61,86 @@ abstract class ReadContentNodeTestCase extends ECampApiTestCase {
 
         /** @var ContentNode $contentNode */
         $contentNode = $this->defaultEntity;
+
+        $this->assertJsonContains([
+            'id' => $contentNode->getId(),
+            'instanceName' => $contentNode->instanceName,
+            'slot' => $contentNode->slot,
+            'position' => $contentNode->position,
+            'contentTypeName' => $contentNode->getContentTypeName(),
+
+            '_links' => [
+                'parent' => ['href' => $this->getIriFor($contentNode->parent)],
+            ],
+        ]);
+    }
+
+    public function testGetInCampPrototypeIsAllowedForUnrelatedUser() {
+        $this->get($this->campPrototypeEntity);
+        $this->assertResponseStatusCodeSame(200);
+
+        /** @var ContentNode $contentNode */
+        $contentNode = $this->campPrototypeEntity;
+
+        $this->assertJsonContains([
+            'id' => $contentNode->getId(),
+            'instanceName' => $contentNode->instanceName,
+            'slot' => $contentNode->slot,
+            'position' => $contentNode->position,
+            'contentTypeName' => $contentNode->getContentTypeName(),
+
+            '_links' => [
+                'parent' => ['href' => $this->getIriFor($contentNode->parent)],
+            ],
+        ]);
+    }
+
+    public function testGetInSharedCampIsAllowedForUnrelatedUser() {
+        $this->get($this->sharedCampEntity);
+        $this->assertResponseStatusCodeSame(200);
+
+        /** @var ContentNode $contentNode */
+        $contentNode = $this->sharedCampEntity;
+
+        $this->assertJsonContains([
+            'id' => $contentNode->getId(),
+            'instanceName' => $contentNode->instanceName,
+            'slot' => $contentNode->slot,
+            'position' => $contentNode->position,
+            'contentTypeName' => $contentNode->getContentTypeName(),
+
+            '_links' => [
+                'parent' => ['href' => $this->getIriFor($contentNode->parent)],
+            ],
+        ]);
+    }
+
+    public function testGetInSharedCampIsAllowedForInactiveUser() {
+        $this->get($this->sharedCampEntity, user: static::$fixtures['user5inactive']);
+        $this->assertResponseStatusCodeSame(200);
+
+        /** @var ContentNode $contentNode */
+        $contentNode = $this->sharedCampEntity;
+
+        $this->assertJsonContains([
+            'id' => $contentNode->getId(),
+            'instanceName' => $contentNode->instanceName,
+            'slot' => $contentNode->slot,
+            'position' => $contentNode->position,
+            'contentTypeName' => $contentNode->getContentTypeName(),
+
+            '_links' => [
+                'parent' => ['href' => $this->getIriFor($contentNode->parent)],
+            ],
+        ]);
+    }
+
+    public function testGetInSharedCampIsAllowedForInvitedUser() {
+        $this->get($this->sharedCampEntity, user: static::$fixtures['user6invited']);
+        $this->assertResponseStatusCodeSame(200);
+
+        /** @var ContentNode $contentNode */
+        $contentNode = $this->sharedCampEntity;
 
         $this->assertJsonContains([
             'id' => $contentNode->getId(),

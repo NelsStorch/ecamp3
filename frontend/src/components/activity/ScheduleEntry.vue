@@ -33,6 +33,7 @@ Displays a single scheduleEntry
             >
               <template #after>
                 <v-icon
+                  v-if="isContributor"
                   right
                   class="ml-0 e-category-chip-save-icon"
                   :class="{ 'mdi-spin': categoryChangeState === 'saving' }"
@@ -116,10 +117,14 @@ Displays a single scheduleEntry
           <DownloadNuxtPdf :config="printConfig" />
           <DownloadClientPdf :config="printConfig" />
 
-          <v-divider />
+          <v-divider v-if="!isOutsider" />
 
           <!-- layout/content switch (switch to layout mode) -->
-          <v-list-item :disabled="!isContributor" @click="layoutMode = true">
+          <v-list-item
+            v-if="!isOutsider"
+            :disabled="!isContributor"
+            @click="layoutMode = true"
+          >
             <v-list-item-icon>
               <v-icon>mdi-puzzle-edit-outline</v-icon>
             </v-list-item-icon>
@@ -143,10 +148,10 @@ Displays a single scheduleEntry
             translation-context-i18n-key="components.activity.scheduleEntry.clipboardInfoDialog"
           />
 
-          <v-divider />
+          <v-divider v-if="!isOutsider" />
 
           <!-- remove activity -->
-          <DialogEntityDelete :entity="activity" @submit="onDelete">
+          <DialogEntityDelete v-if="!isOutsider" :entity="activity" @submit="onDelete">
             <template #activator="{ on }">
               <v-list-item :disabled="!isContributor" v-on="on">
                 <v-list-item-icon>

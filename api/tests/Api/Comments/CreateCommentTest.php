@@ -57,6 +57,58 @@ class CreateCommentTest extends ECampApiTestCase {
         $this->assertJsonContains($this->getExampleReadPayload());
     }
 
+    public function testCreateCommentInCampPrototypeIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campPrototype'),
+            'activity' => $this->getIriFor('activity1campPrototype'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateCommentInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+            'activity' => $this->getIriFor('activity1campPrototype'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateCommentInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/comments', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+            'activity' => $this->getIriFor('activity1campPrototype'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateCommentInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/comments', ['json' => $this->getExampleWritePayload([
+            'camp' => $this->getIriFor('campShared'),
+            'activity' => $this->getIriFor('activity1campPrototype'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testCreateCommentValidatesMissingText() {
         static::createClientWithCredentials()->request('POST', '/comments', ['json' => $this->getExampleWritePayload([], ['textHtml'])]);
 

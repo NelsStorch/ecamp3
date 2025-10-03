@@ -126,6 +126,67 @@ class ReadDayTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testGetSingleDayFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var Day $day */
+        $day = static::getFixture('day1period1campShared');
+        $start = $day->getStart()->format(\DateTime::W3C);
+        $end = $day->getEnd()->format(\DateTime::W3C);
+        static::createClientWithCredentials()->request('GET', '/days/'.$day->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $day->getId(),
+            'dayOffset' => $day->dayOffset,
+            'number' => $day->getDayNumber(),
+            '_links' => [
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'scheduleEntries' => ['href' => '/schedule_entries?period=%2Fperiods%2F'.$day->period->getId().'&start%5Bstrictly_before%5D='.urlencode($end).'&end%5Bafter%5D='.urlencode($start)],
+                'dayResponsibles' => ['href' => '/days/'.$day->getId().'/day_responsibles'],
+            ],
+        ]);
+    }
+
+    public function testGetSingleDayFromSharedCampIsAllowedForInactiveUser() {
+        /** @var Day $day */
+        $day = static::getFixture('day1period1campShared');
+        $start = $day->getStart()->format(\DateTime::W3C);
+        $end = $day->getEnd()->format(\DateTime::W3C);
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/days/'.$day->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $day->getId(),
+            'dayOffset' => $day->dayOffset,
+            'number' => $day->getDayNumber(),
+            '_links' => [
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'scheduleEntries' => ['href' => '/schedule_entries?period=%2Fperiods%2F'.$day->period->getId().'&start%5Bstrictly_before%5D='.urlencode($end).'&end%5Bafter%5D='.urlencode($start)],
+                'dayResponsibles' => ['href' => '/days/'.$day->getId().'/day_responsibles'],
+            ],
+        ]);
+    }
+
+    public function testGetSingleDayFromSharedCampIsAllowedForInvitedUser() {
+        /** @var Day $day */
+        $day = static::getFixture('day1period1campShared');
+        $start = $day->getStart()->format(\DateTime::W3C);
+        $end = $day->getEnd()->format(\DateTime::W3C);
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/days/'.$day->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $day->getId(),
+            'dayOffset' => $day->dayOffset,
+            'number' => $day->getDayNumber(),
+            '_links' => [
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'scheduleEntries' => ['href' => '/schedule_entries?period=%2Fperiods%2F'.$day->period->getId().'&start%5Bstrictly_before%5D='.urlencode($end).'&end%5Bafter%5D='.urlencode($start)],
+                'dayResponsibles' => ['href' => '/days/'.$day->getId().'/day_responsibles'],
+            ],
+        ]);
+    }
+
     public function testDatesFormatProperlyInTimezoneAheadOfUTC() {
         // given
         date_default_timezone_set('Asia/Singapore');
