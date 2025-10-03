@@ -2499,7 +2499,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -2616,7 +2616,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp-read_Camp.Periods_Period.Days_Camp.CampCollaborations_CampCollaboration.User:
@@ -2725,7 +2724,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -2835,7 +2834,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp-read_CampCollaboration.Camp_CampCollaboration.User:
@@ -2940,7 +2938,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -3057,7 +3055,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp-read_Period.Camp_Period.Days:
@@ -3162,7 +3159,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -3279,7 +3276,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp-write_create:
@@ -3348,7 +3344,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -3477,7 +3473,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -3604,7 +3600,7 @@ components:
                 isShared:
                   default: false
                   description: |-
-                    Whether the programme of this camp is publicly available to anyone (except for
+                    Whether the programme of this camp is publicly available to anyone (including
                     personal data such as camp collaborations, personal material lists,
                     responsibilities and comments).
                   example: true
@@ -3657,7 +3653,6 @@ components:
                   type: ['null', string]
               required:
                 - printYSLogoOnPicasso
-                - sharedSince
                 - title
               type: object
             id:
@@ -3851,7 +3846,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -3968,7 +3963,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonhal-read_Camp.Periods_Period.Days_Camp.CampCollaborations_CampCollaboration.User:
@@ -4086,7 +4080,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -4196,7 +4190,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonhal-read_CampCollaboration.Camp_CampCollaboration.User:
@@ -4310,7 +4303,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -4427,7 +4420,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonhal-read_Period.Camp_Period.Days:
@@ -4541,7 +4533,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -4658,7 +4650,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonhal-write_create:
@@ -4736,7 +4727,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -4934,7 +4925,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -5051,7 +5042,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonld-read_Camp.Periods_Period.Days_Camp.CampCollaborations_CampCollaboration.User:
@@ -5183,7 +5173,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -5293,7 +5283,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonld-read_CampCollaboration.Camp_CampCollaboration.User:
@@ -5421,7 +5410,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -5538,7 +5527,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonld-read_Period.Camp_Period.Days:
@@ -5666,7 +5654,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true
@@ -5783,7 +5771,6 @@ components:
         - periods
         - printYSLogoOnPicasso
         - progressLabels
-        - sharedSince
         - title
       type: object
     Camp.jsonld-write_create:
@@ -5852,7 +5839,7 @@ components:
         isShared:
           default: false
           description: |-
-            Whether the programme of this camp is publicly available to anyone (except for
+            Whether the programme of this camp is publicly available to anyone (including
             personal data such as camp collaborations, personal material lists,
             responsibilities and comments).
           example: true

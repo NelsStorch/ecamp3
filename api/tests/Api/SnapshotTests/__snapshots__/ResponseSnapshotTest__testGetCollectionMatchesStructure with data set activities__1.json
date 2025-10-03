@@ -345,6 +345,9 @@
                     "category": {
                         "href": "escaped_value"
                     },
+                    "comments": {
+                        "href": "escaped_value"
+                    },
                     "contentNodes": {
                         "href": "escaped_value"
                     },

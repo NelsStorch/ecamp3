@@ -133,7 +133,8 @@ class CreateActivityTest extends ECampApiTestCase {
                         'end' => '2025-06-07T16:00:00+00:00',
                     ],
                 ],
-            ])]);
+            ])])
+        ;
 
         $this->assertResponseStatusCodeSame(201);
         $this->assertJsonContains($this->getExampleReadPayload());

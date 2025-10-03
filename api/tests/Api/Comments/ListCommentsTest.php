@@ -58,9 +58,9 @@ class ListCommentsTest extends ECampApiTestCase {
         $response = $client->request('GET', '/comments');
         $items = $response->toArray()['_embedded']['items'];
 
-        $this->assertCount(4, $items);
+        $this->assertCount(6, $items);
         $this->assertGreaterThanOrEqual($items[0]['createTime'], $items[3]['createTime']);
-        $this->assertEquals($items[3]['createTime'], $lastComment['createTime']);
+        $this->assertEquals($items[5]['createTime'], $lastComment['createTime']);
     }
 
     public function testListCommentsFilteredByActivity() {

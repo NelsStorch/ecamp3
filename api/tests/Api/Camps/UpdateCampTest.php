@@ -3,10 +3,7 @@
 namespace App\Tests\Api\Camps;
 
 use App\Entity\Camp;
-use App\Entity\ContentNode\ChecklistNode;
 use App\Tests\Api\ECampApiTestCase;
-use DateInterval;
-use DateTime;
 
 /**
  * @internal
@@ -600,13 +597,13 @@ class UpdateCampTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'isShared' => true,
             '_links' => [
-                'sharedBy' => [ 'href' => $this->getIriFor('user1manager') ],
+                'sharedBy' => ['href' => $this->getIriFor('user1manager')],
             ],
         ]);
         $camp = $this->getEntityManager()->getRepository(Camp::class)->find($camp->getId());
         $this->assertNotNull($camp->sharedSince);
-        $shortlyAgo = new DateTime();
-        $shortlyAgo->sub(new DateInterval('PT30S'));
+        $shortlyAgo = new \DateTime();
+        $shortlyAgo->sub(new \DateInterval('PT30S'));
         $this->assertGreaterThan($shortlyAgo, $camp->sharedSince);
     }
 
@@ -617,14 +614,15 @@ class UpdateCampTest extends ECampApiTestCase {
         static::createClientWithCredentials(['email' => static::getFixture('user4unrelated')->getEmail()])
             ->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
                 'isShared' => false,
-            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
 
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
             'isShared' => false,
             'sharedSince' => '2025-09-03T12:00:00+00:00',
             '_links' => [
-                'sharedBy' => [ 'href' => $this->getIriFor('admin') ],
+                'sharedBy' => ['href' => $this->getIriFor('admin')],
             ],
         ]);
     }
