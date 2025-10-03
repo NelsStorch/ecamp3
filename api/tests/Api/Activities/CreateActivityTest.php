@@ -122,6 +122,23 @@ class CreateActivityTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateActivityInSharedCampIsAllowedForManager() {
+        static::createClientWithCredentials(['email' => static::getFixture('user4unrelated')->getEmail()])
+            ->request('POST', '/activities', ['json' => $this->getExampleWritePayload([
+                'category' => $this->getIriFor('category1campShared'),
+                'scheduleEntries' => [
+                    [
+                        'period' => $this->getIriFor('period1campShared'),
+                        'start' => '2025-06-07T15:00:00+00:00',
+                        'end' => '2025-06-07T16:00:00+00:00',
+                    ],
+                ],
+            ])]);
+
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertJsonContains($this->getExampleReadPayload());
+    }
+
     public function testCreateActivityInSharedCampIsDeniedForInactiveUser() {
         static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/activities', ['json' => $this->getExampleWritePayload([
             'category' => $this->getIriFor('category1campShared'),

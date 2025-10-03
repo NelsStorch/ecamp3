@@ -109,7 +109,7 @@ class UpdateMaterialListTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testPatchMaterialListInCampSharedIsDeniedForUnrelatedUser() {
+    public function testPatchMaterialListInSharedCampIsDeniedForUnrelatedUser() {
         $materialList = static::getFixture('materialList1campShared');
         static::createClientWithCredentials()->request('PATCH', '/material_lists/'.$materialList->getId(), ['json' => [
             'name' => 'Something',
@@ -121,7 +121,7 @@ class UpdateMaterialListTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testPatchMaterialListInCampSharedIsDeniedForInactiveUser() {
+    public function testPatchMaterialListInSharedCampIsDeniedForInactiveUser() {
         $materialList = static::getFixture('materialList1campShared');
         static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/material_lists/'.$materialList->getId(), ['json' => [
             'name' => 'Something',
@@ -133,7 +133,7 @@ class UpdateMaterialListTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testPatchMaterialListInCampSharedIsDeniedForInvitedUser() {
+    public function testPatchMaterialListInSharedCampIsDeniedForInvitedUser() {
         $materialList = static::getFixture('materialList1campShared');
         static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/material_lists/'.$materialList->getId(), ['json' => [
             'name' => 'Something',

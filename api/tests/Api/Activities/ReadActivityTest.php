@@ -183,4 +183,21 @@ class ReadActivityTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForManager() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
 }

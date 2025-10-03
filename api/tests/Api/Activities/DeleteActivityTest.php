@@ -85,7 +85,7 @@ class DeleteActivityTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteActivityFromCampSharedIsDeniedForUnrelatedUser() {
+    public function testDeleteActivityFromSharedCampIsDeniedForUnrelatedUser() {
         $activity = static::getFixture('activity1campShared');
         static::createClientWithCredentials()->request('DELETE', '/activities/'.$activity->getId());
 
@@ -96,7 +96,7 @@ class DeleteActivityTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteActivityFromCampSharedIsDeniedForInactiveUser() {
+    public function testDeleteActivityFromSharedCampIsDeniedForInactiveUser() {
         $activity = static::getFixture('activity1campShared');
         static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('DELETE', '/activities/'.$activity->getId());
 
@@ -107,7 +107,7 @@ class DeleteActivityTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteActivityFromCampSharedIsDeniedForInvitedUser() {
+    public function testDeleteActivityFromSharedCampIsDeniedForInvitedUser() {
         $activity = static::getFixture('activity1campShared');
         static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('DELETE', '/activities/'.$activity->getId());
 
@@ -116,6 +116,14 @@ class DeleteActivityTest extends ECampApiTestCase {
             'title' => 'An error occurred',
             'detail' => 'Access Denied.',
         ]);
+    }
+
+    public function testDeleteActivityFromSharedCampIsAllowedForManager() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('DELETE', '/activities/'.$activity->getId());
+
+        $this->assertResponseStatusCodeSame(204);
+        $this->assertNull($this->getEntityManager()->getRepository(Activity::class)->find($activity->getId()));
     }
 
     public function testDeleteActivityAlsoDeletesContentNodes() {

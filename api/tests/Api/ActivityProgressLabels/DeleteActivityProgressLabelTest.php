@@ -100,7 +100,7 @@ class DeleteActivityProgressLabelTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteActivityProgressLabelFromCampSharedIsDeniedForUnrelatedUser() {
+    public function testDeleteActivityProgressLabelFromSharedCampIsDeniedForUnrelatedUser() {
         $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
         static::createClientWithCredentials()->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
 
@@ -111,7 +111,7 @@ class DeleteActivityProgressLabelTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteActivityProgressLabelFromCampSharedIsDeniedForInactiveUser() {
+    public function testDeleteActivityProgressLabelFromSharedCampIsDeniedForInactiveUser() {
         $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
         static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
 
@@ -122,7 +122,7 @@ class DeleteActivityProgressLabelTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testDeleteActivityProgressLabelFromCampSharedIsDeniedForInvitedUser() {
+    public function testDeleteActivityProgressLabelFromSharedCampIsDeniedForInvitedUser() {
         $activityProgressLabel = static::getFixture('activityProgressLabel1campShared');
         static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('DELETE', '/activity_progress_labels/'.$activityProgressLabel->getId());
 

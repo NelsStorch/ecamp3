@@ -162,6 +162,19 @@ class UpdateActivityTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchActivityFromSharedCampIsAllowedForManager() {
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('PATCH', '/activities/'.$activity->getId(), ['json' => [
+            'title' => 'Hello World',
+            'location' => 'Stoos',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'title' => 'Hello World',
+            'location' => 'Stoos',
+        ]);
+    }
+
     public function testPatchActivityValidatesCategoryFromSameCamp() {
         $activity = static::getFixture('activity1');
         static::createClientWithCredentials()->request('PATCH', '/activities/'.$activity->getId(), ['json' => [
