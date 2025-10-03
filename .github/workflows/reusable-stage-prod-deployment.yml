@@ -112,6 +112,7 @@ jobs:
             --set autoscaling.enabled=true \
             --set autoscaling.targetCPUUtilizationPercentage=90 \
             --set featureToggle.checklist=${{ vars.FEATURE_CHECKLIST || 'false' }} \
+            --set featureToggle.comments=${{ vars.FEATURE_COMMENTS || 'false' }} \
             --timeout ${{ vars.HELM_TIMEOUT || '5m0s' }}
 
       - name: Finish the GitHub deployment

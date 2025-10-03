@@ -4,7 +4,8 @@ Displays a single activity
 
 <template>
   <v-container fluid>
-    <CommentWrapper v-if="!comments._meta.loading">
+    <ScheduleEntry v-if="!featureCommentsEnabled" :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
+    <CommentWrapper v-else-if="!comments._meta.loading">
       <ScheduleEntry :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
       <template #comments>
         <Comment
@@ -64,6 +65,7 @@ Displays a single activity
 import ScheduleEntry from '@/components/activity/ScheduleEntry.vue'
 import CommentWrapper from '@/components/comments/CommentWrapper.vue'
 import UserAvatar from '@/components/user/UserAvatar.vue'
+import { getEnv } from '@/environment.js'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -94,6 +96,9 @@ export default {
     }),
     comments() {
       return this.api.get().activities({ id: this.activityId }).comments()
+    },
+    featureCommentsEnabled() {
+      return getEnv().FEATURE_COMMENTS ?? false
     },
   },
   methods: {
