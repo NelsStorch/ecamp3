@@ -6,7 +6,6 @@
     class="newItemRow"
     @keyup.enter="submitForm"
   >
-    <td class="pt-1"></td>
     <td class="pt-1">
       <e-number-field
         ref="quantity"
@@ -29,7 +28,7 @@
         maxlength="64"
       />
     </td>
-    <td class="pt-1" :colspan="columns - 5">
+    <td class="pt-1" :colspan="columns - 4">
       <e-select
         v-model="materialItem.materialList"
         dense

@@ -27,14 +27,6 @@
       </tr>
     </template>
 
-    <template #[`item.done`]="{ item }">
-      <api-checkbox
-        :disabled="layoutMode || doneChecklistDisabled || disabled"
-        :uri="item.uri"
-        path="done"
-      />
-    </template>
-
     <template #[`item.quantity`]="{ item }">
       <api-number-field
         v-if="!item.readonly"
@@ -255,9 +247,6 @@ export default {
 
     disabled: { type: Boolean, default: false },
 
-    // Done-Checkbox is disabled
-    doneChecklistDisabled: { type: Boolean, required: false, default: false },
-
     // layoutMode=true --> data editing is disabled
     layoutMode: { type: Boolean, required: false, default: false },
 
@@ -291,13 +280,6 @@ export default {
       if (this.isDefaultVariant) {
         headers.push(
           {
-            text: this.$tc('entity.materialItem.fields.done'),
-            value: 'done',
-            align: 'start',
-            sortable: false,
-            width: '5%',
-          },
-          {
             text: this.$tc('entity.materialItem.fields.quantity'),
             value: 'quantity',
             align: 'end',
@@ -322,23 +304,14 @@ export default {
           }
         )
       } else {
-        headers.push(
-          {
-            text: this.$tc('entity.materialItem.fields.done'),
-            value: 'done',
-            align: 'start',
-            sortable: false,
-            width: '25%',
-          },
-          {
-            text: this.$tc('entity.materialItem.fields.article'),
-            value: 'article',
-            align: 'start',
-            sortable: true,
-            width: 'auto',
-            cellClass: 'pl-0',
-          }
-        )
+        headers.push({
+          text: this.$tc('entity.materialItem.fields.article'),
+          value: 'article',
+          align: 'start',
+          sortable: true,
+          width: 'auto',
+          cellClass: 'pl-0',
+        })
       }
 
       // Activity column only shown in period overview

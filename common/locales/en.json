@@ -195,7 +195,6 @@
     "materialItem": {
       "fields": {
         "article": "Article",
-        "done": "Done",
         "list": "Material list",
         "quantity": "Quantity",
         "reference": "Activity / Period",

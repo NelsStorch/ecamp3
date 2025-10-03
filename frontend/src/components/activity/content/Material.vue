@@ -6,7 +6,6 @@
       :layout-mode="layoutMode"
       :material-item-collection="materialItemCollection"
       :disabled="disabled"
-      :done-checklist-disabled="true"
       hide-period-filter
     />
   </ContentNodeCard>
