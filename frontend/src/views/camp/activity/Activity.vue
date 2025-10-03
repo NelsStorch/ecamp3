@@ -4,7 +4,11 @@ Displays a single activity
 
 <template>
   <v-container fluid>
-    <ScheduleEntry v-if="!featureCommentsEnabled" :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
+    <ScheduleEntry
+      v-if="!featureCommentsEnabled"
+      :activity-id="activityId"
+      :schedule-entry-id="scheduleEntryId"
+    />
     <CommentWrapper v-else-if="!comments._meta.loading">
       <ScheduleEntry :activity-id="activityId" :schedule-entry-id="scheduleEntryId" />
       <template #comments>
