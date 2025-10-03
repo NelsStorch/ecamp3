@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app clipped-left clipped-right color="blue-grey darken-4" dark>
+  <v-app-bar app clipped-left color="blue-grey darken-4" dark>
     <logo text />
 
     <v-toolbar-items>
