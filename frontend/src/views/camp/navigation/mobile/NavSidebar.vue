@@ -23,9 +23,11 @@
           :to="{ name: 'profile', query: { isDetail: true } }"
         >
           <template #pre>
-            <v-list-item-avatar>
-              <UserAvatar :user="user" :camp-collaboration="currentCampCollaboration" />
-            </v-list-item-avatar>
+            <UserAvatar
+              :user="user"
+              :camp-collaboration="currentCampCollaboration"
+              size="40"
+            />
           </template>
         </SidebarListItem>
         <SidebarListItem

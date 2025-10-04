@@ -1,7 +1,9 @@
 <template>
   <v-list-item link :to="to" :href="href" v-bind="$attrs">
     <template v-if="!hideAvatar" #prepend>
-      <v-icon v-if="icon">{{ icon }}</v-icon>
+      <slot name="pre">
+        <v-icon v-if="icon">{{ icon }}</v-icon>
+      </slot>
     </template>
     <v-list-item-title :class="{ 'whitespace-normal': titleMultiline }">{{
       title
