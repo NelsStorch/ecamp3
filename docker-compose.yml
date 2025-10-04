@@ -21,6 +21,7 @@ services:
       - CI=${CI}
     working_dir: /app
     command: ./docker-setup.sh
+    stop_signal: SIGKILL
     depends_on:
       - pdf
 
@@ -91,6 +92,7 @@ services:
       - ./.cache/npm:/home/node/.npm
     working_dir: /app
     command: ./docker-setup.sh
+    stop_signal: SIGKILL
     environment:
       - NODE_ENV=development
       - NPM_CONFIG_UPDATE_NOTIFIER=false
@@ -118,6 +120,7 @@ services:
       - ./print/print.env
     working_dir: /app
     command: ./docker-setup.sh
+    stop_signal: SIGKILL
 
   database:
     image: postgres:15-alpine
@@ -208,6 +211,7 @@ services:
       - target: 3004
         published: 3004
         protocol: tcp
+    stop_signal: SIGKILL
 
   translation:
     image: node:24.8.0
