@@ -81,7 +81,7 @@ export default {
           // following structure is defined by vuetify v-select items property
           return {
             value: value._meta.self,
-            text: campCollaborationDisplayName(value, this.$t.bind(this)),
+            title: campCollaborationDisplayName(value, this.$t.bind(this)),
           }
         })
     },
