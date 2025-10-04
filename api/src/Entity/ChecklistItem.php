@@ -33,8 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             security: 'is_granted("CHECKLIST_IS_PROTOTYPE", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PUBLIC", object) or
                        is_granted("CAMP_COLLABORATOR", object)
                       '
         ),
@@ -65,8 +64,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                     fromClass: Checklist::class,
                     toProperty: 'checklist',
                     security: 'is_granted("CHECKLIST_IS_PROTOTYPE", checklist) or
-                               is_granted("CAMP_IS_PROTOTYPE", checklist) or
-                               is_granted("CAMP_IS_SHARED", checklist) or
+                               is_granted("CAMP_IS_PUBLIC", checklist) or
                                is_granted("CAMP_COLLABORATOR", checklist)'
                 ),
             ],
