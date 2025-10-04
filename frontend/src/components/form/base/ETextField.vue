@@ -1,13 +1,11 @@
 <template>
   <div class="e-form-container">
     <v-text-field
-      :id="name"
       ref="textField"
       :class="[inputClass]"
-      :error-messages="errorMessage"
-      :label="label || name"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :label="labelOrEntityFieldLabel"
       :model-value="inputValue"
-      :name="name"
       :type="type"
       v-bind="$attrs"
       :filled="filled"
@@ -25,19 +23,23 @@
 </template>
 
 <script setup>
-import { toRef } from 'vue'
+import { inject } from 'vue'
 import { useField } from 'vee-validate'
+import { useI18n } from 'vue-i18n'
 
-import { props as formComponentProps } from './formComponentProps'
+import { props as formComponentProps, useFormComponent } from './formComponentProps'
 import {
   props as formComponentValidationProps,
   useValidation,
 } from './formComponentValidation'
 
+const { t } = useI18n()
+
+const entityName = inject('entityName', null)
+
 const props = defineProps({
   ...formComponentProps,
   ...formComponentValidationProps,
-
   /**
    * additional props for ETextField
    */
@@ -48,18 +50,20 @@ const props = defineProps({
 })
 
 const { required } = useValidation(props.veeRules)
-
-const name = toRef(props, 'name')
-const rules = toRef(props, 'veeRules')
+const { labelOrEntityFieldLabel, validationLabel } = useFormComponent(
+  props.label,
+  props.path,
+  props.validationLabelOverride,
+  entityName,
+  t
+)
 
 const {
   value: inputValue,
-  errorMessage,
-  errors,
+  errorMessage: veeErrors,
   handleBlur,
   handleChange,
-  meta,
-} = useField(name, rules, {
+} = useField(validationLabel, props.veeRules, {
   initialValue: props.modelValue,
 })
 </script>

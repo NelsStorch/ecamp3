@@ -1,3 +1,5 @@
+import { computed } from 'vue'
+
 export const props = {
   modelValue: {
     type: String,
@@ -18,7 +20,7 @@ export const props = {
 
   // vuetify property hideDetails
   hideDetails: {
-    type: String,
+    type: [String, Boolean],
     default: 'auto',
   },
 
@@ -29,15 +31,29 @@ export const props = {
     required: false,
   },
 
-  // used as field name for validation and as label (if no override label is provided)
-  name: {
+  /**
+   * used as field path for validation
+   * and together with entityName as label (if no override label is provided)
+   */
+  path: {
     type: String,
     required: false,
     default: null,
   },
 
-  // override the label which is displayed to the user; name is used instead if no label is provided
+  /**
+   * override the automatic entity field label
+   */
   label: {
+    type: String,
+    required: false,
+    default: null,
+  },
+
+  /**
+   * override the automatic validation field name
+   */
+  validationLabelOverride: {
     type: String,
     required: false,
     default: null,
@@ -49,4 +65,29 @@ export const props = {
     required: false,
     default: () => [],
   },
+}
+
+export function useFormComponent(label, path, validationLabelOverride, entityName, t) {
+  const labelOrEntityFieldLabel = computed(() => {
+    if (label !== undefined) {
+      return label
+    }
+    if (!entityName || !path) {
+      return null
+    }
+    return t(`entity.${entityName}.fields.${path}`)
+  })
+
+  const validationLabel = computed(() => {
+    if (validationLabelOverride) {
+      return validationLabelOverride
+    }
+    if (label) {
+      return label
+    }
+
+    return t(`entity.${entityName}.fields.${path}`)
+  })
+
+  return { labelOrEntityFieldLabel, validationLabel }
 }
