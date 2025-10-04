@@ -32,7 +32,7 @@
           <component
             :is="item.component('v')"
             v-if="item.component('v') !== ''"
-            v-model="item.value"
+            v-model="values[item.id]"
             v-bind="{ ...item.props, ...config }"
           />
           <span v-else v-text="item.value" />
@@ -40,7 +40,7 @@
         <template #[`item.e`]="{ item }">
           <component
             :is="item.component('e')"
-            v-model="item.value"
+            v-model="values[item.id]"
             v-bind="{ ...item.props, ...config }"
           />
         </template>
@@ -134,16 +134,19 @@ export default {
     label: false,
     labelText: 'Label',
 
-    textfieldValue: 'FFFFFFFFFF',
     numberfieldValue: 10,
     textareaValue: 'FFFFFFFFFF',
     richtextValue: '<p>FFFFFFFFFF</p>',
-    checkboxValue: false,
     colorValue: null,
     selectValue: null,
     dateValue: '2020-01-01',
     timeValue: '2020-01-01T14:45:00+00:00',
     timeValue2: '00:00',
+    values: {
+      textfield: 'FFFFFFFFFF',
+      checkbox: false,
+      switch: false,
+    },
 
     headers: [
       { text: 'Type', value: 'id' },
@@ -162,63 +165,61 @@ export default {
     items() {
       return [
         {
-          id: 'text-field',
+          id: 'textfield',
           component: (type) => `${type}-text-field`,
-          value: this.textfieldValue,
           props: {
             placeholder: this.placeholder,
             path: 'nickname',
             uri: this.profileUri,
           },
         },
-        {
-          id: 'number-field',
-          component: (type) => (type === 'v' ? '' : `${type}-number-field`),
-          value: this.numberfieldValue,
-          props: {
-            placeholder: this.placeholder,
-            inputmode: 'decimal',
-            path: 'quantity',
-            uri: this.materialUri,
-          },
-        },
-        {
-          id: 'textarea',
-          component: (type) => `${type}-textarea`,
-          value: this.textareaValue,
-          props: {
-            placeholder: this.placeholder,
-            rows: 3,
-            path: 'data.html',
-            uri: this.singleTextUri,
-          },
-        },
-        {
-          id: 'richtext',
-          component: (type) => (type === 'v' ? 'v-tiptap-editor' : `${type}-richtext`),
-          value: this.richtextValue,
-          props: {
-            placeholder: this.placeholder,
-            rows: 3,
-            path: 'data.html',
-            uri: this.singleTextUri,
-          },
-        },
-        {
-          id: 'select',
-          component: (type) => `${type}-select`,
-          value: this.selectValue,
-          props: {
-            path: 'language',
-            placeholder: this.placeholder,
-            items: this.availableLocales,
-            uri: this.profileUri,
-          },
-        },
+        // {
+        //   id: 'number-field',
+        //   component: (type) => (type === 'v' ? '' : `${type}-number-field`),
+        //   value: this.numberfieldValue,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     inputmode: 'decimal',
+        //     path: 'quantity',
+        //     uri: this.materialUri,
+        //   },
+        // },
+        // {
+        //   id: 'textarea',
+        //   component: (type) => `${type}-textarea`,
+        //   value: this.textareaValue,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     rows: 3,
+        //     path: 'data.html',
+        //     uri: this.singleTextUri,
+        //   },
+        // },
+        // {
+        //   id: 'richtext',
+        //   component: (type) => (type === 'v' ? 'v-tiptap-editor' : `${type}-richtext`),
+        //   value: this.richtextValue,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     rows: 3,
+        //     path: 'data.html',
+        //     uri: this.singleTextUri,
+        //   },
+        // },
+        // {
+        //   id: 'select',
+        //   component: (type) => `${type}-select`,
+        //   value: this.selectValue,
+        //   props: {
+        //     path: 'language',
+        //     placeholder: this.placeholder,
+        //     items: this.availableLocales,
+        //     uri: this.profileUri,
+        //   },
+        // },
         {
           id: 'checkbox',
           component: (type) => `${type}-checkbox`,
-          value: this.checkboxValue,
           props: {
             path: 'printYSLogoOnPicasso',
             uri: this.campUri,
@@ -227,65 +228,64 @@ export default {
         {
           id: 'switch',
           component: (type) => `${type}-switch`,
-          value: this.checkboxValue,
           props: {
             path: 'printYSLogoOnPicasso',
             uri: this.campUri,
           },
         },
-        {
-          id: 'date-picker',
-          component: (type) => (type === 'v' ? '' : `${type}-date-picker`),
-          value: this.dateValue,
-          props: {
-            placeholder: this.placeholder,
-            path: 'start',
-            uri: this.periodUri,
-          },
-        },
-        {
-          id: 'time-picker',
-          component: (type) => (type === 'v' ? '' : `${type}-time-picker`),
-          value: this.timeValue,
-          props: {
-            placeholder: this.placeholder,
-            'value-format': 'YYYY-MM-DDTHH:mm:ssZ',
-            path: 'start',
-            uri: this.scheduleEntryUri,
-          },
-        },
-        {
-          id: 'color-picker',
-          component: (type) => (type === 'v' ? '' : `${type}-color-picker`),
-          value: this.colorValue,
-          props: {
-            placeholder: this.placeholder,
-            path: 'color',
-            uri: this.categoryUri,
-            veeRules: 'required',
-          },
-        },
-        {
-          id: 'color-field',
-          component: (type) => (type !== 'v' ? `${type}-color-field` : ''),
-          value: this.colorValue,
-          props: {
-            placeholder: this.placeholder,
-            path: 'color',
-            uri: this.campCollaborationUri,
-            veeRules: 'required',
-          },
-        },
-        {
-          id: 'time-field',
-          component: (type) => (type === 'e' ? `${type}-time-field` : ''),
-          value: this.timeValue2,
-          props: {
-            placeholder: this.placeholder,
-            path: 'start',
-            uri: this.scheduleEntryUri,
-          },
-        },
+        // {
+        //   id: 'date-picker',
+        //   component: (type) => (type === 'v' ? '' : `${type}-date-picker`),
+        //   value: this.dateValue,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     path: 'start',
+        //     uri: this.periodUri,
+        //   },
+        // },
+        // {
+        //   id: 'time-picker',
+        //   component: (type) => (type === 'v' ? '' : `${type}-time-picker`),
+        //   value: this.timeValue,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     'value-format': 'YYYY-MM-DDTHH:mm:ssZ',
+        //     path: 'start',
+        //     uri: this.scheduleEntryUri,
+        //   },
+        // },
+        // {
+        //   id: 'color-picker',
+        //   component: (type) => (type === 'v' ? '' : `${type}-color-picker`),
+        //   value: this.colorValue,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     path: 'color',
+        //     uri: this.categoryUri,
+        //     veeRules: 'required',
+        //   },
+        // },
+        // {
+        //   id: 'color-field',
+        //   component: (type) => (type !== 'v' ? `${type}-color-field` : ''),
+        //   value: this.colorValue,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     path: 'color',
+        //     uri: this.campCollaborationUri,
+        //     veeRules: 'required',
+        //   },
+        // },
+        // {
+        //   id: 'time-field',
+        //   component: (type) => (type === 'e' ? `${type}-time-field` : ''),
+        //   value: this.timeValue2,
+        //   props: {
+        //     placeholder: this.placeholder,
+        //     path: 'start',
+        //     uri: this.scheduleEntryUri,
+        //   },
+        // },
       ]
     },
     profileUri() {

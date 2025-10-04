@@ -12,7 +12,7 @@
       :label="labelOrEntityFieldLabel"
       :model-value="modelValue"
       v-bind="$attrs"
-      @update:modelValue="
+      @update:model-value="
         ($event) => {
           handleChange($event)
           $emit('input', $event)
