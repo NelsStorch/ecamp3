@@ -3,9 +3,9 @@
     <template #activator="{ props }">
       <v-chip
         :color="active ? 'primary' : 'surface'"
-        border="sm"
+        :border="active ? null : 'sm'"
         label
-        variant="flat"
+        :variant="active ? 'outlined' : 'flat'"
         v-bind="props"
         append-icon="mdi-chevron-down"
       >
@@ -15,9 +15,9 @@
         <span class="d-sm-none">{{ labelValue || label }}</span>
       </v-chip>
     </template>
-    <v-list density="compact">
-      <v-list-item color="primary" density="compact" @click.prevent="clear()">
-        <v-list-item-title class="d-flex align-center text-grey-darken-1">
+    <v-list :lines="false" density="compact" tag="ul">
+      <v-list-item color="primary" density="comfortable" @click.prevent="clear()">
+        <v-list-item-title class="d-flex align-center text-body-2 text-surface-variant">
           <span class="flex-grow-1">{{
             $t('components.dashboard.selectFilter.clear')
           }}</span>
@@ -28,22 +28,27 @@
         v-for="(item, self) in processedItems"
         :key="self"
         density="compact"
-        :input-value="item.selected"
+        :active="item.selected"
+        active-class="text-primary"
+        class="mb-0"
         color="primary"
+        tag="li"
         @click.prevent="toggle(item.value, item.exclusiveNone)"
       >
-        <v-list-item-title>
+        <v-list-item-title class="text-body-2">
           <slot name="item" v-bind="{ item, self }">{{ item.text }}</slot>
           <CountBadge v-if="item.resultCount !== null" :count="item.resultCount" />
         </v-list-item-title>
-        <v-list-item-action v-if="multiple && !item.exclusiveNone">
-          <v-checkbox v-model="item.selected" dense />
-        </v-list-item-action>
-        <v-list-item-action v-if="item.exclusiveNone">
-          <v-radio-group v-model="item.selected">
-            <v-radio dense :value="true" />
-          </v-radio-group>
-        </v-list-item-action>
+        <template #append>
+          <v-list-item-action v-if="multiple && !item.exclusiveNone" end>
+            <v-checkbox-btn v-model="item.selected" dense />
+          </v-list-item-action>
+          <v-list-item-action v-if="item.exclusiveNone" end>
+            <v-radio-group v-model="item.selected" hide-details>
+              <v-radio dense :value="true" />
+            </v-radio-group>
+          </v-list-item-action>
+        </template>
       </v-list-item>
     </v-list>
   </v-menu>
@@ -60,12 +65,13 @@ export default {
   props: {
     label: { type: String, required: true },
     multiple: { type: Boolean, default: false },
-    value: { type: [Array, String], default: null },
+    modelValue: { type: [Array, String], default: null },
     items: { type: Object, default: () => ({}) },
     displayField: { type: [String, Function], required: true },
     valueField: { type: String, default: '_meta.self' },
     andFilter: { type: Boolean, default: false },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       open: false,
@@ -73,7 +79,7 @@ export default {
   },
   computed: {
     active() {
-      return this.value?.length > 0
+      return this.modelValue?.length > 0
     },
     processedItems() {
       return keyBy(
@@ -83,8 +89,8 @@ export default {
           const resultCount = get(item, 'resultCount', null)
           const exclusiveNone = get(item, 'exclusiveNone')
           const selected = this.multiple
-            ? this.value?.includes(value)
-            : this.value === value
+            ? this.modelValue?.includes(value)
+            : this.modelValue === value
           return { text, resultCount, value, selected, exclusiveNone }
         }),
         'value'
@@ -92,7 +98,7 @@ export default {
     },
     labelValue() {
       if (this.multiple) {
-        const list = (this.value || []).map((item) => this.processedItems[item].text)
+        const list = (this.modelValue || []).map((item) => this.processedItems[item].text)
         const lang = this.$store.state.lang.language
         if ('Intl' in window && 'ListFormat' in Intl) {
           const listFormat = new Intl.ListFormat(lang, {
@@ -102,7 +108,7 @@ export default {
         }
         return list.join(', ')
       }
-      return this.processedItems[this.value]?.text
+      return this.processedItems[this.modelValue]?.text
     },
   },
   methods: {
@@ -116,24 +122,24 @@ export default {
       return get(item, this.displayField)
     },
     clear() {
-      this.$emit('input', null)
+      this.$emit('update:modelValue', null)
     },
     toggle(item, none = false) {
       if (this.andFilter && none) {
-        const newValue = this.value === item ? null : item
-        this.$emit('input', this.multiple ? [newValue] : newValue)
+        const newValue = this.modelValue === item ? null : item
+        this.$emit('update:modelValue', this.multiple ? [newValue] : newValue)
       } else {
         if (this.multiple) {
           const filteredValue = this.andFilter
-            ? this.value?.filter((value) => value !== 'none')
-            : this.value
+            ? this.modelValue?.filter((value) => value !== 'none')
+            : this.modelValue
           const newValue = filteredValue?.includes(item)
             ? filteredValue.filter((value) => value !== item)
             : (filteredValue || []).concat([item])
-          this.$emit('input', newValue)
+          this.$emit('update:modelValue', newValue)
         } else {
-          const newValue = this.value === item ? null : item
-          this.$emit('input', newValue)
+          const newValue = this.modelValue === item ? null : item
+          this.$emit('update:modelValue', newValue)
         }
       }
     },
