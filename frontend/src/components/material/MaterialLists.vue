@@ -4,9 +4,9 @@
       <v-list-item-content>
         {{ $t('components.material.materialLists.overview') }}
       </v-list-item-content>
-      <v-list-item-icon>
+      <template #append>
         <v-icon color="blue-grey lighten-3">mdi-chevron-right</v-icon>
-      </v-list-item-icon>
+      </template>
     </v-list-item>
     <v-list-item
       v-if="unassignedCount > 0"
@@ -27,9 +27,9 @@
           }}
         </v-list-item-subtitle>
       </v-list-item-content>
-      <v-list-item-icon>
+      <template #append>
         <v-icon color="blue-grey lighten-3">mdi-chevron-right</v-icon>
-      </v-list-item-icon>
+      </template>
     </v-list-item>
     <v-skeleton-loader v-if="materialLists._meta.loading" type="list-item@3" />
     <v-list-item
@@ -52,9 +52,9 @@
           }}
         </v-list-item-subtitle>
       </v-list-item-content>
-      <v-list-item-icon>
+      <template #append>
         <v-icon color="blue-grey lighten-3">mdi-chevron-right</v-icon>
-      </v-list-item-icon>
+      </template>
     </v-list-item>
   </v-list>
 </template>

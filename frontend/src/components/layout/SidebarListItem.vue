@@ -1,17 +1,15 @@
 <template>
   <v-list-item link :to="to" :href="href" v-bind="$attrs">
-    <slot name="pre">
-      <v-list-item-icon v-if="!hideAvatar">
-        <v-icon v-if="icon">{{ icon }}</v-icon>
-      </v-list-item-icon>
-    </slot>
+    <template #prepend v-if="!hideAvatar">
+      <v-icon v-if="icon">{{ icon }}</v-icon>
+    </template>
     <v-list-item-title :class="{ 'whitespace-normal': titleMultiline }">{{
       title
     }}</v-list-item-title>
     <v-list-item-subtitle v-if="subtitle">{{ subtitle }}</v-list-item-subtitle>
-    <v-list-item-icon v-if="!hideChevron">
+    <template #append v-if="!hideChevron">
       <v-icon style="opacity: 0.6">mdi-chevron-right</v-icon>
-    </v-list-item-icon>
+    </template>
   </v-list-item>
 </template>
 

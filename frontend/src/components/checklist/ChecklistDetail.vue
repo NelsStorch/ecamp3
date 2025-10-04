@@ -49,9 +49,9 @@
           >
             <template #activator="{ props }">
               <v-list-item v-bind="props">
-                <v-list-item-icon>
+                <template #prepend>
                   <v-icon>mdi-delete</v-icon>
-                </v-list-item-icon>
+                </template>
                 <v-list-item-title>
                   {{ $t('global.button.delete') }}
                 </v-list-item-title>

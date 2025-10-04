@@ -69,9 +69,9 @@ Show all activity schedule entries of a single period.
             :color="isFilterSet ? 'primary' : null"
             @click="openFilter = !openFilter"
           >
-            <v-list-item-icon>
+            <template #prepend>
               <v-icon>mdi-filter</v-icon>
-            </v-list-item-icon>
+            </template>
             <v-list-item-content>
               <v-list-item-title>Filter</v-list-item-title>
             </v-list-item-content>
