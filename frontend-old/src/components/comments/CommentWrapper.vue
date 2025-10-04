@@ -5,7 +5,7 @@
     </div>
     <template v-if="openComments">
       <div
-        v-if="$vuetify.breakpoint.width > 1360"
+        v-if="$vuetify.display.width > 1360"
         style="flex-basis: 320px"
         class="d-flex flex-column gap-2 items-center"
       >

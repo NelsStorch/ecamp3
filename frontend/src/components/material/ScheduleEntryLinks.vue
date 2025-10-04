@@ -6,7 +6,7 @@
     class="e-title-link tabular-nums"
   >
     <CategoryChip dense :category="activity.category()" />&thinsp;{{
-      $vuetify.breakpoint.smAndUp ? fullDescription(items[0]) : shortDescription(items[0])
+      $vuetify.display.smAndUp ? fullDescription(items[0]) : shortDescription(items[0])
     }}
   </router-link>
   <span v-else class="d-inline-flex flex-sm-wrap align-center">

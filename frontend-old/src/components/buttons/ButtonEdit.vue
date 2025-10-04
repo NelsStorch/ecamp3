@@ -3,7 +3,7 @@
     class="px-3 px-sm-4"
     color="primary"
     :icon="icon"
-    :hide-label="hideLabel || $vuetify.breakpoint.xsOnly"
+    :hide-label="hideLabel || $vuetify.display.xs"
     v-bind="$attrs"
     v-on="$listeners"
   >

@@ -9,8 +9,8 @@
     v-on="$listeners"
   >
     <v-icon v-if="iconOnly">{{ icon }}</v-icon>
-    <v-icon v-else-if="!text" :left="$vuetify.breakpoint.smAndUp">{{ icon }}</v-icon>
-    <v-icon v-if="!iconOnly && text" :left="$vuetify.breakpoint.smAndUp">{{
+    <v-icon v-else-if="!text" :left="$vuetify.display.smAndUp">{{ icon }}</v-icon>
+    <v-icon v-if="!iconOnly && text" :left="$vuetify.display.smAndUp">{{
       icon
     }}</v-icon>
 

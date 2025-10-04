@@ -9,7 +9,7 @@
           <ButtonAdd
             color="secondary"
             text
-            :hide-label="$vuetify.breakpoint.xsOnly"
+            :hide-label="$vuetify.display.xs"
             class="my-n2"
             v-on="on"
           >

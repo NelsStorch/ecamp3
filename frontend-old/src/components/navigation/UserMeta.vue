@@ -7,7 +7,7 @@
     right
     rounded
     :content-class="
-      ['ec-usermenu my-4', $vuetify.breakpoint.xsOnly && 'rounded-lg mt-2'].join(' ')
+      ['ec-usermenu my-4', $vuetify.display.xs && 'rounded-lg mt-2'].join(' ')
     "
     transition="slide-y-transition"
     :close-on-content-click="false"
@@ -109,7 +109,7 @@
         <span>{{ $tc('components.navigation.userMeta.admin') }}</span>
       </v-list-item>
       <v-list-item
-        v-if="!$vuetify.breakpoint.lgAndUp"
+        v-if="!$vuetify.display.lgAndUp"
         block
         :href="helpLink"
         target="_blank"

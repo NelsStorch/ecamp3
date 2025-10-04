@@ -291,9 +291,9 @@ export default {
       if (element) {
         let elementPosition =
           element.getBoundingClientRect().top + document.documentElement.scrollTop
-        if (this.$vuetify.breakpoint.mdAndUp) {
+        if (this.$vuetify.display.mdAndUp) {
           elementPosition = elementPosition - 50
-        } else if (this.$vuetify.breakpoint.smAndUp) {
+        } else if (this.$vuetify.display.smAndUp) {
           elementPosition = elementPosition + 14
         } else {
           elementPosition = elementPosition - 34
