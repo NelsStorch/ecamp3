@@ -15,7 +15,6 @@ Displays the content wrapped inside a card.
       <v-toolbar-items>
         <button-back
           v-if="back || (!$vuetify.display.mdAndUp && !!$route.query.isDetail)"
-          class="ml-n4"
         />
       </v-toolbar-items>
 
@@ -26,13 +25,15 @@ Displays the content wrapped inside a card.
       </slot>
       <v-spacer />
 
-      <v-skeleton-loader v-if="!loaded" type="actions" />
-      <slot v-else name="title-actions" />
+      <template v-if="!loaded" #append>
+        <v-skeleton-loader type="button" width="40" class="mr-2" />
+      </template>
+      <slot v-if="loaded" name="title-actions" />
     </v-toolbar>
 
     <!-- main content -->
     <v-sheet class="ec-content-card__content fill-height">
-      <v-skeleton-loader v-if="!loaded" type="article" />
+      <v-skeleton-loader v-if="!loaded" type="article" class="pa-4" />
       <slot v-else />
     </v-sheet>
   </v-card>

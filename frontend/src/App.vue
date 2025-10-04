@@ -110,7 +110,7 @@ export default {
 }
 
 @media #{map.get(settings.$display-breakpoints, 'xs')} {
-  .v-main > .v-main__wrap > .v-container {
+  .v-main > .v-container--fluid {
     min-height: 100%;
     display: flex;
 
