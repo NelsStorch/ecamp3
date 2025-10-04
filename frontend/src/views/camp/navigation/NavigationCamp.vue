@@ -1,8 +1,8 @@
 <template>
   <NavTopbar v-if="$vuetify.display.mdAndUp" :camp="camp" />
   <div v-else>
-    <NavBottombar :camp="camp" @input="open = $event" />
     <NavSidebar v-model="open" :camp="camp" />
+    <NavBottombar :camp="camp" @input="open = $event" />
   </div>
 </template>
 

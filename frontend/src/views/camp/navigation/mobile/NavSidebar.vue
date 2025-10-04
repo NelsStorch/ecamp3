@@ -1,10 +1,11 @@
 <template>
   <v-navigation-drawer
-    :model-value="value"
+    :model-value="modelValue"
     app
     location="right"
+    scrim
     width="300"
-    @update:model-value="$emit('input', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <div class="d-flex flex-column fill-height">
       <div class="d-flex flex-column align-center bg-blue-grey-darken-4 text-white py-6">
@@ -107,13 +108,13 @@
       </v-list>
       <div class="mt-auto">
         <v-btn
-          size="x-large"
+          size="large"
           height="56"
           variant="text"
           tile
           block
           class="ec-close-drawer pb-safe"
-          @click="$emit('input', false)"
+          @click="$emit('update:modelValue', false)"
         >
           {{ $t('views.camp.navigation.mobile.navSidebar.itemClose') }}
           <v-icon end>mdi-close</v-icon>
@@ -137,9 +138,10 @@ export default {
     UserAvatar,
   },
   props: {
-    value: { type: Boolean, required: true },
+    modelValue: { type: Boolean, required: true },
     camp: { type: Object, required: true },
   },
+  emits: ['update:modelValue'],
   computed: {
     newsLink() {
       return getEnv().NEWS_LINK
