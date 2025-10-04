@@ -13,12 +13,8 @@
       :max="localPeriod.end"
     />
 
-    <e-date-picker
-      v-model="localPeriod.end"
-      path="end"
-      vee-rules="required|greaterThanOrEqual_date:@start"
-      :min="localPeriod.start"
-    />
+    <!-- vee-rules="required|greaterThanOrEqual_date:@start" -->
+    <e-date-picker v-model="localPeriod.end" path="end" :min="localPeriod.start" />
   </e-form>
 </template>
 

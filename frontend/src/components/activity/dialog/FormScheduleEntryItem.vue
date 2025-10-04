@@ -54,11 +54,11 @@
       </e-time-dropdown>
     </div>
 
+    <!-- :vee-rules="'required|greaterThanOrEqual_date:@startDate' + startUTC" -->
     <e-date-picker
       v-model="localScheduleEntry.end"
       value-format="YYYY-MM-DDTHH:mm:ssZ"
       path="endDate"
-      :vee-rules="'required|greaterThanOrEqual_date:@startDate' + startUTC"
       :min="localScheduleEntry.start"
       :allowed-dates="dateIsInSelectedPeriod"
       :filled="false"
