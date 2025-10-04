@@ -36,6 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 @use 'vuetify/settings';
+@use 'sass:map';
 
 .ec-content-group__title {
   border-bottom: 1px solid map.get(settings.$blue-grey, 'lighten-4');

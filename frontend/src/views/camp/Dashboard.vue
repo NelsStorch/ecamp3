@@ -311,6 +311,7 @@ export default {
 <style scoped lang="scss">
 @use 'vuetify/settings';
 @use 'sass:map';
+
 .day-header {
   z-index: 1;
   position: sticky;

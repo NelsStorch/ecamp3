@@ -27,8 +27,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@use 'vuetify/settings';
 @use 'sass:map';
-@use 'vuetify/settings' .button-wrapper {
+
+.button-wrapper {
   display: flex;
   flex-direction: column;
   gap: 8px;
