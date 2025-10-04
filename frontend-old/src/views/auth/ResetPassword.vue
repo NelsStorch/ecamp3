@@ -30,7 +30,7 @@
             :value="email"
             path="email"
             append-icon="mdi-at"
-            :dense="$vuetify.display.xs"
+            :dense="$vuetify.breakpoint.xsOnly"
             type="email"
             autocomplete="username"
             readonly
@@ -42,7 +42,7 @@
             vee-rules="required|min:12|max:128"
             validate-on-blur
             append-icon="mdi-lock-outline"
-            :dense="$vuetify.display.xs"
+            :dense="$vuetify.breakpoint.xsOnly"
             type="password"
             autocomplete="new-password"
             minlength="12"
@@ -68,7 +68,7 @@
             :label="$tc('views.auth.resetPassword.passwordConfirmation')"
             vee-rules="required|confirmed:password"
             validate-on-blur
-            :dense="$vuetify.display.xs"
+            :dense="$vuetify.breakpoint.xsOnly"
             append-icon="mdi-lock-outline"
             type="password"
             autocomplete="new-password"
@@ -83,7 +83,7 @@
             :color="email ? 'blue darken-2' : 'blue lightne-4'"
             :disabled="!email"
             outlined
-            :x-large="$vuetify.display.smAndUp"
+            :x-large="$vuetify.breakpoint.smAndUp"
             class="my-4"
           >
             <v-progress-circular v-if="status == 'reseting'" indeterminate size="24" />

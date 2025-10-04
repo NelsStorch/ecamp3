@@ -95,7 +95,7 @@
             <template #label>
               <span
                 style="hyphens: auto"
-                :class="{ 'body-2': $vuetify.display.xs }"
+                :class="{ 'body-2': $vuetify.breakpoint.xsOnly }"
               >
                 {{ $tc('views.auth.register.acceptTermsOfService') }}
               </span>

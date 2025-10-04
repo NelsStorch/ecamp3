@@ -9,7 +9,7 @@
       toolbar
     >
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.breakpoint.mdAndUp" avatar-only btn-classes="mr-n4" />
       </template>
       <v-col>
         <v-skeleton-loader type="text" :loading="profile._meta.loading">
@@ -51,7 +51,7 @@
             <api-select path="language" :items="availableLocales" />
           </api-form>
           <v-btn
-            v-if="!$vuetify.display.mdAndUp"
+            v-if="!$vuetify.breakpoint.mdAndUp"
             class="mt-2"
             color="red"
             block

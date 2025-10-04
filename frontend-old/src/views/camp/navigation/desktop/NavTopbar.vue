@@ -4,42 +4,42 @@
 
     <v-toolbar-items>
       <v-btn :to="campRoute(camp)" text>
-        <v-icon :left="$vuetify.display.mdAndUp">mdi-tent</v-icon>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-tent</v-icon>
         <span class="sr-only-sm-and-down">{{ campShortTitle(camp) }}</span>
       </v-btn>
       <v-btn :to="campRoute(camp, 'program')" text>
-        <v-icon :left="$vuetify.display.mdAndUp">mdi-view-dashboard</v-icon>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-view-dashboard</v-icon>
         <span class="sr-only-sm-and-down">{{
           $tc('views.camp.navigation.desktop.navTopbar.program')
         }}</span>
       </v-btn>
       <v-btn v-if="hasChecklist" :to="campRoute(camp, 'overview/checklists')" text>
-        <v-icon :left="$vuetify.display.mdAndUp">mdi-clipboard-list-outline</v-icon>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-clipboard-list-outline</v-icon>
         <span class="sr-only-sm-and-down">{{
           $tc('views.camp.navigation.desktop.navTopbar.checklist')
         }}</span>
       </v-btn>
       <v-btn :to="campRoute(camp, 'story')" text>
-        <v-icon :left="$vuetify.display.mdAndUp"> mdi-book-open-variant </v-icon>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp"> mdi-book-open-variant </v-icon>
         <span class="sr-only-sm-and-down">{{
           $tc('views.camp.navigation.desktop.navTopbar.story')
         }}</span>
       </v-btn>
       <v-btn :to="materialListRoute(camp)" text>
-        <v-icon :left="$vuetify.display.mdAndUp"> mdi-package-variant </v-icon>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp"> mdi-package-variant </v-icon>
         <span class="sr-only-sm-and-down">{{
           $tc('views.camp.navigation.desktop.navTopbar.material')
         }}</span>
       </v-btn>
       <v-btn :to="campRoute(camp, 'admin')" text>
-        <v-icon :left="$vuetify.display.mdAndUp"> mdi-cogs </v-icon>
+        <v-icon :left="$vuetify.breakpoint.mdAndUp"> mdi-cogs </v-icon>
         <span class="sr-only-sm-and-down">{{
           $tc('global.navigation.admin.title')
         }}</span>
       </v-btn>
     </v-toolbar-items>
     <v-spacer />
-    <v-toolbar-items v-if="$vuetify.display.lgAndUp">
+    <v-toolbar-items v-if="$vuetify.breakpoint.lgAndUp">
       <v-btn :href="helpLink" target="_blank" text>
         {{ $tc('global.navigation.help') }}
         <span class="blue-grey--text"><v-icon small right>mdi-open-in-new</v-icon></span>

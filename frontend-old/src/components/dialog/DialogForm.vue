@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     content-class="ec-dialog-form"
-    :fullscreen="$vuetify.display.xs"
+    :fullscreen="$vuetify.breakpoint.xsOnly"
     eager
     v-bind="$attrs"
     :value="value"
@@ -25,7 +25,7 @@
             </v-toolbar-title>
             <v-btn
               v-if="
-                (closeVisibleOnMobile || $vuetify.display.smAndUp) &&
+                (closeVisibleOnMobile || $vuetify.breakpoint.smAndUp) &&
                 cancelAction != null
               "
               icon

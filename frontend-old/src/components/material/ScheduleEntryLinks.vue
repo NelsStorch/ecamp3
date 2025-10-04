@@ -6,7 +6,7 @@
     class="e-title-link tabular-nums"
   >
     <CategoryChip dense :category="activity.category()" />&thinsp;{{
-      $vuetify.display.smAndUp ? fullDescription(items[0]) : shortDescription(items[0])
+      $vuetify.breakpoint.smAndUp ? fullDescription(items[0]) : shortDescription(items[0])
     }}
   </router-link>
   <span v-else class="d-inline-flex flex-sm-wrap align-center">
@@ -16,7 +16,7 @@
         :to="scheduleEntryRoute(items[0])"
         dense
         :category="activity.category()"
-      />{{ $vuetify.display.smAndUp ? `\u2009${activity.title}:` : '' }}
+      />{{ $vuetify.breakpoint.smAndUp ? `\u2009${activity.title}:` : '' }}
     </span>
     <span class="d-inline-flex gap-x-1 flex-wrap"
       ><router-link

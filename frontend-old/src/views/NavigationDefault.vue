@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    v-if="$vuetify.display.mdAndUp"
+    v-if="$vuetify.breakpoint.mdAndUp"
     app
     clipped-left
     color="blue-grey darken-4"
@@ -8,7 +8,7 @@
   >
     <Logo text />
     <v-spacer />
-    <v-toolbar-items v-if="$vuetify.display.lgAndUp">
+    <v-toolbar-items v-if="$vuetify.breakpoint.lgAndUp">
       <v-btn :href="helpLink" target="_blank" text>
         {{ $tc('global.navigation.help') }}
         <span class="blue-grey--text"><v-icon small right>mdi-open-in-new</v-icon></span>

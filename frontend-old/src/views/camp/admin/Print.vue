@@ -6,7 +6,7 @@ Basic layout for print preview
   <content-card :title="$tc('views.camp.admin.print.title')" toolbar>
     <template #title-actions>
       <v-btn text class="mr-n2" @click="$refs.printConfigurator?.resetConfig()">
-        <v-icon v-if="$vuetify.display.smAndUp" left>mdi-file-restore-outline</v-icon>
+        <v-icon v-if="$vuetify.breakpoint.smAndUp" left>mdi-file-restore-outline</v-icon>
         {{ $tc('global.button.reset') }}
       </v-btn>
     </template>

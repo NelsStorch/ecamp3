@@ -9,7 +9,7 @@
         }}
       </p>
     </v-card-text>
-    <template v-if="$vuetify.display.mdAndUp">
+    <template v-if="$vuetify.breakpoint.mdAndUp">
       <v-list-item v-for="invitation in invitations.items" :key="invitation._meta.self">
         <v-list-item-content>
           <v-list-item-title>{{ invitation.campTitle }}</v-list-item-title>
