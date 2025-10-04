@@ -16,7 +16,7 @@ Displays a field as a textfield (can be used with v-model)
   <v-text-field
     ref="textField"
     :class="[inputClass]"
-    :error-messages="veeErrors.concat(combinedErrorMessages)"
+    :error-messages="(veeErrors ?? []).concat(combinedErrorMessages)"
     :filled="filled"
     :hide-details="hideDetails"
     :label="labelOrEntityFieldLabel"

@@ -8,7 +8,7 @@
   <!--  >-->
   <v-switch
     :class="[inputClass]"
-    :error-messages="veeErrors.concat(errorMessages)"
+    :error-messages="(veeErrors ?? []).concat(errorMessages)"
     :hide-details="hideDetails"
     :label="labelOrEntityFieldLabel"
     :model-value="value"
