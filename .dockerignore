@@ -9,5 +9,9 @@
 /frontend/dist
 /frontend/.env.*
 /frontend/public/environment.*
+/frontend-old/data
+/frontend-old/dist
+/frontend-old/.env.*
+/frontend-old/public/environment.*
 **/vendor/
 **/node_modules/

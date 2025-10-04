@@ -38,9 +38,10 @@ if (sentryAuthToken) {
 }
 
 export default defineConfig(({ mode }) => ({
+  base: '/old',
   server: {
     port: 3000,
-    allowedHosts: ['frontend', 'localhost:3000'],
+    allowedHosts: ['frontend-old', 'localhost:3000'],
   },
   plugins,
   worker: {
