@@ -1,47 +1,44 @@
 <template>
-  <v-app-bar app clipped-left color="blue-grey darken-4" dark>
+  <v-app-bar app clipped-left color="blue-grey-darken-4" dark>
     <logo text />
 
     <v-toolbar-items>
-      <v-btn :to="campRoute(camp)" text>
-        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-tent</v-icon>
-        <span class="sr-only-sm-and-down">{{ campShortTitle(camp) }}</span>
-      </v-btn>
-      <v-btn :to="campRoute(camp, 'program')" text>
-        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-view-dashboard</v-icon>
-        <span class="sr-only-sm-and-down">{{
-          $tc('views.camp.navigation.desktop.navTopbar.program')
-        }}</span>
-      </v-btn>
-      <v-btn v-if="hasChecklist" :to="campRoute(camp, 'overview/checklists')" text>
-        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-clipboard-list-outline</v-icon>
-        <span class="sr-only-sm-and-down">{{
-          $tc('views.camp.navigation.desktop.navTopbar.checklist')
-        }}</span>
-      </v-btn>
-      <v-btn :to="campRoute(camp, 'story')" text>
-        <v-icon :left="$vuetify.breakpoint.mdAndUp"> mdi-book-open-variant </v-icon>
-        <span class="sr-only-sm-and-down">{{
-          $tc('views.camp.navigation.desktop.navTopbar.story')
-        }}</span>
-      </v-btn>
-      <v-btn :to="materialListRoute(camp)" text>
-        <v-icon :left="$vuetify.breakpoint.mdAndUp"> mdi-package-variant </v-icon>
-        <span class="sr-only-sm-and-down">{{
-          $tc('views.camp.navigation.desktop.navTopbar.material')
-        }}</span>
-      </v-btn>
-      <v-btn :to="campRoute(camp, 'admin')" text>
-        <v-icon :left="$vuetify.breakpoint.mdAndUp"> mdi-cogs </v-icon>
-        <span class="sr-only-sm-and-down">{{
-          $tc('global.navigation.admin.title')
-        }}</span>
-      </v-btn>
+      <TopNavigationItem
+        :to="campRoute(camp)"
+        icon="mdi-tent"
+        :text="campShortTitle(camp)"
+      />
+      <TopNavigationItem
+        :to="campRoute(camp, 'program')"
+        icon="mdi-view-dashboard"
+        :text="$t('views.camp.navigation.desktop.navTopbar.program')"
+      />
+      <TopNavigationItem
+        v-if="hasChecklist"
+        :to="campRoute(camp, 'overview/checklists')"
+        icon="mdi-clipboard-list-outline"
+        :text="$t('views.camp.navigation.desktop.navTopbar.checklist')"
+      />
+      <TopNavigationItem
+        :to="campRoute(camp, 'story')"
+        icon="mdi-book-open-variant"
+        :text="$t('views.camp.navigation.desktop.navTopbar.story')"
+      />
+      <TopNavigationItem
+        :to="materialListRoute(camp)"
+        icon="mdi-package-variant"
+        :text="$t('views.camp.navigation.desktop.navTopbar.material')"
+      />
+      <TopNavigationItem
+        :to="campRoute(camp, 'admin')"
+        icon="mdi-cogs"
+        :text="$t('global.navigation.admin.title')"
+      />
     </v-toolbar-items>
     <v-spacer />
-    <v-toolbar-items v-if="$vuetify.breakpoint.lgAndUp">
+    <v-toolbar-items v-if="$vuetify.display.lgAndUp">
       <v-btn :href="helpLink" target="_blank" text>
-        {{ $tc('global.navigation.help') }}
+        {{ $t('global.navigation.help') }}
         <span class="blue-grey--text"><v-icon small right>mdi-open-in-new</v-icon></span>
       </v-btn>
     </v-toolbar-items>
@@ -57,10 +54,12 @@ import { mapGetters } from 'vuex'
 import { campRoleMixin } from '@/mixins/campRoleMixin.js'
 import { getEnv } from '@/environment.js'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
+import TopNavigationItem from '@/components/navigation/TopNavigationItem.vue'
 
 export default {
   name: 'NavTopbar',
   components: {
+    TopNavigationItem,
     UserMeta,
     Logo,
   },

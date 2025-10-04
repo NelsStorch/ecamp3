@@ -1,10 +1,10 @@
 <template>
-  <content-card :title="$tc('views.camp.dashboard.activities')" toolbar>
+  <content-card :title="$t('views.camp.dashboard.activities')" toolbar>
     <template #title-actions>
       <v-spacer />
       <v-btn v-if="today !== null" text @click="scrollToToday">
         <v-icon left>mdi-calendar-today</v-icon>
-        {{ $tc('views.camp.dashboard.today') }}
+        {{ $t('views.camp.dashboard.today') }}
       </v-btn>
     </template>
     <div class="d-flow-root">
@@ -48,19 +48,19 @@
           <thead :key="uri + '_head'">
             <tr class="d-sr-only">
               <th :id="uri + 'th-number'" scope="col">
-                {{ $tc('views.camp.dashboard.columns.number') }}
+                {{ $t('views.camp.dashboard.columns.number') }}
               </th>
               <th :id="uri + 'th-category'" scope="col">
-                {{ $tc('views.camp.dashboard.columns.category') }}
+                {{ $t('views.camp.dashboard.columns.category') }}
               </th>
               <th :id="uri + 'th-time'" scope="col">
-                {{ $tc('views.camp.dashboard.columns.time') }}
+                {{ $t('views.camp.dashboard.columns.time') }}
               </th>
               <th :id="uri + 'th-title'" scope="col">
-                {{ $tc('views.camp.dashboard.columns.title') }}
+                {{ $t('views.camp.dashboard.columns.title') }}
               </th>
               <th :id="uri + 'th-responsible'" scope="col">
-                {{ $tc('views.camp.dashboard.columns.responsible') }}
+                {{ $t('views.camp.dashboard.columns.responsible') }}
               </th>
             </tr>
           </thead>
@@ -103,10 +103,10 @@
           v-if="scheduleEntries.length > 0 && filteredScheduleEntries.length === 0"
           class="ma-4"
         >
-          {{ $tc('views.camp.dashboard.noEntries') }}
+          {{ $t('views.camp.dashboard.noEntries') }}
         </p>
         <p v-if="scheduleEntries.length === 0" class="ma-4">
-          {{ $tc('views.camp.dashboard.welcome') }}
+          {{ $t('views.camp.dashboard.welcome') }}
         </p>
       </template>
       <table v-else class="mx-4 mt-6 mb-3 d-sr-none" style="border-collapse: collapse">
@@ -192,7 +192,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.camp.dashboard.activities'),
+      title: this.$t('views.camp.dashboard.activities'),
     }
   },
   computed: {
@@ -309,14 +309,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
 .day-header {
   z-index: 1;
   position: sticky;
   top: calc(48px - 1px - 0.75rem);
-  @media #{map-get($display-breakpoints, 'sm-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
     top: calc(0px - 1px - 0.75rem);
   }
-  @media #{map-get($display-breakpoints, 'md-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
     top: calc(64px - 1px - 0.75rem);
   }
   padding-bottom: 0.25rem;

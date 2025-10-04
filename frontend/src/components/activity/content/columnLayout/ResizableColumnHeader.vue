@@ -3,7 +3,7 @@
     <slot>
       <v-btn
         icon
-        text
+        variant="text"
         color="primary"
         class="resize-btn"
         :class="{ dragging }"
@@ -52,7 +52,7 @@ export default {
     document.documentElement.addEventListener('touchcancel', this.mouseUp, true)
     document.documentElement.addEventListener('touchstart', this.mouseUp, true)
   },
-  beforeDestroy: function () {
+  beforeUnmount: function () {
     document.documentElement.removeEventListener('mousemove', this.mouseMove)
     document.documentElement.removeEventListener('mouseup', this.mouseUp)
     document.documentElement.removeEventListener('mouseleave', this.mouseUp)
@@ -105,6 +105,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .resize-btn {
   position: absolute;
   right: -35px;
@@ -118,7 +121,7 @@ export default {
   }
   &:active,
   &:hover {
-    color: map-get($blue, 'darken-4') !important;
+    color: map.get(settings.$blue, 'darken-4') !important;
     cursor: col-resize;
   }
   &::after {
@@ -136,14 +139,14 @@ export default {
       to bottom,
       rgb(21, 101, 192, 0.1),
       rgb(21, 101, 192, 0.1) 40%,
-      map-get($blue, 'darken-3') 40%,
-      map-get($blue, 'darken-3') 100%
+      map.get(settings.$blue, 'darken-3') 40%,
+      map.get(settings.$blue, 'darken-3') 100%
     );
     border-image: linear-gradient(
         to right,
         transparent 0%,
-        map-get($blue, 'lighten-2') 46%,
-        map-get($blue, 'lighten-2') 53%,
+        map.get(settings.$blue, 'lighten-2') 46%,
+        map.get(settings.$blue, 'lighten-2') 53%,
         transparent 100%
       )
       1;

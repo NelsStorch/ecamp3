@@ -1,5 +1,5 @@
 <template>
-  <content-card :title="$tc('views.camp.story.title')" toolbar>
+  <content-card :title="$t('views.camp.story.title')" toolbar>
     <template #title-actions>
       <PeriodSwitcher :period="period" :route-name="'camp/period/story'" />
       <v-spacer />
@@ -10,8 +10,8 @@
         @click="editMode = !editMode"
       />
       <v-menu offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn class="ml-auto" text icon v-bind="attrs" v-on="on">
+        <template #activator="{ props }">
+          <v-btn class="ml-auto" icon v-bind="props" variant="text">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
@@ -61,7 +61,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.camp.story.title'),
+      title: this.$t('views.camp.story.title'),
     }
   },
   computed: {
@@ -69,8 +69,7 @@ export default {
       return {
         camp: this.camp._meta.self,
         language: this.$store.state.lang.language,
-        documentName:
-          campShortTitle(this.camp) + '-' + this.$tc('views.camp.story.title'),
+        documentName: campShortTitle(this.camp) + '-' + this.$t('views.camp.story.title'),
         options: { pageNumbers: false },
         contents: [
           {

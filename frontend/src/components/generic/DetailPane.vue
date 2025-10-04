@@ -1,13 +1,13 @@
 <template>
   <DialogBottomSheet
-    v-if="$vuetify.breakpoint.smAndDown"
+    v-if="$vuetify.display.smAndDown"
     :saving-override.sync="isSaving"
     :value="value"
     v-bind="{ ...$props, ...$attrs }"
     v-on="$listeners"
   >
     <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
+    <template v-for="(_, name) in $slots" #[name]="slotData">
       <slot :name="name" v-bind="slotData" />
     </template>
   </DialogBottomSheet>
@@ -20,8 +20,10 @@
     v-bind="{ ...$props, ...$attrs }"
     v-on="$listeners"
   >
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
+    <template v-for="(_, name) in $slots" #[name]>
+      <slot :name="name" />
+    </template>
+    <template v-for="(_, name) in $slots" #[name]="slotData">
       <slot :name="name" v-bind="slotData" />
     </template>
   </DialogForm>

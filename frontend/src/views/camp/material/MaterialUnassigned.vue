@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <content-card :title="$tc('views.camp.material.materialUnassigned.title')" toolbar>
+    <content-card :title="$t('views.camp.material.materialUnassigned.title')" toolbar>
       <template #title-actions>
         <v-menu offset-y>
           <template #activator="{ attrs, on }">
@@ -14,7 +14,7 @@
                 <v-icon>mdi-microsoft-excel</v-icon>
               </v-list-item-icon>
               <v-list-item-content
-                >{{ $tc('global.button.download') }}
+                >{{ $t('global.button.download') }}
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -71,7 +71,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.camp.material.materialUnassigned.title'),
+      title: this.$t('views.camp.material.materialUnassigned.title'),
     }
   },
   computed: {
@@ -96,7 +96,7 @@ export default {
       this.downloadMaterialList(
         this.camp,
         { value: this.filteredCollection },
-        this.$tc('views.camp.material.materialUnassigned.excelTitle')
+        this.$t('views.camp.material.materialUnassigned.excelTitle')
       )()
     },
   },

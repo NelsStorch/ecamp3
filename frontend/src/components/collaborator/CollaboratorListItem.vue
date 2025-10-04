@@ -9,21 +9,19 @@
       </v-list-item-title>
       <v-list-item-subtitle>
         <v-tooltip right>
-          <template #activator="{ on }">
-            <button v-on="on">
-              {{ $tc(roles[collaborator.role].roleTranslation)
+          <template #activator="{ props }">
+            <button v-bind="props">
+              {{ $t(roles[collaborator.role].roleTranslation)
               }}<span>
                 &middot;
-                <template v-for="icon in roles[collaborator.role].icons"
-                  ><v-icon :key="icon" x-small class="vertical-baseline">{{
-                    icon
-                  }}</v-icon
+                <template v-for="icon in roles[collaborator.role].icons" :key="icon"
+                  ><v-icon class="vertical-baseline" x-small>{{ icon }}</v-icon
                   >&thinsp;</template
                 ></span
               >
             </button>
           </template>
-          {{ $tc(roles[collaborator.role].abilitiesTranslation) }}
+          {{ $t(roles[collaborator.role].abilitiesTranslation) }}
         </v-tooltip>
       </v-list-item-subtitle>
     </v-list-item-content>
@@ -74,7 +72,7 @@ export default {
   }),
   computed: {
     name() {
-      return campCollaborationDisplayName(this.collaborator, this.$tc.bind(this), false)
+      return campCollaborationDisplayName(this.collaborator, this.$t.bind(this), false)
     },
   },
 }

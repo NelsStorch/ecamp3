@@ -8,7 +8,7 @@
       <BooleanFilter
         v-if="loadingEndpoints !== true && loadingEndpoints.campCollaborations !== true"
         v-model="showOnlyMyActivities"
-        :label="$tc('components.program.scheduleEntryFilters.onlyMyActivities')"
+        :label="$t('components.program.scheduleEntryFilters.onlyMyActivities')"
         :result-count="myActivitiesCount"
       />
       <v-skeleton-loader
@@ -27,7 +27,7 @@
           v-model="value.period"
           :items="periodItems"
           display-field="description"
-          :label="$tc('components.program.scheduleEntryFilters.period')"
+          :label="$t('components.program.scheduleEntryFilters.period')"
           @input="(val) => updateFilter({ period: val })"
         />
       </template>
@@ -46,7 +46,7 @@
       and-filter
       :items="campCollaborations"
       :display-field="campCollaborationDisplayName"
-      :label="$tc('components.program.scheduleEntryFilters.responsible')"
+      :label="$t('components.program.scheduleEntryFilters.responsible')"
       @input="(val) => updateFilter({ responsible: val })"
     >
       <template #item="{ item }">
@@ -74,7 +74,7 @@
       multiple
       :items="categories"
       display-field="short"
-      :label="$tc('components.program.scheduleEntryFilters.category')"
+      :label="$t('components.program.scheduleEntryFilters.category')"
       @input="(val) => updateFilter({ category: val })"
     >
       <template #item="{ item }">
@@ -96,7 +96,7 @@
         multiple
         :items="dayItems"
         display-field="label"
-        :label="$tc('components.program.scheduleEntryFilters.day')"
+        :label="$t('components.program.scheduleEntryFilters.day')"
         @input="(val) => updateFilter({ day: val })"
       />
       <v-skeleton-loader
@@ -113,7 +113,7 @@
       multiple
       :items="progressLabels"
       display-field="title"
-      :label="$tc('components.program.scheduleEntryFilters.progressLabel')"
+      :label="$t('components.program.scheduleEntryFilters.progressLabel')"
       @input="(val) => updateFilter({ progressLabel: val })"
     >
       <template #item="{ item }">
@@ -130,7 +130,7 @@
     <v-chip v-if="filterSet" label outlined @click="resetFilter">
       <span>&ZeroWidthSpace;</span>
       <v-icon left>mdi-close</v-icon>
-      {{ $tc('components.program.scheduleEntryFilters.clearFilters') }}
+      {{ $t('components.program.scheduleEntryFilters.clearFilters') }}
     </v-chip>
   </div>
 </template>
@@ -217,7 +217,7 @@ export default {
         this.camp.periods().items.flatMap((period) =>
           period.days().items.map((day) => ({
             ...day,
-            label: this.$tc('components.program.scheduleEntryFilters.dayLabel', 0, {
+            label: this.$t('components.program.scheduleEntryFilters.dayLabel', 0, {
               dayNumber: day.number,
               date: this.$date.utc(day.start).format('dd. DD. MMM'),
             }),
@@ -242,13 +242,13 @@ export default {
       return {
         none: {
           exclusiveNone: true,
-          label: this.$tc('components.program.scheduleEntryFilters.responsibleNone'),
+          label: this.$t('components.program.scheduleEntryFilters.responsibleNone'),
           _meta: { self: 'none' },
           resultCount: this.resultCountWithModifiedFilter('responsible', ['none']),
         },
         ...keyBy(
           sortBy(this.camp.campCollaborations().items, (u) =>
-            campCollaborationDisplayName(u, this.$tc.bind(this)).toLowerCase()
+            campCollaborationDisplayName(u, this.$t.bind(this)).toLowerCase()
           ).map((campCollaboration) => {
             return {
               ...campCollaboration,
@@ -281,7 +281,7 @@ export default {
       const labels = sortBy(this.camp.progressLabels().items, (l) => l.position)
       return {
         none: {
-          title: this.$tc('components.program.scheduleEntryFilters.progressLabelNone'),
+          title: this.$t('components.program.scheduleEntryFilters.progressLabelNone'),
           _meta: { self: 'none' },
           resultCount: this.resultCountWithModifiedFilter('progressLabel', ['none']),
         },
@@ -344,7 +344,7 @@ export default {
   },
   methods: {
     campCollaborationDisplayName(campCollaboration) {
-      return campCollaborationDisplayName(campCollaboration, this.$tc.bind(this))
+      return campCollaborationDisplayName(campCollaboration, this.$t.bind(this))
     },
     loadEndpointData(endpoint, filterKey, hasNone = false) {
       this.camp[endpoint]()._meta.load.then(({ allItems }) => {

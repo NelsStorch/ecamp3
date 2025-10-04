@@ -1,9 +1,9 @@
 <template>
   <v-app-bar
-    v-if="$vuetify.breakpoint.mdAndUp"
+    v-if="$vuetify.display.mdAndUp"
     app
     clipped-left
-    color="blue-grey darken-4"
+    color="blue-grey-darken-4"
     dark
   >
     <logo text />
@@ -11,7 +11,7 @@
     <v-toolbar-items>
       <v-btn :href="newsLink" target="_blank" text>
         <v-icon left>mdi-script-text-outline</v-icon>
-        {{ $tc('global.navigation.news') }}
+        {{ $t('global.navigation.news') }}
       </v-btn>
     </v-toolbar-items>
     <v-btn
@@ -20,13 +20,13 @@
       fab
       x-small
       light
-      absolute
+      position="absolute"
       top
       right
       class="help-button--desktop"
     >
       <v-icon>mdi-help</v-icon>
-      <span class="d-sr-only">{{ $tc('global.navigation.help') }}</span>
+      <span class="d-sr-only">{{ $t('global.navigation.help') }}</span>
     </v-btn>
   </v-app-bar>
   <v-btn
@@ -34,14 +34,17 @@
     :href="helpLink"
     target="_blank"
     fab
-    x-small
-    absolute
+    icon="mdi-help"
+    size="small"
+    position="absolute"
+    location="right"
     top
     right
-    class="help-button--mobile"
+    class="help-button--mobile ma-4"
+    style="z-index: 10"
   >
-    <v-icon>mdi-help</v-icon>
-    <span class="d-sr-only">{{ $tc('global.navigation.help') }}</span>
+    <v-icon icon="mdi-help" />
+    <span class="d-sr-only">{{ $t('global.navigation.help') }}</span>
   </v-btn>
 </template>
 

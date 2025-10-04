@@ -16,7 +16,7 @@
       <span>{{ state }}</span>
     </v-tooltip>
     <v-list-item-title>
-      {{ $tc('components.print.printClient.downloadClientPdfListItem.label') }}
+      {{ $t('components.print.printClient.downloadClientPdfListItem.label') }}
     </v-list-item-title>
   </v-list-item>
 </template>

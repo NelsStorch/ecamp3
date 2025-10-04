@@ -44,7 +44,7 @@ export default {
         [...this.collaborators],
         (c) =>
           String(ROLE_ORDER.indexOf(c.role)).padStart(3, '0') +
-          campCollaborationDisplayName(c, this.$tc.bind(this)).toLowerCase()
+          campCollaborationDisplayName(c, this.$t.bind(this)).toLowerCase()
       )
     },
 

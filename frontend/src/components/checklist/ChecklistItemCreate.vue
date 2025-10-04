@@ -4,17 +4,17 @@
     :loading="loading"
     :error="error"
     icon="mdi-account-plus"
-    :title="$tc('components.checklist.checklistItemCreate.title')"
+    :title="$t('components.checklist.checklistItemCreate.title')"
     :submit-action="createChecklistItem"
-    :submit-label="$tc('global.button.add')"
+    :submit-label="$t('global.button.add')"
     submit-icon="mdi-plus"
     submit-color="success"
     :cancel-action="close"
   >
-    <template #activator="{ on }">
-      <slot name="activator" v-bind="{ on }">
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }">
         <ButtonAdd color="secondary" text class="my-n2" icon="mdi-playlist-plus" v-on="on"
-          >{{ $tc('components.checklist.checklistItemCreate.title') }}
+          >{{ $t('components.checklist.checklistItemCreate.title') }}
         </ButtonAdd>
       </slot>
     </template>

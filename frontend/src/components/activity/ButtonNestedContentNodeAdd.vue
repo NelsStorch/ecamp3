@@ -9,18 +9,17 @@
       'ec-button-contentnode-add-wrapper--single': single,
     }"
   >
-    <v-menu bottom left offset-y>
-      <template #activator="{ on, attrs }">
+    <v-menu location="bottom left" offset-y>
+      <template #activator="{ props }">
         <v-btn
           class="ec-button-contentnode-add"
           color="primary--text"
           block
           :loading="isAdding"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           <v-icon left>mdi-plus-circle-outline</v-icon>
-          {{ $tc('global.button.add') }}
+          {{ $t('global.button.add') }}
         </v-btn>
       </template>
       <v-list>
@@ -31,10 +30,10 @@
           @click="addContentNode(contentType)"
         >
           <v-list-item-icon>
-            <v-icon>{{ $tc(contentTypeIconKey(contentType)) }}</v-icon>
+            <v-icon>{{ $t(contentTypeIconKey(contentType)) }}</v-icon>
           </v-list-item-icon>
           <v-list-item-title>
-            {{ $tc(contentTypeNameKey(contentType)) }}
+            {{ $t(contentTypeNameKey(contentType)) }}
           </v-list-item-title>
         </v-list-item>
 
@@ -47,10 +46,10 @@
           @click="addContentNode(contentType)"
         >
           <v-list-item-icon>
-            <v-icon>{{ $tc(contentTypeIconKey(contentType)) }}</v-icon>
+            <v-icon>{{ $t(contentTypeIconKey(contentType)) }}</v-icon>
           </v-list-item-icon>
           <v-list-item-title>
-            {{ $tc(contentTypeNameKey(contentType)) }}
+            {{ $t(contentTypeNameKey(contentType)) }}
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -128,8 +127,8 @@ export default {
       }
     },
     sortContentTypeByTranslatedName(ct1, ct2) {
-      const ct1name = this.$i18n.tc(this.contentTypeNameKey(ct1))
-      const ct2name = this.$i18n.tc(this.contentTypeNameKey(ct2))
+      const ct1name = this.$i18n.t(this.contentTypeNameKey(ct1))
+      const ct2name = this.$i18n.t(this.contentTypeNameKey(ct2))
       return ct1name.localeCompare(ct2name)
     },
     async addContentNode(contentType) {

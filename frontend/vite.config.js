@@ -1,23 +1,34 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue2'
-import { createSvgPlugin } from 'vite-plugin-vue2-svg'
+import vue from '@vitejs/plugin-vue'
 import { comlink } from 'vite-plugin-comlink'
 import * as path from 'path'
-import { VuetifyResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { configDefaults } from 'vitest/config'
+import svgLoader from 'vite-svg-loader'
+import Vuetify from 'vite-plugin-vuetify'
 
 const plugins = [
   comlink(), // must be first
-  vue(),
-  Components({
-    resolvers: [
-      // Vuetify
-      VuetifyResolver(),
-    ],
+  vue({
+    template: {
+      compilerOptions: {
+        compatConfig: {
+          MODE: 2,
+        },
+      },
+    },
   }),
-  createSvgPlugin(),
+  Components({
+    resolvers: [],
+  }),
+  svgLoader(),
+  Vuetify({
+    autoImport: {
+      labs: true,
+    },
+    styles: { configFile: 'src/scss/settings.scss' },
+  }),
 ]
 const sentryAuthToken = process.env.SENTRY_AUTH_TOKEN
 if (sentryAuthToken) {
@@ -105,13 +116,16 @@ export default defineConfig(({ mode }) => ({
       'vue',
       'vuedraggable',
       'vue-toastification',
-      'vuetify/es5/components/VCalendar/modes/column.js',
-      'vuetify/es5/components/VCalendar/util/events.js',
+      // 'vuetify/es5/components/VCalendar/modes/column.js',
+      // 'vuetify/es5/components/VCalendar/util/events.js',
     ],
   },
   build: {
     sourcemap: true,
     minify: mode === 'development' ? false : 'esbuild',
+    rollupOptions: {
+      external: ['vuetify/lib'],
+    },
   },
   resolve: {
     alias: [
@@ -142,22 +156,6 @@ export default defineConfig(({ mode }) => ({
       },
     ],
     preserveSymlinks: true,
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        // support for legacy api will be removed in vite 7. https://vite.dev/guide/migration.html#sass-now-uses-modern-api-by-default
-        api: 'legacy',
-        additionalData: '@import "./node_modules/vuetify/src/styles/styles.sass";\n', // original default variables from vuetify
-        silenceDeprecations: ['slash-div', 'mixed-decls'],
-      },
-      sass: {
-        // support for legacy api will be removed in vite 7. https://vite.dev/guide/migration.html#sass-now-uses-modern-api-by-default
-        api: 'legacy',
-        additionalData: '@import "./src/scss/variables.scss"\n', // vuetify variable overrides
-        silenceDeprecations: ['slash-div', 'mixed-decls'],
-      },
-    },
   },
   test: {
     environment: 'jsdom',

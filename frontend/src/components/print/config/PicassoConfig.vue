@@ -2,7 +2,7 @@
   <div class="px-md-4 flex-grow-1 d-flex flex-column justify-content-between">
     <e-select
       v-model="options.periods"
-      :label="$tc('print.config.periods')"
+      :label="$t('print.config.periods')"
       :items="periods"
       multiple
       :filled="false"
@@ -11,7 +11,7 @@
     />
     <e-select
       v-model="options.orientation"
-      :label="$tc('components.print.config.picassoConfig.orientation')"
+      :label="$t('components.print.config.picassoConfig.orientation')"
       :items="orientations"
       :filled="false"
       @input="$emit('input')"
@@ -44,11 +44,11 @@ export default {
       orientations: [
         {
           value: 'L',
-          text: this.$tc('components.print.config.picassoConfig.landscape'),
+          text: this.$t('components.print.config.picassoConfig.landscape'),
         },
         {
           value: 'P',
-          text: this.$tc('components.print.config.picassoConfig.portrait'),
+          text: this.$t('components.print.config.picassoConfig.portrait'),
         },
       ],
     }

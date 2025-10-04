@@ -10,6 +10,5 @@ export default (dayjs, i18n) => ({
     const valueDate = dayjs.utc(value, 'L')
     return valueDate.diff(maxDate, 'day') <= 0
   },
-  message: (field, values) =>
-    i18n.tc('global.validation.lessThanOrEqual_date', 0, values),
+  message: (field, values) => i18n.t('global.validation.lessThanOrEqual_date', 0, values),
 })

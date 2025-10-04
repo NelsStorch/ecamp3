@@ -4,12 +4,12 @@
       v-if="user"
       max-width="800"
       :title="
-        $tc('views.profile.profile') + (user._meta.loading ? '' : ': ' + user.displayName)
+        $t('views.profile.profile') + (user._meta.loading ? '' : ': ' + user.displayName)
       "
       toolbar
     >
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.breakpoint.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only btn-classes="mr-n4" />
       </template>
       <v-col>
         <v-skeleton-loader type="text" :loading="profile._meta.loading">
@@ -25,9 +25,9 @@
             >
               <template #append>
                 <dialog-change-mail>
-                  <template #activator="{ on }">
-                    <ButtonEdit text class="v-btn--has-bg" v-on="on">
-                      {{ $tc('views.profile.changeEmail') }}
+                  <template #activator="{ props }">
+                    <ButtonEdit text class="v-btn--has-bg" v-bind="props">
+                      {{ $t('views.profile.changeEmail') }}
                     </ButtonEdit>
                   </template>
                 </dialog-change-mail>
@@ -51,7 +51,7 @@
             <api-select path="language" :items="availableLocales" />
           </api-form>
           <v-btn
-            v-if="!$vuetify.breakpoint.mdAndUp"
+            v-if="!$vuetify.display.mdAndUp"
             class="mt-2"
             color="red"
             block
@@ -59,7 +59,7 @@
             dark
             @click="$auth.logout()"
           >
-            {{ $tc('global.button.logout') }}
+            {{ $t('global.button.logout') }}
           </v-btn>
         </v-skeleton-loader>
       </v-col>
@@ -98,7 +98,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.profile.profile'),
+      title: this.$t('views.profile.profile'),
     }
   },
   computed: {
@@ -109,16 +109,16 @@ export default {
       return this.user?.profile()
     },
     availableLocales() {
-      return VueI18n.availableLocales.map((l) => ({
+      return VueI18n.global.availableLocales.map((l) => ({
         value: l,
-        text: this.$tc('global.language', 1, l),
+        text: this.$t('global.language', 1, l),
       }))
     },
   },
   watch: {
     profile() {
-      if (VueI18n.availableLocales.includes(this.profile?.language)) {
-        this.$store.commit('setLanguage', this.profile?.language)
+      if (VueI18n.global.availableLocales.includes(this.profile?.language)) {
+        // this.$store.commit('setLanguage', this.profile?.language)
       }
     },
   },

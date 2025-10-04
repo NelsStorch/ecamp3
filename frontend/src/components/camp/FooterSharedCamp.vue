@@ -2,8 +2,8 @@
   <v-footer v-if="isOutsider || showSharedWarning" app class="shared-camp">
     <p class="mb-0">
       <v-icon left small class="currentColor--text">mdi-earth</v-icon>
-      <strong>{{ $tc(`components.camp.footerSharedCamp.${key}`) }}</strong>
-      {{ $tc(`components.camp.footerSharedCamp.${key}Description`) }}
+      <strong>{{ $t(`components.camp.footerSharedCamp.${key}`) }}</strong>
+      {{ $t(`components.camp.footerSharedCamp.${key}Description`) }}
     </p>
   </v-footer>
 </template>

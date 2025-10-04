@@ -5,7 +5,7 @@
       <PagesConfig
         v-for="(content, idx) in cnf.contents"
         :key="idx"
-        :title="$tc('components.print.printConfigurator.config.' + content.type)"
+        :title="$t('components.print.printConfigurator.config.' + content.type)"
         :landscape="content.options.orientation === 'L'"
         :multiple="
           contentComponents[content.type].design.multiple ||
@@ -22,14 +22,13 @@
       </PagesConfig>
 
       <v-menu offset-y rounded="lg" offset-overflow>
-        <template #activator="{ on, attrs }">
+        <template #activator="{ props }">
           <PagesConfig
             id="page-config"
-            :title="$tc('components.print.printConfigurator.add')"
+            :title="$t('components.print.printConfigurator.add')"
             multiple
             template
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           />
         </template>
         <v-list>
@@ -44,7 +43,7 @@
             "
           >
             <v-list-item-title>
-              {{ $tc('components.print.printConfigurator.config.' + idx) }}
+              {{ $t('components.print.printConfigurator.config.' + idx) }}
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -53,26 +52,26 @@
       <template #drawer>
         <v-expansion-panels flat class="e-print-configurator__cnf">
           <v-expansion-panel class="transparent rounded-0">
-            <v-expansion-panel-header class="subtitle py-2"
-              >{{ $tc('components.print.printConfigurator.options') }}
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
+            <v-expansion-panel-title class="subtitle py-2"
+              >{{ $t('components.print.printConfigurator.options') }}
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
               <e-checkbox
                 v-model="cnf.options.pageNumbers"
-                :label="$tc('components.print.printConfigurator.pageNumbers')"
+                :label="$t('components.print.printConfigurator.pageNumbers')"
                 @input="onChange"
               />
-            </v-expansion-panel-content>
+            </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
         <v-expansion-panels v-if="isDev" flat class="e-print-configurator__cnf">
-          <v-expansion-panel class="transparent rounded-0">
-            <v-expansion-panel-header class="subtitle py-2"
+          <v-expansion-panel class="bg-transparent rounded-0">
+            <v-expansion-panel-title class="subtitle py-2"
               >View Print-Config
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
               <pre style="font-size: 12px">{{ cnf }}</pre>
-            </v-expansion-panel-content>
+            </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
       </template>

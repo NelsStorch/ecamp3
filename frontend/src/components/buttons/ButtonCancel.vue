@@ -1,6 +1,6 @@
 <template>
-  <v-btn text color="secondary" v-bind="$attrs" v-on="$listeners">
-    {{ $tc('global.button.cancel') }}
+  <v-btn color="secondary" v-bind="$attrs" variant="text" v-on="$listeners">
+    {{ $t('global.button.cancel') }}
   </v-btn>
 </template>
 

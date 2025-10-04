@@ -2,21 +2,20 @@
   <DetailPane
     v-model="dialogOpen"
     max-width="900px"
-    :title="$tc('components.print.config.dialogScheduleEntryFilter.title')"
+    :title="$t('components.print.config.dialogScheduleEntryFilter.title')"
     icon="mdi-filter"
     :cancel-action="close"
     :cancel-visible="false"
     @input="emit"
   >
-    <template #activator="{ on, attrs }">
+    <template #activator="{ props }">
       <v-chip
         :input-value="dialogOpen"
         label
         outlined
         :color="anyFilter ? 'primary' : null"
         class="align-self-stretch mt-4 mb-4"
-        v-bind="attrs"
-        v-on="on"
+        v-bind="props"
       >
         <v-icon left size="20">mdi-filter</v-icon>
         <span class="flex-grow-1 text-center">{{ activatorLabel }}</span>
@@ -64,7 +63,7 @@ export default {
     },
     activatorLabel() {
       if (this.anyFilter)
-        return this.$tc(
+        return this.$t(
           'components.print.config.dialogScheduleEntryFilter.filterActive',
           1,
           {
@@ -72,7 +71,7 @@ export default {
             total: this.filterFn({}).length,
           }
         )
-      return this.$tc(
+      return this.$t(
         'components.print.config.dialogScheduleEntryFilter.filterActivities',
         1,
         {
@@ -81,14 +80,10 @@ export default {
       )
     },
     resultCountLabel() {
-      return this.$tc(
-        'components.print.config.dialogScheduleEntryFilter.resultCount',
-        1,
-        {
-          filtered: this.filteredCount,
-          total: this.filterFn({}).length,
-        }
-      )
+      return this.$t('components.print.config.dialogScheduleEntryFilter.resultCount', 1, {
+        filtered: this.filteredCount,
+        total: this.filterFn({}).length,
+      })
     },
     anyFilter() {
       return (

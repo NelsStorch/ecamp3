@@ -24,7 +24,7 @@
             {{ comment.author().displayName }}</span
           >
           <span>{{
-            $date(comment.createTime).format($tc('global.datetime.dateTimeLong'))
+            $date(comment.createTime).format($t('global.datetime.dateTimeLong'))
           }}</span>
         </div>
       </Comment>

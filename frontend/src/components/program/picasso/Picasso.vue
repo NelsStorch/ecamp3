@@ -25,15 +25,12 @@ Listing all given activity schedule entries in a calendar view.
       :day-format="dayFormat"
       :type="type"
       :max-days="maxDays"
-      :weekday-format="weekdayFormat"
       :weekdays="[1, 2, 3, 4, 5, 6, 0]"
       color="primary"
       :event-ripple="false"
       v-on="vCalendarListeners"
       @mouseleave.native="onMouseleave"
-      @mousedown.native.prevent="
-        /*this prevents from middle button to start scroll behavior*/
-      "
+      @mousedown.native.prevent="preventMiddleButtonFromStartingScrollBehaviour"
     >
       <!-- day header -->
       <template #day-label-header="{ date }">
@@ -43,11 +40,11 @@ Listing all given activity schedule entries in a calendar view.
               entryWidth > 140
                 ? $date
                     .utc(date)
-                    .format($tc('components.program.picasso.picasso.datetime.fullDate'))
+                    .format($t('components.program.picasso.picasso.datetime.fullDate'))
                 : $date
                     .utc(date)
                     .format(
-                      $tc(
+                      $t(
                         'components.program.picasso.picasso.datetime.smallDate',
                         widthPluralization
                       )
@@ -71,12 +68,12 @@ Listing all given activity schedule entries in a calendar view.
 
     <v-snackbar v-model="isSaving" light>
       <v-icon class="mdi-spin">mdi-loading</v-icon>
-      {{ $tc('global.button.saving') }}
+      {{ $t('global.button.saving') }}
     </v-snackbar>
   </div>
 </template>
 <script>
-import Vue, { reactive, ref, toRefs, watch, computed } from 'vue'
+import { reactive, ref, toRefs, watch, computed } from 'vue'
 import { useDragAndDropMove } from './useDragAndDropMove.js'
 import { useDragAndDropResize } from './useDragAndDropResize.js'
 import { useDragAndDropNew } from './useDragAndDropNew.js'
@@ -250,17 +247,29 @@ export default {
     const events = ref([])
     const loadCalenderEventsFromScheduleEntries = () => {
       // prepare scheduleEntries to make them understandable by v-calendar
-      events.value = scheduleEntries.value.map((entry) => ({
+      events.value = scheduleEntries.value.items?.map((entry) => ({
         ...entry,
         startTimestamp: utcStringToTimestamp(entry.start),
         endTimestamp: utcStringToTimestamp(entry.end),
         timed: true,
         isResizing: false,
         isMoving: false,
+
+        // VCalendar v3
+        title:
+          (entry.number ? entry.number + ' ' : '') +
+          (entry.activity().category().short
+            ? entry.activity().category().short + ': '
+            : '') +
+          entry.activity().title,
+        start: new Date(utcStringToTimestamp(entry.start)),
+        end: new Date(utcStringToTimestamp(entry.end)),
+        color: entry.activity().category().color,
+        allDay: false,
       }))
 
       // add placeholder for drag & drop (create new entry)
-      events.value.push(placeholder)
+      events.value?.push(placeholder)
     }
     loadCalenderEventsFromScheduleEntries()
 
@@ -273,6 +282,8 @@ export default {
       loadCalenderEventsFromScheduleEntries()
     }
 
+    function preventMiddleButtonFromStartingScrollBehaviour() {}
+
     return {
       vCalendarListeners,
       startResize: dragAndDropResize.startResize,
@@ -281,13 +292,14 @@ export default {
       reloadScheduleEntries,
       loadCalenderEventsFromScheduleEntries,
       events,
+      preventMiddleButtonFromStartingScrollBehaviour,
     }
   },
   data() {
     return {
       maxDays: 100,
       entryWidth: 80,
-      value: '',
+      value: new Date(),
       activitiesLoading: true,
       categoriesLoading: true,
 
@@ -296,6 +308,9 @@ export default {
       intervalMinutes: 60,
       firstInterval: 0,
       intervalCount: 24,
+
+      // VCalendar v3 demo
+      calendarValue: [new Date('2023-12-15')],
     }
   },
   computed: {
@@ -312,9 +327,9 @@ export default {
       return this.period.camp()
     },
     computedIntervalHeight() {
-      return (this.intervalHeight ?? this.$vuetify.breakpoint.xsOnly)
-        ? (1.3 * (this.$vuetify.breakpoint.height - 140)) / this.intervalCount
-        : 1.3 * Math.max((this.$vuetify.breakpoint.height - 204) / this.intervalCount, 32)
+      return (this.intervalHeight ?? this.$vuetify.display.xsOnly)
+        ? (1.3 * (this.$vuetify.display.height - 140)) / this.intervalCount
+        : 1.3 * Math.max((this.$vuetify.display.height - 204) / this.intervalCount, 32)
     },
   },
   mounted() {
@@ -334,41 +349,43 @@ export default {
     // scroll a bit down to hide the night hours
     const scroller = this.$el.querySelector('.v-calendar')
     scroller.scrollTo({ top: 250 })
+
+    this.calendarValue = [new Date(this.period.start)]
   },
   methods: {
     resize() {
       const widthIntervals = 46
       this.entryWidth = Math.max(
         (this.$refs.calendar.$el.offsetWidth - widthIntervals) /
-          this.$refs.calendar.days.length,
+          this.$refs.calendar.daysInWeek.length,
         85
       )
     },
     intervalFormat(time) {
       return this.$date
         .utc(time.date + ' ' + time.time)
-        .format(this.$tc('global.datetime.hourLong'))
+        .format(this.$t('global.datetime.hourLong'))
     },
     dayFormat(day) {
-      if (this.$vuetify.breakpoint.smAndDown) {
-        return this.$date.utc(day.date).format(this.$tc('global.datetime.dateShort'))
+      if (this.$vuetify.display.smAndDown) {
+        return this.$date.utc(day.date).format(this.$t('global.datetime.dateShort'))
       } else {
-        return this.$date.utc(day.date).format(this.$tc('global.datetime.dateLong'))
+        return this.$date.utc(day.date).format(this.$t('global.datetime.dateLong'))
       }
-    },
-    weekdayFormat() {
-      return ''
     },
   },
 }
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .e-picasso {
   border: none;
   overflow: auto;
 
-  @media #{map-get($display-breakpoints, 'xs-only')} {
+  @media #{map.get(settings.$display-breakpoints, 'xs')} {
     position: fixed;
     height: inherit;
     top: 48px;
@@ -377,21 +394,21 @@ export default {
     right: 0;
   }
 
-  @media #{map-get($display-breakpoints, 'sm-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
     height: calc(100vh - 106px);
   }
 
-  @media #{map-get($display-breakpoints, 'md-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
     height: calc(100vh - 136px - var(--schedule-entry-filters-height));
   }
 
   :deep {
     .v-event-timed-container {
       margin-right: 3px;
-      @media #{map-get($display-breakpoints, 'sm-and-up')} {
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
         margin-right: 5px;
       }
-      @media #{map-get($display-breakpoints, 'md-and-up')} {
+      @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
         margin-right: 6px;
       }
     }
@@ -510,7 +527,7 @@ export default {
   .v-select__selections {
     gap: 4px;
     padding: 2px;
-    @media #{map-get($display-breakpoints, 'md-and-up')} {
+    @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
       padding: 4px 2px;
     }
     width: 100%;

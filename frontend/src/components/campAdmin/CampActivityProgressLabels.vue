@@ -1,19 +1,19 @@
 <template>
   <content-group
-    :title="$tc('components.campAdmin.campActivityProgressLabels.title')"
+    :title="$t('components.campAdmin.campActivityProgressLabels.title')"
     icon="mdi-eye-check"
   >
     <template #title-actions>
       <DialogActivityProgressLabelCreate v-if="!disabled" :camp="camp">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <ButtonAdd
             color="secondary"
             text
-            :hide-label="$vuetify.breakpoint.xsOnly"
+            :hide-label="$vuetify.display.xsOnly"
             class="my-n2"
-            v-on="on"
+            v-bind="props"
           >
-            {{ $tc('components.campAdmin.campActivityProgressLabels.create') }}
+            {{ $t('components.campAdmin.campActivityProgressLabels.create') }}
           </ButtonAdd>
         </template>
       </DialogActivityProgressLabelCreate>
@@ -46,8 +46,8 @@
           :key="progressLabel._meta.self"
           :progress-label="progressLabel"
         >
-          <template #activator="{ on }">
-            <v-list-item class="px-2 rounded" v-on="on">
+          <template #activator="{ props }">
+            <v-list-item class="px-2 rounded" v-bind="props">
               <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
                 parseInt(idx) + 1
               }}</v-avatar>
@@ -94,8 +94,8 @@
       <v-icon left>{{ reorder ? 'mdi-close' : 'mdi-sort' }}</v-icon>
       {{
         reorder
-          ? $tc('components.campAdmin.campActivityProgressLabels.exit')
-          : $tc('components.campAdmin.campActivityProgressLabels.reorder')
+          ? $t('components.campAdmin.campActivityProgressLabels.exit')
+          : $t('components.campAdmin.campActivityProgressLabels.reorder')
       }}
     </v-btn>
   </content-group>

@@ -1,6 +1,6 @@
 <template>
   <SideBar
-    :title="$tc('views.camp.activity.sideBarProgram.title')"
+    :title="$t('views.camp.activity.sideBarProgram.title')"
     icon="mdi-format-list-numbered"
   >
     <ScheduleEntries v-if="period" :period="period" :show-button="false">
@@ -87,8 +87,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .ec-sidebar-program__picasso :deep(.e-picasso) {
-  @media #{map-get($display-breakpoints, 'md-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
     height: calc(100vh - 202px);
   }
 }

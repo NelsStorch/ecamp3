@@ -12,8 +12,8 @@
   >
     <template #header>
       <strong>
-        <v-icon color="blue darken-2">$vuetify.icons.responsiveLayout</v-icon>
-        {{ $tc('contentNode.responsiveLayout.name') }}
+        <v-icon color="blue-darken-2">$responsiveLayout</v-icon>
+        {{ $t('contentNode.responsiveLayout.name') }}
       </strong>
       <menu-cardless-content-node :content-node="contentNode" />
     </template>
@@ -25,7 +25,7 @@
           v-if="layoutMode"
           class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
         >
-          {{ $tc('contentNode.responsiveLayout.mainContent') }}
+          {{ $t('contentNode.responsiveLayout.mainContent') }}
         </p>
         <draggable-content-nodes
           slot-name="main"
@@ -44,7 +44,7 @@
           v-if="layoutMode"
           class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
         >
-          {{ $tc('contentNode.responsiveLayout.printAboveMainContent') }}
+          {{ $t('contentNode.responsiveLayout.printAboveMainContent') }}
         </p>
         <draggable-content-nodes
           slot-name="aside-top"
@@ -68,7 +68,7 @@
           v-if="layoutMode"
           class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
         >
-          {{ $tc('contentNode.responsiveLayout.printBelowMainContent') }}
+          {{ $t('contentNode.responsiveLayout.printBelowMainContent') }}
         </p>
         <draggable-content-nodes
           slot-name="aside-bottom"
@@ -140,7 +140,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ec-responsivelayout--layout-mode {
   border: 1px solid black;
   border-radius: 10px;

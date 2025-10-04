@@ -1,15 +1,14 @@
 <template>
   <v-toolbar-items v-if="period.camp().periods().items.length > 1">
     <v-menu offset-y>
-      <template #activator="{ on, attrs, value }">
+      <template #activator="{ props }">
         <v-btn
           text
           large
           class="justify-start px-4 my-1 rounded-pill ec-period-switcher__button"
           height="auto"
           block
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           <h1 class="text-subtitle-1">
             {{ period.description }}
@@ -19,7 +18,7 @@
         </v-btn>
       </template>
       <v-list>
-        <v-subheader>{{ $tc('components.program.periodSwitcher.title') }}</v-subheader>
+        <v-subheader>{{ $t('components.program.periodSwitcher.title') }}</v-subheader>
         <v-list-item
           v-for="item in allPeriods"
           :key="item._meta.self"
@@ -37,7 +36,7 @@
     </v-menu>
   </v-toolbar-items>
   <v-toolbar-title v-else>
-    <h1 class="subtitle-1">
+    <h1 class="text-subtitle-1">
       {{ period.description }}
     </h1>
   </v-toolbar-title>

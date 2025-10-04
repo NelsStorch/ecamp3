@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-btn color="primary" :loading="loading" outlined @click="generatePdf">
+    <v-btn :loading="loading" color="primary" variant="outlined" @click="generatePdf">
       <v-icon>mdi-printer</v-icon>
       <div class="mx-1">
-        {{ $tc('components.print.printNuxt.downloadNuxtPdfButton.label') }}
+        {{ $t('components.print.printNuxt.downloadNuxtPdfButton.label') }}
       </div>
     </v-btn>
   </div>

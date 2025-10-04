@@ -1,6 +1,7 @@
 <template>
   <PopoverPrompt
     v-model="showDialog"
+    v-bind="$attrs"
     type="error"
     :error="error"
     :submit-action="deactivateUser"
@@ -10,7 +11,6 @@
     submit-icon="mdi-cancel"
     cancel-icon=""
     :cancel-action="close"
-    v-bind="$attrs"
   >
     <template #activator="scope">
       <slot name="activator" v-bind="scope" />
@@ -46,18 +46,18 @@ export default {
       return isOwnCampCollaboration(this.entity, this.$store.state.auth)
     },
     displayName() {
-      return campCollaborationDisplayName(this.entity, this.$tc.bind(this))
+      return campCollaborationDisplayName(this.entity, this.$t.bind(this))
     },
     submitLabel() {
       return this.isOwnCampCollaboration
-        ? this.$tc('components.collaborator.promptCollaboratorDeactivate.leaveCamp')
-        : this.$tc('components.collaborator.promptCollaboratorDeactivate.deactivate')
+        ? this.$t('components.collaborator.promptCollaboratorDeactivate.leaveCamp')
+        : this.$t('components.collaborator.promptCollaboratorDeactivate.deactivate')
     },
     warningText() {
       const key = this.isOwnCampCollaboration
         ? 'components.collaborator.promptCollaboratorDeactivate.warningTextLeaveCamp'
         : 'components.collaborator.promptCollaboratorDeactivate.warningText'
-      return this.$tc(key, 1, {
+      return this.$t(key, 1, {
         name: this.displayName,
         camp: campShortTitle(this.entity.camp()),
       })

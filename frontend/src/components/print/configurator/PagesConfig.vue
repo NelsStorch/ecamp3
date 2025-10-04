@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$vuetify.breakpoint.mdAndUp" class="e-pages-config__wrapper">
+  <div v-if="$vuetify.display.mdAndUp" class="e-pages-config__wrapper">
     <div
       class="e-pages-config"
       :class="{
@@ -17,9 +17,9 @@
       />
       <div class="e-pages-config__inner" v-bind="$attrs" v-on="$listeners">
         <div class="e-pages-config__scroller">
-          <v-icon v-if="template" x-large class="ma-auto">mdi-plus</v-icon>
+          <v-icon v-if="template" class="ma-auto" size="x-large">mdi-plus</v-icon>
           <h3
-            class="e-pages-config__title title py-4 white sticky"
+            class="e-pages-config__title text-h6 py-4 bg-white sticky"
             :class="{ handle: !template }"
           >
             <TextAlignBaseline v-if="!template"
@@ -95,6 +95,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .e-pages-config__wrapper {
   display: flow-root;
   aspect-ratio: 1 / 1;
@@ -224,6 +227,6 @@ export default {
 }
 
 .e-pages-config__delete:hover {
-  color: map-get($red, 'base') !important;
+  color: map.get(settings.$red, 'base') !important;
 }
 </style>

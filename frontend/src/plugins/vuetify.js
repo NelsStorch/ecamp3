@@ -1,7 +1,6 @@
 // You still need to register Vuetify itself
 // src/plugins/vuetify.js
 
-import Vuetify from 'vuetify/lib'
 import PbsLogo from '@/assets/PbsLogo.svg'
 import GoogleLogo from '@/assets/GoogleLogo.svg'
 import eCampLogo from '@/assets/eCampLogo.svg'
@@ -15,30 +14,35 @@ import BigScreen from '@/assets/icons/BigScreen.svg'
 import ResponsiveLayout from '@/assets/icons/ResponsiveLayout.svg'
 import ColumnLayout from '@/assets/icons/ColumnLayout.svg'
 import i18n from '@/plugins/i18n'
-import colors from 'vuetify/lib/util/colors'
+import * as colors from 'vuetify/util/colors'
+
+import { VCalendar } from 'vuetify/labs/VCalendar'
+
+// Styles
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
 
 class VuetifyLoaderPlugin {
-  install(Vue) {
-    Vue.use(Vuetify)
-
+  install(app) {
     const opts = {
       lang: {
-        t: (key, ...params) => i18n.tc(key, 0, params),
+        t: (key, ...params) => i18n.t(key, 0, params),
       },
       icons: {
-        values: {
-          pbs: { component: PbsLogo },
-          google: { component: GoogleLogo },
-          ecamp: { component: eCampLogo },
-          cevi: { component: CeviLogo },
-          jubla: { component: JublaLogo },
-          js: { component: JSLogo },
-          gs: { component: GSLogo },
-          tentDay: { component: TentDay },
-          paperSize: { component: PaperSize },
-          bigScreen: { component: BigScreen },
-          columnLayout: { component: ColumnLayout },
-          responsiveLayout: { component: ResponsiveLayout },
+        aliases: {
+          pbs: PbsLogo,
+          google: GoogleLogo,
+          ecamp: eCampLogo,
+          cevi: CeviLogo,
+          jubla: JublaLogo,
+          js: JSLogo,
+          gs: GSLogo,
+          tentDay: TentDay,
+          paperSize: PaperSize,
+          bigScreen: BigScreen,
+          columnLayout: ColumnLayout,
+          responsiveLayout: ResponsiveLayout,
         },
       },
       theme: {
@@ -48,9 +52,14 @@ class VuetifyLoaderPlugin {
           },
         },
       },
+      components: {
+        VCalendar,
+      },
     }
 
-    vuetify = new Vuetify(opts)
+    vuetify = createVuetify(opts)
+
+    app.use(vuetify)
   }
 }
 

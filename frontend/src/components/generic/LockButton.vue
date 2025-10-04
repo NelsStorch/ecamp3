@@ -1,16 +1,16 @@
 <template>
-  <v-tooltip :disabled="tooltip == ''" bottom>
-    <template #activator="{ on }">
+  <v-tooltip :disabled="tooltip == ''" location="bottom">
+    <template #activator="{ props }">
       <button
         :aria-label="tooltip"
         :aria-disabled="disabledForGuest"
         class="v-btn v-btn--icon v-btn--round v-size--small"
         :class="{ 'e-shake-lock': shake }"
+        v-bind="props"
         @click="onClick"
-        v-on="on"
       >
-        <v-icon v-if="value" small>mdi-lock-open-variant</v-icon>
-        <v-icon v-else small>mdi-lock</v-icon>
+        <v-icon v-if="value" size="small">mdi-lock-open-variant</v-icon>
+        <v-icon v-else size="small">mdi-lock</v-icon>
       </button>
     </template>
     <span>{{ tooltip }}</span>
@@ -43,15 +43,15 @@ export default {
   computed: {
     tooltip() {
       if (this.disabledForGuest) {
-        return this.$tc('components.generic.lockButton.guestsCannotEdit')
+        return this.$t('components.generic.lockButton.guestsCannotEdit')
       }
       if (this.message) {
         return this.message
       }
       if (!this.value) {
-        return this.$tc('components.generic.lockButton.clickToUnlock')
+        return this.$t('components.generic.lockButton.clickToUnlock')
       }
-      return this.$tc('components.generic.lockButton.clickToLock')
+      return this.$t('components.generic.lockButton.clickToLock')
     },
   },
   methods: {

@@ -71,7 +71,7 @@ export const generatePdfMixin = {
       )
 
       if (error) {
-        this.$toast.error(this.$tc('components.print.printClient.generatePdfMixin.error'))
+        this.$toast.error(this.$t('components.print.printClient.generatePdfMixin.error'))
         Sentry.captureException(new Error(error))
         this.setProgress(100, 'failed')
         this.loading = false
@@ -98,7 +98,7 @@ export const generatePdfMixin = {
     },
     setProgress(progress, state = null, params = {}) {
       this.progress = progress
-      this.state = this.$tc(
+      this.state = this.$t(
         'components.print.printClient.generatePdfMixin.progress.' + state,
         1,
         params

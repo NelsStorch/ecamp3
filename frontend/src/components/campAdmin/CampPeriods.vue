@@ -4,20 +4,20 @@ Displays all periods of a single camp and allows to edit them & create new ones
 
 <template>
   <content-group
-    :title="$tc('components.campAdmin.campPeriods.title', camp.periods().items.length)"
+    :title="$t('components.campAdmin.campPeriods.title', camp.periods().items.length)"
     icon="mdi-calendar-multiple"
   >
     <template #title-actions>
       <dialog-period-create v-if="!disabled" :camp="camp">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <button-add
             color="secondary"
             text
             class="my-n2"
-            :hide-label="$vuetify.breakpoint.xsOnly"
-            v-on="on"
+            :hide-label="$vuetify.display.xsOnly"
+            v-bind="props"
           >
-            {{ $tc('components.campAdmin.campPeriods.createPeriod') }}
+            {{ $t('components.campAdmin.campPeriods.createPeriod') }}
           </button-add>
         </template>
       </dialog-period-create>

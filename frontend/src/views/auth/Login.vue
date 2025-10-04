@@ -1,32 +1,32 @@
 <template>
   <auth-container>
-    <div v-if="isProdSuffix && $vuetify.breakpoint.smAndDown" class="text-center">
-      <v-icon size="64"> $vuetify.icons.ecamp </v-icon>
+    <div v-if="isProdSuffix && $vuetify.display.smAndDown" class="text-center">
+      <v-icon size="64" icon="$ecamp" />
     </div>
 
-    <h1 class="display-1 text-center" :class="{ 'my-4': isProdSuffix }">
-      {{ $tc('global.button.login') }}
+    <h1 class="text-h4 text-center" :class="{ 'my-4': isProdSuffix }">
+      {{ $t('global.button.login') }}
     </h1>
 
     <v-alert
       v-if="!isProdSuffix"
-      class="mt-2 text-justify"
-      text
-      dense
-      border="left"
-      style="hyphens: auto"
+      class="mt-2 mb-4 text-justify text-warning"
+      variant="tonal"
+      border="start"
+      density="compact"
+      style="hypens: auto"
       color="warning"
     >
       <div>
-        <i18n :path="infoTextKey">
+        <i18n-t :keypath="infoTextKey">
           <template #br><br /></template>
-        </i18n>
+        </i18n-t>
         <v-btn
           text
           elevation="0"
-          color="warning darken-3"
           height="32px"
-          class="v-btn--has-bg float-end dev-login-button"
+          class="v-btn--has-bg float-end dev-login-button text-deep-orange-darken-4"
+          append-icon="mdi-auto-fix"
           @click="
             (event) => {
               email = event.shiftKey ? 'admin@example.com' : 'test@example.com'
@@ -36,22 +36,28 @@
           "
         >
           Login
-          <v-icon right>mdi-auto-fix</v-icon>
         </v-btn>
       </div>
     </v-alert>
-    <v-alert v-if="error" outlined text border="left" type="error">
+    <v-alert
+      v-if="error"
+      outlined
+      variant="tonal"
+      border="start"
+      type="error"
+      icon="mdi-alert"
+    >
       <span class="d-block">{{ error }}</span>
       <span class="d-block mt-1"
-        >{{ $tc('views.auth.login.passwordForgotten') }}
+        >{{ $t('views.auth.login.passwordForgotten') }}
         <router-link :to="{ name: 'resetPasswordRequest' }">
-          {{ $tc('views.auth.login.resetPassword') }}
+          {{ $t('views.auth.login.resetPassword') }}
         </router-link>
       </span>
       <span class="d-block mt-1"
-        >{{ $tc('views.auth.login.notActivated') }}
+        >{{ $t('views.auth.login.notActivated') }}
         <router-link :to="{ name: 'resendActivation' }">
-          {{ $tc('views.auth.login.resendActivation') }}
+          {{ $t('views.auth.login.resendActivation') }}
         </router-link>
       </span>
     </v-alert>
@@ -61,10 +67,10 @@
         v-model="email"
         vee-rules="email|required"
         autofocus
-        :label="$tc('views.auth.login.email')"
+        :label="$t('views.auth.login.email')"
         name="email"
-        append-icon="mdi-account-outline"
-        :dense="$vuetify.breakpoint.xsOnly"
+        append-inner-icon="mdi-account-outline"
+        :dense="$vuetify.display.xsOnly"
         type="email"
         autocomplete="username"
       />
@@ -72,11 +78,11 @@
       <e-text-field
         id="inputPassword"
         v-model="password"
-        :label="$tc('views.auth.login.password')"
+        :label="$t('views.auth.login.password')"
         vee-rules="required"
         name="password"
-        append-icon="mdi-lock-outline"
-        :dense="$vuetify.breakpoint.xsOnly"
+        append-inner-icon="mdi-lock-outline"
+        :dense="$vuetify.display.xsOnly"
         type="password"
         autocomplete="current-password"
       />
@@ -86,96 +92,97 @@
           tabindex="100"
           style="color: gray"
         >
-          {{ $tc('views.auth.login.passwordForgotten') }}
+          {{ $t('views.auth.login.passwordForgotten') }}
         </router-link>
       </small>
 
       <v-btn
         type="submit"
-        :color="email && password ? 'blue darken-2' : 'blue lighten-4'"
+        :color="email && password ? 'blue-darken-2' : 'blue-lighten-4'"
         block
         :disabled="!(email && password) || authenticationInProgress"
-        outlined
-        :x-large="$vuetify.breakpoint.smAndUp"
+        :size="$vuetify.display.smAndUp && 'x-large'"
+        variant="outlined"
         class="my-4"
       >
         <v-progress-circular v-if="authenticationInProgress" indeterminate size="24" />
-        <v-icon v-else>$vuetify.icons.ecamp</v-icon>
+        <v-icon v-else>$ecamp</v-icon>
         <v-spacer />
-        <span>{{ $tc('views.auth.login.provider.ecamp') }}</span>
+        <span>{{ $t('views.auth.login.provider.ecamp') }}</span>
         <v-spacer />
         <icon-spacer />
       </v-btn>
     </v-form>
-    <horizontal-rule :label="$tc('views.auth.login.or')" />
+    <horizontal-rule :label="$t('views.auth.login.or')" />
     <div class="openid-buttons">
       <v-btn
         dark
         color="#91697f"
-        :x-large="$vuetify.breakpoint.smAndUp"
-        text
+        :size="$vuetify.display.smAndUp && 'x-large'"
+        variant="text"
         @click="loginPbsMiData"
       >
-        <v-icon class="my-1" color="#521d3a">$vuetify.icons.pbs</v-icon>
-        <span class="text--secondary body-2 font-weight-medium">{{
-          $tc('views.auth.login.provider.midata')
+        <v-icon class="my-1" color="#521d3a">$pbs</v-icon>
+        <span class="text-grey-darken-2 text-body-2 font-weight-medium">{{
+          $t('views.auth.login.provider.midata')
         }}</span>
       </v-btn>
       <v-btn
         dark
         color="green"
-        :x-large="$vuetify.breakpoint.smAndUp"
-        text
+        :size="$vuetify.display.smAndUp && 'x-large'"
+        variant="text"
         @click="loginCeviDB"
       >
-        <v-icon class="my-1">$vuetify.icons.cevi</v-icon>
-        <span class="text--secondary body-2 font-weight-medium">{{
-          $tc('views.auth.login.provider.cevidb')
+        <v-icon class="my-1">$cevi</v-icon>
+        <span class="text-grey-darken-2 text-body-2 font-weight-medium">{{
+          $t('views.auth.login.provider.cevidb')
         }}</span>
       </v-btn>
       <v-btn
         dark
         color="blue"
-        :x-large="$vuetify.breakpoint.smAndUp"
-        text
+        :size="$vuetify.display.smAndUp && 'x-large'"
+        variant="text"
+        class="jubla-btn"
         @click="loginJublaDB"
       >
-        <v-icon size="32">$vuetify.icons.jubla</v-icon>
-        <span class="text--secondary body-2 font-weight-medium">{{
-          $tc('views.auth.login.provider.jubladb')
+        <v-icon size="24">$jubla</v-icon>
+        <span class="text-grey-darken-2 text-body-2 font-weight-medium">{{
+          $t('views.auth.login.provider.jubladb')
         }}</span>
       </v-btn>
       <v-btn
         dark
-        color="blue-grey lighten-3"
-        :x-large="$vuetify.breakpoint.smAndUp"
-        text
+        :size="$vuetify.display.smAndUp && 'x-large'"
+        color="blue-grey-lighten-3"
+        variant="text"
         @click="loginGoogle"
       >
-        <v-icon class="my-1">$vuetify.icons.google</v-icon>
-        <span class="text--secondary body-2 font-weight-medium">{{
-          $tc('views.auth.login.provider.google')
+        <v-icon class="my-1">$google</v-icon>
+        <span class="text-grey-darken-2 text-body-2 font-weight-medium">{{
+          $t('views.auth.login.provider.google')
         }}</span>
       </v-btn>
       <small class="w-100">
-        <i18n
-          path="views.auth.login.acceptTermsOfServiceOnOAuthLogin"
+        <i18n-t
+          keypath="views.auth.login.acceptTermsOfServiceOnOAuthLogin"
           tag="p"
-          class="text--secondary text-center w-100 mt-2"
+          class="text-grey-darken-2 text-center w-100 mt-2"
           style="hyphens: auto"
         >
           <template #termsOfServiceLink>
             <a :href="termsOfServiceLink" target="_blank" style="color: gray">{{
-              $tc('views.auth.login.termsOfServiceLink')
+              $t('views.auth.login.termsOfServiceLink')
             }}</a>
           </template>
-        </i18n>
+        </i18n-t>
       </small>
     </div>
-    <p class="mt-8 mb-0 text--secondary text-center">
-      {{ $tc('views.auth.login.accountless') }}<br />
-      <router-link :to="{ name: 'register' }">
-        {{ $tc('views.auth.login.registernow') }}
+    <p class="mt-8 mb-0 text-grey-darken-2 text-center">
+      {{ $t('views.auth.login.accountless') }}<br />
+      <router-link :to="{ name: 'register' }" class="text-primary">
+        {{ $t('views.auth.login.registernow') }}
       </router-link>
     </p>
   </auth-container>
@@ -218,7 +225,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('global.button.login'),
+      title: this.$t('global.button.login'),
     }
   },
   computed: {
@@ -240,7 +247,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('setLanguage', this.$i18n.browserPreferredLocale)
+    // this.$store.commit('setLanguage', this.$i18n.browserPreferredLocale)
   },
   methods: {
     async login() {
@@ -251,8 +258,8 @@ export default {
         .then(async () => {
           const user = await this.$auth.loadUser()
           const profile = await user.profile()._meta.load
-          if (VueI18n.availableLocales.includes(profile.language)) {
-            await this.$store.commit('setLanguage', profile.language)
+          if (VueI18n.global.availableLocales.includes(profile.language)) {
+            // await this.$store.commit('setLanguage', profile.language)
           }
           this.$router.replace(this.$route.query.redirect || '/')
         })
@@ -299,5 +306,10 @@ export default {
   margin-top: 12px;
   margin-bottom: -12px;
   translate: 0 -12px;
+}
+
+.jubla-btn :deep(.v-btn__content) {
+  height: 100%;
+  justify-content: space-between;
 }
 </style>

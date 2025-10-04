@@ -1,27 +1,26 @@
 <template>
   <v-tooltip bottom>
-    <template #activator="{ on }">
+    <template #activator="{ props }">
       <v-btn
         text
         icon
         class="ec-paper-size-toggle d-none d-md-block"
         :aria-label="
           value
-            ? $tc('components.activity.togglePaperSize.switchToFullSize')
-            : $tc('components.activity.togglePaperSize.switchToPaperSize')
+            ? $t('components.activity.togglePaperSize.switchToFullSize')
+            : $t('components.activity.togglePaperSize.switchToPaperSize')
         "
-        v-bind="buttonProps"
+        v-bind="{ ...buttonProps, ...props }"
         @click="$emit('input', !value)"
-        v-on="on"
       >
-        <v-icon v-if="value" class="resize-icon">$vuetify.icons.bigScreen </v-icon>
-        <v-icon v-else class="resize-icon">$vuetify.icons.paperSize</v-icon>
+        <v-icon v-if="value" class="resize-icon" icon="$bigScreen" />
+        <v-icon v-else class="resize-icon" icon="$paperSize" />
       </v-btn>
     </template>
     {{
       value
-        ? $tc('components.activity.togglePaperSize.switchToFullSize')
-        : $tc('components.activity.togglePaperSize.switchToPaperSize')
+        ? $t('components.activity.togglePaperSize.switchToFullSize')
+        : $t('components.activity.togglePaperSize.switchToPaperSize')
     }}
   </v-tooltip>
 </template>

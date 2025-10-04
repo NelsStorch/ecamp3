@@ -1,13 +1,11 @@
 <template>
   <div class="bg">
     <div class="hill">
-      <v-icon :size="$vuetify.breakpoint.smAndUp ? 300 : 200" class="tent"
-        >$vuetify.icons.tentDay
-      </v-icon>
+      <v-icon :size="$vuetify.display.smAndUp ? 300 : 200" class="tent">$tentDay</v-icon>
       <div class="trees"></div>
       <div class="localnav justify-space-between d-flex w-100 py-2">
-        <ButtonBack v-if="!$vuetify.breakpoint.mdAndUp" text dark visible-label />
-        <UserMeta v-if="!$vuetify.breakpoint.mdAndUp" avatar-only />
+        <ButtonBack v-if="!$vuetify.display.mdAndUp" dark text visible-label />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only />
       </div>
       <h1 class="wood text-center align-self-end">
         <span class="rope"></span>
@@ -19,18 +17,18 @@
           height="48"
         />
         <template v-else-if="variant === 'default' && invitationFound !== false">
-          <span class="subtitle-2 font-weight-bold">{{
-            $tc('views.camp.invitation.title')
+          <span class="text-subtitle-2 font-weight-bold">{{
+            $t('views.camp.invitation.title')
           }}</span>
           <span v-if="!invite?._meta.loading">{{ invite?.campTitle }}</span>
         </template>
         <span v-else-if="variant === 'rejected'">{{
-          $tc('views.camp.invitation.successfullyRejected')
+          $t('views.camp.invitation.successfullyRejected')
         }}</span>
         <span v-else-if="variant === 'error'">{{
-          $tc('views.camp.invitation.error')
+          $t('views.camp.invitation.error')
         }}</span>
-        <span v-else>{{ $tc('views.camp.invitation.notFound') }}</span>
+        <span v-else>{{ $t('views.camp.invitation.notFound') }}</span>
       </h1>
       <div
         v-if="variant === 'default' && invitationFound === true"
@@ -39,54 +37,59 @@
         <div v-if="authUser">
           <v-alert
             v-if="invite?.userAlreadyInCamp"
-            border="left"
+            :icon="$vuetify.display.smAndUp ? 'mdi-information-outline' : false"
             colored-border
             color="primary"
             class="mb-1"
-            :icon="$vuetify.breakpoint.smAndUp ? 'mdi-information-outline' : false"
+            border="start"
             type="info"
           >
-            {{ $tc('views.camp.invitation.userAlreadyInCamp') }}
+            {{ $t('views.camp.invitation.userAlreadyInCamp') }}
             <div class="mt-2 d-flex flex-wrap gap-2">
-              <v-btn small color="primary" :to="campLink" elevation="0">
-                {{ $tc('views.camp.invitation.openCamp') }}
+              <v-btn :to="campLink" color="primary" elevation="0" size="small">
+                {{ $t('views.camp.invitation.openCamp') }}
               </v-btn>
               <v-btn
                 color="primary"
-                text
-                small
+                size="small"
+                variant="text"
                 class="v-btn--has-bg"
                 @click="useAnotherAccount"
               >
-                {{ $tc('views.camp.invitation.useOtherAuth') }}
+                {{ $t('views.camp.invitation.useOtherAuth') }}
               </v-btn>
             </div>
           </v-alert>
           <div v-else class="d-grid gap-2 grid-cols-fill">
-            <v-btn color="primary" x-large @click="acceptInvitation">
-              {{ $tc('views.camp.invitation.acceptCurrentAuth') }}<br />
+            <v-btn color="primary" size="x-large" @click="acceptInvitation">
+              {{ $t('views.camp.invitation.acceptCurrentAuth') }}<br />
             </v-btn>
-            <v-btn dark text class="mt-2" @click="useAnotherAccount">
-              {{ $tc('views.camp.invitation.useOtherAuth') }}
+            <v-btn class="mt-2" dark variant="text" @click="useAnotherAccount">
+              {{ $t('views.camp.invitation.useOtherAuth') }}
             </v-btn>
           </div>
         </div>
         <div v-else class="d-grid gap-2 grid-cols-2">
-          <v-btn color="primary" x-large :to="loginLink">
-            {{ $tc('global.button.login') }}
+          <v-btn :to="loginLink" color="primary" size="x-large">
+            {{ $t('global.button.login') }}
           </v-btn>
-          <v-btn color="secondary" x-large :to="{ name: 'register' }">
-            {{ $tc('views.camp.invitation.register') }}
+          <v-btn :to="{ name: 'register' }" color="secondary" size="x-large">
+            {{ $t('views.camp.invitation.register') }}
           </v-btn>
         </div>
-        <v-btn dark text :small="invite?.userAlreadyInCamp" @click="rejectInvitation">
-          {{ $tc('views.camp.invitation.reject') }}
+        <v-btn
+          :size="invite?.userAlreadyInCamp && 'small'"
+          dark
+          variant="text"
+          @click="rejectInvitation"
+        >
+          {{ $t('views.camp.invitation.reject') }}
         </v-btn>
       </div>
       <div class="justify-center d-flex col gap-2">
-        <v-btn v-if="authUser" text dark :to="{ name: 'home' }">
-          <v-icon left>mdi-tent</v-icon>
-          {{ $tc('views.camp.invitation.backToHome') }}
+        <v-btn v-if="authUser" :to="{ name: 'home' }" dark variant="text">
+          <v-icon start>mdi-tent</v-icon>
+          {{ $t('views.camp.invitation.backToHome') }}
         </v-btn>
       </div>
     </div>
@@ -95,14 +98,13 @@
 
 <script>
 import { loginRoute } from '@/router'
-import VueRouter from 'vue-router'
+import { isNavigationFailure, NavigationFailureType } from 'vue-router'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import ButtonBack from '@/components/buttons/ButtonBack.vue'
 import UserMeta from '@/components/navigation/UserMeta.vue'
 
-const { isNavigationFailure, NavigationFailureType } = VueRouter
 const ignoreNavigationFailure = (e) => {
-  if (!isNavigationFailure(e, NavigationFailureType.redirected)) {
+  if (!isNavigationFailure(e, NavigationFailureType.duplicated)) {
     return Promise.reject(e)
   }
 }
@@ -119,7 +121,7 @@ export default {
   }),
   head() {
     return {
-      title: this.$tc('views.camp.invitation.title'),
+      title: this.$t('views.camp.invitation.title'),
       templateParams: { section: () => this.invite?.campTitle ?? null },
     }
   },
@@ -209,6 +211,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .bg {
   height: 100%;
   background-image: radial-gradient(
@@ -242,7 +247,7 @@ export default {
     bottom 58% right -5%;
 }
 
-@media #{map-get($display-breakpoints, 'sm-and-up')} {
+@media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
   .hill {
     background-image:
       radial-gradient(150vmax 75% at bottom, #2c5b23, #84b444 70.1%, transparent 70.2%),
@@ -257,7 +262,7 @@ export default {
   }
 }
 
-@media #{map-get($display-breakpoints, 'md-and-up')} {
+@media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
   .hill {
     transition: background-position 0.5s ease-in-out;
     background-position:
@@ -267,7 +272,7 @@ export default {
   }
 }
 
-@media #{map-get($display-breakpoints, 'lg-and-up')} {
+@media #{map.get(settings.$display-breakpoints, 'lg-and-up')} {
   .hill {
     background-position:
       bottom center,
@@ -329,7 +334,7 @@ export default {
   order: -1;
 }
 
-@media #{map-get($display-breakpoints, 'xs-only')} {
+@media #{map.get(settings.$display-breakpoints, 'xs')} {
   .wood {
     font-size: 22px;
   }
@@ -397,7 +402,7 @@ export default {
   right: min(5%, 42px);
 }
 
-@media #{map-get($display-breakpoints, 'xs-only')} {
+@media #{map.get(settings.$display-breakpoints, 'xs')} {
   .rope,
   .rope::before,
   .rope::after {
@@ -430,17 +435,17 @@ export default {
   background-size:
     auto 40%,
     auto 65%;
-  @media #{map-get($display-breakpoints, 'sm-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
     background-size:
       auto 44%,
       auto 65%;
   }
-  @media #{map-get($display-breakpoints, 'md-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
     background-size:
       auto 49%,
       auto 75%;
   }
-  @media #{map-get($display-breakpoints, 'lg-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'lg-and-up')} {
     background-size:
       auto 100%,
       auto 90%;

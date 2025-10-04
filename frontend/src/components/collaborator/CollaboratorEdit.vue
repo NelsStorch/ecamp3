@@ -4,9 +4,9 @@
     :loading="loading"
     :error="error"
     icon="mdi-account-edit"
-    :title="$tc('components.collaborator.collaboratorEdit.title', 2, { user: name })"
+    :title="$t('components.collaborator.collaboratorEdit.title', 2, { user: name })"
     :submit-action="update"
-    :submit-label="$tc('global.button.save')"
+    :submit-label="$t('global.button.save')"
     submit-color="success"
     :cancel-action="close"
   >
@@ -22,7 +22,7 @@
         }"
       >
         {{
-          $tc('components.collaborator.collaboratorEdit.delete', 0, {
+          $t('components.collaborator.collaboratorEdit.delete', 0, {
             name: name,
           })
         }}
@@ -45,14 +45,14 @@
       >
         {{
           emailSent && !resendingEmail
-            ? $tc('components.collaborator.collaboratorEdit.resentEmail')
-            : $tc('components.collaborator.collaboratorEdit.resendEmail')
+            ? $t('components.collaborator.collaboratorEdit.resentEmail')
+            : $t('components.collaborator.collaboratorEdit.resendEmail')
         }}
       </IconButton>
     </template>
 
-    <template #activator="{ on }">
-      <slot name="activator" v-bind="{ on }">
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }">
         <CollaboratorListItem
           :collaborator="collaborator"
           :disabled="!isManager"
@@ -72,11 +72,11 @@
         <v-tooltip
           v-if="collaborator.status !== 'inactive'"
           :disabled="disabled || !isLastManager"
-          top
+          location="top"
           eager
         >
-          <template #activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on">
+          <template #activator="{ props }">
+            <div v-bind="props">
               <PromptCollaboratorDeactivate :entity="collaborator">
                 <template #activator="{ on: onDialog, attrs: attrsDialog }">
                   <IconButton
@@ -101,7 +101,7 @@
             </div>
           </template>
           <span>{{
-            $tc('components.collaborator.collaboratorEdit.cannotRemoveLastManager')
+            $t('components.collaborator.collaboratorEdit.cannotRemoveLastManager')
           }}</span>
         </v-tooltip>
         <IconButton
@@ -113,7 +113,7 @@
           :disabled="disabled || resendingEmail"
           @click="reinvite"
         >
-          {{ $tc('components.collaborator.collaboratorEdit.inviteAgain') }}
+          {{ $t('components.collaborator.collaboratorEdit.inviteAgain') }}
         </IconButton>
       </template>
     </CollaboratorForm>
@@ -177,12 +177,12 @@ export default {
       return isOwnCampCollaboration(this.collaborator, this.$store.state.auth)
     },
     name() {
-      return campCollaborationDisplayName(this.collaborator, this.$tc.bind(this), false)
+      return campCollaborationDisplayName(this.collaborator, this.$t.bind(this), false)
     },
     deactivateLabel() {
       return this.isOwnCampCollaboration
-        ? this.$tc('components.collaborator.collaboratorEdit.leaveCamp')
-        : this.$tc('components.collaborator.collaboratorEdit.deactivate')
+        ? this.$t('components.collaborator.collaboratorEdit.leaveCamp')
+        : this.$t('components.collaborator.collaboratorEdit.deactivate')
     },
   },
   watch: {

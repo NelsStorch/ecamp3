@@ -23,14 +23,8 @@ Displays a single scheduleEntry
           nudge-bottom="4"
           :disabled="layoutMode || !isContributor"
         >
-          <template #activator="{ on, attrs }">
-            <CategoryChip
-              :schedule-entry="scheduleEntry"
-              large
-              dense
-              v-bind="attrs"
-              v-on="on"
-            >
+          <template #activator="{ props }">
+            <CategoryChip :schedule-entry="scheduleEntry" large dense v-bind="props">
               <template #after>
                 <v-icon
                   v-if="isContributor"
@@ -97,18 +91,18 @@ Displays a single scheduleEntry
         outlined
         @click="layoutMode = false"
       >
-        <template v-if="$vuetify.breakpoint.smAndUp">
+        <template v-if="$vuetify.display.smAndUp">
           <v-icon left>mdi-file-document-edit-outline</v-icon>
-          {{ $tc('components.activity.scheduleEntry.backToContents') }}
+          {{ $t('components.activity.scheduleEntry.backToContents') }}
         </template>
-        <template v-else>{{ $tc('global.button.back') }}</template>
+        <template v-else>{{ $t('global.button.back') }}</template>
       </v-btn>
 
       <TogglePaperSize v-model="isPaperDisplaySize" />
       <!-- hamburger menu -->
       <v-menu v-if="!layoutMode" offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
@@ -129,7 +123,7 @@ Displays a single scheduleEntry
               <v-icon>mdi-puzzle-edit-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              {{ $tc('components.activity.scheduleEntry.changeLayout') }}
+              {{ $t('components.activity.scheduleEntry.changeLayout') }}
             </v-list-item-title>
           </v-list-item>
 
@@ -140,7 +134,7 @@ Displays a single scheduleEntry
               <v-icon>mdi-content-copy</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              {{ $tc('components.activity.scheduleEntry.copyScheduleEntry') }}
+              {{ $t('components.activity.scheduleEntry.copyScheduleEntry') }}
             </v-list-item-title>
           </v-list-item>
           <ClipboardInfoDialog
@@ -152,17 +146,17 @@ Displays a single scheduleEntry
 
           <!-- remove activity -->
           <DialogEntityDelete v-if="!isOutsider" :entity="activity" @submit="onDelete">
-            <template #activator="{ on }">
-              <v-list-item :disabled="!isContributor" v-on="on">
+            <template #activator="{ props }">
+              <v-list-item :disabled="!isContributor" v-bind="props">
                 <v-list-item-icon>
                   <v-icon>mdi-delete</v-icon>
                 </v-list-item-icon>
                 <v-list-item-title>
-                  {{ $tc('global.button.delete') }}
+                  {{ $t('global.button.delete') }}
                 </v-list-item-title>
               </v-list-item>
             </template>
-            {{ $tc('components.activity.scheduleEntry.deleteWarning') }}
+            {{ $t('components.activity.scheduleEntry.deleteWarning') }}
           </DialogEntityDelete>
         </v-list>
       </v-menu>
@@ -182,13 +176,13 @@ Displays a single scheduleEntry
                     scope="col"
                     class="text-right pb-2 pr-4"
                   >
-                    {{ $tc('entity.scheduleEntry.fields.nr') }}
+                    {{ $t('entity.scheduleEntry.fields.nr') }}
                   </th>
                   <th scope="col" class="text-left pb-2 pr-4">
-                    {{ $tc('entity.scheduleEntry.fields.duration') }}
+                    {{ $t('entity.scheduleEntry.fields.duration') }}
                   </th>
                   <th scope="col" class="text-left pb-2" colspan="2">
-                    {{ $tc('entity.scheduleEntry.fields.time') }}
+                    {{ $t('entity.scheduleEntry.fields.time') }}
                   </th>
                 </tr>
               </thead>
@@ -244,8 +238,8 @@ Displays a single scheduleEntry
               hide-header-fields
               @activity-updated="activity.$reload()"
             >
-              <template #activator="{ on }">
-                <ButtonEdit text small class="v-btn--has-bg" v-on="on" />
+              <template #activator="{ props }">
+                <ButtonEdit text small class="v-btn--has-bg" v-bind="props" />
               </template>
             </DialogActivityEdit>
           </v-col>
@@ -526,7 +520,7 @@ export default {
       await navigator.clipboard.writeText(url)
 
       this.$toast.info(
-        this.$tc('global.toast.copied', null, { source: this.activityName }),
+        this.$t('global.toast.copied', null, { source: this.activityName }),
         {
           timeout: 2000,
         }

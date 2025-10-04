@@ -3,10 +3,10 @@
     <td v-if="!layoutMode" class="e-storyboard-row__handle">
       <v-btn
         icon
-        small
+        size="small"
         class="drag-and-drop-handle"
         :disabled="isLastSection"
-        :aria-label="$tc('global.button.move')"
+        :aria-label="$t('global.button.move')"
         @keydown.down="$emit('move-down', itemKey)"
         @keydown.up="$emit('move-up', itemKey)"
       >
@@ -39,14 +39,14 @@
     </td>
     <td v-if="!layoutMode && !disabled" class="e-storyboard-row__controls">
       <dialog-remove-section @submit="$emit('delete', itemKey)">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <v-btn
             icon
-            small
+            size="small"
             class="e-storyboard-row__delete"
             color="error"
             :disabled="isLastSection"
-            v-on="on"
+            v-bind="props"
           >
             <v-icon>mdi-delete-outline</v-icon>
           </v-btn>

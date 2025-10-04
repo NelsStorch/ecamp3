@@ -91,7 +91,7 @@ import ApiDatePicker from '@/components/form/api/ApiDatePicker.vue'
 import ApiTimePicker from '@/components/form/api/ApiTimePicker.vue'
 import ApiColorPicker from '@/components/form/api/ApiColorPicker.vue'
 import VueI18n from '@/plugins/i18n'
-import { VTextField, VTextarea, VCheckbox, VSwitch, VSelect } from 'vuetify/lib'
+import { VTextField, VTextarea, VCheckbox, VSwitch, VSelect } from 'vuetify/components'
 
 export default {
   name: 'Controls',
@@ -313,9 +313,9 @@ export default {
       return '/camp_collaborations/3229d273decd' // Harry Potter - Snoopy
     },
     availableLocales() {
-      return VueI18n.availableLocales.map((l) => ({
+      return VueI18n.global.availableLocales.map((l) => ({
         value: l,
-        text: this.$tc('global.language', 1, l),
+        text: this.$t('global.language', 1, l),
       }))
     },
     config() {

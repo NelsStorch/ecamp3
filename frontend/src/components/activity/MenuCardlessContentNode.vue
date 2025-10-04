@@ -1,7 +1,7 @@
 <template>
-  <v-menu bottom left offset-y>
-    <template #activator="{ on, attrs }">
-      <v-btn icon class="mr-n1" small v-bind="attrs" v-on="on">
+  <v-menu location="bottom left" offset-y>
+    <template #activator="{ props }">
+      <v-btn class="mr-n1" icon size="small" v-bind="props">
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </template>
@@ -13,8 +13,8 @@
         :warning-text-entity="contentNodeName"
         @error="deletingFailed"
       >
-        <template #activator="{ on }">
-          <v-list-item :disabled="deletingDisabled" v-on="on">
+        <template #activator="{ props }">
+          <v-list-item :disabled="deletingDisabled" v-bind="props">
             <v-list-item-icon>
               <v-icon>mdi-trash-can-outline</v-icon>
             </v-list-item-icon>
@@ -61,11 +61,11 @@ export default {
     },
     deleteCaption() {
       return this.deletingDisabled
-        ? this.$tc('components.activity.menuCardlessContentNode.deletingDisabled')
-        : this.$tc('global.button.delete')
+        ? this.$t('components.activity.menuCardlessContentNode.deletingDisabled')
+        : this.$t('global.button.delete')
     },
     contentNodeName() {
-      return this.$tc(`contentNode.${camelCase(this.contentNode.contentTypeName)}.name`)
+      return this.$t(`contentNode.${camelCase(this.contentNode.contentTypeName)}.name`)
     },
   },
   methods: {

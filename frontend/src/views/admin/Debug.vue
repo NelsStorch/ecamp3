@@ -64,7 +64,7 @@ export default {
     deploymentTime() {
       const timestamp = this.environment.DEPLOYMENT_TIME
       const dateTime = timestamp ? this.$date.unix(timestamp) : this.$date()
-      return dateTime.format(this.$tc('global.datetime.dateTimeLong'))
+      return dateTime.format(this.$t('global.datetime.dateTimeLong'))
     },
     version() {
       return this.environment.VERSION || ''
@@ -81,7 +81,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media #{map-get($display-breakpoints, 'xs-only')} {
+@use 'vuetify/settings';
+@use 'sass:map';
+
+@media #{map.get(settings.$display-breakpoints, 'xs')} {
   :deep(table) {
     display: block;
   }

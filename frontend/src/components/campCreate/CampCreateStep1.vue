@@ -7,7 +7,7 @@
             <e-text-field
               v-model="localCamp.title"
               path="title"
-              :placeholder="$tc('components.campCreate.campCreateStep1.titlePlaceholder')"
+              :placeholder="$t('components.campCreate.campCreateStep1.titlePlaceholder')"
               vee-rules="required|max:32"
               data-testid="create-camp-title-input"
               required
@@ -39,18 +39,12 @@
               @click="$emit('next-step')"
             />
             <v-tooltip v-else top>
-              <template #activator="{ attrs, on }">
-                <v-btn
-                  elevation="0"
-                  color="secondary"
-                  v-bind="attrs"
-                  @click="validate()"
-                  v-on="on"
-                >
-                  {{ $tc('global.button.continue') }}
+              <template #activator="{ props }">
+                <v-btn elevation="0" color="secondary" v-bind="props" @click="validate()">
+                  {{ $t('global.button.continue') }}
                 </v-btn>
               </template>
-              {{ $tc('components.campCreate.campCreateStep1.submitTooltip') }}
+              {{ $t('components.campCreate.campCreateStep1.submitTooltip') }}
             </v-tooltip>
           </ContentActions>
         </v-form>
@@ -59,7 +53,7 @@
   </v-stepper-content>
 </template>
 <script>
-import { ValidationObserver } from 'vee-validate'
+// import { ValidationObserver } from 'vee-validate'
 import ButtonCancel from '@/components/buttons/ButtonCancel.vue'
 import ButtonContinue from '@/components/buttons/ButtonContinue.vue'
 import ContentActions from '@/components/layout/ContentActions.vue'
@@ -74,7 +68,7 @@ export default {
     ContentActions,
     CreateCampPeriods,
     ETextField,
-    ValidationObserver,
+    // ValidationObserver,
   },
   props: {
     camp: { type: Object, required: true },

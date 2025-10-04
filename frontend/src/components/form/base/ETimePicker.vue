@@ -21,15 +21,15 @@ Allows 15min steps only
       <v-time-picker
         :value="picker.value || ''"
         :allowed-minutes="allowedStep"
-        :format="$tc('global.datetime.vuetifyTimePickerFormat')"
+        :format="$t('global.datetime.vuetifyTimePickerFormat')"
         :min="min"
         :max="max"
         scrollable
         @input="picker.onInput"
       >
         <v-spacer />
-        <v-btn text color="primary" @click="picker.close">
-          {{ $tc('global.button.close') }}
+        <v-btn color="primary" variant="text" @click="picker.close">
+          {{ $t('global.button.close') }}
         </v-btn>
       </v-time-picker>
     </template>
@@ -125,7 +125,7 @@ export default {
           return Promise.resolve(newValue)
         } else {
           return Promise.reject(
-            new Error(this.$tc('components.form.base.eTimePicker.invalidFormat'))
+            new Error(this.$t('components.form.base.eTimePicker.invalidFormat'))
           )
         }
       } else {

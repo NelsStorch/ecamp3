@@ -8,7 +8,7 @@
     :submit-action="null"
     submit-color="success"
     :cancel-action="close"
-    :cancel-label="$tc('global.button.close')"
+    :cancel-label="$t('global.button.close')"
     :cancel-visible="false"
     close-visible-on-mobile
   >

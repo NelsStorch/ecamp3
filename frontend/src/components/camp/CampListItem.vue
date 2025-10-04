@@ -7,7 +7,7 @@
           v-if="camp.isShared === true"
           x-small
           class="align-self-center px-1 v-btn--has-bg"
-          >{{ $tc('components.camp.campListItem.public') }}</v-chip
+          >{{ $t('components.camp.campListItem.public') }}</v-chip
         >
         <span class="flex-grow-1"></span>
         <span>{{ date }}</span>

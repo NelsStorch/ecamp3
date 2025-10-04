@@ -16,7 +16,7 @@
         :to="scheduleEntryRoute(items[0])"
         dense
         :category="activity.category()"
-      />{{ $vuetify.breakpoint.smAndUp ? `\u2009${activity.title}:` : '' }}
+      />{{ $vuetify.display.smAndUp ? `\u2009${activity.title}:` : '' }}
     </span>
     <span class="d-inline-flex gap-x-1 flex-wrap"
       ><router-link
@@ -78,7 +78,7 @@ export default {
     },
     shortDescription(scheduleEntry) {
       if (this.loading) return ''
-      return shortScheduleEntryDescription(scheduleEntry, this.$tc.bind(this))
+      return shortScheduleEntryDescription(scheduleEntry, this.$t.bind(this))
     },
   },
 }

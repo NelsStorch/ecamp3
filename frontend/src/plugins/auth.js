@@ -89,9 +89,10 @@ function getJWTExpirationTimestamp() {
 export function isLoggedIn() {
   const isLoggedIn = Date.now() < getJWTExpirationTimestamp()
 
-  if (isLoggedIn) {
-    loadUser()
-  }
+  // TODO: commented code creates an infinite-loop
+  // if (isLoggedIn) {
+  //   loadUser()
+  // }
 
   return isLoggedIn
 }
@@ -229,8 +230,8 @@ export const auth = {
 }
 
 class AuthPlugin {
-  install(Vue) {
-    Object.defineProperties(Vue.prototype, {
+  install(app) {
+    Object.defineProperties(app.config.globalProperties, {
       $auth: {
         get() {
           return auth

@@ -84,7 +84,7 @@ export default {
       return keyBy(this.allContentNodes().items, 'id')
     },
     draggingEnabled() {
-      return this.layoutMode && this.$vuetify.breakpoint.mdAndUp && !this.disabled
+      return this.layoutMode && this.$vuetify.display.mdAndUp && !this.disabled
     },
     contentNodeIds() {
       return sortBy(
@@ -114,7 +114,7 @@ export default {
       },
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.cleanupDrag()
   },
   methods: {
@@ -167,6 +167,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .min-height {
   min-height: 10rem;
 }
@@ -237,7 +240,7 @@ export default {
       right: -4px;
       opacity: 40%;
       border-radius: 8px;
-      border: 2px dotted map-get($blue, 'darken-2');
+      border: 2px dotted map.get(settings.$blue, 'darken-2');
       opacity: 40%;
       content: '';
     }

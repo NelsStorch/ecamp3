@@ -4,14 +4,14 @@ Show all activity schedule entries of a single period.
 
 <template>
   <content-card
-    :title="$tc('views.camp.campProgram.title')"
+    :title="$t('views.camp.campProgram.title')"
     toolbar
-    :no-border="$vuetify.breakpoint.mdAndUp && openFilter"
+    :no-border="$vuetify.display.mdAndUp && openFilter"
   >
     <template #title-actions>
       <period-switcher :period="period" />
       <v-spacer />
-      <template v-if="$vuetify.breakpoint.smAndUp">
+      <template v-if="$vuetify.display.smAndUp">
         <v-toolbar-items v-if="isFilterSet">
           <v-chip
             label
@@ -44,10 +44,10 @@ Show all activity schedule entries of a single period.
         @click="editMode = !editMode"
       />
       <v-menu offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" data-testid="campprogram-menu" v-on="on">
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props" data-testid="campprogram-menu">
             <v-badge
-              v-if="!$vuetify.breakpoint.smAndUp && filteredPropertiesCount > 0"
+              v-if="!$vuetify.display.smAndUp && filteredPropertiesCount > 0"
               overlap
               offset-x="2"
               dot
@@ -87,7 +87,7 @@ Show all activity schedule entries of a single period.
     </template>
 
     <ScheduleEntryFilters
-      v-if="$vuetify.breakpoint.mdAndUp && openFilter"
+      v-if="$vuetify.display.mdAndUp && openFilter"
       v-model="filter"
       class="ec-content-card__toolbar--border pb-4 justify-center"
       :loading-endpoints="loadingEndpoints"
@@ -125,7 +125,7 @@ Show all activity schedule entries of a single period.
       <v-icon>mdi-lock</v-icon>
       {{ reminderText }}
     </v-snackbar>
-    <v-bottom-sheet v-if="!$vuetify.breakpoint.mdAndUp" v-model="openFilter">
+    <v-bottom-sheet v-if="!$vuetify.display.mdAndUp" v-model="openFilter">
       <v-sheet class="text-center" height="200px">
         <ScheduleEntryFilters
           v-model="filter"
@@ -199,7 +199,7 @@ export default {
   head() {
     return {
       title: () =>
-        this.$tc('views.camp.campProgram.title') + ': ' + this.period.description,
+        this.$t('views.camp.campProgram.title') + ': ' + this.period.description,
     }
   },
   computed: {
@@ -284,8 +284,8 @@ export default {
     showUnlockReminder(move) {
       if (this.isOutsider) return
       this.reminderText = move
-        ? this.$tc('views.camp.campProgram.reminderLockedMove')
-        : this.$tc('views.camp.campProgram.reminderLockedCreate')
+        ? this.$t('views.camp.campProgram.reminderLockedMove')
+        : this.$t('views.camp.campProgram.reminderLockedCreate')
       this.showReminder = true
     },
     persistRouterState() {

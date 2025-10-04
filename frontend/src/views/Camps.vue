@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
-    <content-card :title="$tc('views.camps.title')" max-width="800" toolbar>
+    <content-card :title="$t('views.camps.title')" max-width="800" toolbar>
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.breakpoint.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only btn-classes="mr-n4" />
       </template>
       <v-list class="py-0">
         <template v-if="loading">
@@ -25,7 +25,7 @@
               icon="mdi-plus"
               :to="{ name: 'camps/create' }"
             >
-              {{ $tc('views.camps.create') }}
+              {{ $t('views.camps.create') }}
             </button-add>
           </v-list-item-action>
         </v-list-item>
@@ -36,15 +36,15 @@
         "
         multiple
         flat
-        accordion
+        variant="accordion"
       >
         <v-expansion-panel v-if="isAdmin && prototypeCamps.length > 0">
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
-              {{ $tc('views.camps.prototypeCamps') }}
+              {{ $t('views.camps.prototypeCamps') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <v-list class="py-0">
               <CampListItem
                 v-for="camp in prototypeCamps"
@@ -52,15 +52,15 @@
                 :camp="camp"
               />
             </v-list>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
         <v-expansion-panel v-if="!loading && pastCamps.length > 0">
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
-              {{ $tc('views.camps.pastCamps') }}
+              {{ $t('views.camps.pastCamps') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <v-list class="py-0">
               <CampListItem
                 v-for="{ camp, periods } in pastCamps"
@@ -69,7 +69,7 @@
                 :periods="periods"
               />
             </v-list>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
     </content-card>
@@ -102,7 +102,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.camps.title'),
+      title: this.$t('views.camps.title'),
     }
   },
   computed: {

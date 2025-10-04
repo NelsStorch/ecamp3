@@ -26,11 +26,11 @@
       <v-icon x-small color="white">mdi-content-copy</v-icon>
     </v-btn>
 
-    <ClipboardInfoDialog
-      v-if="isEditable"
-      ref="copyInfoDialog"
-      translation-context-i18n-key="components.program.picasso.picassoEntry.clipboardInfoDialog"
-    />
+    <!--    <ClipboardInfoDialog-->
+    <!--      v-if="isEditable"-->
+    <!--      ref="copyInfoDialog"-->
+    <!--      translation-context-i18n-key="components.program.picasso.picassoEntry.clipboardInfoDialog"-->
+    <!--    />-->
 
     <!-- edit button & dialog -->
     <DialogActivityEdit
@@ -40,21 +40,16 @@
       @activity-updated="$emit('finish-edit')"
       @error="$emit('finish-edit')"
     >
-      <template #activator="{ on }">
+      <template #activator="{ props }">
         <v-btn
           x-small
           text
           class="e-picasso-entry__quickedit rounded-sm pr-0"
-          @click.prevent="on.click"
+          @click.prevent="props.onClick"
           @mousedown.stop=""
           @mouseup.stop=""
         >
           <v-icon x-small color="white">mdi-pencil</v-icon>
-        </v-btn>
-      </template>
-      <template #moreActions>
-        <v-btn color="primary" :to="scheduleEntryRoute">
-          {{ $tc('global.button.open') }}
         </v-btn>
       </template>
     </DialogActivityEdit>
@@ -67,7 +62,7 @@
       <br v-if="!isTinyDuration" />
       <small class="e-picasso-entry__location">
         <span class="d-sr-only">{{
-          $tc('components.program.picasso.picassoEntry.location')
+          $t('components.program.picasso.picassoEntry.location')
         }}</span>
         {{ location }}
       </small>
@@ -78,7 +73,7 @@
         <br v-if="isLongDuration" />
         <small class="e-picasso-entry__responsible">
           <span class="d-sr-only">{{
-            $tc('components.program.picasso.picassoEntry.responsible')
+            $t('components.program.picasso.picassoEntry.responsible')
           }}</span
           >{{ campCollaborationText }}</small
         >
@@ -116,7 +111,7 @@
       <br v-if="!isTinyDuration" />
       <small
         ><span class="d-sr-only">{{
-          $tc('components.program.picasso.picassoEntry.location')
+          $t('components.program.picasso.picassoEntry.location')
         }}</span>
         {{ location }}
       </small>
@@ -127,7 +122,7 @@
         <br v-if="isLongDuration" />
         <small>
           <span class="d-sr-only">{{
-            $tc('components.program.picasso.picassoEntry.responsible')
+            $t('components.program.picasso.picassoEntry.responsible')
           }}</span
           >{{ campCollaborationText }}
         </small>
@@ -193,9 +188,9 @@ export default {
       return this.activity.category()
     },
     activityName() {
-      if (this.scheduleEntry.tmpEvent) return this.$tc('entity.activity.new')
+      if (this.scheduleEntry.tmpEvent) return this.$t('entity.activity.new')
 
-      if (this.activityLoading) return this.$tc('global.loading')
+      if (this.activityLoading) return this.$t('global.loading')
 
       return (
         (this.scheduleEntry.number ? this.scheduleEntry.number + ' ' : '') +
@@ -213,7 +208,7 @@ export default {
     campCollaborationText() {
       if (this.campCollaborations.length === 0) return ''
       return this.campCollaborations
-        .map((item) => campCollaborationDisplayName(item, this.$tc.bind(this)))
+        .map((item) => campCollaborationDisplayName(item, this.$t.bind(this)))
         .join(', ')
     },
     duration() {
@@ -273,7 +268,7 @@ export default {
     this.scrollHeight = this.$el.scrollHeight
     window.addEventListener('resize', this.onResize)
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('resize', this.onResize)
   },
   methods: {
@@ -300,7 +295,7 @@ export default {
       await navigator.clipboard.writeText(url)
 
       this.$toast.info(
-        this.$tc('global.toast.copied', null, { source: this.activityName }),
+        this.$t('global.toast.copied', null, { source: this.activityName }),
         {
           timeout: 2000,
         }
@@ -311,15 +306,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .e-picasso-entry {
   user-select: none;
   display: block;
   height: 100%;
   padding: 1px;
-  @media #{map-get($display-breakpoints, 'sm-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
     padding: 1px 2px;
   }
-  @media #{map-get($display-breakpoints, 'md-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
     padding: 2px 3px;
     line-height: normal;
   }
@@ -337,7 +335,7 @@ export default {
   opacity: 0.3;
 }
 
-@media #{map-get($display-breakpoints, 'sm-and-up')} {
+@media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
   .e-picasso-entry {
     font-size: 12px;
   }
@@ -496,7 +494,7 @@ export default {
   font-size: 11px;
 }
 
-@media #{map-get($display-breakpoints, 'sm-and-up')} {
+@media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
   .e-picasso-entry:hover .e-picasso-entry__drag-bottom::after {
     display: block; // resize handle not visible on mobile
   }

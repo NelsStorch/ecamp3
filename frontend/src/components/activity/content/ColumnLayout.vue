@@ -8,8 +8,8 @@
   >
     <template #header>
       <strong>
-        <v-icon color="blue darken-2">$vuetify.icons.columnLayout</v-icon>
-        {{ $tc('contentNode.columnLayout.name') }}
+        <v-icon color="blue-darken-2">$columnLayout</v-icon>
+        {{ $t('contentNode.columnLayout.name') }}
       </strong>
       <MenuCardlessContentNode :content-node="contentNode">
         <column-operations

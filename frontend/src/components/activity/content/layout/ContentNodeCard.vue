@@ -57,15 +57,15 @@
           :entity="contentNode"
           :warning-text-entity="instanceOrContentTypeName"
         >
-          <template #activator="{ on }">
+          <template #activator="{ props }">
             <v-btn
               icon
-              small
+              size="small"
               color="error"
               class="float-right"
               width="36"
               height="36"
-              v-on="on"
+              v-bind="props"
             >
               <v-icon>mdi-trash-can-outline</v-icon>
             </v-btn>
@@ -116,7 +116,7 @@ export default {
       if (this.contentNode.instanceName) {
         return this.contentNode.instanceName
       }
-      return this.$tc(`contentNode.${camelCase(this.contentNode.contentTypeName)}.name`)
+      return this.$t(`contentNode.${camelCase(this.contentNode.contentTypeName)}.name`)
     },
     icon() {
       return contentTypeIcons[camelCase(this.contentNode.contentTypeName)]

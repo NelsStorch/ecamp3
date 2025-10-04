@@ -11,5 +11,5 @@ export default (dayjs, i18n) => ({
     return valueDate.diff(minDate, 'day') >= 0
   },
   message: (field, values) =>
-    i18n.tc('global.validation.greaterThanOrEqual_date', 0, values),
+    i18n.t('global.validation.greaterThanOrEqual_date', 0, values),
 })

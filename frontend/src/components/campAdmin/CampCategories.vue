@@ -1,19 +1,19 @@
 <template>
   <content-group
-    :title="$tc('components.campAdmin.campCategories.title')"
+    :title="$t('components.campAdmin.campCategories.title')"
     icon="mdi-shape"
   >
     <template #title-actions>
       <DialogCategoryCreate v-if="!disabled" :camp="camp">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <ButtonAdd
             color="secondary"
             text
-            :hide-label="$vuetify.breakpoint.xsOnly"
+            :hide-label="$vuetify.display.xsOnly"
             class="my-n2"
-            v-on="on"
+            v-bind="props"
           >
-            {{ $tc('components.campAdmin.campCategories.create') }}
+            {{ $t('components.campAdmin.campCategories.create') }}
           </ButtonAdd>
         </template>
       </DialogCategoryCreate>

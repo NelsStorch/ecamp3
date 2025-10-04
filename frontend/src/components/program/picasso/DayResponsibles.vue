@@ -25,7 +25,7 @@
     @input="onInput"
   >
     <template #prepend-item>
-      <v-subheader>{{ $tc('entity.day.fields.dayResponsibles') }}</v-subheader>
+      <v-subheader>{{ $t('entity.day.fields.dayResponsibles') }}</v-subheader>
     </template>
   </e-select>
 </template>
@@ -81,7 +81,7 @@ export default {
           // following structure is defined by vuetify v-select items property
           return {
             value: value._meta.self,
-            text: campCollaborationDisplayName(value, this.$tc.bind(this)),
+            text: campCollaborationDisplayName(value, this.$t.bind(this)),
           }
         })
     },

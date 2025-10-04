@@ -35,8 +35,8 @@
       <ChecklistItemCreate v-if="isContributor" :checklist="checklist" />
       <!-- hamburger menu -->
       <v-menu v-if="isContributor" offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
@@ -47,17 +47,17 @@
             :error-handler="deleteErrorHandler"
             :success-handler="deleteSuccessHandler"
           >
-            <template #activator="{ on }">
-              <v-list-item v-on="on">
+            <template #activator="{ props }">
+              <v-list-item v-bind="props">
                 <v-list-item-icon>
                   <v-icon>mdi-delete</v-icon>
                 </v-list-item-icon>
                 <v-list-item-title>
-                  {{ $tc('global.button.delete') }}
+                  {{ $t('global.button.delete') }}
                 </v-list-item-title>
               </v-list-item>
             </template>
-            {{ $tc('components.checklist.checklistDetail.deleteWarning') }}
+            {{ $t('components.checklist.checklistDetail.deleteWarning') }}
           </DialogEntityDelete>
         </v-list>
       </v-menu>
@@ -127,7 +127,7 @@ export default {
     },
     deleteErrorHandler(e) {
       if (e?.response?.status === 422 /* Validation Error */) {
-        return this.$tc('components.checklist.checklistDetail.deleteError')
+        return this.$t('components.checklist.checklistDetail.deleteError')
       }
       return null
     },
