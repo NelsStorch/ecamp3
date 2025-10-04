@@ -1,8 +1,18 @@
 <template>
-  <div style="display: flex" class="gap-4">
+  <div class="d-flex gap-4">
     <div style="flex-grow: 1; flex-shrink: 1">
       <slot />
     </div>
+    <v-fab
+      app
+      icon
+      location="right bottom"
+      color="primary"
+      class="mb-4 mr-4"
+      @click="openComments = !openComments"
+    >
+      <v-icon>mdi-chat</v-icon>
+    </v-fab>
     <template v-if="openComments">
       <div
         v-if="$vuetify.display.width > 1360"
@@ -15,7 +25,7 @@
         v-else
         v-model="openComments"
         clipped
-        right
+        location="right"
         app
         permanent
         temporary
@@ -28,17 +38,6 @@
         </div>
       </v-navigation-drawer>
     </template>
-    <v-btn
-      fab
-      fixed
-      bottom
-      right
-      color="primary"
-      class="mb-4 mr-4"
-      @click="openComments = !openComments"
-    >
-      <v-icon>mdi-chat</v-icon>
-    </v-btn>
   </div>
 </template>
 
