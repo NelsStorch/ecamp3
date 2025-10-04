@@ -5,7 +5,7 @@
       <v-icon v-else :disabled="disabled">mdi-lock-open-variant</v-icon>
     </template>
     <v-list-item-title>
-      {{ value ? $t('global.button.lock') : $t('global.button.unlock') }}
+      {{ modelValue ? $t('global.button.lock') : $t('global.button.unlock') }}
     </v-list-item-title>
   </v-list-item>
 </template>
@@ -13,7 +13,7 @@
 <script>
 export default {
   props: {
-    value: {
+    modelValue: {
       type: Boolean,
       required: true,
     },

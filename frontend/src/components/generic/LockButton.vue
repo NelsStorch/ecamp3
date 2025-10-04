@@ -9,7 +9,7 @@
         v-bind="props"
         @click="onClick"
       >
-        <v-icon v-if="value" size="small">mdi-lock-open-variant</v-icon>
+        <v-icon v-if="modelValue" size="small">mdi-lock-open-variant</v-icon>
         <v-icon v-else size="small">mdi-lock</v-icon>
       </button>
     </template>
@@ -21,7 +21,7 @@
 export default {
   name: 'LockButton',
   props: {
-    value: {
+    modelValue: {
       type: Boolean,
       required: true,
     },
@@ -48,7 +48,7 @@ export default {
       if (this.message) {
         return this.message
       }
-      if (!this.value) {
+      if (!this.modelValue) {
         return this.$t('components.generic.lockButton.clickToUnlock')
       }
       return this.$t('components.generic.lockButton.clickToLock')
