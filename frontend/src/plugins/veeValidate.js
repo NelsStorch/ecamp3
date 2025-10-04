@@ -1,6 +1,6 @@
 import { configure, defineRule } from 'vee-validate'
 import { localize, setLocale } from '@vee-validate/i18n'
-import * as rules from '@vee-validate/rules'
+import { all } from '@vee-validate/rules'
 
 // import greaterThan from '@/plugins/veeValidate/greaterThan'
 // import greaterThan_time from './veeValidate/greaterThan_time.js'
@@ -30,8 +30,8 @@ class VeeValidatePlugin {
     setLocale('en')
 
     // install all default rules
-    Object.keys(rules).forEach((rule) => {
-      defineRule(rule, rules[rule])
+    Object.entries(all).forEach(([name, rule]) => {
+      defineRule(name, rule)
     })
 
     /**

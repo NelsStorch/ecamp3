@@ -28,88 +28,15 @@
 import { toRef } from 'vue'
 import { useField } from 'vee-validate'
 
-// TODO: test & implement the following props: "veeId", "required"
+import { props as formComponentProps } from './formComponentProps'
+import {
+  props as formComponentValidationProps,
+  useValidation,
+} from './formComponentValidation'
 
 const props = defineProps({
-  /**
-   * from vee-validate example at https://vee-validate.logaretm.com/v4/examples/custom-inputs/
-   */
-
-  modelValue: {
-    type: String,
-    default: undefined,
-  },
-  successMessage: {
-    type: String,
-    default: '',
-  },
-
-  /**
-   * props from formComponentPropsMixin
-   */
-  id: {
-    type: String,
-    required: false,
-    default: null,
-  },
-
-  // vuetify property hideDetails
-  filled: {
-    type: Boolean,
-    default: true,
-  },
-
-  // vuetify property hideDetails
-  hideDetails: {
-    type: String,
-    default: 'auto',
-  },
-
-  // set classes on input
-  inputClass: {
-    type: String,
-    default: '',
-    required: false,
-  },
-
-  // used as field name for validation and as label (if no override label is provided)
-  name: {
-    type: String,
-    required: false,
-    default: null,
-  },
-
-  // override the label which is displayed to the user; name is used instead if no label is provided
-  label: {
-    type: String,
-    required: false,
-    default: null,
-  },
-
-  // error messages from outside which should be displayed on the component
-  errorMessages: {
-    type: Array,
-    required: false,
-    default: () => [],
-  },
-
-  /**
-   * props from formComponentMixin.js
-   */
-
-  // ID for vee-validation
-  veeId: {
-    type: String,
-    required: false,
-    default: null,
-  },
-
-  // rules for vee-validation
-  veeRules: {
-    type: [String, Object],
-    required: false,
-    default: '',
-  },
+  ...formComponentProps,
+  ...formComponentValidationProps,
 
   /**
    * additional props for ETextField
@@ -120,8 +47,11 @@ const props = defineProps({
   },
 })
 
+const { required } = useValidation(props.veeRules)
+
 const name = toRef(props, 'name')
 const rules = toRef(props, 'veeRules')
+
 const {
   value: inputValue,
   errorMessage,

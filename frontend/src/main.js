@@ -44,7 +44,7 @@ app.use(storeLoader)
 app.use(vuetifyLoader)
 app.use(dayjs)
 app.use(color)
-//app.use(veeValidate)
+app.use(veeValidate)
 app.use(Toast, {
   maxToasts: 2,
 })
