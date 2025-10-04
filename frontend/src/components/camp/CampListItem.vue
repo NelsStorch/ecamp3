@@ -1,22 +1,20 @@
 <template>
-  <v-list-item two-line :to="campRoute(camp)">
-    <v-list-item-content>
-      <v-list-item-title class="d-flex gap-x-2 justify-space-between">
-        <strong class="whitespace-normal">{{ camp.title }}</strong>
-        <v-chip
-          v-if="camp.isShared === true"
-          x-small
-          class="align-self-center px-1 v-btn--has-bg"
-          >{{ $t('components.camp.campListItem.public') }}</v-chip
-        >
-        <span class="flex-grow-1"></span>
-        <span>{{ date }}</span>
-      </v-list-item-title>
-      <v-list-item-subtitle class="d-flex gap-2 flex-wrap-reverse justify-space-between">
-        <span class="whitespace-normal">{{ camp.motto }}</span>
-        <span>{{ camp.organizer }}</span>
-      </v-list-item-subtitle>
-    </v-list-item-content>
+  <v-list-item lines="two" :to="campRoute(camp)">
+    <v-list-item-title class="d-flex gap-x-2 justify-space-between">
+      <strong class="whitespace-normal">{{ camp.title }}</strong>
+      <v-chip
+        v-if="camp.isShared === true"
+        x-small
+        class="align-self-center px-1 v-btn--has-bg"
+        >{{ $t('components.camp.campListItem.public') }}</v-chip
+      >
+      <span class="flex-grow-1"></span>
+      <span>{{ date }}</span>
+    </v-list-item-title>
+    <v-list-item-subtitle class="d-flex gap-2 flex-wrap-reverse justify-space-between">
+      <span class="whitespace-normal">{{ camp.motto }}</span>
+      <span>{{ camp.organizer }}</span>
+    </v-list-item-subtitle>
   </v-list-item>
 </template>
 

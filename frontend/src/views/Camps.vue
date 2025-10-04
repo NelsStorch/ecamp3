@@ -17,17 +17,18 @@
             :periods="periods"
           />
         </template>
-        <v-list-item>
-          <v-list-item-content />
-          <v-list-item-action>
-            <button-add
-              data-testid="create-camp-button"
-              icon="mdi-plus"
-              :to="{ name: 'camps/create' }"
-            >
-              {{ $t('views.camps.create') }}
-            </button-add>
-          </v-list-item-action>
+        <v-list-item lines="two">
+          <template #append>
+            <v-list-item-action>
+              <button-add
+                data-testid="create-camp-button"
+                icon="mdi-plus"
+                :to="{ name: 'camps/create' }"
+              >
+                {{ $t('views.camps.create') }}
+              </button-add>
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </v-list>
       <v-expansion-panels
