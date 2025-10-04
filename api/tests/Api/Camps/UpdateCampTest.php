@@ -2,6 +2,7 @@
 
 namespace App\Tests\Api\Camps;
 
+use App\Entity\Camp;
 use App\Tests\Api\ECampApiTestCase;
 
 /**
@@ -89,6 +90,42 @@ class UpdateCampTest extends ECampApiTestCase {
     public function testPatchPrototypeCampIsDeniedForUnrelatedUser() {
         $camp = static::getFixture('campPrototype');
         static::createClientWithCredentials()->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'title' => 'Hello World',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchSharedCampIsDeniedForUnrelatedUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials()->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'title' => 'Hello World',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchSharedCampIsDeniedForInactiveUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'title' => 'Hello World',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchSharedCampIsDeniedForInvitedUser() {
+        $camp = static::getFixture('campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
             'title' => 'Hello World',
         ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
         $this->assertResponseStatusCodeSame(403);
@@ -542,6 +579,50 @@ class UpdateCampTest extends ECampApiTestCase {
                     'propertyPath' => 'addressCity',
                     'message' => 'This value is too long. It should have 128 characters or less.',
                 ],
+            ],
+        ]);
+    }
+
+    public function testPatchCampEnablesSharedAndSetsMetadata() {
+        /** @var Camp $camp */
+        $camp = static::getFixture('camp1');
+        // Precondition before the test
+        $this->assertNull($camp->sharedSince);
+
+        static::createClientWithCredentials()->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+            'isShared' => true,
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'isShared' => true,
+            '_links' => [
+                'sharedBy' => ['href' => $this->getIriFor('user1manager')],
+            ],
+        ]);
+        $camp = $this->getEntityManager()->getRepository(Camp::class)->find($camp->getId());
+        $this->assertNotNull($camp->sharedSince);
+        $shortlyAgo = new \DateTime();
+        $shortlyAgo->sub(new \DateInterval('PT30S'));
+        $this->assertGreaterThan($shortlyAgo, $camp->sharedSince);
+    }
+
+    public function testPatchCampDisablesSharedAndDoesNotChangeMetadata() {
+        /** @var Camp $camp */
+        $camp = static::getFixture('campShared');
+
+        static::createClientWithCredentials(['email' => static::getFixture('user4unrelated')->getEmail()])
+            ->request('PATCH', '/camps/'.$camp->getId(), ['json' => [
+                'isShared' => false,
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'isShared' => false,
+            'sharedSince' => '2025-09-03T12:00:00+00:00',
+            '_links' => [
+                'sharedBy' => ['href' => $this->getIriFor('admin')],
             ],
         ]);
     }

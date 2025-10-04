@@ -30,6 +30,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -86,6 +92,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -111,6 +118,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -161,6 +174,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -187,6 +201,12 @@ components:
             -
               type: 'null'
           readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -236,6 +256,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -264,6 +285,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -321,6 +348,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -469,6 +497,8 @@ components:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 category:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                comments:
+                  properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabel:
                   properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
                 rootContentNode:
@@ -478,6 +508,7 @@ components:
               required:
                 - activityResponsibles
                 - category
+                - comments
                 - scheduleEntries
               type: object
             type:
@@ -492,6 +523,8 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
+              -
+                $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
                 $ref: '#/components/schemas/ScheduleEntry.jsonapi'
               -
@@ -546,6 +579,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -602,6 +641,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -636,6 +676,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -686,6 +732,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -721,6 +768,12 @@ components:
             -
               type: 'null'
           readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -770,6 +823,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -807,6 +861,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -864,6 +924,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -978,6 +1039,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -1034,6 +1101,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1065,6 +1133,12 @@ components:
             of the activity, and is used for marking similar activities. Must be in the same camp as the activity.
           example: /categories/1a2b3c4d
           format: iri-reference
+          type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
           type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
@@ -1115,6 +1189,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1164,6 +1239,12 @@ components:
             -
               type: 'null'
           readOnly: true
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -1213,6 +1294,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -1265,6 +1347,12 @@ components:
           example: /categories/1a2b3c4d
           format: iri-reference
           type: string
+        comments:
+          description: 'All comments of the activity.'
+          example: /activities/1a2b3c4d/comments
+          format: iri-reference
+          readOnly: true
+          type: string
         contentNodes:
           description: 'All the content nodes that make up the tree of programme content.'
           example: '/content_nodes?root=%2Fcontent_node%2Fcolumn_layouts%2F1a2b3c4d'
@@ -1321,6 +1409,7 @@ components:
       required:
         - activityResponsibles
         - category
+        - comments
         - location
         - scheduleEntries
         - title
@@ -2407,6 +2496,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -2471,6 +2568,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -2609,6 +2721,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -2666,6 +2786,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -2800,6 +2935,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -2864,6 +3007,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -2998,6 +3156,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3062,6 +3228,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -3160,6 +3341,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3281,6 +3470,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3400,6 +3597,14 @@ components:
                   example: true
                   readOnly: true
                   type: boolean
+                isShared:
+                  default: false
+                  description: |-
+                    Whether the programme of this camp is publicly available to anyone (including
+                    personal data such as camp collaborations, personal material lists,
+                    responsibilities and comments).
+                  example: true
+                  type: boolean
                 kind:
                   description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
                   example: Zeltlager
@@ -3420,6 +3625,12 @@ components:
                   description: 'Whether the Y+S logo should be printed on the picasso of this camp.'
                   example: true
                   type: boolean
+                sharedSince:
+                  description: 'Date and time when the camp was last set to be shared publicly.'
+                  example: '2025-10-01T00:00:00+00:00'
+                  format: date-time
+                  readOnly: true
+                  type: ['null', string]
                 shortTitle:
                   description: |-
                     An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -3464,6 +3675,8 @@ components:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabels:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
+                sharedBy:
+                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
               required:
                 - activities
                 - campCollaborations
@@ -3485,6 +3698,8 @@ components:
             url: 'https://jsonapi.org/format/#fetching-includes'
           items:
             anyOf:
+              -
+                $ref: '#/components/schemas/CampCollaboration.jsonapi'
               -
                 $ref: '#/components/schemas/CampCollaboration.jsonapi'
               -
@@ -3628,6 +3843,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3692,6 +3915,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -3839,6 +4077,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -3896,6 +4142,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4039,6 +4300,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4103,6 +4372,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4246,6 +4530,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4310,6 +4602,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4417,6 +4724,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4607,6 +4922,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4671,6 +4994,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -4832,6 +5170,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -4889,6 +5235,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -5046,6 +5407,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -5110,6 +5479,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -5267,6 +5651,14 @@ components:
           example: true
           readOnly: true
           type: boolean
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -5331,6 +5723,21 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        sharedBy:
+          description: 'The person who last set the camp to be shared publicly.'
+          example: 'https://example.com/'
+          format: iri-reference
+          readOnly: true
+          type:
+            - 'null'
+            - string
+        sharedSince:
+          description: 'Date and time when the camp was last set to be shared publicly.'
+          example: '2025-10-01T00:00:00+00:00'
+          format: date-time
+          type:
+            - 'null'
+            - string
         shortTitle:
           description: |-
             An optional short title for the camp. Can be used in the UI where space is tight. If
@@ -5429,6 +5836,14 @@ components:
           type:
             - 'null'
             - string
+        isShared:
+          default: false
+          description: |-
+            Whether the programme of this camp is publicly available to anyone (including
+            personal data such as camp collaborations, personal material lists,
+            responsibilities and comments).
+          example: true
+          type: boolean
         kind:
           description: 'Rough categorization of the camp (house, tent, traveling, summer, autumn).'
           example: Zeltlager
@@ -10444,6 +10859,10 @@ components:
           example: /camps/1a2b3c4d
           format: iri-reference
           type: string
+        createTime:
+          format: date-time
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -10481,6 +10900,10 @@ components:
                   description: 'An internal, unique, randomly generated identifier of this entity.'
                   example: 1a2b3c4d
                   maxLength: 16
+                  readOnly: true
+                  type: string
+                createTime:
+                  format: date-time
                   readOnly: true
                   type: string
                 orphanDescription:
@@ -10615,6 +11038,10 @@ components:
           example: /camps/1a2b3c4d
           format: iri-reference
           type: string
+        createTime:
+          format: date-time
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -10726,6 +11153,10 @@ components:
           example: /camps/1a2b3c4d
           format: iri-reference
           type: string
+        createTime:
+          format: date-time
+          readOnly: true
+          type: string
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -10749,7 +11180,7 @@ components:
         - camp
         - textHtml
       type: object
-    ConstraintViolation-json:
+    ConstraintViolation:
       deprecated: false
       description: 'Unprocessable entity'
       properties:
@@ -10785,7 +11216,7 @@ components:
             type: object
           type: array
       type: object
-    ConstraintViolation.jsonld-jsonld:
+    ConstraintViolation.jsonld:
       deprecated: false
       description: 'Unprocessable entity'
       properties:
@@ -13701,6 +14132,11 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -13746,6 +14182,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem-write:
@@ -13756,6 +14193,11 @@ components:
           description: 'The name of the item that is required.'
           example: Volleyball
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -13801,6 +14243,11 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -13840,6 +14287,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonapi:
@@ -13861,6 +14309,11 @@ components:
                   example: Volleyball
                   maxLength: 64
                   type: string
+                done:
+                  default: false
+                  description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+                  example: true
+                  type: boolean
                 quantity:
                   description: 'The number of items or the amount in the unit of items that are required.'
                   example: 1.5
@@ -13873,6 +14326,7 @@ components:
                   type: ['null', string]
               required:
                 - article
+                - done
               type: object
             id:
               type: string
@@ -13936,6 +14390,11 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -13981,6 +14440,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonhal-write_create:
@@ -14001,6 +14461,11 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -14040,6 +14505,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonld-read:
@@ -14080,6 +14546,11 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -14125,6 +14596,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonld-write_create:
@@ -14136,6 +14608,11 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -14175,6 +14652,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialList-read:
@@ -23260,13 +23738,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a Activity resource.'
@@ -23603,13 +24081,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the Activity resource.'
@@ -23764,13 +24242,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a ActivityProgressLabel resource.'
@@ -23981,13 +24459,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the ActivityProgressLabel resource.'
@@ -24168,13 +24646,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a ActivityResponsible resource.'
@@ -24457,13 +24935,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Request activation email again'
@@ -24539,13 +25017,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Request Password-Reset-Mail'
@@ -24707,13 +25185,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the ResetPassword resource.'
@@ -24929,13 +25407,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a CampCollaboration resource.'
@@ -25146,13 +25624,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the CampCollaboration resource.'
@@ -25249,13 +25727,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Send the invitation email for this CampCollaboration again. Only possible, if the status is already invited.'
@@ -25267,6 +25745,18 @@ paths:
       description: 'Retrieves the collection of Camp resources.'
       operationId: api_camps_get_collection
       parameters:
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: campCollaborator
+          required: false
+          schema:
+            type: string
+          style: form
         -
           allowEmptyValue: false
           allowReserved: false
@@ -25423,13 +25913,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a Camp resource.'
@@ -26166,13 +26656,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the Camp resource.'
@@ -26327,13 +26817,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a Category resource.'
@@ -26544,13 +27034,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the Category resource.'
@@ -26757,13 +27247,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a ChecklistItem resource.'
@@ -26974,13 +27464,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the ChecklistItem resource.'
@@ -27161,13 +27651,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a Checklist resource.'
@@ -27517,13 +28007,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the Checklist resource.'
@@ -27704,13 +28194,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a Comment resource.'
@@ -28042,13 +28532,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a ChecklistNode resource.'
@@ -28259,13 +28749,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the ChecklistNode resource.'
@@ -28482,13 +28972,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a ColumnLayout resource.'
@@ -28699,13 +29189,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the ColumnLayout resource.'
@@ -28922,13 +29412,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a MaterialNode resource.'
@@ -29139,13 +29629,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the MaterialNode resource.'
@@ -29362,13 +29852,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a MultiSelect resource.'
@@ -29579,13 +30069,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the MultiSelect resource.'
@@ -29802,13 +30292,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a ResponsiveLayout resource.'
@@ -30019,13 +30509,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the ResponsiveLayout resource.'
@@ -30242,13 +30732,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a SingleText resource.'
@@ -30459,13 +30949,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the SingleText resource.'
@@ -30682,13 +31172,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a Storyboard resource.'
@@ -30899,13 +31389,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the Storyboard resource.'
@@ -31390,13 +31880,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a DayResponsible resource.'
@@ -31901,13 +32391,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Accept an Invitation.'
@@ -32044,13 +32534,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Reject an Invitation.'
@@ -32269,13 +32759,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a MaterialItem resource.'
@@ -32486,13 +32976,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the MaterialItem resource.'
@@ -32647,13 +33137,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a MaterialList resource.'
@@ -32864,13 +33354,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the MaterialList resource.'
@@ -32890,6 +33380,18 @@ paths:
           explode: false
           in: query
           name: camp
+          required: false
+          schema:
+            type: string
+          style: form
+        -
+          allowEmptyValue: false
+          allowReserved: false
+          deprecated: false
+          description: ''
+          explode: false
+          in: query
+          name: campCollaborator
           required: false
           schema:
             type: string
@@ -33025,13 +33527,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a Period resource.'
@@ -33242,13 +33744,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the Period resource.'
@@ -33808,13 +34310,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Accept a personal invitation.'
@@ -33898,13 +34400,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Reject a personal invitation.'
@@ -34180,13 +34682,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the Profile resource.'
@@ -34463,13 +34965,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a ScheduleEntry resource.'
@@ -34680,18 +35182,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the ScheduleEntry resource.'
       tags:
         - ScheduleEntry
+  /token/refresh:
+    post:
+      operationId: postRefreshToken
+      responses:
+        204:
+          description: 'Get a refreshed JWT token split across the two cookies example_com_jwt_hp and example_com_jwt_s. Also returns a new refresh token example_com_refresh_token.'
+      summary: 'Refresh token.'
+      tags:
+        - 'JWT Refresh'
+    ref: 'JWT Token Refresh'
   /users:
     get:
       deprecated: false
@@ -34828,13 +35340,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Creates a User resource.'
@@ -35045,13 +35557,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the User resource.'
@@ -35135,13 +35647,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation.jsonld-jsonld'
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ConstraintViolation-json'
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Updates the User resource.'

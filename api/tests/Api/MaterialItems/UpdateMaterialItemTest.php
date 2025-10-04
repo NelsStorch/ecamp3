@@ -145,6 +145,51 @@ class UpdateMaterialItemTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testPatchMaterialItemInSharedCampIsDeniedForUnrelatedUser() {
+        $materialItem = static::getFixture('materialItem1period1campShared');
+        static::createClientWithCredentials()->request('PATCH', '/material_items/'.$materialItem->getId(), ['json' => [
+            'materialNode' => null,
+            'article' => 'Mehl',
+            'quantity' => 1500,
+            'unit' => 'g',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchMaterialItemInSharedCampIsDeniedForInactiveUser() {
+        $materialItem = static::getFixture('materialItem1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('PATCH', '/material_items/'.$materialItem->getId(), ['json' => [
+            'materialNode' => null,
+            'article' => 'Mehl',
+            'quantity' => 1500,
+            'unit' => 'g',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testPatchMaterialItemInSharedCampIsDeniedForInvitedUser() {
+        $materialItem = static::getFixture('materialItem1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('PATCH', '/material_items/'.$materialItem->getId(), ['json' => [
+            'materialNode' => null,
+            'article' => 'Mehl',
+            'quantity' => 1500,
+            'unit' => 'g',
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testPatchMaterialItemValidatesMissingMaterialList() {
         $materialItem = static::getFixture('materialItem1');
         static::createClientWithCredentials()->request('PATCH', '/material_items/'.$materialItem->getId(), ['json' => [

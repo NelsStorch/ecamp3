@@ -7,7 +7,7 @@ use App\Tests\Api\ECampApiTestCase;
 /**
  * @internal
  */
-class ListChecklistTest extends ECampApiTestCase {
+class ListChecklistsTest extends ECampApiTestCase {
     public function testListChecklistsIsDeniedForAnonymousUser() {
         static::createBasicClient()->request('GET', '/checklists');
         $this->assertResponseStatusCodeSame(401);
@@ -24,7 +24,7 @@ class ListChecklistTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/checklists');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 5,
+            'totalItems' => 6,
             '_links' => [
                 'items' => [],
             ],
@@ -38,6 +38,7 @@ class ListChecklistTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('checklist2WithNoItems')],
             ['href' => $this->getIriFor('checklist1camp2')],
             ['href' => $this->getIriFor('checklist1campPrototype')],
+            ['href' => $this->getIriFor('checklist1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -93,6 +94,46 @@ class ListChecklistTest extends ECampApiTestCase {
         $this->assertJsonContains(['totalItems' => 1]);
         $this->assertEqualsCanonicalizing([
             ['href' => $this->getIriFor('checklist1campPrototype')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListChecklistsFilteredBySharedCampIsAllowedForUnrelatedUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/checklists?camp=%2Fcamps%2F'.$camp->getId());
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('checklist1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListChecklistsFilteredBySharedCampIsAllowedForInactiveUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/checklists?camp=%2Fcamps%2F'.$camp->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('checklist1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListChecklistsFilteredBySharedCampIsAllowedForInvitedUser() {
+        $camp = static::getFixture('campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/checklists?camp=%2Fcamps%2F'.$camp->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->assertJsonContains(['totalItems' => 1]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('checklist1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 

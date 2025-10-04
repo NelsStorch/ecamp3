@@ -29,6 +29,7 @@ class ReadCommentTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'id' => $comment->getId(),
             'textHtml' => $comment->textHtml,
+            'createTime' => $comment->getCreateTime()->format(\DateTime::W3C),
         ]);
     }
 
@@ -42,6 +43,7 @@ class ReadCommentTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'id' => $comment->getId(),
             'textHtml' => $comment->textHtml,
+            'createTime' => $comment->getCreateTime()->format(\DateTime::W3C),
         ]);
     }
 
@@ -55,6 +57,58 @@ class ReadCommentTest extends ECampApiTestCase {
         $this->assertJsonContains([
             'title' => 'An error occurred',
             'detail' => 'Not Found',
+        ]);
+    }
+
+    public function testGetSingleCommentInCampPrototypeIsAllowedForUnrelatedUser() {
+        $comment = static::getFixture('comment1campPrototype');
+        static::createClientWithCredentials()
+            ->request('GET', '/comments/'.$comment->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $comment->getId(),
+            'textHtml' => $comment->textHtml,
+        ]);
+    }
+
+    public function testGetSingleCommentInSharedCampIsAllowedForUnrelatedUser() {
+        $comment = static::getFixture('comment1campShared');
+        static::createClientWithCredentials()
+            ->request('GET', '/comments/'.$comment->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $comment->getId(),
+            'textHtml' => $comment->textHtml,
+        ]);
+    }
+
+    public function testGetSingleCommentInSharedCampIsAllowedForInactiveUser() {
+        $comment = static::getFixture('comment1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/comments/'.$comment->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $comment->getId(),
+            'textHtml' => $comment->textHtml,
+        ]);
+    }
+
+    public function testGetSingleCommentInSharedCampIsAllowedForInvitedUser() {
+        $comment = static::getFixture('comment1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/comments/'.$comment->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $comment->getId(),
+            'textHtml' => $comment->textHtml,
         ]);
     }
 }

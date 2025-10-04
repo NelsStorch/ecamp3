@@ -24,3 +24,9 @@ App\Entity\Activity:
     location: <word()>
     rootContentNode: '@columnLayout1campPrototype'
     category: '@category1campPrototype'
+  activity1campShared:
+    camp: '@campShared'
+    title: <word()>
+    location: <word()>
+    rootContentNode: '@columnLayout1campShared'
+    category: '@category1campShared'

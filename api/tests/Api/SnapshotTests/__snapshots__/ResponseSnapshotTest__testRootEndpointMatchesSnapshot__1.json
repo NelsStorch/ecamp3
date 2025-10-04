@@ -17,7 +17,7 @@
             "templated": true
         },
         "camps": {
-            "href": "/camps{/id}{?isPrototype,isPrototype[]}",
+            "href": "/camps{/id}{?isPrototype,isPrototype[],campCollaborator}",
             "templated": true
         },
         "categories": {
@@ -100,7 +100,7 @@
             "templated": true
         },
         "periods": {
-            "href": "/periods{/id}{?camp,camp[]}",
+            "href": "/periods{/id}{?camp,camp[],campCollaborator}",
             "templated": true
         },
         "personalInvitations": {
@@ -110,6 +110,9 @@
         "profiles": {
             "href": "/profiles{/id}{?user.collaborations.camp,user.collaborations.camp[],user,user[]}",
             "templated": true
+        },
+        "refreshToken": {
+            "href": "/token/refresh"
         },
         "resendActivation": {
             "href": "/auth/resend_activation",

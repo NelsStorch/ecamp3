@@ -8,16 +8,13 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
 use App\Entity\Activity;
 use App\Entity\ContentNode;
-use App\Repository\FiltersByCampCollaboration;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
+use Symfony\Component\TypeInfo\Type;
 
 final class ContentNodeCampFilter extends AbstractFilter {
-    use FiltersByCampCollaboration;
-
     public const CAMP_QUERY_NAME = 'camp';
 
     public function __construct(
@@ -34,7 +31,7 @@ final class ContentNodeCampFilter extends AbstractFilter {
     public function getDescription(string $resourceClass): array {
         return ['camp' => [
             'property' => self::CAMP_QUERY_NAME,
-            'type' => Type::BUILTIN_TYPE_STRING,
+            'type' => Type::string()->__toString(),
             'required' => false,
         ]];
     }

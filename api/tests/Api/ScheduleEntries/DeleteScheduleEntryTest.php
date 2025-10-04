@@ -85,6 +85,43 @@ class DeleteScheduleEntryTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testDeleteScheduleEntryFromSharedCampIsDeniedForUnrelatedUser() {
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/schedule_entries/'.$scheduleEntry->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteScheduleEntryFromSharedCampIsDeniedForInactiveUser() {
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('DELETE', '/schedule_entries/'.$scheduleEntry->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteScheduleEntryFromSharedCampIsDeniedForInvitedUser() {
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('DELETE', '/schedule_entries/'.$scheduleEntry->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testDeleteScheduleEntryIsDeniedForLastScheduleEntryOfActivity() {
         $scheduleEntry = static::getFixture('scheduleEntry1period1camp1');
         static::createClientWithCredentials()->request('DELETE', '/schedule_entries/'.$scheduleEntry->getId());

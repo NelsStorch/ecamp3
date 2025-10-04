@@ -24,7 +24,10 @@
               {{ title }}
             </v-toolbar-title>
             <v-btn
-              v-if="$vuetify.breakpoint.smAndUp && cancelAction != null"
+              v-if="
+                (closeVisibleOnMobile || $vuetify.breakpoint.smAndUp) &&
+                cancelAction != null
+              "
               icon
               class="ml-auto"
               :title="$tc('global.button.cancel')"

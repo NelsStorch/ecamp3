@@ -2,6 +2,7 @@
 
 namespace App\Tests\Api\ContentNodes;
 
+use App\Entity\BaseEntity;
 use App\Entity\ContentNode;
 use App\Tests\Api\ECampApiTestCase;
 
@@ -13,6 +14,9 @@ use App\Tests\Api\ECampApiTestCase;
  * @internal
  */
 abstract class DeleteContentNodeTestCase extends ECampApiTestCase {
+    protected BaseEntity $campPrototypeEntity;
+    protected BaseEntity $sharedCampEntity;
+
     public function setUp(): void {
         parent::setUp();
     }
@@ -62,5 +66,29 @@ abstract class DeleteContentNodeTestCase extends ECampApiTestCase {
         $this->delete(user: static::$fixtures['user1manager']);
         $this->assertResponseStatusCodeSame(204);
         $this->assertEntityWasRemoved();
+    }
+
+    public function testDeleteInCampPrototypeIsDeniedForUnrelatedUser() {
+        $this->delete($this->campPrototypeEntity);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertEntityStillExists();
+    }
+
+    public function testDeleteInSharedCampIsDeniedForUnrelatedUser() {
+        $this->delete($this->sharedCampEntity);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertEntityStillExists();
+    }
+
+    public function testDeleteInSharedCampIsDeniedForInactiveUser() {
+        $this->delete($this->sharedCampEntity, user: static::$fixtures['user5inactive']);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertEntityStillExists();
+    }
+
+    public function testDeleteInSharedCampIsDeniedForInvitedUser() {
+        $this->delete($this->sharedCampEntity, user: static::$fixtures['user6invited']);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertEntityStillExists();
     }
 }

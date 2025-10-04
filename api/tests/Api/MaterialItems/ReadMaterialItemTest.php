@@ -121,4 +121,62 @@ class ReadMaterialItemTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleMaterialItemInSharedCampIsAllowedForUnrelatedUser() {
+        /** @var MaterialItem $materialItem */
+        $materialItem = static::getFixture('materialItem1period1campShared');
+        static::createClientWithCredentials()->request('GET', '/material_items/'.$materialItem->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $materialItem->getId(),
+            'quantity' => (int) $materialItem->quantity,
+            'unit' => $materialItem->unit,
+            'article' => $materialItem->article,
+            '_links' => [
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'materialList' => ['href' => $this->getIriFor('materialList1campShared')],
+                'materialNode' => null,
+            ],
+        ]);
+    }
+
+    public function testGetSingleMaterialItemInSharedCampIsAllowedForInactiveUser() {
+        /** @var MaterialItem $materialItem */
+        $materialItem = static::getFixture('materialItem1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/material_items/'.$materialItem->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $materialItem->getId(),
+            'quantity' => (int) $materialItem->quantity,
+            'unit' => $materialItem->unit,
+            'article' => $materialItem->article,
+            '_links' => [
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'materialList' => ['href' => $this->getIriFor('materialList1campShared')],
+                'materialNode' => null,
+            ],
+        ]);
+    }
+
+    public function testGetSingleMaterialItemInSharedCampIsAllowedForInvitedUser() {
+        /** @var MaterialItem $materialItem */
+        $materialItem = static::getFixture('materialItem1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/material_items/'.$materialItem->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $materialItem->getId(),
+            'quantity' => (int) $materialItem->quantity,
+            'unit' => $materialItem->unit,
+            'article' => $materialItem->article,
+            '_links' => [
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'materialList' => ['href' => $this->getIriFor('materialList1campShared')],
+                'materialNode' => null,
+            ],
+        ]);
+    }
 }

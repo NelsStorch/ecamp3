@@ -14,6 +14,7 @@
         class="ma-4"
         :loading-endpoints="true"
         :camp="camp"
+        :hide-self-filter="isOutsider"
         hide-day-filter
         :periods="periods"
       />
@@ -25,6 +26,7 @@
         :loading-endpoints="loadingEndpoints"
         :camp="camp"
         :periods="periods"
+        :hide-self-filter="isOutsider"
         hide-day-filter
         :filter-fn="filterFn"
       />
@@ -153,6 +155,7 @@ import AvatarRow from '@/components/generic/AvatarRow.vue'
 import ScheduleEntryFilters from '@/components/program/ScheduleEntryFilters.vue'
 import dayjs from '@/common/helpers/dayjs.js'
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
+import { campRoleMixin } from '../../mixins/campRoleMixin.js'
 
 export default {
   name: 'Dashboard',
@@ -162,7 +165,7 @@ export default {
     ActivityRow,
     ContentCard,
   },
-  mixins: [dateHelperUTCFormatted],
+  mixins: [dateHelperUTCFormatted, campRoleMixin],
   props: {
     camp: { type: Object, required: true },
   },
@@ -270,8 +273,9 @@ export default {
 
     this.camp.periods()._meta.load.then(({ allItems }) => {
       const collection = allItems.map((entry) => entry._meta.self)
-      this.filter.period =
-        this.filter.period?.filter((value) => collection.includes(value)) ?? null
+      if (!collection.includes(this.filter.period)) {
+        this.filter.period = null
+      }
       this.loadingEndpoints.periods = false
     })
   },

@@ -75,8 +75,45 @@ class DeleteChecklistItemTest extends ECampApiTestCase {
     }
 
     public function testDeleteChecklistItemFromCampPrototypeIsDeniedForUnrelatedUser() {
-        $checklistItem = static::getFixture('checklistItemPrototype_1_1');
+        $checklistItem = static::getFixture('checklistItemCampPrototype_1_1');
         static::createClientWithCredentials()->request('DELETE', '/checklist_items/'.$checklistItem->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteChecklistItemFromSharedCampIsDeniedForUnrelatedUser() {
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials()->request('DELETE', '/checklist_items/'.$checklistItem->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteChecklistItemFromSharedCampIsDeniedForInactiveUser() {
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('DELETE', '/checklist_items/'.$checklistItem->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteChecklistItemFromSharedCampIsDeniedForInvitedUser() {
+        $checklistItem = static::getFixture('checklistItemCampShared_1_1');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('DELETE', '/checklist_items/'.$checklistItem->getId())
+        ;
 
         $this->assertResponseStatusCodeSame(403);
         $this->assertJsonContains([

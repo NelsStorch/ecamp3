@@ -107,6 +107,45 @@ class CreateMaterialItemTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testCreateMaterialItemInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/material_items', ['json' => $this->getExampleWritePayload([
+            'materialList' => $this->getIriFor('materialList1campShared'),
+            'period' => $this->getIriFor('period1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateMaterialItemInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/material_items', ['json' => $this->getExampleWritePayload([
+            'materialList' => $this->getIriFor('materialList1campShared'),
+            'period' => $this->getIriFor('period1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateMaterialItemInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/material_items', ['json' => $this->getExampleWritePayload([
+            'materialList' => $this->getIriFor('materialList1campShared'),
+            'period' => $this->getIriFor('period1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testCreateMaterialItemWithMaterialNodeInsteadOfPeriodIsPossible() {
         static::createClientWithCredentials()->request('POST', '/material_items', ['json' => $this->getExampleWritePayload([
             'materialNode' => $this->getIriFor('materialNode1'),

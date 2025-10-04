@@ -1,5 +1,9 @@
 <template>
-  <div class="e-checklist-dragarea" :class="{ dragging }">
+  <div
+    v-if="!disabled || sortedItems.length"
+    class="e-checklist-dragarea"
+    :class="{ dragging }"
+  >
     <draggable
       class="e-checklist-dragarea--inner"
       :list="sortedItems"
@@ -20,12 +24,13 @@
         :checklist="checklist"
         :item="item"
         :item-position="i"
+        :disabled="disabled"
         @drag-start="dragStart"
         @drag-end="dragEnd"
       />
     </draggable>
     <ChecklistItemCreate
-      v-if="!(parentDragging || dragging)"
+      v-if="!disabled && !(parentDragging || dragging)"
       class="add-item"
       :checklist="checklist"
       :parent="parent?._meta.self"

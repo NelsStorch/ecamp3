@@ -32,7 +32,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)'
         ),
         new Patch(
             validationContext: ['groups' => MaterialItemUpdateGroupSequence::class],
@@ -141,6 +143,14 @@ class MaterialItem extends BaseEntity implements BelongsToCampInterface, CopyFro
     #[Groups(['read', 'write'])]
     #[ORM\Column(type: 'text', nullable: true)]
     public ?string $unit = null;
+
+    /**
+     * Whether the item has been prepared and is ready to be brought to the camp.
+     */
+    #[ApiProperty(example: true)]
+    #[Groups(['read', 'write'])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    public bool $done = false;
 
     public function __construct() {
         parent::__construct();

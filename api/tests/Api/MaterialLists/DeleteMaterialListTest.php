@@ -85,6 +85,43 @@ class DeleteMaterialListTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testDeleteMaterialListFromSharedCampIsDeniedForUnrelatedUser() {
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/material_lists/'.$materialList->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteMaterialListFromSharedCampIsDeniedForInactiveUser() {
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('DELETE', '/material_lists/'.$materialList->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteMaterialListFromSharedCampIsDeniedForInvitedUser() {
+        $materialList = static::getFixture('materialList1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('DELETE', '/material_lists/'.$materialList->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testDeleteMaterialListValidatesThatListHasNoItems() {
         $materialList = static::getFixture('materialList1');
         static::createClientWithCredentials()->request('DELETE', '/material_lists/'.$materialList->getId());

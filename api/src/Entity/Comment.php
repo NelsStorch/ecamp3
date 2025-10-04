@@ -26,7 +26,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or object.author === user',
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object) or
+                       object.author === user',
         ),
         new Delete(
             security: 'object.author === user',
@@ -45,7 +48,9 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'activityId' => new Link(
                     toProperty: 'activity',
                     fromClass: Activity::class,
-                    security: 'is_granted("CAMP_COLLABORATOR", activity)',
+                    security: 'is_granted("CAMP_COLLABORATOR", activity) or
+                               is_granted("CAMP_IS_SHARED", activity) or
+                               is_granted("CAMP_IS_PROTOTYPE", activity)',
                 ),
             ],
             security: 'is_fully_authenticated()',
@@ -53,6 +58,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     ],
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    order: ['createTime' => 'ASC'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp', 'activity'])]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -119,5 +125,11 @@ class Comment extends BaseEntity implements BelongsToCampInterface {
 
     public function getCamp(): ?Camp {
         return $this->camp;
+    }
+
+    #[ApiProperty(writable: false)]
+    #[Groups(['read'])]
+    public function getCreateTime(): \DateTime {
+        return $this->createTime;
     }
 }

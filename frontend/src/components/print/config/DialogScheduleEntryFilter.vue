@@ -27,6 +27,7 @@
       :camp="camp"
       :filter-fn="filterFn"
       :loading-endpoints="{}"
+      :hide-self-filter="isOutsider"
       :hide-period-filter="hidePeriodFilter"
       :hide-day-filter="hideDayFilter"
     />
@@ -38,10 +39,12 @@
 <script>
 import ScheduleEntryFilters from '../../program/ScheduleEntryFilters.vue'
 import DetailPane from '../../generic/DetailPane.vue'
+import { campRoleMixin } from '../../../mixins/campRoleMixin.js'
 
 export default {
   name: 'DialogScheduleEntryFilter',
   components: { DetailPane, ScheduleEntryFilters },
+  mixins: [campRoleMixin],
   props: {
     camp: { type: Object, required: true },
     filterFn: { type: Function, required: true },

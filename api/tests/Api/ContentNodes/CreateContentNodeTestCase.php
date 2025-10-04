@@ -91,6 +91,34 @@ abstract class CreateContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContains($this->getExampleReadPayload($newContentNode), true);
     }
 
+    public function testCreateInCampPrototypeIsDeniedForUnrelatedUser() {
+        $this->create(payload: $this->getExampleWritePayload([
+            'parent' => $this->getIriFor(static::$fixtures['columnLayout1campPrototype']),
+        ]), user: static::$fixtures['user1manager']);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function testCreateInSharedCampIsDeniedForUnrelatedUser() {
+        $this->create(payload: $this->getExampleWritePayload([
+            'parent' => $this->getIriFor(static::$fixtures['columnLayout1campShared']),
+        ]), user: static::$fixtures['user1manager']);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function testCreateInSharedCampIsDeniedForInactiveUser() {
+        $this->create(payload: $this->getExampleWritePayload([
+            'parent' => $this->getIriFor(static::$fixtures['columnLayout1campShared']),
+        ]), user: static::$fixtures['user5inactive']);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    public function testCreateInSharedCampIsDeniedForInvitedUser() {
+        $this->create(payload: $this->getExampleWritePayload([
+            'parent' => $this->getIriFor(static::$fixtures['columnLayout1campShared']),
+        ]), user: static::$fixtures['user6invited']);
+        $this->assertResponseStatusCodeSame(403);
+    }
+
     #[DataProvider('getContentNodesWhichCannotHaveChildren')]
     public function testCreateRejectsParentsWhichDontSupportChildren(string $idOfParentFixture) {
         $this->defaultParent = static::getFixture($idOfParentFixture);
@@ -101,7 +129,7 @@ abstract class CreateContentNodeTestCase extends ECampApiTestCase {
             'violations' => [
                 0 => [
                     'propertyPath' => 'parent',
-                    'message' => 'This parent does not support children, only content_nodes of type column_layout support children.',
+                    'message' => 'This parent does not support children, only content_nodes of type column_layout or responsive_layout support children.',
                 ],
             ],
         ]);

@@ -19,6 +19,9 @@ App\Entity\ChecklistItem:
   checklistItemUnrelated_1_1:
     checklist: '@checklist1campUnrelated'
     text: 'CampUnrelated_List1_Item1'
-  checklistItemPrototype_1_1:
+  checklistItemCampPrototype_1_1:
     checklist: '@checklist1campPrototype'
     text: 'CampPrototype_List1_Item1'
+  checklistItemCampShared_1_1:
+    checklist: '@checklist1campShared'
+    text: 'CampShared_List1_Item1'

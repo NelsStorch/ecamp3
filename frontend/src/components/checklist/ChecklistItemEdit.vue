@@ -77,36 +77,12 @@ export default {
     return {
       entityProperties: ['checklist', 'text'],
       entityUri: '',
+      activitiesWithChecklistItem: [],
     }
   },
   computed: {
     camp() {
       return this.checklist.camp()
-    },
-    activitiesWithChecklistItem() {
-      const activities = this.camp.activities().items
-      const allChecklistNodes = this.api
-        .get()
-        .checklistNodes({ camp: this.camp._meta.self }).items
-
-      const checklistNodes = allChecklistNodes.filter((cn) =>
-        cn.checklistItems().items.some((ci) => ci.id === this.checklistItem.id)
-      )
-
-      return sortBy(
-        activities.filter((a) =>
-          checklistNodes.some((cn) => cn.root().id === a.rootContentNode().id)
-        ),
-        (activity) =>
-          activity
-            .scheduleEntries()
-            .items.map(
-              (s) =>
-                `${s.dayNumber}`.padStart(3, '0') +
-                `${s.scheduleEntryNumber}`.padStart(3, '0')
-            )
-            .reduce((p, v) => (p < v ? p : v))
-      )
     },
   },
   watch: {
@@ -121,12 +97,57 @@ export default {
         this.clearEntityData()
       }
     },
+    checklistItem: {
+      async handler(checklistItem) {
+        await this.camp.activities()._meta.load
+        const activities = await Promise.all(
+          this.camp.activities().items.map(async (a) => ({
+            activity: a,
+            rootContentNodeUri: await a.$href('rootContentNode'),
+          }))
+        )
+
+        await this.loadData()
+
+        const checklistNodes = await Promise.all(
+          checklistItem.checklistNodes().items.map(async (cn) => ({
+            checklistNode: cn,
+            rootUri: await cn.$href('root'),
+          }))
+        )
+
+        const res = sortBy(
+          activities
+            .filter((a) =>
+              checklistNodes.some((cn) => cn.rootUri == a.rootContentNodeUri)
+            )
+            .map((a) => a.activity),
+          (activity) =>
+            activity
+              .scheduleEntries()
+              .items.map(
+                (s) =>
+                  `${s.dayNumber}`.padStart(3, '0') +
+                  `${s.scheduleEntryNumber}`.padStart(3, '0')
+              )
+              .reduce((p, v) => (p < v ? p : v))
+        )
+        this.activitiesWithChecklistItem = res
+      },
+      immediate: true,
+    },
   },
   async mounted() {
     this.api.href(this.api.get(), 'checklistItems').then((uri) => (this.entityUri = uri))
-
-    await this.api.get().checklistNodes({ camp: this.camp._meta.self })
-    await this.api.get().checklistItems({ 'checklist.camp': this.camp._meta.self })
+    this.loadData()
+  },
+  methods: {
+    async loadData() {
+      return Promise.all([
+        this.api.get().checklistNodes({ camp: this.camp._meta.self }),
+        this.api.get().checklistItems({ 'checklist.camp': this.camp._meta.self }),
+      ])
+    },
   },
 }
 </script>

@@ -61,6 +61,7 @@
                                 }
                             },
                             "article": "escaped_value",
+                            "done": "escaped_value",
                             "id": "escaped_value",
                             "quantity": "escaped_value",
                             "unit": "escaped_value"
@@ -518,6 +519,9 @@
             "href": "escaped_value"
         },
         "category": {
+            "href": "escaped_value"
+        },
+        "comments": {
             "href": "escaped_value"
         },
         "contentNodes": {

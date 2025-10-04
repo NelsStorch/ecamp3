@@ -9,7 +9,7 @@
             </v-btn>
           </template>
           <v-list class="py-0">
-            <DialogMaterialListEdit v-if="!isGuest" :material-list="materialList">
+            <DialogMaterialListEdit v-if="isContributor" :material-list="materialList">
               <template #activator="{ attrs, on }">
                 <v-list-item v-bind="attrs" v-on="on">
                   <v-list-item-icon>

@@ -64,6 +64,7 @@ class ReadActivityTest extends ECampApiTestCase {
                 'camp' => ['href' => $this->getIriFor('camp1')],
                 'scheduleEntries' => ['href' => '/schedule_entries?activity=%2Factivities%2F'.$activity->getId()],
                 'activityResponsibles' => ['href' => '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId()],
+                'comments' => ['href' => '/activities/'.$activity->getId().'/comments'],
             ],
         ]);
     }
@@ -86,6 +87,7 @@ class ReadActivityTest extends ECampApiTestCase {
                 'camp' => ['href' => $this->getIriFor('camp1')],
                 'scheduleEntries' => ['href' => '/schedule_entries?activity=%2Factivities%2F'.$activity->getId()],
                 'activityResponsibles' => ['href' => '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId()],
+                'comments' => ['href' => '/activities/'.$activity->getId().'/comments'],
             ],
         ]);
 
@@ -109,6 +111,7 @@ class ReadActivityTest extends ECampApiTestCase {
                 'camp' => ['href' => $this->getIriFor('camp1')],
                 'scheduleEntries' => ['href' => '/schedule_entries?activity=%2Factivities%2F'.$activity->getId()],
                 'activityResponsibles' => ['href' => '/activity_responsibles?activity=%2Factivities%2F'.$activity->getId()],
+                'comments' => ['href' => '/activities/'.$activity->getId().'/comments'],
             ],
         ]);
     }
@@ -126,6 +129,74 @@ class ReadActivityTest extends ECampApiTestCase {
                 'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campPrototype')],
                 'category' => ['href' => $this->getIriFor('category1campPrototype')],
                 'camp' => ['href' => $this->getIriFor('campPrototype')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials()->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForInactiveUser() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForInvitedUser() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleActivityFromSharedCampIsAllowedForManager() {
+        /** @var Activity $activity */
+        $activity = static::getFixture('activity1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user4unrelated']->getEmail()])->request('GET', '/activities/'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $activity->getId(),
+            'title' => $activity->title,
+            'location' => $activity->location,
+            '_links' => [
+                'rootContentNode' => ['href' => $this->getIriFor('columnLayout1campShared')],
+                'category' => ['href' => $this->getIriFor('category1campShared')],
+                'camp' => ['href' => $this->getIriFor('campShared')],
             ],
         ]);
     }

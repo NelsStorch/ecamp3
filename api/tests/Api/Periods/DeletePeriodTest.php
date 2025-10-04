@@ -85,6 +85,43 @@ class DeletePeriodTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testDeletePeriodFromSharedCampIsDeniedForUnrelatedUser() {
+        $period = static::getFixture('period1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/periods/'.$period->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeletePeriodFromSharedCampIsDeniedForInactiveUser() {
+        $period = static::getFixture('period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('DELETE', '/periods/'.$period->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeletePeriodFromSharedCampIsDeniedForInvitedUser() {
+        $period = static::getFixture('period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('DELETE', '/periods/'.$period->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testDeleteLastPeriodIsRejected() {
         $period = static::getFixture('period1camp2');
         static::createClientWithCredentials()

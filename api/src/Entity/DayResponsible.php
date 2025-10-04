@@ -24,7 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PROTOTYPE", object)'
         ),
         new Delete(
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
@@ -38,7 +40,9 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'dayId' => new Link(
                     toProperty: 'day',
                     fromClass: Day::class,
-                    security: 'is_granted("CAMP_COLLABORATOR", day) or is_granted("CAMP_IS_PROTOTYPE", day)'
+                    security: 'is_granted("CAMP_COLLABORATOR", day) or
+                               is_granted("CAMP_IS_SHARED", day) or
+                               is_granted("CAMP_IS_PROTOTYPE", day)'
                 ),
             ],
             extraProperties: [

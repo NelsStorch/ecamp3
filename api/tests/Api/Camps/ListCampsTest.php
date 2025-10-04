@@ -21,7 +21,7 @@ class ListCampsTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/camps');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 3,
+            'totalItems' => 4,
             '_links' => [
                 'items' => [],
             ],
@@ -33,6 +33,7 @@ class ListCampsTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('camp1')],
             ['href' => $this->getIriFor('camp2')],
             ['href' => $this->getIriFor('campPrototype')],
+            ['href' => $this->getIriFor('campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -53,10 +54,29 @@ class ListCampsTest extends ECampApiTestCase {
         ], $response->toArray()['_links']['items']);
     }
 
-    public function testListCampsDoesNotShowCampToInactiveCollaborator() {
-        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
-            ->request('GET', '/camps')
-        ;
+    public function testListCampsFilteredByCurrentUser() {
+        $user = static::$fixtures['user1manager'];
+        $response = static::createClientWithCredentials(['email' => $user->getEmail()])->request('GET', '/camps?campCollaborator=/users/'.$user->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('camp1')],
+            ['href' => $this->getIriFor('camp2')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListCampsFilteredByOtherCollaboratorIsAllowedButFiltered() {
+        $user = static::$fixtures['user1manager'];
+        $user2 = static::$fixtures['user8memberOnlyInCamp2'];
+        $response = static::createClientWithCredentials(['email' => $user2->getEmail()])->request('GET', '/camps?campCollaborator=/users/'.$user->getId());
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
             'totalItems' => 1,
@@ -68,7 +88,41 @@ class ListCampsTest extends ECampApiTestCase {
             ],
         ]);
         $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('camp2')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListCampsFilteredByUnrelatedUserIsAllowedButFiltered() {
+        $user = static::$fixtures['user1manager'];
+        $user2 = static::$fixtures['user4unrelated'];
+        static::createClientWithCredentials(['email' => $user2->getEmail()])->request('GET', '/camps?campCollaborator=/users/'.$user->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 0,
+            '_links' => [],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+    }
+
+    public function testListCampsDoesNotShowCampToInactiveCollaborator() {
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/camps')
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
             ['href' => $this->getIriFor('campPrototype')],
+            ['href' => $this->getIriFor('campShared')],
         ], $response->toArray()['_links']['items']);
     }
 }

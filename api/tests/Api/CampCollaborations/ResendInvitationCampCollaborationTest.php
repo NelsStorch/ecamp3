@@ -272,4 +272,67 @@ class ResendInvitationCampCollaborationTest extends ECampApiTestCase {
 
         $this->assertResponseStatusCodeSame(404);
     }
+
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     */
+    public function testResendInvitationInSharedCampIsDeniedForUnrelatedUser() {
+        /** @var CampCollaboration $campCollaboration */
+        $campCollaboration = static::getFixture('campCollaboration2invitedCampShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user1manager']->getEmail()])->request(
+            'PATCH',
+            '/camp_collaborations/'.$campCollaboration->getId().'/'.self::RESEND_INVITATION,
+            [
+                'json' => [],
+                'headers' => ['Content-Type' => 'application/merge-patch+json'],
+            ]
+        );
+
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     */
+    public function testResendInvitationInSharedCampIsDeniedForInactiveUser() {
+        /** @var CampCollaboration $campCollaboration */
+        $campCollaboration = static::getFixture('campCollaboration2invitedCampShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request(
+            'PATCH',
+            '/camp_collaborations/'.$campCollaboration->getId().'/'.self::RESEND_INVITATION,
+            [
+                'json' => [],
+                'headers' => ['Content-Type' => 'application/merge-patch+json'],
+            ]
+        );
+
+        $this->assertResponseStatusCodeSame(403);
+    }
+
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     */
+    public function testResendInvitationInSharedCampIsDeniedForInvitedUser() {
+        /** @var CampCollaboration $campCollaboration */
+        $campCollaboration = static::getFixture('campCollaboration4invitedCampShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request(
+            'PATCH',
+            '/camp_collaborations/'.$campCollaboration->getId().'/'.self::RESEND_INVITATION,
+            [
+                'json' => [],
+                'headers' => ['Content-Type' => 'application/merge-patch+json'],
+            ]
+        );
+
+        $this->assertResponseStatusCodeSame(403);
+    }
 }

@@ -8,17 +8,14 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
 use App\Entity\Activity;
 use App\Entity\ContentNode;
-use App\Repository\FiltersByCampCollaboration;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
+use Symfony\Component\TypeInfo\Type;
 
 final class ContentNodePeriodFilter extends AbstractFilter {
-    use FiltersByCampCollaboration;
-
     public const PERIOD_QUERY_NAME = 'period';
 
     public function __construct(
@@ -35,7 +32,7 @@ final class ContentNodePeriodFilter extends AbstractFilter {
     public function getDescription(string $resourceClass): array {
         return ['period' => [
             'property' => self::PERIOD_QUERY_NAME,
-            'type' => Type::BUILTIN_TYPE_STRING,
+            'type' => Type::string()->__toString(),
             'required' => false,
         ]];
     }

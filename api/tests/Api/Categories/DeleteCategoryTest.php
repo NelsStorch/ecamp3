@@ -85,6 +85,39 @@ class DeleteCategoryTest extends ECampApiTestCase {
         ]);
     }
 
+    public function testDeleteCategoryFromSharedCampIsDeniedForUnrelatedUser() {
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/categories/'.$category->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteCategoryFromSharedCampIsDeniedForInactiveUser() {
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('DELETE', '/categories/'.$category->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteCategoryFromSharedCampIsDeniedForInvitedUser() {
+        $category = static::getFixture('category1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('DELETE', '/categories/'.$category->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
     public function testDeleteCategoryValidatesThatCategoryHasNoActivities() {
         $category = static::getFixture('category1');
         static::createClientWithCredentials()

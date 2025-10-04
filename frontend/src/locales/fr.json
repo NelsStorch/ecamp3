@@ -58,6 +58,12 @@
       },
       "campMembers": {
         "title": "Membres"
+      },
+      "footerSharedCamp": {
+        "outsider": "Tu ne travailles pas dans ce camp :",
+        "outsiderDescription": "Tu ne peux pas modifier les données, mais tu peux consulter et copier le programme.",
+        "shared": "Le camp est ouvert au public :",
+        "sharedDescription": "Des personnes étrangères peuvent consulter et copier toutes les données du camp."
       }
     },
     "campAdmin": {
@@ -115,6 +121,21 @@
       },
       "campSettings": {
         "title": "Paramètres"
+      },
+      "campSharingSettings": {
+        "activate": "Activer le partage",
+        "deactivate": "Désactiver le partage",
+        "implications": "Si tu actives le partage, les personnes extérieures peuvent consulter et copier le programme, la liste des participants, les listes de matériel, les responsabilités et tout autre élément relatif à ce camp. Seules les personnes faisant partie de l'équipe peuvent modifier les données.",
+        "notShared": {
+          "description": " : Seules les personnes faisant partie de l'équipe peuvent consulter le programme et les données relatives à ce camp.",
+          "title": "L'autorisation n'est pas activée"
+        },
+        "shared": {
+          "description": " : Les personnes extérieures peuvent consulter et copier le programme, la liste des participants, la liste du matériel, les responsabilités et tout autre élément relatif à ce camp. Seules les personnes faisant partie de l'équipe peuvent modifier les données.",
+          "title": "le camp est ouvert au public"
+        },
+        "sharedSince": "Le {sharedSince} par {sharedBy}",
+        "title": "Partager le camp"
       },
       "createCampPeriods": {
         "add": "Ajouter une période"
@@ -541,6 +562,7 @@
       "save": "Sauvegarder",
       "saving": "En cours de sauvegarde",
       "search": "Rechercher",
+      "share": "Partager",
       "submit": "Envoyer",
       "tryagain": "Réessayer",
       "unlock": "Déverrouiller",
@@ -763,14 +785,11 @@
       "navigation": {
         "desktop": {
           "navTopbar": {
-            "admin": "Admin",
             "campIsLoading": "Le camp est en cours de chargement",
             "checklist": "Check-list",
             "material": "Matériel",
-            "print": "Imprimer",
             "program": "Programme",
-            "story": "Histoire",
-            "team": "Team"
+            "story": "Histoire"
           }
         },
         "mobile": {

@@ -197,7 +197,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
 
     private static function getContentNodeEndpointQueryCountRanges(): array {
         return [
-            '/content_nodes' => [10, 12],
+            '/content_nodes' => [13, 15],
             '/content_node/column_layouts' => [6, 6],
             '/content_node/column_layouts/item' => [9, 9],
             '/content_node/checklist_nodes' => [6, 7],
@@ -244,6 +244,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
                 '/auth/resend_activation' => false,
                 '/invitations' => false,
                 '/personal_invitations' => false,
+                '/token/refresh' => false,
                 default => true
             };
         });

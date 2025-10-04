@@ -11,8 +11,8 @@ use App\Entity\PeriodMaterialItem;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
+use Symfony\Component\TypeInfo\Type;
 
 final class MaterialItemPeriodFilter extends AbstractFilter {
     public const PERIOD_QUERY_NAME = 'period';
@@ -31,7 +31,7 @@ final class MaterialItemPeriodFilter extends AbstractFilter {
     public function getDescription(string $resourceClass): array {
         return ['period' => [
             'property' => self::PERIOD_QUERY_NAME,
-            'type' => Type::BUILTIN_TYPE_STRING,
+            'type' => Type::string()->__toString(),
             'required' => false,
         ]];
     }

@@ -1,6 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from 'vitest'
 import {
+  dateLong,
   dateRange,
+  dateShort,
+  hourLong,
+  hourShort,
   rangeLongEnd,
   rangeShort,
   timeDurationShort,
@@ -93,5 +97,17 @@ describe('dateRange', () => {
     expect(
       dateRange('2019-01-01T14:00:00.000Z', '2019-01-02T10:00:00.000Z', tcMock)
     ).toEqual('Tu 1.1. - We 01/02/2019')
+  })
+})
+
+describe.each([
+  ['dateShort', dateShort, 'Tu 1.1.'],
+  ['dateLong', dateLong, 'Tu 01/01/2019'],
+  ['hourShort', hourShort, '20:00'],
+  ['hourLong', hourLong, '20:00']])('%s', (name, func, expected) => {
+  it('should format dateTime', () => {
+    expect(
+      func('2019-01-01T20:00:00.000Z', tcMock)
+    ).toEqual(expected)
   })
 })

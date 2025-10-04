@@ -7,7 +7,7 @@ use App\Tests\Api\ECampApiTestCase;
 /**
  * @internal
  */
-class ListChecklistItemTest extends ECampApiTestCase {
+class ListChecklistItemsTest extends ECampApiTestCase {
     public function testListChecklistItemsIsDeniedForAnonymousUser() {
         static::createBasicClient()->request('GET', '/checklist_items');
         $this->assertResponseStatusCodeSame(401);
@@ -24,7 +24,7 @@ class ListChecklistItemTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/checklist_items');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 6,
+            'totalItems' => 7,
             '_links' => [
                 'items' => [],
             ],
@@ -38,7 +38,8 @@ class ListChecklistItemTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('checklistItem1_1_2_3')],
             ['href' => $this->getIriFor('checklistItem1_1_2_3_4')],
             ['href' => $this->getIriFor('checklistItem2_1_1')],
-            ['href' => $this->getIriFor('checklistItemPrototype_1_1')],
+            ['href' => $this->getIriFor('checklistItemCampPrototype_1_1')],
+            ['href' => $this->getIriFor('checklistItemCampShared_1_1')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -95,7 +96,7 @@ class ListChecklistItemTest extends ECampApiTestCase {
 
         $this->assertJsonContains(['totalItems' => 1]);
         $this->assertEqualsCanonicalizing([
-            ['href' => $this->getIriFor('checklistItemPrototype_1_1')],
+            ['href' => $this->getIriFor('checklistItemCampPrototype_1_1')],
         ], $response->toArray()['_links']['items']);
     }
 

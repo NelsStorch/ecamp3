@@ -39,3 +39,11 @@ App\Entity\MaterialItem:
     article: Lagerapotheke
     quantity: 1
     unit: null
+  materialItem1period1campShared:
+    camp: '@campShared'
+    materialList: '@materialList1campShared'
+    period: '@period1campShared'
+    materialNode: null
+    article: Umhang
+    quantity: 1
+    unit: null

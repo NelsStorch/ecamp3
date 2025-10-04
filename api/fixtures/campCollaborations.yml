@@ -77,3 +77,27 @@ App\Entity\CampCollaboration:
     camp: '@campPrototype'
     status: established
     role: manager
+  campCollaboration1campShared:
+    user: '@user4unrelated'
+    camp: '@campShared'
+    status: established
+    role: manager
+  campCollaboration2invitedCampShared:
+    user: '@user6invited'
+    camp: '@campShared'
+    inviteKey: "myInviteKeyCampShared"
+    inviteKeyHash: "sl3hC12VkIUzT89mMggYyoMmFup="
+    status: invited
+    role: manager
+  campCollaboration3inactiveCampShared:
+    user: '@user5inactive'
+    camp: '@campShared'
+    status: inactive
+    role: manager
+  campCollaboration4invitedCampShared:
+    camp: '@campShared'
+    inviteKey: "myInviteKeyCampShared"
+    inviteKeyHash: "sl3hC12VkIUzT89mMggYyoMmFuq="
+    inviteEmail: "e.mail@test.com"
+    status: invited
+    role: manager

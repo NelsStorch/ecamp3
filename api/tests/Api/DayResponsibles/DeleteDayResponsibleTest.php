@@ -84,4 +84,41 @@ class DeleteDayResponsibleTest extends ECampApiTestCase {
             'detail' => 'Access Denied.',
         ]);
     }
+
+    public function testDeleteDayResponsibleInSharedCampIsDeniedForUnrelatedUser() {
+        $dayResponsible = static::getFixture('dayResponsible1day1period1campShared');
+        static::createClientWithCredentials()->request('DELETE', '/day_responsibles/'.$dayResponsible->getId());
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteDayResponsibleInSharedCampIsDeniedForInactiveUser() {
+        $dayResponsible = static::getFixture('dayResponsible1day1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('DELETE', '/day_responsibles/'.$dayResponsible->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testDeleteDayResponsibleInSharedCampIsDeniedForInvitedUser() {
+        $dayResponsible = static::getFixture('dayResponsible1day1period1campShared');
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('DELETE', '/day_responsibles/'.$dayResponsible->getId())
+        ;
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
 }

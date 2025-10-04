@@ -142,4 +142,77 @@ class ReadScheduleEntryTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSingleScheduleEntryInSharedCampIsAllowedForUnrelatedUser() {
+        /** @var ScheduleEntry $scheduleEntry */
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+
+        static::createClientWithCredentials()->request('GET', '/schedule_entries/'.$scheduleEntry->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $scheduleEntry->getId(),
+            'left' => 0,
+            'width' => 1,
+            'dayNumber' => 1,
+            'scheduleEntryNumber' => 1,
+            'number' => '1.1',
+            'start' => '2025-06-07T11:00:00+00:00',
+            'end' => '2025-06-07T12:00:00+00:00',
+            '_links' => [
+                'activity' => ['href' => $this->getIriFor('activity1campShared')],
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'day' => ['href' => $this->getIriFor('day1period1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleScheduleEntryInSharedCampIsAllowedForInactiveUser() {
+        /** @var ScheduleEntry $scheduleEntry */
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/schedule_entries/'.$scheduleEntry->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $scheduleEntry->getId(),
+            'left' => 0,
+            'width' => 1,
+            'dayNumber' => 1,
+            'scheduleEntryNumber' => 1,
+            'number' => '1.1',
+            'start' => '2025-06-07T11:00:00+00:00',
+            'end' => '2025-06-07T12:00:00+00:00',
+            '_links' => [
+                'activity' => ['href' => $this->getIriFor('activity1campShared')],
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'day' => ['href' => $this->getIriFor('day1period1campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSingleScheduleEntryInSharedCampIsAllowedForInvitedUser() {
+        /** @var ScheduleEntry $scheduleEntry */
+        $scheduleEntry = static::getFixture('scheduleEntry1period1campShared');
+
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/schedule_entries/'.$scheduleEntry->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $scheduleEntry->getId(),
+            'left' => 0,
+            'width' => 1,
+            'dayNumber' => 1,
+            'scheduleEntryNumber' => 1,
+            'number' => '1.1',
+            'start' => '2025-06-07T11:00:00+00:00',
+            'end' => '2025-06-07T12:00:00+00:00',
+            '_links' => [
+                'activity' => ['href' => $this->getIriFor('activity1campShared')],
+                'period' => ['href' => $this->getIriFor('period1campShared')],
+                'day' => ['href' => $this->getIriFor('day1period1campShared')],
+            ],
+        ]);
+    }
 }

@@ -5,12 +5,7 @@ ecamp3 is running.
 
 ## Prerequisites
 
-You need to add the fluent helm repository:
-
-```shell
-helm repo add fluent https://fluent.github.io/helm-charts 
-helm repo update
-```
+You need the helmfile in addition to kubectl and helm.
 
 ## Provisioning of Kibana Configuration
 

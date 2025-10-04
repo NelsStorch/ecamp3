@@ -15,6 +15,8 @@ class ReadMaterialNodeTest extends ReadContentNodeTestCase {
 
         $this->endpoint = '/content_node/material_nodes';
         $this->defaultEntity = static::getFixture('materialNode1');
+        $this->campPrototypeEntity = static::getFixture('materialNodeCampPrototype');
+        $this->sharedCampEntity = static::getFixture('materialNodeCampShared');
     }
 
     public function testGetMaterialNode() {

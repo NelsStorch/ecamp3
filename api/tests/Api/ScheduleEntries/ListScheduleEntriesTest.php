@@ -25,7 +25,7 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 6,
+            'totalItems' => 8,
             '_links' => [
                 'items' => [],
             ],
@@ -40,6 +40,8 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('scheduleEntry1period1camp2')],
             ['href' => $this->getIriFor('scheduleEntry1period1campPrototype')],
             ['href' => $this->getIriFor('scheduleEntry2period1campPrototype')],
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -106,6 +108,67 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         ], $response->toArray()['_links']['items']);
     }
 
+    public function testListScheduleEntriesFilteredByPeriodInSharedCampIsAllowedForUnrelatedUser() {
+        $period = static::getFixture('period1campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?period=%2Fperiods%2F'.$period->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListScheduleEntriesFilteredByPeriodInSharedCampIsAllowedForInactiveUser() {
+        $period = static::getFixture('period1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/schedule_entries?period=%2Fperiods%2F'.$period->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListScheduleEntriesFilteredByPeriodInSharedCampIsAllowedForInvitedUser() {
+        $period = static::getFixture('period1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/schedule_entries?period=%2Fperiods%2F'.$period->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
     public function testListScheduleEntriesFilteredByActivityIsAllowedForCollaborator() {
         $activity = static::getFixture('activity1');
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?activity=%2Factivities%2F'.$activity->getId());
@@ -168,6 +231,67 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         ], $response->toArray()['_links']['items']);
     }
 
+    public function testListScheduleEntriesFilteredByActivityInSharedCampIsAllowedForUnrelatedUser() {
+        $activity = static::getFixture('activity1campShared');
+        $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?activity=%2Factivities%2F'.$activity->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListScheduleEntriesFilteredByActivityInSharedCampIsAllowedForInactiveUser() {
+        $activity = static::getFixture('activity1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/schedule_entries?activity=%2Factivities%2F'.$activity->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
+    public function testListScheduleEntriesFilteredByActivityInSharedCampIsAllowedForInvitedUser() {
+        $activity = static::getFixture('activity1campShared');
+        $response = static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/schedule_entries?activity=%2Factivities%2F'.$activity->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'totalItems' => 2,
+            '_links' => [
+                'items' => [],
+            ],
+            '_embedded' => [
+                'items' => [],
+            ],
+        ]);
+        $this->assertEqualsCanonicalizing([
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
+        ], $response->toArray()['_links']['items']);
+    }
+
     public function testListScheduleEntriesFilteredByStartBeforeIsAllowedForCollaborator() {
         /** @var ScheduleEntry $scheduleEntry */
         $scheduleEntry = static::getFixture('scheduleEntry2period1campPrototype');
@@ -213,7 +337,7 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?start[after]='.urlencode($scheduleEntry->getStart()->format(\DateTime::W3C)));
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 4,
+            'totalItems' => 6,
             '_links' => [
                 'items' => [],
             ],
@@ -226,6 +350,8 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('scheduleEntry2')],
             ['href' => $this->getIriFor('scheduleEntry1period1camp2')],
             ['href' => $this->getIriFor('scheduleEntry1period1camp1')],
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -235,7 +361,7 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?start[strictly_after]='.urlencode($scheduleEntry->getStart()->format(\DateTime::W3C)));
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 3,
+            'totalItems' => 5,
             '_links' => [
                 'items' => [],
             ],
@@ -247,6 +373,8 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('scheduleEntry1')],
             ['href' => $this->getIriFor('scheduleEntry2')],
             ['href' => $this->getIriFor('scheduleEntry1period1camp1')],
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -254,7 +382,7 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?start[after]=when-I-was-young');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 6,
+            'totalItems' => 8,
             '_links' => [
                 'items' => [],
             ],
@@ -269,6 +397,8 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('scheduleEntry1period1camp2')],
             ['href' => $this->getIriFor('scheduleEntry1period1campPrototype')],
             ['href' => $this->getIriFor('scheduleEntry2period1campPrototype')],
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -317,7 +447,7 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?end[after]='.urlencode($scheduleEntry->getEnd()->format(\DateTime::W3C)));
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 4,
+            'totalItems' => 6,
             '_links' => [
                 'items' => [],
             ],
@@ -330,6 +460,8 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('scheduleEntry2')],
             ['href' => $this->getIriFor('scheduleEntry1period1camp2')],
             ['href' => $this->getIriFor('scheduleEntry1period1camp1')],
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -339,7 +471,7 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?end[strictly_after]='.urlencode($scheduleEntry->getEnd()->format(\DateTime::W3C)));
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 3,
+            'totalItems' => 5,
             '_links' => [
                 'items' => [],
             ],
@@ -351,6 +483,8 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('scheduleEntry1')],
             ['href' => $this->getIriFor('scheduleEntry2')],
             ['href' => $this->getIriFor('scheduleEntry1period1camp1')],
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 
@@ -358,7 +492,7 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
         $response = static::createClientWithCredentials()->request('GET', '/schedule_entries?end[before]=when-I-was-young');
         $this->assertResponseStatusCodeSame(200);
         $this->assertJsonContains([
-            'totalItems' => 6,
+            'totalItems' => 8,
             '_links' => [
                 'items' => [],
             ],
@@ -373,6 +507,8 @@ class ListScheduleEntriesTest extends ECampApiTestCase {
             ['href' => $this->getIriFor('scheduleEntry1period1camp2')],
             ['href' => $this->getIriFor('scheduleEntry1period1campPrototype')],
             ['href' => $this->getIriFor('scheduleEntry2period1campPrototype')],
+            ['href' => $this->getIriFor('scheduleEntry1period1campShared')],
+            ['href' => $this->getIriFor('scheduleEntry2period1campShared')],
         ], $response->toArray()['_links']['items']);
     }
 

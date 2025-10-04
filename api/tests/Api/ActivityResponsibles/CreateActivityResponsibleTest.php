@@ -85,6 +85,46 @@ class CreateActivityResponsibleTest extends ECampApiTestCase {
     public function testCreateActivityResponsibleInCampPrototypeIsDeniedForUnrelatedUser() {
         static::createClientWithCredentials()->request('POST', '/activity_responsibles', ['json' => $this->getExampleWritePayload([
             'activity' => $this->getIriFor('activity1campPrototype'),
+            'campCollaboration' => $this->getIriFor('campCollaboration1campPrototype'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityResponsibleInSharedCampIsDeniedForUnrelatedUser() {
+        static::createClientWithCredentials()->request('POST', '/activity_responsibles', ['json' => $this->getExampleWritePayload([
+            'activity' => $this->getIriFor('activity1campShared'),
+            'campCollaboration' => $this->getIriFor('campCollaboration1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityResponsibleInSharedCampIsDeniedForInactiveUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])->request('POST', '/activity_responsibles', ['json' => $this->getExampleWritePayload([
+            'activity' => $this->getIriFor('activity1campShared'),
+            'campCollaboration' => $this->getIriFor('campCollaboration1campShared'),
+        ])]);
+
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertJsonContains([
+            'title' => 'An error occurred',
+            'detail' => 'Access Denied.',
+        ]);
+    }
+
+    public function testCreateActivityResponsibleInSharedCampIsDeniedForInvitedUser() {
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])->request('POST', '/activity_responsibles', ['json' => $this->getExampleWritePayload([
+            'activity' => $this->getIriFor('activity1campShared'),
+            'campCollaboration' => $this->getIriFor('campCollaboration1campShared'),
         ])]);
 
         $this->assertResponseStatusCodeSame(403);

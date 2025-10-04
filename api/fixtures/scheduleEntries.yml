@@ -24,3 +24,13 @@ App\Entity\ScheduleEntry:
     activity: '@activity1campPrototype'
     startOffset: 720
     endOffset: 780
+  scheduleEntry1period1campShared:
+    period: '@period1campShared'
+    activity: '@activity1campShared'
+    startOffset: 660
+    endOffset: 720
+  scheduleEntry2period1campShared:
+    period: '@period1campShared'
+    activity: '@activity1campShared'
+    startOffset: 720
+    endOffset: 780

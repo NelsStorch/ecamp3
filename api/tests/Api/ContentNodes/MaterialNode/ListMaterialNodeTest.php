@@ -21,5 +21,10 @@ class ListMaterialNodeTest extends ListContentNodeTestCase {
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('materialNodeCampUnrelated'),
         ];
+
+        $this->contentNodesPublicCamps = [
+            $this->getIriFor('materialNodeCampPrototype'),
+            $this->getIriFor('materialNodeCampShared'),
+        ];
     }
 }

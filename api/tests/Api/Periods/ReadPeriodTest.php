@@ -131,4 +131,71 @@ class ReadPeriodTest extends ECampApiTestCase {
             ],
         ]);
     }
+
+    public function testGetSinglePeriodFromSharedCampIsAllowedForUnrelatedUser() {
+        /** @var Period $period */
+        $period = static::getFixture('period1campShared');
+
+        // Precondition: no collaborations on the camp.
+        // This is to make sure a left join from camp to collaborations is used.
+        $this->assertEmpty($period->camp->collaborations);
+
+        static::createClientWithCredentials()->request('GET', '/periods/'.$period->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $period->getId(),
+            'description' => $period->description,
+            'start' => $period->start->format('Y-m-d'),
+            'end' => $period->end->format('Y-m-d'),
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSinglePeriodFromSharedCampIsAllowedForInactiveUser() {
+        /** @var Period $period */
+        $period = static::getFixture('period1campShared');
+
+        // Precondition: no collaborations on the camp.
+        // This is to make sure a left join from camp to collaborations is used.
+        $this->assertEmpty($period->camp->collaborations);
+
+        static::createClientWithCredentials(['email' => static::$fixtures['user5inactive']->getEmail()])
+            ->request('GET', '/periods/'.$period->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $period->getId(),
+            'description' => $period->description,
+            'start' => $period->start->format('Y-m-d'),
+            'end' => $period->end->format('Y-m-d'),
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
+
+    public function testGetSinglePeriodFromSharedCampIsAllowedForInvitedUser() {
+        /** @var Period $period */
+        $period = static::getFixture('period1campShared');
+
+        // Precondition: no collaborations on the camp.
+        // This is to make sure a left join from camp to collaborations is used.
+        $this->assertEmpty($period->camp->collaborations);
+
+        static::createClientWithCredentials(['email' => static::$fixtures['user6invited']->getEmail()])
+            ->request('GET', '/periods/'.$period->getId())
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            'id' => $period->getId(),
+            'description' => $period->description,
+            'start' => $period->start->format('Y-m-d'),
+            'end' => $period->end->format('Y-m-d'),
+            '_links' => [
+                'camp' => ['href' => $this->getIriFor('campShared')],
+            ],
+        ]);
+    }
 }

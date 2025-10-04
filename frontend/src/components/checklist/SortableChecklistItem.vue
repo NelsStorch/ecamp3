@@ -1,6 +1,16 @@
 <template>
-  <div class="e-sortable-checklist-item" @dragstart="gugus">
-    <ChecklistItemEdit :checklist="checklist" :checklist-item="item">
+  <div class="e-sortable-checklist-item" @dragstart="startDragging">
+    <v-list-item v-if="disabled" class="px-2 rounded min-h-0 py-1">
+      <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
+        itemPosition + 1
+      }}</v-avatar>
+      <v-list-item-content class="py-0">
+        <v-list-item-title :class="{ 'font-weight-bold': item?.parent == null }">{{
+          item.text
+        }}</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <ChecklistItemEdit v-else :checklist="checklist" :checklist-item="item">
       <template #activator="{ on }">
         <v-list-item class="px-2 rounded min-h-0 py-1 drag-and-drop-handle" v-on="on">
           <v-btn text plain icon class="my-n1 ml-n1 pointer-events-none">
@@ -27,6 +37,7 @@
       class="ml-8"
       :checklist="checklist"
       :parent="item"
+      :disabled="disabled"
       @drag-start="$emit('drag-start')"
       @drag-end="$emit('drag-end')"
     />
@@ -48,6 +59,7 @@ export default {
     itemPosition: { type: Number, required: true },
     item: { type: Object, required: true },
     checklist: { type: Object, required: true },
+    disabled: { type: Boolean, default: false },
   },
   data() {
     return {
@@ -55,7 +67,7 @@ export default {
     }
   },
   methods: {
-    gugus(event) {
+    startDragging(event) {
       event.target.classList.add('e-sortable-checklist-item--drag-preview')
 
       requestAnimationFrame(() => {
