@@ -4,7 +4,7 @@
     class="px-3 px-sm-4"
     min-width="0"
     :color="color"
-    v-on="$listeners"
+    v-bind="$attrs"
   >
     <v-icon
       v-if="!iconLast"
