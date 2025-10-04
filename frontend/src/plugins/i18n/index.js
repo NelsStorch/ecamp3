@@ -104,6 +104,7 @@ const i18n = createI18n({
   ]),
   silentTranslationWarn: true,
   silentFallbackWarn: true,
+  legacy: false,
 })
 
 Object.defineProperty(i18n, 'browserPreferredLocale', {
