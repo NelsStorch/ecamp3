@@ -138,6 +138,13 @@ class ResponseSnapshotTest extends ECampApiTestCase {
         return $withUrlAsKey;
     }
 
+    /**
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     */
     public static function getCollectionEndpointsFiltered() {
         static::bootKernel();
         $client = static::createClientWithCredentials();
