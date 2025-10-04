@@ -147,6 +147,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
         return [
             [$client, '/content_nodes?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
             [$client, '/checklist_items?checklist=/checklists/'.self::getFixtureFor('/checklists')->getId()],
+            [$client, '/material_items?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
         ];
     }
 
