@@ -1,27 +1,39 @@
 <template>
   <v-navigation-drawer
     v-if="$vuetify.display.smAndUp"
-    v-model="drawer"
-    :mini-variant.sync="mini"
+    :model-value="true"
     app
-    clipped
-    permanent
+    :order="!mini && !$vuetify.display.mdAndUp ? -1 : 0"
+    scrim
+    :permanent="!(!mini && !$vuetify.display.mdAndUp)"
     :temporary="!mini && !$vuetify.display.mdAndUp"
     :width="$vuetify.display.xl || (!mini && !$vuetify.display.mdAndUp) ? 350 : 256"
+    :rail.sync="mini"
     rail-width="40"
-    :color="!title || mini ? 'blue-grey lighten-4' : null"
+    :color="!title || mini ? 'blue-grey-lighten-4' : null"
+    @update:model-value="drawer = $event"
   >
     <v-list class="py-0">
-      <v-list-item v-if="mini" class="py-1" @click.stop="overrideExpanded = true">
+      <v-btn
+        v-if="mini"
+        variant="text"
+        slim
+        class="py-1"
+        min-width="40"
+        height="56"
+        @click.stop="overrideExpanded = true"
+      >
         <v-icon>{{ icon }}</v-icon>
-      </v-list-item>
+      </v-btn>
       <v-list-item v-else class="py-1 pr-2">
         <v-list-item-title class="text-subtitle-1 font-weight-bold">
           {{ title }}
         </v-list-item-title>
-        <v-btn icon @click.stop="overrideExpanded = false">
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
+        <template #append>
+          <v-btn icon variant="text" @click.stop="overrideExpanded = false">
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
+        </template>
       </v-list-item>
     </v-list>
     <v-divider />
