@@ -6,7 +6,7 @@
     v-bind="$attrs"
     v-on="$listeners"
   >
-    <v-icon :left="!hideLabel" size="150%">{{ icon }}</v-icon>
+    <v-icon :start="!hideLabel" size="150%" :icon="icon" />
     <span :class="{ 'd-sr-only': hideLabel }">
       <slot>{{ $t('global.button.add') }}</slot>
     </span>

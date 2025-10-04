@@ -5,7 +5,7 @@
     :aria-label="$t('global.button.back')"
     @click="$router.go(-1)"
   >
-    <v-icon :left="visibleLabel">mdi-arrow-left</v-icon>
+    <v-icon :start="visibleLabel" icon="mdi-arrow-left" />
     <template v-if="visibleLabel">
       {{ $t('global.button.back') }}
     </template>
