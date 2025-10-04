@@ -9,7 +9,7 @@
       toolbar
     >
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only />
       </template>
       <v-col>
         <v-skeleton-loader type="text" :loading="profile._meta.loading">

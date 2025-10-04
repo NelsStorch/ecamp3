@@ -7,7 +7,9 @@
     right
     rounded
     :content-class="
-      ['ec-usermenu my-4', $vuetify.display.xs && 'rounded-lg mt-2'].join(' ')
+      ['ec-usermenu py-4', !$vuetify.display.xs ? 'rounded-lg mt-2' : 'rounded-md'].join(
+        ' '
+      )
     "
     transition="slide-y-transition"
     :close-on-content-click="false"
@@ -15,7 +17,7 @@
   >
     <template #activator="{ props }">
       <v-toolbar-items v-if="!avatarOnly">
-        <v-btn right text v-bind="props" :class="[btnClasses, { 'v-btn--open': value }]">
+        <v-btn start text v-bind="props" :class="[btnClasses, { 'v-btn--open': value }]">
           <template v-if="authUser">
             <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
               <UserAvatar
@@ -38,7 +40,7 @@
       </v-toolbar-items>
       <v-btn
         v-else
-        fab
+        icon
         text
         v-bind="attrs"
         :class="[btnClasses, { 'v-btn--open': value }]"
@@ -71,11 +73,11 @@
         :to="{ name: 'profile', query: { isDetail: true } }"
         @click="open = false"
       >
-        <v-icon left>mdi-account</v-icon>
+        <v-icon start icon="mdi-account" />
         <span>{{ $t('components.navigation.userMeta.profile') }}</span>
       </v-list-item>
       <v-list-item block tag="li" exact :to="{ name: 'camps' }" @click="open = false">
-        <v-icon left>mdi-format-list-bulleted-triangle</v-icon>
+        <v-icon start icon="mdi-format-list-bulleted-triangle" />
         <span>{{ $t('components.navigation.userMeta.myCamps') }}</span>
       </v-list-item>
       <v-list-item
@@ -85,11 +87,17 @@
         :to="{ name: 'invitations' }"
         @click="open = false"
       >
-        <v-icon left>mdi-email</v-icon>
+        <v-icon start>mdi-email</v-icon>
         <span>{{ $t('components.navigation.userMeta.invitations') }}</span>
-        <v-list-item-action-text v-if="invitationCount > 0">
-          <v-badge inline bordered color="#f00" :content="invitationCount" />
-        </v-list-item-action-text>
+        <template #append>
+          <v-badge
+            v-if="invitationCount > 0"
+            inline
+            bordered
+            color="#f00"
+            :content="invitationCount"
+          />
+        </template>
       </v-list-item>
       <v-list-item
         v-if="isAdmin"
@@ -99,7 +107,7 @@
         :to="{ name: 'admin/debug' }"
         @click="open = false"
       >
-        <v-icon left>mdi-coffee</v-icon>
+        <v-icon start icon="mdi-coffee" />
         <span>{{ $t('components.navigation.userMeta.admin') }}</span>
       </v-list-item>
       <v-list-item
@@ -108,16 +116,18 @@
         :href="helpLink"
         target="_blank"
       >
-        <v-icon left>mdi-help-circle</v-icon>
+        <v-icon start icon="mdi-help-circle" />
         <span>{{ $t('global.navigation.help') }}</span>
-        <v-spacer />
-        <v-icon small right>mdi-open-in-new</v-icon>
+        <template #append>
+          <v-icon size="x-small" end icon="mdi-open-in-new" />
+        </template>
       </v-list-item>
       <v-list-item block :href="newsLink" target="_blank">
-        <v-icon left>mdi-script-text-outline</v-icon>
+        <v-icon start>mdi-script-text-outline</v-icon>
         <span>{{ $t('global.navigation.news') }}</span>
-        <v-spacer />
-        <v-icon small right>mdi-open-in-new</v-icon>
+        <template #append>
+          <v-icon size="x-small" end icon="mdi-open-in-new" />
+        </template>
       </v-list-item>
       <v-divider />
       <v-list-item block tag="li" @click="logout">
@@ -127,7 +137,7 @@
           size="18"
           class="mr-2"
         />
-        <v-icon v-else left>mdi-logout</v-icon>
+        <v-icon v-else start icon="mdi-logout" />
 
         <span>{{ $t('components.navigation.userMeta.logOut') }}</span>
       </v-list-item>

@@ -11,7 +11,7 @@
     <v-toolbar-items v-if="$vuetify.display.lgAndUp">
       <v-btn :href="helpLink" target="_blank" text>
         {{ $t('global.navigation.help') }}
-        <span class="blue-grey--text"><v-icon small right>mdi-open-in-new</v-icon></span>
+        <v-icon size="small" end color="blue-grey" icon="mdi-open-in-new" />
       </v-btn>
     </v-toolbar-items>
     <UserMeta />

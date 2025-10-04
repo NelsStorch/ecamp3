@@ -10,7 +10,7 @@
     <v-spacer />
     <v-toolbar-items>
       <v-btn :href="newsLink" target="_blank" text>
-        <v-icon left>mdi-script-text-outline</v-icon>
+        <v-icon start size="small">mdi-script-text-outline</v-icon>
         {{ $t('global.navigation.news') }}
       </v-btn>
     </v-toolbar-items>
