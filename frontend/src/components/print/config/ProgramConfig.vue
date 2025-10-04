@@ -28,7 +28,7 @@
 <script>
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
-import { repairPrintFilterConfig } from '../repairPrintConfig.js'
+import repairFilterConfig from '../../program/repairFilterConfig.js'
 
 export default {
   name: 'ProgramConfig',
@@ -93,7 +93,8 @@ export default {
       })
     }
     if (typeof config.options.dayOverview !== 'boolean') config.options.dayOverview = true
-    return repairPrintFilterConfig(config, camp, knownPeriods)
+    config.options.filter = repairFilterConfig(config, camp)
+    return config
   },
 }
 </script>

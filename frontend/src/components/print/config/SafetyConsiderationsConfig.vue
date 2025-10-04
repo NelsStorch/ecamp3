@@ -25,7 +25,7 @@ import SummaryConfig, {
   SUMMARY_CONTENTTYPES,
 } from '@/components/print/config/SummaryConfig.vue'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
-import { repairPrintFilterConfig } from '../repairPrintConfig.js'
+import repairFilterConfig from '../../program/repairFilterConfig.js'
 
 export default {
   name: 'SafetyConsiderationsConfig',
@@ -56,7 +56,8 @@ export default {
         return knownPeriods.includes(period)
       })
     }
-    return repairPrintFilterConfig(config, camp, knownPeriods)
+    config.options.filter = repairFilterConfig(config, camp)
+    return config
   },
 }
 </script>

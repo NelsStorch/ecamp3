@@ -30,7 +30,7 @@
 <script>
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
-import { repairPrintFilterConfig } from '../repairPrintConfig.js'
+import repairFilterConfig from '../../program/repairFilterConfig.js'
 
 export default {
   name: 'PicassoConfig',
@@ -111,7 +111,8 @@ export default {
     if (!['L', 'P'].includes(config.options.orientation)) {
       config.options.orientation = 'L'
     }
-    return repairPrintFilterConfig(config, camp, knownPeriods)
+    config.options.filter = repairFilterConfig(config, camp)
+    return config
   },
 }
 </script>
