@@ -68,7 +68,7 @@ export default {
   --v-icon-size-multiplier: 1;
 }
 
-:deep(.v-bottom-navigation--grow .v-bottom-navigation__content > .v-btn) {
+.v-bottom-navigation--grow :deep(.v-bottom-navigation__content > .v-btn) {
   flex-basis: auto;
   flex-grow: 0;
   flex-shrink: 1;
