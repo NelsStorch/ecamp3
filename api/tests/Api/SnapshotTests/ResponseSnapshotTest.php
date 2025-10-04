@@ -81,6 +81,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
      * @throws TransportExceptionInterface
      */
     #[DataProvider('getCollectionEndpoints')]
+    #[DataProvider('getCollectionEndpointsFiltered')]
     public function testGetCollectionMatchesStructure(Client $client, string $endpoint) {
         $response = $client->request('GET', $endpoint);
 
@@ -136,6 +137,18 @@ class ResponseSnapshotTest extends ECampApiTestCase {
         return $withUrlAsKey;
     }
 
+    public static function getCollectionEndpointsFiltered() {
+        static::bootKernel();
+        $client = static::createClientWithCredentials();
+        $client->disableReboot();
+        $response = $client->request('GET', '/');
+
+        return [
+            [$client, '/content_nodes?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/checklist_items?checklist=/checklists/'.self::getFixtureFor('/checklists')->getId()],
+        ];
+    }
+
     /**
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -146,7 +159,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
     #[DataProvider('getItemEndpoints')]
     public function testGetItemMatchesStructure(Client $client, string $endpoint) {
         /** @var BaseEntity $fixtureFor */
-        $fixtureFor = $this->getFixtureFor($endpoint);
+        $fixtureFor = self::getFixtureFor($endpoint);
 
         $itemResponse = $client->request('GET', "{$endpoint}/{$fixtureFor->getId()}");
 
@@ -164,7 +177,6 @@ class ResponseSnapshotTest extends ECampApiTestCase {
     public static function getItemEndpoints() {
         return array_filter(self::getCollectionEndpoints(), function (array $endpoint) {
             return match ($endpoint[1]) {
-                '/content_nodes' => false,
                 default => true,
             };
         });
@@ -180,7 +192,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
     #[DataProvider('getPatchEndpoints')]
     public function testPatchResponseMatchesGetItemResponse(Client $client, string $endpoint) {
         /** @var BaseEntity $fixtureFor */
-        $fixtureFor = $this->getFixtureFor($endpoint);
+        $fixtureFor = self::getFixtureFor($endpoint);
 
         $itemResponse = $client->request('GET', "{$endpoint}/{$fixtureFor->getId()}");
         assertThat($itemResponse->getStatusCode(), equalTo(200));
@@ -239,7 +251,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
     #[TestWith(['/periods', '/days'], '/periods_{campId}_days')]
     #[TestWith(['/periods', '/schedule_entries'], '/periods_{campId}_schedule_entries')]
     public function testSubResourceUrlMatchesSnapshot(string $endpoint, string $subresource) {
-        $fixture = $this->getFixtureFor($endpoint);
+        $fixture = self::getFixtureFor($endpoint);
         $uri = "{$endpoint}/{$fixture->getId()}{$subresource}";
 
         $response = static::createClientWithCredentials()->request('GET', $uri);
@@ -248,7 +260,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
         $this->assertMatchesEscapedResponseSnapshot($response);
     }
 
-    private function getFixtureFor(string $collectionEndpoint) {
+    private static function getFixtureFor(string $collectionEndpoint) {
         $fixtures = FixtureStore::getFixtures();
 
         return ReadItemFixtureMap::get($collectionEndpoint, $fixtures);
