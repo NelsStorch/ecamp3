@@ -222,9 +222,11 @@ export default {
     resetErrors() {
       this.loadingErrorMessage = null
       this.serverErrorMessage = null
+      // TODO: fix validation
+      /*
       if (this.isMounted) {
         this.$refs.validationObserver.reset()
-      }
+      }*/
     },
     onEnter() {
       if (!this.autoSave) {
@@ -239,10 +241,11 @@ export default {
       }
 
       // abort saving in case of validation errors
-      const isValid = await this.$refs.validationObserver.validate()
+      // TODO: fix validation
+      /*const isValid = await this.$refs.validationObserver.validate()
       if (!isValid) {
         return
-      }
+      }*/
 
       // reset all dirty flags and start saving
       this.resetErrors()

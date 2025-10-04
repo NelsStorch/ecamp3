@@ -3,7 +3,7 @@ Displays a field as a e-text-field + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$attrs">
+  <api-wrapper v-slot="wrapper" v-bind="$props">
     <e-text-field
       ref="textField"
       :value="wrapper.localValue"

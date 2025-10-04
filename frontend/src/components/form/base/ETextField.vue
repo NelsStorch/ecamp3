@@ -12,7 +12,7 @@
       :required="required"
       :hide-details="hideDetails"
       @blur="handleBlur"
-      @update:model-value="handleChange"
+      @update:model-value="handleUpdate"
     >
       <!-- passing through all slots -->
       <template v-for="(_, name) in $slots" #[name]="slotData">
@@ -36,6 +36,8 @@ import {
 const { t } = useI18n()
 
 const entityName = inject('entityName', null)
+
+const emit = defineEmits(['input'])
 
 const props = defineProps({
   ...formComponentProps,
@@ -66,6 +68,11 @@ const {
 } = useField(validationLabel, props.veeRules, {
   initialValue: props.modelValue,
 })
+
+const handleUpdate = (value) => {
+  handleChange(value)
+  emit('input', value)
+}
 </script>
 
 <!-- <script>
