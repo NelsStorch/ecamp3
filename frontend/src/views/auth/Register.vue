@@ -3,10 +3,10 @@
     <h1 class="display-1 text-center">{{ $t('views.auth.register.title') }}</h1>
     <!--    <validation-observer v-slot="{ handleSubmit }">-->
     <e-form name="user">
-      <v-form @submit.prevent="handleSubmit(register)">
+      <v-form <!--@submit.prevent="handleSubmit(register)" -->@submit.prevent="register">
         <e-text-field
           v-model="firstname"
-          append-icon="mdi-account-outline"
+          append-inner-icon="mdi-account-outline"
           autocomplete="given-name"
           dense
           path="firstname"
@@ -16,7 +16,7 @@
 
         <e-text-field
           v-model="surname"
-          append-icon="mdi-account-outline"
+          append-inner-icon="mdi-account-outline"
           autocomplete="family-name"
           dense
           path="surname"
@@ -26,7 +26,7 @@
 
         <e-text-field
           v-model="email"
-          append-icon="mdi-at"
+          append-inner-icon="mdi-at"
           autocomplete="username"
           dense
           path="email"
@@ -36,7 +36,7 @@
 
         <e-text-field
           v-model="pw1"
-          append-icon="mdi-lock-outline"
+          append-inner-icon="mdi-lock-outline"
           autocomplete="new-password"
           density="compact"
           loading
@@ -62,7 +62,7 @@
         <e-text-field
           v-model="pw2"
           :label="$t('views.auth.register.passwordConfirmation')"
-          append-icon="mdi-lock-outline"
+          append-inner-icon="mdi-lock-outline"
           autocomplete="new-password"
           density="compact"
           maxlength="128"
@@ -135,7 +135,7 @@
 import { load } from 'recaptcha-v3'
 import AuthContainer from '@/components/layout/AuthContainer.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
-import VueI18n from '@/plugins/i18n'
+import { componentI18n } from '@/plugins/i18n'
 // import { ValidationObserver } from 'vee-validate'
 import { passwordStrengthMixin } from '../../mixins/passwordStrengthMixin.js'
 import { parseTemplate } from 'url-template'
@@ -181,22 +181,23 @@ export default {
       }
     },
     availableLocales() {
-      return VueI18n.availableLocales.map((l) => ({
+      return componentI18n.availableLocales.map((l) => ({
         value: l,
-        text: this.$t('global.language', 1, l),
+        title: this.$t('global.language', 1, { locale: l }),
       }))
     },
     termsOfServiceLink() {
+      const currentLanguage = this.language || ''
       return (
         parseTemplate(getEnv().TERMS_OF_SERVICE_LINK_TEMPLATE || '').expand({
-          lang: this.language.substring(0, 2),
+          lang: currentLanguage.substring(0, 2),
         }) || false
       )
     },
   },
   watch: {
     language() {
-      if (VueI18n.availableLocales.includes(this.language)) {
+      if (componentI18n.availableLocales.includes(this.language)) {
         this.$store.commit('setLanguage', this.language)
       }
     },

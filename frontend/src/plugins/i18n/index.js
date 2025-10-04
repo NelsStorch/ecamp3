@@ -128,7 +128,8 @@ export default i18n
 
 /**
  * @type {{
- *   t: (key: string, ...args: any[]) => string
+ *   t: (key: string, ...args: any[]) => string,
+ *   availableLocales: string[],
  * }}
  */
 const componentI18n = i18n.global
