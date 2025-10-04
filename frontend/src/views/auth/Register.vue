@@ -1,127 +1,127 @@
 <template>
   <auth-container>
     <h1 class="display-1 text-center">{{ $t('views.auth.register.title') }}</h1>
-    <!--    <validation-observer v-slot="{ handleSubmit }">-->
-    <e-form name="user">
-      <!-- @submit.prevent="handleSubmit(register)" -->
-      <v-form @submit.prevent="register">
-        <e-text-field
-          v-model="firstname"
-          append-inner-icon="mdi-account-outline"
-          autocomplete="given-name"
-          dense
-          path="firstname"
-          type="text"
-          vee-rules="required"
-        />
 
-        <e-text-field
-          v-model="surname"
-          append-inner-icon="mdi-account-outline"
-          autocomplete="family-name"
-          dense
-          path="surname"
-          type="text"
-          vee-rules="required"
-        />
+    <VeeForm v-slot="{ handleSubmit }">
+      <e-form name="profile">
+        <v-form @submit.prevent="handleSubmit(register)">
+          <e-text-field
+            v-model="firstname"
+            append-inner-icon="mdi-account-outline"
+            autocomplete="given-name"
+            dense
+            path="firstname"
+            type="text"
+            vee-rules="required"
+          />
 
-        <e-text-field
-          v-model="email"
-          append-inner-icon="mdi-at"
-          autocomplete="username"
-          dense
-          path="email"
-          type="email"
-          vee-rules="email|required"
-        />
+          <e-text-field
+            v-model="surname"
+            append-inner-icon="mdi-account-outline"
+            autocomplete="family-name"
+            dense
+            path="surname"
+            type="text"
+            vee-rules="required"
+          />
 
-        <e-text-field
-          v-model="pw1"
-          append-inner-icon="mdi-lock-outline"
-          autocomplete="new-password"
-          density="compact"
-          loading
-          maxlength="128"
-          minlength="12"
-          passwordrules="minlength: 12; maxlength: 128;"
-          path="password"
-          type="password"
-          validate-on-blur
-          vee-rules="required|min:12|max:128"
-          @input="debouncedPasswordStrengthCheck"
-        >
-          <template #progress>
-            <v-progress-linear
-              :color="passwordStrengthColor"
-              :value="passwordStrength"
-              absolute
-              height="5"
-            />
-          </template>
-        </e-text-field>
+          <e-text-field
+            v-model="email"
+            append-inner-icon="mdi-at"
+            autocomplete="username"
+            dense
+            path="email"
+            type="email"
+            vee-rules="email|required"
+          />
 
-        <e-text-field
-          v-model="pw2"
-          :label="$t('views.auth.register.passwordConfirmation')"
-          append-inner-icon="mdi-lock-outline"
-          autocomplete="new-password"
-          density="compact"
-          maxlength="128"
-          minlength="12"
-          passwordrules="minlength: 12; maxlength: 128;"
-          path="passwordConfirmation"
-          type="password"
-          validate-on-blur
-          vee-rules="required|confirmed:password"
-        />
+          <e-text-field
+            v-model="pw1"
+            append-inner-icon="mdi-lock-outline"
+            autocomplete="new-password"
+            density="compact"
+            loading
+            maxlength="128"
+            minlength="12"
+            passwordrules="minlength: 12; maxlength: 128;"
+            path="password"
+            type="password"
+            validate-on-blur
+            vee-rules="required|min:12|max:128"
+            @input="debouncedPasswordStrengthCheck"
+          >
+            <template #loader>
+              <v-progress-linear
+                :color="passwordStrengthColor"
+                :value="passwordStrength"
+                absolute
+                height="5"
+              />
+            </template>
+          </e-text-field>
 
-        <e-select v-model="language" :items="availableLocales" dense path="language" />
+          <e-text-field
+            v-model="pw2"
+            :label="$t('views.auth.register.passwordConfirmation')"
+            append-inner-icon="mdi-lock-outline"
+            autocomplete="new-password"
+            density="compact"
+            maxlength="128"
+            minlength="12"
+            passwordrules="minlength: 12; maxlength: 128;"
+            path="passwordConfirmation"
+            type="password"
+            validate-on-blur
+            vee-rules="required"
+          />
 
-        <e-checkbox
-          v-if="termsOfServiceLink"
-          v-model="tos"
-          :label="$t('views.auth.register.acceptTermsOfService')"
-          :vee-rules="{ required: { allowFalse: false } }"
-          class="align-center"
-        >
-          <template #label>
-            <span :class="{ 'body-2': $vuetify.display.xs }" style="hyphens: auto">
-              {{ $t('views.auth.register.acceptTermsOfService') }}
-            </span>
-          </template>
-          <template #append>
-            <v-btn
-              :href="termsOfServiceLink"
-              :title="$t('global.button.open')"
-              class="px-1"
-              density="compact"
-              min-width="0"
-              tabindex="-1"
-              target="_blank"
-              text
-            >
-              <v-icon small>mdi-open-in-new</v-icon>
-            </v-btn>
-          </template>
-        </e-checkbox>
+          <e-select v-model="language" :items="availableLocales" dense path="language" />
 
-        <p class="mt-0 mb-4 text--secondary text-left">
-          <small>
-            <span style="color: #d32f2f">*</span>
-            {{ $t('views.auth.register.requiredField') }}
-          </small>
-        </p>
+          <e-checkbox
+            v-if="termsOfServiceLink"
+            v-model="tos"
+            :label="$t('views.auth.register.acceptTermsOfService')"
+            :vee-rules="{ required: { allowFalse: false } }"
+            class="align-center"
+          >
+            <template #label>
+              <span :class="{ 'body-2': $vuetify.display.xs }" style="hyphens: auto">
+                {{ $t('views.auth.register.acceptTermsOfService') }}
+              </span>
+            </template>
+            <template #append>
+              <v-btn
+                :href="termsOfServiceLink"
+                :title="$t('global.button.open')"
+                class="px-1"
+                density="compact"
+                min-width="0"
+                tabindex="-1"
+                target="_blank"
+                text
+              >
+                <v-icon small>mdi-open-in-new</v-icon>
+              </v-btn>
+            </template>
+          </e-checkbox>
 
-        <v-btn block color="primary" type="submit" x-large>
-          <v-progress-circular v-if="registering" indeterminate size="24" />
-          <v-spacer />
-          <span>{{ $t('views.auth.register.register') }}</span>
-          <v-spacer />
-          <icon-spacer />
-        </v-btn>
-      </v-form>
-    </e-form>
-    <!--    </validation-observer>-->
+          <p class="mt-0 mb-4 text--secondary text-left">
+            <small>
+              <span style="color: #d32f2f">*</span>
+              {{ $t('views.auth.register.requiredField') }}
+            </small>
+          </p>
+
+          <v-btn block color="primary" type="submit" x-large>
+            <v-progress-circular v-if="registering" indeterminate size="24" />
+            <v-spacer />
+            <span>{{ $t('views.auth.register.register') }}</span>
+            <v-spacer />
+            <icon-spacer />
+          </v-btn>
+        </v-form>
+      </e-form>
+    </VeeForm>
 
     <p class="mt-8 mb-0 text--secondary text-center">
       {{ $t('views.auth.register.alreadyHaveAnAccount') }}<br />
@@ -137,18 +137,18 @@ import { load } from 'recaptcha-v3'
 import AuthContainer from '@/components/layout/AuthContainer.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import { componentI18n } from '@/plugins/i18n'
-// import { ValidationObserver } from 'vee-validate'
 import { passwordStrengthMixin } from '../../mixins/passwordStrengthMixin.js'
 import { parseTemplate } from 'url-template'
 import { getEnv } from '@/environment.js'
 import EForm from '@/components/form/base/EForm.vue'
+import { Form as VeeForm } from 'vee-validate'
 
 export default {
   name: 'Register',
   components: {
     EForm,
     AuthContainer,
-    // ValidationObserver,
+    VeeForm,
   },
   mixins: [passwordStrengthMixin],
   data() {

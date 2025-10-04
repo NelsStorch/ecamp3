@@ -8,7 +8,7 @@ Displays a field as a e-checkbox + write access via API wrapper
   <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }" separate-buttons>
     <e-checkbox
       :value="wrapper.localValue"
-      v-bind="{ ...$props, ...$attrs }"
+      v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"

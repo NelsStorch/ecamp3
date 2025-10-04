@@ -1,42 +1,45 @@
 <template>
-  <!--  <ValidationProvider-->
-  <!--    v-slot="{ errors: veeErrors }"-->
-  <!--    :name="validationLabel"-->
-  <!--    :vid="veeId"-->
-  <!--    :rules="veeRules"-->
-  <!--    :required="required"-->
-  <!--  >-->
-  <v-checkbox
-    :id="id"
-    :class="[inputClass]"
-    :error-messages="(veeErrors ?? []).concat(errorMessages)"
-    :hide-details="hideDetails"
-    :label="labelOrEntityFieldLabel"
-    :model-value="value"
-    v-bind="$attrs"
-    @update:model-value="$emit('input', $event)"
+  <Field
+    :name="validationLabel"
+    :rules="veeRules"
+    v-slot="{ handleChange, errors: veeErrors }"
   >
-    <!-- passing through all slots -->
-    <template v-for="(_, slot) of $slots" #[slot]="slotData">
-      <slot :name="slot" v-bind="slotData || {}"></slot>
-    </template>
-  </v-checkbox>
-  <!--  </ValidationProvider>-->
+    <v-checkbox
+      :id="id"
+      :class="[inputClass]"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      :model-value="modelValue"
+      v-bind="$attrs"
+      @update:modelValue="
+        ($event) => {
+          handleChange($event)
+          $emit('input', $event)
+        }
+      "
+    >
+      <!-- passing through all slots -->
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
+      </template>
+    </v-checkbox>
+  </Field>
 </template>
 
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
-// import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 
 export default {
   name: 'ECheckbox',
   components: {
-    // ValidationProvider
+    Field,
   },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
-    value: { type: Boolean, required: false },
+    modelValue: { type: Boolean, required: false },
   },
 }
 </script>

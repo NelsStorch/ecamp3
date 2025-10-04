@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, watch } from 'vue'
 import { useField } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
 
@@ -65,6 +65,7 @@ const {
   errorMessage: veeErrors,
   handleBlur,
   handleChange,
+  setValue,
 } = useField(validationLabel, props.veeRules, {
   initialValue: props.modelValue,
 })
@@ -73,6 +74,13 @@ const handleUpdate = (value) => {
   handleChange(value)
   emit('input', value)
 }
+
+watch(
+  () => props.modelValue,
+  async (newValue, oldValue) => {
+    setValue(newValue)
+  }
+)
 </script>
 
 <!-- <script>
