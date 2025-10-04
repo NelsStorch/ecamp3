@@ -7,7 +7,7 @@
     right
     rounded
     :content-class="
-      ['ec-usermenu my-4', $vuetify.display.xsOnly && 'rounded-lg mt-2'].join(' ')
+      ['ec-usermenu my-4', $vuetify.display.xs && 'rounded-lg mt-2'].join(' ')
     "
     transition="slide-y-transition"
     :close-on-content-click="false"

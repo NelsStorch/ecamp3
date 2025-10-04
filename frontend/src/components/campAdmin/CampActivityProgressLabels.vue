@@ -9,7 +9,7 @@
           <ButtonAdd
             color="secondary"
             text
-            :hide-label="$vuetify.display.xsOnly"
+            :hide-label="$vuetify.display.xs"
             class="my-n2"
             v-bind="props"
           >

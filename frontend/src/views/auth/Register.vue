@@ -84,7 +84,7 @@
           class="align-center"
         >
           <template #label>
-            <span :class="{ 'body-2': $vuetify.display.xsOnly }" style="hyphens: auto">
+            <span :class="{ 'body-2': $vuetify.display.xs }" style="hyphens: auto">
               {{ $t('views.auth.register.acceptTermsOfService') }}
             </span>
           </template>

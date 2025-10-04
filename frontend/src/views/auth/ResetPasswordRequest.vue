@@ -18,7 +18,7 @@
     >
       <e-text-field
         v-model="email"
-        :density="$vuetify.display.xsOnly && 'compact'"
+        :density="$vuetify.display.xs && 'compact'"
         name="email"
         vee-rules="email"
         append-icon="mdi-at"

@@ -50,12 +50,12 @@ export default {
   },
   methods: {
     click() {
-      if (this.$vuetify.display.xsOnly) {
+      if (this.$vuetify.display.xs) {
         this.showTooltip = !this.showTooltip
       }
     },
     mouseenter() {
-      if (!this.$vuetify.display.xsOnly) {
+      if (!this.$vuetify.display.xs) {
         this.showTooltip = true
       }
     },

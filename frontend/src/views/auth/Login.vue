@@ -70,7 +70,7 @@
         :label="$t('views.auth.login.email')"
         name="email"
         append-inner-icon="mdi-account-outline"
-        :dense="$vuetify.display.xsOnly"
+        :dense="$vuetify.display.xs"
         type="email"
         autocomplete="username"
       />
@@ -82,7 +82,7 @@
         vee-rules="required"
         name="password"
         append-inner-icon="mdi-lock-outline"
-        :dense="$vuetify.display.xsOnly"
+        :dense="$vuetify.display.xs"
         type="password"
         autocomplete="current-password"
       />

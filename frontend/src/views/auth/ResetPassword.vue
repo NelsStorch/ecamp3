@@ -27,7 +27,7 @@
         @submit.prevent="handleSubmit(resetPassword)"
       >
         <e-text-field
-          :dense="$vuetify.display.xsOnly"
+          :dense="$vuetify.display.xs"
           :value="email"
           append-icon="mdi-at"
           autocomplete="username"
@@ -38,7 +38,7 @@
 
         <e-text-field
           v-model="password"
-          :density="$vuetify.display.xsOnly && 'compact'"
+          :density="$vuetify.display.xs && 'compact'"
           append-icon="mdi-lock-outline"
           autocomplete="new-password"
           autofocus
@@ -64,7 +64,7 @@
 
         <e-text-field
           v-model="confirmation"
-          :dense="$vuetify.display.xsOnly"
+          :dense="$vuetify.display.xs"
           :label="$t('views.auth.resetPassword.passwordConfirmation')"
           append-icon="mdi-lock-outline"
           autocomplete="new-password"

@@ -1,6 +1,6 @@
 <template>
   <IconButton
-    :hide-label="hideLabel || $vuetify.display.xsOnly"
+    :hide-label="hideLabel || $vuetify.display.xs"
     class="px-3 px-sm-4"
     color="primary"
     :icon="icon"

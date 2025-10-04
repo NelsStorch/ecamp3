@@ -327,7 +327,7 @@ export default {
       return this.period.camp()
     },
     computedIntervalHeight() {
-      return (this.intervalHeight ?? this.$vuetify.display.xsOnly)
+      return (this.intervalHeight ?? this.$vuetify.display.xs)
         ? (1.3 * (this.$vuetify.display.height - 140)) / this.intervalCount
         : 1.3 * Math.max((this.$vuetify.display.height - 204) / this.intervalCount, 32)
     },

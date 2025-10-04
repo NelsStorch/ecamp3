@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    :fullscreen="$vuetify.display.xsOnly"
+    :fullscreen="$vuetify.display.xs"
     content-class="ec-dialog-form"
     :model-value="value"
     eager
