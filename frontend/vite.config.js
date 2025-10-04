@@ -157,6 +157,16 @@ export default defineConfig(({ mode }) => ({
     ],
     preserveSymlinks: true,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['mixed-decls'],
+      },
+      sass: {
+        silenceDeprecations: ['mixed-decls'],
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     alias: [{ find: /^vue$/, replacement: 'vue/dist/vue.runtime.common.js' }],
