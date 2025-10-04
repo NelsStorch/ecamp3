@@ -1,7 +1,7 @@
 services:
   frontend:
     image: node:24.8.0
-    container_name: 'ecamp3-frontend'
+    container_name: "ecamp3-frontend"
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
@@ -24,36 +24,15 @@ services:
 
   frontend-old:
     image: node:24.8.0
+    container_name: "ecamp3-frontend-old"
     ports:
-      - '9229:9229' # jest debug
+      - "9229:9229" # jest debug
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
     volumes:
       - ./.prettierrc:/.prettierrc:delegated
       - ./frontend-old:/app:delegated
-      - ./common:/common:delegated
-      - ./pdf:/pdf:delegated
-      - ./.cache/npm:/home/node/.npm/_cacache:delegated
-      - ./.cache/npm/sentry-cli:/home/node/.npm/sentry-cli:delegated
-    environment:
-      - NODE_ENV=development
-      - NPM_CONFIG_UPDATE_NOTIFIER=false
-      - NPM_CONFIG_CACHE=/home/node/.npm
-      - CI=${CI}
-    working_dir: /app
-    command: ./docker-setup.sh
-    depends_on:
-      - pdf
-
-  frontend-prototype:
-    image: node:24.5.0
-    stdin_open: true
-    tty: true
-    user: ${USER_ID:-1000}
-    volumes:
-      - ./.prettierrc:/.prettierrc:delegated
-      - ./frontend-prototype:/app:delegated
       - ./common:/common:delegated
       - ./pdf:/pdf:delegated
       - ./.cache/npm:/home/node/.npm/_cacache:delegated
@@ -75,7 +54,7 @@ services:
       target: frankenphp_prod
       cache_from:
         - ecamp/ecamp3-dev-api
-    container_name: 'ecamp3-api'
+    container_name: "ecamp3-api"
     depends_on:
       - database
       - docker-host
@@ -89,7 +68,7 @@ services:
       DATA_MIGRATIONS_DIR: ${DATA_MIGRATIONS_DIR:-dev-data}
       DATABASE_URL: "postgresql://ecamp3:ecamp3@database:5432/ecamp3dev?serverVersion=15&charset=utf8"
       LOG_LEVEL: debug
-      ADDITIONAL_TRUSTED_HOSTS: '.*'
+      ADDITIONAL_TRUSTED_HOSTS: ".*"
       SERVER_NAME: ":3001"
     healthcheck:
       interval: 10s
@@ -97,11 +76,11 @@ services:
       retries: 3
       start_period: 30s
     extra_hosts:
-      - 'host.docker.internal:host-gateway'
+      - "host.docker.internal:host-gateway"
 
   http-cache:
     image: varnish:8.0.0
-    container_name: 'ecamp3-http-cache'
+    container_name: "ecamp3-http-cache"
     depends_on:
       - api
     volumes:
@@ -112,10 +91,10 @@ services:
       - COOKIE_PREFIX=localhost_
       - SEND_XKEY_HEADERS_DOWNSTREAM=${SEND_XKEY_HEADERS_DOWNSTREAM:-true}
       - VARNISH_HTTP_PORT=8080
-  
+
   http-cache-logs:
     image: varnish:8.0.0
-    container_name: 'ecamp3-http-cache-logs'
+    container_name: "ecamp3-http-cache-logs"
     depends_on:
       - http-cache
     volumes:
@@ -124,7 +103,7 @@ services:
 
   pdf:
     image: node:24.8.0
-    container_name: 'ecamp3-pdf'
+    container_name: "ecamp3-pdf"
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
@@ -143,7 +122,7 @@ services:
 
   print:
     image: node:24.8.0
-    container_name: 'ecamp3-print'
+    container_name: "ecamp3-print"
     user: ${USER_ID:-1000}
     volumes:
       - ./.prettierrc:/.prettierrc
@@ -165,7 +144,7 @@ services:
 
   database:
     image: postgres:15-alpine
-    container_name: 'ecamp3-database'
+    container_name: "ecamp3-database"
     environment:
       - POSTGRES_DB=ecamp3dev
       - POSTGRES_PASSWORD=ecamp3
@@ -187,7 +166,7 @@ services:
 
   pg-admin:
     image: dpage/pgadmin4
-    container_name: 'ecamp3-pg-admin'
+    container_name: "ecamp3-pg-admin"
     depends_on:
       - database
     environment:
@@ -199,21 +178,21 @@ services:
 
   mail:
     image: maildev/maildev
-    container_name: 'ecamp3-mail'
+    container_name: "ecamp3-mail"
     environment:
       - MAILDEV_BASE_PATHNAME=/mail
 
   docker-host:
     image: qoomon/docker-host
-    container_name: 'ecamp3-docker-host-forwarder'
-    cap_add: ['NET_ADMIN', 'NET_RAW']
+    container_name: "ecamp3-docker-host-forwarder"
+    cap_add: ["NET_ADMIN", "NET_RAW"]
     restart: on-failure
 
   browserless:
     image: browserless/chrome:1.61.1-puppeteer-21.9.0
-    container_name: 'ecamp3-browserless'
+    container_name: "ecamp3-browserless"
     ports:
-      - '3010:3000'
+      - "3010:3000"
     environment:
       - MAX_CONCURRENT_SESSIONS=1
       - CONNECTION_TIMEOUT=40000
@@ -226,8 +205,8 @@ services:
 
   e2e:
     image: cypress/included:15.2.0@sha256:4bc3d13bcf5964fd3bca3b6fa97520b845b286bc7aed98eeb6a68970e7981865
-    profiles: ['e2e']
-    container_name: 'ecamp3-e2e'
+    profiles: ["e2e"]
+    container_name: "ecamp3-e2e"
     environment:
       - DISPLAY
     volumes:
@@ -236,10 +215,10 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     network_mode: host
     working_dir: /e2e
-    
+
   reverse-proxy:
     image: nginx:1.29
-    container_name: 'ecamp3-reverse-proxy'
+    container_name: "ecamp3-reverse-proxy"
     volumes:
       - ./reverse-proxy-nginx.conf:/etc/nginx/nginx.conf
     depends_on:
@@ -256,8 +235,8 @@ services:
 
   translation:
     image: node:24.8.0
-    profiles: ['translation']
-    container_name: 'ecamp3-translation'
+    profiles: ["translation"]
+    container_name: "ecamp3-translation"
     volumes:
       - ./translation:/translation:delegated
       - ./common:/common:delegated
