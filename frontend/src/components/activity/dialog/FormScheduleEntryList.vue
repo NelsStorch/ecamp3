@@ -112,7 +112,7 @@ export default {
       })
     },
     deleteEntry(scheduleEntry) {
-      this.$set(scheduleEntry, 'deleted', true)
+      scheduleEntry.deleted = true
     },
   },
 }

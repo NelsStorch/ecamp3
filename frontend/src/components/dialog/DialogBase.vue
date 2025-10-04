@@ -56,10 +56,7 @@ export default {
     },
     setEntityData(data) {
       const loadingPromises = []
-
-      this.entityProperties.forEach((key) => {
-        this.$set(this.entityData, key, data[key])
-      })
+      this.entityData = data
       this.embeddedEntities.forEach((key) => {
         if (data[key]) {
           const promise =
@@ -67,7 +64,7 @@ export default {
               ? data[key]()._meta.load
               : data[key]._meta.load
           loadingPromises.push(promise)
-          promise.then((obj) => this.$set(this.entityData, key, obj._meta.self))
+          promise.then((obj) => (this.entityData[key] = obj._meta.self))
         }
       })
       this.embeddedCollections.forEach((key) => {
@@ -76,11 +73,7 @@ export default {
           data[key]()
             .$loadItems()
             .then((obj) => {
-              this.$set(
-                this.entityData,
-                key,
-                obj.items.map((entity) => entity._meta.self)
-              )
+              this.entityData[key] = obj.items.map((entity) => entity._meta.self)
             })
         }
       })

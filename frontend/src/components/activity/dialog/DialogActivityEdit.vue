@@ -66,20 +66,16 @@ export default {
         this.loadEntityData(this.activity._meta.self)
 
         const scheduleEntries = await this.scheduleEntries.$loadItems()
-        this.$set(
-          this.entityData,
-          'scheduleEntries',
-          scheduleEntries.items.map((scheduleEntry) => {
-            return {
-              period: scheduleEntry.period,
-              start: scheduleEntry.start,
-              end: scheduleEntry.end,
-              key: scheduleEntry._meta.self,
-              deleted: false,
-              self: scheduleEntry._meta.self,
-            }
-          })
-        )
+        this.entityData.scheduleEntries = scheduleEntries.items.map((scheduleEntry) => {
+          return {
+            period: scheduleEntry.period,
+            start: scheduleEntry.start,
+            end: scheduleEntry.end,
+            key: scheduleEntry._meta.self,
+            deleted: false,
+            self: scheduleEntry._meta.self,
+          }
+        })
       }
     },
   },
