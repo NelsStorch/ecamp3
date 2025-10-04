@@ -8,6 +8,7 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+@use 'sass:map';
 
 @use 'vuetify/settings' with (
   $heading-font-family: (
@@ -99,8 +100,15 @@
       'letter-spacing': 0.01em,
     ),
   ),
+  $icon-sizes: (
+    'x-small': 16px,
+    'small': 20px,
+    'default': 24px,
+    'large': 32px,
+    'x-large': 48px,
+  ),
   $button-text-letter-spacing: 0.25px,
-  $chip-icon-size-multiplier: calc(8 / 10),
+  $chip-icon-size-multiplier: 1,
   $button-text-transform: none,
   $bottom-navigation-min-width: 60px,
   $list-item-icon-margin-end: 20px,
@@ -108,5 +116,5 @@
   $card-actions-padding: 16px,
   $expansion-panel-title-padding: 16px,
   $expansion-panel-text-padding: 0 16px 16px,
-  $toolbar-title-margin: 16px,
+  $toolbar-title-margin: 16px
 );

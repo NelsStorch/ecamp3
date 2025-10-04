@@ -1,12 +1,18 @@
 <template>
   <v-menu :close-on-content-click="!multiple" :multiple="null">
     <template #activator="{ props }">
-      <v-chip :color="active ? 'primary' : null" label variant="outlined" v-bind="props">
+      <v-chip
+        :color="active ? 'primary' : null"
+        border="sm"
+        label
+        variant="flat"
+        v-bind="props"
+        append-icon="mdi-chevron-down"
+      >
         <span class="d-none d-sm-inline">{{
           labelValue ? `${label}: ${labelValue}` : label
         }}</span>
         <span class="d-sm-none">{{ labelValue || label }}</span>
-        <v-icon right>mdi-chevron-down</v-icon>
       </v-chip>
     </template>
     <v-list density="compact">
