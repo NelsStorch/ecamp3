@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\Post;
 use App\Entity\ContentNode;
 use App\Repository\SingleTextRepository;
 use App\State\ContentNode\SingleTextPersistProcessor;
+use App\State\ContentNodeCollectionProvider;
 use App\Validator\AssertJsonSchema;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -33,7 +34,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: '(is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)) and object.parent !== null'
         ),
         new GetCollection(
-            security: 'is_authenticated()'
+            security: 'is_authenticated()',
+            provider: ContentNodeCollectionProvider::class
         ),
         new Post(
             processor: SingleTextPersistProcessor::class,

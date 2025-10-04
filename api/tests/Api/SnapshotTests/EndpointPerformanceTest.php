@@ -45,7 +45,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
             }
 
             if (!str_contains($collectionEndpoint, '/content_node')) {
-                $fixtureFor = $this->getFixtureFor($collectionEndpoint);
+                $fixtureFor = self::getFixtureFor($collectionEndpoint);
                 list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor("{$collectionEndpoint}/{$fixtureFor->getId()}");
                 $responseCodes["{$collectionEndpoint}/item"] = $statusCode;
                 $numberOfQueries["{$collectionEndpoint}/item"] = $queryCount;
@@ -94,7 +94,8 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         if ('test' !== $this->getEnvironment()) {
             self::markTestSkipped(__FUNCTION__.' is only run in test environment, not in '.$this->getEnvironment());
         }
-        list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor($collectionEndpoint);
+        list($statusCode, $queryCount, $executionTimeSeconds)
+            = $this->measurePerformanceFor($collectionEndpoint.'?camp=/camps/'.self::getFixtureFor('/camps')->getId());
 
         assertThat($statusCode, equalTo(200));
 
@@ -127,7 +128,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         if ('/content_nodes' === $collectionEndpoint) {
             self::markTestSkipped("{$collectionEndpoint} does not support get item endpoint");
         }
-        $fixtureFor = $this->getFixtureFor($collectionEndpoint);
+        $fixtureFor = self::getFixtureFor($collectionEndpoint);
         list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor("{$collectionEndpoint}/{$fixtureFor->getId()}");
 
         assertThat($statusCode, equalTo(200));
@@ -198,19 +199,19 @@ class EndpointPerformanceTest extends ECampApiTestCase {
     private static function getContentNodeEndpointQueryCountRanges(): array {
         return [
             '/content_nodes' => [13, 15],
-            '/content_node/column_layouts' => [6, 6],
+            '/content_node/column_layouts' => [7, 7],
             '/content_node/column_layouts/item' => [9, 9],
             '/content_node/checklist_nodes' => [6, 7],
             '/content_node/checklist_nodes/item' => [9, 9],
             '/content_node/material_nodes' => [6, 7],
             '/content_node/material_nodes/item' => [9, 9],
-            '/content_node/multi_selects' => [6, 7],
+            '/content_node/multi_selects' => [7, 8],
             '/content_node/multi_selects/item' => [9, 9],
-            '/content_node/responsive_layouts' => [6, 6],
+            '/content_node/responsive_layouts' => [7, 7],
             '/content_node/responsive_layouts/item' => [9, 9],
-            '/content_node/single_texts' => [6, 7],
+            '/content_node/single_texts' => [7, 8],
             '/content_node/single_texts/item' => [9, 9],
-            '/content_node/storyboards' => [6, 7],
+            '/content_node/storyboards' => [7, 8],
             '/content_node/storyboards/item' => [9, 9],
         ];
     }
@@ -291,7 +292,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         ];
     }
 
-    private function getFixtureFor(string $collectionEndpoint) {
+    private static function getFixtureFor(string $collectionEndpoint) {
         $fixtures = FixtureStore::getFixtures();
 
         return ReadItemFixtureMap::get($collectionEndpoint, $fixtures);

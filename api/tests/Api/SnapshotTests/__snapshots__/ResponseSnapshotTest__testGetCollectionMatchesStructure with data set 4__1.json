@@ -3,9 +3,6 @@
         "items": [
             {
                 "_links": {
-                    "checklistItems": {
-                        "href": "escaped_value"
-                    },
                     "children": [],
                     "contentType": {
                         "href": "escaped_value"
@@ -21,7 +18,16 @@
                     }
                 },
                 "contentTypeName": "escaped_value",
-                "data": "escaped_value",
+                "data": {
+                    "options": {
+                        "key1": {
+                            "checked": "escaped_value"
+                        },
+                        "key2": {
+                            "checked": "escaped_value"
+                        }
+                    }
+                },
                 "id": "escaped_value",
                 "instanceName": "escaped_value",
                 "position": "escaped_value",
@@ -29,9 +35,6 @@
             },
             {
                 "_links": {
-                    "checklistItems": {
-                        "href": "escaped_value"
-                    },
                     "children": [],
                     "contentType": {
                         "href": "escaped_value"
@@ -47,7 +50,13 @@
                     }
                 },
                 "contentTypeName": "escaped_value",
-                "data": "escaped_value",
+                "data": {
+                    "options": {
+                        "key1": {
+                            "checked": "escaped_value"
+                        }
+                    }
+                },
                 "id": "escaped_value",
                 "instanceName": "escaped_value",
                 "position": "escaped_value",
