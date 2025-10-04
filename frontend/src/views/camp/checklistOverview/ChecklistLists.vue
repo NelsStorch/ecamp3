@@ -11,9 +11,9 @@
         <v-list-item-content>
           <v-list-item-title>{{ checklist.name }}</v-list-item-title>
         </v-list-item-content>
-        <v-list-item-icon>
+        <template v-slot:append>
           <v-icon color="blue-grey lighten-3">mdi-chevron-right</v-icon>
-        </v-list-item-icon>
+        </template>
       </v-list-item>
     </v-list>
   </content-card>
