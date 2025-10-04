@@ -10,7 +10,7 @@
     </slot>
     <slot name="after" />
   </GenericChip>
-  <GenericChip v-else v-bind="$attrs"
+  <GenericChip v-else v-bind="$attrs" color="skeleton"
     ><span class="d-sr-only">{{ $t('global.loading') }}</span
     ><span aria-hidden="true">·&#x202f;·&#x202f;·</span></GenericChip
   >
