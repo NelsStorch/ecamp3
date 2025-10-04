@@ -2,7 +2,7 @@
   <v-menu :close-on-content-click="!multiple" :multiple="null">
     <template #activator="{ props }">
       <v-chip
-        :color="active ? 'primary' : null"
+        :color="active ? 'primary' : 'surface'"
         border="sm"
         label
         variant="flat"
