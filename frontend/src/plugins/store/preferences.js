@@ -42,8 +42,8 @@ export const getters = {
 }
 
 function setPreferenceValue(state, campUri, identifier, value) {
-  if (!(campUri in state.preferences)) Vue.set(state.preferences, campUri, {})
-  app.set(state.preferences[campUri], identifier, value)
+  if (!(campUri in state.preferences)) state.preferences[campUri] = {}
+  state.preferences[campUri][identifier] = value
   window.localStorage.setItem(
     `${LOCAL_STORAGE_PREFIX}${campUri}:${identifier}`,
     JSON.stringify(value)
