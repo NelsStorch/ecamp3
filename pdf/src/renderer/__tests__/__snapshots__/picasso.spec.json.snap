@@ -8578,21 +8578,21 @@
                     {
                       "parent": [Circular],
                       "type": "TEXT_INSTANCE",
-                      "value": "ES",
+                      "value": "LS",
                     },
                   ],
                   "parent": [Circular],
                   "props": {
                     "class": "category-label",
                     "style": {
-                      "backgroundColor": "#BBBBBB",
+                      "backgroundColor": "#4DBB52",
                       "color": "#000",
                       "margin-right": "2pt",
                     },
                   },
                   "style": {
                     "alignSelf": "center",
-                    "backgroundColor": "#BBBBBB",
+                    "backgroundColor": "#4DBB52",
                     "borderRadius": "18pt",
                     "color": "#000",
                     "marginRight": "2pt",
@@ -8606,7 +8606,7 @@
                     {
                       "parent": [Circular],
                       "type": "TEXT_INSTANCE",
-                      "value": "Essen",
+                      "value": "Lagersport",
                     },
                   ],
                   "parent": [Circular],
@@ -8755,21 +8755,21 @@
                     {
                       "parent": [Circular],
                       "type": "TEXT_INSTANCE",
-                      "value": "LS",
+                      "value": "ES",
                     },
                   ],
                   "parent": [Circular],
                   "props": {
                     "class": "category-label",
                     "style": {
-                      "backgroundColor": "#4DBB52",
+                      "backgroundColor": "#BBBBBB",
                       "color": "#000",
                       "margin-right": "2pt",
                     },
                   },
                   "style": {
                     "alignSelf": "center",
-                    "backgroundColor": "#4DBB52",
+                    "backgroundColor": "#BBBBBB",
                     "borderRadius": "18pt",
                     "color": "#000",
                     "marginRight": "2pt",
@@ -8783,7 +8783,7 @@
                     {
                       "parent": [Circular],
                       "type": "TEXT_INSTANCE",
-                      "value": "Lagersport",
+                      "value": "Essen",
                     },
                   ],
                   "parent": [Circular],
