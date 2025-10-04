@@ -92,7 +92,7 @@ Displays a single scheduleEntry
         @click="layoutMode = false"
       >
         <template v-if="$vuetify.display.smAndUp">
-          <v-icon left>mdi-file-document-edit-outline</v-icon>
+          <v-icon start>mdi-file-document-edit-outline</v-icon>
           {{ $t('components.activity.scheduleEntry.backToContents') }}
         </template>
         <template v-else>{{ $t('global.button.back') }}</template>

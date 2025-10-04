@@ -16,11 +16,11 @@
           hide-slider
         >
           <v-tab :tab-value="true">
-            <v-icon left>mdi-view-compact-outline</v-icon>
+            <v-icon start>mdi-view-compact-outline</v-icon>
             {{ $t('components.category.categoryTemplate.layout') }}
           </v-tab>
           <v-tab :tab-value="false">
-            <v-icon left>mdi-text</v-icon>
+            <v-icon start>mdi-text</v-icon>
             {{ $t('components.category.categoryTemplate.contents') }}
           </v-tab>
         </v-tabs>

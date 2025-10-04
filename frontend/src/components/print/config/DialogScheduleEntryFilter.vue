@@ -17,7 +17,7 @@
         class="align-self-stretch mt-4 mb-4"
         v-bind="props"
       >
-        <v-icon left size="20">mdi-filter</v-icon>
+        <v-icon start size="20">mdi-filter</v-icon>
         <span class="flex-grow-1 text-center">{{ activatorLabel }}</span>
       </v-chip>
     </template>

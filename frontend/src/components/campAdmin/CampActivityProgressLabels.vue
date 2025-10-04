@@ -91,7 +91,7 @@
       </template>
     </v-list>
     <v-btn v-if="!disabled" text block @click="reorder = !reorder">
-      <v-icon left>{{ reorder ? 'mdi-close' : 'mdi-sort' }}</v-icon>
+      <v-icon start>{{ reorder ? 'mdi-close' : 'mdi-sort' }}</v-icon>
       {{
         reorder
           ? $t('components.campAdmin.campActivityProgressLabels.exit')

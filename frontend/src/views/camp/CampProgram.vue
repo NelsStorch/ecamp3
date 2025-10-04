@@ -21,7 +21,7 @@ Show all activity schedule entries of a single period.
             class="align-self-center mr-2"
             @click="openFilter = !openFilter"
           >
-            <v-icon left size="20">mdi-filter</v-icon>
+            <v-icon start size="20">mdi-filter</v-icon>
             {{ filteredPropertiesCount }}
           </v-chip>
         </v-toolbar-items>

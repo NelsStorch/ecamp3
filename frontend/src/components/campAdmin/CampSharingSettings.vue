@@ -53,7 +53,7 @@
                 class="v-btn--has-bg"
                 :loading="loading"
                 @click="toggleShare"
-                ><v-icon left>mdi-alert</v-icon
+                ><v-icon start>mdi-alert</v-icon
                 >{{
                   camp.isShared
                     ? $t('components.campAdmin.campSharingSettings.deactivate')
@@ -71,7 +71,7 @@
                 >
 
                 <v-btn text class="v-btn--has-bg" @click="copyCampUrlToClipboard()">
-                  <v-icon left>mdi-clipboard-check-multiple-outline</v-icon>
+                  <v-icon start>mdi-clipboard-check-multiple-outline</v-icon>
                   {{ $t('global.button.copy') }}
                 </v-btn>
               </div>

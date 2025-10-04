@@ -18,7 +18,7 @@
           :loading="isAdding"
           v-bind="props"
         >
-          <v-icon left>mdi-plus-circle-outline</v-icon>
+          <v-icon start>mdi-plus-circle-outline</v-icon>
           {{ $t('global.button.add') }}
         </v-btn>
       </template>

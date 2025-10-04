@@ -3,7 +3,7 @@
     <template #title-actions>
       <v-spacer />
       <v-btn v-if="today !== null" text @click="scrollToToday">
-        <v-icon left>mdi-calendar-today</v-icon>
+        <v-icon start>mdi-calendar-today</v-icon>
         {{ $t('views.camp.dashboard.today') }}
       </v-btn>
     </template>

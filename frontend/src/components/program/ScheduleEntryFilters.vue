@@ -136,7 +136,7 @@
       @click="resetFilter"
     >
       <span>&ZeroWidthSpace;</span>
-      <v-icon left>mdi-close</v-icon>
+      <v-icon start>mdi-close</v-icon>
       {{ $t('components.program.scheduleEntryFilters.clearFilters') }}
     </v-chip>
   </div>

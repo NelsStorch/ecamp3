@@ -167,7 +167,7 @@
             :disabled="isSaving"
             @click="$emit('previous-step')"
           >
-            <v-icon left>mdi-arrow-left</v-icon>
+            <v-icon start>mdi-arrow-left</v-icon>
             {{ $t('global.button.back') }}
           </v-btn>
           <div class="ml-auto">

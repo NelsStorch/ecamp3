@@ -13,8 +13,8 @@
           <h1 class="text-subtitle-1">
             {{ period.description }}
           </h1>
-          <v-icon v-if="value" right>mdi-menu-up</v-icon>
-          <v-icon v-else right>mdi-menu-down</v-icon>
+          <v-icon v-if="value" end>mdi-menu-up</v-icon>
+          <v-icon v-else end>mdi-menu-down</v-icon>
         </v-btn>
       </template>
       <v-list>
