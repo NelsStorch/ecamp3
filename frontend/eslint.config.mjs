@@ -13,7 +13,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 export default [
-  ...vueEslint.configs['flat/vue2-recommended'],
   ...vueEslint.configs['flat/recommended'],
   ...vueScopedCssEslint.configs['flat/recommended'],
   js.configs.recommended,
