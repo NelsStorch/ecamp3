@@ -40,7 +40,7 @@
           <caption class="text-left">
             <router-link
               :to="periodRoute(periods[uri])"
-              class="text-decoration-none text-decoration-hover-underline black--text font-weight-bold"
+              class="text-decoration-none text-decoration-hover-underline text-inherit font-weight-bold"
             >
               {{ periods[uri].description }}
             </router-link>
@@ -335,12 +335,12 @@ export default {
   align-items: center;
   justify-content: space-between;
   gap: 0 0.5rem;
-  color: #5c6061;
-  background: #eceff1;
+  color: rgba(var(--v-theme-surface-variant), var(--v-high-emphasis-opacity));
+  background: rgba(var(--v-theme-surface-light), var(--v-high-emphasis-opacity));
   margin: 0 -16px;
   padding: 4px 16px;
-  border-bottom: 1px solid #ddd;
-  border-top: 1px solid #ddd;
+  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+  border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
 }
 
 .day-header__row + tr > :is(th, td) {

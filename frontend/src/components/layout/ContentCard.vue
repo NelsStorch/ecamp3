@@ -3,12 +3,7 @@ Displays the content wrapped inside a card.
 -->
 
 <template>
-  <v-card
-    :max-width="maxWidth"
-    width="100%"
-    :rounded="$vuetify.display.xs && '0'"
-    class="mx-auto"
-  >
+  <v-card :max-width="maxWidth" width="100%" :tile="$vuetify.display.xs" class="mx-auto">
     <v-toolbar
       v-if="back || !$vuetify.display.mdAndUp || toolbar"
       class="ec-content-card__toolbar"
@@ -75,6 +70,6 @@ export default {
 }
 
 .ec-content-card__toolbar--border {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-bottom: 1px solid rgba(var(--v-border-color), 0.12) !important;
 }
 </style>
