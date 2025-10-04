@@ -21,9 +21,9 @@ Displays a single period as a list item including controls to edit and delete it
         <dialog-period-description-edit :period="period" @closed="showMenuEdit = false">
           <template #activator="{ props }">
             <v-list-item v-bind="props">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-pencil</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-title>{{
                 $t('components.campAdmin.campPeriodsListItem.changePeriodDescription')
               }}</v-list-item-title>
@@ -38,9 +38,9 @@ Displays a single period as a list item including controls to edit and delete it
         >
           <template #activator="{ props }">
             <v-list-item v-bind="props">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-arrow-left-right</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-title>
                 {{ $t('components.campAdmin.campPeriodsListItem.movePeriod') }}
               </v-list-item-title>
@@ -55,9 +55,9 @@ Displays a single period as a list item including controls to edit and delete it
         >
           <template #activator="{ props }">
             <v-list-item v-bind="props">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-arrow-collapse-left</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-title>
                 {{
                   $t('components.campAdmin.campPeriodsListItem.periodChangeStart')
@@ -74,9 +74,9 @@ Displays a single period as a list item including controls to edit and delete it
         >
           <template #activator="{ props }">
             <v-list-item v-bind="props">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-arrow-collapse-right</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-title>
                 {{
                   $t('components.campAdmin.campPeriodsListItem.periodChangeEnd')
@@ -95,9 +95,9 @@ Displays a single period as a list item including controls to edit and delete it
         >
           <template #activator="{ props }">
             <v-list-item v-bind="props">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-delete</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-title>
                 {{ $t('global.button.delete') }}
               </v-list-item-title>

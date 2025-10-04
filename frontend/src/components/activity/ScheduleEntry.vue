@@ -119,9 +119,9 @@ Displays a single scheduleEntry
             :disabled="!isContributor"
             @click="layoutMode = true"
           >
-            <v-list-item-icon>
+            <template #prepend>
               <v-icon>mdi-puzzle-edit-outline</v-icon>
-            </v-list-item-icon>
+            </template>
             <v-list-item-title>
               {{ $t('components.activity.scheduleEntry.changeLayout') }}
             </v-list-item-title>
@@ -130,9 +130,9 @@ Displays a single scheduleEntry
           <v-divider />
 
           <v-list-item @click="copyUrlToClipboard">
-            <v-list-item-icon>
+            <template #prepend>
               <v-icon>mdi-content-copy</v-icon>
-            </v-list-item-icon>
+            </template>
             <v-list-item-title>
               {{ $t('components.activity.scheduleEntry.copyScheduleEntry') }}
             </v-list-item-title>
@@ -148,9 +148,9 @@ Displays a single scheduleEntry
           <DialogEntityDelete v-if="!isOutsider" :entity="activity" @submit="onDelete">
             <template #activator="{ props }">
               <v-list-item :disabled="!isContributor" v-bind="props">
-                <v-list-item-icon>
+                <template #prepend>
                   <v-icon>mdi-delete</v-icon>
-                </v-list-item-icon>
+                </template>
                 <v-list-item-title>
                   {{ $t('global.button.delete') }}
                 </v-list-item-title>

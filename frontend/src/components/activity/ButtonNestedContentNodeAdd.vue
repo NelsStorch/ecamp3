@@ -29,9 +29,9 @@
           :key="contentType._meta.self"
           @click="addContentNode(contentType)"
         >
-          <v-list-item-icon>
+          <template #prepend>
             <v-icon>{{ $t(contentTypeIconKey(contentType)) }}</v-icon>
-          </v-list-item-icon>
+          </template>
           <v-list-item-title>
             {{ $t(contentTypeNameKey(contentType)) }}
           </v-list-item-title>
@@ -45,9 +45,9 @@
           :key="contentType._meta.self"
           @click="addContentNode(contentType)"
         >
-          <v-list-item-icon>
+          <template #prepend>
             <v-icon>{{ $t(contentTypeIconKey(contentType)) }}</v-icon>
-          </v-list-item-icon>
+          </template>
           <v-list-item-title>
             {{ $t(contentTypeNameKey(contentType)) }}
           </v-list-item-title>

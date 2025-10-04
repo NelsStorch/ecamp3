@@ -15,9 +15,9 @@
       >
         <template #activator="{ props }">
           <v-list-item :disabled="deletingDisabled" v-bind="props">
-            <v-list-item-icon>
+            <template #prepend>
               <v-icon>mdi-trash-can-outline</v-icon>
-            </v-list-item-icon>
+            </template>
             <v-list-item-title>
               {{ deleteCaption }}
             </v-list-item-title>

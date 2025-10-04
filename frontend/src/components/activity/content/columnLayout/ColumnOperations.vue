@@ -1,17 +1,17 @@
 <template>
   <div>
     <v-list-item :disabled="!addingColumnEnabled" @click="addColumn">
-      <v-list-item-icon>
+      <template #prepend>
         <v-icon>mdi-playlist-plus</v-icon>
-      </v-list-item-icon>
+      </template>
       <v-list-item-title>
         {{ $t('components.activity.content.columnLayout.columnOperations.addColumn') }}
       </v-list-item-title>
     </v-list-item>
     <v-list-item :disabled="!removingColumnEnabled" @click="removeColumn">
-      <v-list-item-icon>
+      <template #prepend>
         <v-icon>mdi-playlist-minus</v-icon>
-      </v-list-item-icon>
+      </template>
       <v-list-item-title>
         {{ $t('components.activity.content.columnLayout.columnOperations.removeColumn') }}
       </v-list-item-title>
