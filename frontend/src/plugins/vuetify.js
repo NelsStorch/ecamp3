@@ -14,6 +14,7 @@ import BigScreen from '@/assets/icons/BigScreen.svg'
 import ResponsiveLayout from '@/assets/icons/ResponsiveLayout.svg'
 import ColumnLayout from '@/assets/icons/ColumnLayout.svg'
 import i18n from '@/plugins/i18n'
+import { useI18n } from 'vue-i18n'
 
 import { VCalendar } from 'vuetify/labs/VCalendar'
 
@@ -21,12 +22,13 @@ import { VCalendar } from 'vuetify/labs/VCalendar'
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 
 class VuetifyLoaderPlugin {
   install(app) {
     const opts = {
-      lang: {
-        t: (key, ...params) => i18n.t(key, 0, params),
+      locale: {
+        adapter: createVueI18nAdapter({ i18n, useI18n }),
       },
       icons: {
         aliases: {
