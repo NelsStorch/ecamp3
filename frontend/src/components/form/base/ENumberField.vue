@@ -13,7 +13,9 @@
     @input="$emit('input', $event)"
   >
     <!-- passing through all slots -->
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
+    <template v-for="(_, slot) of $slots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData || {}"></slot>
+    </template>
   </EParseField>
 </template>
 

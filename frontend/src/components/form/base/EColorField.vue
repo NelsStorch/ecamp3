@@ -14,9 +14,8 @@
     @input="$emit('input', $event)"
   >
     <!-- passing through all slots -->
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-      <slot v-if="name !== 'prepend'" :name="name" v-bind="slotData" />
+    <template v-for="(_, slot) of $slots" #[slot]="slotData">
+      <slot v-if="name !== 'prepend'" :name="slot" v-bind="slotData || {}"></slot>
     </template>
     <template #prepend="props">
       <slot name="prepend" v-bind="props">
