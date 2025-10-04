@@ -11,7 +11,8 @@
     </template>
     <!--    <ValidationObserver v-if="value" ref="validation" v-slot="{ handleSubmit }">-->
     <!-- ValidationObserver/handleSubmit ensures that doSubmit is only called if there are no validation errors -->
-    <v-form @submit.prevent="handleSubmit(doSubmit)">
+    <!-- handleSubmit(doSubmit) -->
+    <v-form @submit.prevent="doSubmit">
       <v-card rounded="b-0">
         <v-toolbar class="ec-dialog-toolbar" dense elevation="0">
           <v-icon start>
