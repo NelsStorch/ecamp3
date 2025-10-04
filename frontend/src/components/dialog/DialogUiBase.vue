@@ -1,4 +1,6 @@
 <script>
+import { componentI18n } from '@/plugins/i18n/index.js'
+
 export default {
   name: 'DialogUiBase',
   props: {
@@ -9,7 +11,7 @@ export default {
     submitLabel: {
       type: String,
       default: function () {
-        return this.$t('global.button.submit')
+        return componentI18n.t('global.button.submit')
       },
       required: false,
     },
@@ -21,7 +23,7 @@ export default {
     cancelLabel: {
       type: String,
       default: function () {
-        return this.$t('global.button.cancel')
+        return componentI18n.t('global.button.cancel')
       },
       required: false,
     },

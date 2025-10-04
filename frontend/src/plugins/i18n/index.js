@@ -126,4 +126,11 @@ Object.defineProperty(i18n, 'browserPreferredLocale', {
 
 export default i18n
 
-export { i18n, fallbackLocales }
+/**
+ * @type {{
+ *   t: (key: string, ...args: any[]) => string
+ * }}
+ */
+const componentI18n = i18n.global
+
+export { i18n, fallbackLocales, componentI18n }
