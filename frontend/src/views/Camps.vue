@@ -170,7 +170,7 @@ export default {
 </script>
 
 <style scoped>
-.v-expansion-panel-content:deep(.v-expansion-panel-content__wrap) {
+:deep(.v-expansion-panel-text .v-expansion-panel-text__wrapper) {
   padding: 0 !important;
 }
 </style>
