@@ -12,9 +12,9 @@
             <DialogMaterialListEdit v-if="isContributor" :material-list="materialList">
               <template #activator="{ props }">
                 <v-list-item v-bind="props">
-                  <v-list-item-icon>
+                  <template #prepend>
                     <v-icon>mdi-pencil</v-icon>
-                  </v-list-item-icon>
+                  </template>
                   <v-list-item-content>{{
                     $t('global.button.edit')
                   }}</v-list-item-content>
@@ -22,9 +22,9 @@
               </template>
             </DialogMaterialListEdit>
             <v-list-item @click="downloadXlsx">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-microsoft-excel</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-content>{{
                 $t('global.button.download')
               }}</v-list-item-content>

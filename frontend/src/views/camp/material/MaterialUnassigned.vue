@@ -10,9 +10,9 @@
           </template>
           <v-list class="py-0">
             <v-list-item @click="downloadFilteredXlsx">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-microsoft-excel</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-content
                 >{{ $t('global.button.download') }}
               </v-list-item-content>

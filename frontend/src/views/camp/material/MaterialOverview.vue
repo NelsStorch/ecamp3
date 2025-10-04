@@ -12,9 +12,9 @@
             <DialogMaterialListCreate v-if="isContributor" :camp="camp">
               <template #activator="{ props }">
                 <v-list-item v-bind="props">
-                  <v-list-item-icon>
+                  <template #prepend>
                     <v-icon>mdi-plus</v-icon>
-                  </v-list-item-icon>
+                  </template>
                   <v-list-item-content
                     >{{ $t('views.camp.material.materialOverview.createNewList') }}
                   </v-list-item-content>
@@ -22,9 +22,9 @@
               </template>
             </DialogMaterialListCreate>
             <v-list-item @click="downloadXlsx">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-microsoft-excel</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-content
                 >{{ $t('views.camp.material.materialOverview.download') }}
               </v-list-item-content>

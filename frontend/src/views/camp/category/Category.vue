@@ -24,9 +24,9 @@
           </template>
           <v-list>
             <v-list-item @click="copyUrlToClipboard">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-content-copy</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-title>
                 {{ $t('views.camp.category.category.copyCategory') }}
               </v-list-item-title>
@@ -44,9 +44,9 @@
             >
               <template #activator="{ on }">
                 <v-list-item v-on="on">
-                  <v-list-item-icon>
+                  <template #prepend>
                     <v-icon>mdi-delete</v-icon>
-                  </v-list-item-icon>
+                  </template>
                   <v-list-item-title>
                     {{ $t('views.camp.category.category.deleteCategory') }}
                   </v-list-item-title>
