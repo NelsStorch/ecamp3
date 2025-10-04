@@ -3,7 +3,7 @@
     v-bind="$attrs"
     content-class="ec-dialog-form"
     eager
-    :value="value"
+    :value="modelValue"
     @input="onInput"
   >
     <template #activator="scope">

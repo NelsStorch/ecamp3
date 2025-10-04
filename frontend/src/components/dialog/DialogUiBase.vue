@@ -4,8 +4,7 @@ import { componentI18n } from '@/plugins/i18n/index.js'
 export default {
   name: 'DialogUiBase',
   props: {
-    value: { type: Boolean, required: true },
-
+    modelValue: { type: Boolean, required: true },
     submitAction: { type: Function, default: null, required: false },
     submitIcon: { type: String, default: 'mdi-send-variant', required: false },
     submitLabel: {
@@ -37,6 +36,7 @@ export default {
     loading: { type: Boolean, default: false, required: false },
     error: { type: [Object, String, Error], default: null, required: false },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       isSaving: false,

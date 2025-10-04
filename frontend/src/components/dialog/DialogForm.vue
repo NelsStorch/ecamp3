@@ -2,7 +2,7 @@
   <v-dialog
     :fullscreen="$vuetify.display.xs"
     content-class="ec-dialog-form"
-    :model-value="value"
+    :model-value
     eager
     v-bind="$attrs"
     :max-width="maxWidth"
@@ -112,7 +112,7 @@ export default {
     },
   },
   watch: {
-    value(visible) {
+    modelValue(visible) {
       if (visible) {
         this.$nextTick(() => this.$refs.validation.reset())
       }

@@ -2,7 +2,7 @@
   <DialogBottomSheet
     v-if="$vuetify.display.smAndDown"
     :saving-override.sync="isSaving"
-    :value="value"
+    :value="modelValue"
     v-bind="$attrs"
   >
     <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
