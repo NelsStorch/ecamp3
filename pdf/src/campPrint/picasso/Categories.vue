@@ -16,10 +16,18 @@ export default {
   extends: PdfComponent,
   props: {
     period: { type: Object, required: true },
+    scheduleEntries: { type: Array, default: () => [] },
   },
   computed: {
     categories() {
-      return this.period.camp().categories().items
+      const usedCategoryUris = [
+        ...new Set(
+          this.scheduleEntries.map(
+            (scheduleEntry) => scheduleEntry.activity().category()._meta.self
+          )
+        ),
+      ]
+      return usedCategoryUris.map((uri) => this.api.get(uri))
     },
   },
 }
