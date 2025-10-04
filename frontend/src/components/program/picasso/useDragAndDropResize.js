@@ -51,7 +51,7 @@ export function useDragAndDropResize(enabled, update, maxTimestamp) {
    */
 
   // triggered when mouse is being moved in calendar (independent whether drag & drop is ongoing or not)
-  const timeMouseMove = (tms) => {
+  const timeMouseMove = (nativeEvent, tms) => {
     if (!enabled.value) {
       return
     }
@@ -91,8 +91,8 @@ export function useDragAndDropResize(enabled, update, maxTimestamp) {
 
   return {
     vCalendarListeners: {
-      'mousemove:time': timeMouseMove,
-      'mouseup:time': timeMouseUp,
+      timeMouseMove,
+      timeMouseUp,
     },
     nativeMouseLeave,
     startResize,

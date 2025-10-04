@@ -78,7 +78,7 @@ export function useDragAndDropMove(
    */
 
   // triggered with MouseDown event on a calendar entry
-  const entryMouseDown = ({ event: entry, timed, nativeEvent }) => {
+  const entryMouseDown = (nativeEvent, { event, timed }) => {
     if (!enabled.value) {
       return
     }
@@ -89,19 +89,19 @@ export function useDragAndDropMove(
     }
 
     // only move timed events and non-filtered entries
-    if (!entry || !timed || !entry.filterMatch) {
+    if (!event || !timed || !event.filterMatch) {
       return
     }
 
     // start Drag & Drop
     startX = nativeEvent.x
     startY = nativeEvent.y
-    draggedEntry = entry
+    draggedEntry = event
     mouseOffset = null // not know yet: will be populated by timeMouseDown event
   }
 
   // triggered with MouseDown event anywhere on the calendar (independent of clicking on entry or not)
-  const timeMouseDown = (tms, nativeEvent) => {
+  const timeMouseDown = (nativeEvent, tms) => {
     if (!enabled.value) {
       return
     }
@@ -120,7 +120,7 @@ export function useDragAndDropMove(
   }
 
   // triggered when mouse is being moved in calendar (independent whether drag & drop is ongoing or not)
-  const timeMouseMove = (tms, nativeEvent) => {
+  const timeMouseMove = (nativeEvent, tms) => {
     if (!enabled.value) {
       return
     }
@@ -160,10 +160,10 @@ export function useDragAndDropMove(
 
   return {
     vCalendarListeners: {
-      'mousedown:event': entryMouseDown,
-      'mousedown:time': timeMouseDown,
-      'mousemove:time': timeMouseMove,
-      'mouseup:time': timeMouseUp,
+      entryMouseDown,
+      timeMouseDown,
+      timeMouseMove,
+      timeMouseUp,
     },
     nativeMouseLeave,
   }

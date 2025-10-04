@@ -12,7 +12,7 @@ Listing all given activity schedule entries in a calendar view.
       :events="events"
       event-start="startTimestamp"
       event-end="endTimestamp"
-      event-color="transparent"
+      :event-color="getEventColor"
       :interval-height="computedIntervalHeight"
       interval-width="46"
       :interval-format="intervalFormat"
@@ -28,9 +28,12 @@ Listing all given activity schedule entries in a calendar view.
       :weekdays="[1, 2, 3, 4, 5, 6, 0]"
       color="primary"
       :event-ripple="false"
-      v-on="vCalendarListeners"
-      @mouseleave.native="onMouseleave"
-      @mousedown.native.prevent="preventMiddleButtonFromStartingScrollBehaviour"
+      @mousedown:event="vCalendarListeners.entryMouseDown"
+      @mousedown:time="vCalendarListeners.timeMouseDown"
+      @mouseleave="onMouseleave"
+      @mousemove:time="vCalendarListeners.timeMouseMove"
+      @mouseup:time="vCalendarListeners.timeMouseUp"
+      @mousedown.prevent="preventMiddleButtonFromStartingScrollBehaviour"
     >
       <!-- day header -->
       <template #day-label-header="{ date }">
@@ -247,7 +250,7 @@ export default {
     const events = ref([])
     const loadCalenderEventsFromScheduleEntries = () => {
       // prepare scheduleEntries to make them understandable by v-calendar
-      events.value = scheduleEntries.value.items?.map((entry) => ({
+      events.value = scheduleEntries.value?.map((entry) => ({
         ...entry,
         startTimestamp: utcStringToTimestamp(entry.start),
         endTimestamp: utcStringToTimestamp(entry.end),
@@ -262,8 +265,6 @@ export default {
             ? entry.activity().category().short + ': '
             : '') +
           entry.activity().title,
-        start: new Date(utcStringToTimestamp(entry.start)),
-        end: new Date(utcStringToTimestamp(entry.end)),
         color: entry.activity().category().color,
         allDay: false,
       }))
@@ -284,6 +285,10 @@ export default {
 
     function preventMiddleButtonFromStartingScrollBehaviour() {}
 
+    function getEventColor(event) {
+      return event.color
+    }
+
     return {
       vCalendarListeners,
       startResize: dragAndDropResize.startResize,
@@ -293,6 +298,7 @@ export default {
       loadCalenderEventsFromScheduleEntries,
       events,
       preventMiddleButtonFromStartingScrollBehaviour,
+      getEventColor,
     }
   },
   data() {

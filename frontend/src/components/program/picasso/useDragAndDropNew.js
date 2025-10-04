@@ -59,7 +59,7 @@ export function useDragAndDropNew(enabled, updatePlaceholder, createEntry) {
    */
 
   // triggered with MouseDown event on a calendar entry
-  const entryMouseDown = ({ event: entry, timed, nativeEvent }) => {
+  const entryMouseDown = (nativeEvent, { event, timed }) => {
     if (!enabled.value) {
       return
     }
@@ -69,13 +69,13 @@ export function useDragAndDropNew(enabled, updatePlaceholder, createEntry) {
       return
     }
 
-    if (entry && timed) {
+    if (event && timed) {
       entryWasClicked = true
     }
   }
 
   // triggered with MouseDown event anywhere on the calendar (independent of clicking on entry or not)
-  const timeMouseDown = (tms, nativeEvent) => {
+  const timeMouseDown = (nativeEvent, tms) => {
     if (!enabled.value) {
       return
     }
@@ -94,7 +94,7 @@ export function useDragAndDropNew(enabled, updatePlaceholder, createEntry) {
   }
 
   // triggered when mouse is being moved in calendar (independent whether drag & drop is ongoing or not)
-  const timeMouseMove = (tms) => {
+  const timeMouseMove = (nativeEvent, tms) => {
     if (!enabled.value) {
       return
     }
@@ -131,10 +131,10 @@ export function useDragAndDropNew(enabled, updatePlaceholder, createEntry) {
 
   return {
     vCalendarListeners: {
-      'mousedown:event': entryMouseDown,
-      'mousedown:time': timeMouseDown,
-      'mousemove:time': timeMouseMove,
-      'mouseup:time': timeMouseUp,
+      entryMouseDown,
+      timeMouseDown,
+      timeMouseMove,
+      timeMouseUp,
     },
     nativeMouseLeave,
   }
