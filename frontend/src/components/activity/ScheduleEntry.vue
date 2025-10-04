@@ -395,7 +395,7 @@ export default {
       const labels = sortBy(this.camp.progressLabels().items, (l) => l.position)
       return labels.map((label) => ({
         value: label._meta.self,
-        text: label.title,
+        title: label.title,
       }))
     },
     contentNodes() {
