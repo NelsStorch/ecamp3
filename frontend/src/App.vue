@@ -29,7 +29,7 @@ export default {
     offline: false,
   }),
   created() {
-    // this.$store.commit('setLanguage', this.$store.state.lang.language)
+    this.$store.commit('setLanguage', this.$store.state.lang.language)
 
     window.addEventListener('offline', this.offlineListener)
     window.addEventListener('online', this.onlineListener)
@@ -41,8 +41,9 @@ export default {
       const profile = await user.profile()._meta.load
 
       if (VueI18n.global.availableLocales.includes(profile.language)) {
-        // this.$store.commit('setLanguage', profile.language)
+        this.$store.commit('setLanguage', profile.language)
       }
+      console.log(VueI18n.global.locale)
     }
   },
   destroyed() {
