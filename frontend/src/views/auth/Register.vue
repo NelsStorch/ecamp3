@@ -3,7 +3,8 @@
     <h1 class="display-1 text-center">{{ $t('views.auth.register.title') }}</h1>
     <!--    <validation-observer v-slot="{ handleSubmit }">-->
     <e-form name="user">
-      <v-form <!--@submit.prevent="handleSubmit(register)" -->@submit.prevent="register">
+      <!-- @submit.prevent="handleSubmit(register)" -->
+      <v-form @submit.prevent="register">
         <e-text-field
           v-model="firstname"
           append-inner-icon="mdi-account-outline"
