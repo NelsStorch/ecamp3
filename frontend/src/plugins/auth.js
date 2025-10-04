@@ -89,10 +89,9 @@ function getJWTExpirationTimestamp() {
 export function isLoggedIn() {
   const isLoggedIn = Date.now() < getJWTExpirationTimestamp()
 
-  // TODO: commented code creates an infinite-loop
-  // if (isLoggedIn) {
-  //   loadUser()
-  // }
+  if (isLoggedIn) {
+    loadUser()
+  }
 
   return isLoggedIn
 }
