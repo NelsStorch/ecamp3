@@ -35,7 +35,6 @@ function timeDurationShort(start, end, tc) {
           : duration.minutes() === 0
             ? 'global.datetime.duration.hoursOnly'
             : 'global.datetime.duration.hoursAndMinutes',
-    0,
     {
       days: Math.floor(duration.asDays()),
       hours: duration.hours(),
