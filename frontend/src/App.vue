@@ -43,7 +43,6 @@ export default {
       if (VueI18n.global.availableLocales.includes(profile.language)) {
         this.$store.commit('setLanguage', profile.language)
       }
-      console.log(VueI18n.global.locale)
     }
   },
   destroyed() {
