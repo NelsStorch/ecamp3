@@ -2,12 +2,12 @@
   <v-container fluid>
     <content-card :title="$t('views.camps.title')" max-width="800" toolbar>
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only />
       </template>
       <v-list class="py-0">
         <template v-if="loading">
-          <v-skeleton-loader type="list-item-two-line" height="64" />
-          <v-skeleton-loader type="list-item-two-line" height="64" />
+          <v-skeleton-loader type="list-item-two-line" height="64" class="pa-4" />
+          <v-skeleton-loader type="list-item-two-line" height="64" class="pa-4" />
         </template>
         <template v-else>
           <CampListItem

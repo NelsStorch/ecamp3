@@ -59,6 +59,10 @@ body {
   height: 100%;
 }
 
+.v-skeleton-loader__bone {
+  gap: 1rem;
+}
+
 .v-skeleton-loader--inherit-size .v-skeleton-loader__bone {
   height: inherit !important;
   width: inherit !important;
