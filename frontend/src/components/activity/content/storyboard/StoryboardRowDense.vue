@@ -39,9 +39,9 @@
     </div>
     <div v-if="!layoutMode && !disabled" role="cell" class="e-storyboard-row__controls">
       <dialog-remove-section @submit="$emit('delete', itemKey)">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <v-btn
-            v-bin="props"
+            v-bind="props"
             icon
             size="small"
             class="e-storyboard-row__delete"
