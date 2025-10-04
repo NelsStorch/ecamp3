@@ -3,10 +3,10 @@ Displays a field as a color picker + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$attrs">
+  <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }">
     <e-color-picker
       :value="wrapper.localValue || ''"
-      v-bind="$attrs"
+      v-bind="{ ...$props, ...$attrs }"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"

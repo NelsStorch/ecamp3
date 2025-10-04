@@ -5,13 +5,13 @@ Displays a field as a e-select + write access via API wrapper
 <template>
   <api-wrapper
     v-slot="wrapper"
-    v-bind="$attrs"
+    v-bind="{ ...$props, ...$attrs }"
     :path
     :auto-save-delay="autoSaveDelayComputed"
   >
     <e-select
       :value="wrapper.localValue"
-      v-bind="$attrs"
+      v-bind="{ ...$props, ...$attrs }"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"

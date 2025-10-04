@@ -5,10 +5,10 @@ Displays a field as a e-checkbox + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$attrs" separate-buttons>
+  <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }" separate-buttons>
     <e-switch
       :value="wrapper.localValue"
-      v-bind="$attrs"
+      v-bind="{ ...$props, ...$attrs }"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
