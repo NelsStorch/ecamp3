@@ -18,5 +18,6 @@ return (new PhpCsFixer\Config())
         'php_unit_test_class_requires_covers' => false,
         'no_superfluous_phpdoc_tags' => true,
     ])
+    ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
     ->setFinder($finder)
     ;
