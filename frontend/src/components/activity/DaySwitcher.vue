@@ -29,47 +29,53 @@
     input-class="e-day-switcher__select mt-0 pt-0"
     @change="changeDay"
   >
-    <template #selection="{ index, parent }">
+    <template #selection="{ index, item }">
       <v-list-item
         v-if="index === 0"
         class="pl-4 pr-0"
         inactive
-        @click.stop="parent.isMenuActive = !parent.isMenuActive"
+        @click.stop="item.raw.isMenuActive = !item.raw.isMenuActive"
       >
-        <v-list-item-title class="flex-grow-0 basis-num flex-shrink-0 font-weight-bold">
-          {{ daySelection.number }}.
-        </v-list-item-title>
-        <v-list-item-subtitle class="basis-auto flex-shrink-0 ml-2">
+        <template #prepend>
+          <strong class="basis-num mr-2">{{ item.raw.number }}.</strong>
+        </template>
+        <template #title />
+        <template #subtitle>
           {{ $date.utc(daySelection.start).format('dd. DD. MMM') }}
-        </v-list-item-subtitle>
-        <AvatarRow
-          :camp-collaborations="
-            daySelection
-              .dayResponsibles()
-              .items.map((responsible) => responsible.campCollaboration())
-          "
-          min-size="28"
-          max-size="28"
-        />
+        </template>
+        <template #append>
+          <AvatarRow
+            :camp-collaborations="
+              daySelection.dayResponsibles.items.map((responsible) =>
+                responsible.campCollaboration()
+              )
+            "
+            min-size="28"
+            max-size="28"
+          />
+        </template>
       </v-list-item>
     </template>
-    <template #item="{ item: day, attrs, on }">
-      <v-list-item v-bind="attrs" v-on="on">
-        <v-list-item-title class="flex-grow-0 basis-num flex-shrink-0 font-weight-bold">
-          {{ day.number }}.
-        </v-list-item-title>
-        <v-list-item-subtitle class="basis-auto flex-shrink-0 ml-2">
-          {{ $date.utc(day.start).format('dd. DD. MMM') }}
-        </v-list-item-subtitle>
-        <AvatarRow
-          :camp-collaborations="
-            day
-              .dayResponsibles()
-              .items.map((responsible) => responsible.campCollaboration())
-          "
-          min-size="28"
-          max-size="28"
-        />
+    <template #item="{ item, props }">
+      <v-list-item v-bind="props">
+        <template #prepend>
+          <strong class="basis-num mr-2">{{ item.raw.number }}.</strong>
+        </template>
+        <template #title />
+        <template #subtitle>
+          {{ $date.utc(item.raw.start).format('dd. DD. MMM') }}
+        </template>
+        <template #append>
+          <AvatarRow
+            :camp-collaborations="
+              item.raw
+                .dayResponsibles()
+                .items.map((responsible) => responsible.campCollaboration())
+            "
+            min-size="28"
+            max-size="28"
+          />
+        </template>
       </v-list-item>
     </template>
   </e-select>
@@ -119,7 +125,7 @@ export default {
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style>
 .basis-num {
-  flex-basis: 2.5ch;
+  width: 2.5ch;
 }
 
 /* .e-day-switcher__menu is in the <e-select> tag */
