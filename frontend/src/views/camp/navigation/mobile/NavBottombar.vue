@@ -57,7 +57,7 @@ export default {
 <style lang="scss" scoped>
 @use 'vuetify/settings';
 @use 'sass:map';
-// eslint-disable-next-line vue-scoped-css/no-unused-selector
+
 .ec-bottombar {
   height: auto !important;
   min-height: 56px;
