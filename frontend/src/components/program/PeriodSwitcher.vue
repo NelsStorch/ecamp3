@@ -18,7 +18,9 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-subheader>{{ $t('components.program.periodSwitcher.title') }}</v-list-subheader>
+        <v-list-subheader>{{
+          $t('components.program.periodSwitcher.title')
+        }}</v-list-subheader>
         <v-list-item
           v-for="item in allPeriods"
           :key="item._meta.self"

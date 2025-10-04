@@ -21,7 +21,7 @@
             </v-list-item-title>
           </v-list-item-content>
 
-          <template #append v-if="isContributor" style="display: inline">
+          <template v-if="isContributor" #append style="display: inline">
             <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
           </template>
         </v-list-item>

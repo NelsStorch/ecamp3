@@ -1,10 +1,5 @@
 <template>
-  <v-btn
-    v-bind="$attrs"
-    class="px-3 px-sm-4"
-    min-width="0"
-    :color="color"
-  >
+  <v-btn v-bind="$attrs" class="px-3 px-sm-4" min-width="0" :color="color">
     <v-icon
       v-if="!iconLast"
       :start="!hideLabel"

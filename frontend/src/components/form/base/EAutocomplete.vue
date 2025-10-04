@@ -15,13 +15,12 @@
     :search-input.sync="search"
     :filled="filled"
     :hide-details="hideDetails"
-    :error-messages="veeErrors.concat(errorMessages)"
+    :error-messages="(veeErrors ?? []).concat(errorMessages)"
     :label="labelOrEntityFieldLabel"
     :class="[inputClass]"
     :readonly="readonly"
     :append-icon="readonly ? null : '$dropdown'"
     :filter="tokensFilter"
-
   >
     <template #item="{ item, on, attrs }">
       <v-list-item v-bind="attrs" v-on="on">
