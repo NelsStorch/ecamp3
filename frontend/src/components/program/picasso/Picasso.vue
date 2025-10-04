@@ -357,7 +357,7 @@ export default {
       const widthIntervals = 46
       this.entryWidth = Math.max(
         (this.$refs.calendar.$el.offsetWidth - widthIntervals) /
-          this.$refs.calendar.daysInWeek.length,
+          this.$refs.calendar.days.length,
         85
       )
     },
