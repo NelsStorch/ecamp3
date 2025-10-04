@@ -116,6 +116,7 @@ class ResponseSnapshotTest extends ECampApiTestCase {
                 '/auth/reset_password' => false,
                 '/auth/resend_activation' => false,
                 '/content_nodes' => false,
+                '/checklist_items' => false,
                 '/invitations' => false,
                 '/personal_invitations' => false,
                 '/token/refresh' => false,
