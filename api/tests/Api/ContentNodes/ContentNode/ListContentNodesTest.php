@@ -19,59 +19,9 @@ class ListContentNodesTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testListContentNodesIsAllowedForLoggedInUserButFiltered() {
+    public function testListContentNodesWithoutFilterIsNotAllowedForLoggedInUser() {
         $response = static::createClientWithCredentials()->request('GET', '/content_nodes');
-        $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContains([
-            'totalItems' => 39,
-            '_links' => [
-                'items' => [],
-            ],
-            '_embedded' => [
-                'items' => [],
-            ],
-        ]);
-        $this->assertEqualsCanonicalizing([
-            ['href' => $this->getIriFor('columnLayout1')],
-            ['href' => $this->getIriFor('checklistNode1')],
-            ['href' => $this->getIriFor('columnLayout2')],
-            ['href' => $this->getIriFor('columnLayoutChild1')],
-            ['href' => $this->getIriFor('columnLayout2Child1')],
-            ['href' => $this->getIriFor('columnLayout3')],
-            ['href' => $this->getIriFor('checklistNode3')],
-            ['href' => $this->getIriFor('columnLayout4')],
-            ['href' => $this->getIriFor('columnLayout5')],
-            ['href' => $this->getIriFor('columnLayout1camp2')],
-            ['href' => $this->getIriFor('columnLayout2camp2')],
-            ['href' => $this->getIriFor('checklistNodeCampPrototype')],
-            ['href' => $this->getIriFor('columnLayout1campPrototype')],
-            ['href' => $this->getIriFor('columnLayout2campPrototype')],
-            ['href' => $this->getIriFor('columnLayout3campPrototype')],
-            ['href' => $this->getIriFor('materialNodeCampPrototype')],
-            ['href' => $this->getIriFor('multiSelectCampPrototype')],
-            ['href' => $this->getIriFor('responsiveLayoutCampPrototype')],
-            ['href' => $this->getIriFor('singleTextCampPrototype')],
-            ['href' => $this->getIriFor('storyboardCampPrototype')],
-            ['href' => $this->getIriFor('singleText1')],
-            ['href' => $this->getIriFor('singleText2')],
-            ['href' => $this->getIriFor('safetyConsiderations1')],
-            ['href' => $this->getIriFor('materialNode1')],
-            ['href' => $this->getIriFor('materialNode2')],
-            ['href' => $this->getIriFor('storyboard1')],
-            ['href' => $this->getIriFor('storyboard2')],
-            ['href' => $this->getIriFor('multiSelect1')],
-            ['href' => $this->getIriFor('multiSelect2')],
-            ['href' => $this->getIriFor('responsiveLayout1')],
-            ['href' => $this->getIriFor('checklistNodeCampShared')],
-            ['href' => $this->getIriFor('columnLayout1campShared')],
-            ['href' => $this->getIriFor('columnLayout2campShared')],
-            ['href' => $this->getIriFor('columnLayout3campShared')],
-            ['href' => $this->getIriFor('materialNodeCampShared')],
-            ['href' => $this->getIriFor('multiSelectCampShared')],
-            ['href' => $this->getIriFor('responsiveLayoutCampShared')],
-            ['href' => $this->getIriFor('singleTextCampShared')],
-            ['href' => $this->getIriFor('storyboardCampShared')],
-        ], $response->toArray()['_links']['items']);
+        $this->assertResponseStatusCodeSame(400);
     }
 
     public function testListContentNodesFilteredByPeriodIsAllowedForCollaborator() {
