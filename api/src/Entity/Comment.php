@@ -27,8 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object) or
+                       is_granted("CAMP_IS_PUBLIC", object) or
                        object.author === user',
         ),
         new Delete(
@@ -49,8 +48,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                     toProperty: 'activity',
                     fromClass: Activity::class,
                     security: 'is_granted("CAMP_COLLABORATOR", activity) or
-                               is_granted("CAMP_IS_SHARED", activity) or
-                               is_granted("CAMP_IS_PROTOTYPE", activity)',
+                               is_granted("CAMP_IS_PUBLIC", activity)',
                 ),
             ],
             security: 'is_fully_authenticated()',

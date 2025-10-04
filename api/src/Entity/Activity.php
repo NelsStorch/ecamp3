@@ -33,8 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Get(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
             security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object)'
+                       is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Patch(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
@@ -56,8 +55,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                     toProperty: 'camp',
                     fromClass: Camp::class,
                     security: 'is_granted("CAMP_COLLABORATOR", camp) or
-                               is_granted("CAMP_IS_SHARED", camp) or
-                               is_granted("CAMP_IS_PROTOTYPE", camp)'
+                               is_granted("CAMP_IS_PUBLIC", camp)'
                 ),
             ],
             normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,

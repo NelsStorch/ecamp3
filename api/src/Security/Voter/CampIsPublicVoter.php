@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 /**
  * @extends Voter<string,BelongsToCampInterface | BelongsToContentNodeTreeInterface>
  */
-class CampIsSharedVoter extends Voter {
+class CampIsPublicVoter extends Voter {
     use GetCampFromContentNodeTrait;
 
     public function __construct(
@@ -22,7 +22,7 @@ class CampIsSharedVoter extends Voter {
     ) {}
 
     protected function supports($attribute, $subject): bool {
-        return 'CAMP_IS_SHARED' === $attribute
+        return 'CAMP_IS_PUBLIC' === $attribute
         && ($subject instanceof BelongsToCampInterface || $subject instanceof BelongsToContentNodeTreeInterface);
     }
 
@@ -33,7 +33,7 @@ class CampIsSharedVoter extends Voter {
             return false;
         }
 
-        if ($camp->isShared) {
+        if ($camp->isPublic) {
             $this->responseTagger->addTags([$camp->getId()]);
 
             return true;

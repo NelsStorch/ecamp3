@@ -35,8 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object)',
+                       is_granted("CAMP_IS_PUBLIC", object)',
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
         ),
         new Patch(
@@ -69,6 +68,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CampRepository::class)]
 #[ORM\Index(columns: ['isPrototype'])]
 #[ORM\Index(columns: ['isShared'])]
+#[ORM\Index(columns: ['isPublic'])]
 #[ORM\Index(columns: ['updateTime'])] // TODO unclear why this is necessary, but doctrine forgot about this index from BaseEntity...
 class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototypeInterface {
     public const ITEM_NORMALIZATION_CONTEXT = [
@@ -227,6 +227,14 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[Groups(['read'])]
     #[ORM\Column(type: 'boolean')]
     public bool $isPrototype = false;
+
+    /**
+     * Automatically set to the value (isShared || isPrototype). Used for more efficient
+     * database filtering operations, since OR queries are very expensive to compute.
+     * This is only used in the database, and therefore not available on the API.
+     */
+    #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => false])]
+    public bool $isPublic = false;
 
     /**
      * An optional short title for the camp. Can be used in the UI where space is tight. If
