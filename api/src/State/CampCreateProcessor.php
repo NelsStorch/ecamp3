@@ -34,6 +34,7 @@ class CampCreateProcessor extends AbstractPersistProcessor {
         $user = $this->security->getUser();
         $data->creator = $user;
         $data->owner = $user;
+        $data->isPublic = $data->isShared || $data->isPrototype;
 
         // copy from prototype, if given
         if (null !== $data->campPrototype) {
