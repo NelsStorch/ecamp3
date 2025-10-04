@@ -14132,6 +14132,11 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -14177,6 +14182,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem-write:
@@ -14187,6 +14193,11 @@ components:
           description: 'The name of the item that is required.'
           example: Volleyball
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -14232,6 +14243,11 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -14271,6 +14287,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonapi:
@@ -14292,6 +14309,11 @@ components:
                   example: Volleyball
                   maxLength: 64
                   type: string
+                done:
+                  default: false
+                  description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+                  example: true
+                  type: boolean
                 quantity:
                   description: 'The number of items or the amount in the unit of items that are required.'
                   example: 1.5
@@ -14304,6 +14326,7 @@ components:
                   type: ['null', string]
               required:
                 - article
+                - done
               type: object
             id:
               type: string
@@ -14367,6 +14390,11 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -14412,6 +14440,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonhal-write_create:
@@ -14432,6 +14461,11 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -14471,6 +14505,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonld-read:
@@ -14511,6 +14546,11 @@ components:
           format: iri-reference
           readOnly: true
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         id:
           description: 'An internal, unique, randomly generated identifier of this entity.'
           example: 1a2b3c4d
@@ -14556,6 +14596,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialItem.jsonld-write_create:
@@ -14567,6 +14608,11 @@ components:
           example: Volleyball
           maxLength: 64
           type: string
+        done:
+          default: false
+          description: 'Whether the item has been prepared and is ready to be brought to the camp.'
+          example: true
+          type: boolean
         materialList:
           description: |-
             The list to which this item belongs. Lists are used to keep track of who is
@@ -14606,6 +14652,7 @@ components:
             - string
       required:
         - article
+        - done
         - materialList
       type: object
     MaterialList-read:

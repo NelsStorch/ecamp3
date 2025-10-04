@@ -18,6 +18,7 @@
                     }
                 },
                 "article": "escaped_value",
+                "done": "escaped_value",
                 "id": "escaped_value",
                 "quantity": "escaped_value",
                 "unit": "escaped_value"
@@ -39,6 +40,7 @@
                     }
                 },
                 "article": "escaped_value",
+                "done": "escaped_value",
                 "id": "escaped_value",
                 "quantity": "escaped_value",
                 "unit": "escaped_value"
@@ -60,6 +62,7 @@
                     }
                 },
                 "article": "escaped_value",
+                "done": "escaped_value",
                 "id": "escaped_value",
                 "quantity": "escaped_value",
                 "unit": "escaped_value"
@@ -81,6 +84,7 @@
                     }
                 },
                 "article": "escaped_value",
+                "done": "escaped_value",
                 "id": "escaped_value",
                 "quantity": "escaped_value",
                 "unit": "escaped_value"
@@ -102,6 +106,7 @@
                     }
                 },
                 "article": "escaped_value",
+                "done": "escaped_value",
                 "id": "escaped_value",
                 "quantity": "escaped_value",
                 "unit": "escaped_value"
