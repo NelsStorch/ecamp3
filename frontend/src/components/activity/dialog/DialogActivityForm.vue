@@ -23,15 +23,15 @@
       <template #item="{ item, on, attrs }">
         <v-list-item :key="item._meta.self" v-bind="attrs" v-on="on">
           <v-list-item-title>
-            <category-chip :category="item" dense />
-            {{ item.name }}
+            <category-chip :category="item.props.title" dense />
+            {{ item.props.name }}
           </v-list-item-title>
         </v-list-item>
       </template>
       <template #selection="{ item }">
         <div class="v-select__selection">
-          <category-chip :category="item" dense />
-          {{ item.name }}
+          <category-chip :category="item.props.title" dense />
+          {{ item.props.name }}
         </div>
       </template>
     </e-select>
