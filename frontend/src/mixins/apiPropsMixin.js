@@ -1,3 +1,5 @@
+import { inject } from 'vue'
+
 export const apiPropsMixin = {
   inheritAttrs: false,
   inject: {
@@ -15,12 +17,13 @@ export const apiPropsMixin = {
       type: String,
       required: false,
       default() {
-        if (this.apiUri === null) {
+        const apiUri = inject('apiUri')
+        if (apiUri === null) {
           throw new Error(
             'ApiWrapper: `uri` not set on component; no ApiForm component found as parent for fallback'
           )
         }
-        return this.apiUri
+        return apiUri
       },
     },
 
