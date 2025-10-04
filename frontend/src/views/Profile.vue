@@ -111,14 +111,14 @@ export default {
     availableLocales() {
       return VueI18n.global.availableLocales.map((l) => ({
         value: l,
-        text: this.$t('global.language', 1, l),
+        title: this.$t('global.language', 1, { locale: l }),
       }))
     },
   },
   watch: {
     profile() {
       if (VueI18n.global.availableLocales.includes(this.profile?.language)) {
-        // this.$store.commit('setLanguage', this.profile?.language)
+        this.$store.commit('setLanguage', this.profile?.language)
       }
     },
   },
