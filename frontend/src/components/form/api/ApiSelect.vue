@@ -3,7 +3,12 @@ Displays a field as a e-select + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$attrs" :auto-save-delay="autoSaveDelayComputed">
+  <api-wrapper
+    v-slot="wrapper"
+    v-bind="$attrs"
+    :path
+    :auto-save-delay="autoSaveDelayComputed"
+  >
     <e-select
       :value="wrapper.localValue"
       v-bind="$attrs"
