@@ -1,9 +1,9 @@
 <template>
   <v-list-item :disabled="disabled" v-bind="$attrs">
-    <v-list-item-icon>
+    <template #prepend>
       <v-icon v-if="value" :disabled="disabled">mdi-lock</v-icon>
       <v-icon v-else :disabled="disabled">mdi-lock-open-variant</v-icon>
-    </v-list-item-icon>
+    </template>
     <v-list-item-title>
       {{ value ? $t('global.button.lock') : $t('global.button.unlock') }}
     </v-list-item-title>

@@ -21,11 +21,9 @@
             </v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action v-if="isContributor" style="display: inline">
-            <v-item-group>
-              <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
-            </v-item-group>
-          </v-list-item-action>
+          <template #append v-if="isContributor" style="display: inline">
+            <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
+          </template>
         </v-list-item>
       </v-list>
     </v-card-text>
