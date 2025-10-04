@@ -25,7 +25,7 @@
     @input="onInput"
   >
     <template #prepend-item>
-      <v-subheader>{{ $t('entity.day.fields.dayResponsibles') }}</v-subheader>
+      <v-list-subheader>{{ $t('entity.day.fields.dayResponsibles') }}</v-list-subheader>
     </template>
   </e-select>
 </template>

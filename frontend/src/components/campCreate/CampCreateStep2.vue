@@ -66,9 +66,9 @@
                 {{ $t('components.campCreate.campCreateStep2.preview') }}
               </h3>
               <v-list class="w-100" dense color="transparent">
-                <v-subheader class="px-0" style="height: auto">
+                <v-list-subheader class="px-0" style="height: auto">
                   {{ $t('components.campCreate.campCreateStep2.category') }}
-                </v-subheader>
+                </v-list-subheader>
                 <v-list-item
                   v-for="category in prototypePreview.categories().items"
                   :key="category._meta.self"
@@ -91,9 +91,9 @@
               </v-list>
               <div class="d-flex flex-row">
                 <v-list class="w-100 sm:w-50" dense color="transparent">
-                  <v-subheader class="px-0" style="height: auto">
+                  <v-list-subheader class="px-0" style="height: auto">
                     {{ $t('components.campCreate.campCreateStep2.progressLabels') }}
-                  </v-subheader>
+                  </v-list-subheader>
                   <v-list-item
                     v-for="(progressLabel, idx) in prototypePreview.progressLabels()
                       .items"
@@ -109,9 +109,9 @@
                   </v-list-item>
                 </v-list>
                 <v-list class="w-100 sm:w-50" dense color="transparent">
-                  <v-subheader class="px-0" style="height: auto">
+                  <v-list-subheader class="px-0" style="height: auto">
                     {{ $t('components.campCreate.campCreateStep2.materialLists') }}
-                  </v-subheader>
+                  </v-list-subheader>
                   <v-list-item
                     v-for="materialList in copyableMaterialLists"
                     :key="materialList._meta.self"
@@ -129,9 +129,9 @@
                 dense
                 color="transparent"
               >
-                <v-subheader class="px-0" style="height: auto">
+                <v-list-subheader class="px-0" style="height: auto">
                   {{ $t('components.campCreate.campCreateStep2.checklists') }}
-                </v-subheader>
+                </v-list-subheader>
                 <v-list-item
                   v-for="checklist in prototypePreview.checklists().items"
                   :key="checklist._meta.self"
