@@ -18,6 +18,7 @@
     v-else
     :value="daySelection.number"
     :items="items"
+    density="comfortable"
     item-value="number"
     :filled="false"
     return-object
