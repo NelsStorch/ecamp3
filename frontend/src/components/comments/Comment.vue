@@ -4,7 +4,6 @@
     class="ec-comment"
     elevation="2"
     rounded="lg"
-    border="left"
     colored-border="blue"
   >
     <v-card-text class="px-3 pt-2 pb-2 ec-comment__text">
