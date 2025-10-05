@@ -12,15 +12,14 @@ Displays a single scheduleEntry
     :max-width="isPaperDisplaySize ? '944px' : ''"
   >
     <template #title>
-      <v-toolbar-title class="font-weight-bold">
+      <div class="font-weight-bold text-h6 d-flex gap-2">
         <span class="tabular-nums">
           {{ scheduleEntry.number }}
         </span>
         <v-menu
           offset-y
-          rounded="lg"
-          nudge-left="10"
-          nudge-bottom="4"
+          location="bottom"
+          offset="10 4"
           :disabled="layoutMode || !isContributor"
         >
           <template #activator="{ props }">
@@ -43,24 +42,24 @@ Displays a single scheduleEntry
               </template>
             </CategoryChip>
           </template>
-          <v-list class="py-0">
+          <v-list class="py-0" rounded="lg">
             <v-list-item
               v-for="cat in camp.categories().items"
               :key="cat._meta.self"
               class="px-3"
+              :title="cat.name"
               @click="changeCategory(cat)"
             >
-              <v-list-item-title>
-                <CategoryChip :category="cat" dense />
-                {{ cat.name }}
-              </v-list-item-title>
+              <template #prepend>
+                <CategoryChip :category="cat" dense class="mr-2" />
+              </template>
             </v-list-item>
           </v-list>
         </v-menu>
         <a v-if="!editActivityTitle" style="color: inherit">
           {{ activity.title }}
         </a>
-      </v-toolbar-title>
+      </div>
       <v-btn
         v-if="isContributor && !editActivityTitle"
         icon
@@ -69,7 +68,7 @@ Displays a single scheduleEntry
         height="24"
         @click="makeTitleEditable()"
       >
-        <v-icon small>mdi-pencil</v-icon>
+        <v-icon size="x-small">mdi-pencil</v-icon>
       </v-btn>
       <api-form v-if="editActivityTitle" :entity="activity" class="mx-2 flex-grow-1">
         <api-text-field
@@ -119,10 +118,8 @@ Displays a single scheduleEntry
             :disabled="!isContributor"
             @click="layoutMode = true"
           >
-            <template #prepend>
-              <v-icon>mdi-puzzle-edit-outline</v-icon>
-            </template>
             <v-list-item-title>
+              <v-icon start>mdi-puzzle-edit-outline</v-icon>
               {{ $t('components.activity.scheduleEntry.changeLayout') }}
             </v-list-item-title>
           </v-list-item>
@@ -130,10 +127,8 @@ Displays a single scheduleEntry
           <v-divider />
 
           <v-list-item @click="copyUrlToClipboard">
-            <template #prepend>
-              <v-icon>mdi-content-copy</v-icon>
-            </template>
             <v-list-item-title>
+              <v-icon start>mdi-content-copy</v-icon>
               {{ $t('components.activity.scheduleEntry.copyScheduleEntry') }}
             </v-list-item-title>
           </v-list-item>
@@ -148,10 +143,8 @@ Displays a single scheduleEntry
           <DialogEntityDelete v-if="!isOutsider" :entity="activity" @submit="onDelete">
             <template #activator="{ props }">
               <v-list-item :disabled="!isContributor" v-bind="props">
-                <template #prepend>
-                  <v-icon>mdi-delete</v-icon>
-                </template>
                 <v-list-item-title>
+                  <v-icon start>mdi-delete</v-icon>
                   {{ $t('global.button.delete') }}
                 </v-list-item-title>
               </v-list-item>
@@ -239,7 +232,7 @@ Displays a single scheduleEntry
               @activity-updated="activity.$reload()"
             >
               <template #activator="{ props }">
-                <ButtonEdit text small class="v-btn--has-bg" v-bind="props" />
+                <ButtonEdit variant="tonal" size="small" v-bind="props" />
               </template>
             </DialogActivityEdit>
           </v-col>

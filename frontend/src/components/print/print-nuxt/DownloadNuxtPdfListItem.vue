@@ -1,10 +1,8 @@
 <template>
   <v-list-item :disabled="loading" @click.stop="generatePdf">
-    <template #prepend>
-      <v-icon v-if="loading" class="mdi-spin">mdi-loading</v-icon>
-      <v-icon v-else>mdi-printer</v-icon>
-    </template>
     <v-list-item-title>
+      <v-icon v-if="loading" start class="mdi-spin">mdi-loading</v-icon>
+      <v-icon v-else start>mdi-printer</v-icon>
       {{ $t('components.print.printNuxt.downloadNuxtPdfListItem.label') }}
     </v-list-item-title>
   </v-list-item>

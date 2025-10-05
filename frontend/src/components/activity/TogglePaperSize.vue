@@ -1,24 +1,24 @@
 <template>
-  <v-tooltip bottom>
+  <v-tooltip location="bottom">
     <template #activator="{ props }">
       <v-btn
         text
         icon
         class="ec-paper-size-toggle d-none d-md-block"
         :aria-label="
-          value
+          modelValue
             ? $t('components.activity.togglePaperSize.switchToFullSize')
             : $t('components.activity.togglePaperSize.switchToPaperSize')
         "
-        v-bind="{ ...buttonProps, ...props }"
-        @click="$emit('input', !value)"
+        v-bind="{ ...props }"
+        @click="$emit('update:modelValue', !modelValue)"
       >
-        <v-icon v-if="value" class="resize-icon" icon="$bigScreen" />
+        <v-icon v-if="modelValue" class="resize-icon" icon="$bigScreen" />
         <v-icon v-else class="resize-icon" icon="$paperSize" />
       </v-btn>
     </template>
     {{
-      value
+      modelValue
         ? $t('components.activity.togglePaperSize.switchToFullSize')
         : $t('components.activity.togglePaperSize.switchToPaperSize')
     }}
@@ -29,9 +29,10 @@
 export default {
   name: 'TogglePaperSize',
   props: {
-    value: { type: Boolean, default: false },
+    modelValue: { type: Boolean, default: false },
     buttonProps: { type: Object, default: () => ({}) },
   },
+  emits: ['update:modelValue'],
 }
 </script>
 
