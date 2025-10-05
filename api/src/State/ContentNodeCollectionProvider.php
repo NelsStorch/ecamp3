@@ -19,10 +19,10 @@ class ContentNodeCollectionProvider implements ProviderInterface {
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|object|null {
         $request = $this->requestStack->getCurrentRequest();
-        $hasFilter = $request?->query->has('camp') || $request?->query->has('period');
+        $hasFilter = $request?->query->has('camp') || $request?->query->has('period') || $request?->query->has('root');
 
         if (!$hasFilter) {
-            throw new BadRequestHttpException('Filter on camp or period is required');
+            throw new BadRequestHttpException('Filter on camp, period or root is required');
         }
 
         return $this->decorated->provide($operation, $uriVariables, $context);
