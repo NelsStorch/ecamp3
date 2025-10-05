@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card-text v-if="invitations.items.length === 0">
-      <p>
+      <p v-if="!loading">
         {{
           $t('components.personalInvitations.personalInvitations.noOpenInvitations', 0, {
             email: authUser.profile().email,
@@ -10,36 +10,36 @@
       </p>
     </v-card-text>
     <template v-if="$vuetify.display.mdAndUp">
-      <v-list-item v-for="invitation in invitations.items" :key="invitation._meta.self">
-        <v-list-item-content>
-          <v-list-item-title>{{ invitation.campTitle }}</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-action>
-          <DialogPersonalInvitationReject
-            :entity="invitation"
-            :camp-title="invitation.campTitle"
-            @submit="rejectInvitation(invitation)"
-          >
-            <template #activator="props">
-              <v-btn class="px-4" text v-bind="props">
-                {{ $t('components.personalInvitations.personalInvitations.reject') }}
-              </v-btn>
-            </template>
-          </DialogPersonalInvitationReject>
-        </v-list-item-action>
-        <v-list-item-action>
-          <v-btn color="primary" @click="acceptInvitation(invitation)">
-            {{ $t('components.personalInvitations.personalInvitations.accept') }}<br />
-          </v-btn>
-        </v-list-item-action>
+      <v-list-item
+        v-for="invitation in invitations.items"
+        :key="invitation._meta.self"
+        lines="two"
+      >
+        <v-list-item-title>{{ invitation.campTitle }}</v-list-item-title>
+        <template #append>
+          <v-list-item-action class="gap-4">
+            <DialogPersonalInvitationReject
+              :entity="invitation"
+              :camp-title="invitation.campTitle"
+              @submit="rejectInvitation(invitation)"
+            >
+              <template #activator="props">
+                <v-btn class="px-4" variant="text" v-bind="props">
+                  {{ $t('components.personalInvitations.personalInvitations.reject') }}
+                </v-btn>
+              </template>
+            </DialogPersonalInvitationReject>
+            <v-btn color="primary" @click="acceptInvitation(invitation)">
+              {{ $t('components.personalInvitations.personalInvitations.accept') }}<br />
+            </v-btn>
+          </v-list-item-action>
+        </template>
       </v-list-item>
     </template>
     <template v-else>
       <v-list-group v-for="invitation in invitations.items" :key="invitation._meta.self">
-        <template #activator>
-          <v-list-item-content>
-            <v-list-item-title>{{ invitation.campTitle }}</v-list-item-title>
-          </v-list-item-content>
+        <template #activator="{ props }">
+          <v-list-item v-bind="props" :title="invitation.campTitle"></v-list-item>
         </template>
         <v-list-item>
           <v-list-item-action>
@@ -49,14 +49,12 @@
               @submit="rejectInvitation(invitation)"
             >
               <template #activator="{ props }">
-                <v-btn class="px-4" text v-bind="props">
+                <v-btn class="px-4" variant="text" v-bind="props">
                   {{ $t('components.personalInvitations.personalInvitations.reject') }}
                 </v-btn>
               </template>
             </DialogPersonalInvitationReject>
-          </v-list-item-action>
-          <v-spacer />
-          <v-list-item-action>
+            <v-spacer />
             <v-btn color="primary" @click="acceptInvitation(invitation)">
               {{ $t('components.personalInvitations.personalInvitations.accept') }}<br />
             </v-btn>
@@ -82,6 +80,15 @@ const ignoreNavigationFailure = (e) => {
 export default {
   name: 'PersonalInvitations',
   components: { DialogPersonalInvitationReject },
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
+  data() {
+    return {
+      loading: true,
+    }
+  },
   computed: {
     invitations() {
       return this.api.get().personalInvitations()
@@ -90,9 +97,10 @@ export default {
       authUser: 'getLoggedInUser',
     }),
   },
-  setup() {
-    const toast = useToast()
-    return { toast }
+  async mounted() {
+    const user = await this.$auth.loadUser()
+    await user.profile()._meta.load
+    this.loading = false
   },
   methods: {
     acceptInvitation(invitation) {
