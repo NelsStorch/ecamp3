@@ -15,6 +15,8 @@ import ResponsiveLayout from '@/assets/icons/ResponsiveLayout.svg'
 import ColumnLayout from '@/assets/icons/ColumnLayout.svg'
 import i18n from '@/plugins/i18n'
 import { useI18n } from 'vue-i18n'
+import DayJsAdapter from '@date-io/dayjs'
+import en from 'dayjs/locale/en'
 
 import { VCalendar } from 'vuetify/labs/VCalendar'
 
@@ -29,6 +31,10 @@ class VuetifyLoaderPlugin {
     const opts = {
       locale: {
         adapter: createVueI18nAdapter({ i18n, useI18n }),
+      },
+      date: {
+        adapter: DayJsAdapter,
+        locale: { en },
       },
       icons: {
         aliases: {

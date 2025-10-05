@@ -139,8 +139,6 @@ export default {
   watch: {
     modelValue: {
       handler(val) {
-        console.log('wathch:modelValue')
-        console.log(val)
         // if the value is the same, we don't need to parse it again
         this.parseError = null
         this.intermediateParseError = null
@@ -156,8 +154,6 @@ export default {
   },
   methods: {
     onInput(value) {
-      console.log('onInput')
-      console.log(value)
       if (this.inputFilter) {
         value = this.inputFilter(value)
         this.stringValue = value
@@ -173,8 +169,6 @@ export default {
       }
     },
     onBlur(event, handleChange) {
-      console.log('onBlur')
-      console.log(event)
       if (this.resetOnBlur && !this.intermediateParseError) {
         this.stringValue = this.format?.(this.internalValue) ?? this.internalValue
         // TODO: is the next line still needed (haven't found any documentation on lazyValue)
@@ -184,13 +178,9 @@ export default {
       //
       //this.$refs.validationProvider.validate(this.serializedValue)
       handleChange(this.serializedValue)
-      console.log('trigger validation')
-      console.log(this.serializedValue)
       this.$emit('blur', event)
     },
     setValue(val) {
-      console.log('setValue')
-      console.log(val)
       if (!this.compare(this.serializedValue, this.serialize?.(val) ?? val)) {
         this.internalValue = val
 
@@ -199,8 +189,6 @@ export default {
       }
     },
     async parseValue(val) {
-      console.log('parseVal')
-      console.log(val)
       try {
         if (this.parse != null) {
           val = await this.parse(val)

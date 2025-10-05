@@ -4,8 +4,9 @@ Displays a field as a date picker (can be used with v-model)
 
 <template>
   <base-picker
+    v-bind="$attrs"
     :icon="icon"
-    :value="value"
+    :model-value="modelValue"
     :format="format"
     :format-picker="formatPicker"
     :parse="parse"
@@ -15,13 +16,12 @@ Displays a field as a date picker (can be used with v-model)
     :vee-rules="veeRules"
     button-aria-label-i18n-key="components.form.base.eDatePicker.openPicker"
     close-on-picker-input
-    v-bind="$attrs"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:model-value', $event)"
   >
     <template #default="picker">
       <v-date-picker
         :picker-date.sync="pickerMonth"
-        :value="picker.value || ''"
+        :model-value="picker.value || ''"
         :locale="$i18n.locale"
         first-day-of-week="1"
         :min="min"
@@ -30,7 +30,7 @@ Displays a field as a date picker (can be used with v-model)
         no-title
         scrollable
         show-adjacent-months
-        @input="picker.onInput"
+        @update:model-value="picker.onInput"
       >
         <v-spacer />
         <v-btn color="primary" variant="text" @click="picker.close">
@@ -50,13 +50,14 @@ Displays a field as a date picker (can be used with v-model)
 import BasePicker from './BasePicker.vue'
 import { HTML5_FMT } from '@/common/helpers/dateFormat.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import dayjs from '@/common/helpers/dayjs.js'
 
 export default {
   name: 'DatePicker',
   components: { BasePicker },
   mixins: [formComponentMixin],
   props: {
-    value: { type: [String, Number], required: true },
+    modelValue: { type: [String, Number], required: true },
     icon: { type: String, required: false, default: 'mdi-calendar' },
 
     // format in which the `value` property is being provided & input events are triggered
@@ -73,7 +74,7 @@ export default {
   watch: {
     min: {
       handler(newMin) {
-        if (this.value) return
+        if (this.modelValue) return
         if (!newMin) return
         const currentPickerMonth = this.$date(this.pickerMonth)
         const newMinPickerMonth = this.$date(newMin)
@@ -86,7 +87,7 @@ export default {
     },
     max: {
       handler(newMax) {
-        if (this.value) return
+        if (this.modelValue) return
         if (!newMax) return
         const currentPickerMonth = this.$date(this.pickerMonth)
         const newMaxPickerMonth = this.$date(newMax)
@@ -104,7 +105,7 @@ export default {
      */
     setDateOnValue(date) {
       // current value as DayJS
-      let valueDateTime = this.getValueAsDateTime(this.value)
+      let valueDateTime = this.getValueAsDateTime(this.modelValue)
 
       // override date
       if (valueDateTime && valueDateTime.isValid()) {
@@ -174,9 +175,9 @@ export default {
      */
     parsePicker(val) {
       if (val) {
-        const parsedDate = this.$date.utc(val, HTML5_FMT.DATE)
-        if (parsedDate.isValid() && parsedDate.format(HTML5_FMT.DATE) === val) {
-          const newValue = this.setDateOnValue(parsedDate)
+        const date = val // TODO: check if we now have a timezone issue across date bounderies
+        if (date && dayjs.isDayjs(date) && date.isValid()) {
+          const newValue = this.setDateOnValue(date)
           return Promise.resolve(newValue)
         } else {
           return Promise.reject(new Error('invalid format'))

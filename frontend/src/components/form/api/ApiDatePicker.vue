@@ -5,8 +5,8 @@ Displays a field as a date picker + write access via API wrapper
 <template>
   <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }">
     <e-date-picker
-      :value="wrapper.localValue || ''"
-      v-bind="{ ...$props, ...$attrs }"
+      v-bind="$attrs"
+      :model-value="wrapper.localValue"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
@@ -14,7 +14,7 @@ Displays a field as a date picker + write access via API wrapper
       :outlined="outlined"
       :filled="filled"
       :error-messages="wrapper.errorMessages"
-      @input="wrapper.on.input"
+      @update:model-value="wrapper.on.input"
     >
       <template #append>
         <api-wrapper-append :wrapper="wrapper" />

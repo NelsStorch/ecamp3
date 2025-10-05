@@ -16,9 +16,10 @@ Displays a field as a picker (can be used with v-model)
     >
       <template #activator="{ props }">
         <e-text-field
+          v-bind="$attrs"
           :id="id"
           ref="textField"
-          :value="fieldValue"
+          :model-value="fieldValue"
           :readonly="readonly"
           :disabled="disabled"
           :filled="filled"
@@ -27,10 +28,9 @@ Displays a field as a picker (can be used with v-model)
           :path="path"
           :label="label"
           :validation-label-override="validationLabelOverride"
-          v-bind="$attrs"
           :error-messages="combinedErrorMessages"
           @click="(...args) => (openOnTextFieldClick ? onMenuOpen(props, ...args) : null)"
-          @input="debouncedParseValue"
+          @update:modelValue="debouncedParseValue"
         >
           <template #prepend>
             <slot
@@ -77,7 +77,7 @@ export default {
   inheritAttr: false,
   mixins: [formComponentPropsMixin],
   props: {
-    value: { type: [Number, String], required: true },
+    modelValue: { type: [Number, String], required: true },
     icon: { type: String, required: false, default: null },
     iconColor: { type: String, required: false, default: null },
     readonly: { type: Boolean, required: false, default: false },
@@ -157,7 +157,7 @@ export default {
     },
   },
   watch: {
-    value(val) {
+    modelValue(val) {
       this.localValueInitialized = false
       this.setValue(val)
     },
@@ -170,7 +170,7 @@ export default {
     }
     document.addEventListener('keydown', this.escapeKeyHandler)
 
-    this.setValue(this.value)
+    this.setValue(this.modelValue)
   },
   beforeUnmount() {
     if (this.clickOutsideHandler) {
@@ -181,9 +181,9 @@ export default {
     }
   },
   methods: {
-    onMenuOpen(on, ...args) {
-      if (typeof on.click === 'function') {
-        return on.click(...args)
+    onMenuOpen(props, ...args) {
+      if (typeof props.onClick === 'function') {
+        return props.onClick(...args)
       }
       return () => {}
     },
@@ -192,9 +192,9 @@ export default {
         this.localValue = val
 
         if (this.localValueInitialized) {
-          this.$emit('input', val)
+          this.$emit('update:model-value', val)
           // after saving value, trigger validations
-          this.$refs.textField.$refs.validationProvider.validate(this.fieldValue)
+          // this.$refs.textField.$refs.validationProvider.validate(this.fieldValue)
         }
       }
       this.localValueInitialized = true
@@ -217,7 +217,7 @@ export default {
       this.showPicker = false
     },
     async inputFromPicker(val) {
-      if (this.value === val) {
+      if (this.modelValue === val) {
         return
       }
       try {
