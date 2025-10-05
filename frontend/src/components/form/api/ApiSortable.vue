@@ -3,6 +3,8 @@
     v-model="localSortedItems"
     ghost-class="ghost"
     handle=".drag-and-drop-handle"
+    tag="transition-group"
+    :component-data="{ name: !dragging ? 'flip-list' : null }"
     :animation="200"
     :force-fallback="true"
     :disabled="disabled"
@@ -10,16 +12,11 @@
     @end="dragging = false"
     @update="finishDrag"
   >
-    <!-- disable transition for drag&drop as draggable already comes with its own anmations -->
-    <transition-group :name="!dragging ? 'flip-list' : null" tag="div">
-      <div
-        v-for="(item, i) in localSortedItems"
-        :key="item._meta.self"
-        :data-href="item._meta.self"
-      >
-        <slot :item-position="i" :item="item" />
+    <template #item="{ element, index }">
+      <div :key="element._meta.self" :data-href="element._meta.self">
+        <slot :item-position="index" :item="element" />
       </div>
-    </transition-group>
+    </template>
   </draggable>
 </template>
 
