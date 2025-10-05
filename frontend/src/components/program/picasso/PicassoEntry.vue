@@ -26,11 +26,11 @@
       <v-icon size="x-small" color="white">mdi-content-copy</v-icon>
     </v-btn>
 
-    <!--    <ClipboardInfoDialog-->
-    <!--      v-if="isEditable"-->
-    <!--      ref="copyInfoDialog"-->
-    <!--      translation-context-i18n-key="components.program.picasso.picassoEntry.clipboardInfoDialog"-->
-    <!--    />-->
+    <ClipboardInfoDialog
+      v-if="isEditable"
+      ref="copyInfoDialog"
+      translation-context-i18n-key="components.program.picasso.picassoEntry.clipboardInfoDialog"
+    />
 
     <!-- edit button & dialog -->
     <DialogActivityEdit
