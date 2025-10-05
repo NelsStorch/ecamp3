@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panel ref="panel">
+  <v-expansion-panel :value="panelValue">
     <v-expansion-panel-title>
       <h3>{{ dateLong(day.start) }}</h3>
     </v-expansion-panel-title>
@@ -102,21 +102,11 @@ export default {
     entriesWithStory() {
       return this.entries.filter(({ storyChapters }) => storyChapters.length)
     },
-  },
-  watch: {
-    day(value) {
-      this.updatePanelValue(value)
-    },
-  },
-  async mounted() {
-    this.updatePanelValue(this.day)
-  },
-  methods: {
-    updatePanelValue(day) {
+    panelValue() {
       // Mark the component with the date of the day.
       // This allows the use of the date in the parent component.
       // See StoryPeriod.vue: v-expansion-panels.v-model
-      this.$refs.panel.value = day.start.substr(0, 10)
+      return this.day.start.substr(0, 10)
     },
   },
 }
