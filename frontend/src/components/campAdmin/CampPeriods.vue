@@ -11,8 +11,8 @@ Displays all periods of a single camp and allows to edit them & create new ones
       <dialog-period-create v-if="!disabled" :camp="camp">
         <template #activator="{ props }">
           <button-add
-            color="secondary"
-            text
+            color="blue-grey-darken-2"
+            variant="text"
             class="my-n2"
             :hide-label="$vuetify.display.xs"
             v-bind="props"
@@ -23,7 +23,7 @@ Displays all periods of a single camp and allows to edit them & create new ones
       </dialog-period-create>
     </template>
     <v-skeleton-loader v-if="camp.periods()._meta.loading" type="article" />
-    <v-list>
+    <v-list class="py-0">
       <period-item
         v-for="period in periods"
         :key="period._meta.self"
