@@ -1,6 +1,6 @@
 <template>
   <auth-container>
-    <h1 class="display-1 text-center">{{ $t('views.auth.register.title') }}</h1>
+    <h1 class="text-h4 text-center">{{ $t('views.auth.register.title') }}</h1>
 
     <VeeForm v-slot="{ handleSubmit }">
       <e-form name="profile">
@@ -53,7 +53,7 @@
             <template #loader>
               <v-progress-linear
                 :color="passwordStrengthColor"
-                :value="passwordStrength"
+                :model-value="passwordStrength"
                 absolute
                 height="5"
               />
@@ -99,9 +99,9 @@
                 min-width="0"
                 tabindex="-1"
                 target="_blank"
-                text
+                variant="text"
               >
-                <v-icon small>mdi-open-in-new</v-icon>
+                <v-icon size="small">mdi-open-in-new</v-icon>
               </v-btn>
             </template>
           </e-checkbox>
@@ -113,7 +113,7 @@
             </small>
           </p>
 
-          <v-btn block color="primary" type="submit" x-large>
+          <v-btn block color="primary" type="submit" size="x-large">
             <v-progress-circular v-if="registering" indeterminate size="24" />
             <v-spacer />
             <span>{{ $t('views.auth.register.register') }}</span>

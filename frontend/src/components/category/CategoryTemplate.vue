@@ -12,7 +12,7 @@
         <v-tabs
           v-model="layoutMode"
           class="ec-category-layoutmode-tabs"
-          centered
+          align-tabs="center"
           hide-slider
         >
           <v-tab :tab-value="true">

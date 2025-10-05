@@ -12,7 +12,7 @@
   <!--  >-->
   <v-autocomplete
     v-bind="$attrs"
-    :search-input.sync="search"
+    :search.sync="search"
     :filled="filled"
     :hide-details="hideDetails"
     :error-messages="(veeErrors ?? []).concat(errorMessages)"
@@ -20,18 +20,16 @@
     :class="[inputClass]"
     :readonly="readonly"
     :append-icon="readonly ? null : '$dropdown'"
-    :filter="tokensFilter"
+    :custom-filter="tokensFilter"
   >
     <template #item="{ item, on, attrs }">
       <v-list-item v-bind="attrs" v-on="on">
-        <v-list-item-content>
-          <v-list-item-title>
-            <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
-              <mark v-if="part.h">{{ part.text }}</mark>
-              <span v-else>{{ part.text }}</span>
-            </span>
-          </v-list-item-title>
-        </v-list-item-content>
+        <v-list-item-title>
+          <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
+            <mark v-if="part.h">{{ part.text }}</mark>
+            <span v-else>{{ part.text }}</span>
+          </span>
+        </v-list-item-title>
       </v-list-item>
     </template>
 

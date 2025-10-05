@@ -15,9 +15,7 @@
                   <template #prepend>
                     <v-icon>mdi-plus</v-icon>
                   </template>
-                  <v-list-item-content
-                    >{{ $t('views.camp.material.materialOverview.createNewList') }}
-                  </v-list-item-content>
+                  {{ $t('views.camp.material.materialOverview.createNewList') }}
                 </v-list-item>
               </template>
             </DialogMaterialListCreate>
@@ -25,9 +23,7 @@
               <template #prepend>
                 <v-icon>mdi-microsoft-excel</v-icon>
               </template>
-              <v-list-item-content
-                >{{ $t('views.camp.material.materialOverview.download') }}
-              </v-list-item-content>
+              {{ $t('views.camp.material.materialOverview.download') }}
             </v-list-item>
           </v-list>
         </v-menu>
@@ -37,7 +33,7 @@
         v-model="openPeriods"
         multiple
         flat
-        accordion
+        variant="accordion"
       >
         <PeriodMaterialLists
           v-for="{ period, materialItems } in collection"

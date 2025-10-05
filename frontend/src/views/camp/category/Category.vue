@@ -17,8 +17,8 @@
       <template #title-actions>
         <TogglePaperSize v-model="isPaperDisplaySize" />
         <v-menu offset-y>
-          <template #activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props">
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
@@ -62,36 +62,36 @@
           </v-list>
         </v-menu>
       </template>
-      <v-expansion-panels :value="openPanels" flat multiple accordion>
+      <v-expansion-panels :model-value="openPanels" flat multiple variant="accordion">
         <v-expansion-panel>
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
               {{ $t('views.camp.category.category.properties') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <CategoryProperties
               :key="category._meta.self"
               :category="category"
               :disabled="!isManager"
             />
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
 
         <v-expansion-panel>
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
               {{ $t('views.camp.category.category.template') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <CategoryTemplate
               :category="category"
               :layout-mode="layoutMode"
               :loading="loading"
               :disabled="!isManager"
             />
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
     </content-card>

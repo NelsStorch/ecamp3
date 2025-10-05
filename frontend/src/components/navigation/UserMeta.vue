@@ -4,7 +4,7 @@
     v-model="open"
     offset-y
     dark
-    right
+    location="right"
     rounded
     :content-class="
       ['ec-usermenu py-4', !$vuetify.display.xs ? 'rounded-lg mt-2' : 'rounded-md'].join(
@@ -19,7 +19,7 @@
       <v-toolbar-items v-if="!avatarOnly">
         <v-btn
           start
-          text
+          variant="text"
           v-bind="props"
           :class="[btnClasses, { 'v-btn--open': props['aria-expanded'] === 'true' }]"
         >
@@ -46,7 +46,7 @@
       <v-btn
         v-else
         icon
-        text
+        variant="text"
         v-bind="props"
         :class="[btnClasses, { 'v-btn--open': props['aria-expanded'] === 'true' }]"
       >

@@ -38,7 +38,7 @@
               <template #activator="{ props }">
                 <v-btn
                   :title="$t('components.campCreate.campCreateStep2.pasteCamp')"
-                  text
+                  variant="text"
                   class="v-btn--has-bg"
                   height="56"
                   v-bind="props"
@@ -52,7 +52,7 @@
               v-else-if="!clipboardAccessDenied"
               ref="pasteButton"
               :title="$t('components.campCreate.campCreateStep2.pasteCamp')"
-              text
+              variant="text"
               class="v-btn--has-bg"
               height="56"
               @click="attemptLoadingEntityFromClipboard"
@@ -65,7 +65,7 @@
             <h3 class="mt-2 h3">
               {{ $t('components.campCreate.campCreateStep2.preview') }}
             </h3>
-            <v-list class="w-100" dense color="transparent">
+            <v-list class="w-100" density="compact" color="transparent">
               <v-list-subheader class="px-0" style="height: auto">
                 {{ $t('components.campCreate.campCreateStep2.category') }}
               </v-list-subheader>
@@ -77,7 +77,7 @@
                 <v-list-item-title class="d-flex gap-2 align-baseline">
                   <CategoryChip :category="category" class="mx-0 flex-shrink-0" dense />
                   <span class="font-weight-medium">{{ category.name }}</span>
-                  <small class="blue-grey--text">{{
+                  <small class="text-blue-grey">{{
                     category
                       .preferredContentTypes()
                       .items.map((item) =>
@@ -89,7 +89,7 @@
               </v-list-item>
             </v-list>
             <div class="d-flex flex-row">
-              <v-list class="w-100 sm:w-50" dense color="transparent">
+              <v-list class="w-100 sm:w-50" density="compact" color="transparent">
                 <v-list-subheader class="px-0" style="height: auto">
                   {{ $t('components.campCreate.campCreateStep2.progressLabels') }}
                 </v-list-subheader>
@@ -104,7 +104,7 @@
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
-              <v-list class="w-100 sm:w-50" dense color="transparent">
+              <v-list class="w-100 sm:w-50" density="compact" color="transparent">
                 <v-list-subheader class="px-0" style="height: auto">
                   {{ $t('components.campCreate.campCreateStep2.materialLists') }}
                 </v-list-subheader>
@@ -122,7 +122,7 @@
             <v-list
               v-if="prototypePreview.checklists().items.length"
               class="w-100"
-              dense
+              density="compact"
               color="transparent"
             >
               <v-list-subheader class="px-0" style="height: auto">
@@ -135,7 +135,7 @@
               >
                 <v-list-item-title class="d-flex gap-2 align-baseline">
                   {{ checklist.name }}
-                  <small class="blue-grey--text">{{
+                  <small class="text-blue-grey">{{
                     $t(
                       'components.campCreate.campCreateStep2.checklistItemCount',
                       checklist.checklistItems().items.length
@@ -162,7 +162,7 @@
         <v-divider />
         <ContentActions>
           <v-btn
-            text
+            variant="text"
             color="secondary"
             :disabled="isSaving"
             @click="$emit('previous-step')"
@@ -180,7 +180,7 @@
             >
               {{ $t('components.campCreate.campCreateStep2.create') }}
             </ButtonAdd>
-            <v-tooltip v-else top>
+            <v-tooltip v-else location="top">
               <template #activator="{ props }">
                 <ButtonAdd
                   color="secondary"

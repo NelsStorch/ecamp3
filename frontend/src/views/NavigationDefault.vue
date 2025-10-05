@@ -9,7 +9,7 @@
     <Logo text />
     <v-spacer />
     <v-toolbar-items v-if="$vuetify.display.lgAndUp">
-      <v-btn :href="helpLink" target="_blank" text>
+      <v-btn :href="helpLink" target="_blank" variant="text">
         {{ $t('global.navigation.help') }}
         <v-icon size="small" end color="blue-grey" icon="mdi-open-in-new" />
       </v-btn>

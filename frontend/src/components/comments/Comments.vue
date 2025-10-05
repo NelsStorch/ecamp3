@@ -43,7 +43,7 @@
         </div>
         <v-btn
           absolute
-          text
+          variant="text"
           style="bottom: 2px; right: 1px"
           :disabled="newComment.length === 0"
           @click="addComment"

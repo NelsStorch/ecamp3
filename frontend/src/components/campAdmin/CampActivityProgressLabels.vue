@@ -75,14 +75,18 @@
                 itemPosition + 1
               }}</v-avatar>
             </template>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ item.title }}
-              </v-list-item-title>
-            </v-list-item-content>
+
+            <v-list-item-title>
+              {{ item.title }}
+            </v-list-item-title>
 
             <v-list-item-action style="display: inline">
-              <v-btn text plain icon class="my-n1 pointer-events-none">
+              <v-btn
+                variant="text"
+                variant="plain"
+                icon
+                class="my-n1 pointer-events-none"
+              >
                 <v-icon>mdi-drag</v-icon>
               </v-btn>
             </v-list-item-action>

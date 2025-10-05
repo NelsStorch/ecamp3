@@ -2,7 +2,7 @@
   <content-card :title="$t('views.camp.dashboard.activities')" toolbar>
     <template #title-actions>
       <v-spacer />
-      <v-btn v-if="today !== null" text @click="scrollToToday">
+      <v-btn v-if="today !== null" variant="text" @click="scrollToToday">
         <v-icon start>mdi-calendar-today</v-icon>
         {{ $t('views.camp.dashboard.today') }}
       </v-btn>

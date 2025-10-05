@@ -18,7 +18,7 @@
         height="24"
         @click="makeChecklistNameEditable()"
       >
-        <v-icon small>mdi-pencil</v-icon>
+        <v-icon size="small">mdi-pencil</v-icon>
       </v-btn>
       <api-form v-if="editChecklistName" :entity="checklist" class="mx-2 flex-grow-1">
         <api-text-field

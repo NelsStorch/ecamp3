@@ -15,8 +15,8 @@ Show all activity schedule entries of a single period.
         <v-toolbar-items v-if="isFilterSet">
           <v-chip
             label
-            outlined
-            :input-value="openFilter"
+            variant="outlined"
+            :model-value="openFilter"
             color="primary"
             class="align-self-center mr-2"
             @click="openFilter = !openFilter"
@@ -27,10 +27,10 @@ Show all activity schedule entries of a single period.
         </v-toolbar-items>
         <v-chip
           v-else
-          outlined
+          variant="outlined"
           label
           class="mr-1"
-          :input-value="openFilter"
+          :model-value="openFilter"
           @click="openFilter = !openFilter"
         >
           <v-icon size="20" color="rgba(0, 0, 0, 0.54)">mdi-filter</v-icon>
@@ -72,9 +72,9 @@ Show all activity schedule entries of a single period.
             <template #prepend>
               <v-icon>mdi-filter</v-icon>
             </template>
-            <v-list-item-content>
-              <v-list-item-title>Filter</v-list-item-title>
-            </v-list-item-content>
+
+            <v-list-item-title>Filter</v-list-item-title>
+
             <v-list-item-action v-if="isFilterSet">
               <v-badge inline color="primary" :content="filteredPropertiesCount" />
             </v-list-item-action>

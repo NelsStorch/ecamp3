@@ -16,7 +16,7 @@
     <!-- "handleSubmit(doSubmit)" -->
     <v-form @submit.prevent="doSubmit">
       <v-card>
-        <v-toolbar class="ec-dialog-toolbar" dense elevation="0">
+        <v-toolbar class="ec-dialog-toolbar" density="compact" elevation="0">
           <v-icon start>
             {{ icon }}
           </v-icon>

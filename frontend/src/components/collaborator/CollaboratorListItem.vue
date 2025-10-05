@@ -9,7 +9,7 @@
       <user-avatar size="40" :camp-collaboration="collaborator" omit-sr />
     </template>
     <v-list-item-subtitle>
-      <v-tooltip right>
+      <v-tooltip location="right">
         <template #activator="{ props }">
           <button v-bind="props">
             {{ $t(roles[collaborator.role].roleTranslation)

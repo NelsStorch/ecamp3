@@ -9,7 +9,7 @@
     <logo text />
     <v-spacer />
     <v-toolbar-items>
-      <v-btn :href="newsLink" target="_blank" text>
+      <v-btn :href="newsLink" target="_blank" variant="text">
         <v-icon start size="small">mdi-script-text-outline</v-icon>
         {{ $t('global.navigation.news') }}
       </v-btn>
@@ -18,11 +18,10 @@
       :href="helpLink"
       target="_blank"
       fab
-      x-small
+      size="x-small"
       light
       position="absolute"
-      top
-      right
+      location="top right"
       class="help-button--desktop"
     >
       <v-icon>mdi-help</v-icon>
@@ -37,9 +36,7 @@
     icon="mdi-help"
     size="small"
     position="absolute"
-    location="right"
-    top
-    right
+    location="right top right"
     class="help-button--mobile ma-4"
     style="z-index: 10"
   >

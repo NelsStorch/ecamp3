@@ -1,5 +1,5 @@
 <template>
-  <v-btn text>
+  <v-btn variant="text">
     <template v-if="$vuetify.display.mdAndUp" #prepend>
       <v-icon :icon="icon" />
     </template>

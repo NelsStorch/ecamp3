@@ -21,10 +21,7 @@
       <div
         class="d-flex flex-column flex-grow-1 ec-responsivelayout__slot ec-responsivelayout__slot--main"
       >
-        <p
-          v-if="layoutMode"
-          class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
-        >
+        <p v-if="layoutMode" class="mt-2 mb-1 text-blue-darken-3 font-weight-medium">
           {{ $t('contentNode.responsiveLayout.mainContent') }}
         </p>
         <draggable-content-nodes
@@ -40,10 +37,7 @@
         class="d-flex flex-column ec-responsivelayout__slot ec-responsivelayout__slot--aside-top"
         :class="{ 'flex-grow-1': !layoutMode }"
       >
-        <p
-          v-if="layoutMode"
-          class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
-        >
+        <p v-if="layoutMode" class="mt-2 mb-1 text-blue-darken-3 font-weight-medium">
           {{ $t('contentNode.responsiveLayout.printAboveMainContent') }}
         </p>
         <draggable-content-nodes
@@ -64,10 +58,7 @@
         class="d-flex flex-column ec-responsivelayout__slot"
         :class="{ 'flex-grow-1': !layoutMode }"
       >
-        <p
-          v-if="layoutMode"
-          class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
-        >
+        <p v-if="layoutMode" class="mt-2 mb-1 text-blue-darken-3 font-weight-medium">
           {{ $t('contentNode.responsiveLayout.printBelowMainContent') }}
         </p>
         <draggable-content-nodes

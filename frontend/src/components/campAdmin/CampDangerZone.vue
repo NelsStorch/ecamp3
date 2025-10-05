@@ -45,7 +45,7 @@ Critical operations on camp
                       {{ $t('global.button.delete') }}
                     </button-delete>
                   </template>
-                  <p class="body-1">
+                  <p class="text-body-1">
                     {{
                       $t(
                         'components.campAdmin.campDangerZone.deleteCamp.explanation',

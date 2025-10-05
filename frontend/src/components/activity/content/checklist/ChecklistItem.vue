@@ -7,7 +7,13 @@
       <component :is="checked ? 'strong' : 'span'" class="flex-grow-1"
         >{{ item.text }}
       </component>
-      <v-switch inset dense :input-value="checked" hide-details class="mt-0" />
+      <v-switch
+        inset
+        density="compact"
+        :model-value="checked"
+        hide-details
+        class="mt-0"
+      />
     </div>
     <ol v-if="children.length > 0">
       <ChecklistItem

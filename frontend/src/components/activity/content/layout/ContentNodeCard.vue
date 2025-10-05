@@ -6,7 +6,7 @@
     :class="{ 'mx-2 my-2 elevation-4--light': draggable }"
   >
     <v-card-title hide-actions class="pa-0 pr-sm-2">
-      <v-toolbar dense flat color="transparent">
+      <v-toolbar density="compact" flat color="transparent">
         <v-icon class="mr-2">{{ icon }}</v-icon>
 
         <api-form
@@ -41,7 +41,7 @@
           height="24"
           @click="toggleEditInstanceName"
         >
-          <v-icon small>mdi-pencil</v-icon>
+          <v-icon size="small">mdi-pencil</v-icon>
         </v-btn>
 
         <v-spacer v-if="!editInstanceName" />

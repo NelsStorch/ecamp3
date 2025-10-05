@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    outlined
+    border
     class="ec-comment"
     elevation="2"
     rounded="lg"
@@ -22,7 +22,7 @@
           class="ec-comment__delete"
           icon
           absolute
-          right
+          location="right"
           v-bind="attrs"
           v-on="on"
         >

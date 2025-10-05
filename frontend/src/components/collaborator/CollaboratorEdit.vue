@@ -31,7 +31,7 @@
         v-if="collaborator.status === 'invited'"
         text
         class="v-btn--has-bg"
-        color="blue-grey darken-2"
+        color="blue-grey-darken-2"
         :icon="
           resendingEmail
             ? 'mdi-refresh'

@@ -51,7 +51,7 @@
 
       <template #drawer>
         <v-expansion-panels flat class="e-print-configurator__cnf">
-          <v-expansion-panel class="transparent rounded-0">
+          <v-expansion-panel class="bg-transparent rounded-0">
             <v-expansion-panel-title class="subtitle py-2"
               >{{ $t('components.print.printConfigurator.options') }}
             </v-expansion-panel-title>

@@ -10,9 +10,9 @@
   >
     <template #activator="{ props }">
       <v-chip
-        :input-value="dialogOpen"
+        :model-value="dialogOpen"
         label
-        outlined
+        variant="outlined"
         :color="anyFilter ? 'primary' : null"
         class="align-self-stretch mt-4 mb-4"
         v-bind="props"

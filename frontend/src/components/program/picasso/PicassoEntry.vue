@@ -16,14 +16,14 @@
     <!-- Copy -->
     <v-btn
       v-if="isEditable"
-      x-small
-      text
+      size="x-small"
+      variant="text"
       class="e-picasso-entry__copy-url rounded-sm pr-0"
       @click.prevent="copyUrlToClipboard"
       @mousedown.stop=""
       @mouseup.stop=""
     >
-      <v-icon x-small color="white">mdi-content-copy</v-icon>
+      <v-icon size="x-small" color="white">mdi-content-copy</v-icon>
     </v-btn>
 
     <!--    <ClipboardInfoDialog-->
@@ -42,14 +42,14 @@
     >
       <template #activator="{ props }">
         <v-btn
-          x-small
-          text
+          size="x-small"
+          variant="text"
           class="e-picasso-entry__quickedit rounded-sm pr-0"
           @click.prevent="props.onClick"
           @mousedown.stop=""
           @mouseup.stop=""
         >
-          <v-icon x-small color="white">mdi-pencil</v-icon>
+          <v-icon size="x-small" color="white">mdi-pencil</v-icon>
         </v-btn>
       </template>
     </DialogActivityEdit>

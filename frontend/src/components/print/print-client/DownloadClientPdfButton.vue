@@ -9,7 +9,7 @@
     <div class="progress-wrapper">
       <v-progress-circular
         v-if="loading"
-        :value="progress"
+        :model-value="progress"
         size="24"
         rotate="270"
       ></v-progress-circular>

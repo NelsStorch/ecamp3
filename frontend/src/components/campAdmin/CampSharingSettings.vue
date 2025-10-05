@@ -48,7 +48,7 @@
                   v-if="isManager"
                   :color="camp.isShared ? '' : 'error'"
                   elevation="0"
-                  text
+                  variant="text"
                   class="v-btn--has-bg"
                   :loading="loading"
                   @click="toggleShare"
@@ -69,7 +69,11 @@
                     ><a :href="campUrl">{{ campUrl }}</a></small
                   >
 
-                  <v-btn text class="v-btn--has-bg" @click="copyCampUrlToClipboard()">
+                  <v-btn
+                    variant="text"
+                    class="v-btn--has-bg"
+                    @click="copyCampUrlToClipboard()"
+                  >
                     <v-icon start>mdi-clipboard-check-multiple-outline</v-icon>
                     {{ $t('global.button.copy') }}
                   </v-btn>

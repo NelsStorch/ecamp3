@@ -22,7 +22,7 @@
         <span class="ml-1">{{ deploymentTime }}</span>
       </h3>
     </v-card-text>
-    <v-simple-table dense>
+    <v-table density="compact">
       <tbody>
         <tr v-for="[key, value] in envArray" :key="key">
           <th>{{ key }}</th>
@@ -31,7 +31,7 @@
           </td>
         </tr>
       </tbody>
-    </v-simple-table>
+    </v-table>
   </content-card>
 </template>
 

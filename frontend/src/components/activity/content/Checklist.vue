@@ -29,12 +29,12 @@
           </button>
         </template>
         <div class="ma-n4">
-          <v-expansion-panels multiple flat accordion>
+          <v-expansion-panels multiple flat variant="accordion">
             <v-expansion-panel
               v-for="{ checklist, items } in allChecklists"
               :key="checklist._meta.self"
             >
-              <v-expansion-panel-header>
+              <v-expansion-panel-title>
                 <h3>
                   {{ checklist.name }}
                   <small class="font-weight-regular">
@@ -48,8 +48,8 @@
                     selected)
                   </small>
                 </h3>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text>
                 <ol>
                   <ChecklistItem
                     v-for="{ item } in items.filter(({ item }) => item.parent == null)"
@@ -60,7 +60,7 @@
                     @add-item="addItem"
                   />
                 </ol>
-              </v-expansion-panel-content>
+              </v-expansion-panel-text>
             </v-expansion-panel>
           </v-expansion-panels>
         </div>

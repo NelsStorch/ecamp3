@@ -12,11 +12,11 @@ Displays a field as a color picker (can be used with v-model)
       offset-y
       offset-overflow
       :open-on-click="false"
-      :close-on-click="false"
+      persistent
       :close-on-content-click="false"
       min-width="290px"
       max-width="290px"
-      @input="onPickerClose"
+      @update:model-value="onPickerClose"
     >
       <template #activator="{ props }">
         <div v-bind="props">
@@ -66,18 +66,18 @@ Displays a field as a color picker (can be used with v-model)
         <v-color-picker
           v-if="pickerNull"
           key="model"
-          value="#FF0000"
+          model-value="#FF0000"
           :style="{ '--picker-contrast-color': contrast }"
           flat
-          @update:color="onPickerInput($event.hex)"
+          @update:model-value="onPickerInput($event.hex)"
         />
         <v-color-picker
           v-else
           key="null"
-          :value="pickerValue"
+          :model-value="pickerValue"
           :style="{ '--picker-contrast-color': contrast }"
           flat
-          @update:color="debouncedPickerValue($event.hex)"
+          @update:model-value="debouncedPickerValue($event.hex)"
         />
         <v-divider />
         <div class="d-flex gap-2 pa-4 flex-wrap">

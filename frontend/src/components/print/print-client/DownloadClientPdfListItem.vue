@@ -7,7 +7,7 @@
     <v-list-item-title>
       <v-progress-circular
         v-if="loading"
-        :value="progress"
+        :model-value="progress"
         :rotate="0"
         size="24"
         color="primary"

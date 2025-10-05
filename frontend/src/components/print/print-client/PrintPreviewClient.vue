@@ -13,7 +13,7 @@
       </div>
       <div v-else class="d-flex flex-column gap-3 align-center">
         <v-progress-circular
-          :value="progress"
+          :model-value="progress"
           :rotate="270"
           size="24"
         ></v-progress-circular>

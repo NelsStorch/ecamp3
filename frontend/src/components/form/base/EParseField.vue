@@ -5,10 +5,10 @@ Displays a field as a textfield (can be used with v-model)
 <template>
   <Field
     v-slot="{ handleChange, errors: veeErrors }"
+    ref="validationField"
     :name="veeId ?? path"
     :label="validationLabel"
     :rules="veeRules"
-    ref="validationField"
   >
     <v-text-field
       v-bind="$attrs"
@@ -22,7 +22,7 @@ Displays a field as a textfield (can be used with v-model)
       :model-value="stringValue"
       type="text"
       @blur="onBlur($event, handleChange)"
-      @update:modelValue="onInput"
+      @update:model-value="onInput"
     >
       <template #prepend>
         <slot
@@ -55,7 +55,6 @@ export default {
   components: {
     Field,
   },
-  emits: ['update:model-value'],
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
     modelValue: { validator: () => true, required: true },
@@ -100,6 +99,7 @@ export default {
      */
     inputFilter: { type: Function, required: false, default: null },
   },
+  emits: ['update:model-value'],
   data() {
     return {
       /**

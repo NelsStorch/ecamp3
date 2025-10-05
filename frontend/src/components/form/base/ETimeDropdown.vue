@@ -1,5 +1,5 @@
 <template>
-  <v-menu ref="menu" v-bind="menuProps" @input="toggle">
+  <v-menu ref="menu" v-bind="menuProps" @update:model-value="toggle">
     <template #activator="{ props }">
       <e-time-field
         :value="value"

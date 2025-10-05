@@ -14,7 +14,11 @@
       :tippy-options="{ maxWidth: 'none' }"
     >
       <div class="elevation-4 ec-tiptap-toolbar bg-white">
-        <v-toolbar class="elevation-0 ec-tiptap-toolbar--first" dense color="transparent">
+        <v-toolbar
+          class="elevation-0 ec-tiptap-toolbar--first"
+          density="compact"
+          color="transparent"
+        >
           <TiptapToolbarButton
             icon="mdi-format-bold"
             :class="editor.isActive('bold') ? 'v-item--active v-btn--active' : ''"
@@ -75,7 +79,7 @@
         <v-divider class="ec-tiptap-toolbar__mobile-divider" />
         <v-toolbar
           class="elevation-0 ec-tiptap-toolbar--second"
-          dense
+          density="compact"
           color="transparent"
         >
           <TiptapToolbarButton

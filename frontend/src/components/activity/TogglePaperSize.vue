@@ -2,7 +2,7 @@
   <v-tooltip location="bottom">
     <template #activator="{ props }">
       <v-btn
-        text
+        variant="text"
         icon
         class="ec-paper-size-toggle d-none d-md-block"
         :aria-label="

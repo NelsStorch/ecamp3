@@ -55,7 +55,7 @@
             class="mt-2"
             color="red"
             block
-            large
+            size="large"
             dark
             @click="$auth.logout()"
           >

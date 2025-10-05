@@ -13,7 +13,12 @@
     <ChecklistItemEdit v-else :checklist="checklist" :checklist-item="item">
       <template #activator="{ on }">
         <v-list-item class="px-2 rounded min-h-0 py-1 drag-and-drop-handle" v-on="on">
-          <v-btn text plain icon class="my-n1 ml-n1 pointer-events-none">
+          <v-btn
+            variant="text"
+            variant="plain"
+            icon
+            class="my-n1 ml-n1 pointer-events-none"
+          >
             <v-icon>mdi-drag</v-icon>
           </v-btn>
           <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{

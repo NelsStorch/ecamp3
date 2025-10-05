@@ -38,7 +38,7 @@
               data-testid="create-camp-next-step"
               @click="$emit('next-step')"
             />
-            <v-tooltip v-else top>
+            <v-tooltip v-else location="top">
               <template #activator="{ props }">
                 <v-btn elevation="0" color="secondary" v-bind="props" @click="validate()">
                   {{ $t('global.button.continue') }}

@@ -3,8 +3,8 @@
     <v-menu offset-y>
       <template #activator="{ props }">
         <v-btn
-          text
-          large
+          variant="text"
+          size="large"
           class="justify-start px-4 my-1 rounded-pill ec-period-switcher__button"
           height="auto"
           block
@@ -25,14 +25,12 @@
           v-for="item in allPeriods"
           :key="item._meta.self"
           :to="periodRoute(item, routeName)"
-          two-line
+          lines="two"
         >
-          <v-list-item-content>
-            <v-list-item-title>{{ item.description }}</v-list-item-title>
-            <v-list-item-subtitle>
-              {{ dateRange(item.start, item.end) }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>{{ item.description }}</v-list-item-title>
+          <v-list-item-subtitle>
+            {{ dateRange(item.start, item.end) }}
+          </v-list-item-subtitle>
         </v-list-item>
       </v-list>
     </v-menu>

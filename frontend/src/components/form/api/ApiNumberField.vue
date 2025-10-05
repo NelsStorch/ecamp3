@@ -16,7 +16,7 @@ Displays a field as a e-number-field + write access via API wrapper
       :outlined="outlined"
       :filled="filled"
       :dense="dense"
-      @update:modelValue="wrapper.on.input"
+      @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"
     >
       <template #append>

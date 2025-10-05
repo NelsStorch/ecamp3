@@ -27,7 +27,7 @@ Displays a single scheduleEntry
               <template #after>
                 <v-icon
                   v-if="isContributor"
-                  right
+                  end
                   class="ml-0 e-category-chip-save-icon"
                   :class="{ 'mdi-spin': categoryChangeState === 'saving' }"
                 >
@@ -87,7 +87,7 @@ Displays a single scheduleEntry
         v-if="layoutMode"
         color="success"
         class="ml-3"
-        outlined
+        variant="outlined"
         @click="layoutMode = false"
       >
         <template v-if="$vuetify.display.smAndUp">

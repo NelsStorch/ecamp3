@@ -4,7 +4,7 @@
       <strong class="whitespace-normal">{{ camp.title }}</strong>
       <v-chip
         v-if="camp.isShared === true"
-        x-small
+        size="x-small"
         class="align-self-center px-1 v-btn--has-bg"
         >{{ $t('components.camp.campListItem.public') }}</v-chip
       >

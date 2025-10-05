@@ -8,7 +8,7 @@
     :disable-sort="layoutMode"
     mobile-breakpoint="0"
     item-class="rowClass"
-    class="transparent"
+    class="bg-transparent"
     :class="{
       'ec-material-table--dense': !isDefaultVariant,
       'ec-material-table--default': isDefaultVariant,
@@ -124,9 +124,9 @@
         />
 
         <div v-if="item.serverError" class="d-flex gap-2 align-center">
-          <v-tooltip top color="red darken-2">
+          <v-tooltip location="top" color="red-darken-2">
             <template #activator="{ props }">
-              <span v-bind="props" class="red--text text--darken-2">{{
+              <span v-bind="props" class="text-red-darken-2">{{
                 $t('global.serverError.short')
               }}</span>
             </template>
@@ -162,7 +162,7 @@
         <v-icon
           v-if="periodFilterEnabled"
           aria-hidden="true"
-          small
+          size="small"
           :color="periodOnly ? 'primary' : null"
         >
           {{ periodOnly ? 'mdi-filter' : 'mdi-filter-outline' }}

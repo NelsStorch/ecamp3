@@ -22,7 +22,7 @@
           <template #br><br /></template>
         </i18n-t>
         <v-btn
-          text
+          variant="text"
           elevation="0"
           height="32px"
           class="v-btn--has-bg float-end dev-login-button text-deep-orange-darken-4"
@@ -41,7 +41,7 @@
     </v-alert>
     <v-alert
       v-if="error"
-      outlined
+      variant="outlined"
       variant="tonal"
       border="start"
       type="error"

@@ -28,9 +28,9 @@
       <template #selection="{ item }">
         <span
           >{{ item.role }} &middot;
-          <span class="grey--text"
+          <span class="text-grey"
             ><template v-for="icon in item.icons" :key="icon"
-              ><v-icon x-small>{{ icon }}</v-icon
+              ><v-icon size="x-small">{{ icon }}</v-icon
               >&thinsp;</template
             ></span
           >
@@ -48,15 +48,14 @@
       vee-rules="required"
     >
       <template #item="{ item, on, attrs }">
-        <v-list-item v-bind="attrs" two-line v-on="on">
-          <v-list-item-content>
-            <v-list-item-title>{{ item.role }}</v-list-item-title>
-            <span class="caption">{{ item.abilities }}</span>
-          </v-list-item-content>
+        <v-list-item v-bind="attrs" lines="two" v-on="on">
+          <v-list-item-title>{{ item.role }}</v-list-item-title>
+          <span class="text-caption">{{ item.abilities }}</span>
+
           <v-list-item-action-text class="text-right">
             <span
               ><template v-for="icon in item.icons" :key="icon"
-                ><v-icon small>{{ icon }}</v-icon
+                ><v-icon size="small">{{ icon }}</v-icon
                 >&thinsp;</template
               ></span
             >
@@ -66,9 +65,9 @@
       <template #selection="{ item }">
         <span
           >{{ item.role }} &middot;
-          <span class="grey--text"
+          <span class="text-grey"
             ><template v-for="icon in item.icons" :key="icon"
-              ><v-icon x-small>{{ icon }}</v-icon
+              ><v-icon size="x-small">{{ icon }}</v-icon
               >&thinsp;</template
             ></span
           >

@@ -3,8 +3,8 @@
     <content-card :title="$t('views.camp.material.materialUnassigned.title')" toolbar>
       <template #title-actions>
         <v-menu offset-y>
-          <template #activator="{ attrs, on }">
-            <v-btn icon v-bind="attrs" v-on="on">
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props">
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
@@ -13,9 +13,7 @@
               <template #prepend>
                 <v-icon>mdi-microsoft-excel</v-icon>
               </template>
-              <v-list-item-content
-                >{{ $t('global.button.download') }}
-              </v-list-item-content>
+              {{ $t('global.button.download') }}
             </v-list-item>
           </v-list>
         </v-menu>
@@ -25,7 +23,7 @@
         v-model="openPeriods"
         multiple
         flat
-        accordion
+        variant="accordion"
       >
         <PeriodMaterialLists
           v-for="{ period, materialItems } in filteredCollection"

@@ -3,8 +3,8 @@
     <v-card
       v-for="(period, i) in periods"
       :key="period.key"
-      outlined
-      color="grey lighten-3"
+      border
+      color="grey-lighten-3"
       class="period mb-2 rounded-b-0"
     >
       <e-form name="period">
@@ -17,7 +17,7 @@
           <v-col cols="auto">
             <v-btn
               class="ml-2 px-2"
-              text
+              variant="text"
               min-width="auto"
               color="error"
               :disabled="!periodDeletable"
@@ -70,7 +70,7 @@
         </v-row>
       </e-form>
     </v-card>
-    <v-btn text block height="auto" class="pa-4" @click="addPeriod">
+    <v-btn variant="text" block height="auto" class="pa-4" @click="addPeriod">
       <v-icon>mdi-plus</v-icon>
       {{ $t('components.campAdmin.createCampPeriods.add') }}
     </v-btn>

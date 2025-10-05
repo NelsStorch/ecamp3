@@ -10,7 +10,7 @@
     :vee-id="veeId"
     :vee-rules="veeRules"
     reset-on-blur
-    @update:modelValue="$emit('update:modelValue', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <!-- passing through all slots -->
     <template v-for="(_, slot) of $slots" #[slot]="slotData">
