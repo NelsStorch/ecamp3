@@ -22,7 +22,7 @@ class MaterialItemCollectionProvider implements ProviderInterface {
         $hasFilter = $request?->query->has('camp') || $request?->query->has('period') || $request?->query->has('materialList') || $request?->query->has('materialNode');
 
         if (!$hasFilter) {
-            throw new BadRequestHttpException('Filter on camp, materialList or materialNode is required');
+            throw new BadRequestHttpException('Filter on camp, period, materialList or materialNode is required');
         }
 
         return $this->decorated->provide($operation, $uriVariables, $context);

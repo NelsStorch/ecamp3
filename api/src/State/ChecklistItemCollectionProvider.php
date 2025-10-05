@@ -22,7 +22,7 @@ class ChecklistItemCollectionProvider implements ProviderInterface {
         $hasFilter = $request?->query->has('checklist') || $request?->query->has('checklist_camp') || $request?->query->has('checklistNodes');
 
         if (!$hasFilter) {
-            throw new BadRequestHttpException('Filter on camp, checklist or checklistNodes is required');
+            throw new BadRequestHttpException('Filter on checklist, checklist.camp or checklistNodes is required');
         }
 
         return $this->decorated->provide($operation, $uriVariables, $context);
