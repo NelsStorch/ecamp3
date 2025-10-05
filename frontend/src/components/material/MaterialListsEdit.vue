@@ -1,6 +1,10 @@
 <template>
   <v-list>
-    <v-skeleton-loader v-if="materialLists._meta.loading" type="list-item@3" />
+    <v-skeleton-loader
+      v-if="materialLists._meta.loading"
+      type="list-item@3"
+      class="gap-4 pa-4"
+    />
     <DialogMaterialListEdit
       v-for="materialList in materialListsSorted"
       :key="materialList._meta.self"
@@ -10,9 +14,11 @@
         <v-list-item exact-path v-bind="props">
           <v-list-item-title>{{ materialList.name }}</v-list-item-title>
 
-          <v-list-item-action class="e-collaborator-item__actions ml-2">
-            <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
-          </v-list-item-action>
+          <template #append>
+            <v-list-item-action class="e-collaborator-item__actions ml-2">
+              <ButtonEdit color="primary" variant="tonal" class="my-n1" />
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </template>
     </DialogMaterialListEdit>
