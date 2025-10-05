@@ -81,11 +81,7 @@
             </v-list-item-title>
 
             <v-list-item-action style="display: inline">
-              <v-btn
-                variant="plain"
-                icon
-                class="my-n1 pointer-events-none"
-              >
+              <v-btn variant="plain" icon class="my-n1 pointer-events-none">
                 <v-icon>mdi-drag</v-icon>
               </v-btn>
             </v-list-item-action>
