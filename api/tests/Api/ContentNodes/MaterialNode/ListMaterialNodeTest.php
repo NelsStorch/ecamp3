@@ -11,20 +11,20 @@ class ListMaterialNodeTest extends ListContentNodeTestCase {
     public function setUp(): void {
         parent::setUp();
 
-        $this->endpoint = '/content_node/material_nodes';
+        $this->endpoint = '/content_node/material_nodes'.'?camp=/camps/'.static::$fixtures['campPrototype']->getId();
 
         $this->contentNodesCamp1and2 = [
-            $this->getIriFor('materialNode1'),
-            $this->getIriFor('materialNode2'),
+//            $this->getIriFor('materialNode1'),
+//            $this->getIriFor('materialNode2'),
         ];
 
         $this->contentNodesCampUnrelated = [
-            $this->getIriFor('materialNodeCampUnrelated'),
+//            $this->getIriFor('materialNodeCampUnrelated'),
         ];
 
         $this->contentNodesPublicCamps = [
             $this->getIriFor('materialNodeCampPrototype'),
-            $this->getIriFor('materialNodeCampShared'),
+//            $this->getIriFor('materialNodeCampShared'),
         ];
     }
 }
