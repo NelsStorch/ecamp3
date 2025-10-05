@@ -6,19 +6,12 @@ to see our applications like graphana, kibana, kubernetes-dashboard...
 
 ## Prerequisites
 
-You need the oauth2-proxy helm chart:
+First you need to have the following dependencies:
 
-```shell
-helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
-helm repo update
-```
-
-You also need the kubernetes-dashboard helm chart:
-
-```shell
-helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
-helm repo update
-```
+- jq
+- kubectl (with a kubeconfig for the cluster you want to deploy to)
+- helm
+- helmfile
 
 ## Deployment
 

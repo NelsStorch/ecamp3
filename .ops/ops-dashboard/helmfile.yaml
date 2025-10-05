@@ -1,0 +1,16 @@
+environments:
+  default:
+    values:
+      - ./env.yaml
+---
+repositories:
+  - name: oauth2-proxy
+    url: https://oauth2-proxy.github.io/manifests
+  - name:  kubernetes-dashboard
+    url: https://kubernetes.github.io/dashboard/
+
+releases:
+  - name: ""
+    chart: .
+    values:
+      - ./values.yaml.gotmpl
