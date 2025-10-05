@@ -17,24 +17,26 @@ import 'vue-toastification/dist/index.css'
 
 import { ClickOutside, Resize } from 'vuetify/directives'
 import ResizeObserver from 'v-resize-observer'
+import * as Sentry from '@sentry/vue'
 import '@/scss/global.scss'
 import '@/scss/tailwind.scss'
 import { initRefresh } from '@/plugins/auth.js'
+import { getEnv } from '@/environment.js'
 
 const app = createApp(App)
 
-// const env = getEnv()
-// if (env && env.SENTRY_FRONTEND_DSN) {
-//   const sentryEnvironment = env.SENTRY_ENVIRONMENT ?? 'local'
-//   Sentry.init({
-//     Vue,
-//     dsn: env.SENTRY_FRONTEND_DSN,
-//     environment: sentryEnvironment,
-//     enableTracing: false,
-//     autoSessionTracking: false,
-//     logErrors: process.env.NODE_ENV !== 'production',
-//   })
-// }
+const env = getEnv()
+if (env && env.SENTRY_FRONTEND_DSN) {
+  const sentryEnvironment = env.SENTRY_ENVIRONMENT ?? 'local'
+  Sentry.init({
+    app,
+    dsn: env.SENTRY_FRONTEND_DSN,
+    environment: sentryEnvironment,
+    enableTracing: false,
+    autoSessionTracking: false,
+    logErrors: process.env.NODE_ENV !== 'production',
+  })
+}
 
 app.use(auth)
 // app.use(head)
