@@ -15,6 +15,7 @@ use App\Doctrine\Filter\MaterialItemPeriodFilter;
 use App\Entity\ContentNode\MaterialNode;
 use App\InputFilter;
 use App\Repository\MaterialItemRepository;
+use App\State\MaterialItemCollectionProvider;
 use App\State\MaterialItemCreateProcessor;
 use App\Util\EntityMap;
 use App\Validator\AssertBelongsToSameCamp;
@@ -43,7 +44,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
         ),
         new GetCollection(
-            security: 'is_authenticated()'
+            security: 'is_authenticated()',
+            provider: MaterialItemCollectionProvider::class
         ),
         new Post(
             processor: MaterialItemCreateProcessor::class,

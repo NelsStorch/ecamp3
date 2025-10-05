@@ -17,28 +17,12 @@ class ListMaterialItemsTest extends ECampApiTestCase {
         ]);
     }
 
-    public function testListMaterialItemsIsAllowedForLoggedInUserButFiltered() {
+    public function testListMaterialItemsWithoutFilterIsNotAllowedForLoggedInUser() {
         // precondition: There is a material item that the user doesn't have access to
         $this->assertNotEmpty(static::$fixtures['materialItem1period1campUnrelated']);
 
         $response = static::createClientWithCredentials()->request('GET', '/material_items');
-        $this->assertResponseStatusCodeSame(200);
-        $this->assertJsonContains([
-            'totalItems' => 5,
-            '_links' => [
-                'items' => [],
-            ],
-            '_embedded' => [
-                'items' => [],
-            ],
-        ]);
-        $this->assertEqualsCanonicalizing([
-            ['href' => $this->getIriFor('materialItem1')],
-            ['href' => $this->getIriFor('materialItem1period1')],
-            ['href' => $this->getIriFor('materialItem1period1camp2')],
-            ['href' => $this->getIriFor('materialItem1period1campPrototype')],
-            ['href' => $this->getIriFor('materialItem1period1campShared')],
-        ], $response->toArray()['_links']['items']);
+        $this->assertResponseStatusCodeSame(400);
     }
 
     public function testListMaterialItemsFilteredByMaterialListIsAllowedForCollaborator() {
