@@ -34,7 +34,7 @@ export const formComponentPropsMixin = {
      */
     path: {
       type: String,
-      required: false,
+      required: true,
       default: null,
     },
 

@@ -72,7 +72,7 @@
             path="passwordConfirmation"
             type="password"
             validate-on-blur
-            vee-rules="required"
+            vee-rules="required|confirmed:@password"
           />
 
           <e-select v-model="language" :items="availableLocales" dense path="language" />
@@ -80,6 +80,7 @@
           <e-checkbox
             v-if="termsOfServiceLink"
             v-model="tos"
+            path="tos"
             :label="$t('views.auth.register.acceptTermsOfService')"
             :vee-rules="{ required: { allowFalse: false } }"
             class="align-center"
@@ -189,7 +190,7 @@ export default {
     availableLocales() {
       return componentI18n.availableLocales.map((l) => ({
         value: l,
-        title: this.$t('global.language', 1, { locale: l }),
+        text: this.$t('global.language', 1, { locale: l }),
       }))
     },
     termsOfServiceLink() {

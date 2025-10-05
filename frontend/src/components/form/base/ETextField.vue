@@ -66,8 +66,9 @@ const {
   handleBlur,
   handleChange,
   setValue,
-} = useField(validationLabel, props.veeRules, {
+} = useField(props.veeId ?? props.path, props.veeRules, {
   initialValue: props.modelValue,
+  label: validationLabel,
 })
 
 const handleUpdate = (value) => {

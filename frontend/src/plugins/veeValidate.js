@@ -1,5 +1,5 @@
 import { configure, defineRule } from 'vee-validate'
-import { localize, setLocale } from '@vee-validate/i18n'
+import { localize } from '@vee-validate/i18n'
 import { all } from '@vee-validate/rules'
 
 // import greaterThan from '@/plugins/veeValidate/greaterThan'
@@ -26,8 +26,6 @@ class VeeValidatePlugin {
       // Not using vue-18n will break translation for our own custom validators below, so we still need to fix this.
       generateMessage: localize({ en, de, fr, it }),
     })
-
-    setLocale('en')
 
     // install all default rules
     Object.entries(all).forEach(([name, rule]) => {

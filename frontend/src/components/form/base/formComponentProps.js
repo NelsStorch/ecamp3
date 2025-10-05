@@ -37,7 +37,7 @@ export const props = {
    */
   path: {
     type: String,
-    required: false,
+    required: true,
     default: null,
   },
 
