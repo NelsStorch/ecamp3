@@ -20,14 +20,13 @@
         <template #append>
           <v-list-item-action>
             <DialogShare :title="$t('components.campAdmin.campSharingSettings.title')">
-              <template #activator="{ on, attrs }">
+              <template #activator="{ props }">
                 <ButtonEdit
+                  v-bind="props"
                   color="primary"
                   variant="tonal"
                   class="my-n1"
                   icon="mdi-earth"
-                  v-bind="attrs"
-                  v-on="on"
                   >{{
                     camp.isShared ? $t('global.button.edit') : $t('global.button.share')
                   }}</ButtonEdit

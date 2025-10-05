@@ -59,13 +59,13 @@
         >
           <template #activator="{ props }">
             <v-btn
+              v-bind="props"
               icon
               size="small"
               color="error"
               class="float-right"
               width="36"
               height="36"
-              v-bind="props"
             >
               <v-icon>mdi-trash-can-outline</v-icon>
             </v-btn>

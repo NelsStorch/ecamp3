@@ -11,11 +11,11 @@ Displays all periods of a single camp and allows to edit them & create new ones
       <dialog-period-create v-if="!disabled" :camp="camp">
         <template #activator="{ props }">
           <button-add
+            v-bind="props"
             color="blue-grey-darken-2"
             variant="text"
             class="my-n2"
             :hide-label="$vuetify.display.xs"
-            v-bind="props"
           >
             {{ $t('components.campAdmin.campPeriods.createPeriod') }}
           </button-add>

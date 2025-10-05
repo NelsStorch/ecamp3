@@ -23,7 +23,7 @@
               :camp-title="invitation.campTitle"
               @submit="rejectInvitation(invitation)"
             >
-              <template #activator="props">
+              <template #activator="{ props }">
                 <v-btn class="px-4" variant="text" v-bind="props">
                   {{ $t('components.personalInvitations.personalInvitations.reject') }}
                 </v-btn>

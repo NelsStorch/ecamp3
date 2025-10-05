@@ -2,7 +2,6 @@
   <v-dialog
     :fullscreen="$vuetify.display.xs"
     content-class="ec-dialog-form"
-    :model-value
     eager
     v-bind="$attrs"
     :max-width="maxWidth"

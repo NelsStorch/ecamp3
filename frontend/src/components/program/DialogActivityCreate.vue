@@ -82,13 +82,13 @@
           icon="mdi-content-paste"
           :title="$t('components.program.dialogActivityCreate.pasteActivity')"
         >
-          <template #activator="scope">
+          <template #activator="{ props }">
             <v-btn
+              v-bind="props"
               :title="$t('components.program.dialogActivityCreate.pasteActivity')"
               variant="text"
               class="v-btn--has-bg"
               height="56"
-              v-on="scope.on"
             >
               <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
               <v-icon v-else>mdi-content-paste</v-icon>

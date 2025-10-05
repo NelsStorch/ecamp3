@@ -37,11 +37,11 @@
             >
               <template #activator="{ props }">
                 <v-btn
+                  v-bind="props"
                   :title="$t('components.campCreate.campCreateStep2.pasteCamp')"
                   variant="text"
                   class="v-btn--has-bg"
                   height="56"
-                  v-bind="props"
                 >
                   <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
                   <v-icon v-else>mdi-content-paste</v-icon>

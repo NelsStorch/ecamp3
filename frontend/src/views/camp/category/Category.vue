@@ -42,8 +42,8 @@
               :dialog-title="$t('views.camp.category.category.deleteCategory')"
               :success-handler="goToActivityAdmin"
             >
-              <template #activator="{ on }">
-                <v-list-item v-on="on">
+              <template #activator="{ props }">
+                <v-list-item v-bind="props">
                   <template #prepend>
                     <v-icon>mdi-delete</v-icon>
                   </template>

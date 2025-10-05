@@ -7,11 +7,11 @@
       <DialogActivityProgressLabelCreate v-if="!disabled" :camp="camp">
         <template #activator="{ props }">
           <ButtonAdd
+            v-bind="props"
             color="blue-grey-darken-2"
             variant="text"
             :hide-label="$vuetify.display.xs"
             class="my-n2"
-            v-bind="props"
           >
             {{ $t('components.campAdmin.campActivityProgressLabels.create') }}
           </ButtonAdd>
