@@ -11,20 +11,20 @@ class ListChecklistNodeTest extends ListContentNodeTestCase {
     public function setUp(): void {
         parent::setUp();
 
-        $this->endpoint = '/content_node/checklist_nodes'.'?camp=/camps/'.static::$fixtures['campPrototype']->getId();
+        $this->endpoint = '/content_node/checklist_nodes?camp=/camps/'.static::$fixtures['campPrototype']->getId();
 
         $this->contentNodesCamp1and2 = [
-//            $this->getIriFor('checklistNode1'),
-//            $this->getIriFor('checklistNode3'),
+            //            $this->getIriFor('checklistNode1'),
+            //            $this->getIriFor('checklistNode3'),
         ];
 
         $this->contentNodesCampUnrelated = [
-//            $this->getIriFor('checklistNodeCampUnrelated'),
+            //            $this->getIriFor('checklistNodeCampUnrelated'),
         ];
 
         $this->contentNodesPublicCamps = [
             $this->getIriFor('checklistNodeCampPrototype'),
-//            $this->getIriFor('checklistNodeCampShared'),
+            //            $this->getIriFor('checklistNodeCampShared'),
         ];
     }
 }
