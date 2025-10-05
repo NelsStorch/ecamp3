@@ -1,5 +1,6 @@
 <script>
-import { VTextField } from 'vuetify/components'
+import { h, reactive, toRefs, toRef, computed } from 'vue'
+import { VField } from 'vuetify/components'
 import TiptapEditor from './TiptapEditor.vue'
 
 export default {
@@ -7,59 +8,53 @@ export default {
   components: {
     TiptapEditor,
   },
-  extends: VTextField,
+  extends: VField,
   props: {
     withExtensions: {
       type: Boolean,
       default: false,
     },
+    onInput: {
+      type: Function,
+      required: true,
+    },
+    modelValue: {
+      type: String,
+      default: '',
+    },
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    readonly: {
+      type: Boolean,
+      default: true,
+    },
+    disabled: {
+      type: Boolean,
+      default: true,
+    },
   },
-  methods: {
-    genInput() {
-      const listeners = Object.assign({}, this.listeners$)
-      return this.$createElement(TiptapEditor, {
-        attrs: {
-          ...this.attrs$,
-          id: this.computedId,
-        },
-        props: {
-          value: this.value,
-          placeholder: this.placeholder,
-          withExtensions: this.withExtensions,
-          editable: !this.readonly && !this.disabled,
-        },
-        on: Object.assign(listeners, {
-          blur: this.onBlur,
-          focus: this.onFocus,
-          // input: this.onInput,
-          mousedown: this.onMouseDown,
-          mouseup: this.onMouseUp,
+  setup(props, ctx) {
+    const readonlyRef = toRef(() => props.readonly)
+    const disabledRef = toRef(() => props.disabled)
+    const tiptap = () =>
+      h(
+        TiptapEditor,
+        reactive({
+          ...toRefs(props),
+          ...toRefs(ctx.attrs),
+          editable: computed(() => !readonlyRef.value && !disabledRef.value),
         }),
-        ref: 'input',
-      })
-    },
-
-    onBlur(e) {
-      VTextField.options.methods.onBlur.call(this, e)
-    },
-    onFocus(e) {
-      VTextField.options.methods.onFocus.call(this, e)
-
-      if (!this.isFocused) {
-        this.isFocused = true
-        e && this.$emit('focus', e)
-      }
-    },
-    onMouseDown(e) {
-      if (e.target === this.$refs.input) {
-        VTextField.options.methods.onMouseDown.call(this, e)
-      }
-    },
-    onMouseUp(e) {
-      if (e.target === this.$refs.input) {
-        VTextField.options.methods.onMouseDown.call(this, e)
-      }
-    },
+        ctx.slots
+      )
+    return VField.setup(
+      reactive({
+        ...toRefs(ctx.attrs),
+        loading: toRef(() => props.loading),
+      }),
+      { ...ctx, slots: { default: tiptap, ...ctx.slots } }
+    )
   },
 }
 </script>

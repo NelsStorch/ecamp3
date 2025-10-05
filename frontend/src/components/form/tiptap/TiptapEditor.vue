@@ -148,7 +148,7 @@ export default {
     BubbleMenu,
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       default: '',
     },
@@ -199,8 +199,10 @@ export default {
       hoverCursor: false,
       editor: new Editor({
         extensions: extensions,
-        content: this.value,
+        content: this.modelValue,
         onUpdate: this.onUpdate,
+        onFocus: (e) => this.$emit('focus', e),
+        onBlur: (e) => this.$emit('blur', e),
         editable: this.editable,
       }),
       placeholderExtension: placeholder,
@@ -258,7 +260,7 @@ export default {
     },
   },
   watch: {
-    value(val) {
+    modelValue(val) {
       // Be careful to only use setContent when absolutely necessary, because it resets the user's cursor to the end
       // of the input field
       if (val !== this.html) {

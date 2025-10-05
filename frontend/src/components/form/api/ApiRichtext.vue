@@ -5,7 +5,7 @@ Displays a field as a e-textarea + write access via API wrapper
 <template>
   <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }" separate-buttons>
     <e-richtext
-      :value="wrapper.localValue"
+      :model-value="wrapper.localValue"
       v-bind="{ ...$props, ...$attrs }"
       :path="path"
       :readonly="wrapper.readonly"
