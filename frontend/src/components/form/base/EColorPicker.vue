@@ -21,9 +21,10 @@ Displays a field as a color picker (can be used with v-model)
       <template #activator="{ props }">
         <div v-bind="props">
           <EColorField
+            v-bind="$attrs"
             :id="id"
             ref="input"
-            :value="pickerValue"
+            :model-value="pickerValue"
             :vee-id="veeId"
             :vee-rules="veeRules"
             :filled="filled"
@@ -34,9 +35,8 @@ Displays a field as a color picker (can be used with v-model)
             :label="label"
             :validation-label-override="validationLabelOverride"
             :error-messages="errorMessages"
-            v-bind="$attrs"
             @blur="onBlur"
-            @input="onInput($event)"
+            @update:model-value="onInput($event)"
             @click.prevent="onInputClick"
           >
             <template #prepend="{ serializedValue }">
@@ -112,7 +112,7 @@ export default {
   mixins: [formComponentMixin, formComponentPropsMixin],
   inheritAttrs: false,
   props: {
-    value: { type: String, required: false, default: null },
+    modelValue: { type: String, required: false, default: null },
   },
   emits: ['input'],
   data: () => ({
@@ -142,8 +142,8 @@ export default {
     contrast() {
       try {
         // Vuetify returns invalid value #NANNAN in the initialization phase
-        return this.value && this.value !== '#NANNAN'
-          ? contrastColor(this.value)
+        return this.modelValue && this.modelValue !== '#NANNAN'
+          ? contrastColor(this.modelValue)
           : 'black'
       } catch {
         return 'black'
@@ -156,8 +156,9 @@ export default {
     },
   },
   watch: {
-    value: {
+    modelValue: {
       handler(newValue) {
+        console.log('watch modelValue')
         this.pickerValue = newValue
         this.pickerNull = [null, ''].includes(newValue)
       },
@@ -196,7 +197,7 @@ export default {
     },
     onInput(value) {
       this.pickerValue = value
-      this.$emit('input', this.pickerValue)
+      this.$emit('update:model-value', this.pickerValue)
     },
     onBlur(event) {
       if (!this.pickerOpen) {
@@ -206,11 +207,11 @@ export default {
     onPickerInput(value) {
       this.pickerValue = value.toUpperCase()
       this.pickerNull = false
-      this.$emit('input', this.pickerValue)
+      this.$emit('update:model-value', this.pickerValue)
     },
     onSwatchSelect(color) {
       this.pickerValue = color
-      this.$emit('input', this.pickerValue)
+      this.$emit('update:model-value', this.pickerValue)
       this.pickerOpen = false
       this.$refs.inputSwatch.$el.focus()
     },

@@ -147,6 +147,8 @@ export default {
       datepicker: '2020-01-01',
       timepicker: '2020-01-01T14:45:00+00:00',
       timefield: '05:00',
+      colorpicker: '#FF9800',
+      colorfield: '#229800',
     },
 
     headers: [
@@ -264,28 +266,26 @@ export default {
             uri: this.scheduleEntryUri,
           },
         },
-        // {
-        //   id: 'color-picker',
-        //   component: (type) => (type === 'v' ? '' : `${type}-color-picker`),
-        //   value: this.colorValue,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     path: 'color',
-        //     uri: this.categoryUri,
-        //     veeRules: 'required',
-        //   },
-        // },
-        // {
-        //   id: 'color-field',
-        //   component: (type) => (type !== 'v' ? `${type}-color-field` : ''),
-        //   value: this.colorValue,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     path: 'color',
-        //     uri: this.campCollaborationUri,
-        //     veeRules: 'required',
-        //   },
-        // },
+        {
+          id: 'colorpicker',
+          component: (type) => (type === 'v' ? '' : `${type}-color-picker`),
+          props: {
+            placeholder: this.placeholder,
+            path: 'color',
+            uri: this.categoryUri,
+            veeRules: 'required',
+          },
+        },
+        {
+          id: 'colorfield',
+          component: (type) => (type !== 'v' ? `${type}-color-field` : ''),
+          props: {
+            placeholder: this.placeholder,
+            path: 'color',
+            uri: this.campCollaborationUri,
+            veeRules: 'required',
+          },
+        },
       ]
     },
     profileUri() {
