@@ -3,17 +3,7 @@
         "items": [
             {
                 "_links": {
-                    "children": [
-                        {
-                            "href": "escaped_value"
-                        },
-                        {
-                            "href": "escaped_value"
-                        },
-                        {
-                            "href": "escaped_value"
-                        }
-                    ],
+                    "children": [],
                     "contentType": {
                         "href": "escaped_value"
                     },
@@ -29,16 +19,7 @@
                 },
                 "contentTypeName": "escaped_value",
                 "data": {
-                    "columns": [
-                        {
-                            "slot": "escaped_value",
-                            "width": "escaped_value"
-                        },
-                        {
-                            "slot": "escaped_value",
-                            "width": "escaped_value"
-                        }
-                    ]
+                    "html": "escaped_value"
                 },
                 "id": "escaped_value",
                 "instanceName": "escaped_value",
@@ -47,18 +28,13 @@
             },
             {
                 "_links": {
-                    "children": [
-                        {
-                            "href": "escaped_value"
-                        },
-                        {
-                            "href": "escaped_value"
-                        }
-                    ],
+                    "children": [],
                     "contentType": {
                         "href": "escaped_value"
                     },
-                    "parent": "escaped_value",
+                    "parent": {
+                        "href": "escaped_value"
+                    },
                     "root": {
                         "href": "escaped_value"
                     },
@@ -68,12 +44,7 @@
                 },
                 "contentTypeName": "escaped_value",
                 "data": {
-                    "columns": [
-                        {
-                            "slot": "escaped_value",
-                            "width": "escaped_value"
-                        }
-                    ]
+                    "html": "escaped_value"
                 },
                 "id": "escaped_value",
                 "instanceName": "escaped_value",
@@ -82,15 +53,13 @@
             },
             {
                 "_links": {
-                    "children": [
-                        {
-                            "href": "escaped_value"
-                        }
-                    ],
+                    "children": [],
                     "contentType": {
                         "href": "escaped_value"
                     },
-                    "parent": "escaped_value",
+                    "parent": {
+                        "href": "escaped_value"
+                    },
                     "root": {
                         "href": "escaped_value"
                     },
@@ -100,12 +69,7 @@
                 },
                 "contentTypeName": "escaped_value",
                 "data": {
-                    "columns": [
-                        {
-                            "slot": "escaped_value",
-                            "width": "escaped_value"
-                        }
-                    ]
+                    "html": "escaped_value"
                 },
                 "id": "escaped_value",
                 "instanceName": "escaped_value",

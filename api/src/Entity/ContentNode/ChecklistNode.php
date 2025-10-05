@@ -13,6 +13,7 @@ use App\Entity\ChecklistItem;
 use App\Entity\ContentNode;
 use App\Repository\ChecklistNodeRepository;
 use App\State\ContentNode\ChecklistNodePersistProcessor;
+use App\State\ContentNodeCollectionProvider;
 use App\Util\EntityMap;
 use App\Validator\ChecklistItem\AssertBelongsToSameCamp;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -36,7 +37,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
             security: '(is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)) and object.parent !== null'
         ),
         new GetCollection(
-            security: 'is_authenticated()'
+            security: 'is_authenticated()',
+            provider: ContentNodeCollectionProvider::class
         ),
         new Post(
             processor: ChecklistNodePersistProcessor::class,

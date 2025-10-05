@@ -13,6 +13,7 @@ use App\Entity\ContentNode;
 use App\Entity\SupportsContentNodeChildren;
 use App\Repository\ResponsiveLayoutRepository;
 use App\State\ContentNode\ContentNodePersistProcessor;
+use App\State\ContentNodeCollectionProvider;
 use App\Validator\AssertJsonSchema;
 use App\Validator\ColumnLayout\AssertNoOrphanChildren;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -37,7 +38,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: '(is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)) and object.parent !== null'
         ),
         new GetCollection(
-            security: 'is_authenticated()'
+            security: 'is_authenticated()',
+            provider: ContentNodeCollectionProvider::class
         ),
         new Post(
             processor: ContentNodePersistProcessor::class,

@@ -117,6 +117,13 @@ class ResponseSnapshotTest extends ECampApiTestCase {
                 '/auth/reset_password' => false,
                 '/auth/resend_activation' => false,
                 '/content_nodes' => false,
+                '/content_node/checklist_nodes' => false,
+                '/content_node/column_layouts' => false,
+                '/content_node/material_nodes' => false,
+                '/content_node/multi_selects' => false,
+                '/content_node/responsive_layouts' => false,
+                '/content_node/single_texts' => false,
+                '/content_node/storyboards' => false,
                 '/checklist_items' => false,
                 '/invitations' => false,
                 '/material_items' => false,
@@ -153,6 +160,13 @@ class ResponseSnapshotTest extends ECampApiTestCase {
 
         return [
             [$client, '/content_nodes?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/content_node/checklist_nodes?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/content_node/column_layouts?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/content_node/material_nodes?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/content_node/multi_selects?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/content_node/responsive_layouts?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/content_node/single_texts?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
+            [$client, '/content_node/storyboards?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
             [$client, '/checklist_items?checklist=/checklists/'.self::getFixtureFor('/checklists')->getId()],
             [$client, '/material_items?camp=/camps/'.self::getFixtureFor('/camps')->getId()],
         ];
