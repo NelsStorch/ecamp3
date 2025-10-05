@@ -21,7 +21,9 @@
         :lang="item"
         @click="changeLang(item)"
       >
-        <v-list-item-title>{{ $t('global.language', 1, item) }}</v-list-item-title>
+        <v-list-item-title>{{
+          $t('global.language', 1, { locale: item })
+        }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>

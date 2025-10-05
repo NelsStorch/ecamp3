@@ -1,46 +1,50 @@
 <template>
-  <!--  <ValidationProvider-->
-  <!--    v-slot="{ errors: veeErrors }"-->
-  <!--    tag="div"-->
-  <!--    :name="validationLabel"-->
-  <!--    :vid="veeId"-->
-  <!--    :rules="veeRules"-->
-  <!--    :skip-if-empty="skipIfEmpty"-->
-  <!--    :required="required"-->
-  <!--    :immediate="immediateValidation"-->
-  <!--    class="e-form-container"-->
-  <!--  >-->
-  <v-select
-    :class="[inputClass]"
-    :error-messages="(veeErrors ?? []).concat(errorMessages)"
-    :filled="filled"
-    :hide-details="hideDetails"
-    :label="labelOrEntityFieldLabel"
-    v-bind="$attrs"
-    :readonly="readonly"
-    :append-icon="readonly ? null : '$dropdown'"
+  <Field
+    :name="validationLabel"
+    :rules="veeRules"
+    v-slot="{ handleChange, errors: veeErrors }"
   >
-    <!-- passing through all slots -->
-    <template v-for="(_, slot) of $slots" #[slot]="slotData">
-      <slot :name="slot" v-bind="slotData || {}"></slot>
-    </template>
-  </v-select>
-  <!--  </ValidationProvider>-->
+    <v-select
+      :class="[inputClass]"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :filled="filled"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      v-bind="$attrs"
+      :readonly="readonly"
+      :append-icon="readonly ? null : '$dropdown'"
+      item-title="text"
+      item-value="value"
+      @update:model-value="
+        ($event) => {
+          handleChange($event)
+          $emit('input', $event)
+        }
+      "
+    >
+      <!-- passing through all slots -->
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
+      </template>
+    </v-select>
+  </Field>
 </template>
 
 <script>
-// import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 
 export default {
   name: 'ESelect',
   components: {
-    // ValidationProvider
+    Field,
   },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
+    // TODO: implement immediateValidation
     immediateValidation: { type: Boolean, default: false },
+    // TODO: implement skipIfEmpty
     skipIfEmpty: { type: Boolean, default: true },
     readonly: { type: Boolean, default: false },
   },

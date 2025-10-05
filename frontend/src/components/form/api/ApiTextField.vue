@@ -6,7 +6,7 @@ Displays a field as a e-text-field + write access via API wrapper
   <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }">
     <e-text-field
       ref="textField"
-      :value="wrapper.localValue"
+      :model-value="wrapper.localValue"
       v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"

@@ -7,7 +7,7 @@ export const apiPropsMixin = {
   },
   props: {
     /* value is not required; by default value is read directly from api */
-    value: { required: false, default: null },
+    modelValue: { required: false, default: null },
 
     /* field path and URI for saving back to API */
     path: { type: String, required: true },

@@ -10,7 +10,7 @@ Displays a field as a e-select + write access via API wrapper
     :auto-save-delay="autoSaveDelayComputed"
   >
     <e-select
-      :value="wrapper.localValue"
+      :model-value="wrapper.localValue"
       v-bind="{ ...$props, ...$attrs }"
       :path="path"
       :readonly="wrapper.readonly"

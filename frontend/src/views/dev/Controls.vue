@@ -138,7 +138,6 @@ export default {
     textareaValue: 'FFFFFFFFFF',
     richtextValue: '<p>FFFFFFFFFF</p>',
     colorValue: null,
-    selectValue: null,
     dateValue: '2020-01-01',
     timeValue: '2020-01-01T14:45:00+00:00',
     timeValue2: '00:00',
@@ -146,6 +145,7 @@ export default {
       textfield: 'FFFFFFFFFF',
       checkbox: false,
       switch: false,
+      select: null,
     },
 
     headers: [
@@ -206,17 +206,19 @@ export default {
         //     uri: this.singleTextUri,
         //   },
         // },
-        // {
-        //   id: 'select',
-        //   component: (type) => `${type}-select`,
-        //   value: this.selectValue,
-        //   props: {
-        //     path: 'language',
-        //     placeholder: this.placeholder,
-        //     items: this.availableLocales,
-        //     uri: this.profileUri,
-        //   },
-        // },
+        {
+          id: 'select',
+          component: (type) => `${type}-select`,
+          props: {
+            path: 'language',
+            placeholder: this.placeholder,
+            items: this.availableLocales,
+            uri: this.profileUri,
+            itemTitle: 'text',
+            itemValue: 'value',
+            veeRules: 'required',
+          },
+        },
         {
           id: 'checkbox',
           component: (type) => `${type}-checkbox`,
@@ -315,7 +317,7 @@ export default {
     availableLocales() {
       return VueI18n.global.availableLocales.map((l) => ({
         value: l,
-        text: this.$t('global.language', 1, l),
+        text: this.$t('global.language', 1, { locale: l }),
       }))
     },
     config() {

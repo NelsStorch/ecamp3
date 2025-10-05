@@ -23,7 +23,7 @@
           size="20"
           class="ml-n3"
         />
-        <span>{{ item.title }}</span>
+        <span>{{ item.text }}</span>
       </v-chip>
     </template>
   </e-select>
@@ -78,10 +78,10 @@ export default {
             return {
               value: value._meta.self,
               campCollaboration: value,
-              title: campCollaborationDisplayName(value, this.$t.bind(this)),
+              text: campCollaborationDisplayName(value, this.$t.bind(this)),
             }
           }),
-        (value) => value.title.toLowerCase()
+        (value) => value.text.toLowerCase()
       )
     },
     currentCampCollaborationIRIs() {
