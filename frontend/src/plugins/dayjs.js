@@ -9,6 +9,5 @@ export default {
         },
       },
     })
-    // Vue.dayjs = dayjs
   },
 }
