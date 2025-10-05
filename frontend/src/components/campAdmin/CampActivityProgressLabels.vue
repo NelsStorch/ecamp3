@@ -7,8 +7,8 @@
       <DialogActivityProgressLabelCreate v-if="!disabled" :camp="camp">
         <template #activator="{ props }">
           <ButtonAdd
-            color="secondary"
-            text
+            color="blue-grey-darken-2"
+            variant="text"
             :hide-label="$vuetify.display.xs"
             class="my-n2"
             v-bind="props"
@@ -30,14 +30,14 @@
           :key="progressLabel._meta.self"
           class="px-2 rounded"
         >
-          <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
-            parseInt(idx) + 1
-          }}</v-avatar>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ progressLabel.title }}
-            </v-list-item-title>
-          </v-list-item-content>
+          <template #prepend>
+            <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
+              parseInt(idx) + 1
+            }}</v-avatar>
+          </template>
+          <v-list-item-title>
+            {{ progressLabel.title }}
+          </v-list-item-title>
         </v-list-item>
       </template>
       <template v-else-if="!reorder">
@@ -47,21 +47,19 @@
           :progress-label="progressLabel"
         >
           <template #activator="{ props }">
-            <v-list-item class="px-2 rounded" v-bind="props">
-              <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
-                parseInt(idx) + 1
-              }}</v-avatar>
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ progressLabel.title }}
-                </v-list-item-title>
-              </v-list-item-content>
-
-              <v-list-item-action v-if="!disabled" style="display: inline">
-                <v-item-group>
-                  <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
-                </v-item-group>
-              </v-list-item-action>
+            <v-list-item class="px-2 rounded" v-bind="props" :title="progressLabel.title">
+              <template #prepend>
+                <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
+                  parseInt(idx) + 1
+                }}</v-avatar>
+              </template>
+              <template #append>
+                <v-list-item-action v-if="!disabled" style="display: inline">
+                  <v-item-group>
+                    <ButtonEdit color="primary" variant="tonal" class="my-n1" />
+                  </v-item-group>
+                </v-list-item-action>
+              </template>
             </v-list-item>
           </template>
         </DialogActivityProgressLabelEdit>
@@ -72,9 +70,11 @@
           :endpoint="camp.progressLabels()"
         >
           <v-list-item class="px-2 rounded drag-and-drop-handle" v-on="on">
-            <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
-              itemPosition + 1
-            }}</v-avatar>
+            <template #prepend>
+              <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
+                itemPosition + 1
+              }}</v-avatar>
+            </template>
             <v-list-item-content>
               <v-list-item-title>
                 {{ item.title }}
@@ -90,7 +90,7 @@
         </api-sortable>
       </template>
     </v-list>
-    <v-btn v-if="!disabled" text block @click="reorder = !reorder">
+    <v-btn v-if="!disabled" variant="text" block @click="reorder = !reorder">
       <v-icon start>{{ reorder ? 'mdi-close' : 'mdi-sort' }}</v-icon>
       {{
         reorder
