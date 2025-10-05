@@ -220,6 +220,7 @@ import * as Sentry from '@sentry/browser'
 import { serverErrorToString } from '@/helpers/serverError.js'
 import PromptEntityDelete from '@/components/prompt/PromptEntityDelete.vue'
 import ApiNumberField from '@/components/form/api/ApiNumberField.vue'
+import { useToast } from 'vue-toastification'
 
 // Non-breaking space
 const nbsp = '\u00A0'
@@ -264,6 +265,10 @@ export default {
 
     // Hide the filter button activity / period
     hidePeriodFilter: { type: Boolean, required: false, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -451,7 +456,7 @@ export default {
         // catch server error
         .catch((error) => {
           this.$set(this.newMaterialItems[key], 'serverError', error)
-          this.$toast.error(errorToMultiLineToast(error))
+          this.toast.error(errorToMultiLineToast(error))
           Sentry.captureMessage(serverErrorToString(error))
         })
     },

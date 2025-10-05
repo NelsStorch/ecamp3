@@ -63,6 +63,7 @@ import { every, sortBy, filter } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
 import SortableChecklistItem from '@/components/checklist/SortableChecklistItem.vue'
 import ChecklistItemCreate from '@/components/checklist/ChecklistItemCreate.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'SortableChecklist',
@@ -86,6 +87,10 @@ export default {
     checklist: { type: Object, required: true },
     parent: { type: Object, default: null },
     disabled: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -156,7 +161,7 @@ export default {
             parent,
           })
           .catch((e) => {
-            this.$toast.error(errorToMultiLineToast(e))
+            this.toast.error(errorToMultiLineToast(e))
           })
           .finally(async () => await this.checklist.checklistItems().$reload())
         this.savingRequest--

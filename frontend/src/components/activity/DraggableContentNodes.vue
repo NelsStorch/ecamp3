@@ -55,6 +55,7 @@ import { keyBy, sortBy } from 'lodash'
 import Draggable from 'vuedraggable'
 import ButtonNestedContentNodeAdd from '@/components/activity/ButtonNestedContentNodeAdd.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'DraggableContentNodes',
@@ -73,6 +74,10 @@ export default {
     direction: { type: String, default: 'column' },
     isRoot: { type: Boolean, default: false },
     compact: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -146,7 +151,7 @@ export default {
           position: event.newDraggableIndex,
         })
       } catch (e) {
-        this.$toast.error(errorToMultiLineToast(e))
+        this.toast.error(errorToMultiLineToast(e))
       }
 
       // reload all contentNodes to update position properties

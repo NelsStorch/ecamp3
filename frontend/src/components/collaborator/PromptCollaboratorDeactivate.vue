@@ -33,6 +33,7 @@ import { errorToMultiLineToast } from '@/components/toast/toasts'
 import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
 import isOwnCampCollaboration from './isOwnCampCollaboration.js'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'PromptCollaboratorDeactivate',
@@ -40,6 +41,10 @@ export default {
   extends: DialogBase,
   props: {
     entity: { type: Object, required: true },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   computed: {
     isOwnCampCollaboration() {
@@ -71,7 +76,7 @@ export default {
       this.error = null
       const promise = this.api
         .patch(this.entity, { status: 'inactive' })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
 
       // User left camp -> navigate to camp-overview
       promise.then(() => {

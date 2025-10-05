@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash-es'
 import axios from 'axios'
 import { getEnv } from '@/environment.js'
 import * as Sentry from '@sentry/browser'
+import { useToast } from 'vue-toastification'
 
 const PRINT_URL = getEnv().PRINT_URL
 
@@ -13,6 +14,10 @@ export const generatePdfMixin = {
       type: Object,
       default: () => {},
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -53,11 +58,11 @@ export const generatePdfMixin = {
         saveAs(new Blob([response.data]), config.documentName + '.pdf')
       } catch (error) {
         if (error?.response?.status === 503) {
-          this.$toast.error(
+          this.toast.error(
             this.$t('components.print.printNuxt.generatePdfMixin.queueFull')
           )
         } else {
-          this.$toast.error(this.$t('components.print.printNuxt.generatePdfMixin.error'))
+          this.toast.error(this.$t('components.print.printNuxt.generatePdfMixin.error'))
         }
         Sentry.captureException(new Error(error))
       } finally {

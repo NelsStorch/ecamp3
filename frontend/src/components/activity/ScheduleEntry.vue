@@ -312,6 +312,7 @@ import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
 import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
 import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
 import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'ScheduleEntry',
@@ -352,6 +353,10 @@ export default {
       type: String,
       default: null,
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -465,7 +470,7 @@ export default {
         .$patch({
           category: category._meta.self,
         })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
         .then(() => {
           this.categoryChangeState = null
           if (category.numberingStyle !== this.scheduleEntry.numberingStyle) {
@@ -476,7 +481,7 @@ export default {
         })
         .catch((e) => {
           this.categoryChangeState = 'error'
-          this.$toast.error(errorToMultiLineToast(e))
+          this.toast.error(errorToMultiLineToast(e))
         })
     },
     async reloadAllScheduleEntriesInRelatedPeriods() {
@@ -519,7 +524,7 @@ export default {
       const url = window.location.origin + router.resolve(scheduleEntry).href
       await navigator.clipboard.writeText(url)
 
-      this.$toast.info(
+      this.toast.info(
         this.$t('global.toast.copied', null, { source: this.activityName }),
         {
           timeout: 2000,

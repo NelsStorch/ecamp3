@@ -4,6 +4,7 @@ import HalJsonVuex from 'hal-json-vuex'
 import lang from './lang'
 import auth from './auth'
 import preferences from './preferences'
+import snackbarMessagesStore from './snackbarMessagesStore'
 import { getEnv } from '@/environment.js'
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -15,6 +16,7 @@ export default {
         lang,
         auth,
         preferences,
+        snackbarMessagesStore,
       },
       strict: false,
       // plugins: debug ? [createLogger()] : [],

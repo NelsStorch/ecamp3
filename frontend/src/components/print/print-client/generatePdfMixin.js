@@ -2,6 +2,7 @@ import { saveAs } from 'file-saver'
 import slugify from 'slugify'
 import * as Sentry from '@sentry/browser'
 import { generatePdf } from './generatePdf.js'
+import { useToast } from 'vue-toastification'
 
 const RENDER_IN_WORKER = true
 
@@ -11,6 +12,10 @@ export const generatePdfMixin = {
       type: Object,
       default: () => {},
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -71,7 +76,7 @@ export const generatePdfMixin = {
       )
 
       if (error) {
-        this.$toast.error(this.$t('components.print.printClient.generatePdfMixin.error'))
+        this.toast.error(this.$t('components.print.printClient.generatePdfMixin.error'))
         Sentry.captureException(new Error(error))
         this.setProgress(100, 'failed')
         this.loading = false

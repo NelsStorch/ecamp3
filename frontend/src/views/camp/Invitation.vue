@@ -102,6 +102,7 @@ import { isNavigationFailure, NavigationFailureType } from 'vue-router'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import ButtonBack from '@/components/buttons/ButtonBack.vue'
 import UserMeta from '@/components/navigation/UserMeta.vue'
+import { useToast } from 'vue-toastification'
 
 const ignoreNavigationFailure = (e) => {
   if (!isNavigationFailure(e, NavigationFailureType.duplicated)) {
@@ -115,6 +116,10 @@ export default {
   props: {
     invitation: { type: Object, required: false, default: null },
     variant: { type: String, default: 'default' },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data: () => ({
     invitationFound: undefined,
@@ -183,7 +188,7 @@ export default {
               .catch(ignoreNavigationFailure)
           }
         )
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
     },
     rejectInvitation() {
       this.api
@@ -204,7 +209,7 @@ export default {
               .catch(ignoreNavigationFailure)
           }
         )
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
     },
   },
 }

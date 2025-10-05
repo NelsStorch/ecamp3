@@ -67,6 +67,7 @@ import { errorToMultiLineToast } from '@/components/toast/toasts'
 import MenuCardlessContentNode from '@/components/activity/MenuCardlessContentNode.vue'
 import LayoutNodeCard from '@/components/activity/content/layout/LayoutNodeCard.vue'
 import camelCase from 'lodash-es/camelCase.js'
+import { useToast } from 'vue-toastification'
 
 function cumulativeSumReducer(cumSum, nextElement) {
   cumSum.push(cumSum[cumSum.length - 1] + nextElement)
@@ -83,6 +84,10 @@ export default {
     ResizableColumn,
   },
   mixins: [contentNodeMixin],
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
   data() {
     return {
       clientWidth: 1000,
@@ -181,7 +186,7 @@ export default {
       try {
         await this.api.patch(this.contentNode, payload)
       } catch (e) {
-        this.$toast.error(errorToMultiLineToast(e))
+        this.toast.error(errorToMultiLineToast(e))
       }
     },
   },

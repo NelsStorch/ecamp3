@@ -109,6 +109,7 @@ import CategoryTemplate from '@/components/category/CategoryTemplate.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import router, { categoryRoute } from '@/router.js'
 import ClipboardInfoDialog from '@/components/generic/ClipboardInfoDialog.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'Category',
@@ -142,6 +143,10 @@ export default {
       default: null,
       required: false,
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -217,7 +222,7 @@ export default {
       const url = window.location.origin + router.resolve(category).href
       await navigator.clipboard.writeText(url)
 
-      this.$toast.info(
+      this.toast.info(
         this.$t('global.toast.copied', null, { source: this.category.name }),
         {
           timeout: 2000,

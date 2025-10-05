@@ -142,6 +142,7 @@ import { parseTemplate } from 'url-template'
 import { getEnv } from '@/environment.js'
 import EForm from '@/components/form/base/EForm.vue'
 import { Form as VeeForm } from 'vee-validate'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'Register',
@@ -151,6 +152,10 @@ export default {
     VeeForm,
   },
   mixins: [passwordStrengthMixin],
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
   data() {
     return {
       registering: false,
@@ -237,7 +242,7 @@ export default {
         })
         .then(() => this.$router.push({ name: 'register-done' }))
         .catch((e) => {
-          this.$toast.error(errorToMultiLineToast(e))
+          this.toast.error(errorToMultiLineToast(e))
           this.registering = false
         })
     },

@@ -61,6 +61,7 @@ import { camelCase } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import { getEnv } from '@/environment.js'
 import contentTypeIcons from './content/contentTypeIcons.js'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'ButtonNestedContentNodeAdd',
@@ -71,6 +72,10 @@ export default {
     slotName: { type: String, required: true },
     root: { type: Boolean, default: false },
     single: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -146,7 +151,7 @@ export default {
 
         await this.allContentNodes().$reload()
       } catch (error) {
-        this.$toast.error(errorToMultiLineToast(error))
+        this.toast.error(errorToMultiLineToast(error))
       }
       this.isAdding = false
     },

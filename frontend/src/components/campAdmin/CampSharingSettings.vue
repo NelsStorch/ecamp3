@@ -90,6 +90,7 @@ import { campRoleMixin } from '@/mixins/campRoleMixin.js'
 import userDisplayName from '@/common/helpers/userDisplayName.js'
 import DialogShare from '@/components/campAdmin/DialogShare.vue'
 import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'CampSharingSettings',
@@ -98,6 +99,10 @@ export default {
   props: {
     camp: { type: Object, required: true },
     disabled: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -134,7 +139,7 @@ export default {
     async copyCampUrlToClipboard() {
       await navigator.clipboard.writeText(this.campUrl)
 
-      this.$toast.info(
+      this.toast.info(
         this.$t('global.toast.copied', null, {
           source: this.$t('components.campAdmin.campSharingSettings.publicCampUrl'),
         }),

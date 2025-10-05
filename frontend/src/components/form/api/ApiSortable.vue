@@ -27,6 +27,7 @@
 import draggable from 'vuedraggable'
 import { every, sortBy } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
+import { useToast } from 'vue-toastification'
 export default {
   name: 'ApiSortable',
   components: {
@@ -35,6 +36,10 @@ export default {
   props: {
     endpoint: { type: Object, required: true },
     disabled: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -82,6 +87,7 @@ export default {
         })
         .catch((e) => {
           this.$toast.error(errorToMultiLineToast(e))
+          this.$store.commit('addSnackbarMessage', errorToMultiLineToast(e))
         })
         .finally(() => this.endpoint.$reload())
       this.savingRequest--

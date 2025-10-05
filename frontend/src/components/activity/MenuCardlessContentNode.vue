@@ -31,6 +31,7 @@
 import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import camelCase from 'lodash-es/camelCase.js'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'MenuCardlessContentNode',
@@ -40,6 +41,10 @@ export default {
   inject: ['allContentNodes'],
   props: {
     contentNode: { type: Object, required: true },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   computed: {
     isRoot() {
@@ -70,7 +75,7 @@ export default {
   },
   methods: {
     deletingFailed(error) {
-      this.$toast.error(errorToMultiLineToast(error))
+      this.toast.error(errorToMultiLineToast(error))
       this.allContentNodes().$reload()
     },
   },

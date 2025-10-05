@@ -88,6 +88,7 @@ import DayResponsibles from './DayResponsibles.vue'
 import { ONE_DAY_IN_MILLISECONDS } from '@/helpers/vCalendarDragAndDrop.js'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import PicassoEntry from './PicassoEntry.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'Picasso',
@@ -166,6 +167,8 @@ export default {
 
     const isSaving = ref(false)
 
+    const toast = useToast()
+
     // callback used to save entry to API
     const updateEntry = (scheduleEntry, startTimestamp, endTimestamp) => {
       const patchData = {
@@ -176,7 +179,7 @@ export default {
       api
         .patch(scheduleEntry._meta.self, patchData)
         .catch((error) => {
-          Vue.$toast.error(errorToMultiLineToast(error))
+          toast.error(errorToMultiLineToast(error))
         })
         .finally(() => {
           isSaving.value = false

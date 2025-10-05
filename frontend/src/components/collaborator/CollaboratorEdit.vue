@@ -132,6 +132,7 @@ import CollaboratorListItem from '@/components/collaborator/CollaboratorListItem
 import PromptEntityDelete from '@/components/prompt/PromptEntityDelete.vue'
 import campCollaborationDisplayName from '../../../../common/helpers/campCollaborationDisplayName'
 import isOwnCampCollaboration from './isOwnCampCollaboration.js'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'CollaboratorEdit',
@@ -149,6 +150,10 @@ export default {
     collaborator: { type: Object, required: true },
     disabled: { type: Boolean, default: false },
     inactive: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -218,7 +223,7 @@ export default {
         .then((postUrl) => this.api.patch(postUrl, {}))
         .catch((e) => {
           this.emailSent = false
-          this.$toast.error(errorToMultiLineToast(e))
+          this.toast.error(errorToMultiLineToast(e))
         })
         .finally(() => {
           this.resendingEmail = false

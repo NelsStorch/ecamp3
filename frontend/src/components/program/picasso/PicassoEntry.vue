@@ -143,6 +143,7 @@ import { useClickDetector } from './useClickDetector.js'
 import AvatarRow from '@/components/generic/AvatarRow.vue'
 import { ONE_MINUTE_IN_MILLISECONDS } from '@/helpers/vCalendarDragAndDrop.js'
 import ClipboardInfoDialog from '@/components/generic/ClipboardInfoDialog.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'PicassoEntry',
@@ -164,7 +165,9 @@ export default {
       editDialog.value.open()
     })
 
-    return { listeners, editDialog }
+    const toast = useToast()
+
+    return { listeners, editDialog, toast }
   },
   data: () => ({
     clientWidth: 0,
@@ -294,7 +297,7 @@ export default {
       const url = window.location.origin + router.resolve(this.scheduleEntryRoute).href
       await navigator.clipboard.writeText(url)
 
-      this.$toast.info(
+      this.toast.info(
         this.$t('global.toast.copied', null, { source: this.activityName }),
         {
           timeout: 2000,

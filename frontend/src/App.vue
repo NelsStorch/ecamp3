@@ -17,11 +17,13 @@
         {{ $t('global.info.offline.description') }}
       </p>
     </v-footer>
+    <v-snackbar-queue v-model="snackbarMessages"></v-snackbar-queue>
   </v-app>
 </template>
 
 <script>
 import VueI18n from '@/plugins/i18n'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -34,6 +36,12 @@ export default {
     window.addEventListener('offline', this.offlineListener)
     window.addEventListener('online', this.onlineListener)
     window.addEventListener('visibilitychange', this.visibilityChangeListener)
+  },
+  computed: {
+    ...mapGetters([
+      'snackbarMessages',
+      // ...
+    ]),
   },
   async mounted() {
     if (this.$auth.isLoggedIn()) {

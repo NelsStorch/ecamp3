@@ -1,8 +1,8 @@
 <template>
   <Field
+    v-slot="{ handleChange, errors: veeErrors }"
     :name="validationLabel"
     :rules="veeRules"
-    v-slot="{ handleChange, errors: veeErrors }"
   >
     <v-checkbox
       :id="id"

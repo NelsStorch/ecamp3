@@ -25,6 +25,7 @@ import {
   adjustColumnWidths,
 } from '@/components/activity/content/columnLayout/calculateNextSlotName.js'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'ColumnOperations',
@@ -33,6 +34,10 @@ export default {
     contentNode: { type: Object, required: true },
     minColumnWidth: { type: Number, default: 3 },
     totalWidth: { type: Number, default: 12 },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   computed: {
     addingColumnEnabled() {
@@ -77,7 +82,7 @@ export default {
       columns = adjustColumnWidths(columns, this.minColumnWidth, this.totalWidth)
       this.contentNode
         .$patch({ data: { columns } })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
     },
     removeColumn() {
       let columns = cloneDeep(this.contentNode.data.columns)
@@ -88,7 +93,7 @@ export default {
       )
       this.contentNode
         .$patch({ data: { columns } })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
     },
   },
 }
