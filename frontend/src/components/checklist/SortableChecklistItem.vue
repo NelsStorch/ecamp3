@@ -14,7 +14,6 @@
       <template #activator="{ on }">
         <v-list-item class="px-2 rounded min-h-0 py-1 drag-and-drop-handle" v-on="on">
           <v-btn
-            variant="text"
             variant="plain"
             icon
             class="my-n1 ml-n1 pointer-events-none"
