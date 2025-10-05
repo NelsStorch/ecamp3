@@ -10,7 +10,7 @@
       >
         <e-richtext
           class="e-story-day e-story-day-readonly"
-          :value="comment.textHtml"
+          :model-value="comment.textHtml"
           :readonly="true"
           :outlined="false"
           :solo="false"
