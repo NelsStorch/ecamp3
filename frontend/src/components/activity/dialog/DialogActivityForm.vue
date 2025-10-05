@@ -15,23 +15,21 @@
     <e-select
       v-model="localActivity.category"
       path="category"
-      :items="categories.items"
-      item-value="_meta.self"
-      item-text="name"
+      :items="Object.keys(categories)"
       vee-rules="required"
     >
-      <template #item="{ item, on, attrs }">
-        <v-list-item :key="item._meta.self" v-bind="attrs" v-on="on">
-          <v-list-item-title>
-            <category-chip :category="item.props.title" dense />
-            {{ item.props.name }}
-          </v-list-item-title>
+      <template #item="{ item, props }">
+        <v-list-item :key="item" v-bind="props">
+          <template #title>
+            <category-chip :category="categories[item.value]" dense />
+            {{ categories[item.value].name }}
+          </template>
         </v-list-item>
       </template>
       <template #selection="{ item }">
         <div class="v-select__selection">
-          <category-chip :category="item.props.title" dense />
-          {{ item.props.name }}
+          <category-chip :category="categories[item.value]" dense />
+          {{ categories[item.value].name }}
         </div>
       </template>
     </e-select>
@@ -52,6 +50,7 @@
 import CategoryChip from '@/components/generic/CategoryChip.vue'
 import FormScheduleEntryList from './FormScheduleEntryList.vue'
 import EForm from '@/components/form/base/EForm.vue'
+import { keyBy } from 'lodash-es'
 
 export default {
   name: 'DialogActivityForm',
@@ -90,7 +89,8 @@ export default {
   },
   computed: {
     categories() {
-      return this.camp.categories()
+      const categories = this.camp.categories().items
+      return keyBy(categories, '_meta.self')
     },
     camp() {
       return this.period.camp()
