@@ -139,7 +139,7 @@ export default {
 
 .ec-responsivelayout__container {
   display: grid;
-  grid-template-columns: minmax(600px, 2fr) minmax(250px, 1fr);
+  grid-template-columns: minmax(560px, 2fr) minmax(320px, 1fr);
   grid-template-rows: 1fr 1fr;
   gap: 1px;
 }
