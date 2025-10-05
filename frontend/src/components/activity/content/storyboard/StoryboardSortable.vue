@@ -12,10 +12,10 @@
     @start="dragging = true"
     @end="dragging = false"
   >
-    <template v-for="key in localSortedKeys">
+    <template #item="{ element }">
       <StoryboardRowDefault
         v-if="variant === 'default'"
-        :key="`default-${key}`"
+        :key="`default-${element}`"
         :disabled="disabled"
         :is-last-section="isLastSection"
         :item-key="key"
@@ -26,7 +26,7 @@
       />
       <StoryboardRowDense
         v-else-if="variant === 'dense'"
-        :key="`dense-${key}`"
+        :key="`dense-${element}`"
         :disabled="disabled"
         :is-last-section="isLastSection"
         :item-key="key"
