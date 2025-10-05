@@ -14,15 +14,10 @@
           :key="checklist._meta.self"
           :to="checklistRoute(camp, checklist)"
           class="px-2 rounded"
+          :title="checklist.name"
         >
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ checklist.name }}
-            </v-list-item-title>
-          </v-list-item-content>
-
-          <template v-if="isContributor" #append style="display: inline">
-            <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
+          <template v-if="isContributor" #append>
+            <ButtonEdit color="primary" variant="tonal" />
           </template>
         </v-list-item>
       </v-list>

@@ -13,9 +13,8 @@
   >
     <template #activator="{ props }">
       <ButtonAdd
-        color="secondary"
-        text
-        class="my-n2"
+        color="blue-grey-darken-2"
+        variant="text"
         icon="mdi-playlist-plus"
         v-bind="props"
         >{{ $t('components.checklist.checklistCreate.title') }}</ButtonAdd
