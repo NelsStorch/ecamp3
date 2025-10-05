@@ -1,7 +1,6 @@
 <template>
   <v-chip
     label
-    variant="outlined"
     :class="modelValue ?? 'text-primary'"
     :border="modelValue ? null : 'sm'"
     :variant="modelValue ? 'outlined' : 'flat'"
