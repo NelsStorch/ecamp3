@@ -3,7 +3,6 @@ import vueEslintConfigPrettier from '@vue/eslint-config-prettier'
 import { includeIgnoreFile } from '@eslint/compat'
 import localRules from 'eslint-plugin-local-rules'
 import vueEslint from 'eslint-plugin-vue'
-import vuetify from 'eslint-plugin-vuetify'
 import vueScopedCssEslint from 'eslint-plugin-vue-scoped-css'
 import globals from 'globals'
 import path from 'node:path'
@@ -15,7 +14,6 @@ const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 export default [
   ...vueEslint.configs['flat/recommended'],
-  ...vuetify.configs['flat/recommended'],
   ...vueScopedCssEslint.configs['flat/recommended'],
   js.configs.recommended,
   {
