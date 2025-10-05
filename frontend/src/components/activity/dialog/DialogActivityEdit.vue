@@ -43,6 +43,7 @@ export default {
       default: false,
     },
   },
+  emits: ['submit'],
   data() {
     return {
       entityProperties: ['title', 'location'],
@@ -136,11 +137,14 @@ export default {
       })
 
       // patch activity entity
-      const activityPayload = { ...this.entityData }
+      const activityPayload = {
+        title: this.entityData.title,
+        category: this.entityData.category,
+        location: this.entityData.location,
+      }
       if (this.hideHeaderFields) {
         delete activityPayload.location
       }
-      delete activityPayload.scheduleEntries
       promises.push(this.api.patch(this.entityUri, activityPayload))
 
       // execute all requests together --> onError if one fails
