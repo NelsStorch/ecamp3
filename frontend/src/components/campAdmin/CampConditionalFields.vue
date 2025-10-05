@@ -4,13 +4,13 @@ Displays fields which don't apply to all camps, but are required for some
 
 <template>
   <v-expansion-panel>
-    <v-expansion-panel-header>
-      <h2 class="subtitle-1 font-weight-bold d-flex align-center">
+    <v-expansion-panel-title>
+      <h2 class="text-subtitle-1 font-weight-bold d-flex align-center">
         <v-icon start size="20">{{ $i18n.locale.includes('it') ? '$gs' : '$js' }}</v-icon>
         {{ $t('components.campAdmin.campConditionalFields.title') }}
       </h2>
-    </v-expansion-panel-header>
-    <v-expansion-panel-content>
+    </v-expansion-panel-title>
+    <v-expansion-panel-text>
       <v-row class="pb-6">
         <v-col cols="12" md="6" class="pb-0">
           <content-group
@@ -49,7 +49,7 @@ Displays fields which don't apply to all camps, but are required for some
           </content-group>
         </v-col>
       </v-row>
-    </v-expansion-panel-content>
+    </v-expansion-panel-text>
   </v-expansion-panel>
 </template>
 
