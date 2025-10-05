@@ -41,7 +41,6 @@
     </v-alert>
     <v-alert
       v-if="error"
-      variant="outlined"
       variant="tonal"
       border="start"
       type="error"
