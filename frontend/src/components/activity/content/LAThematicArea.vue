@@ -22,8 +22,7 @@
         <template v-if="index === 0">
           <v-list
             v-if="selectionCount > 0"
-            :lines="selectionCount > 3 ? 'two' : undefined"
-            :lines="selectionCount <= 3 ? 'three' : undefined"
+            :lines="selectionCount <= 3 ? 'three' : 'two'"
             class="flex-grow-1 bg-transparent"
           >
             <template v-for="[key] in dataOptions">
@@ -159,6 +158,8 @@ export default {
   },
 }
 </script>
+
+<script setup lang="ts"></script>
 
 <style scoped>
 .ec-la-thematic-area :deep(.v-input__slot) {
