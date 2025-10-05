@@ -600,11 +600,11 @@
       "copied": "{source} copié"
     },
     "validation": {
-      "greaterThan": "{_field_} doit être supérieur à {min}",
-      "greaterThanOrEqual_date": "{_field_} ne peut pas être antérieure à {min}",
-      "greaterThan_time": "{_field_} doit être postérieure à {min}",
-      "lessThanOrEqual_date": "{_field_} ne peut pas être postérieure à {max}",
-      "oneEmojiOrTwoCharacters": "{_field_} ne peut avoir que 1 emoji ou 2 lettres/chiffres"
+      "greaterThan": "{field} doit être supérieur à {min}",
+      "greaterThanOrEqual_date": "{field} ne peut pas être antérieure à {min}",
+      "greaterThan_time": "{field} doit être postérieure à {min}",
+      "lessThanOrEqual_date": "{field} ne peut pas être postérieure à {max}",
+      "oneEmojiOrTwoCharacters": "{field} ne peut avoir que 1 emoji ou 2 lettres/chiffres"
     },
     "warning": {
       "delete": "Veux-tu vraiment le supprimer ? | Veux-tu vraiment supprimer \"{entity}\" ?"

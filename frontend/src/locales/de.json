@@ -624,11 +624,11 @@
       "copied": "{source} kopiert"
     },
     "validation": {
-      "greaterThan": "{_field_} muss grösser sein als {min}",
-      "greaterThanOrEqual_date": "{_field_} darf nicht vor {min} liegen",
-      "greaterThan_time": "{_field_} muss später als {min} sein",
-      "lessThanOrEqual_date": "{_field_} darf nicht nach {max} liegen",
-      "oneEmojiOrTwoCharacters": "{_field_} darf nur 1 Emoji oder 2 Buchstaben/Zahlen haben"
+      "greaterThan": "{field} muss grösser sein als {min}",
+      "greaterThanOrEqual_date": "{field} darf nicht vor {min} liegen",
+      "greaterThan_time": "{field} muss später als {min} sein",
+      "lessThanOrEqual_date": "{field} darf nicht nach {max} liegen",
+      "oneEmojiOrTwoCharacters": "{field} darf nur 1 Emoji oder 2 Buchstaben/Zahlen haben"
     },
     "warning": {
       "delete": "Möchtest du das wirklich löschen? | Möchtest du \"{entity}\" wirklich löschen?"

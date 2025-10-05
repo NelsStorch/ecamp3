@@ -1,12 +1,14 @@
 import { configure, defineRule } from 'vee-validate'
 import { localize } from '@vee-validate/i18n'
 import { all } from '@vee-validate/rules'
+import i18n from '@/plugins/i18n'
+import dayjs from '@/common/helpers/dayjs.js'
 
-// import greaterThan from '@/plugins/veeValidate/greaterThan'
-// import greaterThan_time from './veeValidate/greaterThan_time.js'
-// import greaterThanOrEqual_date from './veeValidate/greaterThanOrEqual_date.js'
-// import lessThanOrEqual_date from './veeValidate/lessThanOrEqual_date.js'
-// import oneEmojiOrTwoCharacters from '@/plugins/veeValidate/oneEmojiOrTwoCharacters.js'
+import greaterThan from '@/plugins/veeValidate/greaterThan'
+import greaterThan_time from './veeValidate/greaterThan_time.js'
+import greaterThanOrEqual_date from './veeValidate/greaterThanOrEqual_date.js'
+import lessThanOrEqual_date from './veeValidate/lessThanOrEqual_date.js'
+import oneEmojiOrTwoCharacters from '@/plugins/veeValidate/oneEmojiOrTwoCharacters.js'
 
 import it from '@vee-validate/i18n/dist/locale/it.json'
 import fr from '@vee-validate/i18n/dist/locale/fr.json'
@@ -35,19 +37,18 @@ class VeeValidatePlugin {
     /**
      * define custom rules
      */
+    defineRule('greaterThan', greaterThan(i18n))
 
-    // extend('greaterThan', greaterThan(i18n))
-    //
-    // extend('greaterThan_time', greaterThan_time(Vue.dayjs, i18n))
-    //
-    // // check if date (value) is equal or larger than another date (min)
-    // extend('greaterThanOrEqual_date', greaterThanOrEqual_date(Vue.dayjs, i18n))
-    //
-    // // check if date (value) is equal or less than another date (max)
-    // extend('lessThanOrEqual_date', lessThanOrEqual_date(Vue.dayjs, i18n))
-    //
-    // // check if date (value) is equal or less than another date (max)
-    // extend('oneEmojiOrTwoCharacters', oneEmojiOrTwoCharacters(i18n))
+    defineRule('greaterThan_time', greaterThan_time(dayjs, i18n))
+
+    // check if date (value) is equal or larger than another date (min)
+    defineRule('greaterThanOrEqual_date', greaterThanOrEqual_date(dayjs, i18n))
+
+    // check if date (value) is equal or less than another date (max)
+    defineRule('lessThanOrEqual_date', lessThanOrEqual_date(dayjs, i18n))
+
+    // check if date (value) is equal or less than another date (max)
+    defineRule('oneEmojiOrTwoCharacters', oneEmojiOrTwoCharacters(i18n))
   }
 }
 

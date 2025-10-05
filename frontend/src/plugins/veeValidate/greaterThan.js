@@ -1,17 +1,17 @@
-export default (i18n) => ({
-  params: ['min'],
+export default (i18n) =>
   /**
-   *
    * @param {string} value value of a float number
-   * @param number min   Comparison value in string format 'HH:mm'
-   * @returns {boolean}       validation result
+   * @param number min   Comparison value (interpreted as float)
    */
-  validate: (value, { min }) => {
-    return parseFloat(value) > min
-  },
-  message: (field, { min }) => {
-    return i18n.t('global.validation.greaterThan', 0, {
+  (value, [min], ctx) => {
+    const validate = parseFloat(value) > min
+
+    if (validate) {
+      return true
+    }
+
+    return i18n.global.t('global.validation.greaterThan', {
       min: min,
+      field: ctx.label,
     })
-  },
-})
+  }

@@ -4,22 +4,24 @@ function normalizeMin(min, dayjs) {
     : min.set('date', 1).set('month', 0).set('year', 1970)
 }
 
-export default (dayjs, i18n) => ({
-  params: ['min'],
+export default (dayjs, i18n) =>
   /**
    *
    * @param {string} value Time value in string format 'HH:mm'
    * @param {string} min   Comparison value in string format 'HH:mm'
    * @returns {bool}       validation result
    */
-  validate: (value, { min }) => {
+  (value, [min], ctx) => {
     const valueDate = dayjs.utc('1970-01-01 ' + value, 'YYYY-MM-DD LT')
     const minDate = normalizeMin(min, dayjs)
-    return valueDate.unix() > minDate.unix()
-  },
-  message: (field, values) => {
-    return i18n.t('global.validation.greaterThan_time', 0, {
-      min: normalizeMin(values.min, dayjs).format('LT'),
+    const validate = valueDate.unix() > minDate.unix()
+
+    if (validate) {
+      return true
+    }
+
+    return i18n.global.t('global.validation.greaterThan_time', {
+      min: normalizeMin(min, dayjs).format('LT'),
+      field: ctx.label,
     })
-  },
-})
+  }
