@@ -15,13 +15,13 @@
     :close-on-content-click="false"
     z-index="5"
   >
-    <template #activator="{ props }">
+    <template #activator="{ props, isActive }">
       <v-toolbar-items v-if="!avatarOnly">
         <v-btn
           start
           variant="text"
           v-bind="props"
-          :class="[btnClasses, { 'v-btn--open': props['aria-expanded'] === 'true' }]"
+          :class="[btnClasses, { 'v-btn--open': isActive }]"
         >
           <template v-if="authUser">
             <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
@@ -48,7 +48,7 @@
         icon
         variant="text"
         v-bind="props"
-        :class="[btnClasses, { 'v-btn--open': props['aria-expanded'] === 'true' }]"
+        :class="[btnClasses, { 'v-btn--open': isActive }]"
       >
         <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
           <UserAvatar
