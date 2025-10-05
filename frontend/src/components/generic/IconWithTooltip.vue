@@ -6,18 +6,15 @@
     location="bottom"
     max-width="300px"
   >
-    <!-- eslint-disable-next-line vue/no-unused-vars -->
-    <template #activator="_">
+    <template #activator="{ props }">
       <v-btn
-        icon
-        v-bind="$attrs"
+        :icon="icon"
         class="tooltip-activator"
+        v-bind="props"
         @click="click"
         @mouseenter="mouseenter"
         @mouseleave="mouseleave"
-      >
-        <v-icon>{{ icon }}</v-icon>
-      </v-btn>
+      />
     </template>
     <slot>
       {{ text }}
