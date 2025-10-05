@@ -82,7 +82,6 @@ import dayjs from '@/common/helpers/dayjs.js'
 import { isAdmin } from '@/plugins/auth'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
-import { mapGetters } from 'vuex'
 import UserMeta from '@/components/navigation/UserMeta.vue'
 import CampListItem from '@/components/camp/CampListItem.vue'
 import groupBy from 'lodash-es/groupBy.js'
@@ -145,9 +144,6 @@ export default {
         }))
         .filter(({ camp }) => !camp.isPrototype)
     },
-    ...mapGetters({
-      user: 'getLoggedInUser',
-    }),
   },
   async mounted() {
     this.loadCamps()

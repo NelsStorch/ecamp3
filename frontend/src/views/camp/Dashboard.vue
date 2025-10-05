@@ -143,13 +143,12 @@
 import { periodRoute } from '@/router.js'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ActivityRow from '@/components/dashboard/ActivityRow.vue'
-import { keyBy, groupBy, mapValues } from 'lodash-es'
+import { groupBy, keyBy, mapValues } from 'lodash-es'
 import { dateHelperUTCFormatted } from '@/mixins/dateHelperUTCFormatted.js'
-import { mapGetters } from 'vuex'
 import {
   filterAndQueryAreEqual,
-  transformValuesToHalId,
   processRouteQuery,
+  transformValuesToHalId,
 } from '@/helpers/querySyncHelper'
 import AvatarRow from '@/components/generic/AvatarRow.vue'
 import ScheduleEntryFilters from '@/components/program/ScheduleEntryFilters.vue'
@@ -244,9 +243,6 @@ export default {
           filterMatchScheduleEntry(scheduleEntry, filter)
         )
     },
-    ...mapGetters({
-      loggedInUser: 'getLoggedInUser',
-    }),
   },
   watch: {
     'filter.category': 'persistRouterState',

@@ -50,7 +50,6 @@
 import UserMeta from '@/components/navigation/UserMeta.vue'
 import Logo from '@/components/navigation/Logo.vue'
 import { campRoute, materialListRoute } from '@/router.js'
-import { mapGetters } from 'vuex'
 import { campRoleMixin } from '@/mixins/campRoleMixin.js'
 import { getEnv } from '@/environment.js'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
@@ -79,9 +78,6 @@ export default {
     helpLink() {
       return getEnv().HELP_LINK
     },
-    ...mapGetters({
-      user: 'getLoggedInUser',
-    }),
   },
   methods: {
     materialListRoute,

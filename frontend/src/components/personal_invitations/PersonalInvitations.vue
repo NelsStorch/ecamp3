@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card-text v-if="invitations.items.length === 0">
-      <p v-if="!loading">
+      <p v-if="authUser">
         {{
           $t('components.personalInvitations.personalInvitations.noOpenInvitations', 0, {
             email: authUser.profile().email,
@@ -84,11 +84,6 @@ export default {
     const toast = useToast()
     return { toast }
   },
-  data() {
-    return {
-      loading: true,
-    }
-  },
   computed: {
     invitations() {
       return this.api.get().personalInvitations()
@@ -100,7 +95,6 @@ export default {
   async mounted() {
     const user = await this.$auth.loadUser()
     await user.profile()._meta.load
-    this.loading = false
   },
   methods: {
     acceptInvitation(invitation) {

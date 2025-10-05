@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     reloadUser() {
-      this.api.reload(this.user)
+      if (this.user) this.api.reload(this.user)
     },
   },
 }

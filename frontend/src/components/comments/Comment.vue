@@ -49,7 +49,10 @@ export default {
 
   methods: {
     isDeletable() {
-      return this.comment !== undefined && this.comment.author().id === this.authUser.id
+      return (
+        this.comment !== undefined &&
+        this.comment.author()._meta.self === this.authUser?._meta.self
+      )
     },
   },
   computed: {

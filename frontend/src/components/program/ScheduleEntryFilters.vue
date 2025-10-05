@@ -240,7 +240,7 @@ export default {
     }),
     loggedInCampCollaboration() {
       return Object.values(this.campCollaborations).find((collaboration) => {
-        if (typeof collaboration.user !== 'function') {
+        if (typeof collaboration.user !== 'function' || !this.loggedInUser) {
           return false
         }
         return this.loggedInUser?._meta?.self === collaboration.user?.()?._meta?.self

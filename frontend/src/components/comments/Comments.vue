@@ -37,7 +37,7 @@
         />
         <div class="d-flex align-center mt-2 gap-2">
           <span
-            ><UserAvatar :user="authUser" size="24" class="mr-1" />
+            ><UserAvatar v-if="authUser" :user="authUser" size="24" class="mr-1" />
             {{ authUser.displayName }}</span
           >
         </div>

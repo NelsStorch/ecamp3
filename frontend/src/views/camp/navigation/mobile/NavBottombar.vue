@@ -28,7 +28,6 @@
 
 <script>
 import { campRoute, materialListRoute } from '@/router'
-import { mapGetters } from 'vuex'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default {
@@ -40,11 +39,6 @@ export default {
     return {
       value: false,
     }
-  },
-  computed: {
-    ...mapGetters({
-      user: 'getLoggedInUser',
-    }),
   },
   methods: {
     materialListRoute,

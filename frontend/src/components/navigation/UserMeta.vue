@@ -37,10 +37,10 @@
               :camp-collaboration="currentCampCollaboration"
               :size="40"
             />
+            <span class="sr-only-sm-and-down mx-3">
+              {{ authUser.displayName }}
+            </span>
           </template>
-          <span class="sr-only-sm-and-down mx-3">
-            {{ authUser.displayName }}
-          </span>
         </v-btn>
       </v-toolbar-items>
       <v-btn
@@ -50,21 +50,19 @@
         v-bind="props"
         :class="[btnClasses, { 'v-btn--open': props['aria-expanded'] === 'true' }]"
       >
-        <template v-if="authUser">
-          <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
-            <UserAvatar
-              :user="authUser"
-              :camp-collaboration="currentCampCollaboration"
-              :size="40"
-            />
-          </v-badge>
+        <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
           <UserAvatar
-            v-else
             :user="authUser"
             :camp-collaboration="currentCampCollaboration"
             :size="40"
           />
-        </template>
+        </v-badge>
+        <UserAvatar
+          v-else
+          :user="authUser"
+          :camp-collaboration="currentCampCollaboration"
+          :size="40"
+        />
         <span class="sr-only-sm-and-down mx-3">
           {{ authUser.displayName }}
         </span>
@@ -201,7 +199,8 @@ export default {
     currentCampCollaboration() {
       if (
         typeof this.camp?.campCollaborations !== 'function' ||
-        this.camp.campCollaborations()._meta.loading
+        this.camp.campCollaborations()._meta.loading ||
+        !this.authUser
       ) {
         return undefined
       }
@@ -209,7 +208,7 @@ export default {
         ?.campCollaborations()
         .items.find(
           (collaboration) =>
-            this.authUser?._meta?.self === collaboration.user?.()?._meta?.self
+            this.authUser._meta?.self === collaboration.user?.()?._meta?.self
         )
     },
   },

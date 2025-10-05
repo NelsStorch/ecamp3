@@ -41,9 +41,6 @@ export default {
     loading() {
       return this.api.get().personalInvitations().loading
     },
-    ...mapGetters({
-      user: 'getLoggedInUser',
-    }),
   },
 }
 </script>
