@@ -21,17 +21,18 @@
       @update="finishDrag"
       @end="cleanupDrag"
     >
-      <content-node
-        v-for="id in draggableContentNodeIds"
-        :key="id"
-        :data-href="allContentNodesById[id]._meta.self"
-        :data-type="allContentNodesById[id].contentTypeName"
-        class="content-node"
-        :content-node="allContentNodesById[id]"
-        :layout-mode="layoutMode"
-        :draggable="draggingEnabled"
-        :disabled="disabled"
-      />
+      <template #item="{ element }">
+        <content-node
+          :key="element"
+          :data-href="allContentNodesById[element]._meta.self"
+          :data-type="allContentNodesById[element].contentTypeName"
+          class="content-node"
+          :content-node="allContentNodesById[element]"
+          :layout-mode="layoutMode"
+          :draggable="draggingEnabled"
+          :disabled="disabled"
+        />
+      </template>
       <v-sheet
         v-if="!layoutMode && draggableContentNodeIds.length === 0"
         elevation="0"

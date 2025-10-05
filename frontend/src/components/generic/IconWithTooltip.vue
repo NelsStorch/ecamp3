@@ -45,7 +45,11 @@ export default {
   },
   computed: {
     showIcon() {
-      return this.text || 'default' in this.$slots || this.$t(this.tcKey) != this.tcKey
+      return (
+        this.text ||
+        'default' in this.$slots ||
+        this.$t(this.tooltipI18nKey) != this.tooltipI18nKey
+      )
     },
   },
   methods: {
