@@ -82,7 +82,6 @@
 
             <v-list-item-action style="display: inline">
               <v-btn
-                variant="text"
                 variant="plain"
                 icon
                 class="my-n1 pointer-events-none"
