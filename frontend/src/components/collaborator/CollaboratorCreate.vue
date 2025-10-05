@@ -13,8 +13,8 @@
   >
     <template #activator="{ props }">
       <ButtonAdd
-        color="secondary"
-        text
+        color="blue-grey-darken-2"
+        variant="text"
         class="my-n2"
         icon="mdi-account-plus"
         v-bind="props"
