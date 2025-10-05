@@ -11,20 +11,26 @@ class ListMultiSelectTest extends ListContentNodeTestCase {
     public function setUp(): void {
         parent::setUp();
 
-        $this->endpoint = '/content_node/multi_selects?camp=/camps/'.static::$fixtures['campPrototype']->getId();
+        $this->endpointBase = '/content_node/multi_selects';
 
-        $this->contentNodesCamp1and2 = [
-            //            $this->getIriFor('multiSelect1'),
-            //            $this->getIriFor('multiSelect2'),
+        $this->contentNodesCamp1 = [
+            $this->getIriFor('multiSelect1'),
+            $this->getIriFor('multiSelect2'),
+        ];
+
+        $this->contentNodesCamp2 = [
         ];
 
         $this->contentNodesCampUnrelated = [
-            //            $this->getIriFor('multiSelectCampUnrelated'),
+            $this->getIriFor('multiSelectCampUnrelated'),
         ];
 
-        $this->contentNodesPublicCamps = [
+        $this->contentNodesCampPrototype = [
             $this->getIriFor('multiSelectCampPrototype'),
-            //            $this->getIriFor('multiSelectCampShared'),
+        ];
+
+        $this->contentNodesCampShared = [
+            $this->getIriFor('multiSelectCampShared'),
         ];
     }
 }

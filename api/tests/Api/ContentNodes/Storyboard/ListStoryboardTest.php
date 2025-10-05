@@ -11,20 +11,27 @@ class ListStoryboardTest extends ListContentNodeTestCase {
     public function setUp(): void {
         parent::setUp();
 
-        $this->endpoint = '/content_node/storyboards?camp=/camps/'.static::$fixtures['campPrototype']->getId();
+        $this->endpointBase = '/content_node/storyboards';
 
-        $this->contentNodesCamp1and2 = [
-            //            $this->getIriFor('storyboard1'),
-            //            $this->getIriFor('storyboard2'),
+        $this->contentNodesCamp1 = [
+            $this->getIriFor('storyboard1'),
+            $this->getIriFor('storyboard2'),
+        ];
+
+        $this->contentNodesCamp2 = [
+            // none
         ];
 
         $this->contentNodesCampUnrelated = [
-            //            $this->getIriFor('storyboardCampUnrelated'),
+            $this->getIriFor('storyboardCampUnrelated'),
         ];
 
-        $this->contentNodesPublicCamps = [
+        $this->contentNodesCampPrototype = [
             $this->getIriFor('storyboardCampPrototype'),
-            //            $this->getIriFor('storyboardCampShared'),
+        ];
+
+        $this->contentNodesCampShared = [
+            $this->getIriFor('storyboardCampShared'),
         ];
     }
 }
