@@ -137,15 +137,16 @@ export default {
     textareaValue: 'FFFFFFFFFF',
     richtextValue: '<p>FFFFFFFFFF</p>',
     colorValue: null,
-    dateValue: '2020-01-01',
-    timeValue: '2020-01-01T14:45:00+00:00',
-    timeValue2: '00:00',
+
     values: {
       textfield: 'FFFFFFFFFF',
       checkbox: false,
       switch: false,
       select: null,
       numberfield: 10,
+      datepicker: '2020-01-01',
+      timepicker: '2020-01-01T14:45:00+00:00',
+      timefield: '05:00',
     },
 
     headers: [
@@ -235,27 +236,34 @@ export default {
             uri: this.campUri,
           },
         },
-        // {
-        //   id: 'date-picker',
-        //   component: (type) => (type === 'v' ? '' : `${type}-date-picker`),
-        //   value: this.dateValue,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     path: 'start',
-        //     uri: this.periodUri,
-        //   },
-        // },
-        // {
-        //   id: 'time-picker',
-        //   component: (type) => (type === 'v' ? '' : `${type}-time-picker`),
-        //   value: this.timeValue,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     'value-format': 'YYYY-MM-DDTHH:mm:ssZ',
-        //     path: 'start',
-        //     uri: this.scheduleEntryUri,
-        //   },
-        // },
+        {
+          id: 'datepicker',
+          component: (type) => (type === 'v' ? '' : `${type}-date-picker`),
+          props: {
+            placeholder: this.placeholder,
+            path: 'start',
+            uri: this.periodUri,
+          },
+        },
+        {
+          id: 'timepicker',
+          component: (type) => (type === 'v' ? '' : `${type}-time-picker`),
+          props: {
+            placeholder: this.placeholder,
+            'value-format': 'YYYY-MM-DDTHH:mm:ssZ',
+            path: 'start',
+            uri: this.scheduleEntryUri,
+          },
+        },
+        {
+          id: 'timefield',
+          component: (type) => (type === 'e' ? `${type}-time-field` : ''),
+          props: {
+            placeholder: this.placeholder,
+            path: 'start',
+            uri: this.scheduleEntryUri,
+          },
+        },
         // {
         //   id: 'color-picker',
         //   component: (type) => (type === 'v' ? '' : `${type}-color-picker`),
@@ -276,16 +284,6 @@ export default {
         //     path: 'color',
         //     uri: this.campCollaborationUri,
         //     veeRules: 'required',
-        //   },
-        // },
-        // {
-        //   id: 'time-field',
-        //   component: (type) => (type === 'e' ? `${type}-time-field` : ''),
-        //   value: this.timeValue2,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     path: 'start',
-        //     uri: this.scheduleEntryUri,
         //   },
         // },
       ]

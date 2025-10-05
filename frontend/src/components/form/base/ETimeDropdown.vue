@@ -2,11 +2,11 @@
   <v-menu ref="menu" v-bind="menuProps" @update:model-value="toggle">
     <template #activator="{ props }">
       <e-time-field
-        :value="value"
         v-bind="{ ...props, ...$attrs }"
+        :model-value="modelValue"
         class="e-time-dropdown--input"
         :class="inputClass"
-        @input="onInput"
+        @update:model-value="onInput"
       />
     </template>
 
@@ -32,7 +32,7 @@ export default {
   components: { ETimeField },
   inheritAttrs: false,
   props: {
-    value: { type: [Object, String], required: true },
+    modelValue: { type: [Object, String], required: true },
     items: { type: Array, required: true },
     inputClass: { type: [String, Object], default: '' },
     menuProps: { type: Object, default: () => ({}) },
@@ -40,7 +40,7 @@ export default {
   computed: {
     // find the closest index to current value
     index() {
-      const date = this.$date.utc(this.value)
+      const date = this.$date.utc(this.modelValue)
       return this.items
         .map((item) => Math.abs(date.diff(item.date)))
         .reduce(
@@ -52,7 +52,7 @@ export default {
   methods: {
     onInput(value) {
       this.$refs.menu && (this.$refs.menu.isActive = false)
-      this.$emit('input', value)
+      this.$emit('update:model-value', value)
     },
     toggle() {
       // mechanism taken from v-select
