@@ -1,9 +1,9 @@
 <template>
   <Field
+    v-slot="{ handleChange, errors: veeErrors }"
     :name="veeId ?? path"
     :label="validationLabel"
     :rules="veeRules"
-    v-slot="{ handleChange, errors: veeErrors }"
   >
     <v-select
       :class="[inputClass]"

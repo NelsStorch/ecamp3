@@ -1,6 +1,6 @@
 <template>
   <SideBar :title="$t('global.navigation.admin.title')" icon="mdi-menu">
-    <v-list class="py-0">
+    <v-list class="py-0" density="default">
       <SidebarListItem
         :to="adminRoute(camp, 'info')"
         :title="$t('views.camp.admin.sideBarAdmin.itemInfos')"
