@@ -18,7 +18,7 @@
     </v-container>
     <v-expansion-panels v-model="openPanels" flat accordion multiple>
       <CampConditionalFields :camp="camp" :disabled="!isManager" />
-      <CampDangerZone v-if="isManager" :camp="camp" />
+      <CampDangerZone v-if="isManager" :camp="camp" :active="dangerOpen" />
     </v-expansion-panels>
   </content-card>
 </template>
@@ -55,6 +55,11 @@ export default {
     return {
       title: this.$t('views.camp.admin.info.title'),
     }
+  },
+  computed: {
+    dangerOpen() {
+      return this.openPanels.includes(1)
+    },
   },
   mounted() {
     this.camp._meta.load.then((camp) => {
