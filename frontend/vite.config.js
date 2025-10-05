@@ -7,6 +7,12 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { configDefaults } from 'vitest/config'
 import svgLoader from 'vite-svg-loader'
 import Vuetify from 'vite-plugin-vuetify'
+import { readdirSync } from 'fs'
+
+const componentsPath = 'node_modules/vuetify/lib/components'
+const vuetifyComponents = readdirSync(componentsPath)
+  .filter((file) => file.startsWith('V'))
+  .map((file) => `vuetify/components/${file}`)
 
 const plugins = [
   comlink(), // must be first
@@ -59,7 +65,9 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: [
+      ...vuetifyComponents.filter((dep) => !dep.includes('VOverflowBtn')),
       '@intlify/core',
+      '@leeoniya/ufuzzy',
       '@react-pdf/font',
       '@react-pdf/layout',
       '@react-pdf/pdfkit',
