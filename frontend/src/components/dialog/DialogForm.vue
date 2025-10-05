@@ -1,10 +1,11 @@
 <template>
   <v-dialog
+    v-bind="$attrs"
     :fullscreen="$vuetify.display.xs"
     content-class="ec-dialog-form"
     eager
-    v-bind="$attrs"
     :max-width="maxWidth"
+    :model-value
     @update:model-value="onInput"
   >
     <template #activator="scope">
@@ -138,6 +139,7 @@ export default {
       if (event === false) {
         this.doCancel()
       }
+      this.$emit('update:model-value', event)
     },
   },
 }
