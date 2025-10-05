@@ -35,7 +35,7 @@
             v-model="values[item.id]"
             v-bind="{ ...item.props, ...config }"
           />
-          <span v-else v-text="item.value" />
+          <span v-else v-text="values[item.id]" />
         </template>
         <template #[`item.e`]="{ item }">
           <component
@@ -134,7 +134,6 @@ export default {
     label: false,
     labelText: 'Label',
 
-    numberfieldValue: 10,
     textareaValue: 'FFFFFFFFFF',
     richtextValue: '<p>FFFFFFFFFF</p>',
     colorValue: null,
@@ -146,6 +145,7 @@ export default {
       checkbox: false,
       switch: false,
       select: null,
+      numberfield: 10,
     },
 
     headers: [
@@ -171,19 +171,19 @@ export default {
             placeholder: this.placeholder,
             path: 'nickname',
             uri: this.profileUri,
+            veeRules: 'required',
           },
         },
-        // {
-        //   id: 'number-field',
-        //   component: (type) => (type === 'v' ? '' : `${type}-number-field`),
-        //   value: this.numberfieldValue,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     inputmode: 'decimal',
-        //     path: 'quantity',
-        //     uri: this.materialUri,
-        //   },
-        // },
+        {
+          id: 'numberfield',
+          component: (type) => (type === 'v' ? '' : `${type}-number-field`),
+          props: {
+            placeholder: this.placeholder,
+            inputmode: 'decimal',
+            path: 'quantity',
+            uri: this.materialUri,
+          },
+        },
         // {
         //   id: 'textarea',
         //   component: (type) => `${type}-textarea`,

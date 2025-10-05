@@ -73,7 +73,7 @@ const {
 
 const handleUpdate = (value) => {
   handleChange(value)
-  emit('input', value)
+  emit('update:model-value', value)
 }
 
 watch(

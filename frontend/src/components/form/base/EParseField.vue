@@ -3,63 +3,62 @@ Displays a field as a textfield (can be used with v-model)
 -->
 
 <template>
-  <!--  <ValidationProvider-->
-  <!--    v-slot="{ errors: veeErrors }"-->
-  <!--    ref="validationProvider"-->
-  <!--    tag="div"-->
-  <!--    :name="validationLabel"-->
-  <!--    :vid="veeId ?? path"-->
-  <!--    :rules="veeRules"-->
-  <!--    :required="required"-->
-  <!--    class="e-form-container"-->
-  <!--  >-->
-  <v-text-field
-    ref="textField"
-    :class="[inputClass]"
-    :error-messages="(veeErrors ?? []).concat(combinedErrorMessages)"
-    :filled="filled"
-    :hide-details="hideDetails"
-    :label="labelOrEntityFieldLabel"
-    :required="required"
-    :value="stringValue"
-    type="text"
-    v-bind="$attrs"
-    v-on="inputListeners"
+  <Field
+    v-slot="{ handleChange, errors: veeErrors }"
+    :name="veeId ?? path"
+    :label="validationLabel"
+    :rules="veeRules"
+    ref="validationField"
   >
-    <template #prepend>
-      <slot
-        :internal-value="internalValue"
-        :serialized-value="serializedValue"
-        :string-value="stringValue"
-        name="prepend"
-      />
-    </template>
-    <template #append>
-      <slot
-        :internal-value="internalValue"
-        :serialized-value="serializedValue"
-        :string-value="stringValue"
-        name="append"
-      />
-    </template>
-  </v-text-field>
-  <!--  </ValidationProvider>-->
+    <v-text-field
+      v-bind="$attrs"
+      ref="textField"
+      :class="[inputClass]"
+      :error-messages="(veeErrors ?? []).concat(combinedErrorMessages)"
+      :filled="filled"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      :required="required"
+      :model-value="stringValue"
+      type="text"
+      @blur="onBlur($event, handleChange)"
+      @update:modelValue="onInput"
+    >
+      <template #prepend>
+        <slot
+          :internal-value="internalValue"
+          :serialized-value="serializedValue"
+          :string-value="stringValue"
+          name="prepend"
+        />
+      </template>
+      <template #append>
+        <slot
+          :internal-value="internalValue"
+          :serialized-value="serializedValue"
+          :string-value="stringValue"
+          name="append"
+        />
+      </template>
+    </v-text-field>
+  </Field>
 </template>
 
 <script>
 import { debounce } from 'lodash-es'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-// import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 
 export default {
   name: 'EParseField',
   components: {
-    // ValidationProvider
+    Field,
   },
+  emits: ['update:model-value'],
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
-    value: { validator: () => true, required: true },
+    modelValue: { validator: () => true, required: true },
     readonly: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: false },
     errorMessages: { type: Array, required: false, default: () => [] },
@@ -136,23 +135,12 @@ export default {
       }
       return [...this.errorMessages, this.parseError.message]
     },
-    inputListeners: function () {
-      const vm = this
-      return Object.assign(
-        {},
-        // attach all $parent listeners
-        this.$listeners,
-        // override @input listener for correct handling of numeric values
-        {
-          input: vm.onInput,
-          blur: vm.onBlur,
-        }
-      )
-    },
   },
   watch: {
-    value: {
+    modelValue: {
       handler(val) {
+        console.log('wathch:modelValue')
+        console.log(val)
         // if the value is the same, we don't need to parse it again
         this.parseError = null
         this.intermediateParseError = null
@@ -168,10 +156,13 @@ export default {
   },
   methods: {
     onInput(value) {
+      console.log('onInput')
+      console.log(value)
       if (this.inputFilter) {
         value = this.inputFilter(value)
         this.stringValue = value
-        this.$refs.textField.lazyValue = value
+        // TODO: is the next line still needed (haven't found any documentation on lazyValue)
+        //this.$refs.textField.lazyValue = value
       } else {
         this.stringValue = value
       }
@@ -181,24 +172,35 @@ export default {
         this.parseValue(value)
       }
     },
-    onBlur(event) {
+    onBlur(event, handleChange) {
+      console.log('onBlur')
+      console.log(event)
       if (this.resetOnBlur && !this.intermediateParseError) {
         this.stringValue = this.format?.(this.internalValue) ?? this.internalValue
-        this.$refs.textField.lazyValue = this.stringValue
+        // TODO: is the next line still needed (haven't found any documentation on lazyValue)
+        //this.$refs.textField.lazyValue = this.stringValue
       }
       this.parseError = this.intermediateParseError
-      this.$refs.validationProvider.validate(this.serializedValue)
+      //
+      //this.$refs.validationProvider.validate(this.serializedValue)
+      handleChange(this.serializedValue)
+      console.log('trigger validation')
+      console.log(this.serializedValue)
       this.$emit('blur', event)
     },
     setValue(val) {
+      console.log('setValue')
+      console.log(val)
       if (!this.compare(this.serializedValue, this.serialize?.(val) ?? val)) {
         this.internalValue = val
 
         this.serializedValue = this.serialize?.(val) ?? val
-        this.$emit('input', this.serialize?.(val) ?? val)
+        this.$emit('update:model-value', this.serialize?.(val) ?? val)
       }
     },
     async parseValue(val) {
+      console.log('parseVal')
+      console.log(val)
       try {
         if (this.parse != null) {
           val = await this.parse(val)

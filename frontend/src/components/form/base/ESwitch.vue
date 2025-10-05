@@ -17,6 +17,7 @@
       @update:model-value="
         ($event) => {
           handleChange($event)
+          $emit('update:model-value', $event)
           $emit('input', $event)
         }
       "
