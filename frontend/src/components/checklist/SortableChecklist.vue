@@ -17,17 +17,18 @@
       @start="dragStart"
       @end="dragStop"
     >
-      <SortableChecklistItem
-        v-for="(item, i) in localSortedItems"
-        :key="item._meta.self"
-        :data-href="item._meta.self"
-        :checklist="checklist"
-        :item="item"
-        :item-position="i"
-        :disabled="disabled"
-        @drag-start="dragStart"
-        @drag-end="dragEnd"
-      />
+      <template #item="{ element, index }">
+        <SortableChecklistItem
+          :key="element._meta.self"
+          :data-href="element._meta.self"
+          :checklist="checklist"
+          :item="element"
+          :item-position="index"
+          :disabled="disabled"
+          @drag-start="dragStart"
+          @drag-end="dragEnd"
+        />
+      </template>
     </draggable>
     <ChecklistItemCreate
       v-if="!disabled && !(parentDragging || dragging)"
