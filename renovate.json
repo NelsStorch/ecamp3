@@ -39,17 +39,8 @@
       "groupName": "vue-minor-print-pdf"
     },
     {
-      "extends": ["monorepo:vue"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
       "matchFileNames": ["frontend/package.json"],
-      "dependencyDashboardApproval": true,
-      "groupName": "vue-frontend"
-    },
-    {
-      "matchDepNames": ["@vue/test-utils"],
-      "matchFileNames": ["frontend/package.json"],
-      "dependencyDashboardApproval": true,
-      "groupName": "vue-test-utils-frontend"
+      "enabled": false
     },
     {
       "matchDepNames": ["sass"],
