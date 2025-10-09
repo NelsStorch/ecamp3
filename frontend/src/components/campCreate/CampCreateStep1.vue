@@ -34,13 +34,13 @@
           <v-spacer />
           <ButtonCancel :disabled="isSaving" @click="$router.go(-1)" />
           <ButtonContinue
-            v-if="valid"
+            v-if="true"
             data-testid="create-camp-next-step"
             @click="$emit('next-step')"
           />
           <v-tooltip v-else location="top">
             <template #activator="{ props }">
-              <v-btn elevation="0" color="secondary" v-bind="props" @click="validate()">
+              <v-btn elevation="0" color="secondary" v-bind="props">
                 {{ $t('global.button.continue') }}
               </v-btn>
             </template>
