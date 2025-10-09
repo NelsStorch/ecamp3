@@ -24,7 +24,6 @@ Displays a field as a e-select + write access via API wrapper
       @update:model-value="wrapper.on.input"
     >
       <template #append>
-        <v-icon>mdi-menu-down</v-icon>
         <api-wrapper-append :wrapper="wrapper" />
       </template>
     </e-select>
