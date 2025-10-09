@@ -44,12 +44,31 @@
             v-bind="{ ...item.props, ...config }"
           />
         </template>
+        <template #[`item.e-ro`]="{ item }">
+          <component
+            :is="item.component('e')"
+            v-model="values[item.id]"
+            v-bind="{ ...item.props, ...config }"
+            disabled="true"
+            readonly="true"
+          />
+        </template>
         <template #[`item.api`]="{ item }">
           <component
             :is="item.component('api')"
             v-if="item.props.uri !== null"
             v-bind="{ ...item.props, ...config }"
             :auto-save="false"
+          />
+        </template>
+        <template #[`item.api-ro`]="{ item }">
+          <component
+            :is="item.component('api')"
+            v-if="item.props.uri !== null"
+            v-bind="{ ...item.props, ...config }"
+            :auto-save="false"
+            disabled="true"
+            readonly="true"
           />
         </template>
         <template #[`item.api.autosave`]="{ item }">
@@ -155,7 +174,9 @@ export default {
       { text: 'Type', value: 'id' },
       { text: 'v-input', value: 'v', sortable: false },
       { text: 'e-input', value: 'e', sortable: false },
+      { text: 'e-input readonly', value: 'e-ro', sortable: false },
       { text: 'api-input', value: 'api', sortable: false },
+      { text: 'api-input readonly', value: 'api-ro', sortable: false },
       { text: 'api-input.autosave', value: 'api.autosave', sortable: false },
     ],
   }),
