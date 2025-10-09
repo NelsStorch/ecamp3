@@ -19,7 +19,7 @@
     :label="labelOrEntityFieldLabel"
     :class="[inputClass]"
     :readonly="readonly"
-    :append-icon="readonly ? null : '$dropdown'"
+    :menu-icon="readonly ? null : '$dropdown'"
     :custom-filter="tokensFilter"
   >
     <template #item="{ item, on, attrs }">
