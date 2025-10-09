@@ -13,7 +13,7 @@
       :label="labelOrEntityFieldLabel"
       v-bind="$attrs"
       :readonly="readonly"
-      :append-icon="readonly ? null : '$dropdown'"
+      :menu-icon="readonly ? null : '$dropdown'"
       item-title="text"
       item-value="value"
       @update:model-value="
