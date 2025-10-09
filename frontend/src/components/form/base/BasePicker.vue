@@ -30,7 +30,7 @@ Displays a field as a picker (can be used with v-model)
           :validation-label-override="validationLabelOverride"
           :error-messages="combinedErrorMessages"
           @click="(...args) => (openOnTextFieldClick ? onMenuOpen(props, ...args) : null)"
-          @update:modelValue="debouncedParseValue"
+          @update:model-value="debouncedParseValue"
         >
           <template #prepend>
             <slot
