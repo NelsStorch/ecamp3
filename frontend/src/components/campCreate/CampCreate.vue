@@ -1,33 +1,37 @@
 <template>
-  <v-stepper v-model="step" flat>
+  <v-stepper :model-value="step" flat>
     <v-stepper-header class="elevation-0">
       <v-spacer v-if="$vuetify.display.smAndUp" />
-      <v-stepper-step :complete="step > 1" :step="1" class="px-4">
+      <v-stepper-item :complete="step > 0" class="px-4">
         {{ $t('components.campCreate.campCreate.steps.infos') }}
-      </v-stepper-step>
+      </v-stepper-item>
       <v-divider class="mx-n2" />
-      <v-stepper-step :complete="step > 2" :step="2" class="px-4">
+      <v-stepper-item :complete="step > 1" class="px-4">
         {{ $t('components.campCreate.campCreate.steps.template') }}
-      </v-stepper-step>
+      </v-stepper-item>
       <v-spacer v-if="$vuetify.display.smAndUp" />
     </v-stepper-header>
     <v-divider />
-    <v-stepper-items>
-      <CampCreateStep1
-        :camp="camp"
-        :is-saving="isSaving"
-        @add-period="addPeriod"
-        @delete-period="deletePeriod"
-        @next-step="step++"
-      />
-      <CampCreateStep2
-        :camp="camp"
-        :is-saving="isSaving"
-        :server-error="serverError"
-        @create-camp="createCamp"
-        @previous-step="step--"
-      />
-    </v-stepper-items>
+    <v-stepper-window>
+      <v-stepper-window-item>
+        <CampCreateStep1
+          :camp="camp"
+          :is-saving="isSaving"
+          @add-period="addPeriod"
+          @delete-period="deletePeriod"
+          @next-step="step++"
+        />
+      </v-stepper-window-item>
+      <v-stepper-window-item>
+        <CampCreateStep2
+          :camp="camp"
+          :is-saving="isSaving"
+          :server-error="serverError"
+          @create-camp="createCamp"
+          @previous-step="step--"
+        />
+      </v-stepper-window-item>
+    </v-stepper-window>
   </v-stepper>
 </template>
 <script>
@@ -53,7 +57,7 @@ export default {
             description: this.$t('entity.period.defaultDescription'),
           },
         ],
-        campPrototype: '',
+        campPrototype: null,
       },
       serverError: null,
       isSaving: false,
@@ -63,6 +67,9 @@ export default {
     campsUrl() {
       return this.api.get().camps()._meta.self
     },
+  },
+  mounted() {
+    this.step = 0
   },
   created() {},
   methods: {

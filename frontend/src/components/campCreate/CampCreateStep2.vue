@@ -182,11 +182,7 @@
             </ButtonAdd>
             <v-tooltip v-else location="top">
               <template #activator="{ props }">
-                <ButtonAdd
-                  color="secondary"
-                  elevation="0"
-                  v-bind="props"
-                >
+                <ButtonAdd color="secondary" elevation="0" v-bind="props">
                   {{ $t('components.campCreate.campCreateStep2.create') }}
                 </ButtonAdd>
               </template>
@@ -356,7 +352,7 @@ export default {
   },
   mounted() {
     this.attemptLoadingEntityFromClipboard().then(() => {
-      this.localCamp.campPrototype = ''
+      this.localCamp.campPrototype = null
     })
   },
   methods: { camelCase },
