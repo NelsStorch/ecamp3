@@ -124,7 +124,7 @@ import DownloadNuxtPdfButton from '@/components/print/print-nuxt/DownloadNuxtPdf
 import DownloadClientPdfButton from '@/components/print/print-client/DownloadClientPdfButton.vue'
 import { getEnv } from '@/environment.js'
 import cloneDeep from 'lodash-es/cloneDeep'
-import VueI18n from '../../plugins/i18n/index.js'
+import { componentI18n } from '../../plugins/i18n/index.js'
 import repairConfig from './repairPrintConfig.js'
 import StoryConfig from '@/components/print/config/StoryConfig.vue'
 import SafetyConsiderationsConfig from '@/components/print/config/SafetyConsiderationsConfig.vue'
@@ -283,7 +283,7 @@ export default {
       return repairConfig(
         config,
         this.camp,
-        VueI18n.availableLocales,
+        componentI18n.availableLocales,
         this.lang,
         repairers,
         this.defaultContents()
