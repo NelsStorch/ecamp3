@@ -59,6 +59,7 @@
               v-model="period.end"
               input-class="ml-2"
               path="end"
+              vee-rules="required|greaterThanOrEqual_date:@start"
               :min="period.start"
               :my="2"
               :filled="false"

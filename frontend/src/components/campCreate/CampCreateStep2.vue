@@ -2,7 +2,7 @@
   <v-stepper-content :step="2" class="pa-0">
     <!--    <ValidationObserver v-slot="{ handleSubmit, valid, validate }">-->
     <e-form name="camp">
-      <v-form ref="form" @submit.prevent="$emit('create-camp')">
+      <v-form ref="form" @submit.prevent="handleSubmit(() => $emit('create-camp'))">
         <v-card-text>
           <server-error :server-error="serverError" />
 
@@ -173,7 +173,7 @@
           <div class="ml-auto">
             <ButtonCancel :disabled="isSaving" @click="$router.go(-1)" />
             <ButtonAdd
-              v-if="true"
+              v-if="valid"
               type="submit"
               :loading="isSaving"
               data-testid="create-camp-button"
@@ -182,7 +182,8 @@
             </ButtonAdd>
             <v-tooltip v-else location="top">
               <template #activator="{ props }">
-                <ButtonAdd color="secondary" elevation="0" v-bind="props">
+                <ButtonAdd color="secondary" elevation="0" v-bind="props"@click="validate()"
+                >
                   {{ $t('components.campCreate.campCreateStep2.create') }}
                 </ButtonAdd>
               </template>
