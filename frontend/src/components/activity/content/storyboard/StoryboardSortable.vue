@@ -130,8 +130,8 @@ export default {
       if (newIndex >= 0 && newIndex < list.length) {
         // swap spaces in sortedKeys
         const movingListItem = list[oldIndex]
-        this.$set(list, oldIndex, list[newIndex])
-        this.$set(list, newIndex, movingListItem)
+        list[oldIndex] = list[newIndex]
+        list[newIndex] = movingListItem
 
         this.onSort()
       }
