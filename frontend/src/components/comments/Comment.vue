@@ -39,7 +39,11 @@ export default {
       required: true,
     },
   },
-
+  computed: {
+    ...mapGetters({
+      authUser: 'getLoggedInUser',
+    }),
+  },
   methods: {
     isDeletable() {
       return (
@@ -47,11 +51,6 @@ export default {
         this.comment.author()._meta.self === this.authUser?._meta.self
       )
     },
-  },
-  computed: {
-    ...mapGetters({
-      authUser: 'getLoggedInUser',
-    }),
   },
 }
 </script>
