@@ -281,10 +281,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .api-wrapper--inline .v-btn--last-instance {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .api-wrapper--inline .v-btn {
   border-top: 1px solid rgba(0, 0, 0, 0.38);
   border-bottom: 1px solid rgba(0, 0, 0, 0.38);
