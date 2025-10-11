@@ -99,6 +99,7 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-tabs :deep(.v-tabs-slider-wrapper) {
   transition: none;
 }
