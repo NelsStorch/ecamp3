@@ -55,6 +55,7 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-fab :deep(.v-btn--fab) {
   z-index: 10;
 }
