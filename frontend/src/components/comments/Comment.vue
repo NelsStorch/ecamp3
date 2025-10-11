@@ -66,6 +66,7 @@ export default {
   display: none;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-comment button.ec-comment__delete {
   top: 0;
   right: 0rem;
