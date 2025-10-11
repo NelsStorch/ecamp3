@@ -158,12 +158,14 @@ export default {
   gap: 16px;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-responsivelayout--layout-mode .ec-layout-item {
   border-radius: 4px;
   grid-template-rows: auto 1fr;
   gap: 8px;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-responsivelayout--layout-mode .ec-draggable-area {
   padding: 0 8px 8px;
 }
@@ -176,6 +178,7 @@ export default {
   grid-row: 2 span;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-responsivelayout__aside {
   gap: 1px;
 }
