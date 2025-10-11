@@ -36,7 +36,7 @@ export default {
   props: {
     comment: {
       type: Object,
-      required: false,
+      required: true,
     },
   },
 
