@@ -154,19 +154,15 @@ export default {
   transition: opacity 0.2s linear;
 }
 
-::v-deep {
-  .e-form-container,
-  .v-input,
-  .v-input__control {
-    height: 100%;
-  }
+::v-deep(.e-form-container, .v-input, .v-input__control) {
+  height: 100%;
+}
 
-  .v-text-field__details {
-    flex-grow: 0;
-  }
+::v-deep(.v-text-field__details) {
+  flex-grow: 0;
+}
 
-  .grow-v-slot .v-input__slot {
-    flex-grow: 1;
-  }
+::v-deep(.grow-v-slot .v-input__slot) {
+  flex-grow: 1;
 }
 </style>
