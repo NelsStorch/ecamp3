@@ -23,10 +23,24 @@
 
 <script>
 import VueI18n from '@/plugins/i18n'
+import { headEnvironment } from '@/plugins/index.js'
 import { mapGetters } from 'vuex'
+import { useHead } from '@unhead/vue'
 
 export default {
   name: 'App',
+  setup() {
+    useHead({
+      title: null,
+      templateParams: {
+        site: 'eCamp v3',
+        separator: '·',
+        environment: headEnvironment,
+        section: null,
+      },
+      titleTemplate: '%environment %s %separator %section %separator %site',
+    })
+  },
   data: () => ({
     offline: false,
   }),

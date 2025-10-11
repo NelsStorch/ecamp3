@@ -6,7 +6,7 @@ import {
   color,
   dayjs,
   formBaseComponents,
-  unhead,
+  head,
   i18n,
   storeLoader,
   veeValidate,
@@ -39,7 +39,7 @@ if (env && env.SENTRY_FRONTEND_DSN) {
 }
 
 app.use(auth)
-// app.use(head)
+app.use(head)
 app.use(formBaseComponents)
 // app.use(ignoreNativeBindingWarnMessages)
 app.use(storeLoader)
@@ -57,15 +57,6 @@ app.use(i18n)
 app.directive('click-outside', ClickOutside)
 app.directive('resize', Resize)
 app.directive('resizeobserver', ResizeObserver.directive)
-
-// new Vue({
-//   router,
-//   store,
-//   vuetify,
-//   i18n,
-//   unhead,
-//   render: (h) => h(App),
-// }).$mount('#app')
 
 app.mount('#app')
 
