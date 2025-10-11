@@ -115,6 +115,7 @@ export default {
   }
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .e-form-container + .e-form-container {
   margin-top: 0;
 }
