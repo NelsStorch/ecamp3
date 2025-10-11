@@ -44,18 +44,15 @@ export default {
   data: () => ({
     offline: false,
   }),
+  computed: {
+    ...mapGetters(['snackbarMessages']),
+  },
   created() {
     this.$store.commit('setLanguage', this.$store.state.lang.language)
 
     window.addEventListener('offline', this.offlineListener)
     window.addEventListener('online', this.onlineListener)
     window.addEventListener('visibilitychange', this.visibilityChangeListener)
-  },
-  computed: {
-    ...mapGetters([
-      'snackbarMessages',
-      // ...
-    ]),
   },
   async mounted() {
     if (this.$auth.isLoggedIn()) {
