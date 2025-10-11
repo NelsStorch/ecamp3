@@ -97,12 +97,14 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .flip-list-move {
   transition: transform 0.5s;
   opacity: 0.5;
   background: #c8ebfb;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
