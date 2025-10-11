@@ -116,6 +116,7 @@ export default {
   cursor: pointer;
   border: 1px solid transparent !important;
   transition: color 0.2s ease;
+  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
   .v-icon {
     transition: color 0.2s ease;
   }
