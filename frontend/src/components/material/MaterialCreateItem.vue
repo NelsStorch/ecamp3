@@ -126,10 +126,13 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .newItemRow {
   line-height: 80px;
   vertical-align: top;
 }
+
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-btn {
   vertical-align: text-bottom;
 }
