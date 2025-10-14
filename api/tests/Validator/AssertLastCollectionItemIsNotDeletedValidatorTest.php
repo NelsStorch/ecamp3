@@ -107,10 +107,8 @@ class AssertLastCollectionItemIsNotDeletedValidatorTest extends ConstraintValida
 }
 
 class AssertLastCollectionItemNotDeletedValidatorTestClass {
-    #[AssertLastCollectionItemIsNotDeleted()]
-    public $a;
-
-    public function __construct($a) {
-        $this->a = $a;
-    }
+    public function __construct(
+        #[AssertLastCollectionItemIsNotDeleted()]
+        public $a
+    ) {}
 }

@@ -62,7 +62,7 @@ final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInte
 
         foreach ($joins as $join) {
             // @var Join $join
-            list($fromAlias, $fromProperty) = explode('.', $join->getJoin(), 2);
+            [$fromAlias, $fromProperty] = explode('.', $join->getJoin(), 2);
             $toAlias = $join->getAlias();
 
             $fromClassMetadata = $aliasMap[$fromAlias][0];

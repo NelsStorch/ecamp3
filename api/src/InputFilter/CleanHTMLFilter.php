@@ -3,11 +3,7 @@
 namespace App\InputFilter;
 
 class CleanHTMLFilter extends InputFilter {
-    private \HTMLPurifier $htmlPurifier;
-
-    public function __construct(\HTMLPurifier $htmlPurifier) {
-        $this->htmlPurifier = $htmlPurifier;
-    }
+    public function __construct(private \HTMLPurifier $htmlPurifier) {}
 
     /**
      * {@inheritdoc}

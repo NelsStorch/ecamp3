@@ -17,11 +17,7 @@ class AssertColumWidthsSumTo12Validator extends ConstraintValidator {
         }
 
         $columnWidths = array_sum(array_map(function ($col) {
-            if (isset($col['width'])) {
-                return $col['width'];
-            }
-
-            return 0;
+            return $col['width'] ?? 0;
         }, $value['columns']));
 
         if (12 !== $columnWidths) {

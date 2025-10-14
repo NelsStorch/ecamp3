@@ -190,13 +190,13 @@ abstract class ECampApiTestCase extends ApiTestCase {
                     $decoded = json_decode($example, true, 512, JSON_THROW_ON_ERROR);
 
                     return is_array($decoded) || is_null($decoded) ? $decoded : $example;
-                } catch (\JsonException|\TypeError $e) {
+                } catch (\JsonException|\TypeError) {
                     return $example;
                 }
             }, $examples);
 
             return array_diff_key(array_merge(array_diff_key($examples, array_flip($exceptExamples)), $attributes), array_flip($exceptAttributes));
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return [];
         }
     }
@@ -272,13 +272,13 @@ abstract class ECampApiTestCase extends ApiTestCase {
     protected function assertEntityWasRemoved(?BaseEntity $entity = null) {
         $entity ??= $this->defaultEntity;
 
-        $this->assertNull($this->getEntityManager()->getRepository(get_class($entity))->find($entity->getId()));
+        $this->assertNull($this->getEntityManager()->getRepository($entity::class)->find($entity->getId()));
     }
 
     protected function assertEntityStillExists(?BaseEntity $entity = null) {
         $entity ??= $this->defaultEntity;
 
-        $this->assertNotNull($this->getEntityManager()->getRepository(get_class($entity))->find($entity->getId()));
+        $this->assertNotNull($this->getEntityManager()->getRepository($entity::class)->find($entity->getId()));
     }
 
     /**

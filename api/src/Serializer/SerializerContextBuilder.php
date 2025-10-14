@@ -16,11 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
  * building the payload schemas for the API documentation.
  */
 final class SerializerContextBuilder implements SerializerContextBuilderInterface {
-    private SerializerContextBuilderInterface $decorated;
-
-    public function __construct(SerializerContextBuilderInterface $decorated) {
-        $this->decorated = $decorated;
-    }
+    public function __construct(private SerializerContextBuilderInterface $decorated) {}
 
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array {
         $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);

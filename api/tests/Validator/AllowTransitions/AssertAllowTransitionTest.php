@@ -107,16 +107,14 @@ class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
 }
 
 class TestClass {
-    #[AssertAllowTransitions([
-        ['from' => '1', 'to' => ['2', '3']],
-        ['from' => '2', 'to' => ['3']],
-        ['from' => '3', 'to' => ['1']],
-    ])]
-    public string $a;
-
-    public function __construct($a) {
-        $this->a = $a;
-    }
+    public function __construct(
+        #[AssertAllowTransitions([
+            ['from' => '1', 'to' => ['2', '3']],
+            ['from' => '2', 'to' => ['3']],
+            ['from' => '3', 'to' => ['1']],
+        ])]
+        public string $a
+    ) {}
 
     public function setA(string $a): TestClass {
         $this->a = $a;

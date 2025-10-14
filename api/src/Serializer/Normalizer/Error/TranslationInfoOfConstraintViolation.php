@@ -7,7 +7,7 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 class TranslationInfoOfConstraintViolation {
     public function extract(ConstraintViolationInterface $constraintViolation): TranslationInfo {
         $constraint = $constraintViolation->getConstraint();
-        $constraintClass = get_class($constraint);
+        $constraintClass = null !== $constraint ? $constraint::class : self::class;
         $key = str_replace('\\', '.', $constraintClass);
         $key = strtolower($key);
         $paramsWithoutCurlyBraces = self::removeCurlyBraces($constraintViolation->getParameters());

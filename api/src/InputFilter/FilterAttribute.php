@@ -12,8 +12,6 @@ namespace App\InputFilter;
  * FilterAttribute instances are immutable and serializable.
  */
 abstract class FilterAttribute {
-    protected int $priority;
-
     /**
      * Initializes the input filter with options.
      *
@@ -25,9 +23,7 @@ abstract class FilterAttribute {
      * @param int   $priority The priority of this input filter. Higher priorities are executed first.
      *                        Priorities are evaluated for the whole entity class at once.
      */
-    public function __construct(array $options = [], int $priority = 0) {
-        $this->priority = $priority;
-
+    public function __construct(array $options = [], protected int $priority = 0) {
         foreach ($options as $name => $value) {
             $this->{$name} = $value;
         }
