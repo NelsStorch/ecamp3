@@ -37,9 +37,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_authenticated()'
         ),
         new Post(
-            processor: CommentCreateProcessor::class,
             denormalizationContext: ['groups' => ['create', 'write']],
             securityPostDenormalize: 'is_granted("CAMP_COLLABORATOR", object)',
+            processor: CommentCreateProcessor::class,
         ),
         new GetCollection(
             uriTemplate: self::ACTIVITY_SUBRESOURCE_URI_TEMPLATE,

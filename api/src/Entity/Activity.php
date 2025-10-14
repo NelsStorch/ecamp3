@@ -41,8 +41,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             validationContext: ['groups' => ['Default', 'update']]
         ),
         new Delete(
-            processor: ActivityRemoveProcessor::class,
-            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
+            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
+            processor: ActivityRemoveProcessor::class
         ),
         new GetCollection(
             normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
@@ -65,11 +65,11 @@ use Symfony\Component\Validator\Constraints as Assert;
             ]
         ),
         new Post(
-            processor: ActivityCreateProcessor::class,
-            validationContext: ['groups' => ['Default', 'create']],
-            denormalizationContext: ['groups' => ['write', 'create']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.category === null'
+            denormalizationContext: ['groups' => ['write', 'create']],
+            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.category === null',
+            validationContext: ['groups' => ['Default', 'create']],
+            processor: ActivityCreateProcessor::class
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

@@ -52,7 +52,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContainsItems($response, $this->contentNodesCampShared);
 
         $this->endpoint = $this->endpointBase.'?camp='.$this->getIriFor('campUnrelated');
-        $response = $this->list(user: static::$fixtures['user6invited']);
+        $this->list(user: static::$fixtures['user6invited']);
         $this->assertResponseStatusCodeSame(400);
         $this->assertJsonContains(['status' => 400]);
     }
@@ -69,7 +69,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContainsItems($response, $this->contentNodesCampShared);
 
         $this->endpoint = $this->endpointBase.'?camp='.$this->getIriFor('campUnrelated');
-        $response = $this->list(user: static::$fixtures['user5inactive']);
+        $this->list(user: static::$fixtures['user5inactive']);
         $this->assertResponseStatusCodeSame(400);
         $this->assertJsonContains(['status' => 400]);
     }
@@ -91,7 +91,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContainsItems($response, $this->contentNodesCampShared);
 
         $this->endpoint = $this->endpointBase.'?camp='.$this->getIriFor('camp1');
-        $response = $this->list(user: static::$fixtures['user4unrelated']);
+        $this->list(user: static::$fixtures['user4unrelated']);
         $this->assertResponseStatusCodeSame(400);
         $this->assertJsonContains(['status' => 400]);
     }
@@ -118,7 +118,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContainsItems($response, $this->contentNodesCampShared);
 
         $this->endpoint = $this->endpointBase.'?camp='.$this->getIriFor('campUnrelated');
-        $response = $this->list(user: static::$fixtures['user3guest']);
+        $this->list(user: static::$fixtures['user3guest']);
         $this->assertResponseStatusCodeSame(400);
         $this->assertJsonContains(['status' => 400]);
     }
@@ -145,7 +145,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContainsItems($response, $this->contentNodesCampShared);
 
         $this->endpoint = $this->endpointBase.'?camp='.$this->getIriFor('campUnrelated');
-        $response = $this->list(user: static::$fixtures['user2member']);
+        $this->list(user: static::$fixtures['user2member']);
         $this->assertResponseStatusCodeSame(400);
         $this->assertJsonContains(['status' => 400]);
     }
@@ -172,7 +172,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
         $this->assertJsonContainsItems($response, $this->contentNodesCampShared);
 
         $this->endpoint = $this->endpointBase.'?camp='.$this->getIriFor('campUnrelated');
-        $response = $this->list(user: static::$fixtures['user1manager']);
+        $this->list(user: static::$fixtures['user1manager']);
         $this->assertResponseStatusCodeSame(400);
         $this->assertJsonContains(['status' => 400]);
     }

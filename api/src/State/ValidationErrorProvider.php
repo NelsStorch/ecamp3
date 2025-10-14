@@ -67,12 +67,12 @@ class ValidationErrorProvider implements ProviderInterface {
         }
 
         return new ValidationError(
-            type: $error->getType(),
             title: $error->getTitle(),
             status: $status,
             detail: $error->getDetail(),
             instance: $error->getInstance(),
-            violations: $violationInfos
+            violations: $violationInfos,
+            type: $error->getType()
         );
     }
 }

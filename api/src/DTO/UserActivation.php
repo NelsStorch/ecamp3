@@ -13,13 +13,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new Post(
-            processor: ResendActivationProcessor::class,
             uriTemplate: '/resend_activation{._format}',
-            security: 'true',
             status: 204,
-            output: false,
+            openapi: new OpenApiOperation(summary: 'Request activation email again', description: 'Activation email will be sent to the given email again.'),
             denormalizationContext: ['groups' => ['create']],
-            openapi: new OpenApiOperation(summary: 'Request activation email again', description: 'Activation email will be sent to the given email again.')
+            security: 'true',
+            output: false,
+            processor: ResendActivationProcessor::class
         ),
     ],
     routePrefix: '/auth'

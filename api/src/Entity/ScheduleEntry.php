@@ -40,8 +40,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new Delete(
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            validate: true,
-            validationContext: ['groups' => ['delete', 'ScheduleEntry:delete']]
+            validationContext: ['groups' => ['delete', 'ScheduleEntry:delete']],
+            validate: true
         ),
         new GetCollection(
             security: 'is_authenticated()'
@@ -62,8 +62,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             ]
         ),
         new Post(
-            denormalizationContext: ['groups' => ['write', 'create']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write', 'create']],
             securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.activity === null',
             validationContext: ['groups' => ScheduleEntryPostGroupSequence::class]
         ),

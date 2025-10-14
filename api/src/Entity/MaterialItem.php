@@ -37,8 +37,8 @@ use Symfony\Component\Validator\Constraints as Assert;
                        is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Patch(
-            validationContext: ['groups' => MaterialItemUpdateGroupSequence::class],
-            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
+            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
+            validationContext: ['groups' => MaterialItemUpdateGroupSequence::class]
         ),
         new Delete(
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
@@ -48,9 +48,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             provider: MaterialItemCollectionProvider::class
         ),
         new Post(
-            processor: MaterialItemCreateProcessor::class,
             denormalizationContext: ['groups' => ['write', 'create']],
             securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or (object.period === null and object.materialNode === null)',
+            processor: MaterialItemCreateProcessor::class,
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

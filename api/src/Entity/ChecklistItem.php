@@ -46,8 +46,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Delete(
             security: '(is_granted("CHECKLIST_IS_PROTOTYPE", object) and is_granted("ROLE_ADMIN")) or
                        (is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object))',
-            validate: true,
             validationContext: ['groups' => ['delete']],
+            validate: true,
         ),
         new GetCollection(
             security: 'is_authenticated()',
@@ -63,8 +63,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriTemplate: self::CHECKLIST_SUBRESOURCE_URI_TEMPLATE,
             uriVariables: [
                 'checklistId' => new Link(
-                    fromClass: Checklist::class,
                     toProperty: 'checklist',
+                    fromClass: Checklist::class,
                     security: 'is_granted("CHECKLIST_IS_PROTOTYPE", checklist) or
                                is_granted("CAMP_IS_PUBLIC", checklist) or
                                is_granted("CAMP_COLLABORATOR", checklist)'

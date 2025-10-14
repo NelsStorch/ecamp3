@@ -55,7 +55,7 @@ class AssertColumWidthsSumTo12ValidatorTest extends ConstraintValidatorTestCase 
         $this->validator->validate($data, new AssertColumWidthsSumTo12());
 
         // then
-        $this->buildViolation(self::message)->setParameter('{{ sum }}', 11)->assertRaised();
+        $this->buildViolation(self::message)->setParameter('{{ sum }}', '11')->assertRaised();
     }
 
     public function testMissingWidthIsCountedZero() {
@@ -68,7 +68,7 @@ class AssertColumWidthsSumTo12ValidatorTest extends ConstraintValidatorTestCase 
         $this->validator->validate($data, new AssertColumWidthsSumTo12());
 
         // then
-        $this->buildViolation(self::message)->setParameter('{{ sum }}', 0)->assertRaised();
+        $this->buildViolation(self::message)->setParameter('{{ sum }}', '0')->assertRaised();
     }
 
     protected function createValidator(): ConstraintValidatorInterface {

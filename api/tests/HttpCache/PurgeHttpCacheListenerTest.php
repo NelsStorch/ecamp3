@@ -320,7 +320,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $dummyClassMetadata = new ClassMetadata(ContainNonResource::class);
         $emProphecy->getClassMetadata(NotAResource::class)->willReturn($dummyClassMetadata);
         $em = $emProphecy->reveal();
-        $eventArgs = new OnFlushEventArgs($em);
+        new OnFlushEventArgs($em);
 
         $propertyAccessorProphecy = $this->prophesize(PropertyAccessorInterface::class);
 
@@ -373,7 +373,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $dummyClassMetadata->mapOneToMany(['fieldName' => 'collectionOfNotAResource', 'targetEntity' => NotAResource::class, 'mappedBy' => 'resource']);
         $emProphecy->getClassMetadata(ContainNonResource::class)->willReturn($dummyClassMetadata);
         $em = $emProphecy->reveal();
-        $eventArgs = new OnFlushEventArgs($em);
+        new OnFlushEventArgs($em);
 
         $propertyAccessorProphecy = $this->prophesize(PropertyAccessorInterface::class);
         $propertyAccessorProphecy->isReadable(Argument::type(ContainNonResource::class), 'notAResource')->willReturn(true);

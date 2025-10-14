@@ -70,7 +70,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         $not200Responses = array_filter($responseCodes, fn ($value) => 200 != $value);
         assertThat($not200Responses, equalTo([]));
 
-        if (static::isPerformanceTestDebugOutput()) {
+        if (self::isPerformanceTestDebugOutput()) {
             var_dump($queryExecutionTime);
         }
 
@@ -99,7 +99,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
 
         assertThat($statusCode, equalTo(200));
 
-        if (static::isPerformanceTestDebugOutput()) {
+        if (self::isPerformanceTestDebugOutput()) {
             echo "{$collectionEndpoint}: {$executionTimeSeconds}\n";
         }
 
@@ -133,7 +133,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
 
         assertThat($statusCode, equalTo(200));
 
-        if (static::isPerformanceTestDebugOutput()) {
+        if (self::isPerformanceTestDebugOutput()) {
             echo "{$collectionEndpoint}: {$executionTimeSeconds}\n";
         }
 
