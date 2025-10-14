@@ -9,8 +9,6 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class AssertSlotSupportedByParentValidator extends ConstraintValidator {
-    public function __construct() {}
-
     public function validate($value, Constraint $constraint): void {
         if (!$constraint instanceof AssertSlotSupportedByParent) {
             throw new UnexpectedTypeException($constraint, AssertSlotSupportedByParent::class);
