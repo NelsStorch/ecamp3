@@ -11,8 +11,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  * @extends Voter<string,Checklist|ChecklistItem>
  */
 class ChecklistIsPrototypeVoter extends Voter {
-    public function __construct() {}
-
     protected function supports($attribute, $subject): bool {
         return 'CHECKLIST_IS_PROTOTYPE' === $attribute
         && ($subject instanceof Checklist || $subject instanceof ChecklistItem);
