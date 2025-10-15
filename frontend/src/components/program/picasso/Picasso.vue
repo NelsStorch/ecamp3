@@ -411,74 +411,69 @@ export default {
     height: calc(100vh - 136px - var(--schedule-entry-filters-height));
   }
 
-  :deep {
-    .v-event-timed-container {
-      margin-right: 3px;
-      @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
-        margin-right: 5px;
-      }
-      @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
-        margin-right: 6px;
-      }
+  :deep(.v-event-timed-container) {
+    margin-right: 3px;
+    @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
+      margin-right: 5px;
+    }
+    @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
+      margin-right: 6px;
+    }
+  }
+
+  :deep(.v-calendar-daily_head-day, .v-calendar-daily__day) {
+    min-width: 80px;
+  }
+
+  :deep(.v-event-timed) {
+    padding: 0;
+    white-space: normal;
+    border: none !important;
+
+    &:has(.e-picasso-entry--filtered) {
+      pointer-events: none;
     }
 
-    .v-calendar-daily_head-day,
-    .v-calendar-daily__day {
-      min-width: 80px;
-    }
-
-    .v-event-timed {
-      padding: 0;
-      white-space: normal;
-      border: none !important;
-
-      &:has(.e-picasso-entry--filtered) {
-        pointer-events: none;
-      }
-
-      &:has(.e-picasso-entry:not(.e-picasso-entry--filtered)) {
-        z-index: 1;
-
-        &:hover {
-          z-index: 2;
-        }
-      }
-    }
-
-    .v-calendar-daily__day-container {
-      width: initial;
-    }
-
-    .v-calendar-daily__head,
-    .v-calendar-daily__intervals-body {
-      position: sticky;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(4px);
-    }
-
-    .v-calendar-daily__head {
-      top: 0;
-      z-index: 2;
-      min-width: fit-content;
-      overflow: hidden;
-      box-shadow:
-        rgba(0, 0, 0, 0.1) 0 4px 6px -1px,
-        rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
-    }
-
-    .v-calendar-daily__pane,
-    .v-calendar-daily__body {
-      overflow: visible;
-    }
-
-    .v-calendar-daily__intervals-body {
-      left: 0;
+    &:has(.e-picasso-entry:not(.e-picasso-entry--filtered)) {
       z-index: 1;
-    }
 
-    .v-calendar-daily__scroll-area {
-      overflow-y: visible;
+      &:hover {
+        z-index: 2;
+      }
     }
+  }
+
+  :deep(.v-calendar-daily__day-container) {
+    width: initial;
+  }
+
+  :deep(.v-calendar-daily__head, .v-calendar-daily__intervals-body) {
+    position: sticky;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+  }
+
+  :deep(.v-calendar-daily__head) {
+    top: 0;
+    z-index: 2;
+    min-width: fit-content;
+    overflow: hidden;
+    box-shadow:
+      rgba(0, 0, 0, 0.1) 0 4px 6px -1px,
+      rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
+  }
+
+  :deep(.v-calendar-daily__pane, .v-calendar-daily__body) {
+    overflow: visible;
+  }
+
+  :deep(.v-calendar-daily__intervals-body) {
+    left: 0;
+    z-index: 1;
+  }
+
+  :deep(.v-calendar-daily__scroll-area) {
+    overflow-y: visible;
   }
 
   &:not(.e-picasso-entry--editable) {
