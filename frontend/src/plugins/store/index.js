@@ -7,10 +7,8 @@ import preferences from './preferences'
 import snackbarMessagesStore from './snackbarMessagesStore'
 import { getEnv } from '@/environment.js'
 
-const debug = process.env.NODE_ENV !== 'production'
-
 export default {
-  install: (app, options) => {
+  install: (app, _) => {
     store = createStore({
       modules: {
         lang,
@@ -19,7 +17,6 @@ export default {
         snackbarMessagesStore,
       },
       strict: false,
-      // plugins: debug ? [createLogger()] : [],
     })
 
     app.use(store)
