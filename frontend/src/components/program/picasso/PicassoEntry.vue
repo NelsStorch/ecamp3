@@ -430,6 +430,7 @@ export default {
   .e-picasso-entry__title,
   .e-picasso-entry__location,
   .e-picasso-entry__responsible,
+  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
   .e-avatarrow {
     transition: opacity 0.25s ease-in-out;
   }
@@ -440,6 +441,7 @@ export default {
   .e-picasso-entry__title,
   .e-picasso-entry__location,
   .e-picasso-entry__responsible,
+  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
   .e-avatarrow {
     opacity: 20%;
   }
