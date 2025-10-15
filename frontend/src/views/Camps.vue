@@ -11,10 +11,10 @@
         </template>
         <template v-else>
           <CampListItem
-            v-for="{ camp, periods } in upcomingCamps"
+            v-for="{ camp, periods: upcomingPeriods } in upcomingCamps"
             :key="camp._meta.self"
             :camp="camp"
-            :periods="periods"
+            :periods="upcomingPeriods"
           />
         </template>
         <v-list-item lines="two">
@@ -64,10 +64,10 @@
           <v-expansion-panel-text>
             <v-list class="py-0">
               <CampListItem
-                v-for="{ camp, periods } in pastCamps"
+                v-for="{ camp, periods: pastperiods } in pastCamps"
                 :key="camp._meta.self"
                 :camp="camp"
-                :periods="periods"
+                :periods="pastperiods"
               />
             </v-list>
           </v-expansion-panel-text>
