@@ -21,7 +21,6 @@
 
 <script>
 import ContentCard from '@/components/layout/ContentCard.vue'
-import { mapGetters } from 'vuex'
 import UserMeta from '@/components/navigation/UserMeta.vue'
 import PersonalInvitations from '../components/personal_invitations/PersonalInvitations.vue'
 
@@ -46,6 +45,7 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-expansion-panel-content:deep(.v-expansion-panel-content__wrap) {
   padding: 0 !important;
 }
