@@ -1,5 +1,3 @@
-import app from '../../main.js'
-
 const LOCAL_STORAGE_PREFIX = 'preferences:'
 
 export function loadFromLocalStorage(localStorage = window.localStorage) {
