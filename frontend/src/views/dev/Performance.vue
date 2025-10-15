@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-::v-deep() th[role='columnheader'].text-right {
+:deep(th[role='columnheader'].text-right) {
   direction: rtl;
   span {
     direction: ltr;
