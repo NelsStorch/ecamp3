@@ -27,14 +27,6 @@ const router = createRouter({
             },
             beforeEnter: requireAuth,
           },
-          {
-            path: '/performance',
-            name: 'performance',
-            components: {
-              default: () => import('./views/dev/Performance.vue'),
-            },
-            beforeEnter: requireAuth,
-          },
         ]
       : []),
 
