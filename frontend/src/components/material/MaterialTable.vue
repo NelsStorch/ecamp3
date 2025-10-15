@@ -498,12 +498,12 @@ export default {
   padding: 0 2px;
 }
 
-.ec-material-table--dense.v-data-table::v-deep {
-  .v-data-table__wrapper th,
-  .v-data-table__wrapper td {
-    padding: 4px 2px;
-    line-height: normal;
-  }
+.ec-material-table--dense.v-data-table::v-deep(
+    .v-data-table__wrapper th,
+    .v-data-table__wrapper td
+  ) {
+  padding: 4px 2px;
+  line-height: normal;
 }
 
 .v-data-table:deep(tr.new) {
