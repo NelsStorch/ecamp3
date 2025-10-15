@@ -420,18 +420,15 @@ export default {
       }
     },
 
-    // add new item to list & save to API
     add(key, data) {
-      // add item to local array
-      this.$set(this.newMaterialItems, key, data)
+      this.newMaterialItems[key] = data
 
       this.postToApi(key, data)
     },
 
     // retry to save to API (after server error)
     retry(item) {
-      // reset error
-      this.$set(this.newMaterialItems[item.id], 'serverError', undefined)
+      this.newMaterialItems[item.id]['serverError'] = undefined
 
       // try to save same data again
       this.postToApi(item.id, this.newMaterialItems[item.id])
@@ -439,7 +436,7 @@ export default {
 
     // cancel (remove) item that is not successfully stored to API
     cancel(item) {
-      this.$delete(this.newMaterialItems, item.id)
+      delete this.newMaterialItems[item.id]
     },
 
     postToApi(key, data) {
@@ -450,12 +447,12 @@ export default {
           // reload list after item has successfully been added
           this.api.reload(this.materialItemCollection).then(() => {
             this.api.reload(this.newMaterialItems[key].materialList)
-            this.$delete(this.newMaterialItems, key)
+            delete this.newMaterialItems[key]
           })
         })
         // catch server error
         .catch((error) => {
-          this.$set(this.newMaterialItems[key], 'serverError', error)
+          this.newMaterialItems[key]['serverError'] = error
           this.toast.error(errorToMultiLineToast(error))
           Sentry.captureMessage(serverErrorToString(error))
         })
