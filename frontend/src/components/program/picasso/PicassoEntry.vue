@@ -503,6 +503,7 @@ export default {
   }
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 :deep(.e-avatarrow) {
   position: absolute;
   bottom: 2px;
