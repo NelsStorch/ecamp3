@@ -295,20 +295,18 @@ export default {
 
 <style scoped lang="scss">
 .e-print-configurator__cnf {
-  &:deep {
-    .v-expansion-panel-header {
-      font-family: monospace;
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    }
+  &:deep(.v-expansion-panel-header) {
+    font-family: monospace;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
 
-    .v-expansion-panel-header--active {
-      border-bottom: none;
-    }
+  &:deep(.v-expansion-panel-header--active) {
+    border-bottom: none;
+  }
 
-    .v-expansion-panel-content {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    }
+  &:deep(.v-expansion-panel-content) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 }
 </style>
