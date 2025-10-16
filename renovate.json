@@ -5,7 +5,7 @@
     ":prConcurrentLimitNone"
   ],
   "constraints": {
-    "node": "24.9.0",
+    "node": "24.10.0",
     "php": "8.4.13"
   },
   "automergeType": "branch",
