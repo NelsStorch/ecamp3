@@ -184,7 +184,7 @@ services:
       - FUNCTION_ENABLE_INCOGNITO_MODE=true
 
   e2e:
-    image: cypress/included:15.4.0@sha256:94ce7218a0c1c3fa53e93955d82d39a0872bd32de3422bd1a98b6231f52fd889
+    image: cypress/included:15.4.0@sha256:2039347f99ef06ba66f8365361b7e869b7ba00e5d9437958f1df4c499909ec14
     profiles: ['e2e']
     container_name: 'ecamp3-e2e'
     environment:
