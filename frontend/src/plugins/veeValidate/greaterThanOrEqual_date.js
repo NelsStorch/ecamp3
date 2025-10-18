@@ -2,9 +2,10 @@ export default (dayjs, i18n) =>
   /**
    * @param   {string}  value Dater value in local string format
    * @param   {string}  min   comparison valye in local string format
-   * @returns {bool}          validation result
+   * @param {string} label Field label
+   * @returns {boolean}       validation result
    */
-  (value, [min], ctx) => {
+  (value, { min }, { label }) => {
     const minDate = dayjs.utc(min, 'L')
     const valueDate = dayjs.utc(value, 'L')
     const validate = valueDate.diff(minDate, 'day') >= 0
@@ -15,6 +16,6 @@ export default (dayjs, i18n) =>
 
     return i18n.global.t('global.validation.greaterThanOrEqual_date', {
       min,
-      field: ctx.label,
+      field: label,
     })
   }

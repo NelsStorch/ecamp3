@@ -9,9 +9,10 @@ export default (dayjs, i18n) =>
    *
    * @param {string} value Time value in string format 'HH:mm'
    * @param {string} min   Comparison value in string format 'HH:mm'
-   * @returns {bool}       validation result
+   * @param {string} label Field label
+   * @returns {boolean}       validation result
    */
-  (value, [min], ctx) => {
+  (value, { min }, { label }) => {
     const valueDate = dayjs.utc('1970-01-01 ' + value, 'YYYY-MM-DD LT')
     const minDate = normalizeMin(min, dayjs)
     const validate = valueDate.unix() > minDate.unix()
@@ -22,6 +23,6 @@ export default (dayjs, i18n) =>
 
     return i18n.global.t('global.validation.greaterThan_time', {
       min: normalizeMin(min, dayjs).format('LT'),
-      field: ctx.label,
+      field: label,
     })
   }
