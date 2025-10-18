@@ -53,6 +53,7 @@ export default [
       ],
 
       'vue/multi-word-component-names': 'off',
+      'vue/no-reserved-component-names': ['error', { htmlElementCaseSensitive: true }],
       'vue/no-deprecated-delete-set': 'warn',
       'vue/no-deprecated-destroyed-lifecycle': 'off',
       'vue/no-deprecated-dollar-listeners-api': 'off',

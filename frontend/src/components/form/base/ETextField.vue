@@ -1,30 +1,37 @@
 <template>
   <div class="e-form-container">
-    <v-text-field
-      ref="textField"
-      :class="[inputClass]"
-      :error-messages="(veeErrors ?? []).concat(errorMessages)"
-      :label="labelOrEntityFieldLabel"
-      :model-value="inputValue"
-      :type="type"
-      v-bind="$attrs"
-      :filled="filled"
-      :required="required"
-      :hide-details="hideDetails"
-      @blur="handleBlur"
-      @update:model-value="handleUpdate"
+    <Field
+      v-slot="{ errors: veeFieldErrors }"
+      :name="veeId ?? path"
+      :label="validationLabel"
+      :rules="veeRules"
     >
-      <!-- passing through all slots -->
-      <template v-for="(_, slot) of $slots" #[slot]="slotData">
-        <slot :name="slot" v-bind="slotData || {}"></slot>
-      </template>
-    </v-text-field>
+      <v-text-field
+        ref="textField"
+        :class="[inputClass]"
+        :error-messages="(veeFieldErrors ?? []).concat(errorMessages)"
+        :label="labelOrEntityFieldLabel"
+        :model-value="inputValue"
+        :type="type"
+        v-bind="$attrs"
+        :filled="filled"
+        :required="required"
+        :hide-details="hideDetails"
+        @blur="handleBlur"
+        @update:model-value="handleUpdate"
+      >
+        <!-- passing through all slots -->
+        <template v-for="(_, slot) of $slots" #[slot]="slotData">
+          <slot :name="slot" v-bind="slotData || {}"></slot>
+        </template>
+      </v-text-field>
+    </Field>
   </div>
 </template>
 
 <script setup>
 import { inject, watch } from 'vue'
-import { useField } from 'vee-validate'
+import { Field, useField } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
 
 import { props as formComponentProps, useFormComponent } from './formComponentProps'
@@ -62,7 +69,6 @@ const { labelOrEntityFieldLabel, validationLabel } = useFormComponent(
 
 const {
   value: inputValue,
-  errorMessage: veeErrors,
   handleBlur,
   handleChange,
   setValue,

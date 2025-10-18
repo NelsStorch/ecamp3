@@ -11,10 +11,7 @@
     <template #activator="scope">
       <slot name="activator" v-bind="scope" />
     </template>
-    <!--    <ValidationObserver v-if="value" ref="validation" v-slot="{ handleSubmit }">-->
-    <!-- ValidationObserver/handleSubmit ensures that doSubmit is only called if there are no validation errors -->
-    <!-- "handleSubmit(doSubmit)" -->
-    <v-form @submit.prevent="doSubmit">
+    <Form @submit="doSubmit">
       <v-card>
         <v-toolbar class="ec-dialog-toolbar" density="compact" elevation="0">
           <v-icon start>
@@ -84,20 +81,19 @@
           <slot name="actions" />
         </v-card-actions>
       </v-card>
-    </v-form>
-    <!--    </ValidationObserver>-->
+    </Form>
   </v-dialog>
 </template>
 
 <script>
-// import { ValidationObserver } from 'vee-validate'
 import ServerError from '@/components/form/ServerError.vue'
 import DialogUiBase from '@/components/dialog/DialogUiBase.vue'
+import { Form } from 'vee-validate'
 
 export default {
   name: 'DialogForm',
   components: {
-    // ValidationObserver,
+    Form,
     ServerError,
   },
   extends: DialogUiBase,
@@ -110,13 +106,6 @@ export default {
   computed: {
     currentlySaving() {
       return this.isSaving || this.savingOverride
-    },
-  },
-  watch: {
-    modelValue(visible) {
-      if (visible) {
-        this.$nextTick(() => this.$refs.validation.reset())
-      }
     },
   },
   methods: {
