@@ -20,6 +20,7 @@
 
 <script>
 import { campRoute } from '@/router.js'
+import { componentI18n } from '@/plugins/i18n/index.js'
 export default {
   name: 'CampListItem',
   props: {
@@ -29,7 +30,7 @@ export default {
   computed: {
     date() {
       if (!this.periods.length) return
-      const formatMY = new Intl.DateTimeFormat(this.$i18n.locale, {
+      const formatMY = new Intl.DateTimeFormat(componentI18n.locale, {
         year: 'numeric',
         month: 'short',
       })
