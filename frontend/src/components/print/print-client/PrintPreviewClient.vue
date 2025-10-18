@@ -26,6 +26,7 @@
 <script>
 import { generatePdf } from './generatePdf.js'
 import { generatePdfMixin } from './generatePdfMixin.js'
+import { componentI18n } from '@/plugins/index.js'
 
 const RENDER_IN_WORKER = true
 
@@ -88,7 +89,7 @@ export default {
         {
           config: { ...this.config, apiGet: this.api.get.bind(this) },
           storeData: this.$store.state,
-          translationData: this.$i18n.messages,
+          translationData: componentI18n.messages.value,
           renderInWorker: RENDER_IN_WORKER,
         },
         this.onProgress.bind(this)
