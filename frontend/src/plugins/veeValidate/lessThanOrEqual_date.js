@@ -5,7 +5,7 @@ export default (dayjs, i18n) =>
    * @param {string} label Field label
    * @returns {boolean}       validation result
    */
-  (value, { max }, { label }) => {
+  (value, [max], { label }) => {
     const maxDate = dayjs.utc(max, 'L')
     const valueDate = dayjs.utc(value, 'L')
     const validate = valueDate.diff(maxDate, 'day') <= 0

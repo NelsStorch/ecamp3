@@ -5,7 +5,7 @@ export default (dayjs, i18n) =>
    * @param {string} label Field label
    * @returns {boolean}       validation result
    */
-  (value, { min }, { label }) => {
+  (value, [min], { label }) => {
     const minDate = dayjs.utc(min, 'L')
     const valueDate = dayjs.utc(value, 'L')
     const validate = valueDate.diff(minDate, 'day') >= 0

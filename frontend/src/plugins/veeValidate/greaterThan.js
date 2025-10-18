@@ -5,7 +5,7 @@ export default (i18n) =>
    * @param {string} label Field label
    * @returns {boolean}       validation result
    */
-  (value, { min }, { label }) => {
+  (value, [min], { label }) => {
     const validate = parseFloat(value) > min
 
     if (validate) {
