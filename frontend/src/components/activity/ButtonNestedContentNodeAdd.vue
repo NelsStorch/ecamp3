@@ -62,6 +62,7 @@ import { errorToMultiLineToast } from '@/components/toast/toasts'
 import { getEnv } from '@/environment.js'
 import contentTypeIcons from './content/contentTypeIcons.js'
 import { useToast } from 'vue-toastification'
+import { componentI18n } from '@/plugins/i18n/index.js'
 
 export default {
   name: 'ButtonNestedContentNodeAdd',
@@ -132,8 +133,8 @@ export default {
       }
     },
     sortContentTypeByTranslatedName(ct1, ct2) {
-      const ct1name = this.$i18n.t(this.contentTypeNameKey(ct1))
-      const ct2name = this.$i18n.t(this.contentTypeNameKey(ct2))
+      const ct1name = componentI18n.t(this.contentTypeNameKey(ct1))
+      const ct2name = componentI18n.t(this.contentTypeNameKey(ct2))
       return ct1name.localeCompare(ct2name)
     },
     async addContentNode(contentType) {
