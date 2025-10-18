@@ -210,7 +210,7 @@ export default {
     },
   },
   mounted() {
-    this.language = this.$i18n.browserPreferredLocale
+    this.language = navigator.language
 
     if (getEnv().RECAPTCHA_SITE_KEY) {
       this.recaptcha = load(getEnv().RECAPTCHA_SITE_KEY, {

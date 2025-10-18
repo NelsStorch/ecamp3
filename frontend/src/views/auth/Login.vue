@@ -183,7 +183,7 @@
 
 <script>
 import { isLoggedIn } from '@/plugins/auth'
-import VueI18n from '@/plugins/i18n/index.js'
+import VueI18n, { componentI18n } from '@/plugins/i18n/index.js'
 import AuthContainer from '@/components/layout/AuthContainer.vue'
 import HorizontalRule from '@/components/layout/HorizontalRule.vue'
 import IconSpacer from '@/components/layout/IconSpacer.vue'
@@ -240,7 +240,10 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('setLanguage', this.$i18n.browserPreferredLocale)
+    const navigatorLanguage = navigator.language
+    if (componentI18n.availableLocales.includes(navigatorLanguage)) {
+      this.$store.commit('setLanguage', navigatorLanguage)
+    }
   },
   methods: {
     async login() {
