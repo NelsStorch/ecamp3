@@ -153,9 +153,7 @@ export default {
 
       // only compare time if date is the same day
       if (this.isSameDay) {
-        validator.greaterThan_time = {
-          min: this.$date.utc(this.localScheduleEntry.start),
-        }
+        validator.greaterThan_dateTime = [this.localScheduleEntry.start]
       }
       return validator
     },

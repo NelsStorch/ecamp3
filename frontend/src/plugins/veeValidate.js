@@ -5,6 +5,7 @@ import i18n from '@/plugins/i18n'
 import dayjs from '@/common/helpers/dayjs.js'
 
 import greaterThan from '@/plugins/veeValidate/greaterThan'
+import greaterThan_dateTime from '@/plugins/veeValidate/greaterThan_dateTime.js'
 import greaterThan_time from './veeValidate/greaterThan_time.js'
 import greaterThanOrEqual_date from './veeValidate/greaterThanOrEqual_date.js'
 import lessThanOrEqual_date from './veeValidate/lessThanOrEqual_date.js'
@@ -40,6 +41,8 @@ class VeeValidatePlugin {
     defineRule('greaterThan', greaterThan(i18n))
 
     defineRule('greaterThan_time', greaterThan_time(dayjs, i18n))
+
+    defineRule('greaterThan_dateTime', greaterThan_dateTime(dayjs, i18n))
 
     // check if date (value) is equal or larger than another date (min)
     defineRule('greaterThanOrEqual_date', greaterThanOrEqual_date(dayjs, i18n))
