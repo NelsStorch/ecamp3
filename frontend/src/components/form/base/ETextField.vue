@@ -78,7 +78,7 @@ const handleUpdate = (value) => {
 
 watch(
   () => props.modelValue,
-  async (newValue, oldValue) => {
+  async (newValue, _) => {
     setValue(newValue)
   }
 )
