@@ -51,7 +51,7 @@ const transformViolations = (error, i18n = null) => {
       serverErrorMessages[propertyPath] = []
     }
     const i18nKey = `api.${violation.i18n?.key}`
-    const locale = i18n?.locale?.replaceAll('-', '_')
+    const locale = i18n?.locale?.value.replaceAll('-', '_')
     const apiTranslation = getApiTranslation(locale, violation)
 
     if (i18n?.te(i18nKey)) {
