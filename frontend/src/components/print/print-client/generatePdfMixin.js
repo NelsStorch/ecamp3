@@ -3,6 +3,7 @@ import slugify from 'slugify'
 import * as Sentry from '@sentry/browser'
 import { generatePdf } from './generatePdf.js'
 import { useToast } from 'vue-toastification'
+import { componentI18n } from '@/plugins/index.js'
 
 const RENDER_IN_WORKER = true
 
@@ -69,7 +70,7 @@ export const generatePdfMixin = {
         {
           config: { ...this.config, apiGet: this.api.get.bind(this) },
           storeData: this.$store.state,
-          translationData: this.$i18n.messages,
+          translationData: componentI18n.messages.value,
           renderInWorker: RENDER_IN_WORKER,
         },
         this.onProgress.bind(this)
