@@ -14,7 +14,7 @@
       <v-list-item
         v-for="{ label, value: itemValue, ...args } of items"
         :key="itemValue"
-        @click="$emit('input', itemValue)"
+        @click="onInput(itemValue)"
       >
         <slot name="item" :item="{ label, value: itemValue, ...args }">
           <span class="tabular-nums">{{ label }}</span>
@@ -55,8 +55,6 @@ export default {
       this.$emit('update:model-value', value)
     },
     toggle() {
-      // mechanism taken from v-select
-      this.$nextTick(() => this.$refs.menu.getTiles())
       setTimeout(() => this.setMenuIndex(this.index), 10)
     },
     setMenuIndex(index) {
