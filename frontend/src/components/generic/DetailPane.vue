@@ -5,9 +5,9 @@
     :model-value
     v-bind="$attrs"
   >
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $slots" #[name]="slotData">
-      <slot :name="name" v-bind="slotData" />
+    <!-- passing through all slots -->
+    <template v-for="(_, slot) of $slots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData || {}"></slot>
     </template>
   </DialogBottomSheet>
   <DialogForm
