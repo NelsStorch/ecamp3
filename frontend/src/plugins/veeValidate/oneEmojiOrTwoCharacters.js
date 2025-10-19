@@ -2,6 +2,9 @@ import { size } from 'lodash-es'
 
 export default (i18n) =>
   (value, _, { label }) => {
+    if (!value) {
+      return true
+    }
     const validate = /\p{Extended_Pictographic}/u.test(value)
       ? size(value) <= 1
       : value.length <= 2
