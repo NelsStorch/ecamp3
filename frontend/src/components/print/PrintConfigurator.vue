@@ -2,24 +2,24 @@
   <v-skeleton-loader v-if="loading" type="article" />
   <div v-else>
     <PagesOverview v-model="cnf.contents" @input="onChange">
-      <PagesConfig
-        v-for="(content, idx) in cnf.contents"
-        :key="idx"
-        :title="$t('components.print.printConfigurator.config.' + content.type)"
-        :landscape="content.options.orientation === 'L'"
-        :multiple="
-          contentComponents[content.type].design.multiple ||
-          content.options?.periods?.length > 1
-        "
-        @remove="removeContent(idx)"
-      >
-        <component
-          :is="contentComponents[content.type]"
-          :value="content.options"
-          :camp="camp"
-          @input="onChange"
-        />
-      </PagesConfig>
+      <template #item="{ element: content, index: idx }">
+        <PagesConfig
+          :title="$t('components.print.printConfigurator.config.' + content.type)"
+          :landscape="content.options.orientation === 'L'"
+          :multiple="
+            contentComponents[content.type].design.multiple ||
+            content.options?.periods?.length > 1
+          "
+          @remove="removeContent(idx)"
+        >
+          <component
+            :is="contentComponents[content.type]"
+            :value="content.options"
+            :camp="camp"
+            @input="onChange"
+          />
+        </PagesConfig>
+      </template>
 
       <v-menu offset-y rounded="lg" offset-overflow>
         <template #activator="{ props }">
@@ -70,7 +70,7 @@
               >View Print-Config
             </v-expansion-panel-title>
             <v-expansion-panel-text>
-              <pre style="font-size: 12px">{{ cnf }}</pre>
+              <pre style="font-size: 12px">{{ prettyConfig }}</pre>
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -129,6 +129,7 @@ import repairConfig from './repairPrintConfig.js'
 import StoryConfig from '@/components/print/config/StoryConfig.vue'
 import SafetyConsiderationsConfig from '@/components/print/config/SafetyConsiderationsConfig.vue'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
+import jsonStringifyReactiveValue from '@/components/print/jsonStringifyReactiveValue.js'
 
 export default {
   name: 'PrintConfigurator',
@@ -187,6 +188,9 @@ export default {
     },
     isDev() {
       return getEnv().FEATURE_DEVELOPER ?? false
+    },
+    prettyConfig() {
+      return jsonStringifyReactiveValue(this.cnf, 2)
     },
   },
   watch: {
@@ -268,7 +272,7 @@ export default {
       this.$nextTick(() => {
         this.$store.commit('setLastPrintConfig', {
           campUri: this.camp._meta.self,
-          printConfig: cloneDeep(this.cnf),
+          printConfig: cloneDeep(JSON.parse(jsonStringifyReactiveValue(this.cnf))),
         })
       })
     },

@@ -29,6 +29,7 @@
 
 <script>
 import { getEnv } from '@/environment.js'
+import jsonStringifyReactiveValue from '@/components/print/jsonStringifyReactiveValue.js'
 
 const PRINT_URL = getEnv().PRINT_URL
 
@@ -51,7 +52,7 @@ export default {
       return this.$store.state.lang.language
     },
     url() {
-      return `${PRINT_URL}/?config=${encodeURIComponent(JSON.stringify(this.config))}`
+      return `${PRINT_URL}/?config=${encodeURIComponent(jsonStringifyReactiveValue(this.config))}`
     },
   },
 }
