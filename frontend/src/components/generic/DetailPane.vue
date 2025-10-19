@@ -2,7 +2,7 @@
   <DialogBottomSheet
     v-if="$vuetify.display.smAndDown"
     :saving-override.sync="isSaving"
-    :value="modelValue"
+    :model-value
     v-bind="$attrs"
   >
     <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
@@ -15,7 +15,7 @@
     :saving-override.sync="isSaving"
     content-class="ec-dialog-form"
     eager
-    :value="value"
+    :model-value
     v-bind="$attrs"
   >
     <!-- passing through all slots -->
