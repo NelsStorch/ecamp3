@@ -3,16 +3,13 @@
     v-bind="$attrs"
     content-class="ec-dialog-form"
     eager
-    :value="modelValue"
-    @input="onInput"
+    :model-value
+    @update:model-value="onInput"
   >
     <template #activator="scope">
       <slot name="activator" v-bind="scope" />
     </template>
-    <!--    <ValidationObserver v-if="value" ref="validation" v-slot="{ handleSubmit }">-->
-    <!-- ValidationObserver/handleSubmit ensures that doSubmit is only called if there are no validation errors -->
-    <!-- handleSubmit(doSubmit) -->
-    <v-form @submit.prevent="doSubmit">
+    <Form @submit="doSubmit">
       <v-card rounded="b-0">
         <v-toolbar class="ec-dialog-toolbar" density="compact" elevation="0">
           <v-icon start>
@@ -87,20 +84,19 @@
           </v-card-actions>
         </div>
       </v-card>
-    </v-form>
-    <!--    </ValidationObserver>-->
+    </Form>
   </v-bottom-sheet>
 </template>
 <script>
-// import { ValidationObserver } from 'vee-validate'
 import ServerError from '@/components/form/ServerError.vue'
 import DialogUiBase from '@/components/dialog/DialogUiBase.vue'
+import { Form } from 'vee-validate'
 
 export default {
   name: 'DialogBottomSheet',
   components: {
+    Form,
     ServerError,
-    // ValidationObserver
   },
   extends: DialogUiBase,
   props: {
@@ -110,13 +106,6 @@ export default {
   computed: {
     currentlySaving() {
       return this.isSaving || this.savingOverride
-    },
-  },
-  watch: {
-    value(visible) {
-      if (visible) {
-        this.$nextTick(() => this.$refs.validation.reset())
-      }
     },
   },
   methods: {
@@ -139,6 +128,7 @@ export default {
       if (event === false) {
         this.doCancel()
       }
+      this.$emit('update:model-value', event)
     },
   },
 }
