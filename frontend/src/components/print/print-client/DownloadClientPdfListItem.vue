@@ -24,10 +24,15 @@
 
 <script>
 import { generatePdfMixin } from './generatePdfMixin.js'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'DownloadClientPdfListItem',
   mixins: [generatePdfMixin],
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
 }
 </script>
 

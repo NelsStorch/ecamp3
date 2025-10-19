@@ -27,6 +27,7 @@
 import { generatePdf } from './generatePdf.js'
 import { generatePdfMixin } from './generatePdfMixin.js'
 import { componentI18n } from '@/plugins/index.js'
+import { useToast } from 'vue-toastification'
 
 const RENDER_IN_WORKER = true
 
@@ -38,6 +39,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
