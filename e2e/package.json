@@ -16,7 +16,7 @@
     "@eslint/compat": "1.4.0",
     "@eslint/js": "9.37.0",
     "cypress": "15.4.0",
-    "cypress-terminal-report": "7.3.0",
+    "cypress-terminal-report": "7.3.2",
     "cypress-wait-until": "3.0.2",
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
