@@ -49,9 +49,9 @@
         <v-list-item
           class="ec-copy-source rounded-xl bg-blue-grey-lighten-5 text-blue-grey-darken-4 mt-1"
         >
-          <v-list-item-avatar>
+          <v-avatar>
             <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
-          </v-list-item-avatar>
+          </v-avatar>
 
           <v-list-item-title>
             <CategoryChip :category="clipboardEntity.category()" class="mx-1" dense />
