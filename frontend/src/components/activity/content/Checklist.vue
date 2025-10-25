@@ -196,7 +196,7 @@ export default {
         })
     })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.checkedItems = null
     this.uncheckedItems = null
   },

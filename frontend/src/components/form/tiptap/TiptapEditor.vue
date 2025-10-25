@@ -278,7 +278,7 @@ export default {
     document.addEventListener('keyup', this.specialKeyListeners, { passive: true })
     document.addEventListener('contextmenu', this.specialMenuListeners, { passive: true })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('keydown', this.specialKeyListeners)
     document.removeEventListener('keyup', this.specialKeyListeners)
     document.removeEventListener('contextmenu', this.specialMenuListeners)

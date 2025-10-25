@@ -54,7 +54,6 @@ export default [
 
       'vue/multi-word-component-names': 'off',
       'vue/no-reserved-component-names': ['error', { htmlElementCaseSensitive: true }],
-      'vue/no-deprecated-destroyed-lifecycle': 'off',
       'vue/no-deprecated-dollar-scopedslots-api': 'off',
       'vue/no-deprecated-filter': 'warn',
       'vue/no-deprecated-props-default-this': 'off',
