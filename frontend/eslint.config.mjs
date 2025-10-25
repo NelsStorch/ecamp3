@@ -54,7 +54,6 @@ export default [
 
       'vue/multi-word-component-names': 'off',
       'vue/no-reserved-component-names': ['error', { htmlElementCaseSensitive: true }],
-      'vue/no-deprecated-slot-scope-attribute': 'off',
       'vue/no-deprecated-v-bind-sync': 'off',
       'vue/no-deprecated-v-on-native-modifier': 'warn',
       'vue/no-v-for-template-key-on-child': 'off',
