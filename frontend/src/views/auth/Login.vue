@@ -18,7 +18,7 @@
       color="warning"
     >
       <div>
-        <i18n-t :keypath="infoTextKey">
+        <i18n-t :keypath="infoTextKey" scope="global">
           <template #br><br /></template>
         </i18n-t>
         <v-btn
@@ -164,6 +164,7 @@
           keypath="views.auth.login.acceptTermsOfServiceOnOAuthLogin"
           tag="p"
           class="text-grey-darken-2 text-center w-100 mt-2"
+          scope="global"
           style="hyphens: auto"
         >
           <template #termsOfServiceLink>
