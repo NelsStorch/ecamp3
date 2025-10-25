@@ -16,6 +16,7 @@
     />
     <e-select
       v-model="localMaterialItem.materialList"
+      path="materialList"
       dense
       vee-rules="required"
       :label="$t('entity.materialList.name')"

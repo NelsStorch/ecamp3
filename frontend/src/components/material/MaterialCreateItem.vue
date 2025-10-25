@@ -1,71 +1,66 @@
 <template>
-  <!--  <ValidationObserver-->
-  <!--    v-if="materialListsSorted.length > 0"-->
-  <!--    ref="validation"-->
-  <!--    tag="tr"-->
-  <!--    class="newItemRow"-->
-  <!--    @keyup.enter="submitForm"-->
-  <!--  >-->
-  <td class="pt-1">
-    <e-number-field
-      ref="quantity"
-      v-model="materialItem.quantity"
-      dense
-      vee-rules="greaterThan:0"
-      inputmode="decimal"
-      path="quantity"
-    />
-  </td>
-  <td class="pt-1">
-    <e-text-field v-model="materialItem.unit" dense maxlength="32" path="unit" />
-  </td>
-  <td class="pt-1">
-    <e-text-field
-      v-model="materialItem.article"
-      dense
-      maxlength="64"
-      path="article"
-      vee-rules="required"
-    />
-  </td>
-  <td :colspan="columns - 4" class="pt-1">
-    <e-select
-      v-model="materialItem.materialList"
-      :items="materialListsSorted"
-      :label="$t('entity.materialList.name')"
-      dense
-      vee-rules="required"
-    />
-  </td>
-  <td class="pt-1">
-    <ButtonAdd height="52" hide-label @click="submitForm" />
-  </td>
-  <!--  </ValidationObserver>-->
-  <!--  <tr v-else>-->
-  <!--    <td :colspan="columns">-->
-  <!--      <div>-->
-  <!--        <p>-->
-  <!--          {{ $t("components.material.materialCreateItem.noMaterialListAvailable") }}-->
-  <!--        </p>-->
-  <!--        <v-btn :to="campRoute(camp, 'admin')">-->
-  <!--          <v-icon :left="$vuetify.display.mdAndUp">mdi-cogs</v-icon>-->
-  <!--          {{ $t("components.material.materialCreateItem.campSettingsButton") }}-->
-  <!--        </v-btn>-->
-  <!--      </div>-->
-  <!--    </td>-->
-  <!--  </tr>-->
+  <Form v-if="materialListsSorted.length > 0" v-slot="{ handleSubmit }" as="tr">
+    <td class="pt-1">
+      <e-number-field
+        ref="quantity"
+        v-model="materialItem.quantity"
+        dense
+        inputmode="decimal"
+        path="quantity"
+        vee-rules="greaterThan:0"
+      />
+    </td>
+    <td class="pt-1">
+      <e-text-field v-model="materialItem.unit" dense maxlength="32" path="unit" />
+    </td>
+    <td class="pt-1">
+      <e-text-field
+        v-model="materialItem.article"
+        dense
+        maxlength="64"
+        path="article"
+        vee-rules="required"
+      />
+    </td>
+    <td :colspan="columns - 4" class="pt-1">
+      <e-select
+        v-model="materialItem.materialList"
+        :items="materialListsSorted"
+        :label="$t('entity.materialList.name')"
+        dense
+        path="materialList"
+        vee-rules="required"
+      />
+    </td>
+    <td class="pt-1">
+      <ButtonAdd height="52" hide-label @click="handleSubmit(createMaterialItem)" />
+    </td>
+  </Form>
+  <tr v-else>
+    <td :colspan="columns">
+      <div>
+        <p>
+          {{ $t('components.material.materialCreateItem.noMaterialListAvailable') }}
+        </p>
+        <v-btn :to="campRoute(camp, 'admin')">
+          <v-icon :left="$vuetify.display.mdAndUp">mdi-cogs</v-icon>
+          {{ $t('components.material.materialCreateItem.campSettingsButton') }}
+        </v-btn>
+      </div>
+    </td>
+  </tr>
 </template>
 
 <script>
 import { campRoute } from '@/router.js'
-// import { ValidationObserver } from 'vee-validate'
+import { Form } from 'vee-validate'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
 import materialListsSorted from '@/common/helpers/materialListsSorted.js'
 
 export default {
   name: 'MaterialCreateItem',
   components: {
-    // ValidationObserver,
+    Form,
     ButtonAdd,
   },
   provide() {
@@ -103,18 +98,11 @@ export default {
         materialList: this.materialList?._meta.self ?? undefined,
       }
     },
-    async submitForm() {
-      const isValid = await this.$refs.validation.validate()
-      if (isValid) {
-        this.createMaterialItem()
-      }
-    },
     createMaterialItem() {
       const key = Date.now()
       const data = this.materialItem
 
       this.initEntity()
-      this.$refs.validation.reset()
       this.$refs.quantity.focus()
 
       // fire event to allow for eager adding before post has finished
