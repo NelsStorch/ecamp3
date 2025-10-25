@@ -62,6 +62,7 @@
         autofocus
         :label="$t('views.auth.login.email')"
         name="email"
+        path="email"
         append-inner-icon="mdi-account-outline"
         :dense="$vuetify.display.xs"
         type="email"
@@ -74,6 +75,7 @@
         :label="$t('views.auth.login.password')"
         vee-rules="required"
         name="password"
+        path="email"
         append-inner-icon="mdi-lock-outline"
         :dense="$vuetify.display.xs"
         type="password"
