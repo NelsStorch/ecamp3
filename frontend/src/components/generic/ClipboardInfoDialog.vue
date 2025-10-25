@@ -11,11 +11,9 @@
     </template>
 
     <p>{{ description }}</p>
-    <p v-if="clipboardReadState === 'prompt'">
-      <center>
-        <v-btn color="success" @click="requestClipboardAccess">{{ allow }}</v-btn>
-      </center>
-    </p>
+    <div v-if="clipboardReadState === 'prompt'" class="item-center flex justify-center">
+      <v-btn color="success" @click="requestClipboardAccess">{{ allow }}</v-btn>
+    </div>
     <p v-if="clipboardReadState === 'granted'">{{ granted }}</p>
     <p v-if="clipboardReadState === 'denied'">{{ denied }}</p>
   </dialog-form>

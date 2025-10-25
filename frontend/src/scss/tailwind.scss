@@ -1,5 +1,9 @@
 // This will eventually be replaced by tailwind
 
+.flex {
+  display: flex;
+}
+
 .whitespace-normal {
   white-space: normal;
 }
@@ -38,6 +42,14 @@
 
 .flex-wrap-reverse {
   flex-wrap: wrap-reverse;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-items-start {
