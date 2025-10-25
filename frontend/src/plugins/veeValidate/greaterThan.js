@@ -1,3 +1,4 @@
+export const validationMessageKey = 'global.validation.greaterThan'
 export default (i18n) =>
   /**
    * @param {string} value value of a float number
@@ -11,8 +12,7 @@ export default (i18n) =>
     if (validate) {
       return true
     }
-
-    return i18n.global.t('global.validation.greaterThan', {
+    return i18n.global.t(validationMessageKey, {
       min: min,
       field: label,
     })
