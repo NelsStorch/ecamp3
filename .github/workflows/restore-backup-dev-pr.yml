@@ -21,6 +21,14 @@ on:
         description: The environment, if name is dev then dev, else feature-branch
         required: true
         default: dev
+      action:
+        description: "Choose action"
+        type: choice
+        required: true
+        default: diff
+        options:
+          - diff
+          - deploy
 
 
 jobs:
@@ -36,7 +44,7 @@ jobs:
   upgrade-or-install-deployment:
     name: Upgrade or install deployment
     needs: build-and-push
-    uses: ./.github/workflows/reusable-dev-deployment.yml
+    uses: ./.github/workflows/reusable-ecamp3-deployment.yml
     with:
       name: ${{ inputs.pr-number == null && 'dev' || format('pr{0}', inputs.pr-number) }}
       sha: ${{ github.sha }}
@@ -44,4 +52,5 @@ jobs:
       pr-number: ${{ inputs.pr-number }}
       dropDBOnUninstall: ${{ inputs.pr-number != null }}
       restoreSourceFile: ${{ inputs.restoreSourceFile }}
+      action: ${{ github.event.inputs.action }}
     secrets: inherit
