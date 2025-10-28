@@ -8,6 +8,7 @@
     :disabled="disabled"
     :tag="variant === 'dense' ? 'div' : 'tbody'"
     :role="variant === 'dense' ? 'rowgroup' : null"
+    :item-key="itemKey"
     @sort="onSort"
     @start="dragging = true"
     @end="dragging = false"
@@ -18,7 +19,7 @@
         :key="`default-${element}`"
         :disabled="disabled"
         :is-last-section="isLastSection"
-        :item-key="key"
+        :item-key="element"
         :layout-mode="layoutMode"
         @delete="deleteItem"
         @move-down="moveDown"
@@ -29,7 +30,7 @@
         :key="`dense-${element}`"
         :disabled="disabled"
         :is-last-section="isLastSection"
-        :item-key="key"
+        :item-key="element"
         :layout-mode="layoutMode"
         @delete="deleteItem"
         @move-down="moveDown"
@@ -174,6 +175,10 @@ export default {
       })
 
       return payload
+    },
+
+    itemKey(key) {
+      return this.variant === 'default' ? `default-${key}` : `dense-${key}`
     },
   },
 }
