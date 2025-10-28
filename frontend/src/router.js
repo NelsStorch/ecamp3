@@ -279,7 +279,7 @@ const router = createRouter({
           path: 'program',
           name: 'camp/program',
           async beforeEnter(to, from, next) {
-            redirectToPeriod(to, from, next, 'camp/period/program')
+            return redirectToPeriod(to, from, next, 'camp/period/program')
           },
         },
         {
@@ -297,7 +297,7 @@ const router = createRouter({
           path: 'story',
           name: 'camp/story',
           async beforeEnter(to, from, next) {
-            redirectToPeriod(to, from, next, 'camp/period/story')
+            return redirectToPeriod(to, from, next, 'camp/period/story')
           },
         },
         {
