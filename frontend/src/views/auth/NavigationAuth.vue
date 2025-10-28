@@ -64,11 +64,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .help-button--desktop {
   top: 80px !important;
 }
 .help-button--mobile {
   top: 16px !important;
+}
+::v-deep(.v-toolbar__content) {
+  overflow: visible;
 }
 </style>
