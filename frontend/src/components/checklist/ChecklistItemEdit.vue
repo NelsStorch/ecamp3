@@ -144,8 +144,8 @@ export default {
   methods: {
     async loadData() {
       return Promise.all([
-        this.api.get().checklistNodes({ camp: this.camp._meta.self })._meta.load,
-        this.checklist.checklistItems().$loadItems(),
+        this.api.get().checklistNodes({ camp: this.camp._meta.self }),
+        this.api.get().checklistItems({ 'checklist.camp': this.camp._meta.self }),
       ])
     },
   },
