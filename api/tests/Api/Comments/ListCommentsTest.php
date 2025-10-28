@@ -21,6 +21,7 @@ class ListCommentsTest extends ECampApiTestCase {
     }
 
     public function testListCommentsIsAllowedForLoggedInUser() {
+        /** @noRector */
         $response = static::createClientWithCredentials()->request('GET', '/comments');
 
         $this->assertResponseStatusCodeSame(200);

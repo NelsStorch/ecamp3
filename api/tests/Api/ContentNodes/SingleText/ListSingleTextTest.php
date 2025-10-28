@@ -11,20 +11,27 @@ class ListSingleTextTest extends ListContentNodeTestCase {
     public function setUp(): void {
         parent::setUp();
 
-        $this->endpoint = '/content_node/single_texts';
+        $this->endpointBase = '/content_node/single_texts';
 
-        $this->contentNodesCamp1and2 = [
+        $this->contentNodesCamp1 = [
             $this->getIriFor('singleText1'),
             $this->getIriFor('singleText2'),
             $this->getIriFor('safetyConsiderations1'),
+        ];
+
+        $this->contentNodesCamp2 = [
+            // none
         ];
 
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('singleTextCampUnrelated'),
         ];
 
-        $this->contentNodesPublicCamps = [
+        $this->contentNodesCampPrototype = [
             $this->getIriFor('singleTextCampPrototype'),
+        ];
+
+        $this->contentNodesCampShared = [
             $this->getIriFor('singleTextCampShared'),
         ];
     }

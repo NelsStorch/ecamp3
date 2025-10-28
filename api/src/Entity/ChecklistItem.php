@@ -15,6 +15,7 @@ use ApiPlatform\Metadata\Post;
 use App\Entity\ContentNode\ChecklistNode;
 use App\InputFilter;
 use App\Repository\ChecklistItemRepository;
+use App\State\ChecklistItemCollectionProvider;
 use App\Util\EntityMap;
 use App\Validator\AssertNoLoop;
 use App\Validator\ChecklistItem\AssertBelongsToSameChecklist;
@@ -33,8 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             security: 'is_granted("CHECKLIST_IS_PROTOTYPE", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
+                       is_granted("CAMP_IS_PUBLIC", object) or
                        is_granted("CAMP_COLLABORATOR", object)
                       '
         ),
@@ -46,11 +46,12 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Delete(
             security: '(is_granted("CHECKLIST_IS_PROTOTYPE", object) and is_granted("ROLE_ADMIN")) or
                        (is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object))',
-            validate: true,
             validationContext: ['groups' => ['delete']],
+            validate: true,
         ),
         new GetCollection(
-            security: 'is_authenticated()'
+            security: 'is_authenticated()',
+            provider: ChecklistItemCollectionProvider::class
         ),
         new Post(
             denormalizationContext: ['groups' => ['write', 'create']],
@@ -62,11 +63,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriTemplate: self::CHECKLIST_SUBRESOURCE_URI_TEMPLATE,
             uriVariables: [
                 'checklistId' => new Link(
-                    fromClass: Checklist::class,
                     toProperty: 'checklist',
+                    fromClass: Checklist::class,
                     security: 'is_granted("CHECKLIST_IS_PROTOTYPE", checklist) or
-                               is_granted("CAMP_IS_PROTOTYPE", checklist) or
-                               is_granted("CAMP_IS_SHARED", checklist) or
+                               is_granted("CAMP_IS_PUBLIC", checklist) or
                                is_granted("CAMP_COLLABORATOR", checklist)'
                 ),
             ],

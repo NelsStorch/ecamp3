@@ -816,7 +816,8 @@
             "campIsLoading": "Lager wird geladen",
             "material": "Material",
             "program": "Programm",
-            "story": "Geschichte"
+            "story": "Geschichte",
+            "checklist": "Checkliste"
           }
         },
         "mobile": {

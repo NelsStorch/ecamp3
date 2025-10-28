@@ -35,18 +35,20 @@ spec:
               containerPort: 3000
               protocol: TCP
           readinessProbe:
-            httpGet:
-              scheme: HTTP
-              path: /pressure
-              port: 3000
+            exec:
+              command:
+                - sh
+                - "-c"
+                - "curl --fail -q localhost:3000/pressure?token=${TOKEN}"
             initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 5
           livenessProbe:
-            httpGet:
-              scheme: HTTP
-              path: /pressure
-              port: 3000
+            exec:
+              command:
+                - sh
+                - "-c"
+                - "curl --fail -q localhost:3000/pressure?token=${TOKEN}"
             initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 5
@@ -56,14 +58,9 @@ spec:
             - configMapRef:
                 name: {{ include "browserless.name" . }}-configmap
           env:
-            - name: PREBOOT_CHROME
-              value: "true"
-            - name: KEEP_ALIVE
-              value: "true"
-            - name: ENABLE_DEBUGGER
-              value: "false"
-            - name: FUNCTION_ENABLE_INCOGNITO_MODE
-              value: "true"
-            - name: DISABLED_FEATURES
-              value: '["downloadEndpoint","functionEndpoint","pdfEndpoint","screencastEndpoint","scrapeEndpoint","statsEndpoint","workspaces"]'
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: BROWSERLESS_TOKEN
+                  name: {{ include "print-browserless.name" . }}
 {{- end }}

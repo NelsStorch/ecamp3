@@ -13,6 +13,7 @@ use App\Entity\ChecklistItem;
 use App\Entity\ContentNode;
 use App\Repository\ChecklistNodeRepository;
 use App\State\ContentNode\ChecklistNodePersistProcessor;
+use App\State\ContentNodeCollectionProvider;
 use App\Util\EntityMap;
 use App\Validator\ChecklistItem\AssertBelongsToSameCamp;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,26 +25,26 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new Get(
             security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object)'
+                       is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Patch(
-            processor: ChecklistNodePersistProcessor::class,
             denormalizationContext: ['groups' => ['write', 'update']],
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            validationContext: ['groups' => ['Default', 'update']]
+            validationContext: ['groups' => ['Default', 'update']],
+            processor: ChecklistNodePersistProcessor::class
         ),
         new Delete(
             security: '(is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)) and object.parent !== null'
         ),
         new GetCollection(
-            security: 'is_authenticated()'
+            security: 'is_authenticated()',
+            provider: ContentNodeCollectionProvider::class
         ),
         new Post(
-            processor: ChecklistNodePersistProcessor::class,
             denormalizationContext: ['groups' => ['write', 'create']],
             securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.parent === null',
             validationContext: ['groups' => ['Default', 'create']],
+            processor: ChecklistNodePersistProcessor::class,
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

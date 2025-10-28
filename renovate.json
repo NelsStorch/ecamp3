@@ -5,8 +5,8 @@
     ":prConcurrentLimitNone"
   ],
   "constraints": {
-    "node": "24.8.0",
-    "php": "8.4.12"
+    "node": "24.10.0",
+    "php": "8.4.13"
   },
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
@@ -39,17 +39,8 @@
       "groupName": "vue-minor-print-pdf"
     },
     {
-      "extends": ["monorepo:vue"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
       "matchFileNames": ["frontend/package.json"],
-      "dependencyDashboardApproval": true,
-      "groupName": "vue-frontend"
-    },
-    {
-      "matchDepNames": ["@vue/test-utils"],
-      "matchFileNames": ["frontend/package.json"],
-      "dependencyDashboardApproval": true,
-      "groupName": "vue-test-utils-frontend"
+      "enabled": false
     },
     {
       "matchDepNames": ["sass"],

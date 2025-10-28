@@ -32,8 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Get(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
             security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object)'
+                       is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Patch(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
@@ -41,8 +40,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new Delete(
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            validate: true,
-            validationContext: ['groups' => ['delete', 'ScheduleEntry:delete']]
+            validationContext: ['groups' => ['delete', 'ScheduleEntry:delete']],
+            validate: true
         ),
         new GetCollection(
             security: 'is_authenticated()'
@@ -54,8 +53,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                     toProperty: 'period',
                     fromClass: Period::class,
                     security: 'is_granted("CAMP_COLLABORATOR", period) or
-                               is_granted("CAMP_IS_SHARED", period) or
-                               is_granted("CAMP_IS_PROTOTYPE", period)'
+                               is_granted("CAMP_IS_PUBLIC", period)'
                 ),
             ],
             security: 'is_fully_authenticated()',
@@ -64,8 +62,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             ]
         ),
         new Post(
-            denormalizationContext: ['groups' => ['write', 'create']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write', 'create']],
             securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.activity === null',
             validationContext: ['groups' => ScheduleEntryPostGroupSequence::class]
         ),

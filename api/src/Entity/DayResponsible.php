@@ -25,8 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object)'
+                       is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Delete(
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
@@ -41,8 +40,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                     toProperty: 'day',
                     fromClass: Day::class,
                     security: 'is_granted("CAMP_COLLABORATOR", day) or
-                               is_granted("CAMP_IS_SHARED", day) or
-                               is_granted("CAMP_IS_PROTOTYPE", day)'
+                               is_granted("CAMP_IS_PUBLIC", day)'
                 ),
             ],
             extraProperties: [

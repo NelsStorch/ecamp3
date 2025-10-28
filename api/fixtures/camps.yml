@@ -54,6 +54,7 @@ App\Entity\Camp:
     addressCity: <city()>
     owner: '@admin'
     creator: '@admin'
+    isPublic: true
     isPrototype: true
     isShared: false
     sharedBy: null
@@ -69,6 +70,7 @@ App\Entity\Camp:
     addressCity: <city()>
     owner: '@admin'
     creator: '@admin'
+    isPublic: true
     isPrototype: false
     isShared: true
     sharedBy: '@admin'

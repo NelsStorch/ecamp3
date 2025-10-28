@@ -32,6 +32,8 @@ class CampUpdateProcessor extends AbstractPersistProcessor {
     }
 
     public function onBeforeSharingStatusChange(Camp $data): Camp {
+        $data->isPublic = $data->isShared || $data->isPrototype;
+
         if ($data->isShared) {
             $data->sharedSince = new \DateTime('now', new \DateTimeZone('UTC'));
 

@@ -22,11 +22,7 @@
         />
       </div>
       <div class="tw-flex-initial categories fullwidth text-sm-relative">
-        <div
-          v-for="category in camp.categories().items"
-          :key="category.id"
-          class="categories"
-        >
+        <div v-for="category in categories" :key="category.id" class="categories">
           <div class="category">
             <category-label :category="category" />
             {{ category.name }}
@@ -105,6 +101,18 @@ export default {
   computed: {
     camp() {
       return this.period.camp()
+    },
+    categories() {
+      const usedCategoryUris = [
+        ...new Set(
+          this.scheduleEntries.map(
+            (scheduleEntry) => scheduleEntry.activity().category()._meta.self
+          )
+        ),
+      ]
+      return this.camp.categories().items.filter((category) => {
+        return usedCategoryUris.includes(category._meta.self)
+      })
     },
     address() {
       return this.joinWithoutBlanks(

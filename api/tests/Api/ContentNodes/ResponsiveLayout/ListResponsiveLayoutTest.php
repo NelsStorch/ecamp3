@@ -11,18 +11,25 @@ class ListResponsiveLayoutTest extends ListContentNodeTestCase {
     public function setUp(): void {
         parent::setUp();
 
-        $this->endpoint = '/content_node/responsive_layouts';
+        $this->endpointBase = '/content_node/responsive_layouts';
 
-        $this->contentNodesCamp1and2 = [
+        $this->contentNodesCamp1 = [
             $this->getIriFor('responsiveLayout1'),
+        ];
+
+        $this->contentNodesCamp2 = [
+            // none
         ];
 
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('responsiveLayoutCampUnrelated'),
         ];
 
-        $this->contentNodesPublicCamps = [
+        $this->contentNodesCampPrototype = [
             $this->getIriFor('responsiveLayoutCampPrototype'),
+        ];
+
+        $this->contentNodesCampShared = [
             $this->getIriFor('responsiveLayoutCampShared'),
         ];
     }

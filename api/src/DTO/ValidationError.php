@@ -15,11 +15,11 @@ class ValidationError extends Error {
         private readonly string $type = 'about:blank',
     ) {
         parent::__construct(
-            type: $this->type,
             title: $this->title,
-            status: $this->status,
             detail: $this->detail,
+            status: $this->status,
             instance: $this->instance,
+            type: $this->type,
         );
     }
 

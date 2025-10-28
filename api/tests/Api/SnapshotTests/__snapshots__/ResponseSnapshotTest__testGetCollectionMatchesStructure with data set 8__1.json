@@ -8,54 +8,6 @@
                     },
                     "checklistNodes": [],
                     "children": [],
-                    "parent": "escaped_value",
-                    "self": {
-                        "href": "escaped_value"
-                    }
-                },
-                "id": "escaped_value",
-                "position": "escaped_value",
-                "text": "escaped_value"
-            },
-            {
-                "_links": {
-                    "checklist": {
-                        "href": "escaped_value"
-                    },
-                    "checklistNodes": [],
-                    "children": [],
-                    "parent": "escaped_value",
-                    "self": {
-                        "href": "escaped_value"
-                    }
-                },
-                "id": "escaped_value",
-                "position": "escaped_value",
-                "text": "escaped_value"
-            },
-            {
-                "_links": {
-                    "checklist": {
-                        "href": "escaped_value"
-                    },
-                    "checklistNodes": [],
-                    "children": [],
-                    "parent": "escaped_value",
-                    "self": {
-                        "href": "escaped_value"
-                    }
-                },
-                "id": "escaped_value",
-                "position": "escaped_value",
-                "text": "escaped_value"
-            },
-            {
-                "_links": {
-                    "checklist": {
-                        "href": "escaped_value"
-                    },
-                    "checklistNodes": [],
-                    "children": [],
                     "parent": {
                         "href": "escaped_value"
                     },
@@ -133,15 +85,6 @@
     },
     "_links": {
         "items": [
-            {
-                "href": "escaped_value"
-            },
-            {
-                "href": "escaped_value"
-            },
-            {
-                "href": "escaped_value"
-            },
             {
                 "href": "escaped_value"
             },

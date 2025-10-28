@@ -19,6 +19,7 @@ use Rector\PHPUnit\CodeQuality\Rector\MethodCall\AssertEmptyNullableObjectToAsse
 use Rector\Privatization\Rector\Class_\FinalizeTestCaseClassRector;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
+use Rector\Symfony\Symfony73\Rector\Class_\ConstraintOptionsToNamedArgumentsRector;
 use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
 
 // @noinspection PhpUnhandledExceptionInspection
@@ -42,6 +43,7 @@ return RectorConfig::configure()
         AddInstanceofAssertForNullableInstanceRector::class,
         AssertEmptyNullableObjectToAssertInstanceofRector::class,
         CombineIfRector::class,
+        ConstraintOptionsToNamedArgumentsRector::class,
         DeclareStrictTypesRector::class,
         DisallowedEmptyRuleFixerRector::class,
         ExplicitBoolCompareRector::class,

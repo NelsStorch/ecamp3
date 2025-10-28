@@ -10,7 +10,7 @@ use App\Entity\ContentNode\ColumnLayout;
 use App\Entity\Period;
 use App\Entity\User;
 use App\HttpCache\ResponseTagger;
-use App\Security\Voter\CampIsSharedVoter;
+use App\Security\Voter\CampIsPublicVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,8 +21,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 /**
  * @internal
  */
-class CampIsSharedVoterTest extends TestCase {
-    private CampIsSharedVoter $voter;
+class CampIsPublicVoterTest extends TestCase {
+    private CampIsPublicVoter $voter;
     private MockObject|TokenInterface $token;
     private EntityManagerInterface|MockObject $em;
     private MockObject|ResponseTagger $responseTagger;
@@ -32,7 +32,7 @@ class CampIsSharedVoterTest extends TestCase {
         $this->token = $this->createMock(TokenInterface::class);
         $this->em = $this->createMock(EntityManagerInterface::class);
         $this->responseTagger = $this->createMock(ResponseTagger::class);
-        $this->voter = new CampIsSharedVoter($this->em, $this->responseTagger);
+        $this->voter = new CampIsPublicVoter($this->em, $this->responseTagger);
     }
 
     public function testDoesntVoteWhenAttributeWrong() {
@@ -49,7 +49,7 @@ class CampIsSharedVoterTest extends TestCase {
         // given
 
         // when
-        $result = $this->voter->vote($this->token, new CampIsSharedVoterTestDummy(), ['CAMP_IS_SHARED']);
+        $result = $this->voter->vote($this->token, new CampIsPublicVoterTestDummy(), ['CAMP_IS_PUBLIC']);
 
         // then
         $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
@@ -59,7 +59,7 @@ class CampIsSharedVoterTest extends TestCase {
         // given
 
         // when
-        $result = $this->voter->vote($this->token, null, ['CAMP_IS_SHARED']);
+        $result = $this->voter->vote($this->token, null, ['CAMP_IS_PUBLIC']);
 
         // then
         $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
@@ -72,24 +72,24 @@ class CampIsSharedVoterTest extends TestCase {
         $subject->method('getCamp')->willReturn(null);
 
         // when
-        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_SHARED']);
+        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PUBLIC']);
 
         // then
         $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 
-    public function testDeniesAccessWhenCampIsntShared() {
+    public function testDeniesAccessWhenCampIsntPublic() {
         // given
         $user = $this->createMock(User::class);
         $user->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $camp = new Camp();
-        $camp->isShared = false;
+        $camp->isPublic = false;
         $subject = $this->createMock(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         // when
-        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_SHARED']);
+        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PUBLIC']);
 
         // then
         $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
@@ -101,14 +101,14 @@ class CampIsSharedVoterTest extends TestCase {
         $user->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $camp = new Camp();
-        $camp->isShared = true;
+        $camp->isPublic = true;
         $subject = $this->createMock(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         $this->responseTagger->expects($this->once())->method('addTags')->with([$camp->getId()]);
 
         // when
-        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_SHARED']);
+        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PUBLIC']);
 
         // then
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
@@ -120,7 +120,7 @@ class CampIsSharedVoterTest extends TestCase {
         $user->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $camp = new Camp();
-        $camp->isShared = true;
+        $camp->isPublic = true;
         $activity = $this->createMock(Activity::class);
         $activity->method('getCamp')->willReturn($camp);
         $root = $this->createMock(ColumnLayout::class);
@@ -131,14 +131,14 @@ class CampIsSharedVoterTest extends TestCase {
         $repository->method('findOneBy')->willReturn($activity);
 
         // when
-        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_SHARED']);
+        $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PUBLIC']);
 
         // then
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 }
 
-class CampIsSharedVoterTestDummy extends BaseEntity {}
+class CampIsPublicVoterTestDummy extends BaseEntity {}
 
 class ContentNodeTreeDummy3 implements BelongsToContentNodeTreeInterface {
     public function getRoot(): ?ColumnLayout {

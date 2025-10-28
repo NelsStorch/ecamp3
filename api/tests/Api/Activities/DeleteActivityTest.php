@@ -147,7 +147,6 @@ class DeleteActivityTest extends ECampApiTestCase {
         $client->disableReboot();
 
         $activity = static::$fixtures['activity1'];
-        $comments = $activity->comments;
         $client->request('DELETE', $this->getIriFor($activity));
         $this->assertResponseStatusCodeSame(204);
 

@@ -35,31 +35,31 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
-            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_SHARED", object) or is_granted("CAMP_IS_PROTOTYPE", object)'
+            security: 'is_granted("CAMP_COLLABORATOR", object) or is_granted("CAMP_IS_PUBLIC", object)'
         ),
         new Patch(
-            processor: CampCollaborationUpdateProcessor::class,
-            denormalizationContext: ['groups' => ['write', 'update']],
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write', 'update']],
             security: '(is_authenticated() && user === object.user) or is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            validationContext: ['groups' => ['Default', 'update']]
+            validationContext: ['groups' => ['Default', 'update']],
+            processor: CampCollaborationUpdateProcessor::class
         ),
         new Delete(
-            validate: true,
+            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
             validationContext: ['groups' => ['delete']],
-            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
+            validate: true
         ),
         new Patch(
-            processor: CampCollaborationResendInvitationProcessor::class,
-            security: '(is_authenticated() && user === object.user) or is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
             uriTemplate: 'camp_collaborations/{id}/'.self::RESEND_INVITATION,
-            denormalizationContext: ['groups' => ['resend_invitation']],
             openapi: new OpenApiOperation(summary: 'Send the invitation email for this CampCollaboration again. Only possible, if the status is already invited.'),
-            validationContext: ['groups' => ['Default', 'resend_invitation']]
+            denormalizationContext: ['groups' => ['resend_invitation']],
+            security: '(is_authenticated() && user === object.user) or is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
+            validationContext: ['groups' => ['Default', 'resend_invitation']],
+            processor: CampCollaborationResendInvitationProcessor::class
         ),
         new GetCollection(
-            security: 'is_fully_authenticated()',
-            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
+            security: 'is_fully_authenticated()'
         ),
         new GetCollection(
             uriTemplate: self::CAMP_SUBRESOURCE_URI_TEMPLATE,
@@ -68,19 +68,18 @@ use Symfony\Component\Validator\Constraints as Assert;
                     toProperty: 'camp',
                     fromClass: Camp::class,
                     security: 'is_granted("CAMP_COLLABORATOR", camp) or
-                               is_granted("CAMP_IS_SHARED", camp) or
-                               is_granted("CAMP_IS_PROTOTYPE", camp)'
+                               is_granted("CAMP_IS_PUBLIC", camp)'
                 ),
             ],
-            security: 'is_fully_authenticated()',
-            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT
+            normalizationContext: self::COLLECTION_NORMALIZATION_CONTEXT,
+            security: 'is_fully_authenticated()'
         ),
         new Post(
-            processor: CampCollaborationCreateProcessor::class,
-            denormalizationContext: ['groups' => ['write', 'create']],
-            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
             openapi: new OpenApiOperation(description: 'Also sends an invitation email to the inviteEmail address, if specified.'),
-            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null'
+            normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            denormalizationContext: ['groups' => ['write', 'create']],
+            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null',
+            processor: CampCollaborationCreateProcessor::class
         ),
     ],
     denormalizationContext: ['groups' => ['write']],

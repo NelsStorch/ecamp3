@@ -27,8 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(
             security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object) or
+                       is_granted("CAMP_IS_PUBLIC", object) or
                        object.author === user',
         ),
         new Delete(
@@ -38,9 +37,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_authenticated()'
         ),
         new Post(
-            processor: CommentCreateProcessor::class,
             denormalizationContext: ['groups' => ['create', 'write']],
             securityPostDenormalize: 'is_granted("CAMP_COLLABORATOR", object)',
+            processor: CommentCreateProcessor::class,
         ),
         new GetCollection(
             uriTemplate: self::ACTIVITY_SUBRESOURCE_URI_TEMPLATE,
@@ -49,8 +48,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                     toProperty: 'activity',
                     fromClass: Activity::class,
                     security: 'is_granted("CAMP_COLLABORATOR", activity) or
-                               is_granted("CAMP_IS_SHARED", activity) or
-                               is_granted("CAMP_IS_PROTOTYPE", activity)',
+                               is_granted("CAMP_IS_PUBLIC", activity)',
                 ),
             ],
             security: 'is_fully_authenticated()',

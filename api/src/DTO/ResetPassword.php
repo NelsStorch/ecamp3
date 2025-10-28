@@ -18,26 +18,26 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            provider: ResetPasswordProvider::class,
             uriTemplate: '/reset_password/{id}{._format}', // TO DISCUSS: default uri would be /reset_password (plural). Shall we keep or fix?
             security: 'true',
+            provider: ResetPasswordProvider::class,
         ),
         new Patch(
-            provider: ResetPasswordProvider::class,
-            processor: ResetPasswordUpdateProcessor::class,
             uriTemplate: '/reset_password/{id}{._format}',
+            denormalizationContext: ['groups' => ['update']],
             security: 'true',
-            denormalizationContext: ['groups' => ['update']]
+            provider: ResetPasswordProvider::class,
+            processor: ResetPasswordUpdateProcessor::class
         ),
         new Post(
-            processor: ResetPasswordCreateProcessor::class,
             uriTemplate: '/reset_password{._format}',
-            security: 'true',
             status: 204,
-            output: false,
-            denormalizationContext: ['groups' => ['create']],
+            openapi: new OpenApiOperation(summary: 'Request Password-Reset-Mail', description: 'Password-Reset-Link will be sent to the given email'),
             normalizationContext: ['groups' => ['read']],
-            openapi: new OpenApiOperation(summary: 'Request Password-Reset-Mail', description: 'Password-Reset-Link will be sent to the given email')
+            denormalizationContext: ['groups' => ['create']],
+            security: 'true',
+            output: false,
+            processor: ResetPasswordCreateProcessor::class
         ),
     ],
     routePrefix: '/auth'

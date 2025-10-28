@@ -35,27 +35,26 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            security: 'is_granted("CAMP_COLLABORATOR", object) or
-                       is_granted("CAMP_IS_SHARED", object) or
-                       is_granted("CAMP_IS_PROTOTYPE", object)',
             normalizationContext: self::ITEM_NORMALIZATION_CONTEXT,
+            security: 'is_granted("CAMP_COLLABORATOR", object) or
+                       is_granted("CAMP_IS_PUBLIC", object)',
         ),
         new Patch(
-            processor: PeriodPersistProcessor::class,
-            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)'
+            security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
+            processor: PeriodPersistProcessor::class
         ),
         new Delete(
             security: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object)',
-            validate: true,
-            validationContext: ['groups' => ['delete', 'Period:delete']]
+            validationContext: ['groups' => ['delete', 'Period:delete']],
+            validate: true
         ),
         new GetCollection(
             security: 'is_authenticated()'
         ),
         new Post(
-            processor: PeriodPersistProcessor::class,
             denormalizationContext: ['groups' => ['write', 'create']],
-            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null'
+            securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null',
+            processor: PeriodPersistProcessor::class
         ),
     ],
     denormalizationContext: ['groups' => ['write']],
