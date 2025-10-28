@@ -2,15 +2,10 @@
   <v-menu
     v-if="authUser"
     v-model="open"
-    offset-y
     dark
-    location="right"
+    location="bottom end"
     rounded
-    :content-class="
-      ['ec-usermenu py-4', !$vuetify.display.xs ? 'rounded-lg mt-2' : 'rounded-md'].join(
-        ' '
-      )
-    "
+    :content-class="['py-4 rounded-lg', !$vuetify.display.xs ? 'mt-2' : ''].join(' ')"
     transition="slide-y-transition"
     :close-on-content-click="false"
     z-index="5"
