@@ -9,7 +9,7 @@
       variant="text"
     >
       <v-toolbar-title>
-        <v-icon icon="$ecamp" />
+        <v-icon icon="$ecamp" size="24" />
         <span v-show="text" class="mx-2 e-logo-text">eCamp</span>
       </v-toolbar-title>
     </v-btn>

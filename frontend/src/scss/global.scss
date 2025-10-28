@@ -88,6 +88,10 @@ body {
   height: 100%;
 }
 
+.v-btn .v-icon {
+  --v-icon-size-multiplier: 0.75;
+}
+
 .v-application {
   ul.v-list {
     padding-left: 0;

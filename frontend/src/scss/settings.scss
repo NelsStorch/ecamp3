@@ -24,6 +24,7 @@
   $font-weights: (
     'light': 200,
     'regular': 400,
+    'medium': 500,
     'bold': 600,
   ),
   $typography: (
@@ -122,6 +123,8 @@
   $skeleton-loader-avatar-height: 100%,
   $skeleton-loader-avatar-margin: 0,
   $skeleton-loader-avatar-width: 100%,
+  $toolbar-title-font-weight: 500,
+  $toolbar-title-letter-spacing: 0.25px,
   $list-item-icon-margin-start: 20px,
   $list-item-icon-margin-end: 16px
 );
