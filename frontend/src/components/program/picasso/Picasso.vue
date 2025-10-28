@@ -26,6 +26,7 @@ Listing all given activity schedule entries in a calendar view.
       :type="type"
       :max-days="maxDays"
       :weekdays="[1, 2, 3, 4, 5, 6, 0]"
+      :weekday-format="() => null"
       color="primary"
       :event-ripple="false"
       @mousedown:event="vCalendarListeners.entryMouseDown"
