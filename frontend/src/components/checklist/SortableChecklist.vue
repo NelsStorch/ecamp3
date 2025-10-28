@@ -14,6 +14,7 @@
       :data-parent="parentKey"
       group="checklist"
       :sort="true"
+      :item-key="(element) => element"
       @start="dragStart"
       @end="dragStop"
     >

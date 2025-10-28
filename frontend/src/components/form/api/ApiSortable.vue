@@ -8,6 +8,7 @@
     :animation="200"
     :force-fallback="true"
     :disabled="disabled"
+    :item-key="(element) => element"
     @start="dragging = true"
     @end="dragging = false"
     @update="finishDrag"

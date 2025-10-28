@@ -16,6 +16,7 @@
       }"
       :swap-threshold="0.65"
       :inverted-swap-threshold="0.65"
+      :item-key="(element) => element"
       @start="startDrag"
       @add="finishDrag"
       @update="finishDrag"
