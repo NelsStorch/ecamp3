@@ -14,7 +14,7 @@
       variant="tonal"
       border="start"
       density="compact"
-      style="hypens: auto"
+      style="hyphens: auto"
       color="warning"
     >
       <div>
