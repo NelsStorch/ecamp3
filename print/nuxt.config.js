@@ -64,6 +64,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     basicAuthToken: null,
     browserWsEndpoint: 'ws://browserless:3000',
+    browserlessToken: '1234',
     printUrl: 'http://print:3003/print',
     internalApiRootUrl: 'http://api:3000/api',
     cookiePrefix: 'localhost_',

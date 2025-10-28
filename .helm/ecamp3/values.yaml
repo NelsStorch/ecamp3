@@ -112,10 +112,10 @@ browserless:
   enabled: true
   domain:
   image:
-    repository: "docker.io/browserless/chrome"
+    repository: "ghcr.io/browserless/chrome"
     pullPolicy: IfNotPresent
-    # renovate: datasource=docker depName=browserless/chrome
-    tag: "1.61.1-puppeteer-21.4.1"
+    # renovate: datasource=docker depName=ghcr.io/browserless/chrome
+    tag: "v2.34.1"
   service:
     type: ClusterIP
     port: 3000

@@ -6,6 +6,6 @@ metadata:
     {{- include "browserless.selectorLabels" . | nindent 4 }}
     {{- include "app.commonLabels" . | nindent 4 }}
 data:
-  MAX_CONCURRENT_SESSIONS: {{ .Values.browserless.maxConcurrentSessions | quote }}
-  CONNECTION_TIMEOUT: {{ .Values.browserless.connectionTimeout | quote }}
-  MAX_QUEUE_LENGTH: {{ .Values.browserless.maxQueueLength | quote }}
+  CONCURRENT: {{ .Values.browserless.maxConcurrentSessions | quote }}
+  TIMEOUT: {{ .Values.browserless.connectionTimeout | quote }}
+  QUEUED: {{ .Values.browserless.maxQueueLength | quote }}
