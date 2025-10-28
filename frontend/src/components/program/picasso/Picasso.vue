@@ -463,7 +463,7 @@ export default {
       rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
   }
 
-  :deep(.v-calendar-daily__pane, .v-calendar-daily__body) {
+  :deep(.v-calendar-daily__body) {
     overflow: visible;
   }
 
