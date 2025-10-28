@@ -7,8 +7,8 @@ const environment =
   env === 'app' || env === ''
     ? null
     : env.match('^pr[0-9]+')
-      ? `[${env.toUpperCase()}]`
-      : `[${env.substring(0, 1).toUpperCase() + env.substring(1)}]`
+      ? `[${env.toUpperCase()} old]`
+      : `[${env.substring(0, 1).toUpperCase() + env.substring(1)} old]`
 
 export const unhead = createHead()
 
