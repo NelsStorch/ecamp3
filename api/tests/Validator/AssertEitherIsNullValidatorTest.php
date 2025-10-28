@@ -85,13 +85,9 @@ class AssertEitherIsNullValidatorTest extends ConstraintValidatorTestCase {
 }
 
 class AssertEitherIsNullValidatorTestClass {
-    #[AssertEitherIsNull(other: 'b')]
-    public $a;
-
-    public $b;
-
-    public function __construct($a, $b) {
-        $this->a = $a;
-        $this->b = $b;
-    }
+    public function __construct(
+        #[AssertEitherIsNull(other: 'b')]
+        public $a,
+        public $b
+    ) {}
 }

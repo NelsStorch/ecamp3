@@ -140,7 +140,7 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
      */
     #[ApiProperty(example: '/categories/1a2b3c4d')]
     #[Groups(['create'])]
-    public Activity|Category|null $copyCategorySource;
+    public Activity|Category|null $copyCategorySource = null;
 
     /**
      * The id of the category that was used as a template for creating this category. Internal for now, is
@@ -257,25 +257,14 @@ class Category extends BaseEntity implements BelongsToCampInterface, CopyFromPro
     }
 
     public function getStyledNumber(int $num): string {
-        switch ($this->numberingStyle) {
-            case 'a':
-                return strtolower($this->getAlphaNum($num));
-
-            case 'A':
-                return strtoupper($this->getAlphaNum($num));
-
-            case 'i':
-                return strtolower($this->getRomanNum($num));
-
-            case 'I':
-                return strtoupper($this->getRomanNum($num));
-
-            case '-':
-                return '';
-
-            default:
-                return strval($num);
-        }
+        return match ($this->numberingStyle) {
+            'a' => strtolower($this->getAlphaNum($num)),
+            'A' => strtoupper($this->getAlphaNum($num)),
+            'i' => strtolower($this->getRomanNum($num)),
+            'I' => strtoupper($this->getRomanNum($num)),
+            '-' => '',
+            default => strval($num),
+        };
     }
 
     /**

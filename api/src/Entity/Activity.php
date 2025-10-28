@@ -144,7 +144,7 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
      */
     #[ApiProperty(example: '/activities/1a2b3c4d')]
     #[Groups(['create'])]
-    public ?Activity $copyActivitySource;
+    public ?Activity $copyActivitySource = null;
 
     /**
      * The current assigned ProgressLabel.

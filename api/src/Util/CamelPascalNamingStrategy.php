@@ -55,7 +55,7 @@ class CamelPascalNamingStrategy extends DefaultNamingStrategy {
      * @param string $className
      */
     private function unqualifiedClassName($className): string {
-        if (false !== strpos($className, '\\')) {
+        if (str_contains($className, '\\')) {
             return substr($className, strrpos($className, '\\') + 1);
         }
 

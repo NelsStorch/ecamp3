@@ -48,7 +48,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     private MockObject|PropertyAccessorInterface $propertyAccessor;
     private EntityManagerInterface|MockObject $entityManager;
 
-    private DateFilter|SearchFilterInterface|null $filterInstance;
+    private DateFilter|SearchFilterInterface|null $filterInstance = null;
 
     protected function setUp(): void {
         $filterLocatorMock = $this->createMock(ServiceLocator::class);
@@ -534,7 +534,7 @@ class ParentEntity {
     private Collection $children;
 
     #[ORM\OneToOne(targetEntity: Child::class)]
-    private ?Child $firstBorn;
+    private ?Child $firstBorn = null;
 
     #[SerializedName('childrenWithSerializedName')]
     #[ORM\OneToMany(targetEntity: Child::class, mappedBy: 'parent')]
@@ -553,5 +553,5 @@ class ParentEntity {
 #[ApiFilter(SearchFilter::class, properties: ['parent'])]
 class Child {
     #[ORM\ManyToOne(targetEntity: ParentEntity::class, inversedBy: 'children')]
-    private ?ParentEntity $parent;
+    private ?ParentEntity $parent = null;
 }

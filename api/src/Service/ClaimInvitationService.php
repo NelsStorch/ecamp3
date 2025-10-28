@@ -46,7 +46,7 @@ class ClaimInvitationService {
                 $invitation->user = $user;
                 $this->em->persist($invitation);
                 $this->em->flush();
-            } catch (UniqueConstraintViolationException $e) {
+            } catch (UniqueConstraintViolationException) {
                 // Even though we already handle this case above, it could still happen due
                 // to race conditions. Just ignore it.
                 $this->em->clear();

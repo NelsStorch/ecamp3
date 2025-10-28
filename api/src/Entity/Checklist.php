@@ -96,7 +96,7 @@ class Checklist extends BaseEntity implements BelongsToCampInterface, CopyFromPr
      */
     #[ApiProperty(example: '/checklists/1a2b3c4d')]
     #[Groups(['create'])]
-    public ?Checklist $copyChecklistSource;
+    public ?Checklist $copyChecklistSource = null;
 
     /**
      * All ChecklistItems that belong to this Checklist.

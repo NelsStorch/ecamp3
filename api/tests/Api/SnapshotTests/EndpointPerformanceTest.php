@@ -38,7 +38,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         $collectionEndpoints = self::getCollectionEndpoints();
         foreach ($collectionEndpoints as $collectionEndpoint) {
             if ('/users' !== $collectionEndpoint && !str_contains($collectionEndpoint, '/content_node')) {
-                list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor($collectionEndpoint);
+                [$statusCode, $queryCount, $executionTimeSeconds] = $this->measurePerformanceFor($collectionEndpoint);
                 $responseCodes[$collectionEndpoint] = $statusCode;
                 $numberOfQueries[$collectionEndpoint] = $queryCount;
                 $queryExecutionTime[$collectionEndpoint] = $executionTimeSeconds;
@@ -46,7 +46,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
 
             if (!str_contains($collectionEndpoint, '/content_node')) {
                 $fixtureFor = self::getFixtureFor($collectionEndpoint);
-                list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor("{$collectionEndpoint}/{$fixtureFor->getId()}");
+                [$statusCode, $queryCount, $executionTimeSeconds] = $this->measurePerformanceFor("{$collectionEndpoint}/{$fixtureFor->getId()}");
                 $responseCodes["{$collectionEndpoint}/item"] = $statusCode;
                 $numberOfQueries["{$collectionEndpoint}/item"] = $queryCount;
                 $queryExecutionTime["{$collectionEndpoint}/item"] = $executionTimeSeconds;
@@ -54,14 +54,14 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         }
 
         foreach ($this->getPerformanceCriticalUrls() as $url => $id) {
-            list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor($url.$id);
+            [$statusCode, $queryCount, $executionTimeSeconds] = $this->measurePerformanceFor($url.$id);
             $responseCodes[$url] = $statusCode;
             $numberOfQueries[$url] = $queryCount;
             $queryExecutionTime[$url] = $executionTimeSeconds;
         }
 
         foreach ($this->getSubresourceUrls() as $url => $id) {
-            list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor(preg_replace('/\{id}/', $id, $url));
+            [$statusCode, $queryCount, $executionTimeSeconds] = $this->measurePerformanceFor(preg_replace('/\{id}/', $id, $url));
             $responseCodes[$url] = $statusCode;
             $numberOfQueries[$url] = $queryCount;
             $queryExecutionTime[$url] = $executionTimeSeconds;
@@ -94,7 +94,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
         if ('test' !== $this->getEnvironment()) {
             self::markTestSkipped(__FUNCTION__.' is only run in test environment, not in '.$this->getEnvironment());
         }
-        list($statusCode, $queryCount, $executionTimeSeconds)
+        [$statusCode, $queryCount, $executionTimeSeconds]
             = $this->measurePerformanceFor($collectionEndpoint.'?camp=/camps/'.self::getFixtureFor('/camps')->getId());
 
         assertThat($statusCode, equalTo(200));
@@ -129,7 +129,7 @@ class EndpointPerformanceTest extends ECampApiTestCase {
             self::markTestSkipped("{$collectionEndpoint} does not support get item endpoint");
         }
         $fixtureFor = self::getFixtureFor($collectionEndpoint);
-        list($statusCode, $queryCount, $executionTimeSeconds) = $this->measurePerformanceFor("{$collectionEndpoint}/{$fixtureFor->getId()}");
+        [$statusCode, $queryCount, $executionTimeSeconds] = $this->measurePerformanceFor("{$collectionEndpoint}/{$fixtureFor->getId()}");
 
         assertThat($statusCode, equalTo(200));
 

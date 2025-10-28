@@ -29,34 +29,17 @@ class UriTemplateNormalizerTest extends TestCase {
         $englishInflector = new EnglishInflector();
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator->method('generate')->willReturnCallback(function (string $arg): string {
-            switch ($arg) {
-                case 'authentication_token':
-                    return '/authentication_token';
-
-                case 'connect_google_start':
-                    return '/auth/google';
-
-                case 'connect_pbsmidata_start':
-                    return '/auth/pbsmidata';
-
-                case 'connect_cevidb_start':
-                    return '/auth/cevidb';
-
-                case 'connect_jubladb_start':
-                    return '/auth/jubladb';
-
-                case 'api_refresh_token':
-                    return '/token/refresh';
-
-                case '_api_/auth/resend_activation{._format}_post':
-                    return '/auth/resend_activation';
-
-                case '_api_/auth/reset_password{._format}_post':
-                    return '/auth/reset_password';
-
-                default:
-                    return null;
-            }
+            return match ($arg) {
+                'authentication_token' => '/authentication_token',
+                'connect_google_start' => '/auth/google',
+                'connect_pbsmidata_start' => '/auth/pbsmidata',
+                'connect_cevidb_start' => '/auth/cevidb',
+                'connect_jubladb_start' => '/auth/jubladb',
+                'api_refresh_token' => '/token/refresh',
+                '_api_/auth/resend_activation{._format}_post' => '/auth/resend_activation',
+                '_api_/auth/reset_password{._format}_post' => '/auth/reset_password',
+                default => null,
+            };
         });
 
         $this->uriTemplateNormalizer = new UriTemplateNormalizer(

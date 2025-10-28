@@ -223,7 +223,7 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
             $attributes = $method->getAttributes(RelatedCollectionLink::class);
 
             return ($attributes[0] ?? null)?->newInstance();
-        } catch (\ReflectionException $e) {
+        } catch (\ReflectionException) {
             return null;
         }
     }
