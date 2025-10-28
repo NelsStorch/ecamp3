@@ -80,10 +80,11 @@ export default {
       )
     },
     resultCountLabel() {
-      return this.$t('components.print.config.dialogScheduleEntryFilter.resultCount', 1, {
-        filtered: this.filteredCount,
-        total: this.filterFn({}).length,
-      })
+      return this.$t(
+        'components.print.config.dialogScheduleEntryFilter.resultCount',
+        { filtered: this.filteredCount, total: this.filterFn({}).length },
+        1
+      )
     },
     anyFilter() {
       return (

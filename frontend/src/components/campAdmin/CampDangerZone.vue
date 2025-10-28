@@ -58,9 +58,11 @@ Critical operations on camp
                   </p>
                   <label>
                     {{
-                      $t('components.campAdmin.campDangerZone.deleteCamp.label', 0, {
-                        campTitle: camp.title,
-                      })
+                      $t(
+                        'components.campAdmin.campDangerZone.deleteCamp.label',
+                        { campTitle: camp.title },
+                        0
+                      )
                     }}
                     <e-text-field v-model="promptText" />
                   </label>

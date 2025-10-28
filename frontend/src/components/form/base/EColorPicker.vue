@@ -47,9 +47,11 @@ Displays a field as a color picker (can be used with v-model)
                 :aria-label="
                   pickerOpen
                     ? $t('components.form.base.eColorPicker.closePicker')
-                    : $t('components.form.base.eColorPicker.openPicker', 0, {
-                        label: labelOrEntityFieldLabel,
-                      })
+                    : $t(
+                        'components.form.base.eColorPicker.openPicker',
+                        { label: labelOrEntityFieldLabel },
+                        0
+                      )
                 "
                 aria-haspopup="true"
                 :aria-expanded="pickerOpen ? 'true' : 'false'"

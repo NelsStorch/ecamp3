@@ -4,7 +4,7 @@
     :loading="loading"
     :error="error"
     icon="mdi-account-edit"
-    :title="$t('components.collaborator.collaboratorEdit.title', 2, { user: name })"
+    :title="$t('components.collaborator.collaboratorEdit.title', { user: name }, 2)"
     :submit-action="update"
     :submit-label="$t('global.button.save')"
     submit-color="success"
@@ -21,11 +21,7 @@
           disabled,
         }"
       >
-        {{
-          $t('components.collaborator.collaboratorEdit.delete', 0, {
-            name: name,
-          })
-        }}
+        {{ $t('components.collaborator.collaboratorEdit.delete', { name: name }, 0) }}
       </PromptEntityDelete>
       <IconButton
         v-if="collaborator.status === 'invited'"

@@ -298,7 +298,7 @@ export default {
       await navigator.clipboard.writeText(url)
 
       this.toast.info(
-        this.$t('global.toast.copied', null, { source: this.activityName }),
+        this.$t('global.toast.copied', { source: this.activityName }, null),
         {
           timeout: 2000,
         }

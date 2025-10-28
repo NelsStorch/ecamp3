@@ -223,7 +223,7 @@ export default {
       await navigator.clipboard.writeText(url)
 
       this.toast.info(
-        this.$t('global.toast.copied', null, { source: this.category.name }),
+        this.$t('global.toast.copied', { source: this.category.name }, null),
         {
           timeout: 2000,
         }

@@ -3,7 +3,7 @@
     <v-card-text v-if="invitations.items.length === 0">
       <p v-if="authUser">
         {{
-          $t('components.personalInvitations.personalInvitations.noOpenInvitations', 0, {
+          $t('components.personalInvitations.personalInvitations.noOpenInvitations', {
             email: authUser.profile().email,
           })
         }}

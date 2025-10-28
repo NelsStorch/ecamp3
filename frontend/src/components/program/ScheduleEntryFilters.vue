@@ -225,10 +225,14 @@ export default {
         this.camp.periods().items.flatMap((period) =>
           period.days().items.map((day) => ({
             ...day,
-            label: this.$t('components.program.scheduleEntryFilters.dayLabel', 0, {
-              dayNumber: day.number,
-              date: this.$date.utc(day.start).format('dd. DD. MMM'),
-            }),
+            label: this.$t(
+              'components.program.scheduleEntryFilters.dayLabel',
+              {
+                dayNumber: day.number,
+                date: this.$date.utc(day.start).format('dd. DD. MMM'),
+              },
+              0
+            ),
             resultCount: this.resultCountWithModifiedFilter('day', day._meta.self),
           }))
         ),

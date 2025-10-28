@@ -28,9 +28,11 @@
           />
         </template>
         {{
-          $t('components.checklist.checklistItemEdit.delete', 0, {
-            text: checklistItem.text,
-          })
+          $t(
+            'components.checklist.checklistItemEdit.delete',
+            { text: checklistItem.text },
+            0
+          )
         }}
       </PromptEntityDelete>
     </template>

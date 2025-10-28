@@ -11,10 +11,11 @@
         </v-list-item-title>
         <v-list-item-subtitle v-if="camp.isShared" class="pb-1 whitespace-normal">
           {{
-            $t('components.campAdmin.campSharingSettings.sharedSince', 1, {
-              sharedSince,
-              sharedBy,
-            })
+            $t(
+              'components.campAdmin.campSharingSettings.sharedSince',
+              { sharedSince, sharedBy },
+              1
+            )
           }}
         </v-list-item-subtitle>
         <template #append>
@@ -143,7 +144,7 @@ export default {
       await navigator.clipboard.writeText(this.campUrl)
 
       this.toast.info(
-        this.$t('global.toast.copied', null, {
+        this.$t('global.toast.copied', {
           source: this.$t('components.campAdmin.campSharingSettings.publicCampUrl'),
         }),
         {

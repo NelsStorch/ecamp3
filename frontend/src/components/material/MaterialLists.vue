@@ -25,9 +25,11 @@
       </v-list-item-title>
       <v-list-item-subtitle
         >{{
-          $t('components.material.materialLists.materialsCount', unassignedCount, {
-            count: unassignedCount,
-          })
+          $t(
+            'components.material.materialLists.materialsCount',
+            { count: unassignedCount },
+            unassignedCount
+          )
         }}
       </v-list-item-subtitle>
       <template #append>

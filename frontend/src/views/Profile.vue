@@ -111,7 +111,7 @@ export default {
     availableLocales() {
       return VueI18n.global.availableLocales.map((l) => ({
         value: l,
-        text: this.$t('global.language', 1, { locale: l }),
+        text: this.$t('global.language', { locale: l }, 1),
       }))
     },
   },

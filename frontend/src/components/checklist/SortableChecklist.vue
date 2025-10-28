@@ -47,7 +47,7 @@
           >
           <v-list-item-content class="py-0">
             <v-list-item-title>{{
-              $t('components.checklist.sortableChecklist.add', null, {
+              $t('components.checklist.sortableChecklist.add', {
                 parent: parent?.text ?? checklist.name,
               })
             }}</v-list-item-title>
