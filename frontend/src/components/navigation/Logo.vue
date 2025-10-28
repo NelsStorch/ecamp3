@@ -27,6 +27,10 @@ export default {
 </script>
 
 <style scoped>
+.e-logo-text {
+  letter-spacing: 0.25px;
+}
+
 .e-logo:hover .e-logo-text {
   display: inline !important;
 }
