@@ -37,12 +37,10 @@
       </v-list-item>
     </template>
     <template v-else>
-      <v-list-group v-for="invitation in invitations.items" :key="invitation._meta.self">
-        <template #activator="{ props }">
-          <v-list-item v-bind="props" :title="invitation.campTitle"></v-list-item>
-        </template>
-        <v-list-item>
-          <v-list-item-action>
+      <template v-for="invitation in invitations.items" :key="invitation._meta.self">
+        <v-list-item lines="two">
+          <v-list-item-title>{{ invitation.campTitle }}</v-list-item-title>
+          <v-list-item-action class="mt-4">
             <DialogPersonalInvitationReject
               :entity="invitation"
               :camp-title="invitation.campTitle"
@@ -60,7 +58,8 @@
             </v-btn>
           </v-list-item-action>
         </v-list-item>
-      </v-list-group>
+        <v-divider></v-divider>
+      </template>
     </template>
   </div>
 </template>

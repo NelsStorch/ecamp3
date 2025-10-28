@@ -6,7 +6,7 @@
       toolbar
     >
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only />
       </template>
       <v-list class="py-0">
         <template v-if="loading">
