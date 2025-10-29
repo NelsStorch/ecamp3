@@ -63,6 +63,7 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
      *
      * @throws \Exception
      */
+    #[\Override]
     public function redirect(array $scopes = [], array $options = []): RedirectResponse {
         $state = bin2hex(random_bytes(16));
         $now = time();
@@ -107,6 +108,7 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
      *
      * @throws IdentityProviderException
      */
+    #[\Override]
     public function getAccessToken(array $options = []): AccessTokenInterface {
         $jwt = $this->getCurrentRequest()->cookies->get(static::getCookieName($this->cookiePrefix));
         if (null === $jwt) {

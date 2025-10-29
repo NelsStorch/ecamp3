@@ -16,6 +16,7 @@ class ContentNodePersistProcessor extends AbstractPersistProcessor {
     /**
      * @param T $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): ContentNode {
         /** @var ContentNode $data */
         $data = parent::onBefore($data, $operation, $uriVariables, $context);

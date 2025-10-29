@@ -10,6 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 require_once __DIR__.'/helpers.php';
 
 final class Version202210081114PMPMPM extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -26,5 +27,6 @@ final class Version202210081114PMPMPM extends AbstractMigration {
         // END PHP CODE
     }
 
+    #[\Override]
     public function down(Schema $schema): void {}
 }

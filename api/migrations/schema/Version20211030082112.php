@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20211030082112 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -21,6 +22,7 @@ final class Version20211030082112 extends AbstractMigration {
         $this->addSql('ALTER TABLE content_node ADD CONSTRAINT FK_481D058010EE4CEE FOREIGN KEY (parentId) REFERENCES content_node (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE content_node DROP CONSTRAINT fk_481d058010ee4cee');

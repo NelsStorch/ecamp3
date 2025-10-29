@@ -28,6 +28,7 @@ class UserCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param User $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): User {
         $resp = $this->reCaptcha->verify($data->recaptchaToken);
         if (!$resp->isSuccess()) {

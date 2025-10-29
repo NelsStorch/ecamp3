@@ -29,6 +29,7 @@ class CampCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param Camp $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): BaseEntity {
         /** @var User $user */
         $user = $this->security->getUser();

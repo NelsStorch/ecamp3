@@ -28,6 +28,7 @@ final class VarnishProxyClient extends Varnish {
         }
     }
 
+    #[\Override]
     public function ban(array $headers): static {
         if ($this->isCacheEnabled()) {
             return parent::ban($headers);
@@ -36,6 +37,7 @@ final class VarnishProxyClient extends Varnish {
         return $this;
     }
 
+    #[\Override]
     public function banPath($path, $contentType = null, $hosts = null): static {
         if ($this->isCacheEnabled()) {
             return parent::banPath($path, $contentType, $hosts);
@@ -44,6 +46,7 @@ final class VarnishProxyClient extends Varnish {
         return $this;
     }
 
+    #[\Override]
     public function invalidateTags(array $tags): static {
         if ($this->isCacheEnabled()) {
             return parent::invalidateTags($tags);
@@ -52,6 +55,7 @@ final class VarnishProxyClient extends Varnish {
         return $this;
     }
 
+    #[\Override]
     public function purge($url, array $headers = []): static {
         if ($this->isCacheEnabled()) {
             return parent::purge($url, $headers);
@@ -60,6 +64,7 @@ final class VarnishProxyClient extends Varnish {
         return $this;
     }
 
+    #[\Override]
     public function refresh($url, array $headers = []): static {
         if ($this->isCacheEnabled()) {
             return parent::refresh(${$url}, $headers);
@@ -68,6 +73,7 @@ final class VarnishProxyClient extends Varnish {
         return $this;
     }
 
+    #[\Override]
     public function flush(): int {
         if ($this->isCacheEnabled()) {
             return parent::flush();

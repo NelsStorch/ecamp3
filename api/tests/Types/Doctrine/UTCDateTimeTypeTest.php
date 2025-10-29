@@ -13,6 +13,7 @@ use Doctrine\DBAL\Types\ConversionException;
  * @internal
  */
 class UTCDateTimeTypeTest extends BaseDateTypeTestCase {
+    #[\Override]
     protected function setUp(): void {
         $this->type = new UTCDateTimeType();
 

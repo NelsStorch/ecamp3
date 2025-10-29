@@ -18,7 +18,7 @@ class MaterialItemDenormalizer implements DenormalizerInterface, DenormalizerAwa
     use DenormalizerAwareTrait;
     use NoCachingSupportTrait;
 
-    private const ALREADY_CALLED = 'MATERIAL_ITEM_DENORMALIZER_ALREADY_CALLED';
+    private const string ALREADY_CALLED = 'MATERIAL_ITEM_DENORMALIZER_ALREADY_CALLED';
 
     public function __construct(public RequestStack $requestStack) {}
 

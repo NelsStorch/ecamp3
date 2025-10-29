@@ -8,6 +8,7 @@ use App\Tests\Api\ContentNodes\UpdateContentNodeTestCase;
  * @internal
  */
 class UpdateColumnLayoutTest extends UpdateContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

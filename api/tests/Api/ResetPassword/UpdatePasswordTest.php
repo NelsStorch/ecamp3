@@ -23,6 +23,7 @@ class UpdatePasswordTest extends ECampApiTestCase {
     private ?string $passwordResetKey;
     private $client;
 
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
         $this->client = static::createBasicClient();

@@ -181,6 +181,7 @@ class MyEntityPersistProcessor extends AbstractPersistProcessor {
         parent::__construct($decorated, $propertyChangeListeners);
     }
 
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []) {
         // @noinspection PhpMethodParametersCountMismatchInspection
         return $this->onBefore->call($data, $operation, $uriVariables, $context);

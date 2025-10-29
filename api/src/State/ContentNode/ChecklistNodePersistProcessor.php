@@ -18,6 +18,7 @@ class ChecklistNodePersistProcessor extends ContentNodePersistProcessor {
         parent::__construct($decorated);
     }
 
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): ChecklistNode {
         /** @var ChecklistNode $data */
         $data = parent::onBefore($data, $operation, $uriVariables, $context);

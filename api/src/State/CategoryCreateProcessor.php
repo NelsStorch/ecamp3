@@ -25,6 +25,7 @@ class CategoryCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param Category $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Category {
         // TODO implement actual prototype cloning and strategy classes, this is just a dummy implementation to
         //      fill the non-nullable field for Doctrine

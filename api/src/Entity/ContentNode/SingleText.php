@@ -79,6 +79,7 @@ class SingleText extends ContentNode {
     #[Groups(['read', 'write'])]
     #[AssertJsonSchema(schema: self::JSON_SCHEMA)]
     #[Assert\NotNull]
+    #[\Override]
     public function getData(): ?array {
         return $this->data;
     }

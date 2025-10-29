@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\TypeInfo\Type;
 
 final class ContentNodePeriodFilter extends AbstractFilter {
-    public const PERIOD_QUERY_NAME = 'period';
+    public const string PERIOD_QUERY_NAME = 'period';
 
     public function __construct(
         private readonly IriConverterInterface $iriConverter,

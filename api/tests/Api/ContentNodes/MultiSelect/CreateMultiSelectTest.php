@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\CreateContentNodeTestCase;
  * @internal
  */
 class CreateMultiSelectTest extends CreateContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 
@@ -56,6 +57,7 @@ class CreateMultiSelectTest extends CreateContentNodeTestCase {
         ]);
     }
 
+    #[\Override]
     protected function getExampleWritePayload($attributes = [], $except = []) {
         return parent::getExampleWritePayload(
             array_merge([

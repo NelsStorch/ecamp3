@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\CreateContentNodeTestCase;
  * @internal
  */
 class CreateColumnLayoutTest extends CreateContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 
@@ -82,6 +83,7 @@ class CreateColumnLayoutTest extends CreateContentNodeTestCase {
     /**
      * payload set up.
      */
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return parent::getExampleWritePayload(
             array_merge(

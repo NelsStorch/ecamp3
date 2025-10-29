@@ -21,6 +21,7 @@ class SingleTextPersistProcessor extends ContentNodePersistProcessor {
     /**
      * @param SingleText $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): SingleText {
         $data = parent::onBefore($data, $operation, $uriVariables, $context);
 

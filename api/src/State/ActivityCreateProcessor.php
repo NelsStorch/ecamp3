@@ -25,6 +25,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param Activity $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Activity {
         // @phpstan-ignore nullsafe.neverNull
         if (!isset($data->category?->rootContentNode)) {

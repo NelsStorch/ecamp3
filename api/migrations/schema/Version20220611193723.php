@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220611193723 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'ContentNode: Change inheritance type from JOINED to SINGLE_TABLE';
     }
@@ -80,6 +81,7 @@ final class Version20220611193723 extends AbstractMigration {
         $this->addSql('ALTER TABLE material_item ADD CONSTRAINT FK_4B73482BD2115263 FOREIGN KEY (materialNodeId) REFERENCES content_node (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
 

@@ -10,6 +10,7 @@ use App\Tests\Api\ECampApiTestCase;
  * @internal
  */
 class UpdateRootColumnLayoutTest extends ECampApiTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

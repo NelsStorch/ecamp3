@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20240928105306 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'checklistitem_checklistid_parentid_position_unique deferrable';
     }
@@ -31,6 +32,7 @@ final class Version20240928105306 extends AbstractMigration {
         );
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql(
             <<<'EOF'

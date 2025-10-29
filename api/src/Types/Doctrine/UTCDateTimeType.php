@@ -34,6 +34,7 @@ class UTCDateTimeType extends DateTimeType {
      *
      * @template T
      */
+    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string {
         if (null === $value) {
             return null;
@@ -67,6 +68,7 @@ class UTCDateTimeType extends DateTimeType {
      *
      * @template T
      */
+    #[\Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?\DateTime {
         if (null === $value || $value instanceof \DateTime) {
             return $value;

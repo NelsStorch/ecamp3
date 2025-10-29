@@ -17,7 +17,7 @@ use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 final class CampCollaboratorFilter extends AbstractFilter {
-    public const QUERY_PARAM_NAME = 'campCollaborator';
+    public const string QUERY_PARAM_NAME = 'campCollaborator';
 
     public function __construct(
         private readonly IriConverterInterface $iriConverter,

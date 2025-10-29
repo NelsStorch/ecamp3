@@ -823,6 +823,7 @@ class CreateCampTest extends ECampApiTestCase {
         assertThat($createArray, CompatibleHalResponse::isHalCompatibleWith($getItemResponse->toArray()));
     }
 
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return $this->getExamplePayload(Camp::class, Post::class, $attributes, ['campPrototype'], $except);
     }

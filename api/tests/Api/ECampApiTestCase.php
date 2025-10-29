@@ -59,6 +59,7 @@ abstract class ECampApiTestCase extends ApiTestCase {
         $this->currentTimezone = date_default_timezone_get();
     }
 
+    #[\Override]
     protected function tearDown(): void {
         date_default_timezone_set($this->currentTimezone);
 

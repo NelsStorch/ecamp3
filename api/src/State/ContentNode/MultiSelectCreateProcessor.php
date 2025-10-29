@@ -12,6 +12,7 @@ class MultiSelectCreateProcessor extends ContentNodePersistProcessor {
     /**
      * @param MultiSelect $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): MultiSelect {
         $data = parent::onBefore($data, $operation, $uriVariables, $context);
 

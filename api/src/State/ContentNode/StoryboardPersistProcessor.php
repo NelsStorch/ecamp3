@@ -25,6 +25,7 @@ class StoryboardPersistProcessor extends ContentNodePersistProcessor {
     /**
      * @param Storyboard $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Storyboard {
         $data = parent::onBefore($data, $operation, $uriVariables, $context);
 

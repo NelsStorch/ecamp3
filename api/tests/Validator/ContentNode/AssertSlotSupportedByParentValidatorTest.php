@@ -109,6 +109,7 @@ class AssertSlotSupportedByParentValidatorTest extends ConstraintValidatorTestCa
         $this->validator->validate(null, new AssertSlotSupportedByParent());
     }
 
+    #[\Override]
     protected function createContext(): ExecutionContext {
         $this->parent = new ColumnLayout();
         $this->parent->setData([

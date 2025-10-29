@@ -98,6 +98,7 @@ class ChecklistNode extends ContentNode {
      * @param ChecklistNode $prototype
      * @param EntityMap     $entityMap
      */
+    #[\Override]
     public function copyFromPrototype($prototype, $entityMap): void {
         parent::copyFromPrototype($prototype, $entityMap);
 

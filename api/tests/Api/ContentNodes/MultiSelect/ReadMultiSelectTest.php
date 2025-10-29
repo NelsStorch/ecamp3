@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\ReadContentNodeTestCase;
  * @internal
  */
 class ReadMultiSelectTest extends ReadContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

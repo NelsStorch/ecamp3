@@ -17,6 +17,7 @@ class CreateRootColumnLayoutTest extends ECampApiTestCase {
 
     protected ContentNode $defaultParent;
 
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 
@@ -80,6 +81,7 @@ class CreateRootColumnLayoutTest extends ECampApiTestCase {
     /**
      * payload set up.
      */
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return parent::getExampleWritePayload(
             array_merge(

@@ -70,6 +70,7 @@ class MaterialNode extends ContentNode {
     #[ApiProperty(example: null)]
     #[Groups(['read', 'write'])]
     #[Assert\IsNull]
+    #[\Override]
     public function getData(): ?array {
         return $this->data;
     }
@@ -104,6 +105,7 @@ class MaterialNode extends ContentNode {
      * @param MaterialNode $prototype
      * @param EntityMap    $entityMap
      */
+    #[\Override]
     public function copyFromPrototype($prototype, $entityMap): void {
         parent::copyFromPrototype($prototype, $entityMap);
 

@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20230330160108 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -26,6 +27,7 @@ final class Version20230330160108 extends AbstractMigration {
         $this->addSql('ALTER TABLE camp ADD printYSLogoOnPicasso BOOLEAN DEFAULT false NOT NULL');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');

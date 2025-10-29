@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\UpdateContentNodeTestCase;
  * @internal
  */
 class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

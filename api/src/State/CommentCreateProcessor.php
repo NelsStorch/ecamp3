@@ -20,6 +20,7 @@ class CommentCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param Comment $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Comment {
         /** @var User $user */
         $user = $this->security->getUser();

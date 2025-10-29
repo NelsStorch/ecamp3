@@ -8,6 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 final class Version20240414092957 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add View view_user_camps to fast resolve visible camps';
     }
@@ -29,6 +30,7 @@ final class Version20240414092957 extends AbstractMigration {
         );
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP VIEW public.view_user_camps');

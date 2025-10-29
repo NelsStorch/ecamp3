@@ -39,6 +39,7 @@ class ProfileUpdateProcessor extends AbstractPersistProcessor {
     /**
      * @param Profile $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Profile {
         $this->emailAddressVerificationPerformed = false;
 

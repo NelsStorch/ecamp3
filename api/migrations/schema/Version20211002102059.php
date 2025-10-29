@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20211002102059 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -140,6 +141,7 @@ final class Version20211002102059 extends AbstractMigration {
         $this->addSql('ALTER TABLE schedule_entry ADD CONSTRAINT FK_D7785D2C1335E2FC FOREIGN KEY (activityId) REFERENCES activity (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE activity DROP CONSTRAINT FK_AC74095ABF396750');

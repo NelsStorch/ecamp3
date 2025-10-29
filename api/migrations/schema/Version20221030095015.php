@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20221030095015 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add unique constraint on contentnode (parentid, slot, position)';
     }
@@ -26,6 +27,7 @@ final class Version20221030095015 extends AbstractMigration {
         );
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql(
             <<<'EOF'
