@@ -27,13 +27,13 @@ class CampCollaborationUpdateProcessor extends AbstractPersistProcessor {
     ) {
         $statusChangeListener = PropertyChangeListener::of(
             extractProperty: fn (CampCollaboration $data) => $data->status,
-            beforeAction: fn (CampCollaboration $data) => $this->onBeforeStatusChange($data),
-            afterAction: fn (CampCollaboration $data) => $this->onAfterStatusChange($data)
+            beforeAction: $this->onBeforeStatusChange(...),
+            afterAction: $this->onAfterStatusChange(...)
         );
 
         $roleChangeListener = PropertyChangeListener::of(
             extractProperty: fn (CampCollaboration $data) => $data->role,
-            beforeAction: fn (CampCollaboration $data, CampCollaboration $previous) => $this->onBeforeRoleChange($data, $previous),
+            beforeAction: $this->onBeforeRoleChange(...),
         );
 
         parent::__construct(

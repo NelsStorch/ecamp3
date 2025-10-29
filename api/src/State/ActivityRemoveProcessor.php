@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class ActivityRemoveProcessor extends AbstractRemoveProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private EntityManagerInterface $em,
+        private readonly EntityManagerInterface $em,
     ) {
         parent::__construct($decorated);
     }

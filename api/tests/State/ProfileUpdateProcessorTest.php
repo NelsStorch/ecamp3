@@ -56,7 +56,7 @@ class ProfileUpdateProcessorTest extends TestCase {
         // given
         $this->pwHasher->expects(self::once())
             ->method('hash')
-            ->willReturnCallback(fn ($raw) => md5($raw))
+            ->willReturnCallback(md5(...))
         ;
         $this->profile->newEmail = 'new@mail.com';
 

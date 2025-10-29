@@ -13,7 +13,7 @@ use App\InputFilter\CleanHTMLFilter;
 class SingleTextPersistProcessor extends ContentNodePersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private CleanHTMLFilter $cleanHTMLFilter,
+        private readonly CleanHTMLFilter $cleanHTMLFilter,
     ) {
         parent::__construct($decorated);
     }

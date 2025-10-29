@@ -12,9 +12,9 @@ use FOS\HttpCache\ProxyClient\Varnish;
  * Implementing FOS\HttpCache\ProxyClient\Noop, if caching is disabled or no Varnish URL is set.
  */
 final class VarnishProxyClient extends Varnish {
-    private bool $apiCacheEnabled;
+    private readonly bool $apiCacheEnabled;
 
-    public function __construct(string $apiCacheEnabled, private string $varnishApiUrl) {
+    public function __construct(string $apiCacheEnabled, private readonly string $varnishApiUrl) {
         $this->apiCacheEnabled = filter_var($apiCacheEnabled, FILTER_VALIDATE_BOOLEAN);
 
         if ($this->isCacheEnabled()) {

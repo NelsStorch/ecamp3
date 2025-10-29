@@ -9,7 +9,7 @@ use ApiPlatform\OpenApi\OpenApi;
 /**
  * Decorates the OpenApi factory to add API docs for the oauth endpoints.
  */
-final class OAuthDecorator implements OpenApiFactoryInterface {
+final readonly class OAuthDecorator implements OpenApiFactoryInterface {
     public function __construct(private OpenApiFactoryInterface $decorated) {}
 
     public function __invoke(array $context = []): OpenApi {

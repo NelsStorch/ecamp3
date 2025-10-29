@@ -35,12 +35,12 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
 
     public function __construct(
         AbstractProvider $provider,
-        private RequestStack $requestStack,
-        private string $cookiePrefix,
-        private string $appEnv,
-        private JWTEncoderInterface $jwtEncoder,
-        private EntityManagerInterface $entityManager,
-        private OAuthStateRepository $stateRepository,
+        private readonly RequestStack $requestStack,
+        private readonly string $cookiePrefix,
+        private readonly string $appEnv,
+        private readonly JWTEncoderInterface $jwtEncoder,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly OAuthStateRepository $stateRepository,
     ) {
         parent::__construct($provider, $requestStack);
 

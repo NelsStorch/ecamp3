@@ -20,8 +20,8 @@ use Symfony\Bundle\SecurityBundle\Security;
 class CampCreateProcessor extends AbstractPersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private Security $security,
-        private EntityManagerInterface $em
+        private readonly Security $security,
+        private readonly EntityManagerInterface $em
     ) {
         parent::__construct($decorated);
     }

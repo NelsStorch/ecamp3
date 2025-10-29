@@ -37,8 +37,8 @@ class AbstractPersistProcessorTest extends TestCase {
 
         $this->propertyChangeListener = PropertyChangeListener::of(
             extractProperty: fn ($data) => $data->name,
-            beforeAction: fn ($data) => $this->closure->call($data),
-            afterAction: fn ($data) => $this->closure->call($data),
+            beforeAction: $this->closure->call(...),
+            afterAction: $this->closure->call(...),
         );
 
         $this->onBefore = $this->createMock(MockableClosure::class);
@@ -98,8 +98,8 @@ class AbstractPersistProcessorTest extends TestCase {
         $context = ['previous_data' => null];
         $this->propertyChangeListener = PropertyChangeListener::of(
             extractProperty: fn ($data) => $data->name,
-            beforeAction: fn ($data) => $this->closure->call($data),
-            afterAction: fn ($data) => $this->closure->call($data),
+            beforeAction: $this->closure->call(...),
+            afterAction: $this->closure->call(...),
         );
         $this->closure->expects(self::never())->method('call');
 
@@ -115,7 +115,7 @@ class AbstractPersistProcessorTest extends TestCase {
         $context = ['previous_data' => $toPersist];
         $this->propertyChangeListener = PropertyChangeListener::of(
             extractProperty: fn ($data) => $data->name,
-            afterAction: fn ($data) => $this->closure->call($data)
+            afterAction: $this->closure->call(...)
         );
         $this->closure->expects(self::never())->method('call');
 
@@ -133,8 +133,8 @@ class AbstractPersistProcessorTest extends TestCase {
         $context = ['previous_data' => $toPersist];
         $this->propertyChangeListener = PropertyChangeListener::of(
             extractProperty: fn ($data) => $data->name,
-            beforeAction: fn ($data) => $this->closure->call($data),
-            afterAction: fn ($data) => $this->closure->call($data),
+            beforeAction: $this->closure->call(...),
+            afterAction: $this->closure->call(...),
         );
         $this->closure->expects(self::never())->method('call');
 
@@ -154,8 +154,8 @@ class AbstractPersistProcessorTest extends TestCase {
 
         $this->propertyChangeListener = PropertyChangeListener::of(
             extractProperty: fn ($data) => $data->name,
-            beforeAction: fn ($data) => $this->closure->call($data),
-            afterAction: fn ($data) => $this->closure->call($data),
+            beforeAction: $this->closure->call(...),
+            afterAction: $this->closure->call(...),
         );
         $this->decoratedProcessor->expects(self::once())
             ->method('process')

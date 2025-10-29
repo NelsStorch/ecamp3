@@ -19,7 +19,7 @@ final class ContentNodePeriodFilter extends AbstractFilter {
     public const PERIOD_QUERY_NAME = 'period';
 
     public function __construct(
-        private IriConverterInterface $iriConverter,
+        private readonly IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?LoggerInterface $logger = null,
         ?array $properties = null,

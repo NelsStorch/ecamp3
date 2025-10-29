@@ -13,7 +13,7 @@ use Symfony\Bundle\SecurityBundle\Security;
  * @template-extends AbstractPersistProcessor<Comment>
  */
 class CommentCreateProcessor extends AbstractPersistProcessor {
-    public function __construct(ProcessorInterface $decorated, private Security $security) {
+    public function __construct(ProcessorInterface $decorated, private readonly Security $security) {
         parent::__construct($decorated);
     }
 

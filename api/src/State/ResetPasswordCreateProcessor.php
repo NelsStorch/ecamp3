@@ -19,11 +19,11 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
  */
 class ResetPasswordCreateProcessor implements ProcessorInterface {
     public function __construct(
-        private ReCaptchaWrapper $reCaptcha,
-        private EntityManagerInterface $em,
-        private UserRepository $userRepository,
-        private PasswordHasherFactoryInterface $pwHasherFactory,
-        private MailService $mailService
+        private readonly ReCaptchaWrapper $reCaptcha,
+        private readonly EntityManagerInterface $em,
+        private readonly UserRepository $userRepository,
+        private readonly PasswordHasherFactoryInterface $pwHasherFactory,
+        private readonly MailService $mailService
     ) {}
 
     /**

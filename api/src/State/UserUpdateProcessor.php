@@ -14,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserUpdateProcessor extends AbstractPersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private UserPasswordHasherInterface $userPasswordHasher
+        private readonly UserPasswordHasherInterface $userPasswordHasher
     ) {
         parent::__construct($decorated);
     }

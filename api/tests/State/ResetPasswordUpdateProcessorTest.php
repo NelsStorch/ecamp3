@@ -153,7 +153,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         ;
         $this->pwHasher->expects(self::once())
             ->method('hash')
-            ->willReturnCallback(fn ($raw) => md5($raw))
+            ->willReturnCallback(md5(...))
         ;
 
         $this->resetPassword->id = base64_encode(self::EMAIL.'#myKey');
@@ -189,7 +189,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         ;
         $this->pwHasher->expects(self::once())
             ->method('hash')
-            ->willReturnCallback(fn ($raw) => md5($raw))
+            ->willReturnCallback(md5(...))
         ;
 
         $this->resetPassword->id = base64_encode(self::EMAIL.'#myKey');

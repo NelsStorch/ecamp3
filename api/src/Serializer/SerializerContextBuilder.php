@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
  * settings such as groups are not, because the groups need to be taken into account when
  * building the payload schemas for the API documentation.
  */
-final class SerializerContextBuilder implements SerializerContextBuilderInterface {
+final readonly class SerializerContextBuilder implements SerializerContextBuilderInterface {
     public function __construct(private SerializerContextBuilderInterface $decorated) {}
 
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array {

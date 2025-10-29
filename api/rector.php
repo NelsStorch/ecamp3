@@ -15,6 +15,7 @@ use Rector\DeadCode\Rector\If_\RemoveDeadInstanceOfRector;
 use Rector\Doctrine\Bundle230\Rector\Class_\AddAnnotationToRepositoryRector;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\AddInstanceofAssertForNullableInstanceRector;
 use Rector\PHPUnit\CodeQuality\Rector\MethodCall\AssertEmptyNullableObjectToAssertInstanceofRector;
@@ -36,7 +37,7 @@ return RectorConfig::configure()
     ->withComposerBased(doctrine: true, phpunit: true, symfony: true)
     ->withPreparedSets(deadCode: true, codeQuality: true, privatization: true, rectorPreset: true, phpunitCodeQuality: true, symfonyCodeQuality: true)
     ->withAttributesSets(all: true)
-    ->withPhpSets(php80: true)
+    ->withPhpSets(php82: true)
     ->withConfiguredRule(RenameFunctionRector::class, [
         'implode' => 'join',
         'join' => 'join',
@@ -54,6 +55,7 @@ return RectorConfig::configure()
         FinalizeTestCaseClassRector::class,
         FlipTypeControlToUseExclusiveTypeRector::class,
         LocallyCalledStaticMethodToNonStaticRector::class,
+        NullToStrictStringFuncCallArgRector::class,
         PreferPHPUnitThisCallRector::class,
         RemoveDeadInstanceOfRector::class,
         SimplifyIfElseToTernaryRector::class,

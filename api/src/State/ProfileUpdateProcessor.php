@@ -27,8 +27,8 @@ class ProfileUpdateProcessor extends AbstractPersistProcessor {
 
     public function __construct(
         ProcessorInterface $decorated,
-        private PasswordHasherFactoryInterface $pwHasherFactory,
-        private MailService $mailService,
+        private readonly PasswordHasherFactoryInterface $pwHasherFactory,
+        private readonly MailService $mailService,
         private readonly Security $security,
         private readonly UserRepository $userRepository,
         private readonly ClaimInvitationService $claimInvitationService,

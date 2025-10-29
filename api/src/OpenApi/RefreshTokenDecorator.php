@@ -6,7 +6,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model;
 use ApiPlatform\OpenApi\OpenApi;
 
-final class RefreshTokenDecorator implements OpenApiFactoryInterface {
+final readonly class RefreshTokenDecorator implements OpenApiFactoryInterface {
     public function __construct(private OpenApiFactoryInterface $decorated, private string $cookiePrefix) {}
 
     public function __invoke(array $context = []): OpenApi {

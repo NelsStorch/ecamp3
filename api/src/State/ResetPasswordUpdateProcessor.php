@@ -18,10 +18,10 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
  */
 class ResetPasswordUpdateProcessor implements ProcessorInterface {
     public function __construct(
-        private ReCaptchaWrapper $reCaptcha,
-        private EntityManagerInterface $em,
-        private UserRepository $userRepository,
-        private PasswordHasherFactoryInterface $pwHasherFactory,
+        private readonly ReCaptchaWrapper $reCaptcha,
+        private readonly EntityManagerInterface $em,
+        private readonly UserRepository $userRepository,
+        private readonly PasswordHasherFactoryInterface $pwHasherFactory,
     ) {}
 
     /**

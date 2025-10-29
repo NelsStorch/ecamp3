@@ -18,7 +18,7 @@ final class ContentNodeCampFilter extends AbstractFilter {
     public const CAMP_QUERY_NAME = 'camp';
 
     public function __construct(
-        private IriConverterInterface $iriConverter,
+        private readonly IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?LoggerInterface $logger = null,
         ?array $properties = null,

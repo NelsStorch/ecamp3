@@ -51,7 +51,7 @@ use ApiPlatform\Metadata\Property\Factory\PropertyMetadataFactoryInterface;
  * 30, so this class should be assigned a priority of 29.
  * https://github.com/api-platform/core/blob/main/src/Bridge/Symfony/Bundle/Resources/config/metadata/metadata.xml#L65
  */
-final class PreventAutomaticEmbeddingPropertyMetadataFactory implements PropertyMetadataFactoryInterface {
+final readonly class PreventAutomaticEmbeddingPropertyMetadataFactory implements PropertyMetadataFactoryInterface {
     public function __construct(private PropertyMetadataFactoryInterface $decorated) {}
 
     /**

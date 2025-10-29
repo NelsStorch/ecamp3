@@ -16,8 +16,8 @@ use Ramsey\Uuid\Uuid;
 class StoryboardPersistProcessor extends ContentNodePersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private CleanHTMLFilter $cleanHTMLFilter,
-        private CleanTextFilter $cleanTextFilter
+        private readonly CleanHTMLFilter $cleanHTMLFilter,
+        private readonly CleanTextFilter $cleanTextFilter
     ) {
         parent::__construct($decorated);
     }

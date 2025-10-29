@@ -531,14 +531,14 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
 
 class ParentEntity {
     #[ORM\OneToMany(targetEntity: Child::class, mappedBy: 'parent')]
-    private Collection $children;
+    private readonly Collection $children;
 
     #[ORM\OneToOne(targetEntity: Child::class)]
     private ?Child $firstBorn = null;
 
     #[SerializedName('childrenWithSerializedName')]
     #[ORM\OneToMany(targetEntity: Child::class, mappedBy: 'parent')]
-    private Collection $renamedChildren;
+    private readonly Collection $renamedChildren;
 
     public function getFilterValue(): string {
         return '';

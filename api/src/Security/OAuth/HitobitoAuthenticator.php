@@ -26,13 +26,13 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 
 class HitobitoAuthenticator extends OAuth2Authenticator {
     public function __construct(
-        private AuthenticationSuccessHandler $authenticationSuccessHandler,
-        private string $cookiePrefix,
-        private ClientRegistry $clientRegistry,
-        private EntityManagerInterface $entityManager,
-        private Security $security,
-        private JWTEncoderInterface $jwtDecoder,
-        private ClaimInvitationService $claimInvitationService,
+        private readonly AuthenticationSuccessHandler $authenticationSuccessHandler,
+        private readonly string $cookiePrefix,
+        private readonly ClientRegistry $clientRegistry,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly Security $security,
+        private readonly JWTEncoderInterface $jwtDecoder,
+        private readonly ClaimInvitationService $claimInvitationService,
     ) {}
 
     public function supports(Request $request): ?bool {

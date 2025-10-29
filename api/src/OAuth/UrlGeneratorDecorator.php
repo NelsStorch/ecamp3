@@ -7,8 +7,8 @@ use Symfony\Component\Routing\RequestContext;
 
 class UrlGeneratorDecorator implements UrlGeneratorInterface {
     public function __construct(
-        private UrlGeneratorInterface $decorated,
-        private string $env
+        private readonly UrlGeneratorInterface $decorated,
+        private readonly string $env
     ) {}
 
     public function setContext(RequestContext $context): void {

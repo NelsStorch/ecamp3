@@ -13,7 +13,7 @@ use App\Repository\ChecklistItemRepository;
 class ChecklistNodePersistProcessor extends ContentNodePersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private ChecklistItemRepository $checklistItemRepository,
+        private readonly ChecklistItemRepository $checklistItemRepository,
     ) {
         parent::__construct($decorated);
     }
