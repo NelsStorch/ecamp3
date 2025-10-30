@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20240507154923 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add color and abbreviation to camp_collaboration';
     }
@@ -20,6 +21,7 @@ final class Version20240507154923 extends AbstractMigration {
         $this->addSql('ALTER TABLE camp_collaboration ADD abbreviation TEXT DEFAULT NULL');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql('ALTER TABLE camp_collaboration DROP abbreviation');
         $this->addSql('ALTER TABLE camp_collaboration DROP color');

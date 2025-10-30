@@ -8,6 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 final class Version20240413142253 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add View view_camp_root_content_nodes to fast resolve contentNode-Owner';
     }
@@ -27,6 +28,7 @@ final class Version20240413142253 extends AbstractMigration {
         );
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP VIEW public.view_camp_root_content_nodes');

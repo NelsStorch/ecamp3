@@ -26,6 +26,7 @@ abstract class ListContentNodeTestCase extends ECampApiTestCase {
     protected array $contentNodesCampPrototype = [];
     protected array $contentNodesCampShared = [];
 
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
     }

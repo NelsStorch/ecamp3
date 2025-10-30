@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220210070753 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Adds OAuth provider id properties';
     }
@@ -24,6 +25,7 @@ final class Version20220210070753 extends AbstractMigration {
         $this->addSql('ALTER TABLE "user" ALTER password DROP NOT NULL');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE "user" ALTER password SET NOT NULL');

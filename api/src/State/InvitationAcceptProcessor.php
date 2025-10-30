@@ -16,10 +16,10 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
  */
 class InvitationAcceptProcessor implements ProcessorInterface {
     public function __construct(
-        private PasswordHasherFactoryInterface $passwordHasherFactory,
-        private CampCollaborationRepository $campCollaborationRepository,
-        private Security $security,
-        private EntityManagerInterface $em,
+        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
+        private readonly CampCollaborationRepository $campCollaborationRepository,
+        private readonly Security $security,
+        private readonly EntityManagerInterface $em,
     ) {}
 
     /**

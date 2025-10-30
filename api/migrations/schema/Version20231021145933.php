@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20231021145933 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Remove couponkey from camp';
     }
@@ -21,6 +22,7 @@ final class Version20231021145933 extends AbstractMigration {
         $this->addSql('ALTER TABLE camp DROP couponkey');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql('ALTER TABLE camp ADD couponkey TEXT DEFAULT NULL');
         $this->addSql('CREATE UNIQUE INDEX couponkey_unique ON camp (couponkey)');

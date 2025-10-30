@@ -10,6 +10,7 @@ use App\Tests\Api\ContentNodes\ReadContentNodeTestCase;
  * @internal
  */
 class ReadMaterialNodeTest extends ReadContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class ResponseTagger {
     public function __construct(
-        private string $matchPath,
-        private SymfonyResponseTagger $responseTagger,
-        private RequestStack $requestStack
+        private readonly string $matchPath,
+        private readonly SymfonyResponseTagger $responseTagger,
+        private readonly RequestStack $requestStack
     ) {}
 
     /**

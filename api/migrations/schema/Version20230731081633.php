@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20230731081633 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add extension pgcrypto';
     }
@@ -19,6 +20,7 @@ final class Version20230731081633 extends AbstractMigration {
         $this->addSql('CREATE EXTENSION IF NOT EXISTS pgcrypto');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql('DROP EXTENSION IF EXISTS pgcrypto');
     }

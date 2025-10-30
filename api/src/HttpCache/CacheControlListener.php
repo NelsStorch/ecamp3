@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
  * - caching is disabled (configurable via environment variable API_CACHE_ENABLED)
  * - total header size is too large to be handled by Varnish (configurable via parameter app.httpCache.maxHeaderSize).
  */
-final class CacheControlListener {
+final readonly class CacheControlListener {
     private bool $apiCacheEnabled;
 
     private int $maxHeaderSize;

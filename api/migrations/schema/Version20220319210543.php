@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220319210543 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -22,6 +23,7 @@ final class Version20220319210543 extends AbstractMigration {
         $this->addSql('CREATE UNIQUE INDEX inviteKeyHash_unique ON camp_collaboration (inviteKeyHash)');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP INDEX inviteKeyHash_unique');

@@ -8,6 +8,7 @@ use App\Tests\Api\ContentNodes\DeleteContentNodeTestCase;
  * @internal
  */
 class DeleteChecklistNodeTest extends DeleteContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

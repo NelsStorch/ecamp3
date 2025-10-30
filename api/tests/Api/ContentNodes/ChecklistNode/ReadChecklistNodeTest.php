@@ -8,6 +8,7 @@ use App\Tests\Api\ContentNodes\ReadContentNodeTestCase;
  * @internal
  */
 class ReadChecklistNodeTest extends ReadContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

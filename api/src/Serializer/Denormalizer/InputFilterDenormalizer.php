@@ -20,7 +20,7 @@ class InputFilterDenormalizer implements DenormalizerInterface, DenormalizerAwar
     use DenormalizerAwareTrait;
     use NoCachingSupportTrait;
 
-    private const ALREADY_CALLED = 'INPUT_FILTER_DENORMALIZER_ALREADY_CALLED';
+    private const string ALREADY_CALLED = 'INPUT_FILTER_DENORMALIZER_ALREADY_CALLED';
 
     private ServiceLocator $inputFilterLocator;
 

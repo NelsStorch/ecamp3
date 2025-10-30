@@ -23,6 +23,7 @@ class UserActivateProcessor extends AbstractPersistProcessor {
     /**
      * @param User $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): User {
         if ($data->activationKeyHash === md5($data->activationKey)) {
             $data->state = User::STATE_ACTIVATED;

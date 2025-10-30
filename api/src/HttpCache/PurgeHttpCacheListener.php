@@ -41,7 +41,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 final readonly class PurgeHttpCacheListener {
     use ClassInfoTrait;
 
-    public const IRI_RELATION_DELIMITER = '#';
+    public const string IRI_RELATION_DELIMITER = '#';
 
     public function __construct(
         private IriConverterInterface $iriConverter,

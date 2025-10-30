@@ -13,7 +13,7 @@ use App\InputFilter\CleanHTMLFilter;
 class SingleTextPersistProcessor extends ContentNodePersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private CleanHTMLFilter $cleanHTMLFilter,
+        private readonly CleanHTMLFilter $cleanHTMLFilter,
     ) {
         parent::__construct($decorated);
     }
@@ -21,6 +21,7 @@ class SingleTextPersistProcessor extends ContentNodePersistProcessor {
     /**
      * @param SingleText $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): SingleText {
         $data = parent::onBefore($data, $operation, $uriVariables, $context);
 

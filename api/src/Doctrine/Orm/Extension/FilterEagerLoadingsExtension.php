@@ -16,7 +16,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\Expr\Orx;
 use Doctrine\ORM\QueryBuilder;
 
-final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInterface {
+final readonly class FilterEagerLoadingsExtension implements QueryCollectionExtensionInterface {
     public function __construct(private QueryCollectionExtensionInterface $decorated) {}
 
     public function applyToCollection(

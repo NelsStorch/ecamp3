@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20250903125914 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add sharedSince and sharedBy to camp';
     }
@@ -23,6 +24,7 @@ final class Version20250903125914 extends AbstractMigration {
         $this->addSql('CREATE INDEX IDX_C19442304B2BC976 ON camp (sharedById)');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE camp DROP CONSTRAINT FK_C19442304B2BC976');

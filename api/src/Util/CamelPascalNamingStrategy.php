@@ -11,6 +11,7 @@ class CamelPascalNamingStrategy extends DefaultNamingStrategy {
      *
      * @param string $className the fully-qualified class name
      */
+    #[\Override]
     public function classToTableName($className): string {
         return $this->classToSnakeCase($className);
     }
@@ -23,6 +24,7 @@ class CamelPascalNamingStrategy extends DefaultNamingStrategy {
      * @param null|string $className
      * @param null|string $embeddedClassName
      */
+    #[\Override]
     public function embeddedFieldToColumnName($propertyName, $embeddedColumnName, $className = null, $embeddedClassName = null): string {
         return $propertyName.ucfirst($embeddedColumnName);
     }
@@ -33,6 +35,7 @@ class CamelPascalNamingStrategy extends DefaultNamingStrategy {
      * @param string     $propertyName a property name
      * @param null|mixed $className
      */
+    #[\Override]
     public function joinColumnName($propertyName, $className = null): string {
         return $propertyName.ucfirst($this->referenceColumnName());
     }
@@ -43,6 +46,7 @@ class CamelPascalNamingStrategy extends DefaultNamingStrategy {
      * @param string      $entityName           an entity
      * @param null|string $referencedColumnName a property
      */
+    #[\Override]
     public function joinKeyColumnName($entityName, $referencedColumnName = null): string {
         return $this->classToCamelCase($entityName)
                 .ucfirst($referencedColumnName ?: $this->referenceColumnName());

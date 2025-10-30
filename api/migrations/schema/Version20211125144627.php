@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20211125144627 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -21,6 +22,7 @@ final class Version20211125144627 extends AbstractMigration {
         $this->addSql('ALTER TABLE content_node_storyboard_section RENAME COLUMN pos TO position');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE content_node_multiselect_option RENAME COLUMN position TO pos');

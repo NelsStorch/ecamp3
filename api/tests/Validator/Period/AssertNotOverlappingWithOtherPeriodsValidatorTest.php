@@ -23,6 +23,7 @@ class AssertNotOverlappingWithOtherPeriodsValidatorTest extends ConstraintValida
 
     private \DateTime $period3End;
 
+    #[\Override]
     protected function setUp(): void {
         parent::setUp();
         $this->period1Start = new \DateTime('2022-01-01');

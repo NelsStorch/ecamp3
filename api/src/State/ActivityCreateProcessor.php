@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class ActivityCreateProcessor extends AbstractPersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private EntityManagerInterface $em
+        private readonly EntityManagerInterface $em
     ) {
         parent::__construct($decorated);
     }
@@ -25,6 +25,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param Activity $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Activity {
         // @phpstan-ignore nullsafe.neverNull
         if (!isset($data->category?->rootContentNode)) {
@@ -38,7 +39,7 @@ class ActivityCreateProcessor extends AbstractPersistProcessor {
         $data->camp = $data->category->camp;
         $rootContentNodePrototype = $data->category->rootContentNode;
 
-        if (isset($data->copyActivitySource)) {
+        if (null !== $data->copyActivitySource) {
             // CopyActivity Source is set -> copy it's content (rootContentNode)
             $rootContentNodePrototype = $data->copyActivitySource->rootContentNode;
         }

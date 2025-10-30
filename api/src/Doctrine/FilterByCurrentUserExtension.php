@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\SecurityBundle\Security;
 
-final class FilterByCurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface {
+final readonly class FilterByCurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface {
     public function __construct(private Security $security, private EntityManagerInterface $entityManager) {}
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, ?string $resourceClass = null, ?Operation $operation = null, array $context = []): void {

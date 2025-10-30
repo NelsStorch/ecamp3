@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20221020194510 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Migrate SingleText text -> html and Storyboard column2 -> column2Html';
     }
@@ -20,6 +21,7 @@ final class Version20221020194510 extends AbstractMigration {
         $this->addSql("UPDATE content_node cn SET data = (REPLACE(data::TEXT, '\"column2\"', '\"column2Html\"'))::JSONB WHERE cn.strategy='storyboard'");
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql("UPDATE content_node cn SET data = (REPLACE(data::TEXT, '\"html\"', '\"text\"'))::JSONB WHERE cn.strategy='singletext'");
         $this->addSql("UPDATE content_node cn SET data = (REPLACE(data::TEXT, '\"column2Html\"', '\"column2\"'))::JSONB WHERE cn.strategy='storyboard'");

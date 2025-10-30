@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20211213175935 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -20,6 +21,7 @@ final class Version20211213175935 extends AbstractMigration {
         $this->addSql('ALTER TABLE content_node ALTER "position" SET NOT NULL');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE content_node ALTER position DROP NOT NULL');

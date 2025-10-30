@@ -7,8 +7,8 @@ use ReCaptcha\Response;
 
 class ReCaptchaWrapper {
     public function __construct(
-        private string $reCaptchaSecret,
-        private ReCaptcha $reCaptcha,
+        private readonly string $reCaptchaSecret,
+        private readonly ReCaptcha $reCaptcha,
     ) {}
 
     public function verify($response, $remoteIp = null) {

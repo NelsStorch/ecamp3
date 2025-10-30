@@ -18,7 +18,7 @@ class ArrayDeepSort {
         if (!is_array($input)) {
             return $input;
         }
-        $sorted_children = array_map([ArrayDeepSort::class, 'sort'], $input);
+        $sorted_children = array_map(ArrayDeepSort::sort(...), $input);
 
         if (array_is_list($sorted_children)) {
             uasort($sorted_children, function ($a, $b) {

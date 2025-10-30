@@ -941,6 +941,7 @@ class CreateUserTest extends ECampApiTestCase {
         assertThat($createArray, CompatibleHalResponse::isHalCompatibleWith($getItemResponse->toArray()));
     }
 
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = [], $mergeEmbeddedAttributes = []) {
         $examplePayload = $this->getExamplePayload(
             User::class,

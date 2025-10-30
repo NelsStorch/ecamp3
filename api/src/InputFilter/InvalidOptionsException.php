@@ -3,7 +3,7 @@
 namespace App\InputFilter;
 
 class InvalidOptionsException extends \RuntimeException {
-    public function __construct(string $message, private array $options) {
+    public function __construct(string $message, private readonly array $options) {
         parent::__construct($message);
     }
 

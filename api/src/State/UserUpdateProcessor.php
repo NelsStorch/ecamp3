@@ -14,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserUpdateProcessor extends AbstractPersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private UserPasswordHasherInterface $userPasswordHasher
+        private readonly UserPasswordHasherInterface $userPasswordHasher
     ) {
         parent::__construct($decorated);
     }
@@ -22,6 +22,7 @@ class UserUpdateProcessor extends AbstractPersistProcessor {
     /**
      * @param User $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): User {
         if ($data->plainPassword) {
             $data->password = $this->userPasswordHasher->hashPassword($data, $data->plainPassword);

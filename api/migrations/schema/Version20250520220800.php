@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20250520220800 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'MaterialItem.MaterialList is nullable';
     }
@@ -83,6 +84,7 @@ final class Version20250520220800 extends AbstractMigration {
         SQL);
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql(<<<'SQL'
             ALTER TABLE material_item ALTER materiallistid SET NOT NULL

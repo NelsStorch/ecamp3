@@ -105,10 +105,12 @@ class ResponsiveLayout extends ContentNode implements SupportsContentNodeChildre
         new AssertNoOrphanChildren(),
     ])]
     #[Assert\NotNull]
+    #[\Override]
     public function getData(): ?array {
         return parent::getData();
     }
 
+    #[\Override]
     public function getSupportedSlotNames(): array {
         $items = new ArrayCollection($this->getData()['items']);
 

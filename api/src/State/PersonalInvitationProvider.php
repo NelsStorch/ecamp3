@@ -50,9 +50,7 @@ class PersonalInvitationProvider implements ProviderInterface {
         }
         $campCollaborations = $this->campCollaborationRepository->findAllByPersonallyInvitedUser($user);
 
-        return array_map(function (CampCollaboration $campCollaboration) {
-            return $this->toInvitation($campCollaboration);
-        }, $campCollaborations);
+        return array_map($this->toInvitation(...), $campCollaborations);
     }
 
     /**

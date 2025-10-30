@@ -13,6 +13,7 @@ require_once __DIR__.'/checklists/helpers.php';
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20240928090159 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Insert PBS-Checklist';
     }
@@ -26,5 +27,6 @@ final class Version20240928090159 extends AbstractMigration {
         }
     }
 
+    #[\Override]
     public function down(Schema $schema): void {}
 }

@@ -24,6 +24,7 @@ class FilterEagerLoadingExtensionIntegrationTest extends ECampApiTestCase {
     private array $context = [];
     private FilterEagerLoadingsExtension $filterEagerLoadingExtension;
 
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
         $container = static::getContainer();

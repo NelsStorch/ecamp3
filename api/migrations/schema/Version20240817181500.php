@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20240817181500 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Renames safety concept to safety considerations';
     }
@@ -20,6 +21,7 @@ final class Version20240817181500 extends AbstractMigration {
         $this->addSql("UPDATE content_type SET name = 'SafetyConsiderations' WHERE name = 'SafetyConcept';");
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql("UPDATE content_type SET name = 'SafetyConcept' WHERE name = 'SafetyConsiderations';");

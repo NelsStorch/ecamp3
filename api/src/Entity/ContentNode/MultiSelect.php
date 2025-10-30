@@ -87,6 +87,7 @@ class MultiSelect extends ContentNode {
     #[Assert\IsNull(groups: ['create'])] // create with empty data; default value is populated by data persister
     #[Assert\NotNull(groups: ['update'])]
     #[AssertJsonSchema(schema: self::JSON_SCHEMA, groups: ['update'])]
+    #[\Override]
     public function getData(): ?array {
         return $this->data;
     }

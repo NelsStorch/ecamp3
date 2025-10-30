@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\CreateContentNodeTestCase;
  * @internal
  */
 class CreateResponsiveLayoutTest extends CreateContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 
@@ -64,6 +65,7 @@ class CreateResponsiveLayoutTest extends CreateContentNodeTestCase {
     /**
      * payload set up.
      */
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return parent::getExampleWritePayload(
             array_merge(

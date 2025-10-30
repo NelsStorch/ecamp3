@@ -14,12 +14,12 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Wraps a database transaction around all SQL statements in the whole request.
  */
-final class RequestTransactionListener implements EventSubscriberInterface {
+final readonly class RequestTransactionListener implements EventSubscriberInterface {
     private \SplStack $transactionLevelStack;
 
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-        private readonly LoggerInterface $logger
+        private EntityManagerInterface $entityManager,
+        private LoggerInterface $logger
     ) {
         $this->transactionLevelStack = new \SplStack();
     }

@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  * @internal
  */
 class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
-    private const TRANSITIONS = [
+    private const array TRANSITIONS = [
         ['from' => '1', 'to' => ['2', '3']],
         ['from' => '2', 'to' => ['3']],
         ['from' => '3', 'to' => ['1']],
@@ -26,6 +26,7 @@ class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
     private MockObject|RequestStack $requestStack;
     private TestClass $before;
 
+    #[\Override]
     protected function setUp(): void {
         $this->before = new TestClass('2');
 

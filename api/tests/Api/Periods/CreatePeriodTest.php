@@ -377,6 +377,7 @@ class CreatePeriodTest extends ECampApiTestCase {
         assertThat($createArray, CompatibleHalResponse::isHalCompatibleWith($getPeriodResponse->toArray()));
     }
 
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return $this->getExamplePayload(
             Period::class,

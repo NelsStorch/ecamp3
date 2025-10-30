@@ -13,8 +13,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  */
 class ChecklistItemCollectionProvider implements ProviderInterface {
     public function __construct(
-        private ProviderInterface $decorated,
-        private RequestStack $requestStack
+        private readonly ProviderInterface $decorated,
+        private readonly RequestStack $requestStack
     ) {}
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|object|null {

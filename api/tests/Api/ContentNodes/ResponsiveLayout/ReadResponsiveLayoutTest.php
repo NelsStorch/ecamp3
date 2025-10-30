@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\ReadContentNodeTestCase;
  * @internal
  */
 class ReadResponsiveLayoutTest extends ReadContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

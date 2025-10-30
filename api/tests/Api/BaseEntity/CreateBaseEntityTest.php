@@ -90,6 +90,7 @@ class CreateBaseEntityTest extends ECampApiTestCase {
         ]);
     }
 
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []): array {
         return $this->getExamplePayload(Camp::class, Post::class, $attributes, ['campPrototype'], $except);
     }

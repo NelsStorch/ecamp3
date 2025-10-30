@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20240620104153 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -25,6 +26,7 @@ final class Version20240620104153 extends AbstractMigration {
         $this->addSql('ALTER TABLE checklistnode_checklistitem ADD CONSTRAINT FK_5A2B5B318A09A289 FOREIGN KEY (checklistitem_id) REFERENCES checklist_item (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');

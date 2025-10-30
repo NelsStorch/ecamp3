@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220416125104 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'add indexes for searchable properties';
     }
@@ -23,6 +24,7 @@ final class Version20220416125104 extends AbstractMigration {
         $this->addSql('CREATE INDEX IDX_D7785D2CA501647F ON schedule_entry (endOffset)');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP INDEX IDX_D7785D2CA1CB398B');

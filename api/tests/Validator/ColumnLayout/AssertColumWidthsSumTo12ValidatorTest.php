@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  * @internal
  */
 class AssertColumWidthsSumTo12ValidatorTest extends ConstraintValidatorTestCase {
-    private const message = 'Expected column widths to sum to 12, but got a sum of {{ sum }}';
+    private const string message = 'Expected column widths to sum to 12, but got a sum of {{ sum }}';
 
     private MockObject|RequestStack $requestStack;
 

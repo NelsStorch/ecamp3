@@ -8,6 +8,7 @@ use App\Tests\Api\ContentNodes\ListContentNodeTestCase;
  * @internal
  */
 class ListChecklistNodeTest extends ListContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

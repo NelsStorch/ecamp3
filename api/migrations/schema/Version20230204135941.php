@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20230204135941 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Make unique constraint offset_period_idx a deferred constraint';
     }
@@ -27,6 +28,7 @@ final class Version20230204135941 extends AbstractMigration {
         );
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql(
             <<<'EOF'

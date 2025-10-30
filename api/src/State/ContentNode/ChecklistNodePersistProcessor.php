@@ -13,11 +13,12 @@ use App\Repository\ChecklistItemRepository;
 class ChecklistNodePersistProcessor extends ContentNodePersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private ChecklistItemRepository $checklistItemRepository,
+        private readonly ChecklistItemRepository $checklistItemRepository,
     ) {
         parent::__construct($decorated);
     }
 
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): ChecklistNode {
         /** @var ChecklistNode $data */
         $data = parent::onBefore($data, $operation, $uriVariables, $context);

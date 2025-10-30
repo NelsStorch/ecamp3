@@ -373,6 +373,7 @@ class CreateChecklistTest extends ECampApiTestCase {
         assertThat($createArray, CompatibleHalResponse::isHalCompatibleWith($getItemResponse->toArray()));
     }
 
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return $this->getExamplePayload(
             Checklist::class,

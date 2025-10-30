@@ -15,6 +15,7 @@ class CompatibleHalResponse extends Constraint {
         return 'is hal compatible with '.$this->exporter()->export($this->halResponse);
     }
 
+    #[\Override]
     protected function matches($other): bool {
         if (!is_array($other)) {
             return false;

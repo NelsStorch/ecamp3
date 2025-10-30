@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20250625090555 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add comment entity';
     }
@@ -46,6 +47,7 @@ final class Version20250625090555 extends AbstractMigration {
         SQL);
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'

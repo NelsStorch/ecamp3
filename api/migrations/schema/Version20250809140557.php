@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20250809140557 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add refresh tokens table';
     }
@@ -20,6 +21,7 @@ final class Version20250809140557 extends AbstractMigration {
         $this->addSql('CREATE UNIQUE INDEX UNIQ_9BACE7E1C74F2195 ON refresh_tokens (refresh_token)');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql('DROP TABLE refresh_tokens');
     }
