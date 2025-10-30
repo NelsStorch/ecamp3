@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2250cd7c6b95a73aa796aa001dd5f42",
+    "content-hash": "53502ab2f2bad26c276f5d19d2896bb8",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -11063,16 +11063,16 @@
         },
         {
             "name": "twig/cssinliner-extra",
-            "version": "v3.21.0",
+            "version": "v3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/cssinliner-extra.git",
-                "reference": "378d29b61d6406c456e3a4afbd15bbeea0b72ea8"
+                "reference": "9bcbf04ca515e98fcde479fdceaa1d9d9e76173e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/cssinliner-extra/zipball/378d29b61d6406c456e3a4afbd15bbeea0b72ea8",
-                "reference": "378d29b61d6406c456e3a4afbd15bbeea0b72ea8",
+                "url": "https://api.github.com/repos/twigphp/cssinliner-extra/zipball/9bcbf04ca515e98fcde479fdceaa1d9d9e76173e",
+                "reference": "9bcbf04ca515e98fcde479fdceaa1d9d9e76173e",
                 "shasum": ""
             },
             "require": {
@@ -11116,7 +11116,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/cssinliner-extra/tree/v3.21.0"
+                "source": "https://github.com/twigphp/cssinliner-extra/tree/v3.22.0"
             },
             "funding": [
                 {
@@ -11128,20 +11128,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-31T20:45:36+00:00"
+            "time": "2025-07-29T08:07:07+00:00"
         },
         {
             "name": "twig/extra-bundle",
-            "version": "v3.21.0",
+            "version": "v3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "62d1cf47a1aa009cbd07b21045b97d3d5cb79896"
+                "reference": "6d253f0fe28a83a045497c8fb3ea9bfe84e82cf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/62d1cf47a1aa009cbd07b21045b97d3d5cb79896",
-                "reference": "62d1cf47a1aa009cbd07b21045b97d3d5cb79896",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/6d253f0fe28a83a045497c8fb3ea9bfe84e82cf4",
+                "reference": "6d253f0fe28a83a045497c8fb3ea9bfe84e82cf4",
                 "shasum": ""
             },
             "require": {
@@ -11151,7 +11151,7 @@
                 "twig/twig": "^3.2|^4.0"
             },
             "require-dev": {
-                "league/commonmark": "^1.0|^2.0",
+                "league/commonmark": "^2.7",
                 "symfony/phpunit-bridge": "^6.4|^7.0",
                 "twig/cache-extra": "^3.0",
                 "twig/cssinliner-extra": "^3.0",
@@ -11190,7 +11190,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.21.0"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.22.0"
             },
             "funding": [
                 {
@@ -11202,7 +11202,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-19T14:29:33+00:00"
+            "time": "2025-09-15T05:57:37+00:00"
         },
         {
             "name": "twig/twig",
