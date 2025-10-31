@@ -34,7 +34,7 @@ class AssertNotOverlappingWithOtherPeriodsValidator extends ConstraintValidator 
             return;
         }
         $periods = $camp->getPeriods();
-        $overlappingExists = (new ArrayCollection($periods))
+        $overlappingExists = new ArrayCollection($periods)
             ->filter(fn (Period $p) => $p !== $object)
             ->exists(fn ($_, Period $p) => self::overlaps($value, $p))
         ;

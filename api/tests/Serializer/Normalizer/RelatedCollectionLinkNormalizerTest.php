@@ -446,7 +446,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         ]));
 
         $metadataCollection = new ResourceMetadataCollection('Dummy');
-        $metadataCollection->append((new ApiResource())->withOperations(new Operations([new Get()])));
+        $metadataCollection->append(new ApiResource()->withOperations(new Operations([new Get()])));
         $this->resourceMetadataCollectionFactoryMock->method('create')->willReturn($metadataCollection);
 
         $this->mockGeneratedRoute();
@@ -484,7 +484,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $collectionOperationMetadata['name'] = '_api_/dummys{._format}_get_collection';
 
         $metadataCollection = new ResourceMetadataCollection('Dummy');
-        $metadataCollection->append((new ApiResource())->withOperations(new Operations([
+        $metadataCollection->append(new ApiResource()->withOperations(new Operations([
             new GetCollection(
                 ...$collectionOperationMetadata
             ),

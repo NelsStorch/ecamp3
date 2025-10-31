@@ -42,7 +42,7 @@ class UriTemplateFactoryTest extends TestCase {
         $this->resourceNameCollection = new ResourceNameCollection(['Dummy']);
         $this->resourceMetadataCollection = new ResourceMetadataCollection('Dummy');
 
-        $this->apiResource = (new ApiResource())->withShortName('Dummy')->withOperations(new Operations([
+        $this->apiResource = new ApiResource()->withShortName('Dummy')->withOperations(new Operations([
             new Get(
                 name: '_api_/dummys/{id}{._format}_get'
             ),
@@ -81,7 +81,7 @@ class UriTemplateFactoryTest extends TestCase {
                 name: '_api_/dummys{._format}_get_collection'
             ),
         ]);
-        $apiResource = (new ApiResource())->withShortName('Dummy')->withOperations($operations);
+        $apiResource = new ApiResource()->withShortName('Dummy')->withOperations($operations);
         $this->resourceMetadataCollection->append($apiResource);
 
         $this->createFactory();
@@ -111,7 +111,7 @@ class UriTemplateFactoryTest extends TestCase {
     public function testCreatesTemplatedUriWithFilterQueryParameter() {
         // given
         $resource = 'Dummy';
-        $this->resourceMetadataCollection->append((new ApiResource())->withShortName('Dummy')->withOperations(new Operations([
+        $this->resourceMetadataCollection->append(new ApiResource()->withShortName('Dummy')->withOperations(new Operations([
             new Get(
                 name: '_api_/dummys/{id}{._format}_get'
             ),
@@ -152,7 +152,7 @@ class UriTemplateFactoryTest extends TestCase {
         // given
         $resource = 'Dummy';
         $this->paginationOptions = new PaginationOptions(true);
-        $this->resourceMetadataCollection->append((new ApiResource())->withShortName('Dummy')->withOperations(new Operations([
+        $this->resourceMetadataCollection->append(new ApiResource()->withShortName('Dummy')->withOperations(new Operations([
             new Get(
                 name: '_api_/dummys/{id}{._format}_get'
             ),
@@ -176,7 +176,7 @@ class UriTemplateFactoryTest extends TestCase {
         // given
         $resource = 'Dummy';
 
-        $this->resourceMetadataCollection->append((new ApiResource())->withShortName('Dummy')->withOperations(new Operations([
+        $this->resourceMetadataCollection->append(new ApiResource()->withShortName('Dummy')->withOperations(new Operations([
             new Get(
                 name: '_api_/dummys/{id}{._format}_get'
             ),
@@ -202,7 +202,7 @@ class UriTemplateFactoryTest extends TestCase {
     public function testIgnoresRoutesWithNoSlashAtEnd() {
         // given
         $resource = 'Dummy';
-        $this->resourceMetadataCollection->append((new ApiResource())->withShortName('Dummy')->withOperations(new Operations([
+        $this->resourceMetadataCollection->append(new ApiResource()->withShortName('Dummy')->withOperations(new Operations([
             new Get(
                 name: '_api_/dummys/{id}{._format}_get'
             ),
@@ -223,7 +223,7 @@ class UriTemplateFactoryTest extends TestCase {
     public function testIgnoreActionPathsOfOtherRouteStarts() {
         // given
         $resource = 'Dummy';
-        $this->resourceMetadataCollection->append((new ApiResource())->withShortName('Dummy')->withOperations(new Operations([
+        $this->resourceMetadataCollection->append(new ApiResource()->withShortName('Dummy')->withOperations(new Operations([
             new Get(
                 name: '_api_/dummys/{id}{._format}_get'
             ),
