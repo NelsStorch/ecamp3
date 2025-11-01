@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fa04678f244f8ec12c3d0f8cef87e7c",
+    "content-hash": "c68b181b73cb63207674db9aaac41888",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -8194,16 +8194,16 @@
         },
         {
             "name": "symfony/mailer",
-            "version": "v7.3.4",
+            "version": "v7.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "ab97ef2f7acf0216955f5845484235113047a31d"
+                "reference": "fd497c45ba9c10c37864e19466b090dcb60a50ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/ab97ef2f7acf0216955f5845484235113047a31d",
-                "reference": "ab97ef2f7acf0216955f5845484235113047a31d",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/fd497c45ba9c10c37864e19466b090dcb60a50ba",
+                "reference": "fd497c45ba9c10c37864e19466b090dcb60a50ba",
                 "shasum": ""
             },
             "require": {
@@ -8254,7 +8254,7 @@
             "description": "Helps sending emails",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/mailer/tree/v7.3.4"
+                "source": "https://github.com/symfony/mailer/tree/v7.3.5"
             },
             "funding": [
                 {
@@ -8274,7 +8274,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-17T05:51:54+00:00"
+            "time": "2025-10-24T14:27:20+00:00"
         },
         {
             "name": "symfony/mime",
@@ -10582,16 +10582,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v7.3.4",
+            "version": "v7.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "5e29a348b5fac2227b6938a54db006d673bb813a"
+                "reference": "724086992fb7c7882d05c9d2219d70401ab9fdda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/5e29a348b5fac2227b6938a54db006d673bb813a",
-                "reference": "5e29a348b5fac2227b6938a54db006d673bb813a",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/724086992fb7c7882d05c9d2219d70401ab9fdda",
+                "reference": "724086992fb7c7882d05c9d2219d70401ab9fdda",
                 "shasum": ""
             },
             "require": {
@@ -10660,7 +10660,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/v7.3.4"
+                "source": "https://github.com/symfony/validator/tree/v7.3.5"
             },
             "funding": [
                 {
@@ -10680,7 +10680,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-24T06:32:27+00:00"
+            "time": "2025-10-24T14:27:20+00:00"
         },
         {
             "name": "symfony/var-dumper",
