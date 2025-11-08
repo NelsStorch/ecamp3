@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28df6a135ace41a512f8b6ea4b11857d",
+    "content-hash": "d71bb3d478b83dd831a1012db31d844b",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -4912,51 +4912,52 @@
         },
         {
             "name": "phpmyadmin/sql-parser",
-            "version": "5.11.1",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmyadmin/sql-parser.git",
-                "reference": "1b70d03526df92bd1e170e2670b7d3510e1b722b"
+                "reference": "75397801ef687ef6b850e907a40c60b9d6b755db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/1b70d03526df92bd1e170e2670b7d3510e1b722b",
-                "reference": "1b70d03526df92bd1e170e2670b7d3510e1b722b",
+                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/75397801ef687ef6b850e907a40c60b9d6b755db",
+                "reference": "75397801ef687ef6b850e907a40c60b9d6b755db",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "symfony/polyfill-mbstring": "^1.3",
-                "symfony/polyfill-php80": "^1.16"
+                "php": "^8.2",
+                "symfony/polyfill-mbstring": "^1.24"
             },
             "conflict": {
-                "phpmyadmin/motranslator": "<3.0"
+                "phpmyadmin/motranslator": "<5.2"
             },
             "require-dev": {
-                "phpbench/phpbench": "^1.1",
-                "phpmyadmin/coding-standard": "^3.0",
-                "phpmyadmin/motranslator": "^4.0 || ^5.0",
+                "phpbench/phpbench": "^1.2",
+                "phpmyadmin/coding-standard": "^4.0",
+                "phpmyadmin/motranslator": "^5.3",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.12",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.4",
-                "phpstan/phpstan-strict-rules": "^1.6",
-                "phpunit/phpunit": "^8.5 || ^9.6",
-                "psalm/plugin-phpunit": "^0.16.1",
-                "vimeo/psalm": "^4.11",
-                "zumba/json-serializer": "~3.0.2"
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^11.5",
+                "psalm/plugin-phpunit": "^0.19.2",
+                "vimeo/psalm": "^6.0",
+                "zumba/json-serializer": "^3.2"
             },
             "suggest": {
                 "ext-mbstring": "For best performance",
                 "phpmyadmin/motranslator": "Translate messages to your favorite locale"
             },
             "bin": [
-                "bin/highlight-query",
-                "bin/lint-query",
-                "bin/sql-parser",
-                "bin/tokenize-query"
+                "bin/sql-parser"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.0-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "PhpMyAdmin\\SqlParser\\": "src"
@@ -4997,7 +4998,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-07-20T15:49:56+00:00"
+            "time": "2025-10-31T22:05:33+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
