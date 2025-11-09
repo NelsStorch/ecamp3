@@ -12,8 +12,8 @@
     cancel-icon=""
     :cancel-action="close"
   >
-    <template #activator="scope">
-      <slot name="activator" v-bind="scope" />
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }" />
     </template>
     <slot>
       {{ warningText }}

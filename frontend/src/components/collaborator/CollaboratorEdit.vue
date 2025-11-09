@@ -75,7 +75,7 @@
           <template #activator="{ props }">
             <div v-bind="props">
               <PromptCollaboratorDeactivate :entity="collaborator">
-                <template #activator="{ on: onDialog, attrs: attrsDialog }">
+                <template #activator="{ props: deactivateProps }">
                   <IconButton
                     color="secondary"
                     text
@@ -84,11 +84,10 @@
                     "
                     :icon-only="false"
                     icon="mdi-cancel"
-                    v-bind="attrsDialog"
-                    v-on="
+                    v-bind="
                       (disabled && !isOwnCampCollaboration) || isLastManager
-                        ? on
-                        : onDialog
+                        ? props
+                        : deactivateProps
                     "
                   >
                     {{ deactivateLabel }}
