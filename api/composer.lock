@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c3f0095aca2a786ab0ce9c74d054717",
+    "content-hash": "a8a988d7daf2c4cc81e5e7119b2564f0",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -246,16 +246,16 @@
         },
         {
             "name": "api-platform/http-cache",
-            "version": "v4.1.24",
+            "version": "v4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/http-cache.git",
-                "reference": "3a6b69e57280b30d8db5a25bf3f52edb7f9069fc"
+                "reference": "aef434b026b861ea451d814c86838b5470b8bfb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/http-cache/zipball/3a6b69e57280b30d8db5a25bf3f52edb7f9069fc",
-                "reference": "3a6b69e57280b30d8db5a25bf3f52edb7f9069fc",
+                "url": "https://api.github.com/repos/api-platform/http-cache/zipball/aef434b026b861ea451d814c86838b5470b8bfb4",
+                "reference": "aef434b026b861ea451d814c86838b5470b8bfb4",
                 "shasum": ""
             },
             "require": {
@@ -269,7 +269,8 @@
                 "phpspec/prophecy-phpunit": "^2.2",
                 "phpunit/phpunit": "11.5.x-dev",
                 "symfony/dependency-injection": "^6.4 || ^7.0",
-                "symfony/http-client": "^6.4 || ^7.0"
+                "symfony/http-client": "^6.4 || ^7.0",
+                "symfony/type-info": "^7.3"
             },
             "type": "library",
             "extra": {
@@ -283,7 +284,8 @@
                 "branch-alias": {
                     "dev-3.4": "3.4.x-dev",
                     "dev-4.1": "4.1.x-dev",
-                    "dev-main": "4.2.x-dev"
+                    "dev-4.2": "4.2.x-dev",
+                    "dev-main": "4.3.x-dev"
                 }
             },
             "autoload": {
@@ -318,9 +320,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/http-cache/tree/v4.1.24"
+                "source": "https://github.com/api-platform/http-cache/tree/v4.2.3"
             },
-            "time": "2025-09-16T07:16:14+00:00"
+            "time": "2025-09-16T12:51:08+00:00"
         },
         {
             "name": "api-platform/hydra",
