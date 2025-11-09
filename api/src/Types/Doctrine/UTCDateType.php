@@ -27,7 +27,7 @@ class UTCDateType extends DateType {
         }
 
         if ($value instanceof \DateTimeImmutable) {
-            return (new DateImmutableType())->convertToDatabaseValue($value, $platform);
+            return new DateImmutableType()->convertToDatabaseValue($value, $platform);
         }
 
         return parent::convertToDatabaseValue($value, $platform);

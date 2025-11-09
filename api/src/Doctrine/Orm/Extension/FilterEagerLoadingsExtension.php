@@ -98,23 +98,11 @@ final readonly class FilterEagerLoadingsExtension implements QueryCollectionExte
     }
 
     private function usesAnyToManyAndx($toManyAliases, Andx $and) {
-        foreach ($and->getParts() as $part) {
-            if ($this->usesAnyToMany($toManyAliases, $part)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($and->getParts(), fn ($part) => $this->usesAnyToMany($toManyAliases, $part));
     }
 
     private function usesAnyToManyOrx($toManyAliases, Orx $or) {
-        foreach ($or->getParts() as $part) {
-            if ($this->usesAnyToMany($toManyAliases, $part)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($or->getParts(), fn ($part) => $this->usesAnyToMany($toManyAliases, $part));
     }
 
     private function usesAnyToManyComparison($toManyAliases, Comparison $comparison) {
@@ -124,13 +112,7 @@ final readonly class FilterEagerLoadingsExtension implements QueryCollectionExte
     }
 
     private function usesAnyToManyFunc($toManyAliases, Func $func) {
-        foreach ($func->getArguments() as $argument) {
-            if ($this->usesAnyToMany($toManyAliases, $argument)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($func->getArguments(), fn ($argument) => $this->usesAnyToMany($toManyAliases, $argument));
     }
 
     private function usesAnyToManyString($toManyAliases, string $comparison) {

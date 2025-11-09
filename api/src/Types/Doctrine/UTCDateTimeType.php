@@ -44,7 +44,7 @@ class UTCDateTimeType extends DateTimeType {
             $value = $value->setTimeZone(self::getUtc());
 
             if ($value instanceof \DateTimeImmutable) {
-                return (new DateTimeImmutableType())->convertToDatabaseValue($value, $platform);
+                return new DateTimeImmutableType()->convertToDatabaseValue($value, $platform);
             }
 
             return parent::convertToDatabaseValue($value, $platform);

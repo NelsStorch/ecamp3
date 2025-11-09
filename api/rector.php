@@ -37,7 +37,7 @@ return RectorConfig::configure()
     ->withComposerBased(doctrine: true, phpunit: true, symfony: true)
     ->withPreparedSets(deadCode: true, codeQuality: true, privatization: true, rectorPreset: true, phpunitCodeQuality: true, symfonyCodeQuality: true)
     ->withAttributesSets(all: true)
-    ->withPhpSets(php83: true)
+    ->withPhpSets(php84: true)
     ->withConfiguredRule(RenameFunctionRector::class, [
         'implode' => 'join',
         'join' => 'join',

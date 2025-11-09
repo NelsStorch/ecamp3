@@ -25,7 +25,7 @@ class OperationHelperTest extends TestCase {
 
     public function testFindGet() {
         // given
-        $apiResource = (new ApiResource())->withOperations(new Operations([
+        $apiResource = new ApiResource()->withOperations(new Operations([
             new Get(
                 name: 'get'
             ),
@@ -44,7 +44,7 @@ class OperationHelperTest extends TestCase {
 
     public function testReturnsNullForMissingOperation() {
         // given
-        $apiResource = (new ApiResource())->withOperations(new Operations([
+        $apiResource = new ApiResource()->withOperations(new Operations([
             new Get(
                 name: 'get'
             ),
@@ -61,7 +61,7 @@ class OperationHelperTest extends TestCase {
 
     public function testFindsFirstOperation() {
         // given
-        $apiResource = (new ApiResource())->withOperations(new Operations([
+        $apiResource = new ApiResource()->withOperations(new Operations([
             new Get(
                 name: 'get1'
             ),
@@ -80,12 +80,12 @@ class OperationHelperTest extends TestCase {
 
     public function testFindsOperationInMultipleResources() {
         // given
-        $apiResource1 = (new ApiResource())->withOperations(new Operations([
+        $apiResource1 = new ApiResource()->withOperations(new Operations([
             new GetCollection(
                 name: 'get_collection'
             ),
         ]));
-        $apiResource2 = (new ApiResource())->withOperations(new Operations([
+        $apiResource2 = new ApiResource()->withOperations(new Operations([
             new Get(
                 name: 'get1'
             ),
@@ -105,7 +105,7 @@ class OperationHelperTest extends TestCase {
 
     public function testFindGraphQlOperation() {
         // given
-        $apiResource = (new ApiResource())->withGraphQlOperations([
+        $apiResource = new ApiResource()->withGraphQlOperations([
             new Query(name: 'query'),
             new QueryCollection(name: 'queryCollection'),
         ]);

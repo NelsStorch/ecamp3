@@ -26,7 +26,7 @@ class MailService {
     ) {}
 
     public function sendInviteToCampMail(User $byUser, Camp $camp, string $key, string $emailToInvite): void {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(new Address($emailToInvite))
             ->subject($this->translator->trans('inviteToCamp.subject', ['campTitle' => $camp->title], self::TRANSLATE_DOMAIN, $byUser->profile->language))
@@ -48,7 +48,7 @@ class MailService {
     }
 
     public function sendUserActivationMail(User $user, string $key): void {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(new Address($user->getEmail()))
             ->subject($this->translator->trans('userActivation.subject', [], self::TRANSLATE_DOMAIN, $user->profile->language))
@@ -68,7 +68,7 @@ class MailService {
     }
 
     public function sendPasswordResetLink(User $user, ResetPassword $data): void {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(new Address($user->getEmail()))
             ->subject($this->translator->trans('passwordReset.subject', [], self::TRANSLATE_DOMAIN, $user->profile->language))
@@ -88,7 +88,7 @@ class MailService {
     }
 
     public function sendEmailVerificationMail(User $user, Profile $data): void {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(new Address($data->untrustedEmail))
             ->subject($this->translator->trans('emailVerification.subject', [], self::TRANSLATE_DOMAIN, $user->profile->language))

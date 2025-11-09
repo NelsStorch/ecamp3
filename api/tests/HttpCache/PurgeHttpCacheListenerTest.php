@@ -102,10 +102,10 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $this->propertyAccessorProphecy->getValue(Argument::type(Dummy::class), 'relatedOwningDummy')->willReturn(null);
 
         $this->metadataFactoryProphecy = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
-        $operation = (new GetCollection())->withShortName('Dummy')->withClass(Dummy::class);
-        $operation2 = (new GetCollection())->withShortName('DummyAsSubresource')->withClass(Dummy::class);
+        $operation = new GetCollection()->withShortName('Dummy')->withClass(Dummy::class);
+        $operation2 = new GetCollection()->withShortName('DummyAsSubresource')->withClass(Dummy::class);
         $this->metadataFactoryProphecy->create(Dummy::class)->willReturn(new ResourceMetadataCollection('Dummy', [
-            (new ApiResource('Dummy'))
+            new ApiResource('Dummy')
                 ->withShortName('Dummy')
                 ->withOperations(new Operations([
                     'get_collection' => $operation,
@@ -143,16 +143,16 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $cacheManagerProphecy->flush()->willReturn(0);
 
         $metadataFactoryProphecy = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
-        $operation = (new GetCollection())->withShortName('Dummy')->withClass(Dummy::class);
+        $operation = new GetCollection()->withShortName('Dummy')->withClass(Dummy::class);
         $metadataFactoryProphecy->create(Dummy::class)->willReturn(new ResourceMetadataCollection('Dummy', [
-            (new ApiResource('Dummy'))
+            new ApiResource('Dummy')
                 ->withShortName('Dummy')
                 ->withOperations(new Operations([
                     'get' => $operation,
                 ])),
         ]))->shouldBeCalled();
         $metadataFactoryProphecy->create(DummyNoGetOperation::class)->willReturn(new ResourceMetadataCollection('DummyNoGetOperation', [
-            (new ApiResource('DummyNoGetOperation'))
+            new ApiResource('DummyNoGetOperation')
                 ->withShortName('DummyNoGetOperation'),
         ]))->shouldBeCalled();
 
@@ -345,7 +345,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $metadataFactoryProphecy = $this->prophesize(ResourceMetadataCollectionFactoryInterface::class);
         $metadataFactoryProphecy->create(ContainNonResource::class)->willReturn(new ResourceMetadataCollection('ContainNonResource', [
-            (new ApiResource('ContainNonResource'))
+            new ApiResource('ContainNonResource')
                 ->withShortName('ContainNonResource'),
         ]))->shouldBeCalled();
 

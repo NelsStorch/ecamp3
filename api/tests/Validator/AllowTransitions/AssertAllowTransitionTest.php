@@ -45,7 +45,7 @@ class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
 
         $this->validator->validate($testClass->a, new AssertAllowTransitions(self::TRANSITIONS));
 
-        $allFrom = (new ArrayCollection(self::TRANSITIONS))->map(fn ($elem) => $elem['from'])->toArray();
+        $allFrom = new ArrayCollection(self::TRANSITIONS)->map(fn ($elem) => $elem['from'])->toArray();
         $this->buildViolation(AssertAllowTransitionsValidator::FROM_VIOLATION_MESSAGE)
             ->setParameter('{{ from }}', join(',', $allFrom))
             ->setParameter('{{ previousValue }}', $this->before->a)
