@@ -1,6 +1,6 @@
 <template>
   <DetailPane
-    v-model="showDialog"
+    :model-value="showDialog"
     :loading="loading"
     :error="error"
     icon="mdi-account-edit"
@@ -53,7 +53,8 @@
           :collaborator="collaborator"
           :disabled="!isManager"
           editable
-          v-on="on"
+          @click="showDialog = true"
+          v-on="props"
         />
       </slot>
     </template>
