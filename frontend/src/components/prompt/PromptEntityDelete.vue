@@ -14,9 +14,9 @@
     :cancel-action="close"
     v-bind="$attrs"
   >
-    <template #activator="scope">
-      <slot name="activator" v-bind="scope">
-        <ButtonDelete v-bind="{ ...scope.attrs, ...btnAttrs }" v-on="scope.on" />
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }">
+        <ButtonDelete v-bind="{ ...props, ...btnAttrs }" />
       </slot>
     </template>
     <slot>
