@@ -1,6 +1,6 @@
 <template>
   <DetailPane
-    v-model="showDialog"
+    :model-value="showDialog"
     :loading="loading"
     :error="error"
     icon="mdi-account-plus"
@@ -18,6 +18,7 @@
         class="my-n2"
         icon="mdi-account-plus"
         v-bind="props"
+        @click="showDialog = true"
       >
         {{ $t('components.collaborator.collaboratorCreate.inviteCta') }}
       </ButtonAdd>
