@@ -218,7 +218,7 @@ $portrait-content-height: 1009; /* 1123px minus 114px (=2*15mm margin) */
   }
 }
 
-.theme--light.v-calendar-events .v-event-timed {
+.v-theme--light.v-calendar-events .v-event-timed {
   border: none !important;
   outline: 0.1mm solid black !important;
   line-height: 1.3;

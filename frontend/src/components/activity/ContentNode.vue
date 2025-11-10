@@ -56,7 +56,7 @@ export default {
   cursor: move;
   transition: background-color 0.3s 25ms ease;
 
-  .theme--light.v-toolbar.v-sheet {
+  .v-theme--light.v-toolbar.v-sheet {
     background: none;
   }
 }

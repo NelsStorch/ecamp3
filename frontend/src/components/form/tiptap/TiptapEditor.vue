@@ -362,7 +362,7 @@ div.editor:deep(.editor__content .ProseMirror) {
   overflow-wrap: anywhere;
 }
 
-.theme--light.v-input--is-disabled div.editor:deep(.editor__content .ProseMirror) {
+.v-theme--light.v-input--is-disabled div.editor:deep(.editor__content .ProseMirror) {
   color: rgba(0, 0, 0, 0.38);
 }
 

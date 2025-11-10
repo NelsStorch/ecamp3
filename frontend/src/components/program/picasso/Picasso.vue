@@ -481,7 +481,7 @@ export default {
     &:deep(.v-calendar-daily_head-day-label) {
       cursor: auto;
 
-      .theme--light.v-text-field > .v-input__control > .v-input__slot {
+      .v-theme--light.v-text-field > .v-input__control > .v-input__slot {
         cursor: auto;
 
         &:before {
