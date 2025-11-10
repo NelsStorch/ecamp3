@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Service\MailService;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -23,6 +24,7 @@ class MailServiceTest extends KernelTestCase {
 
     private Camp $camp;
     private User $user;
+    private Security $security;
 
     private MailService $mailer;
 
@@ -33,7 +35,15 @@ class MailServiceTest extends KernelTestCase {
         $translator = self::getContainer()->get(TranslatorInterface::class);
         $twigEnvironment = self::getContainer()->get(Environment::class);
 
-        $this->mailer = new MailService($mailer, $translator, $twigEnvironment, 'frontend.example.com', 'sender@example.com', 'SenderName');
+        $this->security = $this->createMock(Security::class);
+        $profile = new Profile();
+        $profile->nickname = 'Linux';
+        $profile->email = 'sender@ecamp3.ch';
+        $user = new User();
+        $user->profile = $profile;
+        $this->security->method('getUser')->willReturn($user);
+
+        $this->mailer = new MailService($mailer, $translator, $twigEnvironment, 'frontend.example.com', 'sender@example.com', 'SenderName', $this->security);
 
         $this->user = new User();
         $profile = new Profile();
@@ -52,6 +62,7 @@ class MailServiceTest extends KernelTestCase {
         self::assertEmailCount(1);
         $mailerMessage = self::getMailerMessage(0);
         self::assertEmailAddressContains($mailerMessage, 'To', self::INVITE_MAIL);
+        self::assertEmailAddressContains($mailerMessage, 'reply-to', 'sender@ecamp3.ch');
         self::assertEmailHeaderSame($mailerMessage, 'subject', '[eCamp v3] Du wurdest ins Lager "some camp title" eingeladen');
 
         self::assertEmailHtmlBodyContains($mailerMessage, $this->camp->title);
@@ -71,6 +82,7 @@ class MailServiceTest extends KernelTestCase {
         self::assertEmailCount(1);
         $mailerMessage = self::getMailerMessage(0);
         self::assertEmailAddressContains($mailerMessage, 'To', self::INVITE_MAIL);
+        self::assertEmailAddressContains($mailerMessage, 'reply-to', 'sender@ecamp3.ch');
 
         self::assertEmailHtmlBodyContains($mailerMessage, $this->camp->title);
         self::assertEmailHtmlBodyContains($mailerMessage, $this->user->getDisplayName());
