@@ -18,18 +18,18 @@
       readonly
       aria-readonly="true"
       aria-describedby="readonly"
-      :items="items"
+      :items="Object.keys(items)"
       :hint="$t('components.collaborator.collaboratorForm.roleHint')"
       persistent-hint
       item-value="key"
       item-text="role"
       vee-rules="required"
     >
-      <template #selection="{ item }">
+      <template #selection="{ item: { value: itemKey } }">
         <span
-          >{{ item.role }} &middot;
+          >{{ items[itemKey].role }} &middot;
           <span class="text-grey"
-            ><template v-for="icon in item.icons" :key="icon"
+            ><template v-for="icon in items[itemKey].icons" :key="icon"
               ><v-icon size="x-small">{{ icon }}</v-icon
               >&thinsp;</template
             ></span
@@ -41,32 +41,32 @@
       v-else
       v-model="localCollaboration.role"
       path="role"
-      :items="items"
+      :items="Object.keys(items)"
       persistent-hint
       item-value="key"
       item-text="role"
       vee-rules="required"
     >
-      <template #item="{ item, on, attrs }">
-        <v-list-item v-bind="attrs" lines="two" v-on="on">
-          <v-list-item-title>{{ item.role }}</v-list-item-title>
-          <span class="text-caption">{{ item.abilities }}</span>
+      <template #item="{ item: { value: itemKey }, props: bindProps }">
+        <v-list-item :title="undefined" lines="two" v-bind="bindProps">
+          <v-list-item-title>{{ items[itemKey].role }}</v-list-item-title>
+          <span class="text-caption">{{ items[itemKey].abilities }}</span>
 
-          <v-list-item-action-text class="text-right">
+          <v-list-item-action class="text-right">
             <span
-              ><template v-for="icon in item.icons" :key="icon"
+              ><template v-for="icon in items[itemKey].icons" :key="icon"
                 ><v-icon size="small">{{ icon }}</v-icon
                 >&thinsp;</template
               ></span
             >
-          </v-list-item-action-text>
+          </v-list-item-action>
         </v-list-item>
       </template>
-      <template #selection="{ item }">
+      <template #selection="{ item: { value: itemKey } }">
         <span
-          >{{ item.role }} &middot;
+          >{{ items[itemKey].role }} &middot;
           <span class="text-grey"
-            ><template v-for="icon in item.icons" :key="icon"
+            ><template v-for="icon in items[itemKey].icons" :key="icon"
               ><v-icon size="x-small">{{ icon }}</v-icon
               >&thinsp;</template
             ></span
@@ -121,26 +121,24 @@ export default {
   },
   computed: {
     items() {
-      return [
-        {
-          key: 'manager',
+      return {
+        manager: {
           role: this.$t('entity.camp.collaborators.manager'),
           abilities: this.$t('global.collaborationAbilities.manager'),
           icons: ['mdi-eye-outline', 'mdi-pencil-outline', 'mdi-cog-outline'],
         },
-        {
-          key: 'member',
+        member: {
           role: this.$t('entity.camp.collaborators.member'),
           abilities: this.$t('global.collaborationAbilities.member'),
           icons: ['mdi-eye-outline', 'mdi-pencil-outline'],
         },
-        {
+        guest: {
           key: 'guest',
           role: this.$t('entity.camp.collaborators.guest'),
           abilities: this.$t('global.collaborationAbilities.guest'),
           icons: ['mdi-eye-outline'],
         },
-      ]
+      }
     },
     localCollaboration() {
       return this.collaboration
