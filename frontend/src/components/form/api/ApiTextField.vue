@@ -13,7 +13,7 @@ Displays a field as a e-text-field + write access via API wrapper
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :outlined="outlined"
+      :variant="variant"
       :filled="filled"
       :dense="dense"
       @update:model-value="wrapper.on.input"
@@ -35,12 +35,6 @@ export default {
   name: 'ApiTextField',
   components: { ApiWrapper, ApiWrapperAppend },
   mixins: [apiPropsMixin],
-  props: {
-    outlined: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data() {
     return {}
   },

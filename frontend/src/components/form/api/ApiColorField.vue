@@ -12,7 +12,7 @@ Displays a field as a e-color-field + write access via API wrapper
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :outlined="outlined"
+      :variant="variant"
       :filled="filled"
       :dense="dense"
       @update:model-value="wrapper.on.input"
