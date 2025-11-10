@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { slugify } from '@/plugins/slugify.js'
-import { isLoggedIn, isAdmin } from '@/plugins/auth'
+import { isAdmin, isLoggedIn } from '@/plugins/auth'
 import { apiStore } from '@/plugins/store'
 import { campShortTitle } from '@/common/helpers/campShortTitle'
 import { getEnv } from '@/environment.js'
@@ -514,7 +514,8 @@ const router = createRouter({
       components: {
         navigation: NavigationCamp,
         default: () => import('./views/camp/activity/Activity.vue'),
-        aside: () => import('./views/camp/activity/SideBarProgram.vue'),
+        // comment for now until we have everything else up and running.
+        // aside: () => import('./views/camp/activity/SideBarProgram.vue'),
       },
       beforeEnter: all([requireAuth, requireCamp, requireActivityScheduleEntry]),
       props: {
