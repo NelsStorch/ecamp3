@@ -69,7 +69,7 @@ export const props = {
 
 export function useFormComponent(label, path, validationLabelOverride, entityName, t) {
   const labelOrEntityFieldLabel = computed(() => {
-    if (label !== undefined) {
+    if (label !== undefined && label !== null) {
       return label
     }
     if (!entityName || !path) {
