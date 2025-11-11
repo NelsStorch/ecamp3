@@ -7,6 +7,7 @@ use App\Entity\Camp;
 use App\Entity\Profile;
 use App\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -22,13 +23,19 @@ class MailService {
         private readonly Environment $twigEnironment,
         private readonly string $frontendBaseUrl,
         private readonly string $senderEmail,
-        private readonly string $senderName = ''
+        private readonly string $senderName,
+        private readonly Security $security,
     ) {}
 
     public function sendInviteToCampMail(User $byUser, Camp $camp, string $key, string $emailToInvite): void {
+        /** @var User $originator */
+        $originator = $this->security->getUser();
+        $originatorEmail = $originator->getEmail();
+        $originatorName = $originator->getDisplayName();
         $email = new TemplatedEmail()
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(new Address($emailToInvite))
+            ->replyTo(new Address($originatorEmail, $originatorName))
             ->subject($this->translator->trans('inviteToCamp.subject', ['campTitle' => $camp->title], self::TRANSLATE_DOMAIN, $byUser->profile->language))
             ->htmlTemplate($this->getTemplate('emails/campCollaborationInvite.{language}.html.twig', $byUser))
             ->textTemplate($this->getTemplate('emails/campCollaborationInvite.{language}.text.twig', $byUser))
