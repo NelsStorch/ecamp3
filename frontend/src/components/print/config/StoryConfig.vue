@@ -3,6 +3,7 @@
     <e-select
       v-model="options.periods"
       :items="periods"
+      path="periods"
       :label="$t('print.config.periods')"
       multiple
       :filled="false"
@@ -21,9 +22,7 @@
 </template>
 
 <script>
-import SummaryConfig, {
-  SUMMARY_CONTENTTYPES,
-} from '@/components/print/config/SummaryConfig.vue'
+import SummaryConfig, { SUMMARY_CONTENTTYPES, } from '@/components/print/config/SummaryConfig.vue'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
 import repairFilterConfig from '../../program/repairFilterConfig.js'
 

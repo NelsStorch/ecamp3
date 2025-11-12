@@ -3,6 +3,7 @@
     <e-select
       v-if="!loading"
       v-model="optionsScheduleEntry"
+      path="optionsScheduleEntry"
       :items="scheduleEntries"
       :label="$t('components.print.config.activityConfig.activity')"
       :filled="false"

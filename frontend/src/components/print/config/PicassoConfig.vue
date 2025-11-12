@@ -4,6 +4,7 @@
       v-model="options.periods"
       :label="$t('print.config.periods')"
       :items="periods"
+      path="periods"
       multiple
       :filled="false"
       :readonly="periods.length === 1"
@@ -13,6 +14,7 @@
       v-model="options.orientation"
       :label="$t('components.print.config.picassoConfig.orientation')"
       :items="orientations"
+      path="orientation"
       :filled="false"
       @input="$emit('input')"
     />

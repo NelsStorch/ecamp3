@@ -2,6 +2,7 @@
   <div class="px-md-4 flex-grow-1 d-flex flex-column justify-content-between">
     <e-select
       v-model="options.periods"
+      path="periods"
       :items="periods"
       :label="$t('print.config.periods')"
       multiple
