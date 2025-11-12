@@ -5,6 +5,7 @@ import axios from 'axios'
 import { getEnv } from '@/environment.js'
 import * as Sentry from '@sentry/browser'
 import { useToast } from 'vue-toastification'
+import jsonStringifyReactiveValue from '@/components/print/jsonStringifyReactiveValue.js'
 
 const PRINT_URL = getEnv().PRINT_URL
 
@@ -41,9 +42,7 @@ export const generatePdfMixin = {
         const response = await axios({
           baseURL: null,
           method: 'get',
-          url: `${PRINT_URL}/api/pdf?config=${encodeURIComponent(
-            JSON.stringify(config)
-          )}`,
+          url: `${PRINT_URL}/api/pdf?config=${jsonStringifyReactiveValue(config)}`,
           responseType: 'arraybuffer',
           withCredentials: true,
           headers: {
