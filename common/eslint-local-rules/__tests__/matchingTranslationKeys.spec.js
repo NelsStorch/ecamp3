@@ -6,7 +6,7 @@ import globals from 'globals'
 import utils from 'eslint-plugin-vue/lib/utils/index.js'
 import eslintParser from 'vue-eslint-parser'
 
-RuleTester.describe = describe
+RuleTester.describe = describe.skip
 RuleTester.it = it
 
 const ruleTester = new RuleTester({

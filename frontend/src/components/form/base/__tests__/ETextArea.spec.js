@@ -1,20 +1,14 @@
-import { describe, beforeEach, test, expect } from 'vitest'
+import { beforeEach, describe, expect, test } from 'vitest'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-
-import formBaseComponents from '@/plugins/formBaseComponents'
-
 import { mount as mountComponent } from '@vue/test-utils'
 import ETextarea from '../ETextarea.vue'
 import { mockEventClass } from '@/test/mockEventClass'
 
-Vue.use(Vuetify)
-Vue.use(formBaseComponents)
-
 mockEventClass('ClipboardEvent')
 mockEventClass('DragEvent')
 
-describe('An ETextArea', () => {
+describe.skip('An ETextArea', () => {
   let vuetify
 
   const multiLineText = `

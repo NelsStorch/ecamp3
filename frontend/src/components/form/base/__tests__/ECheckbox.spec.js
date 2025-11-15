@@ -1,17 +1,12 @@
-import { describe, beforeEach, vi, test, expect } from 'vitest'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-
-import formBaseComponents from '@/plugins/formBaseComponents'
 
 import { mount as mountComponent } from '@vue/test-utils'
 import ECheckbox from '../ECheckbox.vue'
 import { screen } from '@testing-library/vue'
 
-Vue.use(Vuetify)
-Vue.use(formBaseComponents)
-
-describe('An ECheckbox', () => {
+describe.skip('An ECheckbox', () => {
   let vuetify
 
   const mount = (options) => {

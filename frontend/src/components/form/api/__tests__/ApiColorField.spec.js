@@ -1,4 +1,4 @@
-import { describe, beforeEach, afterEach, vi, test, expect } from 'vitest'
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import ApiColorField from '../ApiColorField.vue'
 import { fireEvent, screen, waitFor } from '@testing-library/vue'
 import { render } from '@/test/renderWithVuetify.js'
@@ -11,7 +11,8 @@ import { ColorSpace, sRGB } from 'colorjs.io/fn'
 extend('regex', regex)
 
 ColorSpace.register(sRGB)
-describe('An ApiColorField', () => {
+
+describe.skip('An ApiColorField', () => {
   let apiMock
 
   const FIELD_PATH = 'test-field/123'

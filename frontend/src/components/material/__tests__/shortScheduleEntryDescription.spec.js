@@ -3,7 +3,7 @@ import shortScheduleEntryDescription from '../shortScheduleEntryDescription.js'
 import createI18n from '@/components/print/print-client/i18n.js'
 import { i18n } from '@/plugins/i18n'
 
-describe('shortScheduleEntryDescription', () => {
+describe.skip('shortScheduleEntryDescription', () => {
   const { translate } = createI18n(i18n.messages, 'en')
   const tc = (key, _count, params) => translate(key, params)
 

@@ -171,7 +171,6 @@ export default defineConfig(({ mode }) => ({
   },
   test: {
     environment: 'jsdom',
-    alias: [{ find: /^vue$/, replacement: 'vue/dist/vue.runtime.common.js' }],
     globalSetup: './tests/globalSetup.js',
     setupFiles: './tests/setup.js',
     maxWorkers: 1,
@@ -183,6 +182,7 @@ export default defineConfig(({ mode }) => ({
       reportsDirectory: './data/coverage',
     },
     deps: {
+      inline: ['vuetify'],
       optimizer: {
         web: {
           exclude: ['vue'],

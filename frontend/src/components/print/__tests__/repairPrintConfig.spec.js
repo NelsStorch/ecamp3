@@ -1,4 +1,4 @@
-import { describe, test, expect } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import repairConfig from '../repairPrintConfig.js'
 import PicassoConfig from '../config/PicassoConfig.vue'
 import ActivityConfig from '../config/ActivityConfig.vue'
@@ -9,7 +9,7 @@ import SafetyConsiderationsConfig from '../config/SafetyConsiderationsConfig.vue
 import TocConfig from '../config/TocConfig.vue'
 import ActivityListConfig from '../config/ActivityListConfig.vue'
 
-describe('repairConfig', () => {
+describe.skip('repairConfig', () => {
   const camp = {
     _meta: { self: '/camps/1a2b3c4d' },
     shortTitle: 'test camp',

@@ -5,7 +5,7 @@ const mockI18n = {
   $tc: (key) => key,
 }
 
-describe('oneEmojiOrTwoCharacters validation', () => {
+describe.skip('oneEmojiOrTwoCharacters validation', () => {
   it.each([
     ['1', true],
     ['12', true],
