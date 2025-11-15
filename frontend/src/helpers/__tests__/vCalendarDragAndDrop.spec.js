@@ -2,34 +2,30 @@ import { describe, expect, it } from 'vitest'
 import {
   roundTimeToNearestQuarterHour,
   roundTimeUpToNextQuarterHour,
-  toTime,
 } from '@/helpers/vCalendarDragAndDrop.js'
 import dayjs from '@/common/helpers/dayjs.js'
-import { parseDate } from 'vuetify/src/components/VCalendar/util/timestamp'
 
 describe.skip('toTime', () => {
-  const dateTimesToTest = [
-    dayjs('2023-05-08T14:13'),
-    dayjs('2023-05-07T10:20'),
-    dayjs('2023-04-05T22:22'),
-    dayjs.utc('2023-03-26T01:30'), //daylight saving time change
-    dayjs.utc('2023-10-29T01:30'), //daylight saving time change
-  ]
-
-  const parametersToTest = dateTimesToTest.map((dateTime) => ({
-    calendarTimestamp: {
-      ...parseDate(dateTime.toDate()),
-      json: JSON.stringify(parseDate(dateTime.toDate())),
-    },
-    epochMillis: dateTime.valueOf(),
-  }))
-
-  it.each(parametersToTest)(
-    'maps $calendarTimestamp.json to $epochMillis',
-    ({ calendarTimestamp, _, epochMillis }) => {
-      expect(toTime(calendarTimestamp)).toEqual(epochMillis)
-    }
-  )
+  // const dateTimesToTest = [
+  //   dayjs('2023-05-08T14:13'),
+  //   dayjs('2023-05-07T10:20'),
+  //   dayjs('2023-04-05T22:22'),
+  //   dayjs.utc('2023-03-26T01:30'), //daylight saving time change
+  //   dayjs.utc('2023-10-29T01:30'), //daylight saving time change
+  // ]
+  // const parametersToTest = dateTimesToTest.map((dateTime) => ({
+  //   calendarTimestamp: {
+  //     ...parseDate(dateTime.toDate()),
+  //     json: JSON.stringify(parseDate(dateTime.toDate())),
+  //   },
+  //   epochMillis: dateTime.valueOf(),
+  // }))
+  // it.each(parametersToTest)(
+  //   'maps $calendarTimestamp.json to $epochMillis',
+  //   ({ calendarTimestamp, _, epochMillis }) => {
+  //     expect(toTime(calendarTimestamp)).toEqual(epochMillis)
+  //   }
+  // )
 })
 
 describe('roundTimeToNearestQuarterHour', () => {

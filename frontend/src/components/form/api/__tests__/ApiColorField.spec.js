@@ -4,11 +4,7 @@ import { fireEvent, screen, waitFor } from '@testing-library/vue'
 import { render } from '@/test/renderWithVuetify.js'
 import user from '@testing-library/user-event'
 import { ApiMock } from '@/components/form/api/__tests__/ApiMock'
-import { extend } from 'vee-validate'
-import { regex } from 'vee-validate/dist/rules'
 import { ColorSpace, sRGB } from 'colorjs.io/fn'
-
-extend('regex', regex)
 
 ColorSpace.register(sRGB)
 
