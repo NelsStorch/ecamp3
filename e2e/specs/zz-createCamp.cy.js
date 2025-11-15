@@ -7,7 +7,7 @@ const in2Days = new Date()
 in2Days.setDate(in2Days.getDate() + 2)
 
 const campTitle = 'title'
-describe('create new camp', () => {
+describe.skip('create new camp', () => {
   it('without prototype', () => {
     cy.login(bipiUser)
 

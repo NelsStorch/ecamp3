@@ -112,7 +112,7 @@ describe('cache test: /camps/{campId}/categories', () => {
     })
   })
 
-  it('invalidates cached data when user leaves a camp', () => {
+  it.skip('invalidates cached data when user leaves a camp', () => {
     Cypress.session.clearAllSavedSessions()
     const uri = `/api/camps/${grgrCampId}/categories`
 

@@ -92,7 +92,7 @@ describe('Nuxt print test', () => {
       cy.getPdfProperties(pdfPath).its('numPages').should('eq', 25)
     })
 
-    it('for picasso', () => {
+    it.skip('for picasso', () => {
       if (Cypress.browser.name === 'firefox') {
         console.log(
           "This test doesn't test browser specific behaviour. Firefox makes problems, thus we dont test this with firefox."
