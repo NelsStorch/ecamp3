@@ -16,15 +16,7 @@ const vuetifyComponents = readdirSync(componentsPath)
 
 const plugins = [
   comlink(), // must be first
-  vue({
-    template: {
-      compilerOptions: {
-        compatConfig: {
-          MODE: 2,
-        },
-      },
-    },
-  }),
+  vue(),
   Components({
     resolvers: [],
   }),

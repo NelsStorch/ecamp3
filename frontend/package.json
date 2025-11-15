@@ -50,7 +50,6 @@
     "@unhead/vue": "2.0.14",
     "@vee-validate/i18n": "4.15.1",
     "@vee-validate/rules": "4.15.1",
-    "@vue/compat": "3.5.21",
     "@zxcvbn-ts/core": "3.0.4",
     "@zxcvbn-ts/language-common": "3.0.4",
     "@zxcvbn-ts/language-de": "3.0.2",
