@@ -61,19 +61,19 @@ export default {
     }
   },
   methods: {
-    tokensFilter(value, queryText, item) {
+    tokensFilter(value, queryText) {
       const [idxs, info] = this.fuzzy.search([value], queryText, true, 1e3)
-      this.searchInfos.set(item.value, info)
+      this.searchInfos.set(value, info)
       return idxs && idxs.length > 0
     },
 
     renderHighlighted(item) {
-      if (this.search) {
-        if (this.searchInfos.has(item.value)) {
-          const info = this.searchInfos.get(item.value)
+      if (this.searchInfos.size > 0) {
+        if (this.searchInfos.has(item.title)) {
+          const info = this.searchInfos.get(item.title)
           if (info) {
             return uFuzzy.highlight(
-              item.text,
+              item.title,
               info.ranges[0],
               (p, m) => ({ h: m, text: p }),
               [],
@@ -84,7 +84,7 @@ export default {
           }
         }
       }
-      return [{ h: false, text: item.text }]
+      return [{ h: false, text: item.title }]
     },
   },
 }
