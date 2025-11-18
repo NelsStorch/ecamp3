@@ -20,13 +20,14 @@ class UTCDateType extends DateType {
      *
      * @template T
      */
+    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string {
         if ($value instanceof \DateTime || $value instanceof \DateTimeImmutable) {
             $value = $value->setTimezone(self::getUtc());
         }
 
         if ($value instanceof \DateTimeImmutable) {
-            return (new DateImmutableType())->convertToDatabaseValue($value, $platform);
+            return new DateImmutableType()->convertToDatabaseValue($value, $platform);
         }
 
         return parent::convertToDatabaseValue($value, $platform);
@@ -43,6 +44,7 @@ class UTCDateType extends DateType {
      *
      * @template T
      */
+    #[\Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?\DateTime {
         if (null === $value || $value instanceof \DateTime) {
             return $value;

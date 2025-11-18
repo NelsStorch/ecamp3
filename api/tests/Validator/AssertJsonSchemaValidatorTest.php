@@ -15,9 +15,9 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  * @internal
  */
 class AssertJsonSchemaValidatorTest extends ConstraintValidatorTestCase {
-    private const message = "Provided JSON doesn't match required schema ({{ schemaError }}).";
+    private const string message = "Provided JSON doesn't match required schema ({{ schemaError }}).";
 
-    private const testSchema = [
+    private const array testSchema = [
         'type' => 'object',
         'properties' => [
             'id' => [

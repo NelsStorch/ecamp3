@@ -246,7 +246,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
     #[ApiProperty(example: 'SoLa 2022')]
     #[Groups(['read', 'write'])]
     #[ORM\Column(type: 'text', nullable: true)]
-    public ?string $shortTitle;
+    public ?string $shortTitle = null;
 
     /**
      * The full title of the camp. Used for identifying the camp in lists of camps, so

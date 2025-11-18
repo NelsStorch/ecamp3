@@ -28,6 +28,7 @@ abstract class CreateContentNodeTestCase extends ECampApiTestCase {
 
     protected ContentNode $defaultParent;
 
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 
@@ -314,6 +315,7 @@ abstract class CreateContentNodeTestCase extends ECampApiTestCase {
         ], $cacheManager->getInvalidatedTags());
     }
 
+    #[\Override]
     protected function getExampleWritePayload($attributes = [], $except = []) {
         return parent::getExampleWritePayload(
             array_merge([

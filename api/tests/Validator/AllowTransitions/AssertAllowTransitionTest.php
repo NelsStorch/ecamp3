@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  * @internal
  */
 class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
-    private const TRANSITIONS = [
+    private const array TRANSITIONS = [
         ['from' => '1', 'to' => ['2', '3']],
         ['from' => '2', 'to' => ['3']],
         ['from' => '3', 'to' => ['1']],
@@ -26,6 +26,7 @@ class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
     private MockObject|RequestStack $requestStack;
     private TestClass $before;
 
+    #[\Override]
     protected function setUp(): void {
         $this->before = new TestClass('2');
 
@@ -44,7 +45,7 @@ class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
 
         $this->validator->validate($testClass->a, new AssertAllowTransitions(self::TRANSITIONS));
 
-        $allFrom = (new ArrayCollection(self::TRANSITIONS))->map(fn ($elem) => $elem['from'])->toArray();
+        $allFrom = new ArrayCollection(self::TRANSITIONS)->map(fn ($elem) => $elem['from'])->toArray();
         $this->buildViolation(AssertAllowTransitionsValidator::FROM_VIOLATION_MESSAGE)
             ->setParameter('{{ from }}', join(',', $allFrom))
             ->setParameter('{{ previousValue }}', $this->before->a)
@@ -107,16 +108,14 @@ class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
 }
 
 class TestClass {
-    #[AssertAllowTransitions([
-        ['from' => '1', 'to' => ['2', '3']],
-        ['from' => '2', 'to' => ['3']],
-        ['from' => '3', 'to' => ['1']],
-    ])]
-    public string $a;
-
-    public function __construct($a) {
-        $this->a = $a;
-    }
+    public function __construct(
+        #[AssertAllowTransitions([
+            ['from' => '1', 'to' => ['2', '3']],
+            ['from' => '2', 'to' => ['3']],
+            ['from' => '3', 'to' => ['1']],
+        ])]
+        public string $a
+    ) {}
 
     public function setA(string $a): TestClass {
         $this->a = $a;

@@ -22,6 +22,7 @@ class PeriodPersistProcessor extends AbstractPersistProcessor {
     /**
      * @param Period $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Period {
         self::moveDaysAndScheduleEntries($data, $context['previous_data'] ?? null);
         self::removeExtraDays($data);

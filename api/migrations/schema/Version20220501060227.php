@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220501060227 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -29,6 +30,7 @@ final class Version20220501060227 extends AbstractMigration {
         $this->addSql('DROP INDEX idx_d7785d2c9d468a55');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE INDEX idx_c93898a9d468a55 ON camp_collaboration (createtime)');

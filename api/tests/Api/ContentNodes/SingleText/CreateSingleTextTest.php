@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\CreateContentNodeTestCase;
  * @internal
  */
 class CreateSingleTextTest extends CreateContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 

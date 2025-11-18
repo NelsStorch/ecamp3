@@ -15,6 +15,7 @@ class CompatibleHalResponse extends Constraint {
         return 'is hal compatible with '.$this->exporter()->export($this->halResponse);
     }
 
+    #[\Override]
     protected function matches($other): bool {
         if (!is_array($other)) {
             return false;
@@ -27,7 +28,7 @@ class CompatibleHalResponse extends Constraint {
         sort($otherKeys);
         $otherKeysWithoutEmbedded = array_diff($otherKeys, ['_embedded']);
 
-        if (join($halResponseKeysWithoutEmbedded) !== join($otherKeysWithoutEmbedded)) {
+        if (join('', $halResponseKeysWithoutEmbedded) !== join('', $otherKeysWithoutEmbedded)) {
             return false;
         }
 
@@ -41,7 +42,7 @@ class CompatibleHalResponse extends Constraint {
         $otherRelationKeys = array_unique(array_merge($otherLinksKeys, $otherEmbeddedKeys));
         sort($otherRelationKeys);
 
-        if (join($halResponseRelationKeys) !== join($otherRelationKeys)) {
+        if (join('', $halResponseRelationKeys) !== join('', $otherRelationKeys)) {
             return false;
         }
 

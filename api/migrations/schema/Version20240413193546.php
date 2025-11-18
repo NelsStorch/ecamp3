@@ -8,6 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 final class Version20240413193546 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add View view_period_material_items to fast resolve materialItem-Owner';
     }
@@ -35,6 +36,7 @@ final class Version20240413193546 extends AbstractMigration {
         );
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP VIEW public.view_period_material_items');

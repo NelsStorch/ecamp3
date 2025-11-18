@@ -25,11 +25,11 @@ class UriTemplateFactory {
     protected ?array $resourceNameMapping = [];
 
     public function __construct(
-        private ContainerInterface $filterLocator,
-        private ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory,
+        private readonly ContainerInterface $filterLocator,
+        private readonly ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory,
         ResourceNameCollectionFactoryInterface $resourceNameCollectionFactory,
-        private IriConverterInterface $iriConverter,
-        private PaginationOptions $paginationOptions,
+        private readonly IriConverterInterface $iriConverter,
+        private readonly PaginationOptions $paginationOptions,
     ) {
         foreach ($resourceNameCollectionFactory->create() as $className) {
             $shortName = $this->resourceMetadataCollectionFactory->create($className)[0]->getShortName();

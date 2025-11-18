@@ -134,7 +134,7 @@ class ExpressionDateTimeFilter extends AbstractFilter implements DateFilterInter
     ) {
         try {
             $value = new \DateTime($value);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             // Silently ignore this filter if it can not be transformed to a \DateTime
             $this->logger->notice('Invalid filter ignored', [
                 'exception' => new InvalidArgumentException(sprintf('The field "%s" has a wrong date format. Use one accepted by the \DateTime constructor', $field)),

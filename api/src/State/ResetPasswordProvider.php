@@ -14,8 +14,8 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
  */
 class ResetPasswordProvider implements ProviderInterface {
     public function __construct(
-        private UserRepository $userRepository,
-        private PasswordHasherFactoryInterface $pwHasherFactory,
+        private readonly UserRepository $userRepository,
+        private readonly PasswordHasherFactoryInterface $pwHasherFactory,
     ) {}
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): ?ResetPassword {

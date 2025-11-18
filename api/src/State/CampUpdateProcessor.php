@@ -16,11 +16,11 @@ use Symfony\Bundle\SecurityBundle\Security;
 class CampUpdateProcessor extends AbstractPersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private Security $security,
+        private readonly Security $security,
     ) {
         $sharingChangeListener = PropertyChangeListener::of(
             extractProperty: fn (Camp $data) => $data->isShared,
-            beforeAction: fn (Camp $data) => $this->onBeforeSharingStatusChange($data),
+            beforeAction: $this->onBeforeSharingStatusChange(...),
         );
 
         parent::__construct(

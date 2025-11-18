@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20240621060047 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add color and abbreviation to profile';
     }
@@ -20,6 +21,7 @@ final class Version20240621060047 extends AbstractMigration {
         $this->addSql('ALTER TABLE profile ADD abbreviation TEXT DEFAULT NULL');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql('ALTER TABLE profile DROP color');
         $this->addSql('ALTER TABLE profile DROP abbreviation');

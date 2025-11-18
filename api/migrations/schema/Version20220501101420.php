@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220501101420 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -51,6 +52,7 @@ final class Version20220501101420 extends AbstractMigration {
         $this->addSql('DROP TABLE abstract_content_node_owner');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE abstract_content_node_owner (id VARCHAR(16) NOT NULL, rootcontentnodeid VARCHAR(16) NOT NULL, createtime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updatetime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, entitytype VARCHAR(255) NOT NULL, PRIMARY KEY(id))');

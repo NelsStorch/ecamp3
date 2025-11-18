@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class CategoryCreateProcessor extends AbstractPersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private EntityManagerInterface $em,
+        private readonly EntityManagerInterface $em,
     ) {
         parent::__construct($decorated);
     }
@@ -25,6 +25,7 @@ class CategoryCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param Category $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Category {
         // TODO implement actual prototype cloning and strategy classes, this is just a dummy implementation to
         //      fill the non-nullable field for Doctrine
@@ -36,7 +37,7 @@ class CategoryCreateProcessor extends AbstractPersistProcessor {
         $rootContentNode->data = ['columns' => [['slot' => '1', 'width' => 12]]];
         $data->setRootContentNode($rootContentNode);
 
-        if (isset($data->copyCategorySource)) {
+        if (null !== $data->copyCategorySource) {
             // CopyActivity Source is set -> copy it's content (rootContentNode)
             $entityMap = new EntityMap($data->camp);
             $rootContentNode->copyFromPrototype($data->copyCategorySource->getRootContentNode(), $entityMap);

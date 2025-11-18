@@ -164,6 +164,7 @@ class CreateCommentTest extends ECampApiTestCase {
         $this->assertJsonContains($this->getExampleReadPayload(['textHtml' => '<b>testText</b>']));
     }
 
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return $this->getExamplePayload(
             Comment::class,

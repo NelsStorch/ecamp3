@@ -8,6 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 final class Version20250821113132 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add isShared flag on camps';
     }
@@ -30,6 +31,7 @@ final class Version20250821113132 extends AbstractMigration {
         );
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql(
             <<<'EOF'

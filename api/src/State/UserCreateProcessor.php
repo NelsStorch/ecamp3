@@ -18,9 +18,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserCreateProcessor extends AbstractPersistProcessor {
     public function __construct(
         ProcessorInterface $decorated,
-        private ReCaptchaWrapper $reCaptcha,
-        private UserPasswordHasherInterface $userPasswordHasher,
-        private MailService $mailService
+        private readonly ReCaptchaWrapper $reCaptcha,
+        private readonly UserPasswordHasherInterface $userPasswordHasher,
+        private readonly MailService $mailService
     ) {
         parent::__construct($decorated);
     }
@@ -28,6 +28,7 @@ class UserCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param User $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): User {
         $resp = $this->reCaptcha->verify($data->recaptchaToken);
         if (!$resp->isSuccess()) {

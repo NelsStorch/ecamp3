@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220319211452 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add campCollaboration to MaterialList';
     }
@@ -22,6 +23,7 @@ final class Version20220319211452 extends AbstractMigration {
         $this->addSql('CREATE INDEX IDX_10A0952D56778C5C ON material_list (campCollaborationId)');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql('ALTER TABLE material_list ALTER COLUMN name SET NOT NULL');
         $this->addSql('ALTER TABLE material_list DROP CONSTRAINT FK_10A0952D56778C5C');

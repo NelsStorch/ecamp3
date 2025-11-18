@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\TypeInfo\Type;
 
 final class ContentNodeIsRootFilter extends AbstractFilter {
-    public const IS_ROOT_QUERY_NAME = 'isRoot';
+    public const string IS_ROOT_QUERY_NAME = 'isRoot';
 
     public function __construct(
         ManagerRegistry $managerRegistry,

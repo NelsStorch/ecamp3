@@ -10,6 +10,7 @@ class CacheManagerMock extends CacheManager {
     public function __construct(
     ) {}
 
+    #[\Override]
     public function flush(): int {
         return 0;
     }
@@ -17,6 +18,7 @@ class CacheManagerMock extends CacheManager {
     /**
      * @param string[] $tags Tags that should be removed/expired from the cache. An empty tag list is ignored.
      */
+    #[\Override]
     public function invalidateTags(array $tags): static {
         if (!$tags) {
             return $this;

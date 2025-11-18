@@ -164,9 +164,7 @@ class ScheduleEntryTest extends TestCase {
     }
 
     protected function setCreateTime(ScheduleEntry $scheduleEntry, \DateTime $createTime) {
-        $createTimeProperty = (new \ReflectionClass(ScheduleEntry::class))->getProperty('createTime');
-        $createTimeProperty->setAccessible(true);
+        $createTimeProperty = new \ReflectionClass(ScheduleEntry::class)->getProperty('createTime');
         $createTimeProperty->setValue($scheduleEntry, $createTime);
-        $createTimeProperty->setAccessible(false);
     }
 }

@@ -13,16 +13,14 @@ use Symfony\Bundle\SecurityBundle\Security;
  * @template-extends AbstractPersistProcessor<Comment>
  */
 class CommentCreateProcessor extends AbstractPersistProcessor {
-    private Security $security;
-
-    public function __construct(ProcessorInterface $decorated, Security $security) {
+    public function __construct(ProcessorInterface $decorated, private readonly Security $security) {
         parent::__construct($decorated);
-        $this->security = $security;
     }
 
     /**
      * @param Comment $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): Comment {
         /** @var User $user */
         $user = $this->security->getUser();

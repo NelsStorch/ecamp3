@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20240817112552 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Rename camp.name to shortTitle and switch shortTitle with title if shortTitle is longer than 16 characters and title is shorter than shortTitle';
     }
@@ -22,6 +23,7 @@ final class Version20240817112552 extends AbstractMigration {
         $this->addSql('UPDATE camp SET shortTitle = title, title = shortTitle WHERE char_length(shortTitle) > 16 AND char_length(title) < char_length(shortTitle);');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql("UPDATE camp SET shortTitle = '' WHERE shortTitle IS NULL");
         $this->addSql('ALTER TABLE camp ALTER shortTitle SET NOT NULL, ALTER shortTitle TYPE VARCHAR(32)');

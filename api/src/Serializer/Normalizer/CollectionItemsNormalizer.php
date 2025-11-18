@@ -10,11 +10,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  * under the relation name `items` instead of `item`.
  */
 class CollectionItemsNormalizer implements NormalizerInterface, NormalizerAwareInterface {
-    private NormalizerInterface $decorated;
-
-    public function __construct(NormalizerInterface $decorated) {
-        $this->decorated = $decorated;
-    }
+    public function __construct(private readonly NormalizerInterface $decorated) {}
 
     public function supportsNormalization($data, $format = null, array $context = []): bool {
         return $this->decorated->supportsNormalization($data, $format, $context);

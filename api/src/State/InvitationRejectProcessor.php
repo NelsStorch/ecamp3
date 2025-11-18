@@ -15,9 +15,9 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
  */
 class InvitationRejectProcessor implements ProcessorInterface {
     public function __construct(
-        private PasswordHasherFactoryInterface $passwordHasherFactory,
-        private CampCollaborationRepository $campCollaborationRepository,
-        private EntityManagerInterface $em,
+        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
+        private readonly CampCollaborationRepository $campCollaborationRepository,
+        private readonly EntityManagerInterface $em,
     ) {}
 
     /**

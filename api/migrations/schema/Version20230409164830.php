@@ -8,6 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 final class Version20230409164830 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Create ActivityProgressLabels for camps from their prototype';
     }
@@ -114,5 +115,6 @@ final class Version20230409164830 extends AbstractMigration {
         ');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {}
 }

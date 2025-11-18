@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20221001082012 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Remove username from profile';
     }
@@ -21,6 +22,7 @@ final class Version20221001082012 extends AbstractMigration {
         $this->addSql('ALTER TABLE profile DROP username');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE "profile" ADD username VARCHAR(64) NOT NULL');

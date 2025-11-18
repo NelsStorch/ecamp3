@@ -15,10 +15,10 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class ContentTypeNormalizer implements NormalizerInterface, SerializerAwareInterface {
     public function __construct(
-        private NormalizerInterface $decorated,
-        private UriTemplate $uriTemplate,
-        private UriTemplateFactory $uriTemplateFactory,
-        private IriConverterInterface $iriConverter,
+        private readonly NormalizerInterface $decorated,
+        private readonly UriTemplate $uriTemplate,
+        private readonly UriTemplateFactory $uriTemplateFactory,
+        private readonly IriConverterInterface $iriConverter,
     ) {}
 
     public function supportsNormalization($data, $format = null, array $context = []): bool {

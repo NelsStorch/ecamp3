@@ -9,6 +9,7 @@ use App\Tests\Api\ContentNodes\CreateContentNodeTestCase;
  * @internal
  */
 class CreateChecklistNodeTest extends CreateContentNodeTestCase {
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
 
@@ -20,6 +21,7 @@ class CreateChecklistNodeTest extends CreateContentNodeTestCase {
     /**
      * payload set up.
      */
+    #[\Override]
     public function getExampleWritePayload($attributes = [], $except = []) {
         return parent::getExampleWritePayload(
             $attributes,

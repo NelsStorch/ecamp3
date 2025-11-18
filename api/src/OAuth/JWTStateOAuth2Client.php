@@ -35,12 +35,12 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
 
     public function __construct(
         AbstractProvider $provider,
-        private RequestStack $requestStack,
-        private string $cookiePrefix,
-        private string $appEnv,
-        private JWTEncoderInterface $jwtEncoder,
-        private EntityManagerInterface $entityManager,
-        private OAuthStateRepository $stateRepository,
+        private readonly RequestStack $requestStack,
+        private readonly string $cookiePrefix,
+        private readonly string $appEnv,
+        private readonly JWTEncoderInterface $jwtEncoder,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly OAuthStateRepository $stateRepository,
     ) {
         parent::__construct($provider, $requestStack);
 
@@ -63,6 +63,7 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
      *
      * @throws \Exception
      */
+    #[\Override]
     public function redirect(array $scopes = [], array $options = []): RedirectResponse {
         $state = bin2hex(random_bytes(16));
         $now = time();
@@ -72,7 +73,7 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
 
         try {
             $response->headers->setCookie(
-                Cookie::create($this->getCookieName($this->cookiePrefix))
+                Cookie::create(static::getCookieName($this->cookiePrefix))
                     ->withValue($this->encodeStateJWT(array_merge($options['additionalData'] ?? [], [
                         'state' => $state,
                         'iat' => $now,
@@ -83,7 +84,7 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
                     ->withSecure('dev' !== $this->appEnv) // in local development, we don't use https
                     ->withExpires($expires)
             );
-        } catch (JWTEncodeFailureException $e) {
+        } catch (JWTEncodeFailureException) {
             throw new \LogicException('Could not create a JWT token for storing the state parameter securely');
         }
 
@@ -107,8 +108,9 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
      *
      * @throws IdentityProviderException
      */
+    #[\Override]
     public function getAccessToken(array $options = []): AccessTokenInterface {
-        $jwt = $this->getCurrentRequest()->cookies->get($this->getCookieName($this->cookiePrefix));
+        $jwt = $this->getCurrentRequest()->cookies->get(static::getCookieName($this->cookiePrefix));
         if (null === $jwt) {
             throw new InvalidStateException('Expired state');
         }
@@ -122,7 +124,7 @@ class JWTStateOAuth2Client extends OAuth2Client implements OAuth2ClientInterface
 
             $now = new \DateTime('@'.time());
             $persistedState = $this->stateRepository->findOneUnexpiredBy($actualState, $now);
-        } catch (JWTDecodeFailureException|NonUniqueResultException|NoResultException $e) {
+        } catch (JWTDecodeFailureException|NonUniqueResultException|NoResultException) {
             throw new InvalidStateException('Invalid state');
         }
 

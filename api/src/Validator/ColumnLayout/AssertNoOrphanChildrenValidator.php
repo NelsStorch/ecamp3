@@ -36,11 +36,7 @@ class AssertNoOrphanChildrenValidator extends ConstraintValidator {
         }
 
         $slots = array_map(function ($col) {
-            if (isset($col['slot'])) {
-                return $col['slot'];
-            }
-
-            return null;
+            return $col['slot'] ?? null;
         }, $array);
 
         $childSlots = $layout->children->map(function (ContentNode $child) {

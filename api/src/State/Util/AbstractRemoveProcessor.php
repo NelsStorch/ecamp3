@@ -12,7 +12,7 @@ use ApiPlatform\State\ProcessorInterface;
  */
 abstract class AbstractRemoveProcessor implements ProcessorInterface {
     public function __construct(
-        private ProcessorInterface $decorated,
+        private readonly ProcessorInterface $decorated,
     ) {}
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): void {

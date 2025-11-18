@@ -46,9 +46,7 @@ class FirewallTest extends ECampApiTestCase {
     }
 
     public static function getProtectedEndpoints(): array {
-        $protectedEndpoints = array_filter(self::getEndPoints(), function (string $endpoint) {
-            return self::isProtectedByFirewall($endpoint);
-        });
+        $protectedEndpoints = array_filter(self::getEndPoints(), self::isProtectedByFirewall(...));
 
         return ParametrizedTestHelper::asParameterTestSets($protectedEndpoints);
     }

@@ -30,10 +30,12 @@ class Hitobito extends AbstractProvider {
         ];
     }
 
+    #[\Override]
     protected function getScopeSeparator(): string {
         return ' ';
     }
 
+    #[\Override]
     protected function fetchResourceOwnerDetails(AccessToken $token): mixed {
         $url = $this->getResourceOwnerDetailsUrl($token);
 
@@ -61,6 +63,7 @@ class Hitobito extends AbstractProvider {
         }
     }
 
+    #[\Override]
     protected function getDefaultHeaders(): array {
         return [
             'Accept' => 'application/json',

@@ -4,9 +4,9 @@ namespace App\State\Util;
 
 class PropertyChangeListener {
     private function __construct(
-        private \Closure $extractProperty,
-        private \Closure $beforeAction,
-        private \Closure $afterAction
+        private readonly \Closure $extractProperty,
+        private readonly \Closure $beforeAction,
+        private readonly \Closure $afterAction
     ) {}
 
     /**

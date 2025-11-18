@@ -16,7 +16,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\Expr\Orx;
 use Doctrine\ORM\QueryBuilder;
 
-final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInterface {
+final readonly class FilterEagerLoadingsExtension implements QueryCollectionExtensionInterface {
     public function __construct(private QueryCollectionExtensionInterface $decorated) {}
 
     public function applyToCollection(
@@ -62,7 +62,7 @@ final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInte
 
         foreach ($joins as $join) {
             // @var Join $join
-            list($fromAlias, $fromProperty) = explode('.', $join->getJoin(), 2);
+            [$fromAlias, $fromProperty] = explode('.', $join->getJoin(), 2);
             $toAlias = $join->getAlias();
 
             $fromClassMetadata = $aliasMap[$fromAlias][0];
@@ -98,23 +98,11 @@ final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInte
     }
 
     private function usesAnyToManyAndx($toManyAliases, Andx $and) {
-        foreach ($and->getParts() as $part) {
-            if ($this->usesAnyToMany($toManyAliases, $part)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($and->getParts(), fn ($part) => $this->usesAnyToMany($toManyAliases, $part));
     }
 
     private function usesAnyToManyOrx($toManyAliases, Orx $or) {
-        foreach ($or->getParts() as $part) {
-            if ($this->usesAnyToMany($toManyAliases, $part)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($or->getParts(), fn ($part) => $this->usesAnyToMany($toManyAliases, $part));
     }
 
     private function usesAnyToManyComparison($toManyAliases, Comparison $comparison) {
@@ -124,13 +112,7 @@ final class FilterEagerLoadingsExtension implements QueryCollectionExtensionInte
     }
 
     private function usesAnyToManyFunc($toManyAliases, Func $func) {
-        foreach ($func->getArguments() as $argument) {
-            if ($this->usesAnyToMany($toManyAliases, $argument)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($func->getArguments(), fn ($argument) => $this->usesAnyToMany($toManyAliases, $argument));
     }
 
     private function usesAnyToManyString($toManyAliases, string $comparison) {

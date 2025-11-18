@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class AssertLastCollectionItemIsNotDeletedValidator extends ConstraintValidator {
     public function __construct(
-        private RequestStack $requestStack,
-        private EntityManagerInterface $em
+        private readonly RequestStack $requestStack,
+        private readonly EntityManagerInterface $em
     ) {}
 
     public function validate(mixed $value, Constraint $constraint): void {

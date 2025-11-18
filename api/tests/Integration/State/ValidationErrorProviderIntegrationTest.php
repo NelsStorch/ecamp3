@@ -32,7 +32,7 @@ class ValidationErrorProviderIntegrationTest extends KernelTestCase {
         parent::setUp();
 
         /** @var ValidationErrorProvider $obj */
-        $obj = self::getContainer()->get('App\State\ValidationErrorProvider');
+        $obj = self::getContainer()->get(ValidationErrorProvider::class);
         $this->validationErrorProvider = $obj;
     }
 

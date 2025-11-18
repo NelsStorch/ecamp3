@@ -157,7 +157,7 @@ class Day extends BaseEntity implements BelongsToCampInterface {
             $start?->add(new \DateInterval('P'.$this->dayOffset.'D'));
 
             return $start;
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return null;
         }
     }
@@ -173,7 +173,7 @@ class Day extends BaseEntity implements BelongsToCampInterface {
             $end?->add(new \DateInterval('P'.($this->dayOffset + 1).'D'));
 
             return $end;
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return null;
         }
     }

@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20220118132859 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Adds initial content types';
     }
@@ -26,6 +27,7 @@ final class Version20220118132859 extends AbstractMigration {
         $this->addSql('INSERT INTO public.content_type (id, name, active, entityclass, jsonconfig, createtime, updatetime) VALUES (\'1a0f84e322c8\', \'LAThematicArea\', true, \'App\Entity\ContentNode\MultiSelect\', \'{"items":["outdoorTechnique","security","natureAndEnvironment","pioneeringTechnique","campsiteAndSurroundings","preventionAndIntegration"]}\', \'2022-01-18 09:12:56\', \'2022-01-18 09:12:56\');');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DELETE FROM public.content_type WHERE id IN (\'44dcc7493c65\', \'318e064ea0c9\', \'4f0c657fecef\', \'f17470519474\', \'cfccaecd4bad\', \'3ef17bd1df72\', \'1a0f84e322c8\')');

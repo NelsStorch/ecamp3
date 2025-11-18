@@ -8,6 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 final class Version20231111000042 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Add ResponsiveLayout content type';
     }
@@ -27,6 +28,7 @@ final class Version20231111000042 extends AbstractMigration {
         ");
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DELETE FROM public.content_type WHERE id IN (\'a4211c112939\')');

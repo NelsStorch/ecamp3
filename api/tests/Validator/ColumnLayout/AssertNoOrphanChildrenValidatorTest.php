@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  * @internal
  */
 class AssertNoOrphanChildrenValidatorTest extends ConstraintValidatorTestCase {
-    private const message = 'The following slots still have child contents and should be present in the columns: {{ slots }}';
+    private const string message = 'The following slots still have child contents and should be present in the columns: {{ slots }}';
 
     private MockObject|RequestStack $requestStack;
 

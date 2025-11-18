@@ -15,10 +15,10 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\TypeInfo\Type;
 
 final class ContentNodeCampFilter extends AbstractFilter {
-    public const CAMP_QUERY_NAME = 'camp';
+    public const string CAMP_QUERY_NAME = 'camp';
 
     public function __construct(
-        private IriConverterInterface $iriConverter,
+        private readonly IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?LoggerInterface $logger = null,
         ?array $properties = null,

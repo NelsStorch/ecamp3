@@ -17,6 +17,7 @@ abstract class DeleteContentNodeTestCase extends ECampApiTestCase {
     protected BaseEntity $campPrototypeEntity;
     protected BaseEntity $sharedCampEntity;
 
+    #[\Override]
     public function setUp(): void {
         parent::setUp();
     }

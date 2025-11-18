@@ -48,7 +48,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     private MockObject|PropertyAccessorInterface $propertyAccessor;
     private EntityManagerInterface|MockObject $entityManager;
 
-    private DateFilter|SearchFilterInterface|null $filterInstance;
+    private DateFilter|SearchFilterInterface|null $filterInstance = null;
 
     protected function setUp(): void {
         $filterLocatorMock = $this->createMock(ServiceLocator::class);
@@ -446,7 +446,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         ]));
 
         $metadataCollection = new ResourceMetadataCollection('Dummy');
-        $metadataCollection->append((new ApiResource())->withOperations(new Operations([new Get()])));
+        $metadataCollection->append(new ApiResource()->withOperations(new Operations([new Get()])));
         $this->resourceMetadataCollectionFactoryMock->method('create')->willReturn($metadataCollection);
 
         $this->mockGeneratedRoute();
@@ -484,7 +484,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $collectionOperationMetadata['name'] = '_api_/dummys{._format}_get_collection';
 
         $metadataCollection = new ResourceMetadataCollection('Dummy');
-        $metadataCollection->append((new ApiResource())->withOperations(new Operations([
+        $metadataCollection->append(new ApiResource()->withOperations(new Operations([
             new GetCollection(
                 ...$collectionOperationMetadata
             ),
@@ -531,14 +531,14 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
 
 class ParentEntity {
     #[ORM\OneToMany(targetEntity: Child::class, mappedBy: 'parent')]
-    private Collection $children;
+    private readonly Collection $children;
 
     #[ORM\OneToOne(targetEntity: Child::class)]
-    private ?Child $firstBorn;
+    private ?Child $firstBorn = null;
 
     #[SerializedName('childrenWithSerializedName')]
     #[ORM\OneToMany(targetEntity: Child::class, mappedBy: 'parent')]
-    private Collection $renamedChildren;
+    private readonly Collection $renamedChildren;
 
     public function getFilterValue(): string {
         return '';
@@ -553,5 +553,5 @@ class ParentEntity {
 #[ApiFilter(SearchFilter::class, properties: ['parent'])]
 class Child {
     #[ORM\ManyToOne(targetEntity: ParentEntity::class, inversedBy: 'children')]
-    private ?ParentEntity $parent;
+    private ?ParentEntity $parent = null;
 }

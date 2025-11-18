@@ -17,7 +17,7 @@ use App\Entity\HasId;
 class TagCollector implements TagCollectorInterface {
     public const IRI_RELATION_DELIMITER = '#';
 
-    public function __construct(private ResponseTagger $responseTagger) {}
+    public function __construct(private readonly ResponseTagger $responseTagger) {}
 
     /**
      * Collect cache tags for cache invalidation.

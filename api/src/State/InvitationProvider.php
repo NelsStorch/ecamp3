@@ -18,10 +18,10 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
  */
 class InvitationProvider implements ProviderInterface {
     public function __construct(
-        private Security $security,
-        private PasswordHasherFactoryInterface $passwordHasherFactory,
-        private UserRepository $userRepository,
-        private CampCollaborationRepository $campCollaborationRepository
+        private readonly Security $security,
+        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
+        private readonly UserRepository $userRepository,
+        private readonly CampCollaborationRepository $campCollaborationRepository
     ) {}
 
     /**

@@ -13,10 +13,10 @@ use Symfony\Component\String\Inflector\EnglishInflector;
  */
 class UriTemplateNormalizer implements NormalizerInterface {
     public function __construct(
-        private NormalizerInterface $decorated,
-        private EnglishInflector $inflector,
-        private UriTemplateFactory $uriTemplateFactory,
-        private UrlGeneratorInterface $urlGenerator,
+        private readonly NormalizerInterface $decorated,
+        private readonly EnglishInflector $inflector,
+        private readonly UriTemplateFactory $uriTemplateFactory,
+        private readonly UrlGeneratorInterface $urlGenerator,
     ) {}
 
     public function supportsNormalization($data, $format = null, array $context = []): bool {

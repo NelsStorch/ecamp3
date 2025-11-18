@@ -315,13 +315,6 @@ class AppendBFilter extends InputFilter {
 }
 
 class DummyEntity {
-    #[Dummy]
-    public $foo;
-
-    // other attribute which is not an input filter
-    #[Valid]
-    public $bar;
-
     #[AppendA(priority: 10)]
     #[AppendB(priority: 0)]
     public $ab;
@@ -339,10 +332,12 @@ class DummyEntity {
     #[ORM\Embedded(class: 'EmbeddableEntity')]
     public EmbeddableEntity $embeddableEntity;
 
-    public function __construct($foo, $bar) {
-        $this->foo = $foo;
-        $this->bar = $bar;
-    }
+    public function __construct(
+        #[Dummy]
+        public $foo,
+        #[Valid]
+        public $bar
+    ) {}
 }
 
 class RelatedEntity extends BaseEntity {

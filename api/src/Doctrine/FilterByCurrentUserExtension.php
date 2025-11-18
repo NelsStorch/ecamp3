@@ -12,14 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\SecurityBundle\Security;
 
-final class FilterByCurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface {
-    private Security $security;
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(Security $security, EntityManagerInterface $entityManager) {
-        $this->security = $security;
-        $this->entityManager = $entityManager;
-    }
+final readonly class FilterByCurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface {
+    public function __construct(private Security $security, private EntityManagerInterface $entityManager) {}
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, ?string $resourceClass = null, ?Operation $operation = null, array $context = []): void {
         $extraProperties = $operation->getExtraProperties();

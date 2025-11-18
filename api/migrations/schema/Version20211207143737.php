@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20211207143737 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return '';
     }
@@ -58,6 +59,7 @@ final class Version20211207143737 extends AbstractMigration {
         $this->addSql('ALTER TABLE "user" DROP roles');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         $this->addSql('ALTER TABLE "user" ADD email VARCHAR(64)');
         $this->addSql('ALTER TABLE "user" ADD username VARCHAR(32)');

@@ -36,6 +36,7 @@ class CampCollaborationCreateProcessor extends AbstractPersistProcessor {
     /**
      * @param CampCollaboration $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): CampCollaboration {
         /** @var CampCollaboration $data */
         $inviteEmail = $data->user?->getEmail() ?? $data->inviteEmail;

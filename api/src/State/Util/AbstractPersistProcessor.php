@@ -15,8 +15,8 @@ abstract class AbstractPersistProcessor implements ProcessorInterface {
      * @param PropertyChangeListener[] $propertyChangeListeners
      */
     public function __construct(
-        private ProcessorInterface $decorated,
-        private array $propertyChangeListeners = []
+        private readonly ProcessorInterface $decorated,
+        private readonly array $propertyChangeListeners = []
     ) {
         foreach ($propertyChangeListeners as $listener) {
             if (!$listener instanceof PropertyChangeListener) {

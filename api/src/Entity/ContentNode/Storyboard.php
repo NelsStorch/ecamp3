@@ -103,7 +103,8 @@ class Storyboard extends ContentNode {
             'position' => 0, ], ]])]
     #[Groups(['read', 'write'])]
     #[AssertJsonSchema(schema: self::JSON_SCHEMA)]
-    #[Assert\NotNull(groups: ['update'])] // if created with empty data, then default value is populated in data persister
+    #[Assert\NotNull(groups: ['update'])]
+    #[\Override] // if created with empty data, then default value is populated in data persister
     public function getData(): ?array {
         return $this->data;
     }

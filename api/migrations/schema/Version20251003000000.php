@@ -11,6 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20251003000000 extends AbstractMigration {
+    #[\Override]
     public function getDescription(): string {
         return 'Done-Column for MaterialItem';
     }
@@ -20,6 +21,7 @@ final class Version20251003000000 extends AbstractMigration {
         $this->addSql('ALTER TABLE material_item ADD done BOOLEAN DEFAULT false NOT NULL');
     }
 
+    #[\Override]
     public function down(Schema $schema): void {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE material_item DROP done');

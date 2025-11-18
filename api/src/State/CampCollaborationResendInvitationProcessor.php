@@ -29,6 +29,7 @@ class CampCollaborationResendInvitationProcessor extends AbstractPersistProcesso
     /**
      * @param CampCollaboration $data
      */
+    #[\Override]
     public function onBefore($data, Operation $operation, array $uriVariables = [], array $context = []): CampCollaboration {
         if (CampCollaboration::STATUS_INVITED == $data->status && $data->getEmail()) {
             $data->inviteKey = IdGenerator::generateRandomHexString(64);
