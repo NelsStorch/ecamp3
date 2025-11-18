@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|MaterialItem findOneBy(array $criteria, array $orderBy = null)
  * @method MaterialItem[]    findAll()
  * @method MaterialItem[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<MaterialItem>
  */
 class MaterialItemRepository extends ServiceEntityRepository implements CanFilterByUserInterface {
     use FiltersByCampCollaboration;

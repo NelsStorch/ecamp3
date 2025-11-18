@@ -15,6 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|DayResponsible findOneBy(array $criteria, array $orderBy = null)
  * @method DayResponsible[]    findAll()
  * @method DayResponsible[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<DayResponsible>
  */
 class DayResponsibleRepository extends ServiceEntityRepository implements CanFilterByUserInterface {
     use FiltersByCampCollaboration;

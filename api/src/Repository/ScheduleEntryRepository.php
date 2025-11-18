@@ -15,6 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|ScheduleEntry findOneBy(array $criteria, array $orderBy = null)
  * @method ScheduleEntry[]    findAll()
  * @method ScheduleEntry[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<ScheduleEntry>
  */
 class ScheduleEntryRepository extends ServiceEntityRepository implements CanFilterByUserInterface {
     use FiltersByCampCollaboration;
