@@ -2,7 +2,7 @@
   <v-btn
     class="e-colorswatch"
     :class="{ 'e-colorswatch--null': color == null }"
-    fab
+    rounded
     elevation="0"
     width="30"
     height="30"

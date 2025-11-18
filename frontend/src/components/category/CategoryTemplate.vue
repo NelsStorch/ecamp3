@@ -1,11 +1,15 @@
 <template>
   <div>
-    <i18n path="components.category.categoryTemplate.createLayoutHelp" tag="p">
+    <i18n-t
+      keypath="components.category.categoryTemplate.createLayoutHelp"
+      tag="p"
+      scope="global"
+    >
       <template #categoryShort>
         <CategoryChip :category="category" dense />
       </template>
       <template #br><br /></template>
-    </i18n>
+    </i18n-t>
 
     <div class="area rounded">
       <div class="relative">
@@ -13,13 +17,14 @@
           v-model="layoutMode"
           class="ec-category-layoutmode-tabs"
           align-tabs="center"
+          color="primary"
           hide-slider
         >
-          <v-tab :tab-value="true">
+          <v-tab :value="true">
             <v-icon start>mdi-view-compact-outline</v-icon>
             {{ $t('components.category.categoryTemplate.layout') }}
           </v-tab>
-          <v-tab :tab-value="false">
+          <v-tab :value="false">
             <v-icon start>mdi-text</v-icon>
             {{ $t('components.category.categoryTemplate.contents') }}
           </v-tab>
