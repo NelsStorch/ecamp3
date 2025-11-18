@@ -1,55 +1,50 @@
 <template>
-  <!--  <ValidationProvider-->
-  <!--    v-slot="{ errors: veeErrors }"-->
-  <!--    tag="div"-->
-  <!--    :name="validationLabel"-->
-  <!--    :vid="veeId"-->
-  <!--    :rules="veeRules"-->
-  <!--    :skip-if-empty="skipIfEmpty"-->
-  <!--    :required="required"-->
-  <!--    :immediate="immediateValidation"-->
-  <!--    class="e-form-container"-->
-  <!--  >-->
-  <v-autocomplete
-    v-bind="$attrs"
-    :search.sync="search"
-    :filled="filled"
-    :hide-details="hideDetails"
-    :error-messages="(veeErrors ?? []).concat(errorMessages)"
-    :label="labelOrEntityFieldLabel"
-    :class="[inputClass]"
-    :readonly="readonly"
-    :menu-icon="readonly ? null : '$dropdown'"
-    :custom-filter="tokensFilter"
+  <Field
+    v-slot="{ errors: veeErrors }"
+    :label="validationLabel"
+    :name="veeId ?? path"
+    :rules="veeRules"
   >
-    <template #item="{ item, on, attrs }">
-      <v-list-item v-bind="attrs" v-on="on">
-        <v-list-item-title>
-          <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
-            <mark v-if="part.h">{{ part.text }}</mark>
-            <span v-else>{{ part.text }}</span>
-          </span>
-        </v-list-item-title>
-      </v-list-item>
-    </template>
+    <v-autocomplete
+      :class="[inputClass]"
+      :custom-filter="tokensFilter"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :filled="filled"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      :menu-icon="readonly ? null : '$dropdown'"
+      :readonly="readonly"
+      :search.sync="search"
+      v-bind="$attrs"
+    >
+      <template #item="{ item, props }">
+        <v-list-item v-bind="props">
+          <v-list-item-title>
+            <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
+              <mark v-if="part.h">{{ part.text }}</mark>
+              <span v-else>{{ part.text }}</span>
+            </span>
+          </v-list-item-title>
+        </v-list-item>
+      </template>
 
-    <!-- passing through all slots -->
-    <template v-for="(_, slot) of $slots" #[slot]="slotData">
-      <slot :name="slot" v-bind="slotData || {}"></slot>
-    </template>
-  </v-autocomplete>
-  <!--  </ValidationProvider>-->
+      <!-- passing through all slots -->
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
+      </template>
+    </v-autocomplete>
+  </Field>
 </template>
 
 <script>
-// import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 import uFuzzy from '@leeoniya/ufuzzy'
 
 export default {
   name: 'EAutocomplete',
-  // components: { ValidationProvider },
+  components: { Field },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
     immediateValidation: { type: Boolean, default: false },
