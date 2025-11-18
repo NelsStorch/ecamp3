@@ -1,6 +1,7 @@
 <template>
   <Field
     v-slot="{ handleChange, handleReset, errors: veeFieldErrors }"
+    ref="validationField"
     :name="veeId ?? path"
     :label="validationLabel"
     :rules="veeRules"
@@ -50,7 +51,7 @@ export default {
   mounted() {
     this.preventValidationOnBlur =
       'autofocus' in this.$attrs &&
-      'required' in this.$refs.validationProvider.$attrs &&
+      'required' in this.$refs.validationField.$attrs &&
       this.$refs.textField.value == ''
   },
   methods: {
