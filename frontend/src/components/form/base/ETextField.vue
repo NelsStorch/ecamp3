@@ -9,6 +9,7 @@
   >
     <v-text-field
       ref="textField"
+      :model-value="modelValue"
       :class="[inputClass]"
       :error-messages="(veeFieldErrors ?? []).concat(errorMessages)"
       :label="labelOrEntityFieldLabel"
@@ -38,6 +39,7 @@ export default {
   components: { Field },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
+    modelValue: { type: String, required: false },
     type: {
       type: String,
       default: 'text',

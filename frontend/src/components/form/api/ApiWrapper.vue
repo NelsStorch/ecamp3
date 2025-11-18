@@ -3,39 +3,39 @@ Wrapper component for form components to save data back to API
 -->
 
 <template>
-  <!--  <ValidationObserver ref="validationObserver" v-slot="validationObserver" slim>-->
-  <v-form
-    :class="[{ 'api-wrapper--inline': !autoSave && !readonly && !separateButtons }]"
-    class="e-form-container"
-    @submit.prevent="onEnter"
-  >
-    <slot
-      :auto-save="autoSave"
-      :dirty="dirty"
-      :error-messages="errorMessages"
-      :has-loading-error="hasLoadingError"
-      :has-server-error="hasServerError"
-      :is-loading="isLoading"
-      :is-saving="isSaving"
-      :local-value="localValue"
-      :on="eventHandlers"
-      :parsed-value="parsedLocalValue"
-      :readonly="readonly || !hasFinishedLoading"
-      :status="status"
-    />
-  </v-form>
-  <!--  </ValidationObserver>-->
+  <VeeForm ref="validationForm" v-slot="{ validate }" slim>
+    <v-form
+      :class="[{ 'api-wrapper--inline': !autoSave && !readonly && !separateButtons }]"
+      class="e-form-container"
+      @submit.prevent="onEnter"
+    >
+      <slot
+        :auto-save="autoSave"
+        :dirty="dirty"
+        :error-messages="errorMessages"
+        :has-loading-error="hasLoadingError"
+        :has-server-error="hasServerError"
+        :is-loading="isLoading"
+        :is-saving="isSaving"
+        :local-value="localValue"
+        :on="eventHandlers"
+        :parsed-value="parsedLocalValue"
+        :readonly="readonly || !hasFinishedLoading"
+        :status="status"
+      />
+    </v-form>
+  </VeeForm>
 </template>
 
 <script>
 import { debounce, set, get } from 'lodash-es'
 import { apiPropsMixin } from '@/mixins/apiPropsMixin.js'
-// import { ValidationObserver } from 'vee-validate'
+import { Form as VeeForm } from 'vee-validate'
 import { serverErrorToString } from '@/helpers/serverError.js'
 
 export default {
   name: 'ApiWrapper',
-  // components: { ValidationObserver },
+  components: { VeeForm },
   mixins: [apiPropsMixin],
   props: {
     separateButtons: {
@@ -99,8 +99,8 @@ export default {
     },
     apiValue() {
       // return value from props if set explicitly
-      if (this.value) {
-        return this.value
+      if (this.modelValue) {
+        return this.modelValue
 
         // while loading, value is null
       } else if (this.isLoading) {
@@ -166,7 +166,7 @@ export default {
   },
   created() {
     // initial data load from API
-    if (!this.value) this.reload()
+    if (!this.modelValue) this.reload()
 
     this.localValue = this.apiValue
 
@@ -221,11 +221,10 @@ export default {
     resetErrors() {
       this.loadingErrorMessage = null
       this.serverErrorMessage = null
-      // TODO: fix validation
-      /*
+
       if (this.isMounted) {
-        this.$refs.validationObserver.reset()
-      }*/
+        this.$refs.validationForm.resetForm()
+      }
     },
     onEnter() {
       if (!this.autoSave) {
@@ -240,11 +239,10 @@ export default {
       }
 
       // abort saving in case of validation errors
-      // TODO: fix validation
-      /*const isValid = await this.$refs.validationObserver.validate()
+      const isValid = (await this.$refs.validationForm.validate()).valid
       if (!isValid) {
         return
-      }*/
+      }
 
       // reset all dirty flags and start saving
       this.resetErrors()

@@ -49,8 +49,8 @@
             :is="item.component('e')"
             v-model="values[item.id]"
             v-bind="{ ...item.props, ...config }"
-            disabled="true"
-            readonly="true"
+            :disabled="true"
+            :readonly="true"
           />
         </template>
         <template #[`item.api`]="{ item }">
@@ -67,8 +67,8 @@
             v-if="item.props.uri !== null"
             v-bind="{ ...item.props, ...config }"
             :auto-save="false"
-            disabled="true"
-            readonly="true"
+            :disabled="true"
+            :readonly="true"
           />
         </template>
         <template #[`item.api.autosave`]="{ item }">
