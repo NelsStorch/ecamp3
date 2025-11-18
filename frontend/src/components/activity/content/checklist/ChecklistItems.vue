@@ -11,18 +11,16 @@
         class="min-h-0 d-grid"
         :disabled="layoutMode"
       >
-        <v-list-item-content class="py-2">
-          <v-list-item-subtitle v-if="parents.length > 0" class="d-flex gap-1">
-            <template v-for="(parent, index) in parents" :key="parent._meta.self">
-              <span v-if="index">/</span>
-              <span class="e-checklist-item-parent-name">{{ parent.text }}</span>
-            </template>
-          </v-list-item-subtitle>
-          <v-list-item-title class="ec-checklist--item-title">
-            {{ parents.map(({ position }) => position + 1 + '.').join('')
-            }}{{ item.position + 1 }}. {{ item.text }}
-          </v-list-item-title>
-        </v-list-item-content>
+        <v-list-item-subtitle v-if="parents.length > 0" class="d-flex gap-1">
+          <template v-for="(parent, index) in parents" :key="parent._meta.self">
+            <span v-if="index">/</span>
+            <span class="e-checklist-item-parent-name">{{ parent.text }}</span>
+          </template>
+        </v-list-item-subtitle>
+        <v-list-item-title class="ec-checklist--item-title">
+          {{ parents.map(({ position }) => position + 1 + '.').join('')
+          }}{{ item.position + 1 }}. {{ item.text }}
+        </v-list-item-title>
       </v-list-item>
     </template>
   </div>

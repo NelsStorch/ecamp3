@@ -13,7 +13,12 @@
   >
     <template #activator="{ props }">
       <slot name="activator" v-bind="{ props }">
-        <ButtonAdd color="secondary" text class="my-n2" icon="mdi-playlist-plus" v-on="on"
+        <ButtonAdd
+          color="secondary"
+          text
+          class="my-n2"
+          icon="mdi-playlist-plus"
+          v-on="props"
           >{{ $t('components.checklist.checklistItemCreate.title') }}
         </ButtonAdd>
       </slot>

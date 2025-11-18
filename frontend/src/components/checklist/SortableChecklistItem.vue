@@ -1,29 +1,32 @@
 <template>
   <div class="e-sortable-checklist-item" @dragstart="startDragging">
     <v-list-item v-if="disabled" class="px-2 rounded min-h-0 py-1">
-      <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
-        itemPosition + 1
-      }}</v-avatar>
-      <v-list-item-content class="py-0">
-        <v-list-item-title :class="{ 'font-weight-bold': item?.parent == null }">{{
-          item.text
-        }}</v-list-item-title>
-      </v-list-item-content>
+      <template #prepend>
+        <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
+          itemPosition + 1
+        }}</v-avatar>
+      </template>
+      <v-list-item-title :class="{ 'font-weight-bold': item?.parent == null }">{{
+        item.text
+      }}</v-list-item-title>
     </v-list-item>
     <ChecklistItemEdit v-else :checklist="checklist" :checklist-item="item">
-      <template #activator="{ on }">
-        <v-list-item class="px-2 rounded min-h-0 py-1 drag-and-drop-handle" v-on="on">
-          <v-btn variant="plain" icon class="my-n1 ml-n1 pointer-events-none">
-            <v-icon>mdi-drag</v-icon>
-          </v-btn>
-          <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
-            itemPosition + 1
-          }}</v-avatar>
-          <v-list-item-content class="py-0">
-            <v-list-item-title :class="{ 'font-weight-bold': item?.parent == null }">{{
-              item.text
-            }}</v-list-item-title>
-          </v-list-item-content>
+      <template #activator="{ props }">
+        <v-list-item
+          class="px-2 rounded min-h-0 py-1 drag-and-drop-handle"
+          v-bind="props"
+        >
+          <template #prepend>
+            <v-btn variant="plain" icon class="my-n1 ml-n1 pointer-events-none">
+              <v-icon>mdi-drag</v-icon>
+            </v-btn>
+            <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
+              itemPosition + 1
+            }}</v-avatar>
+          </template>
+          <v-list-item-title :class="{ 'font-weight-bold': item?.parent == null }">{{
+            item.text
+          }}</v-list-item-title>
           <ButtonEdit
             color="primary--text"
             dense

@@ -42,16 +42,16 @@
           class="e-sortable-checklist-item__add ml-10 mr-2 my-n1 px-0 rounded-pill min-h-0"
           v-bind="props"
         >
-          <v-avatar class="mr-2" size="32"
-            ><v-icon color="currentColor">mdi-plus</v-icon></v-avatar
-          >
-          <v-list-item-content class="py-0">
-            <v-list-item-title>{{
-              $t('components.checklist.sortableChecklist.add', {
-                parent: parent?.text ?? checklist.name,
-              })
-            }}</v-list-item-title>
-          </v-list-item-content>
+          <template #prepend>
+            <v-avatar class="mr-2" size="32">
+              <v-icon color="currentColor">mdi-plus</v-icon>
+            </v-avatar>
+          </template>
+          <v-list-item-title>{{
+            $t('components.checklist.sortableChecklist.add', {
+              parent: parent?.text ?? checklist.name,
+            })
+          }}</v-list-item-title>
         </v-list-item>
       </template>
     </ChecklistItemCreate>
