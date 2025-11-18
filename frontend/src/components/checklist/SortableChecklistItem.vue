@@ -99,10 +99,10 @@ export default {
 .e-sortable-checklist-item__edit {
   display: none;
 }
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .e-sortable-checklist-item:is(:hover, :focus-visible):not(
     :has(.e-sortable-checklist-item:hover)
   ):not(:has(.e-sortable-checklist-item__add:hover))
-  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
   > .v-list-item
   > .e-sortable-checklist-item__edit {
   display: block;
