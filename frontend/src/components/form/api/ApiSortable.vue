@@ -8,7 +8,6 @@
     :animation="200"
     :force-fallback="true"
     :disabled="disabled"
-    :item-key="(element) => element"
     @start="dragging = true"
     @end="dragging = false"
     @update="finishDrag"
@@ -26,6 +25,7 @@ import draggable from 'vuedraggable'
 import { every, sortBy } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
 import { useToast } from 'vue-toastification'
+
 export default {
   name: 'ApiSortable',
   components: {
