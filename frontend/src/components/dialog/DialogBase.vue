@@ -97,8 +97,17 @@ export default {
       this.error = null
       const _events = this._events
       payloadData ??= this.entityData
+      const updatePayload = {}
+      for (const property of [
+        ...this.entityProperties,
+        ...this.embeddedEntities,
+        ...this.embeddedCollections,
+      ]) {
+        updatePayload[property] = payloadData[property]
+      }
+
       const promise = this.api
-        .patch(this.entityUri, payloadData)
+        .patch(this.entityUri, updatePayload)
         .then(this.onSuccess, (e) => this.onError(_events, e))
       this.$emit('submit')
       return promise
