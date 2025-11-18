@@ -13,6 +13,8 @@
       :hide-details="hideDetails"
       :label="labelOrEntityFieldLabel"
       :menu-icon="readonly ? null : '$dropdown'"
+      item-title="text"
+      item-value="value"
       :readonly="readonly"
       :search.sync="search"
       v-bind="$attrs"
