@@ -160,7 +160,6 @@ export default {
   watch: {
     modelValue: {
       handler(newValue) {
-        console.log('watch modelValue')
         this.pickerValue = newValue
         this.pickerNull = [null, ''].includes(newValue)
       },
