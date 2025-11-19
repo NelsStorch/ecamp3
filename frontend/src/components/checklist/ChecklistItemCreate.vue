@@ -18,8 +18,9 @@
           text
           class="my-n2"
           icon="mdi-playlist-plus"
-          v-on="props"
-          >{{ $t('components.checklist.checklistItemCreate.title') }}
+          v-bind="props"
+        >
+          {{ $t('components.checklist.checklistItemCreate.title') }}
         </ButtonAdd>
       </slot>
     </template>

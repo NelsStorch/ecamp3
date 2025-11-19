@@ -14,16 +14,16 @@
     @update:model-value="$emit('update:model-value', $event)"
   >
     <!-- passing through all slots -->
-    <template v-for="(_, slot) of $slots" #[slot]="slotData">
-      <slot v-if="name !== 'prepend'" :name="slot" v-bind="slotData || {}"></slot>
+    <template v-for="(_, slot) of filteredSlots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData || {}"></slot>
     </template>
-    <template #prepend="props">
-      <slot name="prepend" v-bind="props">
+    <template #prepend="slotData">
+      <slot name="prepend" v-bind="slotData">
         <ColorSwatch
           class="mt-n1"
-          :color="props.serializedValue"
+          :color="slotData.serializedValue"
           tag="div"
-          :aria-label="props.serializedValue"
+          :aria-label="slotData.serializedValue"
         />
       </slot>
     </template>
@@ -44,6 +44,13 @@ export default {
     modelValue: { type: String, required: false, default: null },
   },
   emits: ['update:model-value'],
+  computed: {
+    filteredSlots() {
+      return Object.fromEntries(
+        Object.entries(this.$slots).filter((_, slot) => slot !== 'prepend')
+      )
+    },
+  },
   methods: {
     format(value) {
       if (typeof value === 'string') {

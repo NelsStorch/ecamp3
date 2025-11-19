@@ -17,6 +17,7 @@
         variant="text"
         icon="mdi-playlist-plus"
         v-bind="props"
+        @click="showDialog = true"
         >{{ $t('components.checklist.checklistCreate.title') }}</ButtonAdd
       >
     </template>
@@ -31,6 +32,8 @@
     <e-autocomplete
       v-model="entityData.copyChecklistSource"
       path="copyChecklistSource"
+      item-title="text"
+      item-value="value"
       clearable
       :items="prototypeChecklists"
     />

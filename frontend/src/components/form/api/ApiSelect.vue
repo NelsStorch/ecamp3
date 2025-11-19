@@ -11,7 +11,7 @@ Displays a field as a e-select + write access via API wrapper
   >
     <e-select
       :model-value="wrapper.localValue"
-      v-bind="{ ...$props, ...$attrs }"
+      v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"

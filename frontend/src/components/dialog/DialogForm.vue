@@ -14,12 +14,10 @@
     <Form @submit="doSubmit">
       <v-card>
         <v-toolbar class="ec-dialog-toolbar" density="compact" elevation="0">
-          <v-icon start>
-            {{ icon }}
-          </v-icon>
-          <v-toolbar-title>
-            {{ title }}
-          </v-toolbar-title>
+          <template #prepend>
+            <v-icon class="ml-3">{{ icon }}</v-icon>
+          </template>
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-btn
             v-if="
               (closeVisibleOnMobile || $vuetify.display.smAndUp) && cancelAction != null
@@ -103,6 +101,7 @@ export default {
 
     maxWidth: { type: String, default: '600px', required: false },
   },
+  emits: ['update:model-value'],
   computed: {
     currentlySaving() {
       return this.isSaving || this.savingOverride

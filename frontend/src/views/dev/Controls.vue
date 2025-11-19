@@ -171,13 +171,13 @@ export default {
     },
 
     headers: [
-      { text: 'Type', value: 'id' },
-      { text: 'v-input', value: 'v', sortable: false },
-      { text: 'e-input', value: 'e', sortable: false },
-      { text: 'e-input readonly', value: 'e-ro', sortable: false },
-      { text: 'api-input', value: 'api', sortable: false },
-      { text: 'api-input readonly', value: 'api-ro', sortable: false },
-      { text: 'api-input.autosave', value: 'api.autosave', sortable: false },
+      { title: 'Type', value: 'id' },
+      { title: 'v-input', value: 'v', sortable: false },
+      { title: 'e-input', value: 'e', sortable: false },
+      { title: 'e-input readonly', value: 'e-ro', sortable: false },
+      { title: 'api-input', value: 'api', sortable: false },
+      { title: 'api-input readonly', value: 'api-ro', sortable: false },
+      { title: 'api-input.autosave', value: 'api.autosave', sortable: false },
     ],
   }),
 

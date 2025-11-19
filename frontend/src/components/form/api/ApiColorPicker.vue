@@ -13,6 +13,7 @@ Displays a field as a color picker + write access via API wrapper
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       outlined
       :filled="false"
+      :variant="variant"
       :error-messages="wrapper.errorMessages"
       @update:model-value="wrapper.on.input"
     >

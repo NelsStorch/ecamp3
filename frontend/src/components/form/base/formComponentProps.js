@@ -12,7 +12,6 @@ export const props = {
     default: null,
   },
 
-  // vuetify property hideDetails
   filled: {
     type: Boolean,
     default: true,
