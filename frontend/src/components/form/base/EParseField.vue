@@ -6,9 +6,11 @@ Displays a field as a textfield (can be used with v-model)
   <Field
     v-slot="{ handleChange, errors: veeErrors }"
     ref="validationField"
+    as="div"
     :name="veeId ?? path"
     :label="validationLabel"
     :rules="veeRules"
+    class="e-form-container"
   >
     <v-text-field
       v-bind="$attrs"

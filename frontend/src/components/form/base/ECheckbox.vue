@@ -1,9 +1,11 @@
 <template>
   <Field
     v-slot="{ handleChange, errors: veeErrors }"
+    as="div"
     :name="veeId ?? path"
     :label="validationLabel"
     :rules="veeRules"
+    class="e-form-container"
   >
     <v-checkbox
       :id="id"

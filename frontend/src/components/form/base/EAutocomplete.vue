@@ -1,9 +1,11 @@
 <template>
   <Field
     v-slot="{ errors: veeErrors }"
+    as="div"
     :label="validationLabel"
     :name="veeId ?? path"
     :rules="veeRules"
+    class="e-form-container"
   >
     <v-autocomplete
       :class="[inputClass]"

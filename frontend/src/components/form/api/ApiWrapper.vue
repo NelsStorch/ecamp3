@@ -3,10 +3,9 @@ Wrapper component for form components to save data back to API
 -->
 
 <template>
-  <VeeForm ref="validationForm" v-slot="{ validate }" slim>
+  <VeeForm ref="validationForm" v-slot="{ validate }" class="e-form-container" slim>
     <v-form
       :class="[{ 'api-wrapper--inline': !autoSave && !readonly && !separateButtons }]"
-      class="e-form-container"
       @submit.prevent="onEnter"
     >
       <slot
