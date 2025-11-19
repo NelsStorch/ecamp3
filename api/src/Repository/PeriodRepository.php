@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|Period findOneBy(array $criteria, array $orderBy = null)
  * @method Period[]    findAll()
  * @method Period[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<Period>
  */
 class PeriodRepository extends ServiceEntityRepository implements CanFilterByUserInterface {
     use FiltersByCampCollaboration;

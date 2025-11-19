@@ -17,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|ChecklistItem findOneBy(array $criteria, array $orderBy = null)
  * @method ChecklistItem[]    findAll()
  * @method ChecklistItem[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<ChecklistItem>
  */
 class ChecklistItemRepository extends ServiceEntityRepository implements CanFilterByUserInterface {
     public function __construct(ManagerRegistry $registry) {

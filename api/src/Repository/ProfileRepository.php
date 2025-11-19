@@ -16,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|Profile findOneBy(array $criteria, array $orderBy = null)
  * @method Profile[]    findAll()
  * @method Profile[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<Profile>
  */
 class ProfileRepository extends ServiceEntityRepository implements CanFilterByUserInterface {
     public function __construct(ManagerRegistry $registry) {
