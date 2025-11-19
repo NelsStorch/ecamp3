@@ -16,7 +16,8 @@
       <slot name="activator" v-bind="scope" />
     </template>
     <slot>{{
-      $t('global.warning.delete', warningTextEntity ? 2 : 0, {
+      $t('global.warning.delete', {
+        count: warningTextEntity ? 2 : 0,
         entity: warningTextEntity,
       })
     }}</slot>
