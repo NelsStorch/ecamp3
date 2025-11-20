@@ -27,7 +27,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.14'
-          tools: composer:2.8.0
+          tools: composer:2.9.0
           coverage: xdebug
 
       - run: composer update --lock --no-interaction --no-plugins --no-scripts --prefer-dist
