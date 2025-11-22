@@ -3,7 +3,7 @@ Wrapper component for form components to save data back to API
 -->
 
 <template>
-  <VeeForm ref="validationForm" v-slot="{ validate }" class="e-form-container" slim>
+  <VeeForm ref="validationForm" class="e-form-container" slim>
     <v-form
       :class="[{ 'api-wrapper--inline': !autoSave && !readonly && !separateButtons }]"
       @submit.prevent="onEnter"
@@ -27,7 +27,7 @@ Wrapper component for form components to save data back to API
 </template>
 
 <script>
-import { debounce, set, get } from 'lodash-es'
+import { debounce, get, set } from 'lodash-es'
 import { apiPropsMixin } from '@/mixins/apiPropsMixin.js'
 import { Form as VeeForm } from 'vee-validate'
 import { serverErrorToString } from '@/helpers/serverError.js'
