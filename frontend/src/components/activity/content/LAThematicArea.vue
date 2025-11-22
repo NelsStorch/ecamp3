@@ -1,7 +1,8 @@
 <template>
   <ContentNodeCard class="ec-la-thematic-area" v-bind="$props">
     <e-select
-      v-model="localSelection"
+      :model-value="localSelection"
+      path="localSelection"
       item-value="value"
       :items="items"
       multiple
@@ -16,9 +17,9 @@
         contentClass: 'ec-la-thematic-area',
       }"
       :placeholder="$t('components.activity.content.lAThematicArea.placeholder')"
-      @input="onInput"
+      @update:model-value="onInput"
     >
-      <template #selection="{ index, parent }">
+      <template #selection="{ index, item: parent }">
         <template v-if="index === 0">
           <v-list
             v-if="selectionCount > 0"
@@ -34,29 +35,25 @@
                 class="px-0 ec-lta-item"
                 @click.stop="parent.isMenuActive = !parent.isMenuActive"
               >
-                <v-list-item-content class="py-0">
-                  <v-list-item-title>
-                    {{ $t(`contentNode.laThematicArea.entity.option.${key}.name`) }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{
-                      $t(`contentNode.laThematicArea.entity.option.${key}.description`)
-                    }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(`contentNode.laThematicArea.entity.option.${key}.name`) }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ $t(`contentNode.laThematicArea.entity.option.${key}.description`) }}
+                </v-list-item-subtitle>
               </v-list-item>
             </template>
           </v-list>
           <v-skeleton-loader v-else type="sentences" class="mt-2" width="100px" />
         </template>
       </template>
-      <template #item="{ item, parent, on, attrs }">
-        <v-list-item lines="three" class="ec-lta-item" v-bind="attrs" v-on="on">
+      <template #item="{ item, props }">
+        <v-list-item class="ec-lta-item" lines="three" v-bind="props">
           <v-list-item-action>
             <v-checkbox-btn
               class="pointer-events-none"
-              :value="parent.hasItem(item)"
-              :color="parent.color"
+              :color="item.raw.color"
+              :model-value="contentNode.data.options[item.value]"
               :ripple="false"
             />
           </v-list-item-action>
@@ -136,6 +133,7 @@ export default {
       this.debounceSave()
     },
     save() {
+      console.log('saving', this.localSelection)
       this.savingRequestCount++
       this.contentNode
         .$patch({
