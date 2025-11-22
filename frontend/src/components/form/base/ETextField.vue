@@ -40,7 +40,7 @@ export default {
   components: { Field },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
-    modelValue: { type: String, required: false },
+    modelValue: { type: String, required: false, default: null },
     type: {
       type: String,
       default: 'text',
