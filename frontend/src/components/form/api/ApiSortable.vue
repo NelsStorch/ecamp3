@@ -1,6 +1,6 @@
 <template>
   <draggable
-    v-model="localSortedItems"
+    :model-value="localSortedItems"
     ghost-class="ghost"
     handle=".drag-and-drop-handle"
     tag="transition-group"
