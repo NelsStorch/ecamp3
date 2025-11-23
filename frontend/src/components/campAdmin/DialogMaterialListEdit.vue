@@ -14,7 +14,7 @@
     </template>
     <template #moreActions>
       <PromptEntityDelete
-        :entity="entityUri"
+        :entity="materialList"
         :warning-text-entity="materialList.name"
         :error-handler="deleteErrorHandler"
         position="top"
