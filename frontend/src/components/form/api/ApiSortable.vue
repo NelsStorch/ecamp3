@@ -87,7 +87,10 @@ export default {
           this.$toast.error(errorToMultiLineToast(e))
           this.$store.commit('addSnackbarMessage', errorToMultiLineToast(e))
         })
-        .finally(() => this.endpoint.$reload())
+        .finally(async () => {
+          await this.endpoint.$reload()
+          this.localSortedItems = this.endpoint.items
+        })
       this.savingRequest--
       if (this.savingRequest === 0) {
         this.dirty = false
