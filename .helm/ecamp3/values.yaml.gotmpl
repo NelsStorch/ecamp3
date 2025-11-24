@@ -1,6 +1,7 @@
 {{- /* Input parameters from helmfile env.yaml */ -}}
 {{- $name := .Environment.Values | getOrNil "NAME" | required "NAME is required" -}}
 {{- $domain := .Environment.Values | getOrNil "DOMAIN" | required "DOMAIN is required" -}}
+{{- $dbNameSuffix := .Environment.Values | getOrNil "DB_NAME_SUFFIX" | default $name -}}
 {{- $dockerUser := .Environment.Values | getOrNil "DOCKER_HUB_USERNAME" | required "DOCKER_HUB_USERNAME is required" -}}
 {{- $imageTag := .Environment.Values | getOrNil "IMAGE_TAG" | required "IMAGE_TAG is required" -}}
 
@@ -160,7 +161,7 @@ mail:
       memory: 10Mi
 
 postgresql:
-  url: "{{ .Environment.Values | getOrNil "POSTGRES_URL" | required "POSTGRES_URL is required" }}/ecamp3{{ $name }}?sslmode=require"
+  url: "{{ .Environment.Values | getOrNil "POSTGRES_URL" | required "POSTGRES_URL is required" }}/ecamp3{{ $dbNameSuffix }}?sslmode=require"
   dropDBOnUninstall: {{ .Environment.Values | getOrNil "DROP_DB_ON_UNINSTALL" | default false }}
   # An uri with privileges to create and drop a database for the application.
   # Can be left empty if the required database specified in postgresql.url already exists.
