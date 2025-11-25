@@ -50,7 +50,7 @@
                 </h3>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <ol>
+                <ol class="pl-4 pr-4">
                   <ChecklistItem
                     v-for="{ item } in items.filter(({ item }) => item.parent == null)"
                     :key="item._meta.self"
