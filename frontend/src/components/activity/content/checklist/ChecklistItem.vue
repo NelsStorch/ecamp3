@@ -22,6 +22,8 @@
         :checklist="checklist"
         :item="child"
         v-bind="$attrs"
+        @add-item="$emit('add-item', $event)"
+        @remove-item="$emit('remove-item', $event)"
       />
     </ol>
   </li>
