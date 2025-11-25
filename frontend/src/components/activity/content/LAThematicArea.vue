@@ -53,7 +53,7 @@
             <v-checkbox-btn
               class="pointer-events-none"
               :color="item.raw.color"
-              :model-value="contentNode.data.options[item.value]"
+              :model-value="localSelection.includes(item.value)"
               :ripple="false"
             />
           </v-list-item-action>
@@ -126,14 +126,14 @@ export default {
     this.debounceSave = debounce(this.save, DEBOUNCE_WAIT)
   },
   methods: {
-    onInput() {
+    onInput(newValue) {
       this.dirty = true
+      this.localSelection = newValue
       this.errorMessages = []
 
       this.debounceSave()
     },
     save() {
-      console.log('saving', this.localSelection)
       this.savingRequestCount++
       this.contentNode
         .$patch({
