@@ -182,7 +182,7 @@ services:
       - ENABLE_DEBUGGER=false
 
   e2e:
-    image: cypress/included:15.6.0@sha256:46bb4de6756baa895c41c671a0538cffea9e93300313e343138101048585d637
+    image: cypress/included:15.7.0@sha256:554bfde1ce7e9d4a4893332ec0d18d28c0499299dcbb51346a81dd37c62bd642
     profiles: ['e2e']
     container_name: 'ecamp3-e2e'
     environment:
