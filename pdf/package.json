@@ -35,7 +35,7 @@
     "@babel/eslint-parser": "7.28.5",
     "@eslint/compat": "2.0.0",
     "@eslint/js": "9.39.1",
-    "@intlify/core": "11.1.12",
+    "@intlify/core": "11.2.1",
     "@rushstack/eslint-patch": "1.15.0",
     "@vitejs/plugin-vue": "6.0.2",
     "@vitest/coverage-v8": "4.0.13",
