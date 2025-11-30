@@ -4,19 +4,19 @@
       {{ $t('views.auth.resetPassword.title') }}
     </h1>
 
-    <div v-if="status == 'loading'" style="text-align: center">
+    <div v-if="status === 'loading'" style="text-align: center">
       <v-progress-circular :size="70" :width="7" indeterminate />
     </div>
 
-    <v-alert v-if="status == 'loading-failed'" type="error">
+    <v-alert v-if="status === 'loading-failed'" type="error">
       {{ $t('views.auth.resetPassword.invalidRequest') }}
     </v-alert>
 
-    <v-alert v-if="status == 'success'" type="success">
+    <v-alert v-if="status === 'success'" type="success">
       {{ $t('views.auth.resetPassword.successMessage') }}
     </v-alert>
 
-    <v-alert v-if="status == 'failed'" type="error">
+    <v-alert v-if="status === 'failed'" type="error">
       {{ $t('views.auth.resetPassword.errorMessage') }}
     </v-alert>
 
