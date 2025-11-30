@@ -16,7 +16,7 @@
           <api-form :entity="profile" name="profile">
             <e-text-field
               class="e-profile--email"
-              :value="profile.email"
+              :model-value="profile.email"
               path="email"
               outlined
               :filled="false"
