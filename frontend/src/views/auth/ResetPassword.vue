@@ -22,7 +22,7 @@
 
     <Form v-if="status === 'loaded' || status === 'reseting'" @submit="resetPassword">
       <e-text-field
-        :dense="$vuetify.display.xs"
+        :density="$vuetify.display.xs ? 'compact' : 'default'"
         :model-value="email"
         append-icon="mdi-at"
         autocomplete="username"
@@ -33,7 +33,7 @@
 
       <e-text-field
         v-model="password"
-        :density="$vuetify.display.xs && 'compact'"
+        :density="$vuetify.display.xs ? 'compact' : 'default'"
         append-icon="mdi-lock-outline"
         autocomplete="new-password"
         autofocus
@@ -58,7 +58,7 @@
 
       <e-text-field
         v-model="confirmation"
-        :dense="$vuetify.display.xs"
+        :density="$vuetify.display.xs ? 'compact' : 'default'"
         :label="$t('views.auth.resetPassword.passwordConfirmation')"
         append-icon="mdi-lock-outline"
         autocomplete="new-password"
