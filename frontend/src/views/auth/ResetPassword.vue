@@ -47,7 +47,7 @@
         type="password"
         validate-on-blur
         vee-rules="required|min:12|max:128"
-        @input="debouncedPasswordStrengthCheck"
+        @input="(event) => debouncedPasswordStrengthCheck(event.target.value)"
       >
         <template #progress>
           <v-progress-linear
