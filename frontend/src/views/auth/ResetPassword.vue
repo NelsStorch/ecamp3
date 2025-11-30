@@ -20,10 +20,7 @@
       {{ $t('views.auth.resetPassword.errorMessage') }}
     </v-alert>
 
-    <Form
-      v-if="status === 'loaded' || status === 'reseting'"
-      @submit="resetPassword"
-    >
+    <Form v-if="status === 'loaded' || status === 'reseting'" @submit="resetPassword">
       <e-text-field
         :dense="$vuetify.display.xs"
         :model-value="email"
