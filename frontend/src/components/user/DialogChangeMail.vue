@@ -59,7 +59,9 @@ export default {
   methods: {
     async sendChangeMailRequest() {
       await this.api
-        .patch(this.entityUri, this.entityData)
+        .patch(this.entityUri, {
+          newEmail: this.entityData.newEmail,
+        })
         .then(() => {
           this.status = 'success'
         })
