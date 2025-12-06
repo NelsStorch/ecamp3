@@ -225,16 +225,6 @@ Displays a single scheduleEntry
                 </tr>
               </tbody>
             </table>
-            <DialogActivityEdit
-              v-if="scheduleEntry && isContributor"
-              :schedule-entry="scheduleEntry"
-              hide-header-fields
-              @activity-updated="activity.$reload()"
-            >
-              <template #activator="{ props }">
-                <ButtonEdit variant="tonal" size="small" v-bind="props" />
-              </template>
-            </DialogActivityEdit>
           </v-col>
           <v-col class="col col-sm-6 col-12 px-0">
             <api-form :entity="activity" name="activity">
@@ -301,8 +291,6 @@ import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import ApiForm from '@/components/form/api/ApiForm.vue'
 import ApiSelect from '@/components/form/api/ApiSelect.vue'
-import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
-import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
 import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
 import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
 import { useToast } from 'vue-toastification'
@@ -310,8 +298,6 @@ import { useToast } from 'vue-toastification'
 export default {
   name: 'ScheduleEntry',
   components: {
-    DialogActivityEdit,
-    ButtonEdit,
     ApiForm,
     ApiSelect,
     TogglePaperSize,
