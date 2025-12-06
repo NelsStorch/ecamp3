@@ -130,7 +130,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
         $requestMock->cookies = $cookieBag;
-        $requestMock->method('get')->willReturn($state);
+        $requestMock->query = new InputBag(['state' => $state, 'code' => $state]);
 
         $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
         $jwtEncoderMock->expects($this->once())
@@ -175,7 +175,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
         $requestMock->cookies = $cookieBag;
-        $requestMock->method('get')->willReturn($state);
+        $requestMock->query = new InputBag(['state' => $state, 'code' => $state]);
 
         $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
         $jwtEncoderMock->expects($this->once())
@@ -220,7 +220,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
         $requestMock->cookies = $cookieBag;
-        $requestMock->method('get')->willReturn($state);
+        $requestMock->query = new InputBag(['state' => $state, 'code' => $state]);
 
         $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
         $jwtEncoderMock->expects($this->once())
@@ -265,7 +265,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
         $requestMock->cookies = $cookieBag;
-        $requestMock->method('get')->willReturn($state);
+        $requestMock->query = new InputBag(['state' => $state, 'code' => $state]);
 
         $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
         $jwtEncoderMock->expects($this->once())
@@ -311,7 +311,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
         $requestMock->cookies = $cookieBag;
-        $requestMock->method('get')->willReturn($state);
+        $requestMock->query = new InputBag(['state' => $state, 'code' => $state]);
 
         $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
         $jwtEncoderMock->expects($this->once())
@@ -357,7 +357,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
         $requestMock->cookies = $cookieBag;
-        $requestMock->method('get')->willReturn($state);
+        $requestMock->query = new InputBag(['state' => $state, 'code' => $state]);
 
         $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
         $jwtEncoderMock->expects($this->once())
