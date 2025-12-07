@@ -386,7 +386,7 @@ class CreateMaterialItemTest extends ECampApiTestCase {
 
         $this->assertResponseStatusCodeSame(400);
         $this->assertJsonContains([
-            'detail' => 'The type of the "quantity" attribute must be "float", "string" given.',
+            'detail' => 'The type of the "quantity" attribute must be "float|null", "string" given.',
         ]);
     }
 
@@ -521,7 +521,12 @@ class CreateMaterialItemTest extends ECampApiTestCase {
             MaterialItem::class,
             Get::class,
             $attributes,
-            ['materialList', 'period', 'materialNode'],
+            [
+                'materialList',
+                'period',
+                'materialNode',
+                'camp',
+            ],
             $except
         );
     }

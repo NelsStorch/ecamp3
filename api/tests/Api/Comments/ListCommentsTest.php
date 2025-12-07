@@ -52,7 +52,9 @@ class ListCommentsTest extends ECampApiTestCase {
                 'camp' => $this->getIriFor('camp1'),
                 'activity' => $this->getIriFor('activity1'),
             ],
-            [],
+            [
+                'author',
+            ],
             []
         )])->toArray();
 
