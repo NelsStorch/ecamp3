@@ -70,7 +70,6 @@
         "hautelook/alice-bundle": "2.16.0",
         "justinrainbow/json-schema": "6.6.3",
         "php-coveralls/php-coveralls": "2.9.0",
-        "phpspec/prophecy-phpunit": "2.4.0",
         "phpstan/phpstan": "2.1.33",
         "phpunit/phpunit": "12.5.4",
         "rector/rector": "2.2.14",
