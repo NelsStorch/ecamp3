@@ -37,9 +37,6 @@
     "composer/xdebug-handler": {
         "version": "1.4.6"
     },
-    "cweagans/composer-patches": {
-        "version": "1.7.1"
-    },
     "dnoegel/php-xdg-base-dir": {
         "version": "v0.1.1"
     },

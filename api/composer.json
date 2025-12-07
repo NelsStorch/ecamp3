@@ -8,9 +8,9 @@
         "api-platform/doctrine-orm": "4.2.10",
         "api-platform/doctrine-common": "4.2.10",
         "api-platform/documentation": "4.2.10",
+        "api-platform/hal": "4.2.10",
         "api-platform/http-cache": "4.2.10",
         "api-platform/json-api": "4.2.10",
-        "api-platform/json-hal": "4.1.28",
         "api-platform/metadata": "4.2.9",
         "api-platform/openapi": "4.2.10",
         "api-platform/serializer": "4.2.10",
@@ -18,7 +18,6 @@
         "api-platform/symfony": "4.2.9",
         "api-platform/validator": "4.2.10",
         "composer/package-versions-deprecated": "1.11.99",
-        "cweagans/composer-patches": "2.0.0",
         "doctrine/common": "3.5.0",
         "doctrine/doctrine-bundle": "3.1.0",
         "doctrine/doctrine-migrations-bundle": "4.0.0",
@@ -92,7 +91,6 @@
         },
         "sort-packages": true,
         "allow-plugins": {
-            "cweagans/composer-patches": true,
             "php-http/discovery": false,
             "symfony/flex": true,
             "symfony/runtime": true
@@ -161,13 +159,5 @@
     "conflict": {
         "symfony/dependency-injection": "5.3.7",
         "symfony/symfony": "*"
-    },
-    "extra": {
-        "composer-exit-on-patch-failure": true,
-        "patches": {
-            "api-platform/json-hal": {
-                "Allow NULL-Links": "patch/api-plattform-allow-null-links.patch"
-            }
-        }
     }
 }
