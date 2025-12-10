@@ -43737,7 +43737,9 @@ components:
           default: 400
           examples:
             - 404
-          type: number
+          type:
+            - 'null'
+            - number
         title:
           description: 'A short, human-readable summary of the problem.'
           readOnly: true
@@ -43776,7 +43778,9 @@ components:
               default: 400
               examples:
                 - 404
-              type: number
+              type:
+                - 'null'
+                - number
             title:
               description: 'A short, human-readable summary of the problem.'
               readOnly: true
