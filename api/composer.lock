@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50488c074490f3e805cc79e6ec20266d",
+    "content-hash": "83bbb1489f9d7f080cab1d2cfff0801a",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -3023,16 +3023,16 @@
         },
         {
             "name": "friendsofsymfony/http-cache",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCache.git",
-                "reference": "c5ed7189df2cf0550541c6d1a3d2fb558213e403"
+                "reference": "7805dc01f901e0698bea6f7817e246464cf9ff04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/c5ed7189df2cf0550541c6d1a3d2fb558213e403",
-                "reference": "c5ed7189df2cf0550541c6d1a3d2fb558213e403",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/7805dc01f901e0698bea6f7817e246464cf9ff04",
+                "reference": "7805dc01f901e0698bea6f7817e246464cf9ff04",
                 "shasum": ""
             },
             "require": {
@@ -3042,8 +3042,8 @@
                 "php-http/discovery": "^1.12",
                 "psr/http-client-implementation": "^1.0 || ^2.0",
                 "psr/http-factory": "^1.0",
-                "symfony/event-dispatcher": "^6.4 || ^7.0",
-                "symfony/options-resolver": "^6.4 || ^7.0"
+                "symfony/event-dispatcher": "^6.4 || ^7.0 || ^8.0",
+                "symfony/options-resolver": "^6.4 || ^7.0 || ^8.0"
             },
             "conflict": {
                 "toflar/psr6-symfony-http-cache-store": "<2.2.1"
@@ -3054,8 +3054,8 @@
                 "php-http/guzzle7-adapter": "^1",
                 "php-http/mock-client": "^1.6.0",
                 "phpunit/phpunit": "^10.5",
-                "symfony/http-kernel": "^6.4|| ^7.0",
-                "symfony/process": "^6.4|| ^7.0"
+                "symfony/http-kernel": "^6.4|| ^7.0 || ^8.0",
+                "symfony/process": "^6.4|| ^7.0 || ^8.0"
             },
             "suggest": {
                 "friendsofsymfony/http-cache-bundle": "For integration with the Symfony framework",
@@ -3099,9 +3099,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSHttpCache/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSHttpCache/tree/3.1.1"
+                "source": "https://github.com/FriendsOfSymfony/FOSHttpCache/tree/3.1.2"
             },
-            "time": "2025-06-17T09:10:02+00:00"
+            "time": "2025-12-03T15:55:18+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
