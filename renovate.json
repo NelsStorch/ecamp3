@@ -107,7 +107,10 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^.helm/ecamp3/values.ya?ml$/"],
+      "managerFilePatterns": [
+        "/^.helm/ecamp3/values.ya?ml/",
+        "/^.ops/**/values.ya?ml/"
+      ],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)?\\s.*tag: \"(?<currentValue>.*)\"\\s"
       ]
