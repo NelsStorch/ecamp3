@@ -4,6 +4,7 @@ fluent-operator:
     annotations:
       trigger-recreate: {{ exec "uuidgen" (list) }}
     container:
+      # renovate: datasource=docker depName=ghcr.io/fluent/fluent-operator/fluent-operator
       tag: 3.3.0
   fluentbit:
     enable: true
