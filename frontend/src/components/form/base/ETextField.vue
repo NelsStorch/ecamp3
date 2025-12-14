@@ -2,6 +2,7 @@
   <Field
     v-slot="{ handleChange, handleReset, errors: veeFieldErrors }"
     ref="validationField"
+    :model-value="modelValue"
     as="div"
     :name="veeId ?? path"
     :label="validationLabel"
