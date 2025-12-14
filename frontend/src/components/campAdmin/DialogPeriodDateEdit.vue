@@ -12,59 +12,61 @@
     <template #activator="scope">
       <slot name="activator" v-bind="scope" />
     </template>
-    <e-form v-if="mode == 'move'" class="e-form-container" name="period">
+    <e-form v-if="mode === 'move'" class="e-form-container" name="period">
       <p>{{ $t('components.campAdmin.dialogPeriodDateEdit.movePeriod') }}</p>
       <e-date-picker
-        v-model="entityData.start"
+        :model-value="entityData.start"
         path="start"
         icon="mdi-calendar-start"
         vee-rules="required"
-        @input="startChanged"
+        @update:model-value="updateStartAndNotify"
       />
       <e-text-field
-        :value="endString"
+        :model-value="endString"
         path="end"
         hide-details
         readonly
         prepend-icon="mdi-calendar-end"
       />
     </e-form>
-    <e-form v-if="mode == 'changeStart'" class="e-form-container" name="period">
+    <e-form v-if="mode === 'changeStart'" class="e-form-container" name="period">
       <p>{{ $t('components.campAdmin.dialogPeriodDateEdit.periodChangeStart') }}</p>
       <e-date-picker
-        v-model="entityData.start"
+        :model-value="entityData.start"
         path="start"
         icon="mdi-calendar-start"
         :vee-rules="'required|lessThanOrEqual_date:' + endString"
-        @input="startChanged"
+        @update:model-value="updateStartAndNotify"
       />
       <e-text-field
-        :value="endString"
+        :model-value="endString"
         path="end"
         hide-details
         readonly
         prepend-icon="mdi-calendar-end"
       />
     </e-form>
-    <e-form v-if="mode == 'changeEnd'" class="e-form-container" name="period">
+    <e-form v-if="mode === 'changeEnd'" class="e-form-container" name="period">
       <p>{{ $t('components.campAdmin.dialogPeriodDateEdit.periodChangeEnd') }}</p>
       <e-text-field
-        :value="startString"
+        :model-value="startString"
         path="start"
         hide-details
         readonly
         prepend-icon="mdi-calendar-start"
       />
       <e-date-picker
-        v-if="mode == 'changeEnd'"
-        v-model="entityData.end"
+        v-if="mode === 'changeEnd'"
+        :model-value="entityData.end"
         path="end"
         icon="mdi-calendar-end"
         :vee-rules="'required|greaterThanOrEqual_date:' + startString"
+        @update:model-value="entityData.end = $event"
       />
     </e-form>
     <e-text-field
-      :value="periodDurationInDays"
+      :model-value="periodDurationInDays"
+      path="periodDurationInDays"
       :label="$t('components.campAdmin.dialogPeriodDateEdit.periodDuration')"
       hide-details
       prepend-icon="mdi-calendar-expand-horizontal"
@@ -112,13 +114,17 @@ export default {
     },
     loading: function (isLoading) {
       if (!isLoading) {
-        this.entityData.moveScheduleEntries = this.mode == 'move'
+        this.entityData.moveScheduleEntries = this.mode === 'move'
       }
     },
   },
   methods: {
+    updateStartAndNotify(start) {
+      this.entityData.start = start
+      this.startChanged()
+    },
     startChanged() {
-      if (this.mode == 'move') {
+      if (this.mode === 'move') {
         const origStart = this.$date.utc(this.period.start, 'YYYY-MM-DD')
         const origEnd = this.$date.utc(this.period.end, 'YYYY-MM-DD')
         const origLength = origEnd - origStart
