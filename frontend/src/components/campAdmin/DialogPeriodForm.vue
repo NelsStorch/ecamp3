@@ -1,20 +1,27 @@
 <template>
   <e-form name="period">
     <e-text-field
-      v-model="localPeriod.description"
+      :model-value="localPeriod.description"
       path="description"
       vee-rules="required"
+      @update:model-value="localPeriod.description = $event"
     />
 
     <e-date-picker
-      v-model="localPeriod.start"
+      :model-value="localPeriod.start"
       path="start"
       vee-rules="required"
       :max="localPeriod.end"
+      @update:model-value="localPeriod.start = $event"
     />
 
     <!-- vee-rules="required|greaterThanOrEqual_date:@start" -->
-    <e-date-picker v-model="localPeriod.end" path="end" :min="localPeriod.start" />
+    <e-date-picker
+      :min="localPeriod.start"
+      :model-value="localPeriod.end"
+      path="end"
+      @update:model-value="localPeriod.end = $event"
+    />
   </e-form>
 </template>
 
