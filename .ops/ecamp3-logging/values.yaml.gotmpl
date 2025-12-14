@@ -60,7 +60,9 @@ elasticsearch:
         storage: {{ .Environment.Values | get "ELASTIC_NODE_STORAGE_SIZE" nil | required "Please define ELASTIC_NODE_STORAGE_SIZE. There is no good default value." }}
   removeOldIndexes:
     maxIndexAge: {{ .Environment.Values | get "ELASTIC_NODE_MAX_INDEX_AGE" "15" }}
-    image: node:24.8.0
+    image: node
+    # renovate: datasource=docker depName=node
+    tag: "24.8.0"
 
 kibana:
   name: kibana
