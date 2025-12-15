@@ -5,7 +5,7 @@
         "php": ">=8.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/doctrine-orm": "4.2.9",
+        "api-platform/doctrine-orm": "4.2.10",
         "api-platform/doctrine-common": "4.2.10",
         "api-platform/documentation": "4.2.10",
         "api-platform/http-cache": "4.2.10",
