@@ -22,6 +22,7 @@ final readonly class SerializerContextBuilder implements SerializerContextBuilde
         $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);
 
         if ($normalization) {
+            $context['skip_null_to_one_relations'] = false;
             $context['skip_null_values'] = false;
         }
 
