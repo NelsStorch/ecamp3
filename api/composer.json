@@ -65,7 +65,7 @@
     },
     "require-dev": {
         "api-platform/graphql": "4.2.10",
-        "brianium/paratest": "v7.15.0",
+        "brianium/paratest": "v7.16.0",
         "friendsofphp/php-cs-fixer": "3.91.3",
         "hautelook/alice-bundle": "2.16.0",
         "justinrainbow/json-schema": "6.6.3",
