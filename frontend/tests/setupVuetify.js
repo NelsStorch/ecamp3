@@ -1,6 +1,6 @@
 import { config } from '@vue/test-utils'
-import { vuetify } from '@/plugins/vuetify.js'
+import Vuetify from '@/plugins/vuetify.js'
 
 export function setupVuetify() {
-  config.global.plugins = [vuetify]
+  config.global.plugins = [Vuetify]
 }
