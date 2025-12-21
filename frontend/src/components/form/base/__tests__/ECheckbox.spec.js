@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import { setupVuetify } from '/tests/setupVuetify.js'
 import { mount as mountComponent } from '@vue/test-utils'
 import ECheckbox from '../ECheckbox.vue'
