@@ -3,7 +3,7 @@
     v-slot="{ errors: veeErrors }"
     as="div"
     :label="validationLabel"
-    :name="veeId ?? path"
+    :name="veeId ?? path ?? validationLabel"
     :rules="veeRules"
     class="e-form-container"
   >

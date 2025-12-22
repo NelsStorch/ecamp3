@@ -7,7 +7,7 @@ Displays a field as a textfield (can be used with v-model)
     v-slot="{ handleChange, errors: veeErrors }"
     ref="validationField"
     as="div"
-    :name="veeId ?? path"
+    :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
     :rules="veeRules"
     class="e-form-container"

@@ -2,7 +2,7 @@
   <Field
     v-slot="{ handleChange, errors: veeErrors }"
     as="div"
-    :name="veeId ?? path"
+    :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
     :rules="veeRules"
     class="e-form-container"

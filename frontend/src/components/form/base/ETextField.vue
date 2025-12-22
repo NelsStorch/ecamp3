@@ -4,7 +4,7 @@
     ref="validationField"
     :model-value="modelValue"
     as="div"
-    :name="veeId ?? path"
+    :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
     :rules="veeRules"
     class="e-form-container"
