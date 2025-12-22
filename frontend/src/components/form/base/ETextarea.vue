@@ -1,32 +1,35 @@
 <template>
-  <!--  <ValidationProvider-->
-  <!--    v-slot="{ errors: veeErrors }"-->
-  <!--    tag="div"-->
-  <!--    :name="validationLabel"-->
-  <!--    :vid="veeId"-->
-  <!--    :rules="veeRules"-->
-  <!--    :required="required"-->
-  <!--    class="e-form-container"-->
-  <!--  >-->
-  <v-tiptap-editor
-    :class="[inputClass]"
-    :error-messages="(veeErrors ?? []).concat(errorMessages)"
-    :filled="filled"
-    :hide-details="hideDetails"
-    :label="labelOrEntityFieldLabel"
-    :with-extensions="false"
-    v-bind="$attrs"
+  <Field
+    v-slot="{ handleChange, errors: veeErrors }"
+    :label="validationLabel"
+    :name="veeId ?? path"
+    :rules="veeRules"
   >
-    <!-- passing through all slots -->
-    <template v-for="(_, slot) of $slots" #[slot]="slotData">
-      <slot :name="slot" v-bind="slotData || {}"></slot>
-    </template>
-  </v-tiptap-editor>
-  <!--  </ValidationProvider>-->
+    <v-tiptap-editor
+      :class="[inputClass]"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :filled="filled"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      :with-extensions="false"
+      :on-input="
+        ($event) => {
+          handleChange($event)
+          $emit('update:model-value', $event)
+        }
+      "
+      v-bind="$attrs"
+    >
+      <!-- passing through all slots -->
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
+      </template>
+    </v-tiptap-editor>
+  </Field>
 </template>
 
 <script>
-// import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import VTiptapEditor from '@/components/form/tiptap/VTiptapEditor.vue'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
@@ -34,8 +37,8 @@ import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 export default {
   name: 'ETextarea',
   components: {
+    Field,
     VTiptapEditor,
-    // ValidationProvider
   },
   mixins: [formComponentPropsMixin, formComponentMixin],
 }

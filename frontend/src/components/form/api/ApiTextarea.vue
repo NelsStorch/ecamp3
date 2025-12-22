@@ -5,8 +5,8 @@ Displays a field as a e-textarea + write access via API wrapper
 <template>
   <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }" separate-buttons>
     <e-textarea
-      :value="wrapper.localValue"
-      v-bind="{ ...$props, ...$attrs }"
+      :model-value="wrapper.localValue"
+      v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
