@@ -2,18 +2,18 @@
   <v-stepper :model-value="step" flat>
     <v-stepper-header class="elevation-0">
       <v-spacer v-if="$vuetify.display.smAndUp" class="w-100" />
-      <v-stepper-item :complete="step > 0" class="px-4" color="primary">
+      <v-stepper-item :value="1" :complete="step > 1" class="px-4" color="primary">
         {{ $t('components.campCreate.campCreate.steps.infos') }}
       </v-stepper-item>
       <v-divider class="mx-n2" />
-      <v-stepper-item :complete="step > 1" class="px-4" color="primary">
+      <v-stepper-item :value="2" :complete="step > 2" class="px-4" color="primary">
         {{ $t('components.campCreate.campCreate.steps.template') }}
       </v-stepper-item>
       <v-spacer v-if="$vuetify.display.smAndUp" class="w-100" />
     </v-stepper-header>
     <v-divider />
     <v-stepper-window class="ma-0">
-      <v-stepper-window-item>
+      <v-stepper-window-item :value="1">
         <CampCreateStep1
           :camp="camp"
           :is-saving="isSaving"
@@ -22,7 +22,7 @@
           @next-step="step++"
         />
       </v-stepper-window-item>
-      <v-stepper-window-item>
+      <v-stepper-window-item :value="2">
         <CampCreateStep2
           :camp="camp"
           :is-saving="isSaving"
@@ -67,9 +67,6 @@ export default {
     campsUrl() {
       return this.api.get().camps()._meta.self
     },
-  },
-  mounted() {
-    this.step = 0
   },
   created() {},
   methods: {
