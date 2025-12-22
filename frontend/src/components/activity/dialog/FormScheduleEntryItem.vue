@@ -72,7 +72,7 @@
         path="duration"
         :filled="false"
         class="duration"
-        :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
+        :model-value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
       />
       <button-delete
         class="ml-auto"
