@@ -1,7 +1,9 @@
 services:
   frontend:
-    image: node:24.11.0
+    image: node:24.12.0
     container_name: "ecamp3-frontend"
+    ports:
+      - "9229:9229" # jest debug
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
@@ -104,7 +106,7 @@ services:
     command: varnishncsa
 
   pdf:
-    image: node:24.11.0
+    image: node:24.12.0
     container_name: "ecamp3-pdf"
     stdin_open: true
     tty: true
@@ -124,7 +126,7 @@ services:
       - CI=${CI}
 
   print:
-    image: node:24.11.0
+    image: node:24.12.0
     container_name: "ecamp3-print"
     user: ${USER_ID:-1000}
     volumes:
@@ -193,7 +195,7 @@ services:
     restart: on-failure
 
   browserless:
-    image: ghcr.io/browserless/chrome:v2.38.2
+    image: ghcr.io/browserless/chromium:v2.38.2
     container_name: "ecamp3-browserless"
     ports:
       - "3010:3000"
@@ -205,7 +207,7 @@ services:
       - ENABLE_DEBUGGER=false
 
   e2e:
-    image: cypress/included:15.6.0@sha256:46bb4de6756baa895c41c671a0538cffea9e93300313e343138101048585d637
+    image: cypress/included:15.7.1@sha256:73b92d32caa163c1a11ad24a7ac579c18f0069c4acf92c3064c01f437979e575
     profiles: ["e2e"]
     container_name: "ecamp3-e2e"
     environment:
@@ -236,7 +238,7 @@ services:
     stop_signal: SIGKILL
 
   translation:
-    image: node:24.11.0
+    image: node:24.12.0
     profiles: ["translation"]
     container_name: "ecamp3-translation"
     volumes:

@@ -35,7 +35,13 @@ class SerializerContextBuilderTest extends TestCase {
 
         $result = $this->contextBuilder->createFromRequest($request, true);
 
-        $this->assertEquals(['skip_null_values' => false], $result);
+        $this->assertEquals(
+            [
+                'skip_null_to_one_relations' => false,
+                'skip_null_values' => false,
+            ],
+            $result
+        );
     }
 
     public function testDoesntAddSkipNullValuesFalseWhenDenormalizing() {

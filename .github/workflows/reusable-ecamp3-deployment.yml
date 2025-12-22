@@ -31,17 +31,16 @@ on:
         required: true
         default: diff
 
-env:
-  NAME: ${{ inputs.name }}
-  IMAGE_TAG: ${{ inputs.sha }}
-  HELM_TIMEOUT: ${{ vars.HELM_TIMEOUT }}
-
 jobs:
   deploy-ecamp3:
     name: Deploy to Kubernetes
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.env }}
+    env:
+      NAME: ${{ vars.NAME || inputs.name }}
+      IMAGE_TAG: ${{ inputs.sha }}
+      HELM_TIMEOUT: ${{ vars.HELM_TIMEOUT }}
     steps:
       - name: Get link to currently running job logs
         if: ${{ inputs.env == 'feature-branch' }}
@@ -74,7 +73,7 @@ jobs:
             |<span aria-hidden="true">🔍</span> Latest deploy log | [${{ steps.job-url.outputs.html_url }}](${{ steps.job-url.outputs.html_url }}) |
           comment-tag: feature-branch-deployment-status
 
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
         with:
           ref: ${{ inputs.sha }}
 
@@ -96,7 +95,7 @@ jobs:
         run: |
           jq -n \
             '{
-              NAME: "${{ inputs.name }}",
+              NAME: "${{ env.NAME }}",
               IMAGE_TAG: "${{ inputs.sha }}",
               RESTORE_SOURCE_FILE: "${{ inputs.restoreSourceFile || '' }}",
               DROP_DB_ON_UNINSTALL: ${{ inputs.dropDBOnUninstall }}
@@ -132,7 +131,7 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: ${{ (inputs.env == 'staging' || inputs.env == 'prod') && format('https://{0}.{1}', vars.SUBDOMAIN, vars.DOMAIN) || format('https://{0}.{1}', inputs.name, vars.DOMAIN) }}
+          env_url: ${{ format('https://{0}.{1}', env.NAME, vars.DOMAIN) }}
           env: ${{ steps.deployment.outputs.env }}
 
       - name: Get current time
@@ -153,12 +152,12 @@ jobs:
 
             |  Name | Link |
             |---------------------------------|------------------------|
-            |<span aria-hidden="true">😎</span> **Deployment** | [https://${{ inputs.name }}.${{ vars.DOMAIN }}/](https://${{ inputs.name }}.${{ vars.DOMAIN }}/) |
+            |<span aria-hidden="true">😎</span> **Deployment** | [https://${{ env.NAME }}.${{ vars.DOMAIN }}/](https://${{ env.NAME }}.${{ vars.DOMAIN }}/) |
             |<span aria-hidden="true">🔑</span> Login | `test@example.com` / `test` |
             |<span aria-hidden="true">🕒</span> Last deployed at | ${{ steps.current-time.outputs.readableTime }} |
             |<span aria-hidden="true">🔨</span> Latest commit | [${{ inputs.sha }}](https://github.com/${{ github.repository }}/commit/${{ inputs.sha }}) |
             |<span aria-hidden="true">🔍</span> Latest deploy log | [${{ steps.job-url.outputs.html_url }}](${{ steps.job-url.outputs.html_url }}) |
-            |<span aria-hidden="true">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://api.qrserver.com/v1/create-qr-code/?size=180x180&ecc=H&format=svg&qzone=4&color=5-72-97&data=https://${{ inputs.name }}.${{ vars.DOMAIN }}/)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+            |<span aria-hidden="true">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://api.qrserver.com/v1/create-qr-code/?size=180x180&ecc=H&format=svg&qzone=4&color=5-72-97&data=https://${{ env.NAME }}.${{ vars.DOMAIN }}/)<br /><br />_Use your smartphone camera to open QR code link._</details> |
             ---
           comment-tag: feature-branch-deployment-status
 

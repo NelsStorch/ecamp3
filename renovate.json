@@ -5,7 +5,7 @@
     ":prConcurrentLimitNone"
   ],
   "constraints": {
-    "node": "24.11.0",
+    "node": "24.12.0",
     "php": "8.4.14"
   },
   "automergeType": "branch",
@@ -57,7 +57,7 @@
     },
     {
       "matchDepNames": [
-        "browserless/chrome",
+        "browserless/chromium",
         "caddy",
         "krakjoe/apcu",
         "mailhog/mailhog",
@@ -70,7 +70,7 @@
       "schedule": ["after 10pm on sunday", "before 7am on monday"]
     },
     {
-      "matchDepNames": ["browserless/chrome"],
+      "matchDepNames": ["browserless/chromium"],
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>\\w+)-(?<build>\\d+)\\.(\\d+)\\.(\\d+)?$"
     },
     {
@@ -107,7 +107,10 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^.helm/ecamp3/values.ya?ml$/"],
+      "managerFilePatterns": [
+        "/^.helm/ecamp3/values.ya?ml/",
+        "/^.ops/.*/values.ya?ml/"
+      ],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)?\\s.*tag: \"(?<currentValue>.*)\"\\s"
       ]

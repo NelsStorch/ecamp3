@@ -15,6 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|Checklist findOneBy(array $criteria, array $orderBy = null)
  * @method Checklist[]    findAll()
  * @method Checklist[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<Checklist>
  */
 class ChecklistRepository extends ServiceEntityRepository implements CanFilterByUserInterface {
     use FiltersByCampCollaboration;

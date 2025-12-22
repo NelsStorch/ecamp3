@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
 
     // Connect to browserless.io (puppeteer websocket)
     browser = await puppeteer.connect({
-      browserWSEndpoint: browserWsEndpoint + `/chrome?token=${browserlessToken}`,
+      browserWSEndpoint: browserWsEndpoint + `/chromium?token=${browserlessToken}`,
     })
     const context = await browser.createBrowserContext()
     measurePerformance(performanceMeasurements, 'puppeteer_connect')

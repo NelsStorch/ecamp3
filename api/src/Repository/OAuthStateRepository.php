@@ -13,6 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method null|OAuthState findOneBy(array $criteria, array $orderBy = null)
  * @method OAuthState[]    findAll()
  * @method OAuthState[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template-extends ServiceEntityRepository<OAuthState>
  */
 class OAuthStateRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry) {

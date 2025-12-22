@@ -17,12 +17,12 @@ jobs:
     name: 'Validate Api Platform composer.lock'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
 
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.14'
-          tools: composer:2.8.0
+          tools: composer:2.9.0
           coverage: xdebug
 
       - run: composer validate -n --no-check-all --no-check-publish --strict
@@ -32,12 +32,12 @@ jobs:
     name: 'Lint: API (psalm)'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
 
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.14'
-          tools: composer:2.8.0
+          tools: composer:2.9.0
           coverage: xdebug
 
       - name: Get Composer Cache Directory
@@ -62,12 +62,12 @@ jobs:
     name: 'Lint: API (phpstan)'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
 
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.14'
-          tools: composer:2.8.0
+          tools: composer:2.9.0
           coverage: xdebug
 
       - name: Get Composer Cache Directory
@@ -110,12 +110,12 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
 
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.14'
-          tools: composer:2.8.0
+          tools: composer:2.9.0
           coverage: xdebug
 
       - name: Get Composer Cache Directory
