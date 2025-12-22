@@ -49,9 +49,11 @@
         <v-list-item
           class="ec-copy-source rounded-xl bg-blue-grey-lighten-5 text-blue-grey-darken-4 mt-1"
         >
-          <v-avatar>
-            <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
-          </v-avatar>
+          <template #prepend>
+            <v-avatar>
+              <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
+            </v-avatar>
+          </template>
 
           <v-list-item-title>
             <CategoryChip :category="clipboardEntity.category()" class="mx-1" dense />
@@ -61,13 +63,15 @@
             {{ clipboardEntity.camp().title }}
           </v-list-item-subtitle>
 
-          <v-list-item-action>
-            <e-checkbox
-              :value="entityData.copyActivitySource !== null"
-              :label="$t('components.program.dialogActivityCreate.copyActivityContent')"
-              @input="setCopyContentCheckbox"
-            />
-          </v-list-item-action>
+          <template #append>
+            <v-list-item-action>
+              <e-checkbox
+                :value="entityData.copyActivitySource !== null"
+                :label="$t('components.program.dialogActivityCreate.copyActivityContent')"
+                @input="setCopyContentCheckbox"
+              />
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </div>
     </div>
