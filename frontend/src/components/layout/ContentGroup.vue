@@ -10,7 +10,7 @@ Displays the content wrapped inside a card.
         v-if="title"
         class="ec-content-group__title py-1 text-subtitle-1"
       >
-        <v-icon v-if="icon" start size="20" class="mb-n1">{{ icon }}</v-icon>
+        <v-icon v-if="icon" start size="20" class="mb-n1" color="surface-variant">{{ icon }}</v-icon>
         {{ title }}
         <v-spacer />
         <slot name="title-actions" />
