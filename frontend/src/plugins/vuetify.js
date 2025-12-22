@@ -28,6 +28,9 @@ import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 
 class VuetifyLoaderPlugin {
   install(app) {
+    /**
+     * @type VuetifyOptions
+     */
     const opts = {
       locale: {
         adapter: createVueI18nAdapter({ i18n, useI18n }),
@@ -130,6 +133,11 @@ class VuetifyLoaderPlugin {
               'theme-on-code': '#CCCCCC',
             },
           },
+        },
+      },
+      defaults: {
+        VBtn: {
+          variant: 'elevated',
         },
       },
       components: {

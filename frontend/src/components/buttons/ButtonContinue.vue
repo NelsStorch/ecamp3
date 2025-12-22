@@ -1,5 +1,5 @@
 <template>
-  <v-btn color="primary" v-bind="$attrs" type="submit">
+  <v-btn color="primary" variant="elevated" v-bind="$attrs" type="submit">
     {{ $t('global.button.continue') }}
   </v-btn>
 </template>

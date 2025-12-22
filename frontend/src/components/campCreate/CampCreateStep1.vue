@@ -36,7 +36,7 @@
       />
       <v-tooltip v-else location="top">
         <template #activator="{ props }">
-          <v-btn color="secondary" elevation="0" v-bind="props">
+          <v-btn color="secondary" variant="flat" v-bind="props">
             {{ $t('global.button.continue') }}
           </v-btn>
         </template>
