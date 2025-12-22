@@ -7,7 +7,7 @@
       :items="scheduleEntries"
       :label="$t('components.print.config.activityConfig.activity')"
       :filled="false"
-      @input="$emit('input')"
+      @update:model-value="$emit('input')"
     />
     <v-skeleton-loader v-else type="image" height="56" />
   </div>

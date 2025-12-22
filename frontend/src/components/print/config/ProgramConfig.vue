@@ -8,13 +8,13 @@
       multiple
       :filled="false"
       :readonly="periods.length === 1"
-      @input="$emit('input')"
+      @update:model-value="$emit('input')"
     />
     <e-checkbox
       v-model="options.dayOverview"
       path="dayOverview"
       :label="$t('components.print.config.programConfig.dayOverview')"
-      @input="$emit('input')"
+      @update:model-value="$emit('input')"
     />
     <div class="flex-grow-1"></div>
     <DialogScheduleEntryFilter

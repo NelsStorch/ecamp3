@@ -8,7 +8,7 @@
       multiple
       :filled="false"
       :readonly="periods.length === 1"
-      @input="$emit('input')"
+      @update:model-value="$emit('input')"
     />
     <div class="flex-grow-1"></div>
     <DialogScheduleEntryFilter
