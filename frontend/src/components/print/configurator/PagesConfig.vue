@@ -45,27 +45,17 @@
       />
     </div>
   </div>
-  <v-list-item v-else-if="template" class="py-2 px-0" v-bind="$attrs">
-    <v-list-item-icon class="mr-0 my-0 px-4 py-2 align-self-baseline">
-      <TextAlignBaseline><v-icon>mdi-plus</v-icon></TextAlignBaseline>
-    </v-list-item-icon>
-    <v-list-item-content class="align-self-baseline">
-      <v-list-item-title
-        ><h3>{{ title }}</h3></v-list-item-title
-      >
-    </v-list-item-content>
+  <v-list-item v-else-if="template" icon="mdi-plus" class="py-2 px-0" v-bind="$attrs">
+    <v-list-item-title
+      ><h3>{{ title }}</h3></v-list-item-title
+    >
   </v-list-item>
   <div v-else>
-    <v-list-item class="py-2 px-0">
-      <v-list-item-icon v-if="!template" class="mr-0 my-0 px-4 py-2 align-self-baseline">
-        <TextAlignBaseline><v-icon class="handle">mdi-drag</v-icon></TextAlignBaseline>
-      </v-list-item-icon>
-      <v-list-item-content class="align-self-baseline">
-        <v-list-item-title class="mb-2"
-          ><h3>{{ title }}</h3></v-list-item-title
-        >
-        <slot />
-      </v-list-item-content>
+    <v-list-item :icon="!template ?? 'mdi-drag'" class="py-2 px-0">
+      <v-list-item-title class="mb-2"
+        ><h3>{{ title }}</h3></v-list-item-title
+      >
+      <slot />
       <v-list-item-action v-if="!template" class="align-self-baseline my-0">
         <TextAlignBaseline
           ><v-btn icon class="mr-6" @click="$emit('remove')"
