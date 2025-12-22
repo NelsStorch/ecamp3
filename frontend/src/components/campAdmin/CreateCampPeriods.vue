@@ -3,7 +3,7 @@
     <v-card
       v-for="(period, i) in periods"
       :key="period.key"
-      border
+      variant="flat"
       color="grey-lighten-3"
       class="period mb-2 rounded-b-0"
     >
@@ -33,7 +33,7 @@
               v-model="period.description"
               single-line
               path="description"
-              :filled="false"
+              variant="underlined"
               vee-rules="required"
               :my="false"
               input-class="mb-2 pt-0"
@@ -49,7 +49,7 @@
               vee-rules="required"
               :max="period.end"
               :my="2"
-              :filled="false"
+              variant="underlined"
               data-testid="start-date-picker"
               required
             />
@@ -62,7 +62,7 @@
               vee-rules="required|greaterThanOrEqual_date:@start"
               :min="period.start"
               :my="2"
-              :filled="false"
+              variant="underlined"
               data-testid="end-date-picker"
               required
             />
