@@ -2,16 +2,14 @@
   <tr class="e-storyboard-row e-storyboard-row--default">
     <td v-if="!layoutMode" class="e-storyboard-row__handle">
       <v-btn
-        icon
+        icon="mdi-drag"
         size="small"
         class="drag-and-drop-handle"
         :disabled="isLastSection"
         :aria-label="$t('global.button.move')"
         @keydown.down="$emit('move-down', itemKey)"
         @keydown.up="$emit('move-up', itemKey)"
-      >
-        <v-icon>mdi-drag</v-icon>
-      </v-btn>
+      />
     </td>
     <td class="e-storyboard-row__time">
       <api-text-field
@@ -41,14 +39,14 @@
       <dialog-remove-section @submit="$emit('delete', itemKey)">
         <template #activator="{ props }">
           <v-btn
-            icon
+            icon="mdi-delete-outline"
+            variant="text"
             size="small"
             class="e-storyboard-row__delete"
             color="error"
             :disabled="isLastSection"
             v-bind="props"
           >
-            <v-icon>mdi-delete-outline</v-icon>
           </v-btn>
         </template>
       </dialog-remove-section>
