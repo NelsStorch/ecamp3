@@ -28,11 +28,11 @@ export default {
     },
     readonly: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     disabled: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   setup(props, ctx) {

@@ -264,7 +264,8 @@ export default {
       // Be careful to only use setContent when absolutely necessary, because it resets the user's cursor to the end
       // of the input field
       if (val !== this.html) {
-        this.editor.commands.setContent(val)
+        // we do not want to trigger onUpdate when modelValue is updated from outside
+        this.editor.commands.setContent(val, { emitUpdate: false })
       }
     },
     editable() {
