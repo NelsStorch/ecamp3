@@ -158,7 +158,12 @@ export default {
   data() {
     return {
       loading: true,
-      contentComponents: {
+      previewTab: null,
+    }
+  },
+  computed: {
+    contentComponents() {
+      return {
         Cover: CoverConfig,
         Picasso: PicassoConfig,
         Story: StoryConfig,
@@ -167,11 +172,8 @@ export default {
         Activity: ActivityConfig,
         Toc: TocConfig,
         ActivityList: ActivityListConfig,
-      },
-      previewTab: null,
-    }
-  },
-  computed: {
+      }
+    },
     lang() {
       return this.$store.state.lang.language
     },
