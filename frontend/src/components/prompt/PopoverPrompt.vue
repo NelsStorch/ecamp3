@@ -76,7 +76,7 @@ export default {
     },
     type: {
       type: String,
-      default: '',
+      default: undefined,
     },
   },
   data: () => ({
