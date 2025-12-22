@@ -153,12 +153,12 @@ export default {
     label: false,
     labelText: 'Label',
 
-    textareaValue: 'FFFFFFFFFF',
-    richtextValue: '<p>FFFFFFFFFF</p>',
     colorValue: null,
 
     values: {
       textfield: 'FFFFFFFFFF',
+      textarea: 'FFFFFFFFFF',
+      richtext: '<p>FFFFFFFFFF</p>',
       checkbox: false,
       switch: false,
       select: null,
@@ -208,28 +208,26 @@ export default {
             uri: this.materialUri,
           },
         },
-        // {
-        //   id: 'textarea',
-        //   component: (type) => `${type}-textarea`,
-        //   value: this.textareaValue,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     rows: 3,
-        //     path: 'data.html',
-        //     uri: this.singleTextUri,
-        //   },
-        // },
-        // {
-        //   id: 'richtext',
-        //   component: (type) => (type === 'v' ? 'v-tiptap-editor' : `${type}-richtext`),
-        //   value: this.richtextValue,
-        //   props: {
-        //     placeholder: this.placeholder,
-        //     rows: 3,
-        //     path: 'data.html',
-        //     uri: this.singleTextUri,
-        //   },
-        // },
+        {
+          id: 'textarea',
+          component: (type) => `${type}-textarea`,
+          props: {
+            placeholder: this.placeholder,
+            rows: 3,
+            path: 'data.html',
+            uri: this.singleTextUri,
+          },
+        },
+        {
+          id: 'richtext',
+          component: (type) => (type === 'v' ? 'v-tiptap-editor' : `${type}-richtext`),
+          props: {
+            placeholder: this.placeholder,
+            rows: 3,
+            path: 'data.html',
+            uri: this.singleTextUri,
+          },
+        },
         {
           id: 'select',
           component: (type) => `${type}-select`,
