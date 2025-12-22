@@ -57,7 +57,7 @@
     },
     {
       "matchDepNames": [
-        "browserless/chrome",
+        "browserless/chromium",
         "caddy",
         "krakjoe/apcu",
         "mailhog/mailhog",
@@ -70,7 +70,7 @@
       "schedule": ["after 10pm on sunday", "before 7am on monday"]
     },
     {
-      "matchDepNames": ["browserless/chrome"],
+      "matchDepNames": ["browserless/chromium"],
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>\\w+)-(?<build>\\d+)\\.(\\d+)\\.(\\d+)?$"
     },
     {
