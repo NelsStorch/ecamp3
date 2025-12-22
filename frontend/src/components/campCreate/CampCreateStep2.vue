@@ -149,7 +149,8 @@
         color="#0661ab"
         elevation="0"
         icon="mdi-alert-circle-outline"
-        text
+        variant="tonal"
+        class="mt-2 text-body-1"
       >
         <strong>{{
           $t('components.campCreate.campCreateStep2.noPrototypeAlert.title')
