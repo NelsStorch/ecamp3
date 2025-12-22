@@ -27,8 +27,6 @@ services:
   frontend-old:
     image: node:24.8.0
     container_name: "ecamp3-frontend-old"
-    ports:
-      - "9229:9229" # jest debug
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
