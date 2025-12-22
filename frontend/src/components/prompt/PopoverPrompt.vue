@@ -12,13 +12,11 @@
     <template #activator="{ props }">
       <slot name="activator" v-bind="{ props }" />
     </template>
-    <div class="ec-activator v-card__actions pa-0" @click="open = false">
-      <slot name="activator" />
-    </div>
     <v-alert
       border="bottom"
-      colored-border
+      border-color
       :type="type"
+      variant="elevated"
       class="mb-0 pb-5"
       :class="{
         'rounded-tr-0': position === 'bottom' && align === 'right',
@@ -28,13 +26,7 @@
       }"
     >
       <slot />
-      <v-alert
-        v-if="$slots.error"
-        :color="color"
-        icon="mdi-alert"
-        text
-        variant="outlined"
-      >
+      <v-alert v-if="$slots.error" :color="color" icon="mdi-alert" variant="outlined">
         <slot name="error" />
       </v-alert>
       <div class="ec-prompt-buttons mt-2">
@@ -84,7 +76,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'info',
+      default: '',
     },
   },
   data: () => ({
@@ -144,12 +136,6 @@ export default {
 </script>
 
 <style scoped>
-.ec-popover-prompt {
-  overflow: visible;
-  contain: initial;
-  max-width: 90%;
-}
-
 .ec-prompt-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -158,44 +144,5 @@ export default {
 
 .ec-prompt-buttons .v-btn {
   flex-grow: 1;
-}
-
-.ec-popover-prompt ::v-deep(.ec-activator .v-btn) {
-  position: absolute;
-  background-color: white !important;
-  color: #424242 !important;
-}
-
-.ec-popover-prompt ::v-deep(.ec-activator .v-btn:hover::before) {
-  opacity: 0;
-}
-
-.ec-popover-prompt--align-left ::v-deep(.ec-activator .v-btn) {
-  left: 0;
-}
-
-.ec-popover-prompt--align-right ::v-deep(.ec-activator .v-btn) {
-  right: 0;
-}
-
-.ec-popover-prompt--position-bottom ::v-deep(.ec-activator .v-btn) {
-  bottom: 100%;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  box-shadow:
-    0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-
-.ec-popover-prompt--position-top ::v-deep(.ec-activator .v-btn) {
-  top: calc(100% - 10px);
-  z-index: 10;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  box-shadow:
-    0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 10px 10px 1px rgba(0, 0, 0, 0.14),
-    0 14px 14px 0 rgba(0, 0, 0, 0.12);
 }
 </style>
