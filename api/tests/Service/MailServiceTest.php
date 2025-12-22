@@ -24,7 +24,6 @@ class MailServiceTest extends KernelTestCase {
 
     private Camp $camp;
     private User $user;
-    private Security $security;
 
     private MailService $mailer;
 
@@ -35,15 +34,15 @@ class MailServiceTest extends KernelTestCase {
         $translator = self::getContainer()->get(TranslatorInterface::class);
         $twigEnvironment = self::getContainer()->get(Environment::class);
 
-        $this->security = $this->createMock(Security::class);
+        $security = $this->createMock(Security::class);
         $profile = new Profile();
         $profile->nickname = 'Linux';
         $profile->email = 'sender@ecamp3.ch';
         $user = new User();
         $user->profile = $profile;
-        $this->security->method('getUser')->willReturn($user);
+        $security->method('getUser')->willReturn($user);
 
-        $this->mailer = new MailService($mailer, $translator, $twigEnvironment, 'frontend.example.com', 'sender@example.com', 'SenderName', $this->security);
+        $this->mailer = new MailService($mailer, $translator, $twigEnvironment, 'frontend.example.com', 'sender@example.com', 'SenderName', $security);
 
         $this->user = new User();
         $profile = new Profile();

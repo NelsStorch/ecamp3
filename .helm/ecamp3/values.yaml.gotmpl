@@ -25,6 +25,7 @@ featureToggle:
   checklist: {{ .Environment.Values | getOrNil "FEATURE_CHECKLIST" | default false }}
 
 api:
+  authenticationTokenTtl: {{ .Environment.Values | getOrNil "API_AUTHENTICATION_TOKEN_TTL" }}
   dataMigrationsDir: {{ .Environment.Values | getOrNil "API_DATA_MIGRATIONS_DIR" | default "prod-data" }}
   subpath: "/api"
   image:

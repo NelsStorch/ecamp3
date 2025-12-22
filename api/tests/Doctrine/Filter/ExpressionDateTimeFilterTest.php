@@ -56,7 +56,7 @@ class ExpressionDateTimeFilterTest extends TestCase {
 
     public function testGetDescriptionDoesNothingWhenNoPropertiesDefined() {
         // given
-        $filter = new ExpressionDateTimeFilter($this->managerRegistryMock, null, null);
+        $filter = new ExpressionDateTimeFilter($this->managerRegistryMock);
 
         // when
         $description = $filter->getDescription('Dummy');

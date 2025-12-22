@@ -5,7 +5,7 @@ fluent-operator:
       trigger-recreate: {{ exec "uuidgen" (list) }}
     container:
       # renovate: datasource=docker depName=ghcr.io/fluent/fluent-operator/fluent-operator
-      tag: 3.3.0
+      tag: "3.3.0"
   fluentbit:
     enable: true
     input:
@@ -24,7 +24,7 @@ fluent-operator:
   fluentd:
     image:
       # renovate: datasource=docker depName=ghcr.io/fluent/fluent-operator/fluentd
-      tag: v1.17.1
+      tag: "v1.17.1"
     watchedNamespaces:
       - default
       - ingress-nginx
@@ -60,7 +60,9 @@ elasticsearch:
         storage: {{ .Environment.Values | get "ELASTIC_NODE_STORAGE_SIZE" nil | required "Please define ELASTIC_NODE_STORAGE_SIZE. There is no good default value." }}
   removeOldIndexes:
     maxIndexAge: {{ .Environment.Values | get "ELASTIC_NODE_MAX_INDEX_AGE" "15" }}
-    image: node:24.8.0
+    image: node
+    # renovate: datasource=docker depName=node
+    tag: "24.12.0"
 
 kibana:
   name: kibana

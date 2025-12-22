@@ -106,9 +106,7 @@ class JWTStateOAuth2ClientTest extends TestCase {
         // then
         $entityManagerMock->expects($this->once())
             ->method('persist')
-            ->with($this->callback(function ($value) {
-                return $value instanceof OAuthState;
-            }))
+            ->with($this->isInstanceOf(OAuthState::class))
         ;
         // Should also clean up the database table
         $repositoryMock->expects($this->once())->method('deleteAllExpiredBefore');

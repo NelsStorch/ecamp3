@@ -7,7 +7,7 @@ metadata:
     {{- include "app.commonLabels" . | nindent 4 }}
 data:
   ADDITIONAL_TRUSTED_HOSTS: {{ .Values.domain | quote }}
-  {{- if not (.Values.api.authenticationTokenTtl | empty) }}
+  {{- if and (.Values.api.authenticationTokenTtl) (ne (.Values.api.authenticationTokenTtl | toString) "<no value>") }}
   AUTHENTICATION_TOKEN_TTL: {{ .Values.api.authenticationTokenTtl | quote }}
   {{- end }}
   COOKIE_PREFIX: {{ include "api.cookiePrefix" . | quote }}

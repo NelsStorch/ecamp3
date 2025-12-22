@@ -57,7 +57,7 @@ spec:
               value: "-Xms{{ $minHeapSpace }}m -Xmx{{ $maxHeapSpace }}m"
         {{- if not (.Values.elasticsearch.removeOldIndexes.maxIndexAge | empty) }}
         - name: remove-old-indexes
-          image: {{ .Values.elasticsearch.removeOldIndexes.image }}
+          image: {{ .Values.elasticsearch.removeOldIndexes.image }}:{{ .Values.elasticsearch.removeOldIndexes.tag }}
           command:
             - node
             - /src/remove-old-indexes.mjs

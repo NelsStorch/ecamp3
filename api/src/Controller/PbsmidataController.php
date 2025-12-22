@@ -8,12 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PbsmidataController extends AbstractController {
+    public function __construct(private readonly ClientRegistry $clientRegistry) {}
+
     /**
      * Link to this controller to start the "connect" process.
      */
     #[Route('/auth/pbsmidata', name: 'connect_pbsmidata_start')]
-    public function connect(Request $request, ClientRegistry $clientRegistry) {
-        return $clientRegistry
+    public function connect(Request $request) {
+        return $this->clientRegistry
             ->getClient('pbsmidata') // key used in config/packages/knpu_oauth2_client.yaml
             ->redirect([], ['additionalData' => ['callback' => $request->get('callback')]])
         ;
@@ -25,7 +27,7 @@ class PbsmidataController extends AbstractController {
      * in config/packages/knpu_oauth2_client.yaml.
      */
     #[Route('/auth/pbsmidata/callback', name: 'connect_pbsmidata_check')]
-    public function connectCheck(ClientRegistry $clientRegistry) {
+    public function connectCheck() {
         // ** if you want to *authenticate* the user, then
         // leave this method blank and create a custom authenticator
     }

@@ -19,6 +19,7 @@ use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\AddInstanceofAssertForNullableInstanceRector;
 use Rector\PHPUnit\CodeQuality\Rector\MethodCall\AssertEmptyNullableObjectToAssertInstanceofRector;
+use Rector\PHPUnit\CodeQuality\Rector\StmtsAwareInterface\DeclareStrictTypesTestsRector;
 use Rector\Privatization\Rector\Class_\FinalizeTestCaseClassRector;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
@@ -50,6 +51,7 @@ return RectorConfig::configure()
         CombineIfRector::class,
         ConstraintOptionsToNamedArgumentsRector::class,
         DeclareStrictTypesRector::class,
+        DeclareStrictTypesTestsRector::class,
         DisallowedEmptyRuleFixerRector::class,
         ExplicitBoolCompareRector::class,
         FinalizeTestCaseClassRector::class,
