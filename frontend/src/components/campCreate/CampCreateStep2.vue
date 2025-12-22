@@ -170,25 +170,23 @@
         <v-icon start>mdi-arrow-left</v-icon>
         {{ $t('global.button.back') }}
       </v-btn>
-      <div class="ml-auto">
-        <ButtonCancel :disabled="isSaving" @click="$router.go(-1)" />
-        <ButtonAdd
-          v-if="meta.dirty && meta.valid"
-          :loading="isSaving"
-          data-testid="create-camp-button"
-          type="submit"
-        >
-          {{ $t('components.campCreate.campCreateStep2.create') }}
-        </ButtonAdd>
-        <v-tooltip v-else location="top">
-          <template #activator="{ props }">
-            <ButtonAdd color="secondary" elevation="0" v-bind="props">
-              {{ $t('components.campCreate.campCreateStep2.create') }}
-            </ButtonAdd>
-          </template>
-          {{ $t('components.campCreate.campCreateStep2.submitTooltipPrototype') }}
-        </v-tooltip>
-      </div>
+      <ButtonCancel class="ml-auto" :disabled="isSaving" @click="$router.go(-1)" />
+      <ButtonAdd
+        v-if="meta.dirty && meta.valid"
+        :loading="isSaving"
+        data-testid="create-camp-button"
+        type="submit"
+      >
+        {{ $t('components.campCreate.campCreateStep2.create') }}
+      </ButtonAdd>
+      <v-tooltip v-else location="top">
+        <template #activator="{ props }">
+          <ButtonAdd color="secondary" elevation="0" v-bind="props">
+            {{ $t('components.campCreate.campCreateStep2.create') }}
+          </ButtonAdd>
+        </template>
+        {{ $t('components.campCreate.campCreateStep2.submitTooltipPrototype') }}
+      </v-tooltip>
     </ContentActions>
   </Form>
 </template>
