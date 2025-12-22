@@ -2,11 +2,11 @@
   <v-stepper :model-value="step" flat>
     <v-stepper-header class="elevation-0">
       <v-spacer v-if="$vuetify.display.smAndUp" class="w-100" />
-      <v-stepper-item value="1" :complete="step > 0" class="px-4" color="primary">
+      <v-stepper-item :complete="step > 0" class="px-4" color="primary">
         {{ $t('components.campCreate.campCreate.steps.infos') }}
       </v-stepper-item>
       <v-divider class="mx-n2" />
-      <v-stepper-item value="2" :complete="step > 1" class="px-4" color="primary">
+      <v-stepper-item :complete="step > 1" class="px-4" color="primary">
         {{ $t('components.campCreate.campCreate.steps.template') }}
       </v-stepper-item>
       <v-spacer v-if="$vuetify.display.smAndUp" class="w-100" />
