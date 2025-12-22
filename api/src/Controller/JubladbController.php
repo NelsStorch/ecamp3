@@ -8,12 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class JubladbController extends AbstractController {
+    public function __construct(private readonly ClientRegistry $clientRegistry) {}
+
     /**
      * Link to this controller to start the "connect" process.
      */
     #[Route('/auth/jubladb', name: 'connect_jubladb_start')]
-    public function connect(Request $request, ClientRegistry $clientRegistry) {
-        return $clientRegistry
+    public function connect(Request $request) {
+        return $this->clientRegistry
             ->getClient('jubladb') // key used in config/packages/knpu_oauth2_client.yaml
             ->redirect([], ['additionalData' => ['callback' => $request->get('callback')]])
         ;
@@ -25,7 +27,7 @@ class JubladbController extends AbstractController {
      * in config/packages/knpu_oauth2_client.yaml.
      */
     #[Route('/auth/jubladb/callback', name: 'connect_jubladb_check')]
-    public function connectCheck(ClientRegistry $clientRegistry) {
+    public function connectCheck() {
         // ** if you want to *authenticate* the user, then
         // leave this method blank and create a custom authenticator
     }
