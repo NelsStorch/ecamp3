@@ -16,7 +16,7 @@
       <Text v-if="dates" class="picasso-footer-field">{{ dates }}</Text>
     </View>
     <View class="picasso-footer-column">
-      <Text class="picasso-footer-field">{{
+      <Text v-if="leaders" class="picasso-footer-field">{{
         $tc('print.picasso.picassoFooter.leaders', { leaders })
       }}</Text>
       <Text v-if="camp.coachName" class="picasso-footer-field">{{
@@ -69,9 +69,15 @@ export default {
           campCollaboration.role === 'manager'
         )
       })
-      const leaderNames = leaders.map((campCollaboration) => {
-        return campCollaborationLegalName(campCollaboration)
-      })
+      const leaderNames = leaders
+        .map((campCollaboration) => {
+          try {
+            return campCollaborationLegalName(campCollaboration)
+          } catch {
+            return ''
+          }
+        })
+        .filter((leaderName) => leaderName.length)
       if ('Intl' in self && 'ListFormat' in Intl) {
         return new Intl.ListFormat(this.locale, { style: 'short' }).format(leaderNames)
       }
