@@ -147,6 +147,7 @@ export default {
     EditorContent,
     BubbleMenu,
   },
+  emits: ['input', 'focus', 'blur'],
   props: {
     modelValue: {
       type: String,
