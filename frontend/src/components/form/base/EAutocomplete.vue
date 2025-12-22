@@ -1,6 +1,7 @@
 <template>
   <Field
     v-slot="{ errors: veeErrors }"
+    :model-value="modelValue"
     as="div"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
