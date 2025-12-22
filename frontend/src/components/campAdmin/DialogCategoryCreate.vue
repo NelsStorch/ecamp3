@@ -143,7 +143,7 @@ export default {
       fetchClipboardEntity: async (url) => {
         if (!url.startsWith(window.location.origin)) return null
         url = url.substring(window.location.origin.length)
-        const match = router.matcher.match(url)
+        const match = router.resolve(url)
 
         let result
         if (match.name === 'camp/activity') {
