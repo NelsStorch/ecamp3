@@ -170,7 +170,7 @@ services:
     restart: on-failure
 
   browserless:
-    image: ghcr.io/browserless/chrome:v2.38.2
+    image: ghcr.io/browserless/chromium:v2.38.2
     container_name: 'ecamp3-browserless'
     ports:
       - '3010:3000'
