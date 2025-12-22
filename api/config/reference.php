@@ -474,7 +474,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         max_host_connections?: int, // The maximum number of connections to a single host.
  *         default_options?: array{
  *             headers?: array<string, mixed>,
- *             vars?: list<mixed>,
+ *             vars?: array<string, mixed>,
  *             max_redirects?: int, // The maximum number of redirects to follow.
  *             http_version?: scalar|null, // The default HTTP version, typically 1.1 or 2.0, leave to null for the best version.
  *             resolve?: array<string, scalar|null>,
@@ -497,7 +497,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *                 md5?: mixed,
  *             },
  *             crypto_method?: scalar|null, // The minimum version of TLS to accept; must be one of STREAM_CRYPTO_METHOD_TLSv*_CLIENT constants.
- *             extra?: list<mixed>,
+ *             extra?: array<string, mixed>,
  *             rate_limiter?: scalar|null, // Rate limiter name to use for throttling requests. // Default: null
  *             caching?: bool|array{ // Caching configuration.
  *                 enabled?: bool, // Default: false
@@ -550,7 +550,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *                 md5?: mixed,
  *             },
  *             crypto_method?: scalar|null, // The minimum version of TLS to accept; must be one of STREAM_CRYPTO_METHOD_TLSv*_CLIENT constants.
- *             extra?: list<mixed>,
+ *             extra?: array<string, mixed>,
  *             rate_limiter?: scalar|null, // Rate limiter name to use for throttling requests. // Default: null
  *             caching?: bool|array{ // Caching configuration.
  *                 enabled?: bool, // Default: false
@@ -1241,7 +1241,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     inflector?: scalar|null, // Specify an inflector to use. // Default: "api_platform.metadata.inflector"
  *     validator?: array{
  *         serialize_payload_fields?: mixed, // Set to null to serialize all payload fields when a validation error is thrown, or set the fields you want to include explicitly. // Default: []
- *         query_parameter_validation?: bool, // Default: true
+ *         query_parameter_validation?: bool, // Deprecated: Will be removed in API Platform 5.0. // Default: true
  *     },
  *     eager_loading?: bool|array{
  *         enabled?: bool, // Default: true
@@ -1251,11 +1251,13 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     },
  *     handle_symfony_errors?: bool, // Allows to handle symfony exceptions. // Default: false
  *     enable_swagger?: bool, // Enable the Swagger documentation and export. // Default: true
+ *     enable_json_streamer?: bool, // Enable json streamer. // Default: false
  *     enable_swagger_ui?: bool, // Enable Swagger UI // Default: true
  *     enable_re_doc?: bool, // Enable ReDoc // Default: true
  *     enable_entrypoint?: bool, // Enable the entrypoint // Default: true
  *     enable_docs?: bool, // Enable the docs // Default: true
  *     enable_profiler?: bool, // Enable the data collector and the WebProfilerBundle integration. // Default: true
+ *     enable_phpdoc_parser?: bool, // Enable resource metadata collector using PHPStan PhpDocParser. // Default: true
  *     enable_link_security?: bool, // Enable security for Links (sub resources) // Default: false
  *     collection?: array{
  *         exists_parameter_name?: scalar|null, // The name of the query parameter to filter on nullable field values. // Default: "exists"
@@ -1271,6 +1273,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         },
  *     },
  *     mapping?: array{
+ *         imports?: list<scalar|null>,
  *         paths?: list<scalar|null>,
  *     },
  *     resource_class_directories?: list<scalar|null>,
@@ -1368,9 +1371,12 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         license?: array{
  *             name?: scalar|null, // The license name used for the API. // Default: null
  *             url?: scalar|null, // URL to the license used for the API. MUST be in the format of a URL. // Default: null
+ *             identifier?: scalar|null, // An SPDX license expression for the API. The identifier field is mutually exclusive of the url field. // Default: null
  *         },
  *         swagger_ui_extra_configuration?: mixed, // To pass extra configuration to Swagger UI, like docExpansion or filter. // Default: []
  *         overrideResponses?: bool, // Whether API Platform adds automatic responses to the OpenAPI documentation. // Default: true
+ *         error_resource_class?: scalar|null, // The class used to represent errors in the OpenAPI documentation. // Default: null
+ *         validation_error_resource_class?: scalar|null, // The class used to represent validation errors in the OpenAPI documentation. // Default: null
  *     },
  *     maker?: bool|array{
  *         enabled?: bool, // Default: true
@@ -1461,7 +1467,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         parameters?: mixed,
  *         strict_query_parameter_validation?: mixed,
  *         hide_hydra_operation?: mixed,
+ *         json_stream?: mixed,
  *         extra_properties?: mixed,
+ *         map?: mixed,
  *         route_name?: mixed,
  *         errors?: mixed,
  *         read?: mixed,
@@ -1511,6 +1519,11 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     },
  *     intercept_redirects?: bool, // Default: false
  *     excluded_ajax_paths?: scalar|null, // Default: "^/((index|app(_[\\w]+)?)\\.php/)?_wdt"
+ * }
+ * @psalm-type MakerConfig = array{
+ *     root_namespace?: scalar|null, // Default: "App"
+ *     generate_final_classes?: bool, // Default: true
+ *     generate_final_entities?: bool, // Default: false
  * }
  * @psalm-type DoctrineMigrationsConfig = array{
  *     enable_service_migrations?: bool, // Whether to enable fetching migrations from the service container. // Default: false
@@ -1750,6 +1763,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         uploadable?: scalar|null, // Default: "Gedmo\\Uploadable\\UploadableListener"
  *         reference_integrity?: scalar|null, // Default: "Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener"
  *     },
+ *     softdeleteable?: array{
+ *         handle_post_flush_event?: bool, // Default: false
+ *     },
  *     uploadable?: array{
  *         default_file_path?: scalar|null, // Default: null
  *         mime_type_guesser_class?: scalar|null, // Default: "Stof\\DoctrineExtensionsBundle\\Uploadable\\MimeTypeGuesserAdapter"
@@ -1902,6 +1918,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         traces_sampler?: scalar|null,
  *         profiles_sample_rate?: float, // The sampling factor to apply to profiles. A value of 0 will deny sending any profiles, and a value of 1 will send all profiles. Profiles are sampled in relation to traces_sample_rate
  *         enable_logs?: bool,
+ *         enable_metrics?: bool, // Default: true
  *         attach_stacktrace?: bool,
  *         attach_metric_code_locations?: bool,
  *         context_lines?: int,
@@ -1918,6 +1935,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         before_send_check_in?: scalar|null,
  *         before_send_metrics?: scalar|null,
  *         before_send_log?: scalar|null,
+ *         before_send_metric?: scalar|null,
  *         trace_propagation_targets?: mixed,
  *         tags?: array<string, scalar|null>,
  *         error_types?: scalar|null,
@@ -1936,7 +1954,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         http_ssl_verify_peer?: bool,
  *         http_compression?: bool,
  *         capture_silenced_errors?: bool,
- *         max_request_body_size?: "none"|"small"|"medium"|"always",
+ *         max_request_body_size?: "none"|"never"|"small"|"medium"|"always",
  *         class_serializers?: array<string, scalar|null>,
  *     },
  *     messenger?: bool|array{
@@ -2241,11 +2259,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     logout_firewall?: scalar|null, // Name of the firewall that triggers the logout event to hook into (default: api) // Default: "api"
  *     return_expiration?: scalar|null, // When true, the response will include the token expiration timestamp // Default: false
  *     return_expiration_parameter_name?: scalar|null, // The default response parameter name containing the refresh token expiration timestamp // Default: "refresh_token_expiration"
- * }
- * @psalm-type MakerConfig = array{
- *     root_namespace?: scalar|null, // Default: "App"
- *     generate_final_classes?: bool, // Default: true
- *     generate_final_entities?: bool, // Default: false
  * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
