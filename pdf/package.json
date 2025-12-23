@@ -28,7 +28,7 @@
     "@react-pdf/pdfkit": "4.0.4",
     "@react-pdf/render": "4.3.1",
     "colorjs.io": "0.5.2",
-    "lodash-es": "4.17.22",
+    "lodash-es": "4.17.21",
     "runes": "0.4.3"
   },
   "devDependencies": {
