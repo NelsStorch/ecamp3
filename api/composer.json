@@ -14,7 +14,7 @@
         "api-platform/metadata": "4.2.10",
         "api-platform/openapi": "4.2.11",
         "api-platform/serializer": "4.2.10",
-        "api-platform/state": "4.2.10",
+        "api-platform/state": "4.2.11",
         "api-platform/symfony": "4.2.10",
         "api-platform/validator": "4.2.11",
         "composer/package-versions-deprecated": "1.11.99",
