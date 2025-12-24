@@ -406,16 +406,16 @@
         },
         {
             "name": "api-platform/hydra",
-            "version": "v4.2.10",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/hydra.git",
-                "reference": "904b3caf457aa49bc302b46b01456799fbb82304"
+                "reference": "80491f175647d0a63eb96035b2468fc1c2a76c37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/hydra/zipball/904b3caf457aa49bc302b46b01456799fbb82304",
-                "reference": "904b3caf457aa49bc302b46b01456799fbb82304",
+                "url": "https://api.github.com/repos/api-platform/hydra/zipball/80491f175647d0a63eb96035b2468fc1c2a76c37",
+                "reference": "80491f175647d0a63eb96035b2468fc1c2a76c37",
                 "shasum": ""
             },
             "require": {
@@ -487,9 +487,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/hydra/tree/v4.2.10"
+                "source": "https://github.com/api-platform/hydra/tree/v4.2.11"
             },
-            "time": "2025-12-04T14:20:26+00:00"
+            "time": "2025-12-18T14:34:13+00:00"
         },
         {
             "name": "api-platform/json-api",
@@ -575,7 +575,7 @@
         },
         {
             "name": "api-platform/json-schema",
-            "version": "v4.2.10",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/json-schema.git",
@@ -650,22 +650,22 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/json-schema/tree/v4.2.10"
+                "source": "https://github.com/api-platform/json-schema/tree/v4.2.11"
             },
             "time": "2025-12-02T13:32:19+00:00"
         },
         {
             "name": "api-platform/jsonld",
-            "version": "v4.2.10",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/jsonld.git",
-                "reference": "c8896d5a3ddf67ac8aa74bb54199b13153fa39c3"
+                "reference": "3889b185376198a182d2527c48ec0b29b604505f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/jsonld/zipball/c8896d5a3ddf67ac8aa74bb54199b13153fa39c3",
-                "reference": "c8896d5a3ddf67ac8aa74bb54199b13153fa39c3",
+                "url": "https://api.github.com/repos/api-platform/jsonld/zipball/3889b185376198a182d2527c48ec0b29b604505f",
+                "reference": "3889b185376198a182d2527c48ec0b29b604505f",
                 "shasum": ""
             },
             "require": {
@@ -730,9 +730,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/jsonld/tree/v4.2.10"
+                "source": "https://github.com/api-platform/jsonld/tree/v4.2.11"
             },
-            "time": "2025-11-30T12:55:42+00:00"
+            "time": "2025-12-18T14:34:13+00:00"
         },
         {
             "name": "api-platform/metadata",
@@ -6195,34 +6195,30 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v7.4.1",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "21e0755783bbbab58f2bb6a7a57896d21d27a366"
+                "reference": "0e67dc8145810d4e1c0d13c0e1d29ceb930b1c8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/21e0755783bbbab58f2bb6a7a57896d21d27a366",
-                "reference": "21e0755783bbbab58f2bb6a7a57896d21d27a366",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/0e67dc8145810d4e1c0d13c0e1d29ceb930b1c8e",
+                "reference": "0e67dc8145810d4e1c0d13c0e1d29ceb930b1c8e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4",
                 "psr/cache": "^2.0|^3.0",
                 "psr/log": "^1.1|^2|^3",
                 "symfony/cache-contracts": "^3.6",
-                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/service-contracts": "^2.5|^3",
-                "symfony/var-exporter": "^6.4|^7.0|^8.0"
+                "symfony/var-exporter": "^7.4|^8.0"
             },
             "conflict": {
-                "doctrine/dbal": "<3.6",
+                "doctrine/dbal": "<4.3",
                 "ext-redis": "<6.1",
-                "ext-relay": "<0.12.1",
-                "symfony/dependency-injection": "<6.4",
-                "symfony/http-kernel": "<6.4",
-                "symfony/var-dumper": "<6.4"
+                "ext-relay": "<0.12.1"
             },
             "provide": {
                 "psr/cache-implementation": "2.0|3.0",
@@ -6231,16 +6227,16 @@
             },
             "require-dev": {
                 "cache/integration-tests": "dev-master",
-                "doctrine/dbal": "^3.6|^4",
+                "doctrine/dbal": "^4.3",
                 "predis/predis": "^1.1|^2.0",
                 "psr/simple-cache": "^1.0|^2.0|^3.0",
-                "symfony/clock": "^6.4|^7.0|^8.0",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
-                "symfony/filesystem": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
-                "symfony/messenger": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0"
+                "symfony/clock": "^7.4|^8.0",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/filesystem": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/messenger": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -6275,7 +6271,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v7.4.1"
+                "source": "https://github.com/symfony/cache/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -6295,7 +6291,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-04T18:11:45+00:00"
+            "time": "2025-12-04T18:17:06+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -13634,16 +13630,16 @@
         },
         {
             "name": "react/child-process",
-            "version": "v0.6.6",
+            "version": "v0.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/child-process.git",
-                "reference": "1721e2b93d89b745664353b9cfc8f155ba8a6159"
+                "reference": "970f0e71945556422ee4570ccbabaedc3cf04ad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/child-process/zipball/1721e2b93d89b745664353b9cfc8f155ba8a6159",
-                "reference": "1721e2b93d89b745664353b9cfc8f155ba8a6159",
+                "url": "https://api.github.com/repos/reactphp/child-process/zipball/970f0e71945556422ee4570ccbabaedc3cf04ad3",
+                "reference": "970f0e71945556422ee4570ccbabaedc3cf04ad3",
                 "shasum": ""
             },
             "require": {
@@ -13697,7 +13693,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/child-process/issues",
-                "source": "https://github.com/reactphp/child-process/tree/v0.6.6"
+                "source": "https://github.com/reactphp/child-process/tree/v0.6.7"
             },
             "funding": [
                 {
@@ -13705,7 +13701,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2025-01-01T16:37:48+00:00"
+            "time": "2025-12-23T15:25:20+00:00"
         },
         {
             "name": "react/dns",
@@ -15645,23 +15641,23 @@
         },
         {
             "name": "theofidry/alice-data-fixtures",
-            "version": "1.9.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theofidry/AliceDataFixtures.git",
-                "reference": "2098f47253571fab4bce13f75cd96da9ff5139ab"
+                "reference": "011a482252ab416f2e4681731e954554d250695e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theofidry/AliceDataFixtures/zipball/2098f47253571fab4bce13f75cd96da9ff5139ab",
-                "reference": "2098f47253571fab4bce13f75cd96da9ff5139ab",
+                "url": "https://api.github.com/repos/theofidry/AliceDataFixtures/zipball/011a482252ab416f2e4681731e954554d250695e",
+                "reference": "011a482252ab416f2e4681731e954554d250695e",
                 "shasum": ""
             },
             "require": {
                 "nelmio/alice": "^3.10",
-                "php": "^8.3",
+                "php": "^8.4",
                 "psr/log": "^1 || ^2 || ^3",
-                "webmozart/assert": "^1.10"
+                "webmozart/assert": "^1.10 || ^2.0"
             },
             "conflict": {
                 "doctrine/data-fixtures": "<1.7.0",
@@ -15673,9 +15669,9 @@
                 "doctrine/persistence": "<2.5.7 || >=3.0 <3.4.0",
                 "doctrine/phpcr-bundle": "<3.0",
                 "doctrine/phpcr-odm": "<2.0.0",
-                "illuminate/database": "<10.0",
+                "illuminate/database": "<12.0",
                 "ocramius/proxy-manager": "<2.1",
-                "symfony/framework-bundle": ">=6.0 <6.4.19",
+                "symfony/framework-bundle": "<7.4.0",
                 "zendframework/zend-code": "<3.3.1"
             },
             "require-dev": {
@@ -15683,10 +15679,9 @@
                 "phpspec/prophecy": "^1.20.0",
                 "phpspec/prophecy-phpunit": "^2.3.0",
                 "phpunit/phpunit": "^11.5.12",
-                "symfony/phpunit-bridge": "^7.2"
+                "symfony/runtime": "*"
             },
             "suggest": {
-                "alcaeus/mongo-php-adapter": "To use Doctrine with the MongoDB flavour",
                 "doctrine/data-fixtures": "To use Doctrine",
                 "doctrine/dbal": "To use Doctrine with the PHPCR flavour",
                 "doctrine/mongodb": "To use Doctrine with the MongoDB flavour",
@@ -15694,8 +15689,7 @@
                 "doctrine/orm": "To use Doctrine ORM",
                 "doctrine/phpcr-odm": "To use Doctrine with the PHPCR flavour",
                 "illuminate/database": "To use Eloquent",
-                "jackalope/jackalope-doctrine-dbal": "To use Doctrine with the PHPCR flavour",
-                "ocramius/proxy-manager": "To avoid database connection on kernel boot"
+                "jackalope/jackalope-doctrine-dbal": "To use Doctrine with the PHPCR flavour"
             },
             "type": "library",
             "extra": {
@@ -15734,7 +15728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/theofidry/AliceDataFixtures/issues",
-                "source": "https://github.com/theofidry/AliceDataFixtures/tree/1.9.0"
+                "source": "https://github.com/theofidry/AliceDataFixtures/tree/1.11.0"
             },
             "funding": [
                 {
@@ -15742,7 +15736,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-09T12:39:40+00:00"
+            "time": "2025-12-18T23:35:24+00:00"
         },
         {
             "name": "theseer/tokenizer",
