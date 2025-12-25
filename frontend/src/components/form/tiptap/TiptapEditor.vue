@@ -147,7 +147,6 @@ export default {
     EditorContent,
     BubbleMenu,
   },
-  emits: ['input', 'focus', 'blur'],
   props: {
     modelValue: {
       type: String,
@@ -166,6 +165,7 @@ export default {
       default: true,
     },
   },
+  emits: ['input', 'focus', 'blur'],
   data() {
     const placeholder = Placeholder.configure({
       emptyEditorClass: 'is-editor-empty',
