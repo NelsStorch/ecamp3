@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0640f3cb5490e5d6d7755367d7192157",
+    "content-hash": "1e6b6f2a0c8087682d1c2ae61186ecbd",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -1017,16 +1017,16 @@
         },
         {
             "name": "api-platform/state",
-            "version": "v4.2.11",
+            "version": "v4.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/state.git",
-                "reference": "b9644669f953a76742c9f49d571ff42c68e581d1"
+                "reference": "b30b8183e8e7eb1792ed0ad0942aa83668e8c30c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/state/zipball/b9644669f953a76742c9f49d571ff42c68e581d1",
-                "reference": "b9644669f953a76742c9f49d571ff42c68e581d1",
+                "url": "https://api.github.com/repos/api-platform/state/zipball/b30b8183e8e7eb1792ed0ad0942aa83668e8c30c",
+                "reference": "b30b8183e8e7eb1792ed0ad0942aa83668e8c30c",
                 "shasum": ""
             },
             "require": {
@@ -1108,9 +1108,9 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/state/tree/v4.2.11"
+                "source": "https://github.com/api-platform/state/tree/v4.2.10"
             },
-            "time": "2025-12-17T15:10:17+00:00"
+            "time": "2025-12-11T08:50:32+00:00"
         },
         {
             "name": "api-platform/symfony",
