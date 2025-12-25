@@ -4,7 +4,8 @@ exports[`An ECheckbox > looks like a checkbox > checked 1`] = `
 <div data-app>
      <span id>true</span>
      <div class="e-form-container"
-          name="test">
+          name="test"
+          value="true">
           <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-checkbox">
                <!---->
                <div class="v-input__control">
@@ -38,7 +39,8 @@ exports[`An ECheckbox > looks like a checkbox > unchecked 1`] = `
 <div data-app>
      <span id>false</span>
      <div class="e-form-container"
-          name="test">
+          name="test"
+          value="false">
           <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-checkbox">
                <!---->
                <div class="v-input__control">
