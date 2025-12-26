@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b75f9a547fbf6639a01d796f6ae79417",
+    "content-hash": "dd70879a2e943f7565ee6444a3b8e545",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -493,16 +493,16 @@
         },
         {
             "name": "api-platform/json-api",
-            "version": "v4.2.10",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/json-api.git",
-                "reference": "0b5a7c14cc97daae2b720cf0e888059944e106df"
+                "reference": "2bb93263f900401c41476b93bcf03c386c9500d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/json-api/zipball/0b5a7c14cc97daae2b720cf0e888059944e106df",
-                "reference": "0b5a7c14cc97daae2b720cf0e888059944e106df",
+                "url": "https://api.github.com/repos/api-platform/json-api/zipball/2bb93263f900401c41476b93bcf03c386c9500d4",
+                "reference": "2bb93263f900401c41476b93bcf03c386c9500d4",
                 "shasum": ""
             },
             "require": {
@@ -569,9 +569,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/json-api/tree/v4.2.10"
+                "source": "https://github.com/api-platform/json-api/tree/v4.2.11"
             },
-            "time": "2025-12-04T14:20:26+00:00"
+            "time": "2025-12-19T14:13:59+00:00"
         },
         {
             "name": "api-platform/json-schema",
