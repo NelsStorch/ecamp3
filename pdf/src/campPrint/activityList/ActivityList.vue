@@ -21,6 +21,11 @@ export default {
   name: 'ActivityList',
   components: { TocSectionStartMarker, ActivityListPeriod },
   extends: PdfComponent,
+  provide() {
+    return {
+      camp: this.camp,
+    }
+  },
   props: {
     content: { type: Object, required: true },
     config: { type: Object, required: true },
@@ -28,6 +33,9 @@ export default {
   computed: {
     periods() {
       return this.content.options.periods.map((periodUri) => this.api.get(periodUri))
+    },
+    camp() {
+      return this.periods[0].camp()
     },
   },
 }
