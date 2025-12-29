@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aeda41725999cf0a4c55e7b52c36e7a0",
+    "content-hash": "a5a718b700fca2ed8854ec62669ad1e7",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -6783,16 +6783,16 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v7.4.1",
+            "version": "v7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "7acd7ce1b71601b25d698bc2da6b52e43f3c72b3"
+                "reference": "7b511891a81ca14e993b6c88fd35d6bf656085f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/7acd7ce1b71601b25d698bc2da6b52e43f3c72b3",
-                "reference": "7acd7ce1b71601b25d698bc2da6b52e43f3c72b3",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/7b511891a81ca14e993b6c88fd35d6bf656085f7",
+                "reference": "7b511891a81ca14e993b6c88fd35d6bf656085f7",
                 "shasum": ""
             },
             "require": {
@@ -6872,7 +6872,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v7.4.1"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v7.4.0"
             },
             "funding": [
                 {
@@ -6892,7 +6892,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-04T17:15:58+00:00"
+            "time": "2025-11-04T03:05:49+00:00"
         },
         {
             "name": "symfony/dotenv",
@@ -12333,35 +12333,36 @@
         },
         {
             "name": "hautelook/alice-bundle",
-            "version": "2.16.0",
+            "version": "2.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theofidry/AliceBundle.git",
-                "reference": "69c9e3e6b85fcb3ed0dd430e8f790489aaa0cbcc"
+                "reference": "d99a5e2ba524ac422b11744f9024cdf0a8040c25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theofidry/AliceBundle/zipball/69c9e3e6b85fcb3ed0dd430e8f790489aaa0cbcc",
-                "reference": "69c9e3e6b85fcb3ed0dd430e8f790489aaa0cbcc",
+                "url": "https://api.github.com/repos/theofidry/AliceBundle/zipball/d99a5e2ba524ac422b11744f9024cdf0a8040c25",
+                "reference": "d99a5e2ba524ac422b11744f9024cdf0a8040c25",
                 "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "^1.7 || ^2.0",
-                "doctrine/doctrine-bundle": "^2.11.3 || ^3.0",
+                "doctrine/doctrine-bundle": "^2.18.2 || ^3.0",
                 "doctrine/orm": "^3.1",
                 "doctrine/persistence": "^3.3.1 || ^4.0",
-                "php": "^8.2",
+                "php": "^8.4",
                 "psr/log": "^1.0 || ^2.0 || ^3.0",
-                "symfony/finder": "^6.4 || ^7.0",
-                "symfony/framework-bundle": "^6.4 || ^7.0",
-                "theofidry/alice-data-fixtures": "^1.7"
+                "symfony/doctrine-bridge": "7.4 || ^8.0",
+                "symfony/finder": "7.4 || ^8.0",
+                "symfony/framework-bundle": "^7.4 || ^8.0",
+                "theofidry/alice-data-fixtures": "^1.10"
             },
             "require-dev": {
                 "monolog/monolog": "^3.5",
                 "phpspec/prophecy": "^1.14.0",
                 "phpspec/prophecy-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.6.17",
-                "symfony/phpunit-bridge": "^6.4.4 || ^7.0"
+                "phpunit/phpunit": "^11.5.46",
+                "symfony/runtime": "*"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -12401,9 +12402,9 @@
             ],
             "support": {
                 "issues": "https://github.com/theofidry/AliceBundle/issues",
-                "source": "https://github.com/theofidry/AliceBundle/tree/2.16.0"
+                "source": "https://github.com/theofidry/AliceBundle/tree/2.17.0"
             },
-            "time": "2025-10-24T09:03:19+00:00"
+            "time": "2025-12-21T22:21:12+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
