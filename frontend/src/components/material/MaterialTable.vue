@@ -62,7 +62,7 @@
           path="article"
           maxlength="64"
         />
-        <span v-if="item.readonly">{{ item.article }}</span>
+        <strong v-if="item.readonly">{{ item.article }}</strong>
       </template>
       <template v-else>
         <div class="d-flex">
@@ -493,15 +493,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.v-data-table:deep(.v-data-table__wrapper th),
-.v-data-table:deep(.v-data-table__wrapper td) {
+.v-data-table:deep(.v-table__wrapper th),
+.v-data-table:deep(.v-table__wrapper td) {
   padding: 0 2px;
 }
 
-.ec-material-table--dense.v-data-table::v-deep(
-    .v-data-table__wrapper th,
-    .v-data-table__wrapper td
-  ) {
+.ec-material-table--dense.v-table::v-deep(.v-table__wrapper th, .v-table__wrapper td) {
   padding: 4px 2px;
   line-height: normal;
 }
