@@ -66,6 +66,7 @@ export default {
     entity: { type: Object, required: true },
     variant: { type: String, required: true },
   },
+  emits: ['sort'],
   data() {
     return {
       dragging: false,
