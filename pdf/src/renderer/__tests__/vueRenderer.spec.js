@@ -139,6 +139,7 @@ describe('rendering a full camp', () => {
             type: 'Story',
             options: {
               periods: ['/periods/16b2fcffdd8e'],
+              contentType: 'Storycontext',
             },
           },
         ],
