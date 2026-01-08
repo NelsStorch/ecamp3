@@ -99,7 +99,7 @@ Show all activity schedule entries of a single period.
       @height-changed="scheduleEntryFiltersHeightChanged"
     />
     <template v-if="loading">
-      <v-skeleton-loader type="table" />
+      <v-skeleton-loader type="table" class="ma-4" />
     </template>
     <ScheduleEntries
       v-else
