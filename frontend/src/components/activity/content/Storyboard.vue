@@ -79,10 +79,8 @@
   </ContentNodeCard>
 </template>
 <script>
-import ApiForm from '@/components/form/api/ApiForm.vue'
 import ContentNodeCard from '@/components/activity/content/layout/ContentNodeCard.vue'
 import { contentNodeMixin } from '@/mixins/contentNodeMixin.js'
-import ApiSortable from '@/components/form/api/ApiSortable.vue'
 
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import StoryboardSortable from '@/components/activity/content/storyboard/StoryboardSortable.vue'
@@ -113,8 +111,6 @@ export default {
   components: {
     ContentNodeCard,
     StoryboardSortable,
-    ApiForm,
-    ApiSortable,
   },
   mixins: [contentNodeMixin],
   props: {
@@ -164,7 +160,7 @@ export default {
           ? poorUuidPolyfill()
           : self.crypto.randomUUID()
       try {
-        // TODO: consider adding item to ApiSortable eagerly (should be easy, now that uuid is generated locally)
+        // TODO: consider adding item to StoryboardSortable eagerly (should be easy, now that uuid is generated locally)
         await this.contentNode.$patch({
           data: {
             sections: {
