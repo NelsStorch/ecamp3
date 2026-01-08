@@ -80,7 +80,10 @@ export const formComponentPropsMixin = {
       if (this.label) {
         return this.label
       }
-      return this.$t(`entity.${this.entityName}.fields.${this.path}`)
+      if (this.entityName) {
+        return this.$t(`entity.${this.entityName}.fields.${this.path}`)
+      }
+      return this.path
     },
   },
 }

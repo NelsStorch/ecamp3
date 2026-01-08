@@ -3,6 +3,7 @@
     <e-select
       :model-value="localSelection"
       path="localSelection"
+      :label="$t('contentNode.laThematicArea.name')"
       item-value="value"
       :items="items"
       multiple

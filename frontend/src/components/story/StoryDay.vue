@@ -49,7 +49,6 @@
                 dense
                 :readonly="!editMode"
                 path="data.html"
-                aria-label="Erfassen"
                 label=""
               />
             </api-form>
