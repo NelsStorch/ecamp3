@@ -13,7 +13,7 @@
     </td>
     <td class="e-storyboard-row__time">
       <api-text-field
-        :label="null"
+        :label="$t('contentNode.storyboard.entity.section.fields.column1')"
         single-line
         :path="`data.sections[${itemKey}].column1`"
         :disabled="layoutMode || disabled"
@@ -21,7 +21,7 @@
     </td>
     <td class="e-storyboard-row__text">
       <api-richtext
-        :label="null"
+        :label="$t('contentNode.storyboard.entity.section.fields.column2Html')"
         :path="`data.sections[${itemKey}].column2Html`"
         rows="4"
         :disabled="layoutMode || disabled"
@@ -29,7 +29,7 @@
     </td>
     <td class="e-storyboard-row__responsible">
       <api-text-field
-        :label="null"
+        :label="$t('contentNode.storyboard.entity.section.fields.column3')"
         single-line
         :path="`data.sections[${itemKey}].column3`"
         :disabled="layoutMode || disabled"
