@@ -139,6 +139,9 @@ class VuetifyLoaderPlugin {
         VBtn: {
           variant: 'elevated',
         },
+        VField: {
+          color: 'primary',
+        },
       },
       components: {
         VCalendar,
