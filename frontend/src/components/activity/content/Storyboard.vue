@@ -48,13 +48,14 @@
                 <v-btn
                   block
                   icon
+                  variant="text"
                   class="button-add"
                   color="success"
                   rounded
                   :loading="isAdding"
                   @click="addSection"
                 >
-                  <v-icon>mdi-plus</v-icon>
+                  <v-icon size="large">mdi-plus</v-icon>
                 </v-btn>
               </td>
             </tr>
