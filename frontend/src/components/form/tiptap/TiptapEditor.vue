@@ -11,7 +11,6 @@
       ref="bubbleMenu"
       :editor="editor"
       :should-show="shouldShow"
-      :tippy-options="{ maxWidth: 'none' }"
     >
       <div class="elevation-4 ec-tiptap-toolbar bg-white">
         <v-toolbar
