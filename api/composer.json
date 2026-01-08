@@ -61,7 +61,7 @@
         "symfony/yaml": "7.4.1",
         "twig/cssinliner-extra": "^3.4",
         "twig/extra-bundle": "3.22.2",
-        "webonyx/graphql-php": "15.29.1"
+        "webonyx/graphql-php": "15.29.3"
     },
     "require-dev": {
         "api-platform/graphql": "4.2.11",
