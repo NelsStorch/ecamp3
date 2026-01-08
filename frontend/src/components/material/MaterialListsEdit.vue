@@ -12,7 +12,7 @@
     >
       <template #activator="{ props }">
         <v-list-item exact-path v-bind="props">
-          <v-list-item-title>{{ materialList.name }}</v-list-item-title>
+          <v-list-item-title class="py-3">{{ materialList.name }}</v-list-item-title>
 
           <template #append>
             <v-list-item-action class="e-collaborator-item__actions ml-2">
