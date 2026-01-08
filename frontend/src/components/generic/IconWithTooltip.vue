@@ -18,7 +18,7 @@
     </template>
     <slot>
       {{ text }}
-      <i18n-t v-if="tooltipI18nKey" :keypath="tooltipI18nKey">
+      <i18n-t v-if="tooltipI18nKey" :keypath="tooltipI18nKey" scope="global">
         <template #br><br class="linebreak" /></template>
       </i18n-t>
     </slot>

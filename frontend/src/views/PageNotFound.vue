@@ -14,7 +14,7 @@
       <TentNight class="tent" />
       <div class="relative">
         <p class="text-white text-center px-3 d-flex justify-center mb-n8 relative">
-          <i18n-t keypath="views.pageNotFound.detail">
+          <i18n-t keypath="views.pageNotFound.detail" scope="global">
             <template #br><br /></template>
           </i18n-t>
           <br />
