@@ -70,10 +70,10 @@
         </v-row>
       </e-form>
     </v-card>
-    <v-btn variant="text" block height="auto" class="pa-4" @click="addPeriod">
-      <v-icon>mdi-plus</v-icon>
-      {{ $t('components.campAdmin.createCampPeriods.add') }}
-    </v-btn>
+    <!--    <v-btn variant="text" block height="auto" class="pa-4" @click="addPeriod">-->
+    <!--      <v-icon>mdi-plus</v-icon>-->
+    <!--      {{ $t('components.campAdmin.createCampPeriods.add') }}-->
+    <!--    </v-btn>-->
   </div>
 </template>
 <script>
