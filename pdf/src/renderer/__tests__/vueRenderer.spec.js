@@ -150,6 +150,38 @@ describe('rendering a full camp', () => {
     expect(result).toMatchFileSnapshot('./__snapshots__/story_overview.spec.json.snap')
   })
 
+  it('renders the safety considerations overview', async () => {
+    // given
+    const store = wrap(fullCampStoreContent)
+
+    // when
+    const result = renderVueToPdfStructure(CampPrint, {
+      store,
+      $tc: tcMock,
+      locale: 'de',
+      config: {
+        language: 'de',
+        documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
+        camp: store.get('/camps/c4cca3a51342'),
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: {
+              periods: ['/periods/16b2fcffdd8e'],
+              contentType: 'SafetyConsiderations',
+            },
+          },
+        ],
+      },
+    })
+
+    // then
+    expect(result).toMatchFileSnapshot(
+      './__snapshots__/safety_considerations.spec.json.snap'
+    )
+  })
+
   it('renders the program', async () => {
     // given
     const store = wrap(fullCampStoreContent)
