@@ -43,14 +43,14 @@ export default {
         TiptapEditor,
         reactive({
           ...toRefs(props),
-          ...toRefs(ctx.attrs),
+          ...ctx.attrs,
           editable: computed(() => !readonlyRef.value && !disabledRef.value),
         }),
         ctx.slots
       )
     return VField.setup(
       reactive({
-        ...toRefs(ctx.attrs),
+        ...ctx.attrs,
         loading: toRef(() => props.loading),
       }),
       { ...ctx, slots: { default: tiptap, ...ctx.slots } }
