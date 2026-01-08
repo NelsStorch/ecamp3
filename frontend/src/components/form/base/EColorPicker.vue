@@ -116,7 +116,7 @@ export default {
   props: {
     modelValue: { type: String, required: false, default: null },
   },
-  emits: ['input'],
+  emits: ['update:modelValue', 'blur'],
   data: () => ({
     pickerOpen: false,
     pickerValue: null,
