@@ -13,7 +13,12 @@
     </template>
     <Form @submit="doSubmit">
       <v-card>
-        <v-toolbar class="ec-dialog-toolbar" density="compact" elevation="0">
+        <v-toolbar
+          class="ec-dialog-toolbar"
+          density="compact"
+          color="surface"
+          elevation="0"
+        >
           <template #prepend>
             <v-icon class="ml-3">{{ icon }}</v-icon>
           </template>
@@ -60,22 +65,19 @@
             :color="cancelColor"
             :disabled="!cancelEnabled"
             variant="text"
+            :text="cancelLabel"
             @click="doCancel"
-          >
-            {{ cancelLabel }}
-          </v-btn>
+          />
           <v-btn
             v-if="submitAction != null"
             :color="submitColor"
+            variant="elevated"
             :disabled="!submitEnabled"
             :loading="currentlySaving"
             type="submit"
-          >
-            <v-icon v-if="!!submitIcon" start>
-              {{ submitIcon }}
-            </v-icon>
-            {{ submitLabel }}
-          </v-btn>
+            :prepend-icon="submitIcon"
+            :text="submitLabel"
+          />
           <slot name="actions" />
         </v-card-actions>
       </v-card>
