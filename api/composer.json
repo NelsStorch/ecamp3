@@ -44,7 +44,7 @@
         "symfony/dotenv": "7.4.0",
         "symfony/expression-language": "7.4.0",
         "symfony/flex": "2.10.0",
-        "symfony/framework-bundle": "7.4.1",
+        "symfony/framework-bundle": "7.4.3",
         "symfony/http-client": "7.4.3",
         "symfony/intl": "7.4.0",
         "symfony/mailer": "7.4.3",
@@ -55,9 +55,9 @@
         "symfony/runtime": "7.4.1",
         "symfony/security-bundle": "7.4.0",
         "symfony/serializer": "7.4.3",
-        "symfony/translation": "7.4.0",
+        "symfony/translation": "7.4.3",
         "symfony/twig-bundle": "7.4.3",
-        "symfony/validator": "7.4.2",
+        "symfony/validator": "7.4.3",
         "symfony/yaml": "7.4.1",
         "twig/cssinliner-extra": "^3.4",
         "twig/extra-bundle": "3.22.2",
@@ -81,7 +81,7 @@
         "symfony/maker-bundle": "1.65.1",
         "symfony/stopwatch": "7.4.0",
         "symfony/var-dumper": "7.4.3",
-        "symfony/web-profiler-bundle": "7.4.0"
+        "symfony/web-profiler-bundle": "7.4.3"
     },
     "config": {
         "optimize-autoloader": true,
