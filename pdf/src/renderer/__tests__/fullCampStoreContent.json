@@ -9250,8 +9250,11 @@
     }
   },
   "/content_types": {
-    "totalItems": 7,
+    "totalItems": 11,
     "items": [
+      {
+        "href": "/content_types/a4211c11211c"
+      },
       {
         "href": "/content_types/f17470519474"
       },
@@ -9259,10 +9262,19 @@
         "href": "/content_types/1a0f84e322c8"
       },
       {
+        "href": "/content_types/c462edd869f3"
+      },
+      {
+        "href": "/content_types/5e2028c55ee4"
+      },
+      {
         "href": "/content_types/3ef17bd1df72"
       },
       {
         "href": "/content_types/4f0c657fecef"
+      },
+      {
+        "href": "/content_types/a4211c112939"
       },
       {
         "href": "/content_types/44dcc7493c65"
@@ -9863,6 +9875,62 @@
     "campCollaboration": null,
     "_meta": {
       "self": "/material_lists/38a28bc6e4b7",
+      "loading": false,
+      "reloading": false,
+      "load": "{}"
+    }
+  },
+  "/content_types/a4211c11211c": {
+    "name": "Checklist",
+    "active": true,
+    "id": "a4211c11211c",
+    "contentNodes": {
+      "href": "/content_node/checklist_nodes?contentType=%2Fapi%2Fcontent_types%2Fa4211c11211c"
+    },
+    "_meta": {
+      "self": "/content_types/a4211c11211c",
+      "loading": false,
+      "reloading": false,
+      "load": "{}"
+    }
+  },
+  "/content_types/a4211c112939": {
+    "name": "ResponsiveLayout",
+    "active": true,
+    "id": "a4211c112939",
+    "contentNodes": {
+      "href": "/content_node/responsive_layouts?contentType=%2Fapi%2Fcontent_types%2Fa4211c112939"
+    },
+    "_meta": {
+      "self": "/content_types/a4211c112939",
+      "loading": false,
+      "reloading": false,
+      "load": "{}"
+    }
+  },
+  "/content_types/c462edd869f3": {
+    "name": "LearningObjectives",
+    "active": true,
+    "id": "c462edd869f3",
+    "contentNodes": {
+      "href": "/content_node/single_texts?contentType=%2Fapi%2Fcontent_types%2Fc462edd869f3"
+    },
+    "_meta": {
+      "self": "/content_types/c462edd869f3",
+      "loading": false,
+      "reloading": false,
+      "load": "{}"
+    }
+  },
+  "/content_types/5e2028c55ee4": {
+    "name": "LearningTopics",
+    "active": true,
+    "id": "5e2028c55ee4",
+    "contentNodes": {
+      "href": "/content_node/single_texts?contentType=%2Fapi%2Fcontent_types%2F5e2028c55ee4"
+    },
+    "_meta": {
+      "self": "/content_types/5e2028c55ee4",
       "loading": false,
       "reloading": false,
       "load": "{}"

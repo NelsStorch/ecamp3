@@ -8911,6 +8911,7 @@
                   "parent": [Circular],
                   "props": {
                     "class": "picasso-footer-field",
+                    "key": 0,
                   },
                   "style": {
                     "marginBottom": "6pt",

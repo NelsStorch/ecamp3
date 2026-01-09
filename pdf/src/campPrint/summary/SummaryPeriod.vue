@@ -29,6 +29,7 @@ export default {
   extends: PdfComponent,
   props: {
     period: { type: Object, required: true },
+    type: { type: String, required: true },
     contentType: { type: String, required: true },
     filter: { type: Object, default: () => ({}) },
   },
@@ -48,7 +49,7 @@ export default {
       return sortBy(days, (day) => this.$date.utc(day.start).unix())
     },
     title() {
-      return this.$tc('print.' + this.camelCase(this.contentType) + '.title')
+      return this.$tc('print.' + this.camelCase(this.type) + '.title')
     },
   },
   methods: { camelCase },

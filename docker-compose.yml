@@ -1,9 +1,9 @@
 services:
   frontend:
     image: node:24.12.0
-    container_name: "ecamp3-frontend"
+    container_name: 'ecamp3-frontend'
     ports:
-      - "9229:9229" # jest debug
+      - '9229:9229' # jest debug
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
@@ -21,12 +21,13 @@ services:
       - CI=${CI}
     working_dir: /app
     command: ./docker-setup.sh
+    stop_signal: SIGKILL
     depends_on:
       - pdf
 
   frontend-old:
     image: node:24.8.0
-    container_name: "ecamp3-frontend-old"
+    container_name: 'ecamp3-frontend-old'
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
@@ -55,7 +56,7 @@ services:
       target: frankenphp_prod
       cache_from:
         - ecamp/ecamp3-dev-api
-    container_name: "ecamp3-api"
+    container_name: 'ecamp3-api'
     depends_on:
       - database
       - docker-host
@@ -69,7 +70,7 @@ services:
       DATA_MIGRATIONS_DIR: ${DATA_MIGRATIONS_DIR:-dev-data}
       DATABASE_URL: "postgresql://ecamp3:ecamp3@database:5432/ecamp3dev?serverVersion=15&charset=utf8"
       LOG_LEVEL: debug
-      ADDITIONAL_TRUSTED_HOSTS: ".*"
+      ADDITIONAL_TRUSTED_HOSTS: '.*'
       SERVER_NAME: ":3001"
     healthcheck:
       interval: 10s
@@ -78,11 +79,11 @@ services:
       start_period: 30s
     restart: on-failure
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 'host.docker.internal:host-gateway'
 
   http-cache:
     image: varnish:8.0.0
-    container_name: "ecamp3-http-cache"
+    container_name: 'ecamp3-http-cache'
     depends_on:
       - api
     volumes:
@@ -96,7 +97,7 @@ services:
 
   http-cache-logs:
     image: varnish:8.0.0
-    container_name: "ecamp3-http-cache-logs"
+    container_name: 'ecamp3-http-cache-logs'
     depends_on:
       - http-cache
     volumes:
@@ -105,7 +106,7 @@ services:
 
   pdf:
     image: node:24.12.0
-    container_name: "ecamp3-pdf"
+    container_name: 'ecamp3-pdf'
     stdin_open: true
     tty: true
     user: ${USER_ID:-1000}
@@ -125,7 +126,7 @@ services:
 
   print:
     image: node:24.12.0
-    container_name: "ecamp3-print"
+    container_name: 'ecamp3-print'
     user: ${USER_ID:-1000}
     volumes:
       - ./.prettierrc:/.prettierrc
@@ -148,7 +149,7 @@ services:
 
   database:
     image: postgres:15-alpine
-    container_name: "ecamp3-database"
+    container_name: 'ecamp3-database'
     environment:
       - POSTGRES_DB=ecamp3dev
       - POSTGRES_PASSWORD=ecamp3
@@ -170,7 +171,7 @@ services:
 
   pg-admin:
     image: dpage/pgadmin4
-    container_name: "ecamp3-pg-admin"
+    container_name: 'ecamp3-pg-admin'
     depends_on:
       - database
     environment:
@@ -182,21 +183,21 @@ services:
 
   mail:
     image: maildev/maildev
-    container_name: "ecamp3-mail"
+    container_name: 'ecamp3-mail'
     environment:
       - MAILDEV_BASE_PATHNAME=/mail
 
   docker-host:
     image: qoomon/docker-host
-    container_name: "ecamp3-docker-host-forwarder"
-    cap_add: ["NET_ADMIN", "NET_RAW"]
+    container_name: 'ecamp3-docker-host-forwarder'
+    cap_add: ['NET_ADMIN', 'NET_RAW']
     restart: on-failure
 
   browserless:
     image: ghcr.io/browserless/chromium:v2.38.2
-    container_name: "ecamp3-browserless"
+    container_name: 'ecamp3-browserless'
     ports:
-      - "3010:3000"
+      - '3010:3000'
     environment:
       - TOKEN=1234
       - CONCURRENT=1
@@ -205,9 +206,9 @@ services:
       - ENABLE_DEBUGGER=false
 
   e2e:
-    image: cypress/included:15.7.1@sha256:73b92d32caa163c1a11ad24a7ac579c18f0069c4acf92c3064c01f437979e575
-    profiles: ["e2e"]
-    container_name: "ecamp3-e2e"
+    image: cypress/included:15.8.1@sha256:ee41d089db6a482777a2356899cb1b5f7a86e271d2cb7f30c06c9172797e99d4
+    profiles: ['e2e']
+    container_name: 'ecamp3-e2e'
     environment:
       - DISPLAY
     volumes:
@@ -219,7 +220,7 @@ services:
 
   reverse-proxy:
     image: nginx:1.29
-    container_name: "ecamp3-reverse-proxy"
+    container_name: 'ecamp3-reverse-proxy'
     volumes:
       - ./reverse-proxy-nginx.conf:/etc/nginx/nginx.conf
     depends_on:
@@ -237,8 +238,8 @@ services:
 
   translation:
     image: node:24.12.0
-    profiles: ["translation"]
-    container_name: "ecamp3-translation"
+    profiles: ['translation']
+    container_name: 'ecamp3-translation'
     volumes:
       - ./translation:/translation:delegated
       - ./common:/common:delegated

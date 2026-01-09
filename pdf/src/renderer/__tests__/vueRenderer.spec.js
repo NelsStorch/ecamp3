@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, expect, it, describe } from 'vitest'
 import wrap from './minimalHalJsonVuex.js'
 import fullCampStoreContent from './fullCampStoreContent.json'
+import courseActivityListStoreContent from './courseActivityListStoreContent.json'
 import activityWithSingleText from './activityWithSingleText.json'
 import { renderVueToPdfStructure } from '../vueRenderer.js'
 import SimpleDocument from './SimpleDocument.vue'
@@ -138,6 +139,7 @@ describe('rendering a full camp', () => {
             type: 'Story',
             options: {
               periods: ['/periods/16b2fcffdd8e'],
+              contentType: 'Storycontext',
             },
           },
         ],
@@ -146,6 +148,38 @@ describe('rendering a full camp', () => {
 
     // then
     expect(result).toMatchFileSnapshot('./__snapshots__/story_overview.spec.json.snap')
+  })
+
+  it('renders the safety considerations overview', async () => {
+    // given
+    const store = wrap(fullCampStoreContent)
+
+    // when
+    const result = renderVueToPdfStructure(CampPrint, {
+      store,
+      $tc: tcMock,
+      locale: 'de',
+      config: {
+        language: 'de',
+        documentName: 'Pfila 2023.pdf',
+        options: { pageNumbers: false },
+        camp: store.get('/camps/c4cca3a51342'),
+        contents: [
+          {
+            type: 'SafetyConsiderations',
+            options: {
+              periods: ['/periods/16b2fcffdd8e'],
+              contentType: 'SafetyConsiderations',
+            },
+          },
+        ],
+      },
+    })
+
+    // then
+    expect(result).toMatchFileSnapshot(
+      './__snapshots__/safety_considerations.spec.json.snap'
+    )
   })
 
   it('renders the program', async () => {
@@ -232,6 +266,37 @@ describe('rendering a full camp', () => {
 
     // then
     expect(result).toMatchFileSnapshot('./__snapshots__/table_of_contents.spec.json.snap')
+  })
+})
+
+describe('rendering a course activity list', () => {
+  it('renders the activity list', async () => {
+    // given
+    const store = wrap(courseActivityListStoreContent)
+
+    // when
+    const result = renderVueToPdfStructure(CampPrint, {
+      store,
+      $tc: tcMock,
+      locale: 'de',
+      config: {
+        language: 'de',
+        documentName: 'Basiskurs.pdf',
+        options: { pageNumbers: false },
+        camp: store.get('/camps/5d28f99890bc'),
+        contents: [
+          {
+            type: 'ActivityList',
+            options: {
+              periods: ['/periods/88f1f55a69d7'],
+            },
+          },
+        ],
+      },
+    })
+
+    // then
+    expect(result).toMatchFileSnapshot('./__snapshots__/activity_list.spec.json.snap')
   })
 })
 
