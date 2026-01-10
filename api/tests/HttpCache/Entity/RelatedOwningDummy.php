@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Entity]
 class RelatedOwningDummy extends BaseEntity {
-    #[ORM\OneToOne(targetEntity: Dummy::class, cascade: ['persist'], mappedBy: 'relatedOwningDummy')]
+    #[ORM\OneToOne(targetEntity: Dummy::class, mappedBy: 'relatedOwningDummy', cascade: ['persist'])]
     public ?Dummy $ownedDummy = null;
 
     /**

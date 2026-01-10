@@ -57,8 +57,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: UserCreateProcessor::class
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-    normalizationContext: ['groups' => ['read']]
 )]
 #[UniqueEntity(
     fields: ['profile'],
@@ -164,7 +164,7 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
     )]
     #[Groups(['create'])]
     #[ORM\OneToOne(targetEntity: Profile::class, inversedBy: 'user', cascade: ['persist'], fetch: 'EAGER')]
-    #[ORM\JoinColumn(nullable: false, unique: true, onDelete: 'restrict')]
+    #[ORM\JoinColumn(unique: true, nullable: false, onDelete: 'restrict')]
     public Profile $profile;
 
     /**

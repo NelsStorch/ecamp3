@@ -35,8 +35,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_authenticated()'
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['user.collaborations.camp', 'user'])]
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
@@ -57,7 +57,7 @@ class Profile extends BaseEntity {
     #[Assert\Email]
     #[ApiProperty(example: self::EXAMPLE_EMAIL)]
     #[Groups(['read', 'create'])]
-    #[ORM\Column(type: 'string', length: 64, nullable: false, unique: true)]
+    #[ORM\Column(type: 'string', length: 64, unique: true, nullable: false)]
     public ?string $email = null;
 
     /**

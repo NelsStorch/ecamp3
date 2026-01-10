@@ -71,8 +71,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             ]
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['camp.id', 'name'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp', 'isPrototype'])]
@@ -131,7 +131,7 @@ class Checklist extends BaseEntity implements BelongsToCampInterface, CopyFromPr
      */
     #[Assert\Type('bool')]
     #[Assert\DisableAutoMapping]
-    #[ApiProperty(example: true, writable: true)]
+    #[ApiProperty(writable: true, example: true)]
     #[Groups(['read', 'create'])]
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     public bool $isPrototype = false;

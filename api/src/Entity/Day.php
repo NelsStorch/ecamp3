@@ -52,8 +52,8 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
             ]
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['period.start', 'dayOffset']
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['period', 'period.camp'])]
@@ -83,8 +83,8 @@ class Day extends BaseEntity implements BelongsToCampInterface {
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: DayResponsible::DAY_SUBRESOURCE_URI_TEMPLATE,
-        example: '/days/1a2b3c4d/day_responsibles'
+        example: '/days/1a2b3c4d/day_responsibles',
+        uriTemplate: DayResponsible::DAY_SUBRESOURCE_URI_TEMPLATE
     )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: DayResponsible::class, mappedBy: 'day', orphanRemoval: true)]

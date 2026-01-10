@@ -59,9 +59,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: CampCreateProcessor::class,
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
     forceEager: false,
-    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['isPrototype'])]
 #[ApiFilter(filterClass: CampCollaboratorFilter::class)]
@@ -102,7 +102,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
         example: [['description' => 'Hauptlager', 'start' => '2022-01-01', 'end' => '2022-01-08']]
     )]
     #[Groups(['read', 'create'])]
-    #[ORM\OneToMany(targetEntity: Period::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Period::class, mappedBy: 'camp', cascade: ['persist'], orphanRemoval: true)]
     #[ORM\OrderBy(['start' => 'ASC'])]
     public Collection $periods;
 
@@ -111,11 +111,11 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: Category::CAMP_SUBRESOURCE_URI_TEMPLATE,
-        example: '"/camp/1a2b3c4d/categories"'
+        example: '"/camp/1a2b3c4d/categories"',
+        uriTemplate: Category::CAMP_SUBRESOURCE_URI_TEMPLATE
     )]
     #[Groups(['read'])]
-    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'camp', cascade: ['persist'], orphanRemoval: true)]
     public Collection $categories;
 
     /**
@@ -123,11 +123,11 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: ActivityProgressLabel::CAMP_SUBRESOURCE_URI_TEMPLATE,
-        example: '"/camps/1a2b3c4d/activity_progress_labels"'
+        example: '"/camps/1a2b3c4d/activity_progress_labels"',
+        uriTemplate: ActivityProgressLabel::CAMP_SUBRESOURCE_URI_TEMPLATE
     )]
     #[Groups(['read'])]
-    #[ORM\OneToMany(targetEntity: ActivityProgressLabel::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: ActivityProgressLabel::class, mappedBy: 'camp', cascade: ['persist'], orphanRemoval: true)]
     public Collection $progressLabels;
 
     /**
@@ -136,8 +136,8 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: Activity::CAMP_SUBRESOURCE_URI_TEMPLATE,
-        example: '/camps/1a2b3c4d/activities'
+        example: '/camps/1a2b3c4d/activities',
+        uriTemplate: Activity::CAMP_SUBRESOURCE_URI_TEMPLATE
     )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'camp', orphanRemoval: true)]
@@ -149,13 +149,13 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      */
     #[ApiProperty(writable: false, example: '["/material_lists/1a2b3c4d"]')]
     #[Groups(['read'])]
-    #[ORM\OneToMany(targetEntity: MaterialList::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: MaterialList::class, mappedBy: 'camp', cascade: ['persist'], orphanRemoval: true)]
     public Collection $materialLists;
 
     /**
      * List of MaterialItems that belong to this Camp.
      */
-    #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'camp', cascade: ['persist'], orphanRemoval: true)]
     public Collection $materialItems;
 
     /**
@@ -164,7 +164,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      */
     #[ApiProperty(writable: false, uriTemplate: Checklist::CAMP_SUBRESOURCE_URI_TEMPLATE)]
     #[Groups(['read'])]
-    #[ORM\OneToMany(targetEntity: Checklist::class, mappedBy: 'camp', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Checklist::class, mappedBy: 'camp', cascade: ['persist'], orphanRemoval: true)]
     public Collection $checklists;
 
     /**
@@ -223,7 +223,7 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      */
     #[Assert\Type('bool')]
     #[Assert\DisableAutoMapping]
-    #[ApiProperty(example: true, writable: false)]
+    #[ApiProperty(writable: false, example: true)]
     #[Groups(['read'])]
     #[ORM\Column(type: 'boolean')]
     public bool $isPrototype = false;
@@ -485,8 +485,8 @@ class Camp extends BaseEntity implements BelongsToCampInterface, CopyFromPrototy
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: CampCollaboration::CAMP_SUBRESOURCE_URI_TEMPLATE,
-        example: '["/camps/1a2b3c4d/camp_collaborations"]'
+        example: '["/camps/1a2b3c4d/camp_collaborations"]',
+        uriTemplate: CampCollaboration::CAMP_SUBRESOURCE_URI_TEMPLATE
     )]
     public function getCampCollaborations(): array {
         return [];

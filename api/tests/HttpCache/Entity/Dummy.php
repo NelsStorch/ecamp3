@@ -19,7 +19,7 @@ class Dummy extends BaseEntity {
     /**
      * @var null|RelatedOwningDummy
      */
-    #[ORM\OneToOne(targetEntity: RelatedOwningDummy::class, cascade: ['persist'], inversedBy: 'ownedDummy')]
+    #[ORM\OneToOne(targetEntity: RelatedOwningDummy::class, inversedBy: 'ownedDummy', cascade: ['persist'])]
     public $relatedOwningDummy;
 
     public function getRelatedDummy(): ?RelatedDummy {

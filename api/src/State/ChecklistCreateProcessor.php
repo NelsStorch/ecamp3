@@ -3,7 +3,6 @@
 namespace App\State;
 
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Checklist;
 use App\State\Util\AbstractPersistProcessor;
 use App\Util\EntityMap;
@@ -12,10 +11,6 @@ use App\Util\EntityMap;
  * @template-extends AbstractPersistProcessor<Checklist>
  */
 class ChecklistCreateProcessor extends AbstractPersistProcessor {
-    public function __construct(ProcessorInterface $decorated) {
-        parent::__construct($decorated);
-    }
-
     /**
      * @param Checklist $data
      */

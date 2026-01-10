@@ -51,8 +51,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.day === null'
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['day', 'day.period'])]
 #[UniqueEntity(

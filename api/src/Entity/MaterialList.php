@@ -47,8 +47,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             securityPostDenormalize: 'is_granted("CAMP_MEMBER", object) or is_granted("CAMP_MANAGER", object) or object.camp === null'
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['camp.id', 'name'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp'])]

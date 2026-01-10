@@ -47,9 +47,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
             processor: ChecklistNodePersistProcessor::class,
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
+    routePrefix: '/content_node',
     normalizationContext: ['groups' => ['read']],
-    routePrefix: '/content_node'
+    denormalizationContext: ['groups' => ['write']],
 )]
 #[ORM\Entity(repositoryClass: ChecklistNodeRepository::class)]
 class ChecklistNode extends ContentNode {
