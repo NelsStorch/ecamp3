@@ -43,8 +43,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             provider: ContentNodeCollectionProvider::class
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['root.id', 'parent.id', 'slot', 'position']
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['contentType', 'root'])]

@@ -68,8 +68,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             validationContext: ['groups' => ScheduleEntryPostGroupSequence::class]
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['period', 'activity'])]
 #[ApiFilter(filterClass: ExpressionDateTimeFilter::class, properties: [
@@ -94,7 +94,7 @@ class ScheduleEntry extends BaseEntity implements BelongsToCampInterface, CanGen
     #[AssertBelongsToSameCamp]
     #[ApiProperty(example: '/periods/1a2b3c4d')]
     #[Groups(['read', 'write'])]
-    #[ORM\ManyToOne(targetEntity: Period::class, inversedBy: 'scheduleEntries', fetch: 'EAGER')]
+    #[ORM\ManyToOne(targetEntity: Period::class, fetch: 'EAGER', inversedBy: 'scheduleEntries')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
     public ?Period $period = null;
 
@@ -180,7 +180,7 @@ class ScheduleEntry extends BaseEntity implements BelongsToCampInterface, CanGen
     /**
      * Start date and time of the schedule entry.
      */
-    #[ApiProperty(example: '2022-01-02T00:00:00+00:00', required: true, openapiContext: ['format' => 'date-time'])]
+    #[ApiProperty(required: true, example: '2022-01-02T00:00:00+00:00', openapiContext: ['format' => 'date-time'])]
     #[Assert\GreaterThanOrEqual(propertyPath: 'period.start')]
     #[Groups(['read'])]
     public function getStart(): ?\DateTimeInterface {
@@ -206,7 +206,7 @@ class ScheduleEntry extends BaseEntity implements BelongsToCampInterface, CanGen
     /**
      * End date and time of the schedule entry.
      */
-    #[ApiProperty(example: '2022-01-02T01:30:00+00:00', required: true, openapiContext: ['format' => 'date-time'])]
+    #[ApiProperty(required: true, example: '2022-01-02T01:30:00+00:00', openapiContext: ['format' => 'date-time'])]
     #[Assert\GreaterThan(propertyPath: 'start')]
     #[Assert\LessThanOrEqual(propertyPath: 'period.endOfLastDay')]
     #[Groups(['read'])]

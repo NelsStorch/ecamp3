@@ -75,8 +75,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             ]
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['checklist.id', 'id'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['checklist', 'checklist.camp', 'checklistNodes'])]

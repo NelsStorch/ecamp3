@@ -18,46 +18,46 @@ class CacheRegexTest extends KernelTestCase {
         $this->cacheRegex = '{'.$this->getContainer()->getParameter('app.httpCache.matchPath').'}';
     }
 
-    #[TestWith(name: '', data: [''])]
-    #[TestWith(name: '/', data: ['/'])]
-    #[TestWith(name: '/index.jsonhal', data: ['index.jsonhal'])]
-    #[TestWith(name: '/camps/25a82475e0b7/activities', data: ['/camps/25a82475e0b7/activities'])]
-    #[TestWith(name: '/camps/25a82475e0b7/categories', data: ['/camps/25a82475e0b7/categories'])]
-    #[TestWith(name: '/camps/25a82475e0b7/checklists', data: ['/camps/25a82475e0b7/checklists'])]
-    #[TestWith(name: '/content_types', data: ['/content_types'])]
-    #[TestWith(name: '/content_types/25a82375a0b6', data: ['/content_types/25a82375a0b6'])]
-    #[TestWith(name: '/periods/25a82475e0b7/schedule_entries', data: ['/periods/25a82475e0b7/schedule_entries'])]
+    #[TestWith(data: [''], name: '')]
+    #[TestWith(data: ['/'], name: '/')]
+    #[TestWith(data: ['index.jsonhal'], name: '/index.jsonhal')]
+    #[TestWith(data: ['/camps/25a82475e0b7/activities'], name: '/camps/25a82475e0b7/activities')]
+    #[TestWith(data: ['/camps/25a82475e0b7/categories'], name: '/camps/25a82475e0b7/categories')]
+    #[TestWith(data: ['/camps/25a82475e0b7/checklists'], name: '/camps/25a82475e0b7/checklists')]
+    #[TestWith(data: ['/content_types'], name: '/content_types')]
+    #[TestWith(data: ['/content_types/25a82375a0b6'], name: '/content_types/25a82375a0b6')]
+    #[TestWith(data: ['/periods/25a82475e0b7/schedule_entries'], name: '/periods/25a82475e0b7/schedule_entries')]
     public function testIncludesUrls(string $url) {
         assertMatchesRegularExpression($this->cacheRegex, $url);
     }
 
-    #[TestWith(name: '/camps/25a82475e0b7/categories/c53dd7917e63', data: ['/camps/25a82475e0b7/categories/c53dd7917e63'])]
+    #[TestWith(data: ['/camps/25a82475e0b7/categories/c53dd7917e63'], name: '/camps/25a82475e0b7/categories/c53dd7917e63')]
     public function testAlsoIncludesUrls(string $url) {
         assertMatchesRegularExpression($this->cacheRegex, $url);
     }
 
-    #[TestWith(name: '/invitations', data: ['/invitations'])]
-    #[TestWith(name: '/personal_invitations', data: ['/personal_invitations'])]
-    #[TestWith(name: '/activity_progress_labels', data: ['/activity_progress_labels'])]
-    #[TestWith(name: '/activity_responsibles', data: ['/activity_responsibles'])]
-    #[TestWith(name: '/camp_collaborations', data: ['/camp_collaborations'])]
-    #[TestWith(name: '/categories', data: ['/categories'])]
-    #[TestWith(name: '/checklists', data: ['/checklists'])]
-    #[TestWith(name: '/checklist_items', data: ['/checklist_items'])]
-    #[TestWith(name: '/content_nodes', data: ['/content_nodes'])]
-    #[TestWith(name: '/content_node/checklist_nodes', data: ['/content_node/checklist_nodes'])]
-    #[TestWith(name: '/content_node/column_layouts', data: ['/content_node/column_layouts'])]
-    #[TestWith(name: '/content_node/material_nodes', data: ['/content_node/material_nodes'])]
-    #[TestWith(name: '/content_node/multi_selects', data: ['/content_node/multi_selects'])]
-    #[TestWith(name: '/content_node/storyboards', data: ['/content_node/storyboards'])]
-    #[TestWith(name: '/days', data: ['/days'])]
-    #[TestWith(name: '/day_responsibles', data: ['/day_responsibles'])]
-    #[TestWith(name: '/material_items', data: ['/material_items'])]
-    #[TestWith(name: '/material_lists', data: ['/material_lists'])]
-    #[TestWith(name: '/periods', data: ['/periods'])]
-    #[TestWith(name: '/profiles', data: ['/profiles'])]
-    #[TestWith(name: '/schedule_entries', data: ['/schedule_entries'])]
-    #[TestWith(name: '/users', data: ['/users'])]
+    #[TestWith(data: ['/invitations'], name: '/invitations')]
+    #[TestWith(data: ['/personal_invitations'], name: '/personal_invitations')]
+    #[TestWith(data: ['/activity_progress_labels'], name: '/activity_progress_labels')]
+    #[TestWith(data: ['/activity_responsibles'], name: '/activity_responsibles')]
+    #[TestWith(data: ['/camp_collaborations'], name: '/camp_collaborations')]
+    #[TestWith(data: ['/categories'], name: '/categories')]
+    #[TestWith(data: ['/checklists'], name: '/checklists')]
+    #[TestWith(data: ['/checklist_items'], name: '/checklist_items')]
+    #[TestWith(data: ['/content_nodes'], name: '/content_nodes')]
+    #[TestWith(data: ['/content_node/checklist_nodes'], name: '/content_node/checklist_nodes')]
+    #[TestWith(data: ['/content_node/column_layouts'], name: '/content_node/column_layouts')]
+    #[TestWith(data: ['/content_node/material_nodes'], name: '/content_node/material_nodes')]
+    #[TestWith(data: ['/content_node/multi_selects'], name: '/content_node/multi_selects')]
+    #[TestWith(data: ['/content_node/storyboards'], name: '/content_node/storyboards')]
+    #[TestWith(data: ['/days'], name: '/days')]
+    #[TestWith(data: ['/day_responsibles'], name: '/day_responsibles')]
+    #[TestWith(data: ['/material_items'], name: '/material_items')]
+    #[TestWith(data: ['/material_lists'], name: '/material_lists')]
+    #[TestWith(data: ['/periods'], name: '/periods')]
+    #[TestWith(data: ['/profiles'], name: '/profiles')]
+    #[TestWith(data: ['/schedule_entries'], name: '/schedule_entries')]
+    #[TestWith(data: ['/users'], name: '/users')]
     public function testDoesNotIncludeUrls(string $url) {
         assertDoesNotMatchRegularExpression($this->cacheRegex, $url);
     }

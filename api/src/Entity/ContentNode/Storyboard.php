@@ -44,9 +44,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: StoryboardPersistProcessor::class
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
+    routePrefix: '/content_node',
     normalizationContext: ['groups' => ['read']],
-    routePrefix: '/content_node'
+    denormalizationContext: ['groups' => ['write']],
 )]
 #[ORM\Entity(repositoryClass: StoryboardRepository::class)]
 class Storyboard extends ContentNode {

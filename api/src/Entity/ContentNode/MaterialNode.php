@@ -47,15 +47,15 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: ContentNodePersistProcessor::class
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
+    routePrefix: '/content_node',
     normalizationContext: ['groups' => ['read']],
-    routePrefix: '/content_node'
+    denormalizationContext: ['groups' => ['write']],
 )]
 #[ORM\Entity(repositoryClass: MaterialNodeRepository::class)]
 class MaterialNode extends ContentNode {
     #[ApiProperty(readableLink: true, writableLink: false)]
     #[Groups(['read'])]
-    #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'materialNode', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'materialNode', cascade: ['persist', 'remove'], orphanRemoval: true)]
     public Collection $materialItems;
 
     public function __construct() {

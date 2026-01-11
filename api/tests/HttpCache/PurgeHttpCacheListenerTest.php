@@ -39,6 +39,7 @@ use FOS\HttpCacheBundle\CacheManager;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\MakerBundle\Doctrine\StaticReflectionService;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 use function PHPUnit\Framework\assertThat;
 use function PHPUnit\Framework\containsEqual;
@@ -78,13 +79,18 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $this->emProphecy->method('getClassMetadata')->with(Dummy::class)->willReturn($dummyClassMetadata);
 
         $this->propertyAccessorProphecy = $this->createMock(PropertyAccessorInterface::class);
-        $this->propertyAccessorProphecy->method('isReadable')->willReturnCallback(function ($obj, $prop) {
-            if ($obj instanceof Dummy && 'relatedDummy' === $prop) {
-                return true;
-            }
+        $this->propertyAccessorProphecy
+            ->method('isReadable')
+            ->willReturnCallback(
+                function (array|object $obj, PropertyPathInterface|string $prop): bool {
+                    if ($obj instanceof Dummy && 'relatedDummy' === $prop) {
+                        return true;
+                    }
 
-            return false;
-        });
+                    return false;
+                }
+            )
+        ;
         $this->propertyAccessorProphecy->method('getValue')->willReturn(null);
 
         $this->metadataFactoryProphecy = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
@@ -227,9 +233,15 @@ class PurgeHttpCacheListenerTest extends TestCase {
         ;
 
         $propertyAccessorProphecy = $this->createMock(PropertyAccessorInterface::class);
-        $propertyAccessorProphecy->method('isReadable')->willReturnCallback(function ($obj, $prop) {
-            return $obj instanceof Dummy && in_array($prop, ['relatedDummy', 'relatedOwningDummy'], true) && ('relatedDummy' === $prop || 'relatedOwningDummy' === $prop);
-        });
+        $propertyAccessorProphecy->method('isReadable')
+            ->willReturnCallback(
+                function (array|object $obj, PropertyPathInterface|string $prop): bool {
+                    return $obj instanceof Dummy
+                        && in_array($prop, ['relatedDummy', 'relatedOwningDummy'], true)
+                        && ('relatedDummy' === $prop || 'relatedOwningDummy' === $prop);
+                }
+            )
+        ;
         $propertyAccessorProphecy->method('getValue')->willReturn(null);
 
         $listener = new PurgeHttpCacheListener(
@@ -459,7 +471,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         new OnFlushEventArgs($em);
 
         $propertyAccessorProphecy = $this->createMock(PropertyAccessorInterface::class);
-        $propertyAccessorProphecy->method('isReadable')->willReturnCallback(function ($obj, $prop) {
+        $propertyAccessorProphecy->method('isReadable')->willReturnCallback(function (array|object $obj, PropertyPathInterface|string $prop): bool {
             return $obj instanceof ContainNonResource && in_array($prop, ['notAResource', 'collectionOfNotAResource'], true);
         });
         $propertyAccessorProphecy->expects($this->never())->method('getValue');

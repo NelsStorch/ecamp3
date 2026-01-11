@@ -3,7 +3,6 @@
 namespace App\State;
 
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Day;
 use App\Entity\Period;
 use App\State\Util\AbstractPersistProcessor;
@@ -13,12 +12,6 @@ use App\Util\DateTimeUtil;
  * @template-extends AbstractPersistProcessor<Period>
  */
 class PeriodPersistProcessor extends AbstractPersistProcessor {
-    public function __construct(
-        ProcessorInterface $decorated
-    ) {
-        parent::__construct($decorated);
-    }
-
     /**
      * @param Period $data
      */

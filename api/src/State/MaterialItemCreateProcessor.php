@@ -3,7 +3,6 @@
 namespace App\State;
 
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\State\ProcessorInterface;
 use App\Entity\MaterialItem;
 use App\State\Util\AbstractPersistProcessor;
 
@@ -11,10 +10,6 @@ use App\State\Util\AbstractPersistProcessor;
  * @template-extends AbstractPersistProcessor<MaterialItem>
  */
 class MaterialItemCreateProcessor extends AbstractPersistProcessor {
-    public function __construct(ProcessorInterface $decorated) {
-        parent::__construct($decorated);
-    }
-
     /**
      * @param MaterialItem $data
      */

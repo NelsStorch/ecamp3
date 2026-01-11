@@ -74,8 +74,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             ],
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['camp.id', 'short'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp'])]
