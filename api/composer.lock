@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5ac52de1c94c76530fa7e1e15e87294",
+    "content-hash": "9d72ec8ec002e959ba465074755af2f4",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -185,7 +185,7 @@
         },
         {
             "name": "api-platform/documentation",
-            "version": "v4.2.12",
+            "version": "v4.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/documentation.git",
@@ -242,13 +242,13 @@
             ],
             "description": "API Platform documentation controller.",
             "support": {
-                "source": "https://github.com/api-platform/documentation/tree/v4.2.12"
+                "source": "https://github.com/api-platform/documentation/tree/v4.2.13"
             },
             "time": "2025-12-27T22:15:57+00:00"
         },
         {
             "name": "api-platform/hal",
-            "version": "v4.2.12",
+            "version": "v4.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/hal.git",
@@ -320,7 +320,7 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/hal/issues",
-                "source": "https://github.com/api-platform/hal/tree/v4.2.12"
+                "source": "https://github.com/api-platform/hal/tree/v4.2.13"
             },
             "time": "2025-12-27T22:15:57+00:00"
         },
@@ -493,7 +493,7 @@
         },
         {
             "name": "api-platform/json-api",
-            "version": "v4.2.12",
+            "version": "v4.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/json-api.git",
@@ -569,7 +569,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/json-api/tree/v4.2.12"
+                "source": "https://github.com/api-platform/json-api/tree/v4.2.13"
             },
             "time": "2025-12-27T22:15:57+00:00"
         },
@@ -924,16 +924,16 @@
         },
         {
             "name": "api-platform/serializer",
-            "version": "v4.2.11",
+            "version": "v4.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/serializer.git",
-                "reference": "a511d4ba522c3ebbd78c9e1f05e0918978d72a43"
+                "reference": "f29558c3e212f3b9f18f222240971ea0a8f09f4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/serializer/zipball/a511d4ba522c3ebbd78c9e1f05e0918978d72a43",
-                "reference": "a511d4ba522c3ebbd78c9e1f05e0918978d72a43",
+                "url": "https://api.github.com/repos/api-platform/serializer/zipball/f29558c3e212f3b9f18f222240971ea0a8f09f4c",
+                "reference": "f29558c3e212f3b9f18f222240971ea0a8f09f4c",
                 "shasum": ""
             },
             "require": {
@@ -953,7 +953,7 @@
                 "api-platform/openapi": "^4.2",
                 "doctrine/collections": "^2.1",
                 "phpspec/prophecy-phpunit": "^2.2",
-                "phpunit/phpunit": "11.5.x-dev",
+                "phpunit/phpunit": "^12.2",
                 "symfony/mercure-bundle": "*",
                 "symfony/type-info": "^7.3 || ^8.0",
                 "symfony/var-dumper": "^6.4 || ^7.0 || ^8.0",
@@ -1011,9 +1011,9 @@
                 "serializer"
             ],
             "support": {
-                "source": "https://github.com/api-platform/serializer/tree/v4.2.11"
+                "source": "https://github.com/api-platform/serializer/tree/v4.2.12"
             },
-            "time": "2025-12-18T14:36:58+00:00"
+            "time": "2026-01-09T09:40:33+00:00"
         },
         {
             "name": "api-platform/state",
