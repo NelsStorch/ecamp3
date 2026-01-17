@@ -56,6 +56,9 @@
       "campInvitations": {
         "title": "Inviter"
       },
+      "campListItem": {
+        "public": "publique"
+      },
       "campMembers": {
         "title": "Membres"
       },
@@ -130,6 +133,7 @@
           "description": " : Seules les personnes faisant partie de l'équipe peuvent consulter le programme et les données relatives à ce camp.",
           "title": "L'autorisation n'est pas activée"
         },
+        "publicCampUrl": "Lien publique du camp",
         "shared": {
           "description": " : Les personnes extérieures peuvent consulter et copier le programme, la liste des participants, la liste du matériel, les responsabilités et tout autre élément relatif à ce camp. Seules les personnes faisant partie de l'équipe peuvent modifier les données.",
           "title": "le camp est ouvert au public"
@@ -268,6 +272,7 @@
         "deactivate": "Désactiver",
         "delete": "Veux-tu vraiment supprimer la personne '{name}' ?",
         "inviteAgain": "Inviter de nouveau",
+        "leaveCamp": "Quitter le camp",
         "resendEmail": "Renvoyer l'email",
         "resentEmail": "Invitation envoyée",
         "title": "Modifier {user}"
@@ -278,7 +283,9 @@
       },
       "promptCollaboratorDeactivate": {
         "deactivate": "Désactiver",
-        "warningText": "Veux-tu désactiver '{name}' ?"
+        "leaveCamp": "Quitter le camp",
+        "warningText": "Veux-tu désactiver '{name}' ?",
+        "warningTextLeaveCamp": "Voulez-vous sortir du camp \"{camp}\" ?"
       }
     },
     "dashboard": {
@@ -335,7 +342,8 @@
       },
       "materialLists": {
         "materialsCount": "Pas des éléments | Un élément | {count} éléments",
-        "overview": "Aperçu général"
+        "overview": "Aperçu général",
+        "unassigned": "Pas assigné"
       },
       "materialTable": {
         "addNewItem": "Ajoute un nouvel élément",
@@ -381,7 +389,9 @@
         },
         "picassoConfig": {
           "orientation": "Mise en page",
-          "periods": "Période(s) du camp"
+          "landscape": "Paysage",
+          "periods": "Période(s) du camp",
+          "portrait": "Portrait"
         },
         "programConfig": {
           "dayOverview": "Aperçu des jours"
@@ -406,7 +416,18 @@
           "label": "Télécharger le PDF (mise en page #2)"
         },
         "generatePdfMixin": {
-          "error": "Une erreur est survenue. Essaie à nouveau, ou recharge la page."
+          "error": "Une erreur est survenue. Essaie à nouveau, ou recharge la page.",
+          "progress": {
+            "loadingData": "Chargement des dernières données du camp…",
+            "setupTranslationsAndFonts": "Chargement des polices et des textes statiques…",
+            "assembleContent": "Assemblage {type} ({content} sur {totalContents})…",
+            "layoutDocument": "Calcul de la mise en page du document…",
+            "layoutPage": "Calcul de la mise en page de la page {page}…",
+            "renderingPdfPage": "Rendu du pdf, page {page} sur {totalPages}…",
+            "downloadingPdf": "Téléchargement du pdf en cours…",
+            "done": "Terminé",
+            "failed": "Echec"
+          }
         },
         "printPreviewClient": {
           "previewError": "Une erreur est survenue. Veuillez réessayer avec des paramètres d'impression différents, ou recharger la page.",
@@ -424,7 +445,9 @@
           "SafetyConsiderations": "Considérations sur la sécurité",
           "Story": "Histoire",
           "Toc": "Table des matières"
-        }
+        },
+        "options": "Paramètres",
+        "pageNumbers": "Numéros de page"
       },
       "printNuxt": {
         "downloadNuxtPdfButton": {
@@ -543,6 +566,7 @@
       "close": "Fermer",
       "content": "Contenu",
       "continue": "Continuer",
+      "copy": "Copier",
       "create": "Créer",
       "delete": "Supprimer",
       "discard": "Rejeter",
@@ -778,6 +802,10 @@
           "download": "Télécharger l'aperçu",
           "title": "Aperçu général"
         },
+        "materialUnassigned": {
+          "excelTitle": "non-assigné",
+          "title": "Matériel non-assigné"
+        },
         "sideBarMaterialLists": {
           "title": "Listes de matériel"
         }
@@ -786,10 +814,10 @@
         "desktop": {
           "navTopbar": {
             "campIsLoading": "Le camp est en cours de chargement",
-            "checklist": "Check-list",
             "material": "Matériel",
             "program": "Programme",
-            "story": "Histoire"
+            "story": "Histoire",
+            "checklist": "Check-list"
           }
         },
         "mobile": {
