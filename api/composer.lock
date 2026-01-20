@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccac3775f6482306a44a57fbbc079e69",
+    "content-hash": "027730e12835328c6d79634735075d3b",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -2992,27 +2992,27 @@
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle.git",
-                "reference": "389b6d84d6fc754279eb52cbdd57f1952907dc0e"
+                "reference": "9a7b7ceb37d7801b2e300dbc1d1d8352c9db774a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/389b6d84d6fc754279eb52cbdd57f1952907dc0e",
-                "reference": "389b6d84d6fc754279eb52cbdd57f1952907dc0e",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/9a7b7ceb37d7801b2e300dbc1d1d8352c9db774a",
+                "reference": "9a7b7ceb37d7801b2e300dbc1d1d8352c9db774a",
                 "shasum": ""
             },
             "require": {
                 "friendsofsymfony/http-cache": "^3.0",
                 "php": "^8.1",
-                "symfony/dependency-injection": "^6.4 || ^7.0",
-                "symfony/expression-language": "^6.4 || ^7.0",
-                "symfony/framework-bundle": "^6.4 || ^7.0",
-                "symfony/http-foundation": "^6.4 || ^7.0",
-                "symfony/http-kernel": "^6.4 || ^7.0",
-                "symfony/security-bundle": "^6.4 || ^7.0"
+                "symfony/dependency-injection": "^6.4 || ^7.0 || ^8.0",
+                "symfony/expression-language": "^6.4 || ^7.0 || ^8.0",
+                "symfony/framework-bundle": "^6.4 || ^7.0 || ^8.0",
+                "symfony/http-foundation": "^6.4 || ^7.0 || ^8.0",
+                "symfony/http-kernel": "^6.4 || ^7.0 || ^8.0",
+                "symfony/security-bundle": "^6.4 || ^7.0 || ^8.0"
             },
             "conflict": {
                 "symfony/monolog-bridge": "<3.4.4",
@@ -3022,8 +3022,8 @@
                 "friendsofphp/php-cs-fixer": "^3.54",
                 "guzzlehttp/guzzle": "^7.2",
                 "jean-beru/fos-http-cache-cloudfront": "^1.1.1",
-                "matthiasnoback/symfony-config-test": "^4.3.0 || ^5.1",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.3.1 || ^5.0",
+                "matthiasnoback/symfony-config-test": "^5.2 || ^6.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^5.1 || ^6.2",
                 "mockery/mockery": "^1.6.9",
                 "monolog/monolog": "*",
                 "php-http/discovery": "^1.13",
@@ -3034,14 +3034,14 @@
                 "phpstan/phpstan": "^2",
                 "phpstan/phpstan-symfony": "^2",
                 "phpunit/phpunit": "^10.5",
-                "symfony/browser-kit": "^6.4 || ^7.0",
-                "symfony/console": "^6.4 || ^7.0",
-                "symfony/css-selector": "^6.4 || ^7.0",
-                "symfony/finder": "^6.4 || ^7.0",
-                "symfony/monolog-bundle": "^3.0",
-                "symfony/routing": "^6.4 || ^7.0",
-                "symfony/twig-bundle": "^6.4 || ^7.0",
-                "symfony/yaml": "^6.4 || ^7.0",
+                "symfony/browser-kit": "^6.4 || ^7.0 || ^8.0",
+                "symfony/console": "^6.4 || ^7.0 || ^8.0",
+                "symfony/css-selector": "^6.4 || ^7.0 || ^8.0",
+                "symfony/finder": "^6.4 || ^7.0 || ^8.0",
+                "symfony/monolog-bundle": "*",
+                "symfony/routing": "^6.4 || ^7.0 || ^8.0",
+                "symfony/twig-bundle": "^6.4 || ^7.0 || ^8.0",
+                "symfony/yaml": "^6.4 || ^7.0 || ^8.0",
                 "twig/twig": "^v3.8"
             },
             "suggest": {
@@ -3087,9 +3087,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.2.0"
+                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.3.0"
             },
-            "time": "2025-06-17T14:04:24+00:00"
+            "time": "2026-01-13T07:44:35+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
