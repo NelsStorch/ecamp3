@@ -105,9 +105,9 @@ class ChecklistNode extends ContentNode {
         // copy all checklist-items
         foreach ($prototype->checklistItems as $itemPrototype) {
             /** @var ChecklistItem $itemPrototype */
-            /** @var ChecklistItem $checklilstItem */
-            $checklilstItem = $entityMap->get($itemPrototype);
-            $this->addChecklistItem($checklilstItem);
+            /** @var ChecklistItem $checklistItem */
+            $checklistItem = $entityMap->get($itemPrototype);
+            $this->addChecklistItem($checklistItem);
         }
     }
 }
