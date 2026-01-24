@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use App\Entity\Checklist;
 use App\Entity\ChecklistItem;
 use App\Entity\ContentNode;
 use App\Repository\ChecklistNodeRepository;
@@ -102,13 +103,69 @@ class ChecklistNode extends ContentNode {
     public function copyFromPrototype($prototype, $entityMap): void {
         parent::copyFromPrototype($prototype, $entityMap);
 
-        // copy all checklist-items
-        foreach ($prototype->checklistItems as $itemPrototype) {
-            if ($this->getCamp()->getId() === $itemPrototype->getCamp()->getId()) {
+        // copy the connections to checklist items
+        if ($entityMap->belongsToTargetCamp($prototype)) {
+            foreach ($prototype->checklistItems as $itemPrototype) {
                 /** @var ChecklistItem $itemPrototype */
                 /** @var ChecklistItem $checklistItem */
                 $checklistItem = $entityMap->get($itemPrototype);
                 $this->addChecklistItem($checklistItem);
+            }
+        } else {
+            /** @var ChecklistItem[] $checklistItemsInCamp */
+            $checklistItemsInCamp = array_merge(...array_values(array_map(function (Checklist $checklist) {
+                return $checklist->getChecklistItems();
+            }, $entityMap->getTargetCamp()->getChecklists())));
+            foreach ($prototype->checklistItems as $itemPrototype) {
+                /** @var ChecklistItem $itemPrototype */
+                /** @var ChecklistItem $knownEquivalent */
+                // First, look up whether we already know a replacement
+                $knownEquivalent = $entityMap->get($itemPrototype);
+                if ($knownEquivalent !== $itemPrototype) {
+                    $this->addChecklistItem($knownEquivalent);
+
+                    continue;
+                }
+
+                // Calculate a score for how well each item in the target camp matches the prototype item
+                $matches = array_map(function (ChecklistItem $existingItem) use ($itemPrototype) {
+                    $score = 0;
+                    if ($existingItem->text !== $itemPrototype->text) {
+                        return $score;
+                    }
+                    ++$score;
+
+                    /** @var ChecklistItem $parent */
+                    $parent = $itemPrototype->getParent();
+
+                    /** @var ChecklistItem $existingParent */
+                    $existingParent = $existingItem->getParent();
+                    while (null !== $parent && null !== $existingParent && $score < 10) {
+                        if ($existingParent->text !== $parent->text) {
+                            return $score;
+                        }
+                        ++$score;
+
+                        /** @var ChecklistItem $parent */
+                        $parent = $parent->getParent();
+                    }
+                    if ($existingItem->checklist->name !== $itemPrototype->checklist->name) {
+                        return $score;
+                    }
+
+                    return $score + 1;
+                }, $checklistItemsInCamp);
+
+                // Use the checklist with the largest positive score, if any
+                $maxScore = max([0, ...$matches]);
+                $bestMatchIndex = array_find_key($matches, function ($match) use ($maxScore) {
+                    return $match === $maxScore;
+                });
+                if ($maxScore > 0 && null !== $bestMatchIndex) {
+                    $result = $checklistItemsInCamp[$bestMatchIndex];
+                    $entityMap->add($itemPrototype, $result);
+                    $this->addChecklistItem($result);
+                }
             }
         }
     }
