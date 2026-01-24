@@ -104,10 +104,12 @@ class ChecklistNode extends ContentNode {
 
         // copy all checklist-items
         foreach ($prototype->checklistItems as $itemPrototype) {
-            /** @var ChecklistItem $itemPrototype */
-            /** @var ChecklistItem $checklistItem */
-            $checklistItem = $entityMap->get($itemPrototype);
-            $this->addChecklistItem($checklistItem);
+            if ($this->getCamp()->getId() === $itemPrototype->getCamp()->getId()) {
+                /** @var ChecklistItem $itemPrototype */
+                /** @var ChecklistItem $checklistItem */
+                $checklistItem = $entityMap->get($itemPrototype);
+                $this->addChecklistItem($checklistItem);
+            }
         }
     }
 }
