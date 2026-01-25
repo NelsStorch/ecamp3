@@ -140,7 +140,7 @@ class ChecklistNode extends ContentNode {
 
                     /** @var ChecklistItem $existingParent */
                     $existingParent = $existingItem->getParent();
-                    while (null !== $parent && null !== $existingParent && $score < 10) {
+                    while (null !== $parent && null !== $existingParent && $score <= ChecklistItem::MAX_NESTING_DEPTH) {
                         if ($existingParent->text !== $parent->text) {
                             return $score;
                         }
