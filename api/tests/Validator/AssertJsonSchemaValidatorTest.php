@@ -80,7 +80,7 @@ class AssertJsonSchemaValidatorTest extends ConstraintValidatorTestCase {
     }
 
     protected function createValidator(): ConstraintValidatorInterface {
-        $this->requestStack = $this->createMock(RequestStack::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
 
         return new AssertJsonSchemaValidator($this->requestStack);
     }

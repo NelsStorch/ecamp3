@@ -8,6 +8,7 @@ use App\Entity\Languages;
 use App\Entity\Profile;
 use App\Entity\User;
 use App\Service\MailService;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -18,6 +19,7 @@ use Twig\Environment;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class MailServiceTest extends KernelTestCase {
     public const INVITE_MAIL = 'invite@mail.com';
     public const INVITE_KEY = 'key';

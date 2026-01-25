@@ -7,6 +7,7 @@ use ApiPlatform\Serializer\TagCollectorInterface;
 use App\HttpCache\ResponseTagger;
 use App\HttpCache\TagCollector;
 use App\Tests\HttpCache\Entity\Dummy;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -17,6 +18,7 @@ use function PHPUnit\Framework\once;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class TagCollectorTest extends TestCase {
     private TagCollectorInterface $tagCollector;
     private MockObject&ResponseTagger $responseTagger;

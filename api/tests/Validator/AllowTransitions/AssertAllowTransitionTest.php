@@ -30,8 +30,8 @@ class AssertAllowTransitionTest extends ConstraintValidatorTestCase {
     protected function setUp(): void {
         $this->before = new TestClass('2');
 
-        $this->requestStack = $this->createMock(RequestStack::class);
-        $request = $this->createMock(Request::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
+        $request = $this->createStub(Request::class);
         $request->attributes = new ParameterBag(['previous_data' => $this->before]);
         $this->requestStack->method('getCurrentRequest')->willReturn($request);
 

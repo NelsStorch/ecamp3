@@ -17,7 +17,7 @@ class CleanHTMLFilterTest extends KernelTestCase {
     public function setUp(): void {
         parent::setUp();
 
-        $purifierMock = $this->createMock(\HTMLPurifier::class);
+        $purifierMock = $this->createStub(\HTMLPurifier::class);
         $purifierMock->method('purify')->willReturnArgument(0);
 
         $this->inputFilter = new CleanHTMLFilter($purifierMock);

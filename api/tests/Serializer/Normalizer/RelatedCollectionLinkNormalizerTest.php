@@ -20,6 +20,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToManyAssociationMapping;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Rize\UriTemplate;
@@ -34,6 +35,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class RelatedCollectionLinkNormalizerTest extends TestCase {
     private RelatedCollectionLinkNormalizer $normalizer;
 
@@ -51,24 +53,24 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     private DateFilter|SearchFilterInterface|null $filterInstance = null;
 
     protected function setUp(): void {
-        $filterLocatorMock = $this->createMock(ServiceLocator::class);
+        $filterLocatorMock = $this->createStub(ServiceLocator::class);
         $filterLocatorMock->method('get')->willReturnCallback(function (string $name): mixed {
             return $this->filterInstance;
         });
 
         $this->decoratedMock = $this->createMock(NormalizerInterface::class);
-        $this->nameConverterMock = $this->createMock(NameConverterInterface::class);
+        $this->nameConverterMock = $this->createStub(NameConverterInterface::class);
         $this->uriTemplate = $this->createMock(UriTemplate::class);
         $this->uriTemplateFactory = $this->createMock(UriTemplateFactory::class);
-        $this->routerMock = $this->createMock(RouterInterface::class);
-        $this->iriConverterMock = $this->createMock(IriConverterInterface::class);
-        $this->managerRegistryMock = $this->createMock(ManagerRegistry::class);
-        $this->resourceMetadataCollectionFactoryMock = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
-        $this->propertyAccessor = $this->createMock(PropertyAccessorInterface::class);
+        $this->routerMock = $this->createStub(RouterInterface::class);
+        $this->iriConverterMock = $this->createStub(IriConverterInterface::class);
+        $this->managerRegistryMock = $this->createStub(ManagerRegistry::class);
+        $this->resourceMetadataCollectionFactoryMock = $this->createStub(ResourceMetadataCollectionFactoryInterface::class);
+        $this->propertyAccessor = $this->createStub(PropertyAccessorInterface::class);
 
         $this->iriConverterMock->method('getIriFromResource')->willReturn('/iri');
 
-        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->entityManager = $this->createStub(EntityManagerInterface::class);
 
         $this->normalizer = new RelatedCollectionLinkNormalizer(
             $this->decoratedMock,
@@ -82,7 +84,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
             $this->resourceMetadataCollectionFactoryMock,
             $this->propertyAccessor,
         );
-        $this->normalizer->setSerializer($this->createMock(SerializerInterface::class));
+        $this->normalizer->setSerializer($this->createStub(SerializerInterface::class));
     }
 
     public function testDelegatesSupportCheckToDecorated() {

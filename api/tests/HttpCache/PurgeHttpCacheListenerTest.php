@@ -36,6 +36,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use FOS\HttpCacheBundle\CacheManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\MakerBundle\Doctrine\StaticReflectionService;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
@@ -63,13 +64,13 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $this->cacheManagerProphecy = $this->createMock(CacheManager::class);
         $this->cacheManagerProphecy->method('flush')->willReturn(0);
 
-        $this->resourceClassResolverProphecy = $this->createMock(ResourceClassResolverInterface::class);
+        $this->resourceClassResolverProphecy = $this->createStub(ResourceClassResolverInterface::class);
         $this->resourceClassResolverProphecy->method('isResourceClass')->willReturn(true);
         $this->resourceClassResolverProphecy->method('getResourceClass')->willReturn(Dummy::class);
 
         $this->uowProphecy = $this->createMock(UnitOfWork::class);
 
-        $this->emProphecy = $this->createMock(EntityManagerInterface::class);
+        $this->emProphecy = $this->createStub(EntityManagerInterface::class);
         $this->emProphecy->method('getUnitOfWork')->willReturnCallback(fn () => $this->uowProphecy);
 
         $dummyClassMetadata = new ClassMetadata(Dummy::class);
@@ -78,7 +79,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $dummyClassMetadata->wakeupReflection(new StaticReflectionService());
         $this->emProphecy->method('getClassMetadata')->with(Dummy::class)->willReturn($dummyClassMetadata);
 
-        $this->propertyAccessorProphecy = $this->createMock(PropertyAccessorInterface::class);
+        $this->propertyAccessorProphecy = $this->createStub(PropertyAccessorInterface::class);
         $this->propertyAccessorProphecy
             ->method('isReadable')
             ->willReturnCallback(
@@ -93,7 +94,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         ;
         $this->propertyAccessorProphecy->method('getValue')->willReturn(null);
 
-        $this->metadataFactoryProphecy = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
+        $this->metadataFactoryProphecy = $this->createStub(ResourceMetadataCollectionFactoryInterface::class);
         $operation = new GetCollection()->withShortName('Dummy')->withClass(Dummy::class);
         $operation2 = new GetCollection()->withShortName('DummyAsSubresource')->withClass(Dummy::class);
         $this->metadataFactoryProphecy->method('create')->with(Dummy::class)->willReturn(new ResourceMetadataCollection('Dummy', [
@@ -105,7 +106,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
                 ])),
         ]));
 
-        $this->iriConverterProphecy = $this->createMock(IriConverterInterface::class);
+        $this->iriConverterProphecy = $this->createStub(IriConverterInterface::class);
         $this->iriConverterProphecy->method('getIriFromResource')->willReturnCallback(function (object|string $resource, ...$args) use ($operation, $operation2): ?string {
             if ($resource instanceof Dummy) {
                 if (isset($args[1]) && $args[1] === $operation) {
@@ -127,6 +128,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
      * only adjusted to passt the tests with adjusted logic from PurgeHttpCacheListener.
      * Other than that, kept changes to a minimum, in order to simplify copying changes to upstream test.
      */
+    #[AllowMockObjectsWithoutExpectations]
     public function testOnFlush(): void {
         $toInsert1 = new Dummy();
         $toInsert2 = new Dummy();
@@ -258,6 +260,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         assertThat($cacheManagerInvalidateTagsCalls, logicalAnd(containsEqual(['/dummies']), containsEqual(['/dummies/3']), containsEqual(['/dummies/4'])));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testPreUpdate(): void {
         $oldRelatedDummy = new RelatedDummy();
         $oldRelatedDummy->setId('1');
@@ -304,17 +307,17 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $resourceClassResolverProphecy = $this->createMock(ResourceClassResolverInterface::class);
         $resourceClassResolverProphecy->expects($this->atLeastOnce())->method('isResourceClass')->willReturn(true);
 
-        $emProphecy = $this->createMock(EntityManagerInterface::class);
+        $emProphecy = $this->createStub(EntityManagerInterface::class);
 
         $classMetadata = new ClassMetadata(Dummy::class);
         $classMetadata->mapManyToOne(['fieldName' => 'relatedDummy', 'targetEntity' => RelatedDummy::class, 'inversedBy' => 'dummies']);
-        $emProphecy->expects($this->once())->method('getClassMetadata')->with(Dummy::class)->willReturn($classMetadata);
+        $emProphecy->method('getClassMetadata')->with(Dummy::class)->willReturn($classMetadata);
 
         $changeSet = ['relatedDummy' => [$oldRelatedDummy, $newRelatedDummy]];
         $em = $emProphecy;
         $eventArgs = new PreUpdateEventArgs($dummy, $em, $changeSet);
 
-        $propertyAccessorProphecy = $this->createMock(PropertyAccessorInterface::class);
+        $propertyAccessorProphecy = $this->createStub(PropertyAccessorInterface::class);
 
         $listener = new PurgeHttpCacheListener(
             iriConverter: $iriConverterProphecy,
@@ -328,6 +331,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $listener->postFlush();
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNothingToPurge(): void {
         $dummyNoGetOperation = new DummyNoGetOperation();
         $dummyNoGetOperation->setId('1');
@@ -339,22 +343,22 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $cacheManagerProphecy->expects($this->never())->method('invalidateTags');
         $cacheManagerProphecy->method('flush')->willReturn(0);
 
-        $metadataFactoryProphecy = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
+        $metadataFactoryProphecy = $this->createStub(ResourceMetadataCollectionFactoryInterface::class);
 
-        $iriConverterProphecy = $this->createMock(IriConverterInterface::class);
+        $iriConverterProphecy = $this->createStub(IriConverterInterface::class);
 
-        $resourceClassResolverProphecy = $this->createMock(ResourceClassResolverInterface::class);
+        $resourceClassResolverProphecy = $this->createStub(ResourceClassResolverInterface::class);
 
-        $emProphecy = $this->createMock(EntityManagerInterface::class);
+        $emProphecy = $this->createStub(EntityManagerInterface::class);
 
         $classMetadata = new ClassMetadata(DummyNoGetOperation::class);
-        $emProphecy->expects($this->once())->method('getClassMetadata')->with(DummyNoGetOperation::class)->willReturn($classMetadata);
+        $emProphecy->method('getClassMetadata')->with(DummyNoGetOperation::class)->willReturn($classMetadata);
 
         $changeSet = ['lorem' => 'ipsum'];
         $em = $emProphecy;
         $eventArgs = new PreUpdateEventArgs($dummyNoGetOperation, $em, $changeSet);
 
-        $propertyAccessorProphecy = $this->createMock(PropertyAccessorInterface::class);
+        $propertyAccessorProphecy = $this->createStub(PropertyAccessorInterface::class);
 
         $listener = new PurgeHttpCacheListener(
             iriConverter: $iriConverterProphecy,
@@ -368,6 +372,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $listener->postFlush();
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNotAResourceClass(): void {
         $nonResource = new NotAResource('foo', 'bar');
 
@@ -411,6 +416,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $listener->onFlush();
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testPropertyIsNotAResourceClass(): void {
         $containNonResource = new ContainNonResource();
         $nonResource = new NotAResource('foo', 'bar');
@@ -535,6 +541,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $listener->postFlush();
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDeleteShouldPurgeSubresourceCollections(): void {
         // given
         $toDelete1 = new Dummy();
@@ -543,7 +550,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $relatedDummy->setId('100');
         $toDelete1->setRelatedDummy($relatedDummy);
 
-        $unitOfWork = $this->createMock(UnitOfWork::class);
+        $unitOfWork = $this->createStub(UnitOfWork::class);
         $unitOfWork->method('getScheduledEntityInsertions')->willReturn([]);
         $unitOfWork->method('getScheduledEntityUpdates')->willReturn([]);
         $unitOfWork->method('getScheduledEntityDeletions')->willReturn([$toDelete1]);
@@ -551,7 +558,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $unitOfWork->method('getScheduledCollectionDeletions')->willReturn([]);
         $unitOfWork->method('getEntityChangeSet')->willReturn([]);
 
-        $em = $this->createMock(EntityManagerInterface::class);
+        $em = $this->createStub(EntityManagerInterface::class);
         $em->method('getUnitOfWork')->willReturn($unitOfWork);
 
         // then
@@ -584,6 +591,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $listener->postFlush();
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testUpdateShouldPurgeSubresourceCollections(): void {
         // given
         $toUpdate1 = new Dummy();
@@ -595,7 +603,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $relatedDummyOld = new RelatedDummy();
         $relatedDummyOld->setId('99');
 
-        $this->uowProphecy = $this->createMock(UnitOfWork::class);
+        $this->uowProphecy = $this->createStub(UnitOfWork::class);
         $this->uowProphecy->method('getScheduledEntityInsertions')->willReturn([]);
         $this->uowProphecy->method('getScheduledEntityUpdates')->willReturn([$toUpdate1]);
         $this->uowProphecy->method('getScheduledEntityDeletions')->willReturn([]);

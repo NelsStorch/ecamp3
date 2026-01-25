@@ -22,10 +22,10 @@ class UserActivateProcessorTest extends TestCase {
     protected function setUp(): void {
         $this->user = new User();
 
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->processor = new UserActivateProcessor(
             $decoratedProcessor,
-            $this->createMock(ClaimInvitationService::class),
+            $this->createStub(ClaimInvitationService::class),
         );
     }
 

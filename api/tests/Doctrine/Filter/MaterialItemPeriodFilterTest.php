@@ -13,12 +13,14 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class MaterialItemPeriodFilterTest extends TestCase {
     private ManagerRegistry|MockObject $managerRegistryMock;
     private MockObject|QueryBuilder $queryBuilderMock;
@@ -27,12 +29,12 @@ class MaterialItemPeriodFilterTest extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->managerRegistryMock = $this->createMock(ManagerRegistry::class);
-        $materialNodeRepositoryMock = $this->createMock(EntityRepository::class);
-        $materialNodeQueryBuilderMock = $this->createMock(QueryBuilder::class);
+        $this->managerRegistryMock = $this->createStub(ManagerRegistry::class);
+        $materialNodeRepositoryMock = $this->createStub(EntityRepository::class);
+        $materialNodeQueryBuilderMock = $this->createStub(QueryBuilder::class);
         $this->queryBuilderMock = $this->createMock(QueryBuilder::class);
-        $entityManagerMock = $this->createMock(EntityManager::class);
-        $this->queryNameGeneratorInterfaceMock = $this->createMock(QueryNameGeneratorInterface::class);
+        $entityManagerMock = $this->createStub(EntityManager::class);
+        $this->queryNameGeneratorInterfaceMock = $this->createStub(QueryNameGeneratorInterface::class);
         $this->iriConverterMock = $this->createMock(IriConverterInterface::class);
 
         $this->managerRegistryMock

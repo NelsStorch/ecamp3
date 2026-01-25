@@ -3,6 +3,7 @@
 namespace App\Tests\Serializer\Normalizer;
 
 use App\Serializer\Normalizer\CollectionItemsNormalizer;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -10,6 +11,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class CollectionItemsNormalizerTest extends TestCase {
     private CollectionItemsNormalizer $normalizer;
 

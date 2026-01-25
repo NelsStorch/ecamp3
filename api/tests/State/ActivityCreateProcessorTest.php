@@ -22,13 +22,13 @@ class ActivityCreateProcessorTest extends TestCase {
     private Activity $activity;
 
     protected function setUp(): void {
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
-        $em = $this->createMock(EntityManagerInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
+        $em = $this->createStub(EntityManagerInterface::class);
 
         $this->activity = new Activity();
         $this->activity->category = new Category();
 
-        $camp = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
         $this->activity->category->camp = $camp;
 
         $contentType = new ContentType();
@@ -40,7 +40,7 @@ class ActivityCreateProcessorTest extends TestCase {
         $this->activity->category->setRootContentNode($categoryRoot);
 
         // EntityManager
-        $repository = $this->createMock(EntityRepository::class);
+        $repository = $this->createStub(EntityRepository::class);
         $em->method('getRepository')->willReturn($repository);
         $repository->method('findOneBy')->willReturn($contentType);
 
