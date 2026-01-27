@@ -8,6 +8,7 @@ export default {
 
     successHandler: { type: Function, required: false, default: null },
   },
+  emits: ['opened', 'closed', 'submit', 'success', 'error'],
   data() {
     return {
       // specifies entity properties available in the form
