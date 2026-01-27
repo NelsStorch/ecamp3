@@ -21,6 +21,7 @@
     persistent-placeholder
     v-bind="$attrs"
     :readonly="readonly"
+    class="e-day-responsible-dropdown rounded-0"
     :class="{ 'e-day-responsible--readonly': readonly }"
     @input="onInput"
   >
@@ -188,16 +189,39 @@ export default {
 }
 
 .e-day-responsible--readonly {
-  &:deep(.v-input__append-inner) {
-    display: none;
+  :deep(.v-field__input) {
+    justify-content: center !important;
   }
-
-  &:deep(.v-select__selections) {
-    justify-content: center;
+  :deep(.v-field__overlay) {
+    opacity: 0;
   }
-  &:deep(.v-chip--clickable) {
+  &:deep(.v-field),
+  &:deep(.v-field__input) {
     cursor: auto;
   }
+}
+
+.e-day-responsible-dropdown :deep(.v-field__input) {
+  justify-content: start;
+}
+
+.e-day-responsible-dropdown :deep(.v-field) {
+  &:not(:hover) .v-field__overlay {
+    opacity: 0;
+  }
+  .v-field__append-inner {
+    align-items: baseline;
+  }
+  --v-input-control-height: auto;
+  --v-field-padding-start: 2px;
+  --v-field-input-padding-top: 2px;
+  --v-field-input-padding-bottom: 2px;
+  --v-field-padding-end: 2px;
+}
+
+.e-day-responsible-dropdown :deep(.v-field--appended) {
+  -webkit-padding-end: 0;
+  padding-inline-end: 0;
 }
 
 :deep(.v-select__selections) input {

@@ -499,7 +499,7 @@ export default {
   letter-spacing: -0.1px;
 }
 
-:deep(.v-calendar-daily_head-day-label) {
+.e-picasso :deep(.v-calendar-daily_head-day-label) {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -529,12 +529,13 @@ export default {
     align-content: space-between;
   }
 
-  .v-select__selections {
+  .v-field__input {
     gap: 4px;
     padding: 2px;
     @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
       padding: 4px 2px;
     }
+    align-items: baseline;
     width: 100%;
     min-width: initial;
 
