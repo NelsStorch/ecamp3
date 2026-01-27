@@ -109,7 +109,7 @@
         class="my-4 ec-login-button"
       >
         <v-progress-circular v-if="authenticationInProgress" indeterminate size="24" />
-        <v-icon size="large" v-else>$ecamp</v-icon>
+        <v-icon v-else size="large">$ecamp</v-icon>
         <v-spacer />
         <span>{{ $t('views.auth.login.provider.ecamp') }}</span>
         <v-spacer />
