@@ -194,7 +194,7 @@ export default {
       )
     },
     pageSizes() {
-      return ['A5', 'A4', 'A3'].map((size) => ({
+      return ['A5', 'A4'].map((size) => ({
         value: size,
         text: this.$tc(`components.print.printConfigurator.fontSizes.${size}`),
       }))

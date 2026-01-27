@@ -53,8 +53,6 @@ export default {
     },
     fontSizeScalingFactor() {
       switch (this.config.options?.pageSize) {
-        case 'A3':
-          return 5
         case 'A5':
           return 2.5
         default:
