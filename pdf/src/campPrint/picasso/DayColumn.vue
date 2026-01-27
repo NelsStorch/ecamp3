@@ -17,6 +17,7 @@
           ...borderRadiusStyles[scheduleEntry.id],
         }"
         :percentage-height="positionStyles[scheduleEntry.id].percentageHeight"
+        :config="config"
       />
     </View>
   </View>
@@ -41,6 +42,7 @@ export default {
     times: { type: Array, required: true },
     day: { type: Object, required: true },
     scheduleEntries: { type: Array, default: () => [] },
+    config: { type: Object, required: true },
   },
   computed: {
     relevantScheduleEntries() {

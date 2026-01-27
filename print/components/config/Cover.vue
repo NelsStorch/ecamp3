@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-break-after-page tw-text-center">
+  <div class="tw-break-after-page tw-text-center" :class="pageSize">
     <p class="tw-font-medium tw-mt-20 tw-text-3xl">
       {{ camp.organizer }}
     </p>
@@ -22,6 +22,7 @@ export default {
     camp: { type: Object, required: true },
     config: { type: Object, required: true },
     index: { type: Number, required: true },
+    pageSize: { type: String, default: 'a4' },
   },
 }
 </script>

@@ -11,6 +11,7 @@
       :landscape="landscape"
       :days="pageDays"
       :times="timesList"
+      :page-size="pageSize"
     />
   </div>
 </template>
@@ -22,6 +23,7 @@ const props = defineProps({
   landscape: { type: Boolean, required: true },
   filter: { type: Object, default: () => ({}) },
   index: { type: Number, required: true },
+  pageSize: { type: String, default: 'a4' },
 })
 
 const { error } = await useAsyncData(

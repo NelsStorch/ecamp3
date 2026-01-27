@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-break-after-page">
+  <div class="tw-break-after-page" :class="pageSize">
     <div>
       <h1 class="tw-text-center tw-font-semibold tw-mb-6">
         {{ $t('print.program.title') }}: {{ period.description }}
@@ -28,6 +28,7 @@ const props = defineProps({
   showDailySummary: { type: Boolean, required: true },
   showActivities: { type: Boolean, required: true },
   index: { type: Number, required: true },
+  pageSize: { type: String, default: 'a4' },
 })
 
 const { data: days, error } = await useAsyncData(

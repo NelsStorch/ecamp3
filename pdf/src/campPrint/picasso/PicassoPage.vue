@@ -1,5 +1,5 @@
 <template>
-  <Page size="A4" :orientation="orientation" class="page">
+  <Page :size="config.options.pageSize || 'A4'" :orientation="orientation" class="page">
     <slot></slot>
     <TocSectionStartMarker :id="`${id}-${period.id}`" />
     <View class="picasso-title-container">
@@ -33,6 +33,7 @@
         :day="day"
         :schedule-entries="scheduleEntries"
         :class="{ 'picasso-day-column-left-border': day.id === days[0].id }"
+        :config="config"
       />
       <TimeColumn :times="times.slice(0, times.length - 1)" align="left" />
     </View>

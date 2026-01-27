@@ -1,5 +1,5 @@
 <template>
-  <Page size="A4" class="page">
+  <Page :size="config.options.pageSize || 'A4'" class="page">
     <slot></slot>
     <TocSectionStartMarker :id="id" />
     <Text :id="id" :bookmark="$tc('print.toc.title')" class="toc-title">{{

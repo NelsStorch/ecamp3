@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-break-after-page">
+  <div class="tw-break-after-page" :class="pageSize">
     <h1 :id="`content_${index}_toc`" class="tw-text-2xl tw-font-bold">
       {{ $t('print.toc.title') }}
     </h1>
@@ -25,6 +25,7 @@ export default {
     camp: { type: Object, required: true },
     config: { type: Object, required: true },
     index: { type: Number, required: true },
+    pageSize: { type: String, default: 'a4' },
   },
 }
 </script>

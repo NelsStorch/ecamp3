@@ -107,6 +107,10 @@ describe('repairConfig', () => {
       },
     },
   ]
+  const defaultOptions = {
+    pageNumbers: false,
+    pageSize: 'A4',
+  }
   const args = [camp, availableLocales, 'en', componentRepairers, defaultContents]
   const multiPeriodArgs = [
     multiPeriodCamp,
@@ -137,7 +141,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -157,7 +161,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -178,7 +182,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -198,7 +202,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'de-CH-scout',
     }
 
@@ -219,7 +223,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'de-CH-scout',
     })
   })
@@ -239,7 +243,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'definitely-not-a-supported-language',
     }
 
@@ -267,7 +271,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'de-CH-scout',
     })
   })
@@ -287,7 +291,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'definitely-not-a-supported-language',
     }
 
@@ -315,7 +319,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -335,7 +339,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'foobar',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -356,7 +360,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'foobar',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -376,7 +380,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: '',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -397,8 +401,319 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
+    })
+  })
+
+  test('adds missing options', async () => {
+    // given
+    const config = {
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      language: 'de-CH-scout',
+    }
+
+    // when
+    const result = repairConfig(config, ...args)
+
+    // then
+    expect(result).toEqual({
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: defaultOptions,
+      language: 'de-CH-scout',
+    })
+  })
+
+  test('adds missing pageNumbers option', async () => {
+    // given
+    const config = {
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageSize: 'A4',
+      },
+      language: 'de-CH-scout',
+    }
+
+    // when
+    const result = repairConfig(config, ...args)
+
+    // then
+    expect(result).toEqual({
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: defaultOptions,
+      language: 'de-CH-scout',
+    })
+  })
+
+  test('allows enabling pageNumbers', async () => {
+    // given
+    const config = {
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: true,
+        pageSize: 'A4',
+      },
+      language: 'de-CH-scout',
+    }
+
+    // when
+    const result = repairConfig(config, ...args)
+
+    // then
+    expect(result).toEqual({
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: true,
+        pageSize: 'A4',
+      },
+      language: 'de-CH-scout',
+    })
+  })
+
+  test('allows disabling pageNumbers', async () => {
+    // given
+    const config = {
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: false,
+        pageSize: 'A4',
+      },
+      language: 'de-CH-scout',
+    }
+
+    // when
+    const result = repairConfig(config, ...args)
+
+    // then
+    expect(result).toEqual({
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: false,
+        pageSize: 'A4',
+      },
+      language: 'de-CH-scout',
+    })
+  })
+
+  test('adds missing pageSize option', async () => {
+    // given
+    const config = {
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: false,
+      },
+      language: 'de-CH-scout',
+    }
+
+    // when
+    const result = repairConfig(config, ...args)
+
+    // then
+    expect(result).toEqual({
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: defaultOptions,
+      language: 'de-CH-scout',
+    })
+  })
+
+  test.each(['A5', 'A4'])('allows pageSize %p', async (pageSize) => {
+    // given
+    const config = {
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: false,
+        pageSize,
+      },
+      language: 'de-CH-scout',
+    }
+
+    // when
+    const result = repairConfig(config, ...args)
+
+    // then
+    expect(result).toEqual({
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: false,
+        pageSize,
+      },
+      language: 'de-CH-scout',
+    })
+  })
+
+  test('repairs invalid pageSize', async () => {
+    // given
+    const config = {
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: {
+        pageNumbers: false,
+        pageSize: 'tiny',
+      },
+      language: 'de-CH-scout',
+    }
+
+    // when
+    const result = repairConfig(config, ...args)
+
+    // then
+    expect(result).toEqual({
+      camp: '/camps/1a2b3c4d',
+      contents: [
+        {
+          type: 'Picasso',
+          options: {
+            periods: ['/periods/1a2b3c4d'],
+            orientation: 'L',
+            filter: defaultFilter,
+          },
+        },
+      ],
+      documentName: 'test camp',
+      options: defaultOptions,
+      language: 'de-CH-scout',
     })
   })
 
@@ -417,7 +732,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -438,7 +753,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -449,7 +764,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: {},
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -470,7 +785,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -481,7 +796,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: null,
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -502,7 +817,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -513,7 +828,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: [],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -525,7 +840,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: [],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -541,7 +856,7 @@ describe('repairConfig', () => {
         },
       ],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     }
 
@@ -553,7 +868,7 @@ describe('repairConfig', () => {
       camp: '/camps/1a2b3c4d',
       contents: [],
       documentName: 'test camp',
-      options: { pageNumbers: false },
+      options: defaultOptions,
       language: 'en-GB',
     })
   })
@@ -570,7 +885,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -587,7 +902,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -605,7 +920,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -622,7 +937,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -639,7 +954,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -660,7 +975,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -680,7 +995,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -701,7 +1016,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -721,7 +1036,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -742,7 +1057,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -758,7 +1073,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -775,7 +1090,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -791,7 +1106,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -812,7 +1127,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -832,7 +1147,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -853,7 +1168,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -873,7 +1188,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -894,7 +1209,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -911,7 +1226,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -932,7 +1247,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -951,7 +1266,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -972,7 +1287,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -992,7 +1307,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1013,7 +1328,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1033,7 +1348,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1054,7 +1369,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1074,7 +1389,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1095,7 +1410,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1115,7 +1430,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1136,7 +1451,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1164,7 +1479,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1192,7 +1507,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1211,7 +1526,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1232,7 +1547,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1258,7 +1573,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1279,7 +1594,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1306,7 +1621,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1327,7 +1642,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1353,7 +1668,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1374,7 +1689,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1401,7 +1716,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1422,7 +1737,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1448,7 +1763,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1469,7 +1784,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1496,7 +1811,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1517,7 +1832,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1543,7 +1858,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1564,7 +1879,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1591,7 +1906,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1612,7 +1927,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1638,7 +1953,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1659,7 +1974,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1706,7 +2021,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
@@ -1732,7 +2047,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -1753,7 +2068,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -1771,7 +2086,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1792,7 +2107,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1808,7 +2123,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1825,7 +2140,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1845,7 +2160,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1866,7 +2181,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1886,7 +2201,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1907,7 +2222,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1927,7 +2242,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -1948,7 +2263,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -1976,7 +2291,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2004,7 +2319,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2023,7 +2338,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2044,7 +2359,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2070,7 +2385,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2091,7 +2406,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2118,7 +2433,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2139,7 +2454,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2165,7 +2480,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2186,7 +2501,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2213,7 +2528,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2234,7 +2549,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2260,7 +2575,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2281,7 +2596,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2308,7 +2623,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2329,7 +2644,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2355,7 +2670,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2376,7 +2691,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2403,7 +2718,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2424,7 +2739,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2450,7 +2765,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2471,7 +2786,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2518,7 +2833,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
@@ -2544,7 +2859,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2565,7 +2880,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2583,7 +2898,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -2604,7 +2919,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -2624,7 +2939,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -2645,7 +2960,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -2665,7 +2980,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -2686,7 +3001,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -2706,7 +3021,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -2727,7 +3042,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -2747,7 +3062,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -2768,7 +3083,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -2796,7 +3111,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2824,7 +3139,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2843,7 +3158,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2864,7 +3179,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2890,7 +3205,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2911,7 +3226,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2938,7 +3253,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -2959,7 +3274,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -2985,7 +3300,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3006,7 +3321,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3033,7 +3348,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3054,7 +3369,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3080,7 +3395,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3101,7 +3416,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3128,7 +3443,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3149,7 +3464,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3175,7 +3490,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3196,7 +3511,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3223,7 +3538,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3244,7 +3559,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3270,7 +3585,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3291,7 +3606,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3338,7 +3653,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
@@ -3364,7 +3679,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3385,7 +3700,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3404,7 +3719,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -3421,7 +3736,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -3438,7 +3753,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -3455,7 +3770,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -3471,7 +3786,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -3488,7 +3803,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -3504,7 +3819,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -3524,7 +3839,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -3543,7 +3858,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       }
 
@@ -3563,7 +3878,7 @@ describe('repairConfig', () => {
           },
         ],
         documentName: 'test camp',
-        options: { pageNumbers: false },
+        options: defaultOptions,
         language: 'en-GB',
       })
     })
@@ -3590,7 +3905,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3617,7 +3932,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3635,7 +3950,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3655,7 +3970,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3680,7 +3995,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3700,7 +4015,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3726,7 +4041,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3746,7 +4061,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3771,7 +4086,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3791,7 +4106,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3817,7 +4132,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3837,7 +4152,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3862,7 +4177,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3882,7 +4197,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3908,7 +4223,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3928,7 +4243,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3953,7 +4268,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -3973,7 +4288,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -3999,7 +4314,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -4019,7 +4334,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -4044,7 +4359,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -4064,7 +4379,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })
@@ -4109,7 +4424,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
@@ -4134,7 +4449,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         }
 
@@ -4154,7 +4469,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: defaultOptions,
           language: 'en-GB',
         })
       })

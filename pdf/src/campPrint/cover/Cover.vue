@@ -1,5 +1,10 @@
 <template>
-  <Page :id="id" size="A4" :bookmark="$tc('print.cover.title')" class="page">
+  <Page
+    :id="id"
+    :size="config.options.pageSize || 'A4'"
+    :bookmark="$tc('print.cover.title')"
+    class="page"
+  >
     <TocSectionStartMarker :id="id" />
     <View class="cover-camp-wrapper">
       <Text v-if="config.camp.organizer" class="cover-camp-organizer cover-center">

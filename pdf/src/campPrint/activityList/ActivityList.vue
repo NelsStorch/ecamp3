@@ -1,5 +1,5 @@
 <template>
-  <Page :id="id" class="page">
+  <Page :id="id" class="page" :size="config.options.pageSize || 'A4'">
     <slot></slot>
     <TocSectionStartMarker :id="id" />
     <ActivityListPeriod

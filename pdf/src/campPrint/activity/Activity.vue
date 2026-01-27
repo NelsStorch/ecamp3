@@ -1,5 +1,5 @@
 <template>
-  <Page :id="id" class="page activity-page">
+  <Page :id="id" class="page activity-page" :size="config.options.pageSize || 'A4'">
     <slot></slot>
     <TocSectionStartMarker :id="`${id}-${scheduleEntry.id}`" />
     <ScheduleEntry :id="`${id}-${scheduleEntry.id}`" :schedule-entry="scheduleEntry" />
