@@ -71,6 +71,9 @@ Displays a field as a picker (can be used with v-model)
 import { debounce } from 'lodash-es'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 
+/**
+ * TODO: rename modelValue -> serializedValue, fieldValue -> stringValue, localValue -> internalValue to be more consistent with EParseField
+ */
 export default {
   name: 'BasePicker',
   inheritAttr: false,
