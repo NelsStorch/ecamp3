@@ -6,7 +6,7 @@
       :items="periods"
       :label="$t('print.config.periods')"
       multiple
-      variant="plain"
+      :variant="periods.length === 1 ? 'plain' : 'underlined'"
       :readonly="periods.length === 1"
       @update:model-value="$emit('input')"
     />

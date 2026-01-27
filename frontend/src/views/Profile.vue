@@ -18,8 +18,7 @@
               class="e-profile--email"
               :model-value="profile.email"
               path="email"
-              outlined
-              variant="plain"
+              variant="outlined"
               readonly
               required
             >

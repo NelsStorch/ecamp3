@@ -43,7 +43,7 @@
               <api-richtext
                 class="e-story-day"
                 :class="{ 'e-story-day--textmode': !editMode }"
-                :outlined="false"
+                :variant="editMode ? 'underlined' : 'plain'"
                 :solo="false"
                 auto-grow
                 dense

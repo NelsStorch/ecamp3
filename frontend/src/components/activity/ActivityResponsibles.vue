@@ -6,8 +6,7 @@
     :loading="isSaving || isLoading ? 'secondary' : false"
     path="responsible"
     :error-messages="errorMessages"
-    outlined
-    variant="plain"
+    variant="outlined"
     dense
     multiple
     chips

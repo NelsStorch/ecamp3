@@ -6,7 +6,7 @@
       path="optionsScheduleEntry"
       :items="scheduleEntries"
       :label="$t('components.print.config.activityConfig.activity')"
-      variant="plain"
+      variant="underlined"
       @update:model-value="$emit('input')"
     />
     <v-skeleton-loader v-else type="image" height="56" />

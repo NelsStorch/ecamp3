@@ -7,8 +7,7 @@
       item-value="value"
       :items="items"
       multiple
-      variant="plain"
-      outlined
+      variant="outlined"
       persistent-placeholder
       :error-messages="errorMessages"
       :loading="savingRequestCount > 0"

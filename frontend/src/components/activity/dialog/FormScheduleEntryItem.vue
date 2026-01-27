@@ -7,7 +7,7 @@
       :vee-id="'startDate' + startUTC"
       vee-rules="required"
       :allowed-dates="dateIsInAnyPeriod"
-      variant="plain"
+      variant="underlined"
       class="area-startdate date-picker"
       required
     />
@@ -17,7 +17,7 @@
         v-model="localScheduleEntry.start"
         path="startDatetime"
         vee-rules="required"
-        variant="plain"
+        variant="underlined"
         required
         value-format="YYYY-MM-DDTHH:mm:ssZ"
         :items="startTimeList"
@@ -37,7 +37,7 @@
         path="endDatetime"
         :vee-rules="endTimeValidation"
         :min="minEndTime"
-        variant="plain"
+        variant="underlined"
         required
         :items="endTimeList"
         :menu-props="{
@@ -61,7 +61,7 @@
       path="endDate"
       :min="localScheduleEntry.start"
       :allowed-dates="dateIsInSelectedPeriod"
-      variant="plain"
+      variant="underlined"
       :class="{ 'hide-control': $vuetify.display.mdAndUp && isSameDay }"
       class="area-enddate date-picker"
       required
@@ -70,7 +70,7 @@
       <e-text-field
         readonly
         path="duration"
-        variant="plain"
+        variant="underlined"
         class="duration"
         :model-value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
       />

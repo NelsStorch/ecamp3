@@ -51,6 +51,7 @@ export default {
     return VField.setup(
       reactive({
         ...ctx.attrs,
+        ...toRefs(props),
         loading: toRef(() => props.loading),
       }),
       { ...ctx, slots: { default: tiptap, ...ctx.slots } }
