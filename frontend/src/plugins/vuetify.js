@@ -18,8 +18,6 @@ import { useI18n } from 'vue-i18n'
 import DayJsAdapter from '@date-io/dayjs'
 import en from 'dayjs/locale/en'
 
-import { VCalendar } from 'vuetify/labs/VCalendar'
-
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
@@ -142,9 +140,6 @@ class VuetifyLoaderPlugin {
         VField: {
           color: 'primary',
         },
-      },
-      components: {
-        VCalendar,
       },
     }
 
