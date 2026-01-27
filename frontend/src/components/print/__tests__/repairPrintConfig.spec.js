@@ -2021,7 +2021,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
@@ -2833,7 +2833,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
@@ -3653,7 +3653,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
@@ -4424,7 +4424,7 @@ describe('repairConfig', () => {
             },
           ],
           documentName: 'test camp',
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           language: 'en-GB',
         })
       })
