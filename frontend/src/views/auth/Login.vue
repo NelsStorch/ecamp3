@@ -39,7 +39,14 @@
         </v-btn>
       </div>
     </v-alert>
-    <v-alert v-if="error" variant="tonal" border="start" type="error" icon="mdi-alert">
+    <v-alert
+      v-if="error"
+      class="mt-2 mb-4"
+      variant="tonal"
+      border="start"
+      type="error"
+      icon="mdi-alert"
+    >
       <span class="d-block">{{ error }}</span>
       <span class="d-block mt-1"
         >{{ $t('views.auth.login.passwordForgotten') }}
