@@ -13,7 +13,6 @@ Displays a field as a e-textarea + write access via API wrapper
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       :variant="variant"
-      :filled="filled"
       :dense="dense"
       @input="wrapper.on.input"
       @blur="wrapper.on.blur"

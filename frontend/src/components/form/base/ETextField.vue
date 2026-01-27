@@ -17,7 +17,6 @@
       :label="labelOrEntityFieldLabel"
       :type="type"
       v-bind="$attrs"
-      :filled="filled"
       :required="required"
       :hide-details="hideDetails"
       @blur="onBlur($event, handleReset)"

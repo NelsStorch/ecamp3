@@ -8,7 +8,6 @@
     <component
       :is="inputComponent"
       v-bind="$attrs"
-      :filled="filled"
       :hide-details="hideDetails"
       :error-messages="veeErrors.concat(errorMessages)"
       :label.prop="labelOrEntityFieldLabel"

@@ -11,7 +11,6 @@
       :class="[inputClass]"
       :custom-filter="tokensFilter"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
-      :filled="filled"
       :hide-details="hideDetails"
       :label="labelOrEntityFieldLabel"
       :menu-icon="readonly ? null : '$dropdown'"

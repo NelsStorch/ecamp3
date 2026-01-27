@@ -6,7 +6,7 @@
       :items="periods"
       path="periods"
       multiple
-      :filled="false"
+      variant="plain"
       :readonly="periods.length === 1"
       @update:model-value="$emit('input')"
     />
@@ -15,7 +15,7 @@
       :label="$t('components.print.config.picassoConfig.orientation')"
       :items="orientations"
       path="orientation"
-      :filled="false"
+      variant="plain"
       @update:model-value="$emit('input')"
     />
     <div class="flex-grow-1"></div>

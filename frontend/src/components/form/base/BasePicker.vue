@@ -22,7 +22,6 @@ Displays a field as a picker (can be used with v-model)
           v-model="fieldValue"
           :readonly="readonly"
           :disabled="disabled"
-          :filled="filled"
           :hide-details="hideDetails"
           :input-class="inputClass"
           :path="path"

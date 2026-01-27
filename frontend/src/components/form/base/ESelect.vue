@@ -10,7 +10,6 @@
     <v-select
       :class="[inputClass]"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
-      :filled="filled"
       :hide-details="hideDetails"
       :label="labelOrEntityFieldLabel"
       v-bind="$attrs"

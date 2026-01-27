@@ -88,13 +88,13 @@
           <e-text-field
             v-model="localCollaboration.abbreviation"
             path="abbreviation"
-            :filled="false"
+            variant="plain"
             vee-rules="oneEmojiOrTwoCharacters"
           />
 
           <e-color-picker
             v-model="localCollaboration.color"
-            :filled="false"
+            variant="plain"
             path="color"
           />
         </div>

@@ -13,7 +13,7 @@
     path="dayResponsibles"
     :error-messages="errorMessages"
     :menu-props="{ closeOnClick: true, closeOnContentClick: true, overflowY: true }"
-    :filled="false"
+    variant="plain"
     multiple
     chips
     single-line

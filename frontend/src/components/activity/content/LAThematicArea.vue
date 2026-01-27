@@ -7,7 +7,7 @@
       item-value="value"
       :items="items"
       multiple
-      :filled="false"
+      variant="plain"
       outlined
       persistent-placeholder
       :error-messages="errorMessages"

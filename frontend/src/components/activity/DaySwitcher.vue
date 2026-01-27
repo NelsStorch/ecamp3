@@ -20,7 +20,7 @@
     :items="items"
     density="comfortable"
     item-value="number"
-    :filled="false"
+    variant="plain"
     return-object
     :menu-props="{
       offsetY: true,

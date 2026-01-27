@@ -14,7 +14,6 @@ Displays a field as a e-number-field + write access via API wrapper
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       :variant="variant"
-      :filled="filled"
       :dense="dense"
       @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"

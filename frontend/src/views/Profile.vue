@@ -19,7 +19,7 @@
               :model-value="profile.email"
               path="email"
               outlined
-              :filled="false"
+              variant="plain"
               readonly
               required
             >

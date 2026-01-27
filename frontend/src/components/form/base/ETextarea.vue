@@ -8,7 +8,6 @@
     <v-tiptap-editor
       :class="[inputClass]"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
-      :filled="filled"
       :hide-details="hideDetails"
       :label="labelOrEntityFieldLabel"
       :with-extensions="false"

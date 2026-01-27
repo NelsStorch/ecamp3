@@ -7,7 +7,7 @@
     path="responsible"
     :error-messages="errorMessages"
     outlined
-    :filled="false"
+    variant="plain"
     dense
     multiple
     chips

@@ -27,7 +27,6 @@ Displays a field as a color picker (can be used with v-model)
             :model-value="pickerValue"
             :vee-id="veeId"
             :vee-rules="veeRules"
-            :filled="filled"
             :hide-details="hideDetails"
             :input-class="inputClass"
             :required="required"
