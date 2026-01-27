@@ -18,22 +18,20 @@
       readonly
       aria-readonly="true"
       aria-describedby="readonly"
-      :items="Object.keys(items)"
+      :items="items"
       :hint="$t('components.collaborator.collaboratorForm.roleHint')"
       persistent-hint
-      item-value="key"
-      item-text="role"
       vee-rules="required"
     >
-      <template #selection="{ item: { value: itemKey } }">
-        <span
-          >{{ items[itemKey].role }} &middot;
-          <span class="text-grey"
-            ><template v-for="icon in items[itemKey].icons" :key="icon"
-              ><v-icon size="x-small">{{ icon }}</v-icon
-              >&thinsp;</template
-            ></span
-          >
+      <template #selection="{ item }">
+        <span>
+          {{ item.title }} &middot;
+          <span class="text-grey">
+            <template v-for="icon in item.raw.icons" :key="icon">
+              <v-icon size="x-small">{{ icon }}</v-icon>
+              &thinsp;
+            </template>
+          </span>
         </span>
       </template>
     </e-select>
@@ -41,36 +39,34 @@
       v-else
       v-model="localCollaboration.role"
       path="role"
-      :items="Object.keys(items)"
+      :items="items"
       persistent-hint
+      item-title="role"
       item-value="key"
-      item-text="role"
       vee-rules="required"
     >
-      <template #item="{ item: { value: itemKey }, props: bindProps }">
-        <v-list-item :title="undefined" lines="two" v-bind="bindProps">
-          <v-list-item-title>{{ items[itemKey].role }}</v-list-item-title>
-          <span class="text-caption">{{ items[itemKey].abilities }}</span>
-
-          <v-list-item-action class="text-right">
-            <span
-              ><template v-for="icon in items[itemKey].icons" :key="icon"
-                ><v-icon size="small">{{ icon }}</v-icon
-                >&thinsp;</template
-              ></span
-            >
-          </v-list-item-action>
+      <template #item="{ item, props }">
+        <v-list-item lines="two" v-bind="props">
+          <v-list-item-subtitle>{{ item.raw.abilities }}</v-list-item-subtitle>
+          <template #append>
+            <span>
+              <template v-for="icon in item.raw.icons" :key="icon">
+                <v-icon size="small">{{ icon }}</v-icon>
+                &thinsp;
+              </template>
+            </span>
+          </template>
         </v-list-item>
       </template>
-      <template #selection="{ item: { value: itemKey } }">
-        <span
-          >{{ items[itemKey].role }} &middot;
-          <span class="text-grey"
-            ><template v-for="icon in items[itemKey].icons" :key="icon"
-              ><v-icon size="x-small">{{ icon }}</v-icon
-              >&thinsp;</template
-            ></span
-          >
+      <template #selection="{ item }">
+        <span>
+          {{ item.title }} &middot;
+          <span class="text-grey">
+            <template v-for="icon in item.raw.icons" :key="icon">
+              <v-icon size="x-small">{{ icon }}</v-icon>
+              &thinsp;
+            </template>
+          </span>
         </span>
       </template>
     </e-select>
@@ -121,24 +117,26 @@ export default {
   },
   computed: {
     items() {
-      return {
-        manager: {
-          role: this.$t('entity.camp.collaborators.manager'),
+      return [
+        {
+          value: 'manager',
+          text: this.$t('entity.camp.collaborators.manager'),
           abilities: this.$t('global.collaborationAbilities.manager'),
           icons: ['mdi-eye-outline', 'mdi-pencil-outline', 'mdi-cog-outline'],
         },
-        member: {
-          role: this.$t('entity.camp.collaborators.member'),
+        {
+          value: 'member',
+          text: this.$t('entity.camp.collaborators.member'),
           abilities: this.$t('global.collaborationAbilities.member'),
           icons: ['mdi-eye-outline', 'mdi-pencil-outline'],
         },
-        guest: {
-          key: 'guest',
-          role: this.$t('entity.camp.collaborators.guest'),
+        {
+          value: 'guest',
+          text: this.$t('entity.camp.collaborators.guest'),
           abilities: this.$t('global.collaborationAbilities.guest'),
           icons: ['mdi-eye-outline'],
         },
-      }
+      ]
     },
     localCollaboration() {
       return this.collaboration
