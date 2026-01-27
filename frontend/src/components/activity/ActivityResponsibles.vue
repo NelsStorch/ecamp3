@@ -7,7 +7,7 @@
     path="responsible"
     :error-messages="errorMessages"
     variant="outlined"
-    dense
+    density="compact"
     multiple
     chips
     deletable-chips
