@@ -92,7 +92,9 @@
     <v-tabs v-if="isDev" v-model="previewTab" class="px-4">
       <v-tab>Nuxt preview</v-tab>
       <v-tab>Client print preview</v-tab>
-      <v-tab-item>
+    </v-tabs>
+    <v-tabs-window v-model="previewTab">
+      <v-tabs-window-item>
         <print-preview-nuxt
           v-if="previewTab === 0"
           :config="cnf"
@@ -100,8 +102,8 @@
           height="600"
           class="my-4"
         />
-      </v-tab-item>
-      <v-tab-item>
+      </v-tabs-window-item>
+      <v-tabs-window-item>
         <print-preview-client
           v-if="previewTab === 1"
           :config="cnf"
@@ -109,8 +111,8 @@
           height="600"
           class="my-4"
         />
-      </v-tab-item>
-    </v-tabs>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </div>
 </template>
 
@@ -314,17 +316,17 @@ export default {
 
 <style scoped lang="scss">
 .e-print-configurator__cnf {
-  &:deep(.v-expansion-panel-header) {
+  &:deep(.v-expansion-panel-title) {
     font-family: monospace;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 
-  &:deep(.v-expansion-panel-header--active) {
+  &:deep(.v-expansion-panel-title--active) {
     border-bottom: none;
   }
 
-  &:deep(.v-expansion-panel-content) {
+  &:deep(.v-expansion-panel-text) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 }

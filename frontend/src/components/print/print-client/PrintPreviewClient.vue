@@ -7,11 +7,16 @@
       v-bind="$attrs"
       height="800px"
     />
-    <v-overlay :model-value="loading || error" absolute z-index="2">
+    <v-overlay
+      :model-value="loading || error"
+      contained
+      z-index="2"
+      content-class="w-100 h-100 text-white"
+    >
       <div v-if="error">
         {{ $t('components.print.printClient.printPreviewClient.previewError') }}
       </div>
-      <div v-else class="d-flex flex-column gap-3 align-center">
+      <div v-else class="d-flex flex-column gap-3 align-center h-100 justify-center">
         <v-progress-circular
           :model-value="progress"
           :rotate="270"
