@@ -82,8 +82,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: CampCollaborationCreateProcessor::class
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp', 'activityResponsibles.activity'])]
 #[UniqueEntity(

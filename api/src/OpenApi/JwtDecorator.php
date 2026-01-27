@@ -4,6 +4,9 @@ namespace App\OpenApi;
 
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model;
+use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\RequestBody;
+use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\OpenApi;
 
 /**
@@ -33,16 +36,16 @@ final readonly class JwtDecorator implements OpenApiFactoryInterface {
         $cookiePrefix = $this->cookiePrefix;
         $pathItem = new Model\PathItem(
             ref: 'JWT Token',
-            post: new Model\Operation(
+            post: new Operation(
                 operationId: 'postCredentials',
                 tags: ['Login'],
                 responses: [
-                    '204' => [
-                        'description' => "Get a JWT token split across the two cookies {$cookiePrefix}jwt_hp and {$cookiePrefix}jwt_s. Also returns a refresh token in {$cookiePrefix}refresh_token",
-                    ],
+                    '204' => new Response(
+                        description: "Get a JWT token split across the two cookies {$cookiePrefix}jwt_hp and {$cookiePrefix}jwt_s. Also returns a refresh token in {$cookiePrefix}refresh_token",
+                    ),
                 ],
                 summary: 'Log in using email and password.',
-                requestBody: new Model\RequestBody(
+                requestBody: new RequestBody(
                     description: 'Generate new JWT Token by logging in',
                     content: new \ArrayObject([
                         'application/ld+json' => [

@@ -44,9 +44,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: SingleTextPersistProcessor::class
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
+    routePrefix: '/content_node',
     normalizationContext: ['groups' => ['read']],
-    routePrefix: '/content_node'
+    denormalizationContext: ['groups' => ['write']],
 )]
 #[ORM\Entity(repositoryClass: SingleTextRepository::class)]
 class SingleText extends ContentNode {

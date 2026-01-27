@@ -54,8 +54,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: 'is_fully_authenticated()',
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['createTime' => 'ASC'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp', 'activity'])]
@@ -86,7 +86,7 @@ class Comment extends BaseEntity implements BelongsToCampInterface {
      * The author of the comment.
      */
     #[Assert\DisableAutoMapping] // avoids validation error when author is null in payload
-    #[ApiProperty(example: '/users/1a2b3c4d', writable: false)]
+    #[ApiProperty(writable: false, example: '/users/1a2b3c4d')]
     #[Groups(['read', 'create'])]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
@@ -112,14 +112,10 @@ class Comment extends BaseEntity implements BelongsToCampInterface {
     #[InputFilter\Trim]
     #[InputFilter\CleanText]
     #[Assert\Length(max: 32)]
-    #[ApiProperty(example: 'Sportolympiade', writable: false)]
+    #[ApiProperty(writable: false, example: 'Sportolympiade')]
     #[Groups(['read', 'create'])]
     #[ORM\Column(type: 'text', nullable: true)]
     public ?string $orphanDescription = null;
-
-    public function __construct() {
-        parent::__construct();
-    }
 
     public function getCamp(): ?Camp {
         return $this->camp;

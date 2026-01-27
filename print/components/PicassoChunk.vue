@@ -1,6 +1,12 @@
 <template>
-  <div class="tw-break-after-page" :class="{ 'landscape-page': landscape }">
-    <div class="tw-flex tw-flex-col" :class="landscape ? 'landscape' : 'portrait'">
+  <div
+    class="tw-break-after-page"
+    :class="{ 'landscape-page': landscape, [pageSize]: true }"
+  >
+    <div
+      class="tw-flex tw-flex-col"
+      :class="[landscape ? 'landscape' : 'portrait', pageSize]"
+    >
       <div
         class="tw-flex-initial tw-flex tw-flex-row tw-items-center tw-gap-2 tw-mb-3 tw-font-semibold"
       >
@@ -97,6 +103,7 @@ export default {
     landscape: { type: Boolean, required: true },
     days: { type: Array, required: true },
     times: { type: Array, required: true },
+    pageSize: { type: String, default: 'a4' },
   },
   computed: {
     camp() {
@@ -160,31 +167,49 @@ export default {
 <!-- these styles seem to effect the whole picasso, thus we don't want the vue-scoped-css/enforce-style-type warning here -->
 <!-- eslint-disable-next-line -->
 <style lang="scss">
-$portrait-content-width: 680; /* 794px minus 114px (=2*15mm margin) */
-$portrait-content-height: 1009; /* 1123px minus 114px (=2*15mm margin) */
+$a3-portrait-content-width: 1009; /* 1123px minus 114px (=2*15mm margin) */
+$a3-portrait-content-height: 1474; /* 1588px minus 114px (=2*15mm margin) */
+$a4-portrait-content-width: 680; /* 794px minus 114px (=2*15mm margin) */
+$a4-portrait-content-height: 1009; /* 1123px minus 114px (=2*15mm margin) */
+$a5-portrait-content-width: 391; /* 505px minus 114px (=2*15mm margin) */
+$a5-portrait-content-height: 680; /* 794px minus 114px (=2*15mm margin) */
 
-@page landscape {
+@page a4landscape {
   size: a4 landscape;
 }
-
-.landscape-page {
-  page: landscape;
+@page a5landscape {
+  size: a5 landscape;
 }
 
-.landscape {
-  font-size: 10pt;
-
-  width: #{$portrait-content-height}px;
-  height: #{$portrait-content-width}px;
-
-  overflow: visible;
+.a4.landscape-page {
+  page: a4landscape;
+}
+.a5.landscape-page {
+  page: a5landscape;
 }
 
+.a4.landscape {
+  width: #{$a4-portrait-content-height}px;
+  height: #{$a4-portrait-content-width}px;
+}
+.a5.landscape {
+  width: #{$a5-portrait-content-height}px;
+  height: #{$a5-portrait-content-width}px;
+}
+
+.landscape,
 .portrait {
   font-size: 10pt;
-  width: #{$portrait-content-width}px;
-  height: #{$portrait-content-height}px;
   overflow: visible;
+}
+
+.a4.portrait {
+  width: #{$a4-portrait-content-width}px;
+  height: #{$a4-portrait-content-height}px;
+}
+.a5.portrait {
+  width: #{$a5-portrait-content-width}px;
+  height: #{$a5-portrait-content-height}px;
 }
 
 .v-calendar-daily_head-day {
@@ -195,8 +220,11 @@ $portrait-content-height: 1009; /* 1123px minus 114px (=2*15mm margin) */
   margin-right: 4px;
 }
 
-.fullwidth {
-  width: $portrait-content-width;
+.a4.fullwidth {
+  width: $a4-portrait-content-width;
+}
+.a5.fullwidth {
+  width: $a5-portrait-content-width;
 }
 
 .v-calendar {
@@ -227,6 +255,16 @@ $portrait-content-height: 1009; /* 1123px minus 114px (=2*15mm margin) */
 .v-calendar-daily__interval-text {
   font-size: 0.8em;
   font-feature-settings: 'tnum';
+}
+.a5 {
+  .v-calendar-daily__interval {
+    position: relative;
+  }
+
+  .v-calendar-daily__interval-text {
+    position: absolute;
+    font-size: 0.6em;
+  }
 }
 
 .v-calendar-daily__day-interval:nth-child(2n) {

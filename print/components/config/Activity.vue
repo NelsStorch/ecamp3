@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-break-after-page">
+  <div class="tw-break-after-page" :class="pageSize">
     <generic-error-message v-if="error" :error="error" />
     <schedule-entry v-else :schedule-entry="scheduleEntryData" :index="index" />
   </div>
@@ -11,6 +11,7 @@ const props = defineProps({
   camp: { type: Object, required: true },
   config: { type: Object, required: true },
   index: { type: Number, required: true },
+  pageSize: { type: String, default: 'a4' },
 })
 
 const { $api } = useNuxtApp()

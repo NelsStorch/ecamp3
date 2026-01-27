@@ -72,8 +72,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: ActivityCreateProcessor::class
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp'])]
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
@@ -107,14 +107,14 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
      * The list of points in time when this activity's programme will be carried out.
      */
     #[Assert\Valid]
-    #[AssertLastCollectionItemIsNotDeleted(groups: ['ScheduleEntry:delete'], message: 'Cannot delete the last schedule entry.')]
+    #[AssertLastCollectionItemIsNotDeleted(message: 'Cannot delete the last schedule entry.', groups: ['ScheduleEntry:delete'])]
     #[Assert\Count(min: 1, groups: ['create'])]
     #[ApiProperty(
         writableLink: true,
         example: [['period' => '/periods/1a2b3c4a', 'start' => '2023-05-01T15:00:00+00:00', 'end' => '2023-05-01T16:00:00+00:00']],
     )]
     #[Groups(['read', 'create'])]
-    #[ORM\OneToMany(targetEntity: ScheduleEntry::class, mappedBy: 'activity', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: ScheduleEntry::class, mappedBy: 'activity', cascade: ['persist'], orphanRemoval: true)]
     #[ORM\OrderBy(['startOffset' => 'ASC', 'left' => 'ASC', 'endOffset' => 'DESC', 'id' => 'ASC'])]
     public Collection $scheduleEntries;
 
@@ -184,8 +184,8 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: Comment::ACTIVITY_SUBRESOURCE_URI_TEMPLATE,
-        example: '/activities/1a2b3c4d/comments'
+        example: '/activities/1a2b3c4d/comments',
+        uriTemplate: Comment::ACTIVITY_SUBRESOURCE_URI_TEMPLATE
     )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'activity')]

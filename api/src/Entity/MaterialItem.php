@@ -53,8 +53,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: MaterialItemCreateProcessor::class,
         ),
     ],
+    normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp', 'materialList', 'materialNode'])]
 #[ApiFilter(filterClass: MaterialItemPeriodFilter::class)]

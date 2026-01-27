@@ -57,8 +57,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: PeriodPersistProcessor::class
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['start']
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['camp'])]
@@ -75,11 +75,11 @@ class Period extends BaseEntity implements BelongsToCampInterface {
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: Day::PERIOD_SUBRESOURCE_URI_TEMPLATE,
-        example: '/periods/1a2b3c4d/days'
+        example: '/periods/1a2b3c4d/days',
+        uriTemplate: Day::PERIOD_SUBRESOURCE_URI_TEMPLATE
     )]
     #[Groups(['read'])]
-    #[ORM\OneToMany(targetEntity: Day::class, mappedBy: 'period', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Day::class, mappedBy: 'period', cascade: ['persist'], orphanRemoval: true)]
     #[ORM\OrderBy(['dayOffset' => 'ASC'])]
     public Collection $days;
 
@@ -91,8 +91,8 @@ class Period extends BaseEntity implements BelongsToCampInterface {
      */
     #[ApiProperty(
         writable: false,
-        uriTemplate: ScheduleEntry::PERIOD_SUBRESOURCE_URI_TEMPLATE,
-        example: '/periods/1a2b3c4d/schedule_entries'
+        example: '/periods/1a2b3c4d/schedule_entries',
+        uriTemplate: ScheduleEntry::PERIOD_SUBRESOURCE_URI_TEMPLATE
     )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: ScheduleEntry::class, mappedBy: 'period')]

@@ -28,6 +28,9 @@ export default function repairConfig(
   ) {
     configClone.options.pageNumbers = false
   }
+  if (!['A5', 'A4'].includes(configClone.options.pageSize)) {
+    configClone.options.pageSize = 'A4'
+  }
   if (typeof configClone.contents?.map !== 'function') {
     configClone.contents = defaultContents
   }

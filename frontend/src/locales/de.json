@@ -447,7 +447,12 @@
           "Toc": "Inhaltsverzeichnis"
         },
         "options": "Einstellungen",
-        "pageNumbers": "Seitenzahlen"
+        "pageNumbers": "Seitenzahlen",
+        "fontSize": "Schriftgrösse",
+        "fontSizes": {
+          "A4": "Normale Schrift (optimiert für A4 oder A5)",
+          "A5": "Grössere Schrift (optimiert für A6)"
+        }
       },
       "printNuxt": {
         "downloadNuxtPdfButton": {

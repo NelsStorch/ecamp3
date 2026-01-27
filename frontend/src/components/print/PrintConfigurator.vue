@@ -61,6 +61,13 @@
                 :label="$t('components.print.printConfigurator.pageNumbers')"
                 @input="onChange"
               />
+              <e-select
+                v-model="cnf.options.pageSize"
+                class="mt-4"
+                :items="pageSizes"
+                :label="$t('components.print.printConfigurator.fontSize')"
+                @input="onChange"
+              />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -182,11 +189,17 @@ export default {
         this.$store.getters.getLastPrintConfig(this.camp._meta.self, {
           language: this.lang,
           documentName: campShortTitle(this.camp),
-          options: { pageNumbers: false },
+          options: { pageNumbers: false, pageSize: 'A4' },
           camp: this.camp._meta.self,
           contents: this.defaultContents(),
         })
       )
+    },
+    pageSizes() {
+      return ['A5', 'A4'].map((size) => ({
+        value: size,
+        text: this.$t(`components.print.printConfigurator.fontSizes.${size}`),
+      }))
     },
     isDev() {
       return getEnv().FEATURE_DEVELOPER ?? false

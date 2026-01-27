@@ -26627,12 +26627,24 @@ components:
         violations:
           items:
             properties:
+              code:
+                description: 'The code of the violation'
+                type: string
+              hint:
+                description: 'An extra hint to understand the violation'
+                type: string
               message:
                 description: 'The message associated with the violation'
                 type: string
+              payload:
+                description: 'The serialized payload of the violation'
+                type: array
               propertyPath:
                 description: 'The property path of the violation'
                 type: string
+            required:
+              - message
+              - propertyPath
             type: object
           type: array
       type: object
@@ -26667,8 +26679,14 @@ components:
             violations:
               items:
                 properties:
+                  code: { description: 'The code of the violation', type: string }
+                  hint: { description: 'An extra hint to understand the violation', type: string }
                   message: { description: 'The message associated with the violation', type: string }
+                  payload: { description: 'The serialized payload of the violation', type: array }
                   propertyPath: { description: 'The property path of the violation', type: string }
+                required:
+                  - message
+                  - propertyPath
                 type: object
               type: array
           type: object
@@ -54497,12 +54515,42 @@ paths:
           description: 'UserActivation resource created'
           links: []
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: 'Invalid input'
           links: []
         403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: Forbidden
           links: []
         422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Request activation email again'
@@ -54537,12 +54585,42 @@ paths:
           description: 'ResetPassword resource created'
           links: []
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: 'Invalid input'
           links: []
         403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: Forbidden
           links: []
         422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonld'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
           description: 'An error occurred'
           links: []
       summary: 'Request Password-Reset-Mail'

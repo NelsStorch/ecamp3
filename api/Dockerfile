@@ -3,7 +3,7 @@
 # Adapted from https://github.com/api-platform/api-platform/blob/fa1c5808305d7cadbf7b8392e0fddb6e80fb2092/api/Dockerfile
 
 # Versions
-FROM dunglas/frankenphp:1.11-php8.5.1 AS frankenphp_upstream
+FROM dunglas/frankenphp:1.11-php8.5.2 AS frankenphp_upstream
 
 # the different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
@@ -91,7 +91,6 @@ COPY --link docker/php/conf.d/api-platform.prod.ini $PHP_INI_DIR/conf.d/
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* symfony.* ./
-COPY --link patch patch/
 RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
 

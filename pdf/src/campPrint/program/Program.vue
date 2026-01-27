@@ -1,5 +1,5 @@
 <template>
-  <Page :id="id" class="page program-page">
+  <Page :id="id" class="page program-page" :size="config.options.pageSize || 'A4'">
     <slot></slot>
     <ProgramPeriod
       v-for="period in periods"

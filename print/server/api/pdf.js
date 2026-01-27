@@ -131,14 +131,16 @@ export default defineEventHandler(async (event) => {
     })
     measurePerformance(performanceMeasurements, 'load_content')
 
+    const config = JSON.parse(queryParams.config)
+
     // print pdf
     const pdf = await page.pdf({
       printBackground: true,
-      format: 'A4',
+      format: config.options?.pageSize ?? 'A4',
       scale: 1,
       displayHeaderFooter: true,
       headerTemplate: `<div id="header-template" style="font-size:7pt; text-align: center; width: 100%; font-family: Helvetica, sans-serif; font-weight: 500"><span>eCamp v3</span></div>`,
-      footerTemplate: pageFooterTemplate(JSON.parse(queryParams.config)),
+      footerTemplate: pageFooterTemplate(config),
       margin: {
         bottom: '15mm',
         left: '15mm',

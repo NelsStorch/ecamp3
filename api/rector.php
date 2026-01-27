@@ -11,8 +11,8 @@ use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\If_\SimplifyIfElseToTernaryRector;
 use Rector\CodeQuality\Rector\If_\SimplifyIfReturnBoolRector;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassMethod\RemoveParentDelegatingConstructorRector;
 use Rector\DeadCode\Rector\If_\RemoveDeadInstanceOfRector;
-use Rector\Doctrine\Bundle230\Rector\Class_\AddAnnotationToRepositoryRector;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
@@ -44,7 +44,6 @@ return RectorConfig::configure()
         'join' => 'join',
     ])
     ->withSkip([
-        AddAnnotationToRepositoryRector::class,
         AddInstanceofAssertForNullableInstanceRector::class,
         AssertEmptyNullableObjectToAssertInstanceofRector::class,
         ClosureToArrowFunctionRector::class,
@@ -60,6 +59,7 @@ return RectorConfig::configure()
         NullToStrictStringFuncCallArgRector::class,
         PreferPHPUnitThisCallRector::class,
         RemoveDeadInstanceOfRector::class,
+        RemoveParentDelegatingConstructorRector::class,
         SimplifyIfElseToTernaryRector::class,
         SimplifyIfReturnBoolRector::class,
         ThrowWithPreviousExceptionRector::class,

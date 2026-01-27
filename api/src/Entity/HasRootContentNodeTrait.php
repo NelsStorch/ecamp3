@@ -19,7 +19,7 @@ trait HasRootContentNodeTrait {
     #[ApiProperty(writable: false, example: '/content_nodes/1a2b3c4d')]
     #[Groups(['read'])]
     #[ORM\OneToOne(targetEntity: ColumnLayout::class, cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: false, unique: true)]
+    #[ORM\JoinColumn(unique: true, nullable: false)]
     public ?ColumnLayout $rootContentNode = null;
 
     public function setRootContentNode(?ColumnLayout $rootContentNode) {

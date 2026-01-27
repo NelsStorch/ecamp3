@@ -1445,6 +1445,7 @@
       "props": {
         "class": "page activity-page",
         "id": "entry-0",
+        "size": "A5",
       },
       "style": {
         "display": "flex",

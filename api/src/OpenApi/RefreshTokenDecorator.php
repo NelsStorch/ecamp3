@@ -3,7 +3,9 @@
 namespace App\OpenApi;
 
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
-use ApiPlatform\OpenApi\Model;
+use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\PathItem;
+use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\OpenApi;
 
 final readonly class RefreshTokenDecorator implements OpenApiFactoryInterface {
@@ -13,15 +15,15 @@ final readonly class RefreshTokenDecorator implements OpenApiFactoryInterface {
         $openApi = ($this->decorated)($context);
 
         $cookiePrefix = $this->cookiePrefix;
-        $pathItem = new Model\PathItem(
+        $pathItem = new PathItem(
             ref: 'JWT Token Refresh',
-            post: new Model\Operation(
+            post: new Operation(
                 operationId: 'postRefreshToken',
                 tags: ['JWT Refresh'],
                 responses: [
-                    '204' => [
-                        'description' => "Get a refreshed JWT token split across the two cookies {$cookiePrefix}jwt_hp and {$cookiePrefix}jwt_s. Also returns a new refresh token {$cookiePrefix}refresh_token.",
-                    ],
+                    '204' => new Response(
+                        description: "Get a refreshed JWT token split across the two cookies {$cookiePrefix}jwt_hp and {$cookiePrefix}jwt_s. Also returns a new refresh token {$cookiePrefix}refresh_token.",
+                    ),
                 ],
                 summary: 'Refresh token.',
             ),

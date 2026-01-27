@@ -48,9 +48,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             processor: ContentNodePersistProcessor::class
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
+    routePrefix: '/content_node',
     normalizationContext: ['groups' => ['read']],
-    routePrefix: '/content_node'
+    denormalizationContext: ['groups' => ['write']],
 )]
 #[ORM\Entity(repositoryClass: ResponsiveLayoutRepository::class)]
 class ResponsiveLayout extends ContentNode implements SupportsContentNodeChildren {

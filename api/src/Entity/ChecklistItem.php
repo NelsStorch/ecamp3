@@ -75,8 +75,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             ]
         ),
     ],
-    denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     order: ['checklist.id', 'id'],
 )]
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['checklist', 'checklist.camp', 'checklistNodes'])]
@@ -84,6 +84,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\UniqueConstraint(name: 'checklistitem_checklistid_parentid_position_unique', columns: ['checklistid', 'parentid', 'position'])]
 class ChecklistItem extends BaseEntity implements BelongsToCampInterface, CopyFromPrototypeInterface, HasParentInterface {
     public const CHECKLIST_SUBRESOURCE_URI_TEMPLATE = '/checklists/{checklistId}/checklist_items{._format}';
+    public const MAX_NESTING_DEPTH = 3;
 
     /**
      * The Checklist this Item belongs to.
@@ -100,14 +101,14 @@ class ChecklistItem extends BaseEntity implements BelongsToCampInterface, CopyFr
      * root of a ChecklistItem tree. For non-root ChecklistItems, the parent can be changed, as long
      * as the new parent is in the same checklist as the old one.
      *
-     * Nesting has maximum depth of 3 Levels (root - child - grandchild)
+     * Nesting has maximum depth of 3 levels (root - child - grandchild)
      * => CurrentNesting + SubtreeDepth < 3
      */
     #[AssertBelongsToSameChecklist]
     #[AssertNoLoop]
     #[Assert\Expression(
-        '(this.getNestingLevel() + this.getSubtreeDepth()) < 3',
-        'Nesting can be a maximum of 3 levels deep.'
+        '(this.getNestingLevel() + this.getSubtreeDepth()) < '.self::MAX_NESTING_DEPTH,
+        'Nesting can be a maximum of '.self::MAX_NESTING_DEPTH.' levels deep.'
     )]
     #[ApiProperty(example: '/checklist_items/1a2b3c4d')]
     #[Gedmo\SortableGroup]
