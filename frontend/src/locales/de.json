@@ -450,8 +450,8 @@
         "pageNumbers": "Seitenzahlen",
         "fontSize": "Schriftgrösse",
         "fontSizes": {
-          "A4": "Normal (für Druck auf A4 oder A5)",
-          "A5": "Grösser (für Druck auf A6)"
+          "A4": "Normale Schrift (optimiert für A4 oder A5)",
+          "A5": "Grössere Schrift (optimiert für A6)"
         }
       },
       "printNuxt": {
