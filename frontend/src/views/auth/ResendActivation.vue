@@ -22,7 +22,7 @@
         name="email"
         vee-rules="email"
         append-icon="mdi-at"
-        :dense="$vuetify.display.xs"
+        :density="$vuetify.display.xs ? 'compact' : 'default'"
         type="email"
         autocomplete="username"
         autofocus

@@ -157,7 +157,7 @@ export default {
       this.setValue(val)
     },
     // value formatted for text field
-    localValue(val) {
+    localValue(_) {
       if (this.format !== null) {
         this.fieldValue = this.format(this.localValue)
       } else {

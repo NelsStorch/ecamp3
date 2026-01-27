@@ -15,7 +15,7 @@
           :outlined="false"
           :solo="false"
           auto-grow
-          dense
+          density="compact"
           label=""
         />
         <div class="d-flex align-center justify-space-between mt-1 gap-2">

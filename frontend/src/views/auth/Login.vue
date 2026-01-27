@@ -71,7 +71,7 @@
         name="email"
         path="email"
         append-inner-icon="mdi-account-outline"
-        :dense="$vuetify.display.xs"
+        :density="$vuetify.display.xs ? 'compact' : 'default'"
         type="email"
         autocomplete="username"
       />
@@ -84,7 +84,7 @@
         name="password"
         path="email"
         append-inner-icon="mdi-lock-outline"
-        :dense="$vuetify.display.xs"
+        :density="$vuetify.display.xs ? 'compact' : 'default'"
         type="password"
         autocomplete="current-password"
       />

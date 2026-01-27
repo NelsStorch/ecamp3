@@ -9,7 +9,7 @@
             v-model="firstname"
             append-inner-icon="mdi-account-outline"
             autocomplete="given-name"
-            dense
+            density="compact"
             path="firstname"
             type="text"
             vee-rules="required"
@@ -19,7 +19,7 @@
             v-model="surname"
             append-inner-icon="mdi-account-outline"
             autocomplete="family-name"
-            dense
+            density="compact"
             path="surname"
             type="text"
             vee-rules="required"
@@ -29,7 +29,7 @@
             v-model="email"
             append-inner-icon="mdi-at"
             autocomplete="username"
-            dense
+            density="compact"
             path="email"
             type="email"
             vee-rules="email|required"
@@ -75,7 +75,12 @@
             vee-rules="required|confirmed:@password"
           />
 
-          <e-select v-model="language" :items="availableLocales" dense path="language" />
+          <e-select
+            v-model="language"
+            :items="availableLocales"
+            density="compact"
+            path="language"
+          />
 
           <e-checkbox
             v-if="termsOfServiceLink"

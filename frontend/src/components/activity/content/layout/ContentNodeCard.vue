@@ -16,7 +16,7 @@
         @keyup.prevent
       >
         <api-text-field
-          dense
+          density="compact"
           autofocus
           :auto-save="false"
           path="instanceName"

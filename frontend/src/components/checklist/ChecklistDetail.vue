@@ -23,8 +23,7 @@
       <api-form v-if="editChecklistName" :entity="checklist" class="mx-2 flex-grow-1">
         <api-text-field
           path="name"
-          :disabled="layoutMode"
-          dense
+          density="compact"
           autofocus
           :auto-save="false"
           @finished="editChecklistName = false"

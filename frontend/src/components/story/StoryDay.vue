@@ -46,7 +46,7 @@
                 :variant="editMode ? 'underlined' : 'plain'"
                 :solo="false"
                 auto-grow
-                dense
+                density="compact"
                 :readonly="!editMode"
                 path="data.html"
                 label=""

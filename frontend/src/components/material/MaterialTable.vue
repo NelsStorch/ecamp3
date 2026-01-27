@@ -31,7 +31,7 @@
       <api-number-field
         v-if="!item.readonly"
         :disabled="layoutMode || disabled"
-        dense
+        density="compact"
         :uri="item.uri"
         vee-rules="greaterThan:0"
         path="quantity"
@@ -44,7 +44,7 @@
       <api-text-field
         v-if="!item.readonly"
         :disabled="layoutMode || disabled"
-        dense
+        density="compact"
         :uri="item.uri"
         path="unit"
         maxlength="32"
@@ -57,7 +57,7 @@
         <api-text-field
           v-if="!item.readonly"
           :disabled="layoutMode || disabled"
-          dense
+          density="compact"
           :uri="item.uri"
           path="article"
           maxlength="64"
@@ -77,7 +77,7 @@
       <api-select
         v-if="!item.readonly"
         :disabled="layoutMode || disabled"
-        dense
+        density="compact"
         :uri="item.uri"
         path="materialList"
         :items="materialLists"

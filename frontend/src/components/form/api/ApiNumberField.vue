@@ -13,8 +13,8 @@ Displays a field as a e-number-field + write access via API wrapper
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :variant="variant"
-      :dense="dense"
+      :variant
+      :density
       @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"
     >

@@ -74,7 +74,7 @@ Displays a single scheduleEntry
         <api-text-field
           path="title"
           :disabled="layoutMode"
-          dense
+          density="compact"
           autofocus
           :auto-save="false"
           @finished="editActivityTitle = false"

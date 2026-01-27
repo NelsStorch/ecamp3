@@ -4,19 +4,24 @@
       <e-number-field
         ref="quantity"
         v-model="materialItem.quantity"
-        dense
+        density="compact"
         inputmode="decimal"
         path="quantity"
         vee-rules="greaterThan:0"
       />
     </td>
     <td class="pt-1">
-      <e-text-field v-model="materialItem.unit" dense maxlength="32" path="unit" />
+      <e-text-field
+        v-model="materialItem.unit"
+        density="compact"
+        maxlength="32"
+        path="unit"
+      />
     </td>
     <td class="pt-1">
       <e-text-field
         v-model="materialItem.article"
-        dense
+        density="compact"
         maxlength="64"
         path="article"
         vee-rules="required"
@@ -27,7 +32,7 @@
         v-model="materialItem.materialList"
         :items="materialListsSorted"
         :label="$t('entity.materialList.name')"
-        dense
+        density="compact"
         path="materialList"
         vee-rules="required"
       />
