@@ -182,7 +182,7 @@
       />
     </template>
 
-    <template #footer>
+    <template #bottom>
       <!-- add new item (mobile view) -->
       <DialogMaterialItemCreate
         v-if="!layoutMode && !isDefaultVariant && !disabled"
@@ -285,32 +285,32 @@ export default {
       if (this.isDefaultVariant) {
         headers.push(
           {
-            text: this.$t('entity.materialItem.fields.quantity'),
+            title: this.$t('entity.materialItem.fields.quantity'),
             value: 'quantity',
             align: 'end',
             sortable: false,
             width: '10%',
           },
           {
-            text: this.$t('entity.materialItem.fields.unit'),
+            title: this.$t('entity.materialItem.fields.unit'),
             value: 'unit',
             sortable: false,
             width: '15%',
           },
           {
-            text: this.$t('entity.materialItem.fields.article'),
+            title: this.$t('entity.materialItem.fields.article'),
             value: 'article',
             cellClass: 'font-weight-bold',
           },
           {
-            text: this.$t('entity.materialList.name'),
+            title: this.$t('entity.materialList.name'),
             value: 'listName',
             width: '20%',
           }
         )
       } else {
         headers.push({
-          text: this.$t('entity.materialItem.fields.article'),
+          title: this.$t('entity.materialItem.fields.article'),
           value: 'article',
           align: 'start',
           sortable: true,
