@@ -6,6 +6,8 @@
         size="small"
         class="drag-and-drop-handle"
         :disabled="isLastSection"
+        variant="flat"
+        density="comfortable"
         :aria-label="$t('global.button.move')"
         @keydown.down="$emit('move-down', itemKey)"
         @keydown.up="$emit('move-up', itemKey)"
@@ -42,6 +44,7 @@
             icon="mdi-delete-outline"
             variant="text"
             size="small"
+            density="comfortable"
             class="e-storyboard-row__delete"
             color="error"
             :disabled="isLastSection"
@@ -77,7 +80,7 @@ export default {
 }
 
 .e-storyboard-row--default {
-  vertical-align: baseline;
+  vertical-align: top;
 
   .e-storyboard-row__time {
     width: 15%;

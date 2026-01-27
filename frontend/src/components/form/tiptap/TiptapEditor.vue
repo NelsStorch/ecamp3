@@ -396,6 +396,9 @@ div.editor:deep(.editor__content .ProseMirror li p) {
 div.editor:deep(.editor__content .ProseMirror li p:not(:last-child)) {
   margin-bottom: 0;
 }
+.editor.editor--editable {
+  cursor: text;
+}
 .editor.editor--editable:deep(.autolink) {
   cursor: text;
 }

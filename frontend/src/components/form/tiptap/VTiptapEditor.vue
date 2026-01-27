@@ -50,8 +50,8 @@ export default {
       )
     return VField.setup(
       reactive({
-        ...ctx.attrs,
         ...toRefs(props),
+        ...ctx.attrs,
         loading: toRef(() => props.loading),
       }),
       { ...ctx, slots: { default: tiptap, ...ctx.slots } }
@@ -70,14 +70,7 @@ div.v-text-field__slot {
   width: 100%;
 }
 
-.v-text-field.v-text-field--box.v-text-field--single-line:not(.v-input--dense) .editor,
-.v-text-field.v-text-field--box.v-text-field--outlined:not(.v-input--dense) .editor,
-.v-text-field.v-text-field--enclosed.v-text-field--single-line:not(.v-input--dense)
-  .editor,
-.v-text-field.v-text-field--enclosed.v-text-field--outlined:not(.v-input--dense) .editor {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: baseline;
+.v-field.v-field--variant-outlined {
+  padding: 10px 12px;
 }
 </style>

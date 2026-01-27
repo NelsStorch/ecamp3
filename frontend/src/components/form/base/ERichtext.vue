@@ -11,7 +11,6 @@
       :class="[inputClass]"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
       :hide-details="hideDetails"
-      :label="labelOrEntityFieldLabel"
       :on-input="
         ($event) => {
           handleChange($event)
