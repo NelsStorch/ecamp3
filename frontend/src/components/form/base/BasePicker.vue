@@ -78,7 +78,6 @@ export default {
   name: 'BasePicker',
   inheritAttr: false,
   mixins: [formComponentPropsMixin],
-  emits: ['update:modelValue'],
   props: {
     modelValue: { type: [Number, String], required: true },
     icon: { type: String, required: false, default: null },
@@ -110,6 +109,7 @@ export default {
      */
     parsePicker: { type: Function, required: false, default: null },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       // internal random string used for identifying the menu in the DOM
@@ -157,13 +157,13 @@ export default {
       this.setValue(val)
     },
     // value formatted for text field
-    localValue(val){
+    localValue(val) {
       if (this.format !== null) {
         this.fieldValue = this.format(this.localValue)
       } else {
         this.fieldValue = this.localValue
       }
-    }
+    },
   },
   mounted() {
     this.escapeKeyHandler = (event) => {
