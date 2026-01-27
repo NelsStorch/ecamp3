@@ -49,10 +49,8 @@ Critical operations on camp
                     {{
                       $t(
                         'components.campAdmin.campDangerZone.deleteCamp.explanation',
-                        0,
-                        {
-                          campTitle: camp.title,
-                        }
+                        { campTitle: camp.title },
+                        0
                       )
                     }}
                   </p>
@@ -64,7 +62,7 @@ Critical operations on camp
                         0
                       )
                     }}
-                    <e-text-field v-model="promptText" />
+                    <e-text-field v-model="promptText" path="promptText" />
                   </label>
                 </dialog-entity-delete>
               </v-list-item-action>
