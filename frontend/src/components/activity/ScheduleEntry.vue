@@ -229,20 +229,20 @@ Displays a single scheduleEntry
           <v-col class="col col-sm-6 col-12 px-0">
             <api-form :entity="activity" name="activity">
               <v-row dense>
-                <v-col class="col col-sm-8 col-12">
+                <v-col sm="8" cols="12">
                   <api-text-field
                     path="location"
                     :disabled="layoutMode || !isContributor"
-                    dense
+                    density="compact"
                   />
                 </v-col>
-                <v-col class="col col-sm-4 col-12">
+                <v-col sm="4" cols="12">
                   <api-select
                     path="progressLabel"
                     :items="progressLabels"
                     :disabled="layoutMode || !isContributor"
                     clearable
-                    dense
+                    density="compact"
                   />
                 </v-col>
               </v-row>
