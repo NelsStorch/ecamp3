@@ -18,7 +18,8 @@ Displays a field as a e-select + write access via API wrapper
       :variant="variant"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :dense="dense"
+      :variant
+      :density
       :multiple="multiple"
       @update:model-value="wrapper.on.input"
     >

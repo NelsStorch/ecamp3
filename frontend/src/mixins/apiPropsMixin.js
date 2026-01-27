@@ -43,9 +43,9 @@ export const apiPropsMixin = {
       default: 'outlined',
       required: false,
     },
-    dense: {
-      type: Boolean,
-      default: false,
+    density: {
+      type: [null, String],
+      default: 'default',
       required: false,
     },
   },
