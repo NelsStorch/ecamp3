@@ -5,6 +5,7 @@ namespace App\Tests\Api\Activities;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use App\Entity\Activity;
+use App\Entity\ContentNode\ChecklistNode;
 use App\Entity\User;
 use App\Tests\Api\ECampApiTestCase;
 use App\Tests\Constraints\CompatibleHalResponse;
@@ -584,7 +585,7 @@ class CreateActivityTest extends ECampApiTestCase {
     }
 
     public function testCreateActivityFromCopySourceWithinSameCamp() {
-        static::createClientWithCredentials()->request(
+        $response = static::createClientWithCredentials()->request(
             'POST',
             '/activities',
             ['json' => $this->getExampleWritePayload(
@@ -598,6 +599,34 @@ class CreateActivityTest extends ECampApiTestCase {
 
         // Activity created
         $this->assertResponseStatusCodeSame(201);
+        $responseArray = $response->toArray();
+        $contentNodes = $responseArray['_embedded']['contentNodes'];
+
+        // Embedded MaterialNode -> MaterialItems
+        // Test MaterialList is not nulled
+        $materialNodes = array_filter($contentNodes, fn ($cn) => 'Material' == $cn['contentTypeName']);
+        $this->assertCount(1, $materialNodes);
+
+        $materialNode = reset($materialNodes);
+        $materialItems = $materialNode['_embedded']['materialItems'];
+        $this->assertCount(1, $materialItems);
+
+        $materialItem = reset($materialItems);
+        $this->assertEquals($this->getIriFor('materialList1'), $materialItem['_links']['materialList']['href']);
+
+        // Embedded ChecklistNode -> ChecklistItems
+        // Test ChecklistItem connections are copied
+        $checklistNodes = array_filter($contentNodes, fn ($cn) => 'Checklist' == $cn['contentTypeName']);
+        $this->assertCount(1, $checklistNodes);
+
+        $checklistNodeId = reset($checklistNodes)['id'];
+        $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($checklistNodeId);
+
+        $connectedChecklistItems = $checklistNode->getChecklistItems();
+        $this->assertCount(1, $connectedChecklistItems);
+        $connectedChecklistItem = reset($connectedChecklistItems);
+
+        $this->assertEquals($this->getIriFor('checklistItem1_1_1'), $this->getIriFor($connectedChecklistItem));
     }
 
     public function testCreateActivityFromCopySourceAcrossCamp() {
@@ -622,12 +651,11 @@ class CreateActivityTest extends ECampApiTestCase {
 
         // Activity created
         $this->assertResponseStatusCodeSame(201);
-
-        // Embedded MaterialNode -> MaterialItems
-        // Test MaterialList is nulled
         $responseArray = $response->toArray();
         $contentNodes = $responseArray['_embedded']['contentNodes'];
 
+        // Embedded MaterialNode -> MaterialItems
+        // Test MaterialList is nulled
         $materialNodes = array_filter($contentNodes, fn ($cn) => 'Material' == $cn['contentTypeName']);
         $this->assertCount(1, $materialNodes);
 
@@ -635,8 +663,19 @@ class CreateActivityTest extends ECampApiTestCase {
         $materialItems = $materialNode['_embedded']['materialItems'];
         $this->assertCount(1, $materialItems);
 
-        $materailItem = reset($materialItems);
-        $this->assertNull($materailItem['_links']['materialList']);
+        $materialItem = reset($materialItems);
+        $this->assertNull($materialItem['_links']['materialList']);
+
+        // Embedded ChecklistNode -> ChecklistItems
+        // Test ChecklistItem connections are not copied because no matching checklist items are present in target camp
+        $checklistNodes = array_filter($contentNodes, fn ($cn) => 'Checklist' == $cn['contentTypeName']);
+        $this->assertCount(1, $checklistNodes);
+
+        $checklistNodeId = reset($checklistNodes)['id'];
+        $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($checklistNodeId);
+
+        $connectedChecklistItems = $checklistNode->getChecklistItems();
+        $this->assertCount(0, $connectedChecklistItems);
     }
 
     /**
