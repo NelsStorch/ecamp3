@@ -96,12 +96,13 @@
         :color="email && password ? 'blue-darken-2' : 'blue-lighten-4'"
         block
         :disabled="!(email && password) || authenticationInProgress"
-        :size="$vuetify.display.smAndUp && 'x-large'"
+        :size="$vuetify.display.smAndUp && 'large'"
+        height="50"
         variant="outlined"
-        class="my-4"
+        class="my-4 ec-login-button"
       >
         <v-progress-circular v-if="authenticationInProgress" indeterminate size="24" />
-        <v-icon v-else>$ecamp</v-icon>
+        <v-icon size="large" v-else>$ecamp</v-icon>
         <v-spacer />
         <span>{{ $t('views.auth.login.provider.ecamp') }}</span>
         <v-spacer />
@@ -305,6 +306,10 @@ export default {
   margin-top: 12px;
   margin-bottom: -12px;
   translate: 0 -12px;
+}
+
+.ec-login-button :deep(.v-btn__content) {
+  width: 100%;
 }
 
 .jubla-btn :deep(.v-btn__content) {

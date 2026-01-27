@@ -233,6 +233,10 @@ body {
   }
 }
 
+:root {
+  --v-theme-overlay-multiplier: 2;
+}
+
 .d-grid {
   display: grid;
 }
