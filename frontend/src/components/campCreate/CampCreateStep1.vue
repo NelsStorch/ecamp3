@@ -1,5 +1,5 @@
 <template>
-  <Form ref="form" v-slot="{ meta }" @submit="() => $emit('next-step')">
+  <ValidationForm ref="form" v-slot="{ meta }" @submit="() => $emit('next-step')">
     <e-form name="camp">
       <v-card-text>
         <e-text-field
@@ -38,7 +38,7 @@
         />
         <v-tooltip v-else location="top">
           <template #activator="{ props }">
-            <v-btn color="secondary" variant="flat" v-bind="props">
+            <v-btn color="secondary" variant="flat" v-bind="props" type="submit">
               {{ $t('global.button.continue') }}
             </v-btn>
           </template>
@@ -46,7 +46,7 @@
         </v-tooltip>
       </ContentActions>
     </e-form>
-  </Form>
+  </ValidationForm>
 </template>
 <script>
 import ButtonCancel from '@/components/buttons/ButtonCancel.vue'
@@ -54,7 +54,7 @@ import ButtonContinue from '@/components/buttons/ButtonContinue.vue'
 import ContentActions from '@/components/layout/ContentActions.vue'
 import CreateCampPeriods from '@/components/campAdmin/CreateCampPeriods.vue'
 import ETextField from '@/components/form/base/ETextField.vue'
-import { Form } from 'vee-validate'
+import { Form as ValidationForm } from 'vee-validate'
 
 export default {
   name: 'CampCreateStep1',
@@ -63,7 +63,7 @@ export default {
     ButtonContinue,
     ContentActions,
     CreateCampPeriods,
-    Form,
+    ValidationForm,
     ETextField,
   },
   props: {

@@ -19,7 +19,7 @@ Displays a field as a picker (can be used with v-model)
           v-bind="$attrs"
           :id="id"
           ref="textField"
-          :model-value="fieldValue"
+          v-model="fieldValue"
           :readonly="readonly"
           :disabled="disabled"
           :filled="filled"
@@ -76,6 +76,7 @@ export default {
   name: 'BasePicker',
   inheritAttr: false,
   mixins: [formComponentPropsMixin],
+  emits: ['update:modelValue'],
   props: {
     modelValue: { type: [Number, String], required: true },
     icon: { type: String, required: false, default: null },
@@ -115,6 +116,7 @@ export default {
       // internal value
       localValue: null,
       localValueInitialized: false,
+      fieldValue: null,
 
       showPicker: false,
       parseError: null,
@@ -127,15 +129,6 @@ export default {
     }
   },
   computed: {
-    // value formatted for text field
-    fieldValue() {
-      if (this.format !== null) {
-        return this.format(this.localValue)
-      } else {
-        return this.localValue
-      }
-    },
-
     // value formatted for picker component
     pickerValue() {
       if (this.formatPicker !== null) {
@@ -161,6 +154,14 @@ export default {
       this.localValueInitialized = false
       this.setValue(val)
     },
+    // value formatted for text field
+    localValue(val){
+      if (this.format !== null) {
+        this.fieldValue = this.format(this.localValue)
+      } else {
+        this.fieldValue = this.localValue
+      }
+    }
   },
   mounted() {
     this.escapeKeyHandler = (event) => {
@@ -192,7 +193,7 @@ export default {
         this.localValue = val
 
         if (this.localValueInitialized) {
-          this.$emit('update:model-value', val)
+          this.$emit('update:modelValue', val)
           // after saving value, trigger validations
           // this.$refs.textField.$refs.validationProvider.validate(this.fieldValue)
         }
