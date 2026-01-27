@@ -141,6 +141,51 @@ class ChecklistNodeTest extends TestCase {
         $this->assertEquals($targetCamp, $resultItem->checklist->getCamp());
     }
 
+    public function testCopyFromPrototypeAcrossCampsPrefersItemWithSameChecklistPrototypeId() {
+        // given
+        $this->checklistNodePrototype->addChecklistItem($this->itemPrototype1);
+        $this->checklistNodePrototype->addChecklistItem($this->itemPrototype3);
+        $targetCamp = new Camp();
+
+        $targetChecklist = new Checklist();
+        $targetChecklist->name = 'checklist';
+        $targetCamp->addChecklist($targetChecklist);
+
+        $targetChecklist2 = new Checklist();
+        $targetChecklist2->name = 'checklist with other name';
+        $targetCamp->addChecklist($targetChecklist2);
+
+        $targetChecklistItem1 = new ChecklistItem();
+        $targetChecklistItem1->text = 'item2';
+        $targetChecklist->addChecklistItem($targetChecklistItem1);
+        $targetChecklistItem2 = new ChecklistItem();
+        $targetChecklistItem2->text = 'item2';
+        $targetChecklist->addChecklistItem($targetChecklistItem2);
+        $targetChecklistItem3 = new ChecklistItem();
+        $targetChecklistItem3->text = 'item3';
+        $targetChecklistItem2->addChild($targetChecklistItem3);
+        $targetChecklist2->addChecklistItem($targetChecklistItem3);
+        $targetChecklistItem4 = new ChecklistItem();
+        $targetChecklistItem4->text = 'item3';
+        $targetChecklistItem1->addChild($targetChecklistItem4);
+        $targetChecklist->addChecklistItem($targetChecklistItem4);
+
+        $this->checklist->checklistPrototypeId = 'abc';
+        $targetChecklist->checklistPrototypeId = 'abc';
+        $targetChecklist2->checklistPrototypeId = 'def';
+
+        // when
+        $this->checklistNode->copyFromPrototype($this->checklistNodePrototype, new EntityMap($targetCamp));
+
+        // then
+        $this->assertCount(1, $this->checklistNode->getChecklistItems());
+        $resultItem = $this->checklistNode->getChecklistItems()[0];
+        $this->assertEquals($targetChecklistItem4, $resultItem);
+        $this->assertEquals($this->itemPrototype3->text, $resultItem->text);
+        $this->assertNotEquals($this->itemPrototype3->checklist->getCamp(), $resultItem->checklist->getCamp());
+        $this->assertEquals($targetCamp, $resultItem->checklist->getCamp());
+    }
+
     public function testCopyFromPrototypeAcrossCampsPrefersItemWithSameChecklistName() {
         // given
         $this->checklistNodePrototype->addChecklistItem($this->itemPrototype1);

@@ -149,6 +149,12 @@ class ChecklistNode extends ContentNode {
                         /** @var ChecklistItem $parent */
                         $parent = $parent->getParent();
                     }
+
+                    if ($existingItem->checklist->checklistPrototypeId !== $itemPrototype->checklist->checklistPrototypeId) {
+                        return $score;
+                    }
+                    ++$score;
+
                     if ($existingItem->checklist->name !== $itemPrototype->checklist->name) {
                         return $score;
                     }
