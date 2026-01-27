@@ -10,6 +10,7 @@ Displays a field as a time picker + write access via API wrapper
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
+      :variant="variant"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       :error-messages="wrapper.errorMessages"
       @update:model-value="wrapper.on.input"

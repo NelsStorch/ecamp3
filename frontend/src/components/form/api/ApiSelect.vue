@@ -15,6 +15,7 @@ Displays a field as a e-select + write access via API wrapper
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
+      :variant="variant"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       :dense="dense"
