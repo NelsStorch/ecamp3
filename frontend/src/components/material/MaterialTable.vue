@@ -109,7 +109,7 @@
         />
         <DialogMaterialItemEdit v-else :material-item-uri="item.uri">
           <template #activator="{ props }">
-            <ButtonEdit v-bind="props" class="v-btn--has-bg" small text />
+            <ButtonEdit v-bind="props" variant="tonal" small text />
           </template>
         </DialogMaterialItemEdit>
       </template>
