@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56bae75579152dc399c54b3c78a4c03c",
+    "content-hash": "79bca31882129bcfa5f6f9ec8327acca",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -98,16 +98,16 @@
         },
         {
             "name": "api-platform/doctrine-orm",
-            "version": "v4.2.13",
+            "version": "v4.2.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-orm.git",
-                "reference": "0a16719be88909fd0a3d1a49c75691c0dcbad254"
+                "reference": "7a7c5cb7261ead50481a9a2d8ef721e21ea97945"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/doctrine-orm/zipball/0a16719be88909fd0a3d1a49c75691c0dcbad254",
-                "reference": "0a16719be88909fd0a3d1a49c75691c0dcbad254",
+                "url": "https://api.github.com/repos/api-platform/doctrine-orm/zipball/7a7c5cb7261ead50481a9a2d8ef721e21ea97945",
+                "reference": "7a7c5cb7261ead50481a9a2d8ef721e21ea97945",
                 "shasum": ""
             },
             "require": {
@@ -179,13 +179,13 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.13"
+                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.14"
             },
-            "time": "2026-01-12T13:36:15+00:00"
+            "time": "2026-01-23T14:24:03+00:00"
         },
         {
             "name": "api-platform/documentation",
-            "version": "v4.2.14",
+            "version": "v4.2.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/documentation.git",
@@ -242,7 +242,7 @@
             ],
             "description": "API Platform documentation controller.",
             "support": {
-                "source": "https://github.com/api-platform/documentation/tree/v4.2.14"
+                "source": "https://github.com/api-platform/documentation/tree/v4.2.15"
             },
             "time": "2025-12-27T22:15:57+00:00"
         },
@@ -326,7 +326,7 @@
         },
         {
             "name": "api-platform/http-cache",
-            "version": "v4.2.14",
+            "version": "v4.2.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/http-cache.git",
@@ -400,7 +400,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/http-cache/tree/v4.2.14"
+                "source": "https://github.com/api-platform/http-cache/tree/v4.2.15"
             },
             "time": "2026-01-12T13:36:15+00:00"
         },
@@ -1114,16 +1114,16 @@
         },
         {
             "name": "api-platform/symfony",
-            "version": "v4.2.13",
+            "version": "v4.2.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/symfony.git",
-                "reference": "4ff4ef66768fa2b9d7d124a2096b095bad0289d4"
+                "reference": "31539dc26bd88f54e43d2d8a24613ff988307da1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/symfony/zipball/4ff4ef66768fa2b9d7d124a2096b095bad0289d4",
-                "reference": "4ff4ef66768fa2b9d7d124a2096b095bad0289d4",
+                "url": "https://api.github.com/repos/api-platform/symfony/zipball/31539dc26bd88f54e43d2d8a24613ff988307da1",
+                "reference": "31539dc26bd88f54e43d2d8a24613ff988307da1",
                 "shasum": ""
             },
             "require": {
@@ -1236,9 +1236,9 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/api-platform/symfony/tree/v4.2.13"
+                "source": "https://github.com/api-platform/symfony/tree/v4.2.14"
             },
-            "time": "2026-01-16T16:29:22+00:00"
+            "time": "2026-01-23T14:24:03+00:00"
         },
         {
             "name": "api-platform/validator",
