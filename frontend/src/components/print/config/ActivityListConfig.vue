@@ -54,6 +54,9 @@ export default {
         return this.filter.periods.includes(period._meta.self)
       })
     },
+    selectedScheduleEntries() {
+      return this.selectedPeriods.flatMap((period) => period.scheduleEntries().items)
+    },
   },
   defaultOptions(camp) {
     return {
@@ -64,9 +67,9 @@ export default {
   methods: {
     filterFn() {
       return (filter) =>
-        this.selectedPeriods
-          .flatMap((period) => period.scheduleEntries().items)
-          .filter((scheduleEntry) => filterMatchScheduleEntry(scheduleEntry, filter))
+        this.selectedScheduleEntries.filter((scheduleEntry) =>
+          filterMatchScheduleEntry(scheduleEntry, filter)
+        )
     },
     updateFilter(newFilter) {
       this.options.filter = newFilter
