@@ -103,6 +103,7 @@ export default {
     icon: { type: String, default: '', required: false },
     title: { type: String, default: '', required: false },
   },
+  emits: ['update:saving-override', 'update:model-value'],
   computed: {
     currentlySaving() {
       return this.isSaving || this.savingOverride

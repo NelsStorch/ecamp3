@@ -103,7 +103,7 @@ export default {
 
     maxWidth: { type: String, default: '600px', required: false },
   },
-  emits: ['update:model-value'],
+  emits: ['update:model-value', 'update:saving-override'],
   computed: {
     currentlySaving() {
       return this.isSaving || this.savingOverride
