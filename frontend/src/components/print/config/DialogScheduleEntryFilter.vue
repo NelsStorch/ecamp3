@@ -10,10 +10,10 @@
   >
     <template #activator="{ props }">
       <v-chip
-        :model-value="dialogOpen"
         label
         variant="outlined"
-        :color="anyFilter ? 'primary' : null"
+        :color="anyFilter ? 'primary' : 'secondary'"
+        border="sm"
         class="align-self-stretch mt-4 mb-4"
         v-bind="props"
       >
@@ -51,6 +51,7 @@ export default {
     hidePeriodFilter: { type: Boolean, default: false },
     hideDayFilter: { type: Boolean, default: false },
   },
+  emits: ['input'],
   data() {
     return {
       dialogOpen: false,
@@ -63,17 +64,12 @@ export default {
     },
     activatorLabel() {
       if (this.anyFilter)
-        return this.$t(
-          'components.print.config.dialogScheduleEntryFilter.filterActive',
-          1,
-          {
-            filtered: this.filteredCount,
-            total: this.filterFn({}).length,
-          }
-        )
+        return this.$t('components.print.config.dialogScheduleEntryFilter.filterActive', {
+          filtered: this.filteredCount,
+          total: this.filterFn({}).length,
+        })
       return this.$t(
         'components.print.config.dialogScheduleEntryFilter.filterActivities',
-        1,
         {
           total: this.filterFn({}).length,
         }
