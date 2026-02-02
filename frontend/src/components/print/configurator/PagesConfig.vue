@@ -37,10 +37,10 @@
         v-if="!template"
         :text="false"
         icon-only
-        color="grey"
-        dark
+        color="transparent"
         class="e-pages-config__delete px-2"
-        :class="{ 'rounded-l-0': !landscape, 'rounded-t-0': landscape }"
+        variant="flat"
+        :class="{ 'rounded-s-0': !landscape, 'rounded-t-0': landscape }"
         @click="$emit('remove')"
       />
     </div>
