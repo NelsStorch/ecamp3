@@ -89,30 +89,32 @@
       <DownloadClientPdfButton :config="cnf" />
     </v-card-text>
 
-    <v-tabs v-if="isDev" v-model="previewTab" class="px-4">
-      <v-tab>Nuxt preview</v-tab>
-      <v-tab>Client print preview</v-tab>
-    </v-tabs>
-    <v-tabs-window v-model="previewTab">
-      <v-tabs-window-item>
-        <print-preview-nuxt
-          v-if="previewTab === 0"
-          :config="cnf"
-          width="100%"
-          height="600"
-          class="my-4"
-        />
-      </v-tabs-window-item>
-      <v-tabs-window-item>
-        <print-preview-client
-          v-if="previewTab === 1"
-          :config="cnf"
-          width="100%"
-          height="600"
-          class="my-4"
-        />
-      </v-tabs-window-item>
-    </v-tabs-window>
+    <template v-if="isDev">
+      <v-tabs v-model="previewTab" class="px-4">
+        <v-tab>Nuxt preview</v-tab>
+        <v-tab>Client print preview</v-tab>
+      </v-tabs>
+      <v-tabs-window v-model="previewTab">
+        <v-tabs-window-item>
+          <print-preview-nuxt
+            v-if="previewTab === 0"
+            :config="cnf"
+            width="100%"
+            height="600"
+            class="my-4"
+          />
+        </v-tabs-window-item>
+        <v-tabs-window-item>
+          <print-preview-client
+            v-if="previewTab === 1"
+            :config="cnf"
+            width="100%"
+            height="600"
+            class="my-4"
+          />
+        </v-tabs-window-item>
+      </v-tabs-window>
+    </template>
   </div>
 </template>
 
