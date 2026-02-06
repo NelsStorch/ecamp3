@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use App\Entity\ContentType;
 use App\Metadata\Resource\Factory\UriTemplateFactory;
 use App\Serializer\Normalizer\ContentTypeNormalizer;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Rize\UriTemplate;
@@ -15,6 +16,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class ContentTypeNormalizerTest extends TestCase {
     private ContentTypeNormalizer $normalizer;
 

@@ -5,12 +5,14 @@ namespace App\Tests\Serializer;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\Property\Factory\PropertyMetadataFactoryInterface;
 use App\Serializer\PreventAutomaticEmbeddingPropertyMetadataFactory;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\TypeInfo\Type;
 
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class PreventAutomaticEmbeddingPropertyMetadataFactoryTest extends TestCase {
     public function testCreateResetsReadableLinkAndWritableLinkToNull() {
         // given

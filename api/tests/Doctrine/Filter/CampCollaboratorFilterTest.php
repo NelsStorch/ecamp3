@@ -10,12 +10,14 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class CampCollaboratorFilterTest extends TestCase {
     private ManagerRegistry|MockObject $managerRegistryMock;
     private MockObject|QueryBuilder $queryBuilderMock;
@@ -24,10 +26,10 @@ class CampCollaboratorFilterTest extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->managerRegistryMock = $this->createMock(ManagerRegistry::class);
-        $entityManagerMock = $this->createMock(EntityManager::class);
+        $this->managerRegistryMock = $this->createStub(ManagerRegistry::class);
+        $entityManagerMock = $this->createStub(EntityManager::class);
         $this->queryBuilderMock = $this->createMock(QueryBuilder::class);
-        $this->queryNameGeneratorInterfaceMock = $this->createMock(QueryNameGeneratorInterface::class);
+        $this->queryNameGeneratorInterfaceMock = $this->createStub(QueryNameGeneratorInterface::class);
         $this->iriConverterMock = $this->createMock(IriConverterInterface::class);
 
         $entityManagerMock

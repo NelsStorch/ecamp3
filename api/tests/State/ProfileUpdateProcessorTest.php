@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use App\Service\ClaimInvitationService;
 use App\Service\MailService;
 use App\State\ProfileUpdateProcessor;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -19,6 +20,7 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class ProfileUpdateProcessorTest extends TestCase {
     private ProfileUpdateProcessor $processor;
     private MockObject|PasswordHasherInterface $pwHasher;

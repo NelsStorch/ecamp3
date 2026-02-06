@@ -30,9 +30,9 @@ class CampRoleVoterTest extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->token = $this->createMock(TokenInterface::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
-        $this->responseTagger = $this->createMock(ResponseTagger::class);
+        $this->token = $this->createStub(TokenInterface::class);
+        $this->em = $this->createStub(EntityManagerInterface::class);
+        $this->responseTagger = $this->createStub(ResponseTagger::class);
         $this->voter = new CampRoleVoter($this->em, $this->responseTagger);
     }
 
@@ -80,7 +80,7 @@ class CampRoleVoterTest extends TestCase {
     public function testDeniesAccessWhenGetCampYieldsNull() {
         // given
         $this->token->method('getUser')->willReturn(new User());
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn(null);
 
         // when
@@ -93,7 +93,7 @@ class CampRoleVoterTest extends TestCase {
     public function testDeniesAccessWhenGetCampYieldsNullAndNotLoggedIn() {
         // given
         $this->token->method('getUser')->willReturn(null);
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn(null);
 
         // when
@@ -105,11 +105,11 @@ class CampRoleVoterTest extends TestCase {
 
     public function testDeniesAccessWhenNoCampCollaborations() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $camp = new Camp();
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         // when
@@ -121,9 +121,9 @@ class CampRoleVoterTest extends TestCase {
 
     public function testDeniesAccessWhenNoMatchingCampCollaboration() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
-        $user2 = $this->createMock(User::class);
+        $user2 = $this->createStub(User::class);
         $user2->method('getId')->willReturn('otherIdFromTest');
         $this->token->method('getUser')->willReturn($user);
         $collaboration = new CampCollaboration();
@@ -132,7 +132,7 @@ class CampRoleVoterTest extends TestCase {
         $collaboration->role = CampCollaboration::ROLE_MANAGER;
         $camp = new Camp();
         $camp->collaborations->add($collaboration);
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         // when
@@ -144,9 +144,9 @@ class CampRoleVoterTest extends TestCase {
 
     public function testDeniesAccessWhenMatchingCampCollaborationIsInvitation() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
-        $user2 = $this->createMock(User::class);
+        $user2 = $this->createStub(User::class);
         $user2->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $collaboration = new CampCollaboration();
@@ -155,7 +155,7 @@ class CampRoleVoterTest extends TestCase {
         $collaboration->role = CampCollaboration::ROLE_MANAGER;
         $camp = new Camp();
         $camp->collaborations->add($collaboration);
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         // when
@@ -167,9 +167,9 @@ class CampRoleVoterTest extends TestCase {
 
     public function testDeniesAccessWhenMatchingCampCollaborationIsInactive() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
-        $user2 = $this->createMock(User::class);
+        $user2 = $this->createStub(User::class);
         $user2->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $collaboration = new CampCollaboration();
@@ -178,7 +178,7 @@ class CampRoleVoterTest extends TestCase {
         $collaboration->role = CampCollaboration::ROLE_MANAGER;
         $camp = new Camp();
         $camp->collaborations->add($collaboration);
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         // when
@@ -190,9 +190,9 @@ class CampRoleVoterTest extends TestCase {
 
     public function testDeniesAccessWhenRolesDontMatch() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
-        $user2 = $this->createMock(User::class);
+        $user2 = $this->createStub(User::class);
         $user2->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $collaboration = new CampCollaboration();
@@ -201,7 +201,7 @@ class CampRoleVoterTest extends TestCase {
         $collaboration->role = CampCollaboration::ROLE_GUEST;
         $camp = new Camp();
         $camp->collaborations->add($collaboration);
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         // when
@@ -213,9 +213,9 @@ class CampRoleVoterTest extends TestCase {
 
     public function testGrantsAccessViaBelongsToCampInterface() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
-        $user2 = $this->createMock(User::class);
+        $user2 = $this->createStub(User::class);
         $user2->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $collaboration = new CampCollaboration();
@@ -224,10 +224,12 @@ class CampRoleVoterTest extends TestCase {
         $collaboration->role = CampCollaboration::ROLE_MANAGER;
         $camp = new Camp();
         $camp->collaborations->add($collaboration);
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
+        $this->responseTagger = $this->createMock(ResponseTagger::class);
         $this->responseTagger->expects($this->once())->method('addTags')->with([$collaboration->getId()]);
+        $this->voter = new CampRoleVoter($this->em, $this->responseTagger);
 
         // when
         $result = $this->voter->vote($this->token, $subject, ['CAMP_COLLABORATOR']);
@@ -238,9 +240,9 @@ class CampRoleVoterTest extends TestCase {
 
     public function testGrantsAccessViaBelongsToContentNodeTreeInterface() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
-        $user2 = $this->createMock(User::class);
+        $user2 = $this->createStub(User::class);
         $user2->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $collaboration = new CampCollaboration();
@@ -249,12 +251,12 @@ class CampRoleVoterTest extends TestCase {
         $collaboration->role = CampCollaboration::ROLE_MANAGER;
         $camp = new Camp();
         $camp->collaborations->add($collaboration);
-        $activity = $this->createMock(Activity::class);
+        $activity = $this->createStub(Activity::class);
         $activity->method('getCamp')->willReturn($camp);
-        $root = $this->createMock(ColumnLayout::class);
-        $subject = $this->createMock(ContentNodeTreeDummy2::class);
+        $root = $this->createStub(ColumnLayout::class);
+        $subject = $this->createStub(ContentNodeTreeDummy2::class);
         $subject->method('getRoot')->willReturn($root);
-        $repository = $this->createMock(EntityRepository::class);
+        $repository = $this->createStub(EntityRepository::class);
         $this->em->method('getRepository')->willReturn($repository);
         $repository->method('findOneBy')->willReturn($activity);
 

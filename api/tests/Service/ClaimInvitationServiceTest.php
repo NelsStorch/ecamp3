@@ -9,11 +9,13 @@ use App\Repository\CampCollaborationRepository;
 use App\Service\ClaimInvitationService;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class ClaimInvitationServiceTest extends KernelTestCase {
     private CampCollaborationRepository $campCollaborationRepository;
     private EntityManagerInterface $em;

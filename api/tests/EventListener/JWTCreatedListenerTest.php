@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use App\Entity\User;
 use App\EventListener\JWTCreatedListener;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -54,6 +55,7 @@ class JWTCreatedListenerTest extends TestCase {
         $this->jwtCreatedListener->onJWTCreated($event);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testOnJWTCreatedDoesNothingIfNoUserIsFound() {
         // given
         $event = $this->createMock(JWTCreatedEvent::class);

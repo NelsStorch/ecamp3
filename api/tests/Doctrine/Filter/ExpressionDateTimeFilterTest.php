@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -15,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class ExpressionDateTimeFilterTest extends TestCase {
     private ManagerRegistry|MockObject $managerRegistryMock;
     private MockObject|QueryBuilder $queryBuilderMock;
@@ -22,9 +24,9 @@ class ExpressionDateTimeFilterTest extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->managerRegistryMock = $this->createMock(ManagerRegistry::class);
+        $this->managerRegistryMock = $this->createStub(ManagerRegistry::class);
         $this->queryBuilderMock = $this->createMock(QueryBuilder::class);
-        $this->queryNameGeneratorInterfaceMock = $this->createMock(QueryNameGeneratorInterface::class);
+        $this->queryNameGeneratorInterfaceMock = $this->createStub(QueryNameGeneratorInterface::class);
 
         $this->queryBuilderMock
             ->method('getRootAliases')
@@ -46,7 +48,7 @@ class ExpressionDateTimeFilterTest extends TestCase {
         ;
 
         $classMetadata = $this->createStub(ClassMetadata::class);
-        $objectManager = $this->createMock(ObjectManager::class);
+        $objectManager = $this->createStub(ObjectManager::class);
 
         $this->managerRegistryMock->method('getManagerForClass')->willReturn($objectManager);
         $objectManager->method('getClassMetadata')->willReturn($classMetadata);

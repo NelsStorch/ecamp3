@@ -9,6 +9,7 @@ use App\Entity\Activity;
 use App\Entity\Camp;
 use App\Metadata\Resource\Factory\UriTemplateFactory;
 use App\Serializer\Normalizer\UriTemplateNormalizer;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -17,6 +18,7 @@ use Symfony\Component\String\Inflector\EnglishInflector;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class UriTemplateNormalizerTest extends TestCase {
     private UriTemplateNormalizer $uriTemplateNormalizer;
     private MockObject|NormalizerInterface $decorated;

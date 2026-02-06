@@ -13,6 +13,7 @@ use KnpU\OAuth2ClientBundle\Exception\InvalidStateException;
 use League\OAuth2\Client\Token\AccessToken;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class JWTStateOAuth2ClientTest extends TestCase {
     public function testGetCookieName() {
         // given
@@ -34,10 +36,10 @@ class JWTStateOAuth2ClientTest extends TestCase {
 
     public function testRedirect() {
         // given
-        $providerMock = $this->createMock(Hitobito::class);
+        $providerMock = $this->createStub(Hitobito::class);
         $providerMock->method('getAuthorizationUrl')->willReturn('/some-url');
 
-        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock = $this->createStub(RequestStack::class);
 
         $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
         $jwtEncoderMock->expects($this->once())
@@ -53,9 +55,9 @@ class JWTStateOAuth2ClientTest extends TestCase {
             ->willReturn('my encoded JWT value')
         ;
 
-        $entityManagerMock = $this->createMock(EntityManagerInterface::class);
+        $entityManagerMock = $this->createStub(EntityManagerInterface::class);
 
-        $repositoryMock = $this->createMock(OAuthStateRepository::class);
+        $repositoryMock = $this->createStub(OAuthStateRepository::class);
 
         $client = new JWTStateOAuth2Client(
             $providerMock,
@@ -81,12 +83,12 @@ class JWTStateOAuth2ClientTest extends TestCase {
 
     public function testRedirectPersistsStateToTheDatabase() {
         // given
-        $providerMock = $this->createMock(Hitobito::class);
+        $providerMock = $this->createStub(Hitobito::class);
         $providerMock->method('getAuthorizationUrl')->willReturn('/some-url');
 
-        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock = $this->createStub(RequestStack::class);
 
-        $jwtEncoderMock = $this->createMock(JWTEncoderInterface::class);
+        $jwtEncoderMock = $this->createStub(JWTEncoderInterface::class);
         $jwtEncoderMock->method('encode')->willReturn('my encoded JWT value');
 
         $entityManagerMock = $this->createMock(EntityManagerInterface::class);
@@ -119,11 +121,11 @@ class JWTStateOAuth2ClientTest extends TestCase {
         // given
         $state = 'test value';
 
-        $providerMock = $this->createMock(Hitobito::class);
+        $providerMock = $this->createStub(Hitobito::class);
         $providerMock->method('getAccessToken')->willReturn(new AccessToken(['access_token' => 'test access token']));
 
-        $requestMock = $this->createMock(Request::class);
-        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestMock = $this->createStub(Request::class);
+        $requestStackMock = $this->createStub(RequestStack::class);
         $requestStackMock->method('getCurrentRequest')->willReturn($requestMock);
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
@@ -137,11 +139,11 @@ class JWTStateOAuth2ClientTest extends TestCase {
             ->willReturn(['state' => $state])
         ;
 
-        $repositoryMock = $this->createMock(OAuthStateRepository::class);
+        $repositoryMock = $this->createStub(OAuthStateRepository::class);
         $oAuthState = new OAuthState();
         $repositoryMock->method('findOneUnexpiredBy')->willReturn($oAuthState);
 
-        $entityManagerMock = $this->createMock(EntityManagerInterface::class);
+        $entityManagerMock = $this->createStub(EntityManagerInterface::class);
 
         $client = new JWTStateOAuth2Client(
             $providerMock,
@@ -164,11 +166,11 @@ class JWTStateOAuth2ClientTest extends TestCase {
         // given
         $state = 'test value';
 
-        $providerMock = $this->createMock(Hitobito::class);
+        $providerMock = $this->createStub(Hitobito::class);
         $providerMock->method('getAccessToken')->willReturn(new AccessToken(['access_token' => 'test access token']));
 
-        $requestMock = $this->createMock(Request::class);
-        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestMock = $this->createStub(Request::class);
+        $requestStackMock = $this->createStub(RequestStack::class);
         $requestStackMock->method('getCurrentRequest')->willReturn($requestMock);
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
@@ -182,11 +184,11 @@ class JWTStateOAuth2ClientTest extends TestCase {
             ->willThrowException(new JWTDecodeFailureException('', ''))
         ;
 
-        $repositoryMock = $this->createMock(OAuthStateRepository::class);
+        $repositoryMock = $this->createStub(OAuthStateRepository::class);
         $oAuthState = new OAuthState();
         $repositoryMock->method('findOneUnexpiredBy')->willReturn($oAuthState);
 
-        $entityManagerMock = $this->createMock(EntityManagerInterface::class);
+        $entityManagerMock = $this->createStub(EntityManagerInterface::class);
 
         $client = new JWTStateOAuth2Client(
             $providerMock,
@@ -209,11 +211,11 @@ class JWTStateOAuth2ClientTest extends TestCase {
         // given
         $state = 'test value';
 
-        $providerMock = $this->createMock(Hitobito::class);
+        $providerMock = $this->createStub(Hitobito::class);
         $providerMock->method('getAccessToken')->willReturn(new AccessToken(['access_token' => 'test access token']));
 
-        $requestMock = $this->createMock(Request::class);
-        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestMock = $this->createStub(Request::class);
+        $requestStackMock = $this->createStub(RequestStack::class);
         $requestStackMock->method('getCurrentRequest')->willReturn($requestMock);
         $cookieBag = new InputBag();
         $cookieBag->set('test_prefix_oauth_state_jwt', 'test jwt value');
@@ -227,11 +229,11 @@ class JWTStateOAuth2ClientTest extends TestCase {
             ->willReturn(['state' => 'something unexpected'])
         ;
 
-        $repositoryMock = $this->createMock(OAuthStateRepository::class);
+        $repositoryMock = $this->createStub(OAuthStateRepository::class);
         $oAuthState = new OAuthState();
         $repositoryMock->method('findOneUnexpiredBy')->willReturn($oAuthState);
 
-        $entityManagerMock = $this->createMock(EntityManagerInterface::class);
+        $entityManagerMock = $this->createStub(EntityManagerInterface::class);
 
         $client = new JWTStateOAuth2Client(
             $providerMock,

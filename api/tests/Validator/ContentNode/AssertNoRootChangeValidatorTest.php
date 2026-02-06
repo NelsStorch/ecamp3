@@ -37,7 +37,7 @@ class AssertNoRootChangeValidatorTest extends ConstraintValidatorTestCase {
 
     public function testExpectsContentNodeObject() {
         // given
-        $camp = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
         $camp->method('getId')->willReturn('idfromtest');
         $child = new ChildTestClass($camp);
 
@@ -67,7 +67,7 @@ class AssertNoRootChangeValidatorTest extends ConstraintValidatorTestCase {
         $current->parent = null;
         $this->setProperty($current, 'parent');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $request->attributes = new ParameterBag(['previous_data' => $previous]);
         $this->requestStack->method('getCurrentRequest')->willReturn($request);
 
@@ -107,7 +107,7 @@ class AssertNoRootChangeValidatorTest extends ConstraintValidatorTestCase {
 
     public function testInvalid() {
         // given
-        $category = $this->createMock(Category::class);
+        $category = $this->createStub(Category::class);
         $category->method('getId')->willReturn('anotheridfromtest');
         $root = new ColumnLayout();
         $root->root = $root;
@@ -129,7 +129,7 @@ class AssertNoRootChangeValidatorTest extends ConstraintValidatorTestCase {
     }
 
     protected function createValidator(): ConstraintValidatorInterface {
-        $this->requestStack = $this->createMock(RequestStack::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
 
         return new AssertNoRootChangeValidator($this->requestStack);
     }

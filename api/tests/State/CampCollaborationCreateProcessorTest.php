@@ -14,6 +14,7 @@ use App\Repository\ProfileRepository;
 use App\Service\MailService;
 use App\State\CampCollaborationCreateProcessor;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -24,6 +25,7 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class CampCollaborationCreateProcessorTest extends TestCase {
     use CampCollaborationTestTrait;
 

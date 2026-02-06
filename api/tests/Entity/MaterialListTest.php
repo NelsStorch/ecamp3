@@ -20,7 +20,7 @@ class MaterialListTest extends TestCase {
     private CampCollaboration $campCollaboration;
 
     protected function setUp(): void {
-        $this->user = $this->createMock(User::class);
+        $this->user = $this->createStub(User::class);
         $this->user->method('getDisplayName')->willReturn(self::USER_DISPLAY_NAME);
         $this->campCollaboration = new CampCollaboration();
     }

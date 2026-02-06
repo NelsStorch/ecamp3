@@ -24,7 +24,7 @@ class AssertContentTypeCompatibleValidatorTest extends ConstraintValidatorTestCa
 
     public function testExpectsContentNodeObject() {
         // given
-        $contentType = $this->createMock(ContentType::class);
+        $contentType = $this->createStub(ContentType::class);
         $this->setObject(new \stdClass());
 
         // then
@@ -36,7 +36,7 @@ class AssertContentTypeCompatibleValidatorTest extends ConstraintValidatorTestCa
 
     public function testExpectsContentTypeValue() {
         // given
-        $contentType = $this->createMock(Camp::class);
+        $contentType = $this->createStub(Camp::class);
         $contentNode = new ColumnLayout();
         $this->setObject($contentNode);
 
@@ -49,7 +49,7 @@ class AssertContentTypeCompatibleValidatorTest extends ConstraintValidatorTestCa
 
     public function testValid() {
         // given
-        $contentType = $this->createMock(ContentType::class);
+        $contentType = $this->createStub(ContentType::class);
         $contentType->entityClass = ColumnLayout::class;
 
         $contentNode = new ColumnLayout();
@@ -65,7 +65,7 @@ class AssertContentTypeCompatibleValidatorTest extends ConstraintValidatorTestCa
 
     public function testInvalid() {
         // given
-        $contentType = $this->createMock(ContentType::class);
+        $contentType = $this->createStub(ContentType::class);
         $contentType->name = 'DummyContentType';
         $contentType->entityClass = 'App\Entity\DummyEntity';
 

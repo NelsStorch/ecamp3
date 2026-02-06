@@ -72,7 +72,7 @@ class AssertColumWidthsSumTo12ValidatorTest extends ConstraintValidatorTestCase 
     }
 
     protected function createValidator(): ConstraintValidatorInterface {
-        $this->requestStack = $this->createMock(RequestStack::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
 
         return new AssertColumWidthsSumTo12Validator($this->requestStack);
     }

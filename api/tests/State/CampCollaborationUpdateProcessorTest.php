@@ -9,6 +9,7 @@ use App\Entity\Profile;
 use App\Entity\User;
 use App\Service\MailService;
 use App\State\CampCollaborationUpdateProcessor;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -18,6 +19,7 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class CampCollaborationUpdateProcessorTest extends TestCase {
     use CampCollaborationTestTrait;
 
