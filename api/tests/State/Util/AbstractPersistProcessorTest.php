@@ -9,7 +9,7 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Entity\BaseEntity;
 use App\State\Util\AbstractPersistProcessor;
 use App\State\Util\PropertyChangeListener;
-use PHPUnit\Framework\MockObject\Exception;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -72,12 +72,14 @@ class AbstractPersistProcessorTest extends TestCase {
     /**
      * @throws Exception
      */
+    #[AllowMockObjectsWithoutExpectations]
     public function testThrowsIfOnePropertyChangeListenerIsOfWrongType() {
         $this->expectException(\InvalidArgumentException::class);
 
-        new MyEntityPersistProcessor($this->createMock(ProcessorInterface::class), [$this->propertyChangeListener, new \stdClass()], $this->onBefore, $this->onAfter);
+        new MyEntityPersistProcessor($this->createStub(ProcessorInterface::class), [$this->propertyChangeListener, new \stdClass()], $this->onBefore, $this->onAfter);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCallsOnBeforeCreateAndOnAfterCreateOnPost() {
         $toPersist = new MyEntity();
 
@@ -92,6 +94,7 @@ class AbstractPersistProcessorTest extends TestCase {
     /**
      * @throws \ReflectionException
      */
+    #[AllowMockObjectsWithoutExpectations]
     public function testNotCallPropertyChangeListenerIfDataWasNullBefore() {
         $toPersist = new MyEntity();
 
@@ -109,6 +112,7 @@ class AbstractPersistProcessorTest extends TestCase {
     /**
      * @throws \ReflectionException
      */
+    #[AllowMockObjectsWithoutExpectations]
     public function testThrowErrorIfExtractPropertyFails() {
         $toPersist = new MyEmptyEntity();
 
@@ -126,6 +130,7 @@ class AbstractPersistProcessorTest extends TestCase {
     /**
      * @throws \ReflectionException
      */
+    #[AllowMockObjectsWithoutExpectations]
     public function testNotCallPropertyChangeListenerIfPropertyDidNotChange() {
         $toPersist = new MyEntity();
         $toPersist->name = null;
@@ -144,6 +149,7 @@ class AbstractPersistProcessorTest extends TestCase {
     /**
      * @throws \ReflectionException
      */
+    #[AllowMockObjectsWithoutExpectations]
     public function testCallPropertyChangeListenerIfPropertyDidChange() {
         $oldData = new MyEntity();
         $oldData->name = null;

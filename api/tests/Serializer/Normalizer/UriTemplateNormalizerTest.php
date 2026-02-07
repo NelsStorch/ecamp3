@@ -18,7 +18,6 @@ use Symfony\Component\String\Inflector\EnglishInflector;
 /**
  * @internal
  */
-#[AllowMockObjectsWithoutExpectations]
 class UriTemplateNormalizerTest extends TestCase {
     private UriTemplateNormalizer $uriTemplateNormalizer;
     private MockObject|NormalizerInterface $decorated;
@@ -85,6 +84,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ];
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateNotTemplatedLinkIfNoParameters() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [
@@ -113,6 +113,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateTemplatedLinkIfPathParameters() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [
@@ -142,6 +143,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateTemplatedLinkForQueryParameters() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [
@@ -171,6 +173,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testMergePathAndQueryParameter() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [

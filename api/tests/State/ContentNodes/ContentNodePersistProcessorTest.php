@@ -18,7 +18,7 @@ class ContentNodePersistProcessorTest extends TestCase {
     private ColumnLayout $contentNode;
 
     protected function setUp(): void {
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
 
         $this->contentNode = new ColumnLayout();
 

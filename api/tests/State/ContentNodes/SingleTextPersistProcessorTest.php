@@ -28,8 +28,8 @@ class SingleTextPersistProcessorTest extends TestCase {
      * @throws Exception
      */
     protected function setUp(): void {
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
-        $cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
+        $cleanHTMLFilter = $this->createStub(CleanHTMLFilter::class);
         $cleanHTMLFilter->method('applyTo')->willReturnCallback(
             function (array $object, string $property): array {
                 $object[$property] = '***sanitizedHTML***';

@@ -25,7 +25,7 @@ class CampRemoveProcessorTest extends TestCase {
         $this->camp = new Camp();
 
         $this->em = $this->createMock(EntityManagerInterface::class);
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->processor = new CampRemoveProcessor($decoratedProcessor, $this->em);
     }
 

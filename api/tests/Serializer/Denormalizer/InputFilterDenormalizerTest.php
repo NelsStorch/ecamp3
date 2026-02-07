@@ -8,6 +8,7 @@ use App\InputFilter\InputFilter;
 use App\Serializer\Denormalizer\InputFilterDenormalizer;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -26,7 +27,7 @@ class InputFilterDenormalizerTest extends TestCase {
     private $decoratedMock;
 
     protected function setUp(): void {
-        $inputFilterLocatorMock = $this->createMock(ServiceLocator::class);
+        $inputFilterLocatorMock = $this->createStub(ServiceLocator::class);
         $inputFilterLocatorMock->method('get')->willReturnCallback(function (string $name): mixed {
             return new $name();
         });
@@ -58,6 +59,7 @@ class InputFilterDenormalizerTest extends TestCase {
         $this->assertEquals(['ab' => 'xxxAB', 'ba' => 'yyyBA'], $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testSupportsValidArray() {
         $this->assertTrue(
             $this->denormalizer->supportsDenormalization(
@@ -69,6 +71,7 @@ class InputFilterDenormalizerTest extends TestCase {
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDoesntSupportNonArray() {
         $this->assertFalse(
             $this->denormalizer->supportsDenormalization(

@@ -51,10 +51,10 @@ class CampCollaborationResendInvitationProcessorTest extends TestCase {
         $profile->user = $this->user;
         $this->user->profile = $profile;
 
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
-        $security = $this->createMock(Security::class);
-        $security->expects(self::any())->method('getUser')->willReturn($this->user);
-        $pwHashFactory = $this->createMock(PasswordHasherFactory::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
+        $security = $this->createStub(Security::class);
+        $security->method('getUser')->willReturn($this->user);
+        $pwHashFactory = $this->createStub(PasswordHasherFactory::class);
         $this->mailService = $this->createMock(MailService::class);
 
         $this->processor = new CampCollaborationResendInvitationProcessor(

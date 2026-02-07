@@ -21,9 +21,9 @@ class StoryboardPersistProcessorTest extends TestCase {
     private Storyboard $contentNode;
 
     protected function setUp(): void {
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
 
-        $cleanHTMLFilter = $this->createMock(CleanHTMLFilter::class);
+        $cleanHTMLFilter = $this->createStub(CleanHTMLFilter::class);
         $cleanHTMLFilter->method('applyTo')->willReturnCallback(
             function (array $object, string $property): array {
                 $object[$property] = '***sanitizedHTML***';
@@ -32,7 +32,7 @@ class StoryboardPersistProcessorTest extends TestCase {
             }
         );
 
-        $cleanTextFilter = $this->createMock(CleanTextFilter::class);
+        $cleanTextFilter = $this->createStub(CleanTextFilter::class);
         $cleanTextFilter->method('applyTo')->willReturnCallback(
             function (array $object, string $property): array {
                 $object[$property] = '***sanitizedText***';
@@ -127,7 +127,6 @@ class StoryboardPersistProcessorTest extends TestCase {
         /** @var Storyboard $data */
         $data = $this->processor->onBefore($this->contentNode, new Patch());
 
-        // then
         // then
         $this->assertEquals(['sections' => [
             '37bbd7b8-441e-403e-b227-70ea52170b9b' => [
