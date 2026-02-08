@@ -20,7 +20,7 @@ class MultiSelectCreateProcessorTest extends TestCase {
     private MultiSelect $contentNode;
 
     protected function setUp(): void {
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->contentNode = new MultiSelect();
 
         $this->root = new ColumnLayout();

@@ -10,6 +10,7 @@ use App\Security\ReCaptcha\ReCaptchaWrapper;
 use App\Service\MailService;
 use App\State\ResetPasswordCreateProcessor;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReCaptcha\Response;
@@ -38,7 +39,7 @@ class ResetPasswordCreateProcessorTest extends TestCase {
 
         $this->recaptchaResponse = $this->createMock(Response::class);
         $recaptcha = $this->createMock(ReCaptchaWrapper::class);
-        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityManager = $this->createStub(EntityManagerInterface::class);
         $this->userRepository = $this->createMock(UserRepository::class);
         $pwHasherFactory = $this->createMock(PasswordHasherFactory::class);
         $this->pwHasher = $this->createMock(PasswordHasherInterface::class);
@@ -63,6 +64,7 @@ class ResetPasswordCreateProcessorTest extends TestCase {
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateRequiresReCaptcha() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -74,6 +76,7 @@ class ResetPasswordCreateProcessorTest extends TestCase {
         $this->processor->process($this->resetPassword, new Post());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateWithUnknownEmailDoesNotCreateResetKey() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -95,6 +98,7 @@ class ResetPasswordCreateProcessorTest extends TestCase {
         self::assertThat($data, self::isNull());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateWithKnowneMailCreatesResetKey() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')

@@ -25,7 +25,6 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 /**
  * @internal
  */
-#[AllowMockObjectsWithoutExpectations]
 class CampCollaborationCreateProcessorTest extends TestCase {
     use CampCollaborationTestTrait;
 
@@ -65,14 +64,14 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         $this->profile->user = $this->user;
         $this->user->profile = $this->profile;
 
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->security = $this->createMock(Security::class);
         $this->security->expects(self::any())->method('getUser')->willReturn($this->user);
-        $pwHashFactory = $this->createMock(PasswordHasherFactory::class);
+        $pwHashFactory = $this->createStub(PasswordHasherFactory::class);
         $this->profileRepository = $this->createMock(ProfileRepository::class);
         $this->em = $this->createMock(EntityManagerInterface::class);
         $this->mailService = $this->createMock(MailService::class);
-        $validator = $this->createMock(ValidatorInterface::class);
+        $validator = $this->createStub(ValidatorInterface::class);
 
         $this->processor = new CampCollaborationCreateProcessor(
             $decoratedProcessor,
@@ -85,6 +84,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testAfterCreateSendsEmailIfInviteEmailSet() {
         $this->campCollaboration->inviteEmail = 'e@mail.com';
 
@@ -94,6 +94,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         $this->processor->onAfter($result, new Post());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testAfterCreateCreatesMaterialList() {
         $this->campCollaboration->inviteEmail = 'e@mail.com';
         $this->security->expects(self::once())->method('getUser')->willReturn($this->user);
@@ -108,6 +109,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         $this->processor->onAfter($result, new Post());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testAfterCreateSendsEmailIfUserSet() {
         $this->campCollaboration->inviteEmail = 'e@mail.com';
         $this->profileRepository
@@ -124,6 +126,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         $this->processor->onAfter($result, new Post());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testAfterCreateDoesNotSendEmailIfNoInviteEmailSet() {
         $this->mailService->expects(self::never())->method('sendInviteToCampMail');
 
@@ -131,6 +134,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
         $this->processor->onAfter($result, new Post());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     #[DataProvider('notInvitedStatuses')]
     public function testAfterCreateDoesNotSendEmailIfStatusNotInvited(string $status) {
         $this->campCollaboration->inviteEmail = 'e@mail.com';

@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Security\ReCaptcha\ReCaptchaWrapper;
 use App\State\ResetPasswordUpdateProcessor;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -38,7 +39,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
 
         $this->recaptchaResponse = $this->createMock(Response::class);
         $recaptcha = $this->createMock(ReCaptchaWrapper::class);
-        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityManager = $this->createStub(EntityManagerInterface::class);
         $this->userRepository = $this->createMock(UserRepository::class);
         $pwHasherFactory = $this->createMock(PasswordHasherFactory::class);
         $this->pwHasher = $this->createMock(PasswordHasherInterface::class);
@@ -61,6 +62,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testUpdateRequiresReCaptcha() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -72,6 +74,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         $this->processor->process($this->resetPassword, new Patch());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testUpdateWithUnknownEmailThrowsException() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -89,6 +92,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         $this->processor->process($this->resetPassword, new Patch());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testUpdateWithUserHasNoResetKeyThrowsException() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -108,6 +112,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         $this->processor->process($this->resetPassword, new Patch());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testUpdateWithWrongResetKeyThrowsException() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -133,6 +138,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         $this->processor->process($this->resetPassword, new Patch());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testUpdateWithCorrectResetKey() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -167,6 +173,7 @@ class ResetPasswordUpdateProcessorTest extends TestCase {
         self::assertThat($user->state, self::equalTo(User::STATE_ACTIVATED));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     #[TestWith([User::STATE_DELETED])]
     #[TestWith([User::STATE_ACTIVATED])]
     public function testUpdateWithCorrectResetKeyDoesNotChangeActivatedOrDeletedUsers(string $state) {

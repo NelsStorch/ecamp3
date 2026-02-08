@@ -28,7 +28,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testAddsSkipNullValuesFalseWhenNormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')
@@ -47,7 +47,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testDoesntAddSkipNullValuesFalseWhenDenormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')
@@ -60,7 +60,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testDoesntAddAllowExtraAttributesFalseWhenNormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')
@@ -73,7 +73,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testAddsAllowExtraAttributesFalseWhenDenormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')

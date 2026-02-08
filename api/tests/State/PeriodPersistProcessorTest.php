@@ -48,7 +48,7 @@ class PeriodPersistProcessorTest extends TestCase {
         $this->dayResponsible = new DayResponsible();
         $day2->addDayResponsible($this->dayResponsible);
 
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
 
         $this->processor = new PeriodPersistProcessor(
             $decoratedProcessor

@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Security\ReCaptcha\ReCaptchaWrapper;
 use App\Service\MailService;
 use App\State\UserCreateProcessor;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReCaptcha\Response;
@@ -39,7 +40,7 @@ class UserCreateProcessorTest extends TestCase {
 
         $this->userPasswordHasher = $this->createMock(UserPasswordHasher::class);
         $this->mailService = $this->createMock(MailService::class);
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->processor = new UserCreateProcessor(
             $decoratedProcessor,
             $recaptcha,
@@ -48,6 +49,7 @@ class UserCreateProcessorTest extends TestCase {
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateRequiresReCaptcha() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -58,6 +60,7 @@ class UserCreateProcessorTest extends TestCase {
         $this->processor->onBefore($this->user, new Post());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDoesNotHashWhenNoPasswordIsSet() {
         // given
         $this->recaptchaResponse->expects(self::once())
@@ -75,6 +78,7 @@ class UserCreateProcessorTest extends TestCase {
         $this->assertNull($data->plainPassword);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testHashesPasswordWhenPlainPasswordIsSet() {
         // given
         $this->recaptchaResponse->expects(self::once())
@@ -93,6 +97,7 @@ class UserCreateProcessorTest extends TestCase {
         $this->assertNull($data->plainPassword);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateAndSendActivationKey() {
         // given
         $this->recaptchaResponse->expects(self::once())
@@ -110,6 +115,7 @@ class UserCreateProcessorTest extends TestCase {
         $this->assertNotNull($data->activationKeyHash);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testSetsStateToRegisteredBeforeCreate() {
         // when
         $this->recaptchaResponse->expects(self::once())

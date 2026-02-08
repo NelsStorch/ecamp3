@@ -11,8 +11,9 @@ use App\Entity\Profile;
 use App\Entity\User;
 use App\State\CampCreateProcessor;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Constraint\Callback;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -21,19 +22,20 @@ use Symfony\Bundle\SecurityBundle\Security;
  */
 class CampCreateProcessorTest extends TestCase {
     private CampCreateProcessor $processor;
-    private MockObject|Security $security;
+    private Security|Stub $security;
     private EntityManagerInterface|MockObject $em;
     private Camp $camp;
 
     protected function setUp(): void {
         $this->camp = new Camp();
 
-        $this->security = $this->createMock(Security::class);
+        $this->security = $this->createStub(Security::class);
         $this->em = $this->createMock(EntityManagerInterface::class);
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->processor = new CampCreateProcessor($decoratedProcessor, $this->security, $this->em);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testSetsCreatorAndOwnerOnCreate() {
         // given
         $user = new User();
