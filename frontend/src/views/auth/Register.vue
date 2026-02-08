@@ -195,7 +195,7 @@ export default {
     availableLocales() {
       return componentI18n.availableLocales.map((l) => ({
         value: l,
-        text: this.$t('global.language', { locale: l }, 1),
+        text: this.$t('global.language', 1, { locale: l }),
       }))
     },
     termsOfServiceLink() {
