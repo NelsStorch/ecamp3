@@ -23,7 +23,7 @@
     :readonly="readonly"
     class="e-day-responsible-dropdown rounded-0"
     :class="{ 'e-day-responsible--readonly': readonly }"
-    @input="onInput"
+    @update:model-value="onInput"
   >
     <template #prepend-item>
       <v-list-subheader>{{ $t('entity.day.fields.dayResponsibles') }}</v-list-subheader>
