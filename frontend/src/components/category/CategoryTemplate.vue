@@ -43,7 +43,7 @@
             :class="{
               'ec-category-layoutmode-tab--hidden': loading,
             }"
-            :content-node="rootContentNode"
+            :content-node="category.rootContentNode()"
             :layout-mode="true"
             :disabled="disabled"
           />
@@ -55,15 +55,18 @@
           :style="{ opacity: layoutMode ? 0 : 1 }"
         >
           <v-skeleton-loader v-if="loading" type="article" />
-          <div v-else-if="rootContentNodeChildren.length === 0" class="pa-2 text-center">
+          <div
+            v-else-if="category.rootContentNode().children().items.length === 0"
+            class="pa-2 text-center"
+          >
             {{ $t('components.category.categoryTemplate.noTemplate') }}
           </div>
           <root-node
-            v-if="rootContentNodeChildren.length !== 0"
+            v-if="category.rootContentNode().children().items.length !== 0"
             :class="{
               'ec-category-layoutmode-tab--hidden': loading,
             }"
-            :content-node="rootContentNode"
+            :content-node="category.rootContentNode()"
             :layout-mode="false"
             :disabled="disabled"
           />
@@ -95,12 +98,6 @@ export default {
   computed: {
     camp() {
       return this.category.camp()
-    },
-    rootContentNode() {
-      return this.category.rootContentNode()
-    },
-    rootContentNodeChildren() {
-      return this.rootContentNode.children().items
     },
   },
 }
