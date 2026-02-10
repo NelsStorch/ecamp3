@@ -10,6 +10,7 @@ use App\Security\ReCaptcha\ReCaptchaWrapper;
 use App\Service\MailService;
 use App\State\ResendActivationProcessor;
 use Doctrine\ORM\EntityManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -41,7 +42,7 @@ class ResendActivationProcessorTest extends TestCase {
 
         $this->recaptchaResponse = $this->createMock(Response::class);
         $recaptcha = $this->createMock(ReCaptchaWrapper::class);
-        $entityManager = $this->createMock(EntityManager::class);
+        $entityManager = $this->createStub(EntityManager::class);
         $this->userRepository = $this->createMock(UserRepository::class);
         $this->mailService = $this->createMock(MailService::class);
 
@@ -58,6 +59,7 @@ class ResendActivationProcessorTest extends TestCase {
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateRequiresReCaptcha() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -69,6 +71,7 @@ class ResendActivationProcessorTest extends TestCase {
         $this->processor->process($this->userActivation, new Post());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateWithUnknownEmailDoesNothing() {
         $this->recaptchaResponse->expects(self::once())
             ->method('isSuccess')
@@ -90,6 +93,7 @@ class ResendActivationProcessorTest extends TestCase {
         self::assertThat($data, self::isNull());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     #[TestWith([User::STATE_REGISTERED])]
     public function testCreateWithInactiveUserResendsActivationeMail(string $state) {
         $this->recaptchaResponse->expects(self::once())
@@ -119,6 +123,7 @@ class ResendActivationProcessorTest extends TestCase {
         self::assertThat($data, self::isNull());
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     #[TestWith([User::STATE_NONREGISTERED])]
     #[TestWith([User::STATE_ACTIVATED])]
     #[TestWith([User::STATE_DELETED])]

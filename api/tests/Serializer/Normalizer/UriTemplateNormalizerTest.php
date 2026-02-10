@@ -9,6 +9,7 @@ use App\Entity\Activity;
 use App\Entity\Camp;
 use App\Metadata\Resource\Factory\UriTemplateFactory;
 use App\Serializer\Normalizer\UriTemplateNormalizer;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -83,6 +84,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ];
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateNotTemplatedLinkIfNoParameters() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [
@@ -111,6 +113,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateTemplatedLinkIfPathParameters() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [
@@ -140,6 +143,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testCreateTemplatedLinkForQueryParameters() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [
@@ -169,6 +173,7 @@ class UriTemplateNormalizerTest extends TestCase {
         ));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testMergePathAndQueryParameter() {
         // given
         $this->decorated->expects($this->once())->method('normalize')->willReturn(['_links' => [

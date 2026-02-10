@@ -41,7 +41,7 @@ class AssertBelongsToSameCampValidatorTest extends ConstraintValidatorTestCase {
 
     public function testExpectsBelongsToCampObject() {
         // given
-        $camp = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
         $camp->method('getId')->willReturn('idfromtest');
         $child = new ChildTestClass($camp);
 
@@ -66,7 +66,7 @@ class AssertBelongsToSameCampValidatorTest extends ConstraintValidatorTestCase {
 
     public function testValidViaBelongsToCampInterface() {
         // given
-        $camp = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
         $camp->method('getId')->willReturn('idfromtest');
         $child = new ChildTestClass($camp);
         $parent = new ParentTestClass($camp, $child);
@@ -81,16 +81,16 @@ class AssertBelongsToSameCampValidatorTest extends ConstraintValidatorTestCase {
 
     public function testValidViaBelongsToContentNodeTreeInterface() {
         // given
-        $camp = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
         $camp->method('getId')->willReturn('idfromtest');
         $root = new ColumnLayout();
         $contentNode = new ContentNodeTestClass($root);
         $parent = new ParentTestClass($camp);
         $this->setObject($parent);
 
-        $activity = $this->createMock(Activity::class);
+        $activity = $this->createStub(Activity::class);
         $activity->method('getCamp')->willReturn($camp);
-        $repository = $this->createMock(EntityRepository::class);
+        $repository = $this->createStub(EntityRepository::class);
         $this->em->method('getRepository')->willReturn($repository);
         $repository->method('findOneBy')->willReturn($activity);
 
@@ -103,8 +103,8 @@ class AssertBelongsToSameCampValidatorTest extends ConstraintValidatorTestCase {
 
     public function testInvalid() {
         // given
-        $camp = $this->createMock(Camp::class);
-        $camp2 = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
+        $camp2 = $this->createStub(Camp::class);
         $camp->method('getId')->willReturn('idfromtest');
         $child = new ChildTestClass($camp2);
         $parent = new ParentTestClass($camp, $child);
@@ -119,14 +119,14 @@ class AssertBelongsToSameCampValidatorTest extends ConstraintValidatorTestCase {
 
     public function testCompareToPreviousValid() {
         // given
-        $camp = $this->createMock(Camp::class);
-        $camp2 = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
+        $camp2 = $this->createStub(Camp::class);
         $camp->method('getId')->willReturn('idfromtest');
         $child = new ChildTestClass($camp);
         $parent = new ParentTestClass($camp2, $child);
         $this->setObject($parent);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $request->attributes = new ParameterBag(['previous_data' => new ParentTestClass($camp, $child)]);
         $this->requestStack->method('getCurrentRequest')->willReturn($request);
 
@@ -139,14 +139,14 @@ class AssertBelongsToSameCampValidatorTest extends ConstraintValidatorTestCase {
 
     public function testCompareToPreviousInvalid() {
         // given
-        $camp = $this->createMock(Camp::class);
-        $camp2 = $this->createMock(Camp::class);
+        $camp = $this->createStub(Camp::class);
+        $camp2 = $this->createStub(Camp::class);
         $camp->method('getId')->willReturn('idfromtest');
         $child = new ChildTestClass($camp);
         $parent = new ParentTestClass($camp, $child);
         $this->setObject($parent);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $request->attributes = new ParameterBag(['previous_data' => new ParentTestClass($camp2, $child)]);
         $this->requestStack->method('getCurrentRequest')->willReturn($request);
 
@@ -158,8 +158,8 @@ class AssertBelongsToSameCampValidatorTest extends ConstraintValidatorTestCase {
     }
 
     protected function createValidator(): ConstraintValidatorInterface {
-        $this->requestStack = $this->createMock(RequestStack::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
+        $this->em = $this->createStub(EntityManagerInterface::class);
 
         return new AssertBelongsToSameCampValidator($this->requestStack, $this->em);
     }

@@ -20,7 +20,7 @@ class CategoryRemoveProcessorTest extends TestCase {
     private EntityManagerInterface|MockObject $em;
 
     protected function setUp(): void {
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->em = $this->createMock(EntityManagerInterface::class);
 
         $this->category = new Category();

@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use App\Service\ClaimInvitationService;
 use App\Service\MailService;
 use App\State\ProfileUpdateProcessor;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -35,7 +36,7 @@ class ProfileUpdateProcessorTest extends TestCase {
         $pwHasherFactory = $this->createMock(PasswordHasherFactoryInterface::class);
         $this->pwHasher = $this->createMock(PasswordHasherInterface::class);
         $this->mailService = $this->createMock(MailService::class);
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
 
         $pwHasherFactory->expects(self::any())
             ->method('getPasswordHasher')
@@ -46,12 +47,13 @@ class ProfileUpdateProcessorTest extends TestCase {
             $decoratedProcessor,
             $pwHasherFactory,
             $this->mailService,
-            $this->createMock(Security::class),
-            $this->createMock(UserRepository::class),
-            $this->createMock(ClaimInvitationService::class),
+            $this->createStub(Security::class),
+            $this->createStub(UserRepository::class),
+            $this->createStub(ClaimInvitationService::class),
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testSetNewEmail() {
         // given
         $this->pwHasher->expects(self::once())
@@ -69,6 +71,7 @@ class ProfileUpdateProcessorTest extends TestCase {
         $this->assertNotNull($this->profile->untrustedEmailKeyHash);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testSendVerificationMail() {
         // given
         $this->profile->untrustedEmailKey = 'abc';
@@ -81,6 +84,7 @@ class ProfileUpdateProcessorTest extends TestCase {
         $this->assertNull($this->profile->untrustedEmailKey);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testChangeEmail() {
         // given
         $this->pwHasher->expects(self::once())

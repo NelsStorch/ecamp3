@@ -5,6 +5,7 @@ namespace App\Tests\Serializer\Normalizer;
 use ApiPlatform\Doctrine\Common\Filter\SearchFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -20,7 +21,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToManyAssociationMapping;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Rize\UriTemplate;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -38,37 +41,37 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     private RelatedCollectionLinkNormalizer $normalizer;
 
     private MockObject|NormalizerInterface $decoratedMock;
-    private MockObject|NameConverterInterface $nameConverterMock;
+    private NameConverterInterface|Stub $nameConverterMock;
     private MockObject|UriTemplate $uriTemplate;
     private MockObject|UriTemplateFactory $uriTemplateFactory;
-    private MockObject|RouterInterface $routerMock;
-    private IriConverterInterface|MockObject $iriConverterMock;
-    private ManagerRegistry|MockObject $managerRegistryMock;
-    private MockObject|ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactoryMock;
-    private MockObject|PropertyAccessorInterface $propertyAccessor;
-    private EntityManagerInterface|MockObject $entityManager;
+    private RouterInterface|Stub $routerMock;
+    private IriConverterInterface|Stub $iriConverterMock;
+    private ManagerRegistry|Stub $managerRegistryMock;
+    private ResourceMetadataCollectionFactoryInterface|Stub $resourceMetadataCollectionFactoryMock;
+    private PropertyAccessorInterface|Stub $propertyAccessor;
+    private EntityManagerInterface|Stub $entityManager;
 
     private DateFilter|SearchFilterInterface|null $filterInstance = null;
 
     protected function setUp(): void {
-        $filterLocatorMock = $this->createMock(ServiceLocator::class);
+        $filterLocatorMock = $this->createStub(ServiceLocator::class);
         $filterLocatorMock->method('get')->willReturnCallback(function (string $name): mixed {
             return $this->filterInstance;
         });
 
         $this->decoratedMock = $this->createMock(NormalizerInterface::class);
-        $this->nameConverterMock = $this->createMock(NameConverterInterface::class);
+        $this->nameConverterMock = $this->createStub(NameConverterInterface::class);
         $this->uriTemplate = $this->createMock(UriTemplate::class);
         $this->uriTemplateFactory = $this->createMock(UriTemplateFactory::class);
-        $this->routerMock = $this->createMock(RouterInterface::class);
-        $this->iriConverterMock = $this->createMock(IriConverterInterface::class);
-        $this->managerRegistryMock = $this->createMock(ManagerRegistry::class);
-        $this->resourceMetadataCollectionFactoryMock = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
-        $this->propertyAccessor = $this->createMock(PropertyAccessorInterface::class);
+        $this->routerMock = $this->createStub(RouterInterface::class);
+        $this->iriConverterMock = $this->createStub(IriConverterInterface::class);
+        $this->managerRegistryMock = $this->createStub(ManagerRegistry::class);
+        $this->resourceMetadataCollectionFactoryMock = $this->createStub(ResourceMetadataCollectionFactoryInterface::class);
+        $this->propertyAccessor = $this->createStub(PropertyAccessorInterface::class);
 
         $this->iriConverterMock->method('getIriFromResource')->willReturn('/iri');
 
-        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->entityManager = $this->createStub(EntityManagerInterface::class);
 
         $this->normalizer = new RelatedCollectionLinkNormalizer(
             $this->decoratedMock,
@@ -82,9 +85,10 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
             $this->resourceMetadataCollectionFactoryMock,
             $this->propertyAccessor,
         );
-        $this->normalizer->setSerializer($this->createMock(SerializerInterface::class));
+        $this->normalizer->setSerializer($this->createStub(SerializerInterface::class));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDelegatesSupportCheckToDecorated() {
         $this->decoratedMock
             ->expects($this->exactly(2))
@@ -96,6 +100,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->assertFalse($this->normalizer->supportsNormalization([]));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDelegatesNormalizeToDecorated() {
         // given
         $resource = new ParentEntity();
@@ -117,6 +122,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->assertSame($delegatedResult, $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testHandlesDecoratedNormalizerReturningAnIRIString() {
         // given
         $resource = new ParentEntity();
@@ -133,6 +139,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->assertSame($delegatedResult, $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testFallsBackToObjectClassWhenResourceClassIsMissingInContext() {
         // given
         $resource = new ParentEntity();
@@ -154,6 +161,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->assertSame($delegatedResult, $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeReplacesLinkArrayWithSingleFilteredCollectionLink() {
         // given
         $resource = new ParentEntity();
@@ -177,6 +185,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldReplaceChildrenWithLink($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeReplacesLinkArrayWithSingleFilteredCollectionLinkBasedOnAttribute() {
         // given
         $resource = new ParentEntity();
@@ -218,6 +227,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         ], $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeReplacesSerializedNameLinkArray() {
         // given
         $resource = new ParentEntity();
@@ -258,6 +268,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         ], $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenFilterDoesntApplyToMappedProperty() {
         // given
         $resource = new ParentEntity();
@@ -280,6 +291,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenEmptyFiltersArray() {
         // given
         $resource = new ParentEntity();
@@ -302,6 +314,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenNoFilters() {
         // given
         $resource = new ParentEntity();
@@ -324,6 +337,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenTargetEntityIsMissing() {
         // given
         $resource = new ParentEntity();
@@ -346,13 +360,14 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenNotADoctrineAssociation() {
         // given
         $resource = new ParentEntity();
         $this->mockDecoratedNormalizer();
         $this->mockNameConverter();
 
-        $classMetadata = $this->createMock(ORM\ClassMetadata::class);
+        $classMetadata = $this->createStub(ORM\ClassMetadata::class);
         $classMetadata->method('getAssociationMapping')->willThrowException(new ORM\MappingException('test exception'));
         $this->entityManager->method('getClassMetadata')->willReturn($classMetadata);
         $this->managerRegistryMock->method('getManagerForClass')->willReturn($this->entityManager);
@@ -368,6 +383,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenMappedByIsMissing() {
         // given
         $resource = new ParentEntity();
@@ -389,6 +405,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenFilterDoesntExistInContainer() {
         // given
         $resource = new ParentEntity();
@@ -411,6 +428,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenFilterIsNotSearchFilter() {
         // given
         $resource = new ParentEntity();
@@ -433,6 +451,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
         $this->shouldNotReplaceChildren($result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeDoesntReplaceWhenMissingGetCollectionOperation() {
         // given
         $resource = new ParentEntity();
@@ -472,7 +491,7 @@ class RelatedCollectionLinkNormalizerTest extends TestCase {
     }
 
     protected function mockAssociationMetadata($relationMetadata) {
-        $classMetadata = $this->createMock(ORM\ClassMetadata::class);
+        $classMetadata = $this->createStub(ORM\ClassMetadata::class);
         $classMetadata->method('getAssociationMapping')->willReturn($relationMetadata);
         $classMetadata->method('hasAssociation')->willReturn(true);
 

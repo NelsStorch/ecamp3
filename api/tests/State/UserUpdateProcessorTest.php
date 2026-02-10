@@ -26,7 +26,7 @@ class UserUpdateProcessorTest extends TestCase {
         $this->user = new User();
 
         $this->userPasswordHasher = $this->createMock(UserPasswordHasher::class);
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->processor = new UserUpdateProcessor(
             $decoratedProcessor,
             $this->userPasswordHasher,

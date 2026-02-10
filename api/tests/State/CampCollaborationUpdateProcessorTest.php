@@ -9,6 +9,7 @@ use App\Entity\Profile;
 use App\Entity\User;
 use App\Service\MailService;
 use App\State\CampCollaborationUpdateProcessor;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -51,10 +52,10 @@ class CampCollaborationUpdateProcessorTest extends TestCase {
         $profile->user = $this->user;
         $this->user->profile = $profile;
 
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $security = $this->createMock(Security::class);
         $security->expects(self::any())->method('getUser')->willReturn($this->user);
-        $pwHashFactory = $this->createMock(PasswordHasherFactory::class);
+        $pwHashFactory = $this->createStub(PasswordHasherFactory::class);
         $this->mailService = $this->createMock(MailService::class);
 
         $this->processor = new CampCollaborationUpdateProcessor(
@@ -65,6 +66,7 @@ class CampCollaborationUpdateProcessorTest extends TestCase {
         );
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDoesNothingOnStatusChangeWhenNoInviteEmail() {
         $this->mailService->expects(self::never())->method('sendInviteToCampMail');
 
@@ -76,6 +78,7 @@ class CampCollaborationUpdateProcessorTest extends TestCase {
         self::assertThat($result->inviteKey, self::equalTo(self::INITIAL_INVITE_KEY));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     #[DataProvider('notInvitedStatuses')]
     public function testOnStatusChangeDoesNothingIfStatusIsNotInvited(string $status) {
         $this->campCollaboration->inviteEmail = 'e@mail.com';
@@ -91,6 +94,7 @@ class CampCollaborationUpdateProcessorTest extends TestCase {
         self::assertThat($result->inviteKey, self::equalTo(self::INITIAL_INVITE_KEY));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testSendsInviteEmailIfStatusChangesToInvitedAndInviteEmailPresent() {
         $this->campCollaboration->inviteEmail = 'e@mail.com';
         $this->mailService->expects(self::once())->method('sendInviteToCampMail');
@@ -101,6 +105,7 @@ class CampCollaborationUpdateProcessorTest extends TestCase {
         self::assertThat($result->inviteKey, self::logicalNot(self::isNull()));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testSendsInviteEmailIfStatusChangesToInvitedAndUserPresent() {
         $this->campCollaboration->user = $this->user;
         $this->mailService->expects(self::once())->method('sendInviteToCampMail');

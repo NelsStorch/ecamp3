@@ -8,6 +8,7 @@ use App\Entity\CampCollaboration;
 use App\Repository\CampCollaborationRepository;
 use App\State\InvitationRejectProcessor;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
@@ -17,6 +18,7 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class InvitationRejectProcessorTest extends TestCase {
     public const INVITEKEY = 'inviteKey';
     public const INVITEKEYHASH = 'sl3hC12VkIUzT89mMggYyoMmFuo=';

@@ -187,7 +187,7 @@ class Checklist extends BaseEntity implements BelongsToCampInterface, CopyFromPr
         // deep copy ChecklistItems
         foreach ($prototype->getChecklistItems() as $checklistItemPrototype) {
             // deep copy root ChecklistItems
-            // skip non-root ChecklistItems as these are copyed by there parent
+            // skip non-root ChecklistItems as these are copied by their parent
             if (null == $checklistItemPrototype->parent) {
                 $checklistItem = new ChecklistItem();
                 $this->addChecklistItem($checklistItem);

@@ -29,9 +29,9 @@ class CampIsPublicVoterTest extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->token = $this->createMock(TokenInterface::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
-        $this->responseTagger = $this->createMock(ResponseTagger::class);
+        $this->token = $this->createStub(TokenInterface::class);
+        $this->em = $this->createStub(EntityManagerInterface::class);
+        $this->responseTagger = $this->createStub(ResponseTagger::class);
         $this->voter = new CampIsPublicVoter($this->em, $this->responseTagger);
     }
 
@@ -68,7 +68,7 @@ class CampIsPublicVoterTest extends TestCase {
     public function testDeniesAccessWhenGetCampYieldsNull() {
         // given
         $this->token->method('getUser')->willReturn(new User());
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn(null);
 
         // when
@@ -80,12 +80,12 @@ class CampIsPublicVoterTest extends TestCase {
 
     public function testDeniesAccessWhenCampIsntPublic() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $camp = new Camp();
         $camp->isPublic = false;
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
         // when
@@ -97,15 +97,17 @@ class CampIsPublicVoterTest extends TestCase {
 
     public function testGrantsAccessViaBelongsToCampInterface() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $camp = new Camp();
         $camp->isPublic = true;
-        $subject = $this->createMock(Period::class);
+        $subject = $this->createStub(Period::class);
         $subject->method('getCamp')->willReturn($camp);
 
+        $this->responseTagger = $this->createMock(ResponseTagger::class);
         $this->responseTagger->expects($this->once())->method('addTags')->with([$camp->getId()]);
+        $this->voter = new CampIsPublicVoter($this->em, $this->responseTagger);
 
         // when
         $result = $this->voter->vote($this->token, $subject, ['CAMP_IS_PUBLIC']);
@@ -116,17 +118,17 @@ class CampIsPublicVoterTest extends TestCase {
 
     public function testGrantsAccessViaBelongsToContentNodeTreeInterface() {
         // given
-        $user = $this->createMock(User::class);
+        $user = $this->createStub(User::class);
         $user->method('getId')->willReturn('idFromTest');
         $this->token->method('getUser')->willReturn($user);
         $camp = new Camp();
         $camp->isPublic = true;
-        $activity = $this->createMock(Activity::class);
+        $activity = $this->createStub(Activity::class);
         $activity->method('getCamp')->willReturn($camp);
-        $root = $this->createMock(ColumnLayout::class);
-        $subject = $this->createMock(ContentNodeTreeDummy3::class);
+        $root = $this->createStub(ColumnLayout::class);
+        $subject = $this->createStub(ContentNodeTreeDummy3::class);
         $subject->method('getRoot')->willReturn($root);
-        $repository = $this->createMock(EntityRepository::class);
+        $repository = $this->createStub(EntityRepository::class);
         $this->em->method('getRepository')->willReturn($repository);
         $repository->method('findOneBy')->willReturn($activity);
 

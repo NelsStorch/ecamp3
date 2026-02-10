@@ -7,6 +7,7 @@ use App\Security\ReCaptcha\ReCaptchaWrapper;
 use App\Tests\Api\ECampApiTestCase;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use ReCaptcha\Response;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
@@ -40,6 +41,7 @@ class UpdatePasswordTest extends ECampApiTestCase {
         ;
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testPatchResetPasswordValidatesBlankPassword() {
         $this->mockRecaptcha();
         $this->client->request('PATCH', '/auth/reset_password/'.$this->passwordResetKey, ['json' => [
@@ -57,6 +59,7 @@ class UpdatePasswordTest extends ECampApiTestCase {
         ]);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testPatchResetPasswordValidatesShortPassword() {
         $this->mockRecaptcha();
         $this->client->request('PATCH', '/auth/reset_password/'.$this->passwordResetKey, ['json' => [
@@ -74,6 +77,7 @@ class UpdatePasswordTest extends ECampApiTestCase {
         ]);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testPatchResetPasswordAllowsLongPassword() {
         $this->mockRecaptcha();
         $this->client->request('PATCH', '/auth/reset_password/'.$this->passwordResetKey, ['json' => [
@@ -83,6 +87,7 @@ class UpdatePasswordTest extends ECampApiTestCase {
         $this->assertResponseStatusCodeSame(200);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testPatchResetPasswordValidatesUnreasonablyLongPassword() {
         $this->mockRecaptcha();
         $this->client->request('PATCH', '/auth/reset_password/'.$this->passwordResetKey, ['json' => [
@@ -105,6 +110,7 @@ class UpdatePasswordTest extends ECampApiTestCase {
      * @throws TransportExceptionInterface
      * @throws NoResultException
      */
+    #[AllowMockObjectsWithoutExpectations]
     public function testPatchResetPasswordActivatesUser() {
         $this->mockRecaptcha();
         $this->getEntityManager()->createQueryBuilder()

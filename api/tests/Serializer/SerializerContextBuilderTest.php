@@ -4,6 +4,7 @@ namespace App\Tests\Serializer;
 
 use ApiPlatform\State\SerializerContextBuilderInterface;
 use App\Serializer\SerializerContextBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class SerializerContextBuilderTest extends TestCase {
     private SerializerContextBuilder $contextBuilder;
 
@@ -26,7 +28,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testAddsSkipNullValuesFalseWhenNormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')
@@ -45,7 +47,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testDoesntAddSkipNullValuesFalseWhenDenormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')
@@ -58,7 +60,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testDoesntAddAllowExtraAttributesFalseWhenNormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')
@@ -71,7 +73,7 @@ class SerializerContextBuilderTest extends TestCase {
     }
 
     public function testAddsAllowExtraAttributesFalseWhenDenormalizing() {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $this->decoratedMock
             ->expects($this->exactly(1))
             ->method('createFromRequest')

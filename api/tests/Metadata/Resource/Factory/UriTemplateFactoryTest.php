@@ -34,10 +34,10 @@ class UriTemplateFactoryTest extends TestCase {
     private ApiResource $apiResource;
 
     protected function setUp(): void {
-        $this->filterLocator = $this->createMock(ContainerInterface::class);
-        $this->resourceMetadataCollectionFactory = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
-        $this->resourceNameCollectionFactory = $this->createMock(ResourceNameCollectionFactoryInterface::class);
-        $this->iriConverter = $this->createMock(IriConverterInterface::class);
+        $this->filterLocator = $this->createStub(ContainerInterface::class);
+        $this->resourceMetadataCollectionFactory = $this->createStub(ResourceMetadataCollectionFactoryInterface::class);
+        $this->resourceNameCollectionFactory = $this->createStub(ResourceNameCollectionFactoryInterface::class);
+        $this->iriConverter = $this->createStub(IriConverterInterface::class);
         $this->paginationOptions = new PaginationOptions(false);
         $this->resourceNameCollection = new ResourceNameCollection(['Dummy']);
         $this->resourceMetadataCollection = new ResourceMetadataCollection('Dummy');
@@ -120,7 +120,7 @@ class UriTemplateFactoryTest extends TestCase {
                 name: '_api_/dummys{._format}_get_collection'
             ),
         ])));
-        $filter = $this->createMock(FilterInterface::class);
+        $filter = $this->createStub(FilterInterface::class);
         $filter->method('getDescription')->willReturn(['some_filter' => 'something']);
         $this->filterLocator->method('get')->with('some_filter_identifier')->willReturn($filter);
         $this->createFactory();

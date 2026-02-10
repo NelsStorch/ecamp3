@@ -3,6 +3,7 @@
 namespace App\Tests\Serializer\Normalizer;
 
 use App\Serializer\Normalizer\CollectionItemsNormalizer;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -10,6 +11,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class CollectionItemsNormalizerTest extends TestCase {
     private CollectionItemsNormalizer $normalizer;
 
@@ -22,7 +24,7 @@ class CollectionItemsNormalizerTest extends TestCase {
         $this->decoratedMock = $this->createMock(NormalizerInterface::class);
 
         $this->normalizer = new CollectionItemsNormalizer($this->decoratedMock);
-        $this->normalizer->setNormalizer($this->createMock(NormalizerInterface::class));
+        $this->normalizer->setNormalizer($this->createStub(NormalizerInterface::class));
     }
 
     public function testDelegatesSupportCheckToDecorated() {
@@ -57,6 +59,7 @@ class CollectionItemsNormalizerTest extends TestCase {
         $this->assertSame($delegatedResult, $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeReplacesEmbeddedAndLinkedItemWithItems() {
         // given
         $resource = [];
@@ -83,6 +86,7 @@ class CollectionItemsNormalizerTest extends TestCase {
         ], $result);
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testNormalizeAddsEmptyEmbeddedItemsIfTotalItemsIsZero() {
         // given
         $resource = [];

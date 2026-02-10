@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use App\Entity\ContentType;
 use App\Metadata\Resource\Factory\UriTemplateFactory;
 use App\Serializer\Normalizer\ContentTypeNormalizer;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Rize\UriTemplate;
@@ -25,7 +26,7 @@ class ContentTypeNormalizerTest extends TestCase {
     protected function setUp(): void {
         $this->decoratedMock = $this->createMock(NormalizerInterface::class);
 
-        $iriConverter = $this->createMock(IriConverterInterface::class);
+        $iriConverter = $this->createStub(IriConverterInterface::class);
         $this->uriTemplate = $this->createMock(UriTemplate::class);
         $this->uriTemplateFactory = $this->createMock(UriTemplateFactory::class);
 
@@ -35,9 +36,10 @@ class ContentTypeNormalizerTest extends TestCase {
             $this->uriTemplateFactory,
             $iriConverter,
         );
-        $this->normalizer->setSerializer($this->createMock(SerializerInterface::class));
+        $this->normalizer->setSerializer($this->createStub(SerializerInterface::class));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDelegatesSupportCheckToDecorated() {
         $this->decoratedMock
             ->expects($this->exactly(2))
@@ -49,6 +51,7 @@ class ContentTypeNormalizerTest extends TestCase {
         $this->assertFalse($this->normalizer->supportsNormalization([]));
     }
 
+    #[AllowMockObjectsWithoutExpectations]
     public function testDelegatesNormalizeToDecorated() {
         // given
         $resource = new \stdClass();

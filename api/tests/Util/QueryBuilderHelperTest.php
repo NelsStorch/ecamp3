@@ -6,12 +6,14 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\Day;
 use App\Util\QueryBuilderHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class QueryBuilderHelperTest extends KernelTestCase {
     private EntityManagerInterface $entityManager;
     private MockObject|QueryNameGeneratorInterface $queryNameGeneratorInterfaceMock;

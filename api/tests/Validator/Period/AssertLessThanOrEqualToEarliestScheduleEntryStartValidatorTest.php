@@ -86,13 +86,13 @@ class AssertLessThanOrEqualToEarliestScheduleEntryStartValidatorTest extends Con
 
     protected function createValidator(): ConstraintValidatorInterface {
         /** @var MockObject|UnitOfWork $uow */
-        $uow = $this->createMock(UnitOfWork::class);
+        $uow = $this->createStub(UnitOfWork::class);
         $uow->method('getOriginalEntityData')->willReturn([
             'start' => new \DateTime('2023-08-01'),
         ]);
 
         /** @var EntityManagerInterface|MockObject $em */
-        $em = $this->createMock(EntityManagerInterface::class);
+        $em = $this->createStub(EntityManagerInterface::class);
         $em->method('getUnitOfWork')->willReturn($uow);
 
         return new AssertLessThanOrEqualToEarliestScheduleEntryStartValidator($em);

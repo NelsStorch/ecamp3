@@ -6,6 +6,7 @@ use App\EventListener\RequestTransactionListener;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -22,6 +23,7 @@ use function PHPUnit\Framework\once;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 class RequestTransactionListenerTest extends TestCase {
     private Connection|MockObject $connection;
     private EntityManagerInterface|MockObject $entityManager;
@@ -37,7 +39,7 @@ class RequestTransactionListenerTest extends TestCase {
         $this->entityManager->method('getConnection')->willReturn($this->connection);
         $this->logger = $this->createMock(LoggerInterface::class);
 
-        $this->kernel = $this->createMock(HttpKernelInterface::class);
+        $this->kernel = $this->createStub(HttpKernelInterface::class);
         $this->request = $this->createMock(Request::class);
 
         $this->requestTransactionListener = new RequestTransactionListener($this->entityManager, $this->logger);

@@ -9,7 +9,7 @@ use App\Entity\ContentType;
 use App\State\CategoryCreateProcessor;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,30 +17,30 @@ use PHPUnit\Framework\TestCase;
  */
 class CategoryCreateProcessorTest extends TestCase {
     private CategoryCreateProcessor $processor;
-    private EntityManagerInterface|MockObject $entityManagerMock;
+    private EntityManagerInterface|Stub $entityManagerStub;
     private Category $category;
 
     protected function setUp(): void {
         $this->category = new Category();
 
-        $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
-        $decoratedProcessor = $this->createMock(ProcessorInterface::class);
+        $this->entityManagerStub = $this->createStub(EntityManagerInterface::class);
+        $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->processor = new CategoryCreateProcessor(
             $decoratedProcessor,
-            $this->entityManagerMock
+            $this->entityManagerStub
         );
     }
 
     public function testCreatesNewContentNodeBeforeCreate() {
         // given
-        $repositoryMock = $this->createMock(EntityRepository::class);
+        $repositoryMock = $this->createStub(EntityRepository::class);
         $repositoryMock->method('findOneBy')->willReturnCallback(function (array $criteria): object {
             $result = new ContentType();
             $result->name = $criteria['name'];
 
             return $result;
         });
-        $this->entityManagerMock->method('getRepository')->willReturn($repositoryMock);
+        $this->entityManagerStub->method('getRepository')->willReturn($repositoryMock);
 
         // when
         /** @var Category $data */

@@ -22,7 +22,7 @@ class UserStatusCheckerTest extends TestCase {
 
     public function testNoActionForNonUserEntity() {
         $this->expectNotToPerformAssertions();
-        $user = $this->createMock(UserInterface::class);
+        $user = $this->createStub(UserInterface::class);
         $this->userChecker->checkPreAuth($user);
         $this->userChecker->checkPostAuth($user);
     }

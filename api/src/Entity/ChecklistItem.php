@@ -242,6 +242,7 @@ class ChecklistItem extends BaseEntity implements BelongsToCampInterface, CopyFr
 
         // copy ChecklistItem base properties
         $this->text = $prototype->text;
+        $this->position = $prototype->position;
 
         // deep copy ChecklistItems
         foreach ($prototype->getChildren() as $childPrototype) {

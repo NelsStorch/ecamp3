@@ -46,9 +46,9 @@ class AssertLastCollectionItemIsNotDeletedValidatorTest extends ConstraintValida
         $object = new AssertLastCollectionItemNotDeletedValidatorTestClass($collectionMock);
         $this->setObject($object);
 
-        $requestMock = $this->createMock(Request::class);
-        $requestMock->expects($this->once())->method('getMethod')->willReturn('DELETE');
-        $this->requestStack->expects($this->once())->method('getCurrentRequest')->willReturn($requestMock);
+        $requestMock = $this->createStub(Request::class);
+        $requestMock->method('getMethod')->willReturn('DELETE');
+        $this->requestStack->method('getCurrentRequest')->willReturn($requestMock);
 
         // when
         $this->validator->validate($object->a, new AssertLastCollectionItemIsNotDeleted());
@@ -67,9 +67,9 @@ class AssertLastCollectionItemIsNotDeletedValidatorTest extends ConstraintValida
         $object = new AssertLastCollectionItemNotDeletedValidatorTestClass($collectionMock);
         $this->setObject($object);
 
-        $requestMock = $this->createMock(Request::class);
-        $requestMock->expects($this->once())->method('getMethod')->willReturn('POST');
-        $this->requestStack->expects($this->once())->method('getCurrentRequest')->willReturn($requestMock);
+        $requestMock = $this->createStub(Request::class);
+        $requestMock->method('getMethod')->willReturn('POST');
+        $this->requestStack->method('getCurrentRequest')->willReturn($requestMock);
 
         // when
         $this->validator->validate($object->a, new AssertLastCollectionItemIsNotDeleted());
@@ -87,9 +87,9 @@ class AssertLastCollectionItemIsNotDeletedValidatorTest extends ConstraintValida
         $object = new AssertLastCollectionItemNotDeletedValidatorTestClass($collectionMock);
         $this->setObject($object);
 
-        $requestMock = $this->createMock(Request::class);
-        $requestMock->expects($this->once())->method('getMethod')->willReturn('DELETE');
-        $this->requestStack->expects($this->once())->method('getCurrentRequest')->willReturn($requestMock);
+        $requestMock = $this->createStub(Request::class);
+        $requestMock->method('getMethod')->willReturn('DELETE');
+        $this->requestStack->method('getCurrentRequest')->willReturn($requestMock);
 
         // when
         $this->validator->validate($object->a, new AssertLastCollectionItemIsNotDeleted());
@@ -99,8 +99,8 @@ class AssertLastCollectionItemIsNotDeletedValidatorTest extends ConstraintValida
     }
 
     protected function createValidator(): ConstraintValidatorInterface {
-        $this->requestStack = $this->createMock(RequestStack::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
+        $this->em = $this->createStub(EntityManagerInterface::class);
 
         return new AssertLastCollectionItemIsNotDeletedValidator($this->requestStack, $this->em);
     }

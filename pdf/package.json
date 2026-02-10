@@ -33,12 +33,12 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.28.6",
-    "@eslint/compat": "2.0.1",
+    "@eslint/compat": "2.0.2",
     "@eslint/js": "9.39.2",
     "@intlify/core": "11.2.8",
     "@rushstack/eslint-patch": "1.15.0",
-    "@vitejs/plugin-vue": "6.0.3",
-    "@vitest/coverage-v8": "4.0.17",
+    "@vitejs/plugin-vue": "6.0.4",
+    "@vitest/coverage-v8": "4.0.18",
     "@vue/babel-preset-app": "5.0.9",
     "@vue/compiler-dom": "3.5.27",
     "@vue/compiler-sfc": "3.5.27",
@@ -52,12 +52,12 @@
     "eslint": "9.39.2",
     "eslint-plugin-local-rules": "3.0.2",
     "eslint-plugin-vue": "10.6.2",
-    "globals": "17.0.0",
+    "globals": "17.3.0",
     "jsdom": "27.4.0",
-    "prettier": "3.8.0",
+    "prettier": "3.8.1",
     "url-template": "3.1.1",
     "vite": "7.3.1",
-    "vitest": "4.0.17"
+    "vitest": "4.0.18"
   },
   "overrides": {
     "lodash": "lodash-es",
