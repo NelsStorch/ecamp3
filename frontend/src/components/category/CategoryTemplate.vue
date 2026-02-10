@@ -45,7 +45,7 @@
             }"
             :content-node="category.rootContentNode()"
             :layout-mode="true"
-            :disabled="disabled"
+            :disabled="displayDisabled"
           />
         </div>
         <div
@@ -68,7 +68,7 @@
             }"
             :content-node="category.rootContentNode()"
             :layout-mode="false"
-            :disabled="disabled"
+            :disabled="displayDisabled"
           />
         </div>
       </div>
@@ -93,11 +93,15 @@ export default {
   data() {
     return {
       layoutMode: true,
+      debouncedDisabled: true,
     }
   },
   computed: {
     camp() {
       return this.category.camp()
+    },
+    displayDisabled() {
+      return this.disabled || this.loading
     },
   },
 }
