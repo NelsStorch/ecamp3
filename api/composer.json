@@ -73,7 +73,7 @@
         "phpstan/phpstan": "2.1.38",
         "phpunit/phpunit": "12.5.10",
         "rector/rector": "2.3.6",
-        "psalm/phar": "6.15.0",
+        "psalm/phar": "6.15.1",
         "spatie/phpunit-snapshot-assertions": "5.3.0",
         "symfony/browser-kit": "7.4.3",
         "symfony/css-selector": "7.4.0",
