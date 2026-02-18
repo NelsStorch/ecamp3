@@ -40,7 +40,7 @@ abstract class BaseDateTypeTestCase extends TestCase {
         $this->type->convertToDatabaseValue($value, $this->platform);
     }
 
-    /** @return \Iterator<(int | string), array<mixed>> */
+    /** @return \Iterator<(int|string), array<mixed>> */
     public static function invalidPHPValuesProvider(): \Iterator {
         yield [0];
 
