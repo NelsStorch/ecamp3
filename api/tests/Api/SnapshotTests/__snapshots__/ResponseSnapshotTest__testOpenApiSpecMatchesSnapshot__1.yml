@@ -1511,15 +1511,15 @@ components:
                 activityResponsibles:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 category:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 comments:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 progressLabel:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 rootContentNode:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 scheduleEntries:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
               type: object
@@ -2922,7 +2922,7 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -3689,9 +3689,9 @@ components:
             relationships:
               properties:
                 activity:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 campCollaboration:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -8796,13 +8796,13 @@ components:
                 campCollaborations:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 campPrototype:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 categories:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 checklists:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 creator:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 materialItems:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 materialLists:
@@ -8814,7 +8814,7 @@ components:
                 progressLabels:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 sharedBy:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -12826,11 +12826,11 @@ components:
                 activityResponsibles:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 dayResponsibles:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 user:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -15507,13 +15507,13 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 copyCategorySource:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 preferredContentTypes:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 rootContentNode:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -17240,11 +17240,11 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 checklistItems:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 copyChecklistSource:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -18807,13 +18807,13 @@ components:
             relationships:
               properties:
                 checklist:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 checklistNodes:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -21316,17 +21316,17 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 checklistItems:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 contentType:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 root:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -24152,15 +24152,15 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 contentType:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 root:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -26041,11 +26041,11 @@ components:
             relationships:
               properties:
                 activity:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 author:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -26637,8 +26637,9 @@ components:
                 description: 'The message associated with the violation'
                 type: string
               payload:
+                additionalProperties: true
                 description: 'The serialized payload of the violation'
-                type: array
+                type: object
               propertyPath:
                 description: 'The property path of the violation'
                 type: string
@@ -26682,7 +26683,7 @@ components:
                   code: { description: 'The code of the violation', type: string }
                   hint: { description: 'An extra hint to understand the violation', type: string }
                   message: { description: 'The message associated with the violation', type: string }
-                  payload: { description: 'The serialized payload of the violation', type: array }
+                  payload: { additionalProperties: true, description: 'The serialized payload of the violation', type: object }
                   propertyPath: { description: 'The property path of the violation', type: string }
                 required:
                   - message
@@ -31843,7 +31844,7 @@ components:
                 dayResponsibles:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 period:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 scheduleEntries:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
               type: object
@@ -32946,9 +32947,9 @@ components:
             relationships:
               properties:
                 campCollaboration:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 day:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -35113,13 +35114,13 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 materialList:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 materialNode:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 period:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -36805,9 +36806,9 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 campCollaboration:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 materialItems:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
               type: object
@@ -39293,17 +39294,17 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 contentType:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 materialItems:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 root:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -40573,11 +40574,11 @@ components:
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 contentType:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 root:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -42363,7 +42364,7 @@ components:
             relationships:
               properties:
                 camp:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 contentNodes:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 dayResponsibles:
@@ -45857,7 +45858,7 @@ components:
             relationships:
               properties:
                 user:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -47566,11 +47567,11 @@ components:
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 contentType:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 root:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -49751,11 +49752,11 @@ components:
             relationships:
               properties:
                 activity:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 day:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 period:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -51117,11 +51118,11 @@ components:
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 contentType:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 root:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -51601,11 +51602,11 @@ components:
                 children:
                   properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } }
                 contentType:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 parent:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
                 root:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -52713,7 +52714,7 @@ components:
             relationships:
               properties:
                 profile:
-                  properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } }
+                  properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } }
               type: object
             type:
               type: string
@@ -53355,7 +53356,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Activity' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, category: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, comments: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, progressLabel: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, rootContentNode: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Activity' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, category: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, comments: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, progressLabel: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, rootContentNode: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Activity.jsonapi collection.'
             text/html:
               schema:
@@ -53535,7 +53536,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Comment' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, author: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Comment' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, author: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Comment.jsonapi collection.'
             text/html:
               schema:
@@ -53819,7 +53820,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ActivityProgressLabel' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ActivityProgressLabel' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ActivityProgressLabel.jsonapi collection.'
             text/html:
               schema:
@@ -54197,7 +54198,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ActivityResponsible' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, campCollaboration: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ActivityResponsible' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, campCollaboration: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ActivityResponsible.jsonapi collection.'
             text/html:
               schema:
@@ -54897,7 +54898,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/CampCollaboration' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, user: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/CampCollaboration' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, user: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'CampCollaboration.jsonapi collection.'
             text/html:
               schema:
@@ -55363,7 +55364,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Camp' }, id: { type: string }, relationships: { properties: { activities: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, campCollaborations: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, campPrototype: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, categories: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, checklists: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, creator: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, materialLists: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, periods: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, profiles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, progressLabels: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, sharedBy: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Camp' }, id: { type: string }, relationships: { properties: { activities: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, campCollaborations: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, campPrototype: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, categories: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, checklists: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, creator: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, materialLists: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, periods: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, profiles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, progressLabels: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, sharedBy: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Camp.jsonapi collection.'
             text/html:
               schema:
@@ -55534,7 +55535,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Activity' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, category: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, comments: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, progressLabel: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, rootContentNode: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Activity' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, category: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, comments: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, progressLabel: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, rootContentNode: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Activity.jsonapi collection.'
             text/html:
               schema:
@@ -55620,7 +55621,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ActivityProgressLabel' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ActivityProgressLabel' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ActivityProgressLabel.jsonapi collection.'
             text/html:
               schema:
@@ -55728,7 +55729,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/CampCollaboration' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, user: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/CampCollaboration' }, id: { type: string }, relationships: { properties: { activityResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, user: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'CampCollaboration.jsonapi collection.'
             text/html:
               schema:
@@ -55814,7 +55815,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Category' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, copyCategorySource: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, preferredContentTypes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, rootContentNode: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Category' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, copyCategorySource: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, preferredContentTypes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, rootContentNode: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Category.jsonapi collection.'
             text/html:
               schema:
@@ -55909,7 +55910,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Checklist' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, checklistItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, copyChecklistSource: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Checklist' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, checklistItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, copyChecklistSource: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Checklist.jsonapi collection.'
             text/html:
               schema:
@@ -56180,7 +56181,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Category' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, copyCategorySource: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, preferredContentTypes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, rootContentNode: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Category' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, copyCategorySource: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, preferredContentTypes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, rootContentNode: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Category.jsonapi collection.'
             text/html:
               schema:
@@ -56580,7 +56581,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ChecklistItem' }, id: { type: string }, relationships: { properties: { checklist: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, checklistNodes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ChecklistItem' }, id: { type: string }, relationships: { properties: { checklist: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, checklistNodes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ChecklistItem.jsonapi collection.'
             text/html:
               schema:
@@ -56958,7 +56959,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Checklist' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, checklistItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, copyChecklistSource: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Checklist' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, checklistItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, copyChecklistSource: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Checklist.jsonapi collection.'
             text/html:
               schema:
@@ -57160,7 +57161,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ChecklistItem' }, id: { type: string }, relationships: { properties: { checklist: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, checklistNodes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ChecklistItem' }, id: { type: string }, relationships: { properties: { checklist: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, checklistNodes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ChecklistItem.jsonapi collection.'
             text/html:
               schema:
@@ -57453,7 +57454,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Comment' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, author: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Comment' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, author: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Comment.jsonapi collection.'
             text/html:
               schema:
@@ -57762,7 +57763,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ChecklistNode' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, checklistItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ChecklistNode' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, checklistItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ChecklistNode.jsonapi collection.'
             text/html:
               schema:
@@ -58170,7 +58171,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ColumnLayout' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ColumnLayout' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ColumnLayout.jsonapi collection.'
             text/html:
               schema:
@@ -58578,7 +58579,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MaterialNode' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MaterialNode' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'MaterialNode.jsonapi collection.'
             text/html:
               schema:
@@ -58986,7 +58987,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MultiSelect' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MultiSelect' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'MultiSelect.jsonapi collection.'
             text/html:
               schema:
@@ -59394,7 +59395,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ResponsiveLayout' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ResponsiveLayout' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ResponsiveLayout.jsonapi collection.'
             text/html:
               schema:
@@ -59802,7 +59803,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/SingleText' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/SingleText' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'SingleText.jsonapi collection.'
             text/html:
               schema:
@@ -60210,7 +60211,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Storyboard' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Storyboard' }, id: { type: string }, relationships: { properties: { children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Storyboard.jsonapi collection.'
             text/html:
               schema:
@@ -60618,7 +60619,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ContentNode' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, parent: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, root: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ContentNode' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, children: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, contentType: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, parent: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, root: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ContentNode.jsonapi collection.'
             text/html:
               schema:
@@ -60851,7 +60852,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/DayResponsible' }, id: { type: string }, relationships: { properties: { campCollaboration: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, day: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/DayResponsible' }, id: { type: string }, relationships: { properties: { campCollaboration: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, day: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'DayResponsible.jsonapi collection.'
             text/html:
               schema:
@@ -61130,7 +61131,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Day' }, id: { type: string }, relationships: { properties: { dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, period: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Day' }, id: { type: string }, relationships: { properties: { dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, period: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Day.jsonapi collection.'
             text/html:
               schema:
@@ -61238,7 +61239,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/DayResponsible' }, id: { type: string }, relationships: { properties: { campCollaboration: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, day: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/DayResponsible' }, id: { type: string }, relationships: { properties: { campCollaboration: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, day: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'DayResponsible.jsonapi collection.'
             text/html:
               schema:
@@ -61655,7 +61656,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MaterialItem' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, materialList: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, materialNode: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, period: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MaterialItem' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, materialList: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, materialNode: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, period: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'MaterialItem.jsonapi collection.'
             text/html:
               schema:
@@ -62011,7 +62012,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MaterialList' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, campCollaboration: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/MaterialList' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, campCollaboration: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'MaterialList.jsonapi collection.'
             text/html:
               schema:
@@ -62377,7 +62378,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Period' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, contentNodes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, days: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Period' }, id: { type: string }, relationships: { properties: { camp: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, contentNodes: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, days: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, materialItems: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Period.jsonapi collection.'
             text/html:
               schema:
@@ -62765,7 +62766,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Day' }, id: { type: string }, relationships: { properties: { dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, period: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Day' }, id: { type: string }, relationships: { properties: { dayResponsibles: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } }, period: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, scheduleEntries: { properties: { data: { items: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, type: array } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Day.jsonapi collection.'
             text/html:
               schema:
@@ -62953,7 +62954,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ScheduleEntry' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, day: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, period: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ScheduleEntry' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, day: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, period: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ScheduleEntry.jsonapi collection.'
             text/html:
               schema:
@@ -63342,7 +63343,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Profile' }, id: { type: string }, relationships: { properties: { user: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/Profile' }, id: { type: string }, relationships: { properties: { user: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'Profile.jsonapi collection.'
             text/html:
               schema:
@@ -63682,7 +63683,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ScheduleEntry' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, day: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } }, period: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/ScheduleEntry' }, id: { type: string }, relationships: { properties: { activity: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, day: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } }, period: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'ScheduleEntry.jsonapi collection.'
             text/html:
               schema:
@@ -64026,7 +64027,7 @@ paths:
               schema:
                 allOf:
                   - { $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination' }
-                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/User' }, id: { type: string }, relationships: { properties: { profile: { properties: { data: { properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
+                  - { properties: { data: { items: { properties: { attributes: { $ref: '#/components/schemas/User' }, id: { type: string }, relationships: { properties: { profile: { properties: { data: { oneOf: [{ properties: { id: { format: iri-reference, type: string }, type: { type: string } }, type: object }, { type: 'null' }] } } } }, type: object }, type: { type: string } }, required: [id, type], type: object }, type: array } }, type: object }
                 description: 'User.jsonapi collection.'
             text/html:
               schema:
