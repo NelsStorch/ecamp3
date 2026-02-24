@@ -11,7 +11,9 @@
         :aria-label="$t('global.button.move')"
         @keydown.down="$emit('move-down', itemKey)"
         @keydown.up="$emit('move-up', itemKey)"
-      />
+      >
+        <v-icon icon="mdi-drag" size="24" />
+      </v-btn>
     </div>
     <div role="cell" class="e-storyboard-row__time">
       <api-text-field
@@ -49,7 +51,9 @@
             class="e-storyboard-row__delete"
             color="error"
             :disabled="isLastSection"
-          />
+          >
+            <v-icon icon="mdi-delete-outline" size="24" />
+          </v-btn>
         </template>
       </dialog-remove-section>
     </div>
