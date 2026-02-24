@@ -375,6 +375,10 @@ div.editor:deep(.editor__content .ProseMirror ol),
 div.editor:deep(.editor__content .ProseMirror ul) {
   margin-bottom: 6px;
 }
+div.editor:deep(.editor__content .ProseMirror ol),
+div.editor:deep(.editor__content .ProseMirror ul) {
+  padding-left: 24px;
+}
 div.editor:deep(.editor__content .ProseMirror h1) {
   margin-top: 18px;
   margin-bottom: 6px;
