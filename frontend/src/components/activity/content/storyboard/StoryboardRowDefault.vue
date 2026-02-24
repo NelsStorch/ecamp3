@@ -83,7 +83,7 @@ export default {
 }
 
 .e-storyboard-row--default {
-  vertical-align: top;
+  vertical-align: baseline;
 
   .e-storyboard-row__time {
     width: 15%;

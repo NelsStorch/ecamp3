@@ -306,3 +306,8 @@ body {
 .justify-items-center {
   justify-items: center;
 }
+
+// https://github.com/vuetifyjs/vuetify/issues/22648
+.v-field {
+  contain: none!important;
+}
