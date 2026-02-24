@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class AssertLastCollectionItemIsNotDeleted extends Constraint {
     public const IS_EMPTY_ERROR = 'IS_EMPTY_ERROR';
-    public string $message = 'Cannot delete the last entry.';
+    public string $message;
 
     public function __construct(
         ?array $options = null,
@@ -15,8 +15,8 @@ class AssertLastCollectionItemIsNotDeleted extends Constraint {
         ?array $groups = null,
         mixed $payload = null
     ) {
-        parent::__construct($options ?? [], $groups, $payload);
+        $this->message = $message ?? $options['message'] ?? 'Cannot delete the last entry.';
 
-        $this->message = $message ?? $this->message;
+        parent::__construct(null, $groups, $payload);
     }
 }
