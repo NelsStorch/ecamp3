@@ -336,7 +336,7 @@ jobs:
           sed -i "s|$(pwd)/api/|api/|g" api/build/logs/clover.xml
           api/vendor/bin/php-coveralls -v \
                                   --coverage_clover api/build/logs/clover.xml \
-                                  --json_path api/build/logs/coveralls-upload.json
+                                  --json_path api/build/logs/coveralls-upload.json || true
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_PARALLEL: true
