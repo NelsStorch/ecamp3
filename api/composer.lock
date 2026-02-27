@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fa7a8cff18eaa49dbb96c7c78509015",
+    "content-hash": "21f42ac250f4a3d90a37985676e51877",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
-            "version": "v4.2.18",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-common.git",
@@ -185,7 +185,7 @@
         },
         {
             "name": "api-platform/documentation",
-            "version": "v4.2.18",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/documentation.git",
@@ -326,7 +326,7 @@
         },
         {
             "name": "api-platform/http-cache",
-            "version": "v4.2.18",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/http-cache.git",
@@ -1017,7 +1017,7 @@
         },
         {
             "name": "api-platform/state",
-            "version": "v4.2.18",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/state.git",
@@ -1108,7 +1108,7 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/state/tree/v4.2.18"
+                "source": "https://github.com/api-platform/state/tree/v4.2.19"
             },
             "time": "2026-02-17T09:18:17+00:00"
         },
@@ -1242,7 +1242,7 @@
         },
         {
             "name": "api-platform/validator",
-            "version": "v4.2.18",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/validator.git",
@@ -1312,7 +1312,7 @@
                 "validator"
             ],
             "support": {
-                "source": "https://github.com/api-platform/validator/tree/v4.2.18"
+                "source": "https://github.com/api-platform/validator/tree/v4.2.19"
             },
             "time": "2026-01-26T15:45:40+00:00"
         },
