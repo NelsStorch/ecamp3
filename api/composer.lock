@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21f42ac250f4a3d90a37985676e51877",
+    "content-hash": "97270b71451d52b85a76935f2b65c871",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -406,16 +406,16 @@
         },
         {
             "name": "api-platform/hydra",
-            "version": "v4.2.19",
+            "version": "v4.2.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/hydra.git",
-                "reference": "3f2587cc3b98f46247ca458ba557c03f62e19905"
+                "reference": "ddba613f615caa8372df3d478a36a910b77f6d28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/hydra/zipball/3f2587cc3b98f46247ca458ba557c03f62e19905",
-                "reference": "3f2587cc3b98f46247ca458ba557c03f62e19905",
+                "url": "https://api.github.com/repos/api-platform/hydra/zipball/ddba613f615caa8372df3d478a36a910b77f6d28",
+                "reference": "ddba613f615caa8372df3d478a36a910b77f6d28",
                 "shasum": ""
             },
             "require": {
@@ -487,9 +487,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/hydra/tree/v4.2.19"
+                "source": "https://github.com/api-platform/hydra/tree/v4.2.16"
             },
-            "time": "2026-02-27T10:31:31+00:00"
+            "time": "2026-02-13T15:07:33+00:00"
         },
         {
             "name": "api-platform/json-api",
@@ -575,16 +575,16 @@
         },
         {
             "name": "api-platform/json-schema",
-            "version": "v4.2.19",
+            "version": "v4.2.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/json-schema.git",
-                "reference": "adc464d8240ac411ff8ed65ac8614b16d11f5544"
+                "reference": "3569ab8e3e5c01d77f00964683254809571fa078"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/json-schema/zipball/adc464d8240ac411ff8ed65ac8614b16d11f5544",
-                "reference": "adc464d8240ac411ff8ed65ac8614b16d11f5544",
+                "url": "https://api.github.com/repos/api-platform/json-schema/zipball/3569ab8e3e5c01d77f00964683254809571fa078",
+                "reference": "3569ab8e3e5c01d77f00964683254809571fa078",
                 "shasum": ""
             },
             "require": {
@@ -650,9 +650,9 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/json-schema/tree/v4.2.19"
+                "source": "https://github.com/api-platform/json-schema/tree/v4.2.16"
             },
-            "time": "2026-02-25T15:52:40+00:00"
+            "time": "2026-02-13T15:07:33+00:00"
         },
         {
             "name": "api-platform/jsonld",

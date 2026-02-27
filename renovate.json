@@ -39,6 +39,8 @@
         "!api-platform/admin-pack",
         "!api-platform/api-pack",
         "!api-platform/api-platform",
+        "!api-platform/hydra",
+        "!api-platform/json-schema",
         "!api-platform/metadata",
         "!api-platform/openapi",
         "!api-platform/parameter-validator",
