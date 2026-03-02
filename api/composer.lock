@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42f87218740ba900eadbc277967a5a1b",
+    "content-hash": "3544188727673f63f27c2ba0c3b917c8",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -924,16 +924,16 @@
         },
         {
             "name": "api-platform/serializer",
-            "version": "v4.2.17",
+            "version": "v4.2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/serializer.git",
-                "reference": "f021a31e6a409e8c3fd24bee1e5e183b995f9137"
+                "reference": "35f0e935675f092a09e83e774462ece3a0b322bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/serializer/zipball/f021a31e6a409e8c3fd24bee1e5e183b995f9137",
-                "reference": "f021a31e6a409e8c3fd24bee1e5e183b995f9137",
+                "url": "https://api.github.com/repos/api-platform/serializer/zipball/35f0e935675f092a09e83e774462ece3a0b322bc",
+                "reference": "35f0e935675f092a09e83e774462ece3a0b322bc",
                 "shasum": ""
             },
             "require": {
@@ -1011,9 +1011,9 @@
                 "serializer"
             ],
             "support": {
-                "source": "https://github.com/api-platform/serializer/tree/v4.2.17"
+                "source": "https://github.com/api-platform/serializer/tree/v4.2.18"
             },
-            "time": "2026-02-20T09:35:37+00:00"
+            "time": "2026-02-22T06:55:14+00:00"
         },
         {
             "name": "api-platform/state",
