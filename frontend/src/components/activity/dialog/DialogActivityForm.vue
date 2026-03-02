@@ -37,7 +37,12 @@
       </template>
     </e-select>
 
-    <e-text-field v-if="!hideLocation" v-model="localActivity.location" path="location" maxlength="64" />
+    <e-text-field
+      v-if="!hideLocation"
+      v-model="localActivity.location"
+      path="location"
+      maxlength="64"
+    />
 
     <FormScheduleEntryList
       v-if="activity.scheduleEntries"
