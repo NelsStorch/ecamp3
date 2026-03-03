@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3544188727673f63f27c2ba0c3b917c8",
+    "content-hash": "7baf15c59ca4832b00c3cc6d1ad66702",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -5783,23 +5783,23 @@
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "5.8.3",
+            "version": "5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "e82559a078b26c8f8592289e98a25b203527a9c6"
+                "reference": "75a73de23b9af414b3c8b15c26187a4ae6c65732"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/e82559a078b26c8f8592289e98a25b203527a9c6",
-                "reference": "e82559a078b26c8f8592289e98a25b203527a9c6",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/75a73de23b9af414b3c8b15c26187a4ae6c65732",
+                "reference": "75a73de23b9af414b3c8b15c26187a4ae6c65732",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/psr7": "^2.1.1",
                 "jean85/pretty-package-versions": "^1.5||^2.0",
                 "php": "^7.2||^8.0",
-                "sentry/sentry": "^4.19.1",
+                "sentry/sentry": "^4.20.0",
                 "symfony/cache-contracts": "^1.1||^2.4||^3.0",
                 "symfony/config": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
                 "symfony/console": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
@@ -5869,7 +5869,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-symfony/issues",
-                "source": "https://github.com/getsentry/sentry-symfony/tree/5.8.3"
+                "source": "https://github.com/getsentry/sentry-symfony/tree/5.9.0"
             },
             "funding": [
                 {
@@ -5881,7 +5881,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-12-18T09:26:49+00:00"
+            "time": "2026-02-23T12:32:36+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -12977,11 +12977,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.39",
+            "version": "2.1.40",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c6f73a2af4cbcd99c931d0fb8f08548cc0fa8224",
-                "reference": "c6f73a2af4cbcd99c931d0fb8f08548cc0fa8224",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
+                "reference": "9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
                 "shasum": ""
             },
             "require": {
@@ -13026,7 +13026,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-11T14:48:56+00:00"
+            "time": "2026-02-23T15:04:35+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
