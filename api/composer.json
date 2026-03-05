@@ -5,10 +5,10 @@
         "php": ">=8.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/doctrine-orm": "4.2.17",
+        "api-platform/doctrine-orm": "4.2.19",
         "api-platform/doctrine-common": "4.2.19",
         "api-platform/documentation": "4.2.19",
-        "api-platform/hal": "4.2.17",
+        "api-platform/hal": "4.2.19",
         "api-platform/http-cache": "4.2.19",
         "api-platform/json-api": "4.2.18",
         "api-platform/metadata": "4.2.19",
@@ -64,7 +64,7 @@
         "webonyx/graphql-php": "15.30.2"
     },
     "require-dev": {
-        "api-platform/graphql": "4.2.17",
+        "api-platform/graphql": "4.2.19",
         "api-platform/hydra":  "4.2.17",
         "api-platform/json-schema": "4.2.19",
         "brianium/paratest": "v7.17.0",

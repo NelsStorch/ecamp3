@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec65bccc62a41568e7199b5de8c91840",
+    "content-hash": "4b15794c5010354edc04a2e04625b0bc",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -98,16 +98,16 @@
         },
         {
             "name": "api-platform/doctrine-orm",
-            "version": "v4.2.17",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-orm.git",
-                "reference": "99d8b8cdee4ca79fd3abb351991bda6b42696eee"
+                "reference": "a7d4c255519ac0438f9293b3e97d2b3bd9ca43d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/doctrine-orm/zipball/99d8b8cdee4ca79fd3abb351991bda6b42696eee",
-                "reference": "99d8b8cdee4ca79fd3abb351991bda6b42696eee",
+                "url": "https://api.github.com/repos/api-platform/doctrine-orm/zipball/a7d4c255519ac0438f9293b3e97d2b3bd9ca43d7",
+                "reference": "a7d4c255519ac0438f9293b3e97d2b3bd9ca43d7",
                 "shasum": ""
             },
             "require": {
@@ -179,9 +179,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.17"
+                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.19"
             },
-            "time": "2026-02-13T17:30:49+00:00"
+            "time": "2026-02-25T15:52:40+00:00"
         },
         {
             "name": "api-platform/documentation",
@@ -248,16 +248,16 @@
         },
         {
             "name": "api-platform/hal",
-            "version": "v4.2.17",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/hal.git",
-                "reference": "90871de2dde3bf98ef0c1bee6483fdf87ee95b03"
+                "reference": "9d8b5a596808eda4aa777e73d96354c8d2c56c98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/hal/zipball/90871de2dde3bf98ef0c1bee6483fdf87ee95b03",
-                "reference": "90871de2dde3bf98ef0c1bee6483fdf87ee95b03",
+                "url": "https://api.github.com/repos/api-platform/hal/zipball/9d8b5a596808eda4aa777e73d96354c8d2c56c98",
+                "reference": "9d8b5a596808eda4aa777e73d96354c8d2c56c98",
                 "shasum": ""
             },
             "require": {
@@ -320,9 +320,9 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/hal/issues",
-                "source": "https://github.com/api-platform/hal/tree/v4.2.17"
+                "source": "https://github.com/api-platform/hal/tree/v4.2.19"
             },
-            "time": "2026-02-13T17:30:49+00:00"
+            "time": "2026-02-25T15:52:40+00:00"
         },
         {
             "name": "api-platform/http-cache",
@@ -11506,16 +11506,16 @@
     "packages-dev": [
         {
             "name": "api-platform/graphql",
-            "version": "v4.2.17",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/graphql.git",
-                "reference": "fee986f7a283067631a764427f966c3f85c69c95"
+                "reference": "25b44ca446d86b50b5bc412a093f387f1994390e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/graphql/zipball/fee986f7a283067631a764427f966c3f85c69c95",
-                "reference": "fee986f7a283067631a764427f966c3f85c69c95",
+                "url": "https://api.github.com/repos/api-platform/graphql/zipball/25b44ca446d86b50b5bc412a093f387f1994390e",
+                "reference": "25b44ca446d86b50b5bc412a093f387f1994390e",
                 "shasum": ""
             },
             "require": {
@@ -11592,9 +11592,9 @@
                 "graphql"
             ],
             "support": {
-                "source": "https://github.com/api-platform/graphql/tree/v4.2.17"
+                "source": "https://github.com/api-platform/graphql/tree/v4.2.19"
             },
-            "time": "2026-02-13T15:07:33+00:00"
+            "time": "2026-02-25T15:52:40+00:00"
         },
         {
             "name": "brianium/paratest",
