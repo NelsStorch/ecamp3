@@ -67,7 +67,7 @@
         "api-platform/graphql": "4.2.19",
         "api-platform/hydra":  "4.2.17",
         "api-platform/json-schema": "4.2.20",
-        "brianium/paratest": "v7.17.0",
+        "brianium/paratest": "v7.19.1",
         "friendsofphp/php-cs-fixer": "3.94.2",
         "hautelook/alice-bundle": "2.17.2",
         "justinrainbow/json-schema": "6.7.2",
