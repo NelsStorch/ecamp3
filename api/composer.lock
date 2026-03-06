@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a529b5b28a339b8d7e8eac2569e88acc",
+    "content-hash": "b653a7ee0a8daf686d86c1e2c0aed312",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-common.git",
@@ -92,13 +92,13 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/doctrine-common/tree/v4.3.0-alpha.2"
+                "source": "https://github.com/api-platform/doctrine-common/tree/v4.3.0-beta.1"
             },
             "time": "2026-02-13T15:07:33+00:00"
         },
         {
             "name": "api-platform/doctrine-orm",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-orm.git",
@@ -179,13 +179,13 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.19"
+                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.2.20"
             },
             "time": "2026-02-25T15:52:40+00:00"
         },
         {
             "name": "api-platform/documentation",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/documentation.git",
@@ -242,13 +242,13 @@
             ],
             "description": "API Platform documentation controller.",
             "support": {
-                "source": "https://github.com/api-platform/documentation/tree/v4.3.0-alpha.2"
+                "source": "https://github.com/api-platform/documentation/tree/v4.3.0-beta.1"
             },
             "time": "2025-12-27T22:15:57+00:00"
         },
         {
             "name": "api-platform/hal",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/hal.git",
@@ -320,13 +320,13 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/hal/issues",
-                "source": "https://github.com/api-platform/hal/tree/v4.2.19"
+                "source": "https://github.com/api-platform/hal/tree/v4.2.20"
             },
             "time": "2026-02-25T15:52:40+00:00"
         },
         {
             "name": "api-platform/http-cache",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/http-cache.git",
@@ -400,7 +400,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/http-cache/tree/v4.3.0-alpha.2"
+                "source": "https://github.com/api-platform/http-cache/tree/v4.3.0-beta.1"
             },
             "time": "2026-02-13T15:07:33+00:00"
         },
@@ -493,23 +493,23 @@
         },
         {
             "name": "api-platform/json-api",
-            "version": "v4.2.18",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/json-api.git",
-                "reference": "6c5b5b83f693667371b7b31a65a50925e10c6d46"
+                "reference": "d28b51d78c50451e6714ed7a0c673ec6d9070900"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/json-api/zipball/6c5b5b83f693667371b7b31a65a50925e10c6d46",
-                "reference": "6c5b5b83f693667371b7b31a65a50925e10c6d46",
+                "url": "https://api.github.com/repos/api-platform/json-api/zipball/d28b51d78c50451e6714ed7a0c673ec6d9070900",
+                "reference": "d28b51d78c50451e6714ed7a0c673ec6d9070900",
                 "shasum": ""
             },
             "require": {
                 "api-platform/documentation": "^4.2",
                 "api-platform/json-schema": "^4.2",
                 "api-platform/metadata": "^4.2",
-                "api-platform/serializer": "^4.2.4",
+                "api-platform/serializer": "^4.2.18",
                 "api-platform/state": "^4.2.4",
                 "php": ">=8.2",
                 "symfony/error-handler": "^6.4 || ^7.0 || ^8.0",
@@ -569,9 +569,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/json-api/tree/v4.2.18"
+                "source": "https://github.com/api-platform/json-api/tree/v4.2.20"
             },
-            "time": "2026-02-13T17:30:49+00:00"
+            "time": "2026-02-27T16:03:48+00:00"
         },
         {
             "name": "api-platform/json-schema",
@@ -924,16 +924,16 @@
         },
         {
             "name": "api-platform/serializer",
-            "version": "v4.2.18",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/serializer.git",
-                "reference": "35f0e935675f092a09e83e774462ece3a0b322bc"
+                "reference": "bd627b86c0cb37bd2c2ca6b7f996d5301627f627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/serializer/zipball/35f0e935675f092a09e83e774462ece3a0b322bc",
-                "reference": "35f0e935675f092a09e83e774462ece3a0b322bc",
+                "url": "https://api.github.com/repos/api-platform/serializer/zipball/bd627b86c0cb37bd2c2ca6b7f996d5301627f627",
+                "reference": "bd627b86c0cb37bd2c2ca6b7f996d5301627f627",
                 "shasum": ""
             },
             "require": {
@@ -1011,13 +1011,13 @@
                 "serializer"
             ],
             "support": {
-                "source": "https://github.com/api-platform/serializer/tree/v4.2.18"
+                "source": "https://github.com/api-platform/serializer/tree/v4.2.20"
             },
-            "time": "2026-02-22T06:55:14+00:00"
+            "time": "2026-02-27T16:03:48+00:00"
         },
         {
             "name": "api-platform/state",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/state.git",
@@ -1108,22 +1108,22 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/state/tree/v4.2.19"
+                "source": "https://github.com/api-platform/state/tree/v4.2.20"
             },
             "time": "2026-02-17T09:18:17+00:00"
         },
         {
             "name": "api-platform/symfony",
-            "version": "v4.2.17",
+            "version": "v4.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/symfony.git",
-                "reference": "04052b61e26a1c059bb595b78670302ad4517b7f"
+                "reference": "3ed112cd9e278a5ba2d7b663df04861a3c4ba905"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/symfony/zipball/04052b61e26a1c059bb595b78670302ad4517b7f",
-                "reference": "04052b61e26a1c059bb595b78670302ad4517b7f",
+                "url": "https://api.github.com/repos/api-platform/symfony/zipball/3ed112cd9e278a5ba2d7b663df04861a3c4ba905",
+                "reference": "3ed112cd9e278a5ba2d7b663df04861a3c4ba905",
                 "shasum": ""
             },
             "require": {
@@ -1236,13 +1236,13 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/api-platform/symfony/tree/v4.2.17"
+                "source": "https://github.com/api-platform/symfony/tree/v4.2.19"
             },
-            "time": "2026-02-18T14:55:07+00:00"
+            "time": "2026-02-27T10:22:56+00:00"
         },
         {
             "name": "api-platform/validator",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/validator.git",
@@ -1312,7 +1312,7 @@
                 "validator"
             ],
             "support": {
-                "source": "https://github.com/api-platform/validator/tree/v4.2.19"
+                "source": "https://github.com/api-platform/validator/tree/v4.2.20"
             },
             "time": "2026-01-26T15:45:40+00:00"
         },
@@ -11506,7 +11506,7 @@
     "packages-dev": [
         {
             "name": "api-platform/graphql",
-            "version": "v4.2.19",
+            "version": "v4.2.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/graphql.git",
@@ -11592,7 +11592,7 @@
                 "graphql"
             ],
             "support": {
-                "source": "https://github.com/api-platform/graphql/tree/v4.2.19"
+                "source": "https://github.com/api-platform/graphql/tree/v4.2.20"
             },
             "time": "2026-02-25T15:52:40+00:00"
         },
