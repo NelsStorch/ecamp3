@@ -2,7 +2,7 @@
   <e-form name="activity">
     <div class="e-form-container d-flex gap-2">
       <e-text-field
-        v-model="localActivity.title"
+        v-model="activity.title"
         path="title"
         vee-rules="required"
         class="flex-grow-1"
@@ -13,7 +13,7 @@
     </div>
 
     <e-select
-      v-model="localActivity.category"
+      v-model="activity.category"
       path="category"
       :items="Object.keys(categories)"
       vee-rules="required"
@@ -34,7 +34,7 @@
       </template>
     </e-select>
 
-    <e-text-field v-if="!hideLocation" v-model="localActivity.location" path="location" />
+    <e-text-field v-if="!hideLocation" v-model="activity.location" path="location" />
 
     <FormScheduleEntryList
       v-if="activity.scheduleEntries"
@@ -81,11 +81,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  data() {
-    return {
-      localActivity: this.activity,
-    }
   },
   computed: {
     categories() {
