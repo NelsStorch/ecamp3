@@ -117,6 +117,7 @@
   </div>
 </template>
 <script>
+import { markRaw } from 'vue'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import { BubbleMenu } from '@tiptap/vue-3/menus'
 import Document from '@tiptap/extension-document'
@@ -197,14 +198,16 @@ export default {
 
     return {
       hoverCursor: false,
-      editor: new Editor({
-        extensions: extensions,
-        content: this.modelValue,
-        onUpdate: this.onUpdate,
-        onFocus: (e) => this.$emit('focus', e),
-        onBlur: (e) => this.$emit('blur', e),
-        editable: this.editable,
-      }),
+      editor: markRaw(
+        new Editor({
+          extensions: extensions,
+          content: this.modelValue,
+          onUpdate: this.onUpdate,
+          onFocus: (e) => this.$emit('focus', e),
+          onBlur: (e) => this.$emit('blur', e),
+          editable: this.editable,
+        })
+      ),
       placeholderExtension: placeholder,
       regex: {
         emptyParagraph: /<p><\/p>/,
