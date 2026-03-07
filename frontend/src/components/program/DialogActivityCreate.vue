@@ -137,6 +137,7 @@ export default {
   props: {
     scheduleEntry: { type: Object, required: true },
   },
+  emits: ['activity-created'],
   setup() {
     const showCopyActivityUrlPopover = ref(false)
 
