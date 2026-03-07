@@ -43,7 +43,7 @@ export default {
       default: false,
     },
   },
-  emits: ['submit'],
+  emits: ['activity-updated', 'submit'],
   data() {
     return {
       entityProperties: ['title', 'location'],
