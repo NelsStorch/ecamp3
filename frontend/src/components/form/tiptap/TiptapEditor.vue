@@ -139,6 +139,10 @@ import {
 } from '@/components/form/tiptap/AutoLinkDecoration.js'
 import { isTextSelection } from '@tiptap/core'
 
+function isSillyThingThatHappensWithTipTap(val) {
+  return val && Object.prototype.hasOwnProperty.call(val, 'isTrusted')
+}
+
 export default {
   name: 'TiptapEditor',
   components: {
@@ -263,7 +267,7 @@ export default {
     modelValue(val) {
       // Be careful to only use setContent when absolutely necessary, because it resets the user's cursor to the end
       // of the input field
-      if (val !== this.html) {
+      if (val !== this.html && !isSillyThingThatHappensWithTipTap(val)) {
         // we do not want to trigger onUpdate when modelValue is updated from outside
         this.editor.commands.setContent(val, { emitUpdate: false })
       }
