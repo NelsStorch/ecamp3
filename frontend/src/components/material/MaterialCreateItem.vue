@@ -1,5 +1,9 @@
 <template>
-  <Form v-if="materialListsSorted.length > 0" v-slot="{ handleSubmit }" as="tr">
+  <Form
+    v-if="materialListsSorted.length > 0"
+    v-slot="{ handleSubmit, resetForm }"
+    as="tr"
+  >
     <td class="pt-1">
       <e-number-field
         ref="quantity"
@@ -38,7 +42,11 @@
       />
     </td>
     <td class="pt-1">
-      <ButtonAdd height="52" hide-label @click="handleSubmit(createMaterialItem)" />
+      <ButtonAdd
+        height="52"
+        hide-label
+        @click="handleSubmit(() => createMaterialItem(resetForm))"
+      />
     </td>
   </Form>
   <tr v-else>
@@ -103,7 +111,7 @@ export default {
         materialList: this.materialList?._meta.self ?? undefined,
       }
     },
-    createMaterialItem() {
+    createMaterialItem(resetForm) {
       const key = Date.now()
       const data = this.materialItem
 
@@ -111,7 +119,7 @@ export default {
       this.$refs.quantity.focus()
 
       // fire event to allow for eager adding before post has finished
-      this.$emit('item-adding', key, data)
+      this.$emit('item-adding', key, data, resetForm)
     },
     campRoute,
   },

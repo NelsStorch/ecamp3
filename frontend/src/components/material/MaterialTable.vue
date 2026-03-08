@@ -420,10 +420,11 @@ export default {
       }
     },
 
-    add(key, data) {
+    add(key, data, resetForm) {
       this.newMaterialItems[key] = data
 
       this.postToApi(key, data)
+      resetForm()
     },
 
     // retry to save to API (after server error)
