@@ -2,7 +2,7 @@
   <div class="e-pages-overview">
     <draggable
       :model-value="modelValue"
-      :item-key="itemKeyComputed"
+      :item-key="() => undefined"
       handle=".handle"
       filter=".e-pages-config--template"
       class="e-pages-overview__grid pa-0 pa-md-8"
@@ -33,21 +33,8 @@ export default {
       type: Array,
       default: () => [],
     },
-    // Optional: provide a property name or a function (item, index) => key
-    itemKey: {
-      type: [String, Function],
-      default: null,
-    },
   },
   emits: ['update:modelValue'],
-  computed: {
-    itemKeyComputed() {
-      if (typeof this.itemKey === 'function') return this.itemKey
-      if (typeof this.itemKey === 'string' && this.itemKey.length > 0) return this.itemKey
-      // Fallback to index-based key when no itemKey provided
-      return (item, index) => index
-    },
-  },
 }
 </script>
 
