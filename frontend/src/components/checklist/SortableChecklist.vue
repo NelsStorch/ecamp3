@@ -10,7 +10,7 @@
       ghost-class="e-sortable-checklist-item--ghost"
       handle=".drag-and-drop-handle"
       filter=".add-item"
-      :disabled="debouncedDisabled"
+      :disabled="disabled"
       :data-parent="parentKey"
       group="checklist"
       :sort="true"
@@ -25,14 +25,14 @@
           :checklist="checklist"
           :item="element"
           :item-position="index"
-          :disabled="debouncedDisabled"
+          :disabled="disabled"
           @drag-start="dragStart"
           @drag-end="dragEnd"
         />
       </template>
     </draggable>
     <ChecklistItemCreate
-      v-if="!debouncedDisabled && !(parentDragging || dragging)"
+      v-if="!disabled && !(parentDragging || dragging)"
       class="add-item"
       :checklist="checklist"
       :parent="parent?._meta.self"
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { computed, nextTick } from 'vue'
+import { computed } from 'vue'
 import draggable from 'vuedraggable'
 import { every, sortBy, filter } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
@@ -96,7 +96,6 @@ export default {
   },
   data() {
     return {
-      debouncedDisabled: true,
       dragging: false,
       dirty: false,
       savingRequest: 0,
@@ -140,10 +139,6 @@ export default {
       },
       immediate: true,
     },
-  },
-  async mounted() {
-    await nextTick()
-    this.debouncedDisabled = this.disabled
   },
   methods: {
     dragStart() {
