@@ -66,7 +66,7 @@
         v-if="checklist && !checklist._meta.deleting"
         :parent="null"
         :checklist="checklist"
-        :disabled="isOutsider"
+        :disabled="debouncedDisabled"
       />
     </v-list>
   </content-card>
@@ -80,6 +80,7 @@ import ApiForm from '@/components/form/api/ApiForm.vue'
 import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import { checklistRoute } from '@/router.js'
 import { campRoleMixin } from '@/mixins/campRoleMixin.js'
+import { nextTick } from 'vue'
 
 export default {
   name: 'ChecklistDetail',
@@ -104,7 +105,11 @@ export default {
     },
   },
   data() {
-    return { dragging: false, editChecklistName: false }
+    return {
+      dragging: false,
+      editChecklistName: false,
+      debouncedDisabled: true,
+    }
   },
   computed: {
     items() {
@@ -119,6 +124,9 @@ export default {
         camp: this.camp._meta.self,
       })
       .$loadItems()
+
+    await nextTick()
+    this.debouncedDisabled = this.isOutsider
   },
   methods: {
     makeChecklistNameEditable() {
