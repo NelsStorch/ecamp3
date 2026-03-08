@@ -3,7 +3,7 @@
     v-resizeobserver.debounce="onResize"
     :headers="tableHeaders"
     :items="materialItemsData"
-    :disable-pagination="true"
+    :items-per-page="-1"
     :disable-filtering="layoutMode"
     :disable-sort="layoutMode"
     mobile-breakpoint="0"
@@ -388,13 +388,6 @@ export default {
     // Show filter just if period material is in the list
     periodFilterEnabled() {
       return this.materialItemCollection.items.some((item) => item.materialNode === null)
-    },
-  },
-  watch: {
-    periodFilterEnabled() {
-      if (!this.periodFilterEnabled) {
-        this.periodOnly = false
-      }
     },
   },
   async mounted() {
