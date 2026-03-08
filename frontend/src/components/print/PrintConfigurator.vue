@@ -1,7 +1,7 @@
 <template>
   <v-skeleton-loader v-if="loading" type="article" />
   <div v-else>
-    <PagesOverview v-model="cnf.contents" @input="onChange">
+    <PagesOverview v-model="cnf.contents" @update:model-value="onChange">
       <template #item="{ element: content, index: idx }">
         <PagesConfig
           :title="$t('components.print.printConfigurator.config.' + content.type)"

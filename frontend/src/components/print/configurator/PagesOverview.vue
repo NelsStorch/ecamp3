@@ -10,7 +10,9 @@
       @update:model-value="$emit('update:modelValue', $event)"
     >
       <template #item="slotProps">
-        <slot name="item" v-bind="slotProps" />
+        <div :key="slotProps.index">
+          <slot name="item" v-bind="slotProps" />
+        </div>
       </template>
       <template #footer>
         <slot />
