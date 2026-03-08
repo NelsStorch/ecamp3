@@ -5,7 +5,6 @@
       value-format="YYYY-MM-DDTHH:mm:ssZ"
       path="startDate"
       :vee-id="'startDate' + startUTC"
-      vee-rules="required"
       :allowed-dates="dateIsInAnyPeriod"
       variant="underlined"
       class="area-startdate date-picker"
@@ -16,7 +15,6 @@
       <e-time-dropdown
         v-model="localScheduleEntry.start"
         path="startDatetime"
-        vee-rules="required"
         variant="underlined"
         required
         value-format="YYYY-MM-DDTHH:mm:ssZ"
