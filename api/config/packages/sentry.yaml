@@ -14,6 +14,14 @@ sentry:
 #            - 'Symfony\Component\Serializer\Exception\ExtraAttributesException'
 #            - 'Symfony\Component\Serializer\Exception\UnexpectedValueException'
 
+services:
+    # Configure the Sentry Monolog handler as a service for monolog-bundle v4
+    Sentry\Monolog\Handler:
+        arguments:
+            $hub: '@Sentry\State\HubInterface'
+            $level: !php/const Monolog\Logger::ERROR
+            $fillExtraContext: false
+
 monolog:
     handlers:
         sentry:
@@ -24,6 +32,5 @@ monolog:
             buffer_size: 50 # How many messages should be saved? Prevent memory leaks
 
         sentry_main:
-            type: sentry
-            level: !php/const Monolog\Logger::ERROR
-            hub_id: Sentry\State\HubInterface
+            type: service
+            id: Sentry\Monolog\Handler

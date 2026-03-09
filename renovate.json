@@ -4,8 +4,11 @@
     "config:recommended",
     ":prConcurrentLimitNone"
   ],
+  "ignorePresets": [
+    "group:apiPlatform"
+  ],
   "constraints": {
-    "node": "24.13.0",
+    "node": "24.13.1",
     "php": "8.5.2"
   },
   "automergeType": "branch",
@@ -23,6 +26,27 @@
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "lockFileMaintenance"],
       "automerge": true
+    },
+    {
+      "groupName": "api-platform packages",
+      "groupSlug": "api-platform",
+      "matchDatasources": [
+        "packagist"
+      ],
+      "matchPackageNames": [
+        "api-platform/*",
+        "!api-platform/admin-meta",
+        "!api-platform/admin-pack",
+        "!api-platform/api-pack",
+        "!api-platform/api-platform",
+        "!api-platform/hydra",
+        "!api-platform/json-schema",
+        "!api-platform/metadata",
+        "!api-platform/openapi",
+        "!api-platform/parameter-validator",
+        "!api-platform/postman-collection-generator",
+        "!api-platform/schema-generator"
+      ]
     },
     {
       "extends": ["monorepo:vue"],

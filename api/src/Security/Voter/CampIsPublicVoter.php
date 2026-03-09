@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
- * @extends Voter<string,BelongsToCampInterface | BelongsToContentNodeTreeInterface>
+ * @extends Voter<string,BelongsToCampInterface|BelongsToContentNodeTreeInterface>
  */
 class CampIsPublicVoter extends Voter {
     use GetCampFromContentNodeTrait;
