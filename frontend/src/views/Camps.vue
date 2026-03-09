@@ -34,6 +34,7 @@
         v-if="
           !loading && ((isAdmin && prototypeCamps.length > 0) || pastCamps.length > 0)
         "
+        v-model="openedPanels"
         multiple
         flat
         accordion
@@ -98,6 +99,7 @@ export default {
     return {
       loading: true,
       isAdmin: false,
+      openedPanels: [],
     }
   },
   head() {
@@ -162,6 +164,13 @@ export default {
 
       await Promise.all([this.camps._meta.load, this.periods._meta.load])
 
+      if (this.upcomingCamps.length === 0 && this.pastCamps.length > 0) {
+        let pastCampsIndex = 0
+        if (this.isAdmin && this.prototypeCamps.length > 0) {
+          pastCampsIndex = 1
+        }
+        this.openedPanels = [pastCampsIndex]
+      }
       this.loading = false
     },
   },
