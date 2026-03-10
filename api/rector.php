@@ -22,6 +22,7 @@ use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\AddInstanceofAssertForNullable
 use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\NoSetupWithParentCallOverrideRector;
 use Rector\PHPUnit\CodeQuality\Rector\MethodCall\AssertEmptyNullableObjectToAssertInstanceofRector;
 use Rector\PHPUnit\CodeQuality\Rector\StmtsAwareInterface\DeclareStrictTypesTestsRector;
+use Rector\PHPUnit\PHPUnit120\Rector\Class_\AllowMockObjectsWhereParentClassRector;
 use Rector\Privatization\Rector\Class_\FinalizeTestCaseClassRector;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
@@ -48,6 +49,7 @@ return RectorConfig::configure()
     ->withSkip([
         AddInstanceofAssertForNullableArgumentRector::class,
         AddInstanceofAssertForNullableInstanceRector::class,
+        AllowMockObjectsWhereParentClassRector::class,
         AssertEmptyNullableObjectToAssertInstanceofRector::class,
         ClosureToArrowFunctionRector::class,
         CombineIfRector::class,
