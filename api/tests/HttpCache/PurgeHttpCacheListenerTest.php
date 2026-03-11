@@ -297,12 +297,12 @@ class PurgeHttpCacheListenerTest extends TestCase {
         ;
         $cacheManagerProphecy->method('flush')->willReturn(0);
 
-        $metadataFactoryProphecy = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
+        $metadataFactoryProphecy = $this->createStub(ResourceMetadataCollectionFactoryInterface::class);
 
         $iriConverterProphecy = $this->createMock(IriConverterInterface::class);
         $iriConverterProphecy->expects($this->exactly(2))
             ->method('getIriFromResource')
-            ->willReturnCallback(function ($resource) use ($oldRelatedDummy, $newRelatedDummy) {
+            ->willReturnCallback(function (object|string $resource) use ($oldRelatedDummy, $newRelatedDummy): string {
                 static $i = 0;
                 $expected = [$oldRelatedDummy, $newRelatedDummy];
                 TestCase::assertSame($expected[$i], $resource);
@@ -400,7 +400,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $iriConverterProphecy = $this->createMock(IriConverterInterface::class);
         $iriConverterProphecy->expects($this->never())->method('getIriFromResource');
 
-        $metadataFactoryProphecy = $this->createMock(ResourceMetadataCollectionFactoryInterface::class);
+        $metadataFactoryProphecy = $this->createStub(ResourceMetadataCollectionFactoryInterface::class);
 
         $resourceClassResolverProphecy = $this->createMock(ResourceClassResolverInterface::class);
         $resourceClassResolverProphecy->expects($this->once())->method('isResourceClass')->with(NotAResource::class)->willReturn(false);
@@ -420,7 +420,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $em = $emProphecy;
         new OnFlushEventArgs($em);
 
-        $propertyAccessorProphecy = $this->createMock(PropertyAccessorInterface::class);
+        $propertyAccessorProphecy = $this->createStub(PropertyAccessorInterface::class);
 
         $listener = new PurgeHttpCacheListener(
             iriConverter: $iriConverterProphecy,
@@ -461,15 +461,20 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $resourceClassResolverProphecy = $this->createMock(ResourceClassResolverInterface::class);
         $resourceClassResolverProphecy->method('getResourceClass')->willReturn(ContainNonResource::class);
-        $resourceClassResolverProphecy->expects($this->exactly(2))->method('isResourceClass')->willReturnCallback(function (string $class) {
-            if (ContainNonResource::class === $class) {
-                return true;
-            }
-            if (NotAResource::class === $class) {
-                return false;
-            }
-            TestCase::fail('Unexpected class passed to isResourceClass: '.$class);
-        });
+        $resourceClassResolverProphecy->expects($this->exactly(2))
+            ->method('isResourceClass')
+            ->willReturnCallback(
+                function (string $class): bool {
+                    if (ContainNonResource::class === $class) {
+                        return true;
+                    }
+                    if (NotAResource::class === $class) {
+                        return false;
+                    }
+                    TestCase::fail('Unexpected class passed to isResourceClass: '.$class);
+                }
+            )
+        ;
 
         $uowProphecy = $this->createMock(UnitOfWork::class);
         $uowProphecy->expects($this->once())->method('getScheduledEntityInsertions')->willReturn([$containNonResource]);
