@@ -245,7 +245,7 @@ jobs:
           echo "result: ${{ toJSON(steps.transform-build-args.outputs) }}"
 
       - name: Build and push image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         if: steps.check-image.outputs.result == 'false'
         with:
           push: true
