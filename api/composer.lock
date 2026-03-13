@@ -656,7 +656,7 @@
         },
         {
             "name": "api-platform/jsonld",
-            "version": "v4.2.20",
+            "version": "v4.2.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/jsonld.git",
@@ -730,7 +730,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/jsonld/tree/v4.2.20"
+                "source": "https://github.com/api-platform/jsonld/tree/v4.2.21"
             },
             "time": "2026-02-13T17:30:49+00:00"
         },
