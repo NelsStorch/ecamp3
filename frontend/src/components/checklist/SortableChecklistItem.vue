@@ -12,12 +12,9 @@
     </v-list-item>
     <ChecklistItemEdit v-else :checklist="checklist" :checklist-item="item">
       <template #activator="{ props }">
-        <v-list-item
-          class="px-2 rounded min-h-0 py-1 drag-and-drop-handle"
-          v-bind="props"
-        >
+        <v-list-item class="px-2 rounded min-h-0 py-1">
           <template #prepend>
-            <v-btn variant="plain" icon class="my-n1 ml-n1 pointer-events-none">
+            <v-btn variant="plain" icon class="my-n1 ml-n1 drag-and-drop-handle">
               <v-icon>mdi-drag</v-icon>
             </v-btn>
             <v-avatar color="rgba(0,0,0,0.12)" class="mr-2" size="32">{{
@@ -27,12 +24,17 @@
           <v-list-item-title :class="{ 'font-weight-bold': item?.parent == null }">{{
             item.text
           }}</v-list-item-title>
-          <ButtonEdit
-            color="primary--text"
-            dense
-            text
-            class="e-sortable-checklist-item__edit my-n1"
-          />
+          <template #append>
+            <v-list-item-action>
+              <ButtonEdit
+                color="primary--text"
+                dense
+                text
+                class="e-sortable-checklist-item__edit my-n1"
+                v-bind="props"
+              />
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </template>
     </ChecklistItemEdit>
@@ -103,8 +105,7 @@ export default {
 .e-sortable-checklist-item:is(:hover, :focus-visible):not(
     :has(.e-sortable-checklist-item:hover)
   ):not(:has(.e-sortable-checklist-item__add:hover))
-  > .v-list-item
-  > .e-sortable-checklist-item__edit {
+  .e-sortable-checklist-item__edit {
   display: block;
 }
 </style>
