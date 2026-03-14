@@ -16,7 +16,6 @@ Show all activity schedule entries of a single period.
           <v-chip
             label
             variant="outlined"
-            :model-value="openFilter"
             color="primary"
             class="align-self-center mr-2"
             @click="openFilter = !openFilter"
@@ -30,7 +29,6 @@ Show all activity schedule entries of a single period.
           variant="outlined"
           label
           class="mr-1"
-          :model-value="openFilter"
           @click="openFilter = !openFilter"
         >
           <v-icon size="20" color="rgba(0, 0, 0, 0.54)">mdi-filter</v-icon>
