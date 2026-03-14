@@ -26,28 +26,6 @@ grafana-proxy:
     # Create a new secret with the following command
     # openssl rand -base64 32 | head -c 32 | base64
     cookieSecret: {{ .Environment.Values | getOrNil "COOKIE_SECRET" | required "COOKIE_SECRET is required" | quote }}
-kubernetes-dashboard-proxy:
-  ingress:
-    enabled: true
-    className: nginx
-    hosts:
-      - {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_HOST" | required "KUBERNETES_DASHBOARD_PROXY_HOST is required" | quote }}
-  extraArgs:
-    whitelist-domain: {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_HOST" | required "KUBERNETES_DASHBOARD_PROXY_HOST is required" | quote }}
-    provider: github
-    github-org: ecamp
-    upstream: https://ops-dashboard-kong-proxy.ops-dashboard.svc.cluster.local
-    ssl-upstream-insecure-skip-verify: true
-  config:
-    # OAuth client ID
-    clientID: {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_ID" | required "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_ID is required" | quote }}
-    # OAuth client secret
-    clientSecret: {{ .Environment.Values | getOrNil "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_SECRET" | required "KUBERNETES_DASHBOARD_PROXY_OAUTH_CLIENT_SECRET is required" | quote }}
-    configFile: |
-        {{- $configFile | trim | nindent 8 }}
-    # Create a new secret with the following command
-    # openssl rand -base64 32 | head -c 32 | base64
-    cookieSecret: {{ .Environment.Values | getOrNil "COOKIE_SECRET" | required "COOKIE_SECRET is required" | quote }}
 logging-proxy:
   ingress:
     enabled: true

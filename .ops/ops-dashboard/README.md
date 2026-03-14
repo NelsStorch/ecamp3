@@ -2,7 +2,7 @@
 
 This is a helm chart to deploy an oauth2-proxy and a homer dashboard.
 Then the ecamp3-developers can use their github login
-to see our applications like graphana, kibana, kubernetes-dashboard...
+to see our applications like graphana and kibana.
 
 ## Prerequisites
 
