@@ -68,6 +68,8 @@ Displays a field as a color picker (can be used with v-model)
           v-if="pickerNull"
           key="model"
           model-value="#FF0000"
+          class="w-100"
+          elevation="0"
           :style="{ '--picker-contrast-color': contrast }"
           flat
           @update:model-value="onPickerInput($event.hex)"
@@ -76,6 +78,8 @@ Displays a field as a color picker (can be used with v-model)
           v-else
           key="null"
           :model-value="pickerValue"
+          class="w-100"
+          elevation="0"
           :style="{ '--picker-contrast-color': contrast }"
           flat
           @update:model-value="debouncedPickerValue($event.hex)"
