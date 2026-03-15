@@ -68,21 +68,23 @@ Displays a field as a color picker (can be used with v-model)
           v-if="pickerNull"
           key="model"
           model-value="#FF0000"
+          :modes="['hex', 'rgb', 'hsl']"
           class="w-100"
           elevation="0"
           :style="{ '--picker-contrast-color': contrast }"
           flat
-          @update:model-value="onPickerInput($event.hex)"
+          @update:model-value="onPickerInput($event)"
         />
         <v-color-picker
           v-else
           key="null"
           :model-value="pickerValue"
+          :modes="['hex', 'rgb', 'hsl']"
           class="w-100"
           elevation="0"
           :style="{ '--picker-contrast-color': contrast }"
           flat
-          @update:model-value="debouncedPickerValue($event.hex)"
+          @update:model-value="debouncedPickerValue($event)"
         />
         <v-divider />
         <div class="d-flex gap-2 pa-4 flex-wrap">
