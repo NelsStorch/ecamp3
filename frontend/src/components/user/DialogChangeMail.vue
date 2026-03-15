@@ -17,7 +17,7 @@
         v-model="entityData.newEmail"
         path="email"
         vee-rules="email|required"
-        append-icon="mdi-at"
+        append-inner-icon="mdi-at"
         autofocus
       />
       <p class="mt-5">
