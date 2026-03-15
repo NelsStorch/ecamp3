@@ -186,10 +186,10 @@ body {
   background-color: transparent !important;
 }
 
-.v-text-field--outlined.v-input--readonly
-  > .v-input__control
-  > .v-input__slot
-  fieldset {
+.v-input--readonly .v-field--variant-outlined .v-field__outline__start,
+.v-input--readonly .v-field--variant-outlined .v-field__outline__notch::before,
+.v-input--readonly .v-field--variant-outlined .v-field__outline__notch::after,
+.v-input--readonly .v-field--variant-outlined .v-field__outline__end {
   border: none !important;
 }
 
