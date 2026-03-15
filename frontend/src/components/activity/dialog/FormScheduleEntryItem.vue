@@ -76,6 +76,7 @@
         class="ml-auto"
         :disabled="!deletable"
         icon-only
+        variant="text"
         @click="$emit('delete')"
       />
     </div>

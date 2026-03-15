@@ -66,6 +66,6 @@ export default {
 
 <style scoped>
 .e-time-dropdown--input {
-  width: 126px;
+  width: 56px;
 }
 </style>

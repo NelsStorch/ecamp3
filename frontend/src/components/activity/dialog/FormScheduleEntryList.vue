@@ -1,6 +1,6 @@
 <template>
   <div class="e-form-container">
-    <v-card border color="grey-lighten-3" class="period mb-2 rounded-b-0">
+    <v-card color="grey-lighten-3" elevation="0" class="period mb-2 rounded-b-0">
       <v-row no-gutters>
         <v-col class="header mb-3">
           <legend class="py-2 px-3 float-left">
@@ -9,6 +9,7 @@
 
           <button-add
             color="secondary"
+            variant="text"
             text
             class="ma-1 float-right"
             @click="addScheduleEntry"
@@ -18,7 +19,7 @@
       <transition-group
         name="transition-list"
         tag="div"
-        class="row no-gutters d-grid gap-4"
+        class="row no-gutters d-grid gap-4 pb-4"
       >
         <FormScheduleEntryItem
           v-for="scheduleEntry in scheduleEntriesWithoutDeleted"
@@ -34,9 +35,6 @@
           @delete="deleteEntry(scheduleEntry)"
         />
       </transition-group>
-      <v-row>
-        <v-col cols="12" class="text-center" />
-      </v-row>
     </v-card>
   </div>
 </template>

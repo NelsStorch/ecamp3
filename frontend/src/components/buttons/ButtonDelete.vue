@@ -7,9 +7,13 @@
     :icon="btnIcon && iconOnly"
     v-bind="$attrs"
   >
-    <v-icon v-if="iconOnly">{{ icon }}</v-icon>
-    <v-icon v-else-if="!text" :start="$vuetify.display.smAndUp">{{ icon }}</v-icon>
-    <v-icon v-if="!iconOnly && text" :start="$vuetify.display.smAndUp">{{ icon }}</v-icon>
+    <v-icon v-if="iconOnly" size="24">{{ icon }}</v-icon>
+    <v-icon v-else-if="!text" :start="$vuetify.display.smAndUp" size="24">{{
+      icon
+    }}</v-icon>
+    <v-icon v-if="!iconOnly && text" :start="$vuetify.display.smAndUp" size="24">{{
+      icon
+    }}</v-icon>
 
     <span v-if="!iconOnly" class="d-none d-sm-block">
       <slot>{{ $t('global.button.delete') }}</slot>

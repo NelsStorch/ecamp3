@@ -26,7 +26,7 @@ Displays a field as a textfield (can be used with v-model)
       @blur="onBlur($event, handleChange)"
       @update:model-value="onInput"
     >
-      <template #prepend>
+      <template v-if="'prepend' in $slots" #prepend>
         <slot
           :internal-value="internalValue"
           :serialized-value="serializedValue"
@@ -34,7 +34,7 @@ Displays a field as a textfield (can be used with v-model)
           name="prepend"
         />
       </template>
-      <template #append>
+      <template v-if="'append' in $slots" #append>
         <slot
           :internal-value="internalValue"
           :serialized-value="serializedValue"

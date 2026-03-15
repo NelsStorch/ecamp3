@@ -170,7 +170,7 @@ body {
   }
 }
 
-.v-text-field--outlined.v-input--is-readonly:not(.v-input--is-focused):not(
+.v-text-field--outlined.v-input--readonly:not(.v-input--is-focused):not(
     .v-input--has-state
   )
   > .v-input__control
@@ -179,14 +179,14 @@ body {
   color: rgb(0, 0, 0, 0.18);
 }
 
-.v-text-field.v-input--is-readonly > .v-input__control > .v-input__slot,
-.v-text-field.v-input--is-readonly > .v-input__control > .v-input__slot:before,
-.v-text-field.v-input--is-readonly > .v-input__control > .v-input__slot:after {
+.v-text-field.v-input--readonly > .v-input__control .v-field__outline,
+.v-text-field.v-input--readonly > .v-input__control .v-field__outline:before,
+.v-text-field.v-input--readonly > .v-input__control .v-field__outline:after {
   border-color: transparent !important;
   background-color: transparent !important;
 }
 
-.v-text-field--outlined.v-input--is-readonly
+.v-text-field--outlined.v-input--readonly
   > .v-input__control
   > .v-input__slot
   fieldset {

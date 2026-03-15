@@ -15,7 +15,7 @@
   >
     <!-- passing through all slots -->
     <template v-for="(_, slot) of $slots" #[slot]="slotData">
-      <slot :name="slot" v-bind="slotData || {}"></slot>
+      <slot :name="slot" v-bind="slotData"></slot>
     </template>
   </EParseField>
 </template>
