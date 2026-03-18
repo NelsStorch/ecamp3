@@ -9,7 +9,7 @@
   ],
   "constraints": {
     "node": "24.14.0",
-    "php": "8.5.3"
+    "php": "8.5.4"
   },
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
