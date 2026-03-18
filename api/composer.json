@@ -60,7 +60,7 @@
         "symfony/validator": "7.4.7",
         "symfony/yaml": "7.4.6",
         "twig/cssinliner-extra": "^3.4",
-        "twig/extra-bundle": "3.23.0",
+        "twig/extra-bundle": "3.24.0",
         "webonyx/graphql-php": "15.30.2"
     },
     "require-dev": {
