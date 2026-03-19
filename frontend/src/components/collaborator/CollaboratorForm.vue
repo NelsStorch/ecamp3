@@ -19,21 +19,19 @@
       aria-readonly="true"
       aria-describedby="readonly"
       :items="items"
-      :hint="$tc('components.collaborator.collaboratorForm.roleHint')"
+      :hint="$t('components.collaborator.collaboratorForm.roleHint')"
       persistent-hint
-      item-value="key"
-      item-text="role"
       vee-rules="required"
     >
       <template #selection="{ item }">
-        <span
-          >{{ item.role }} &middot;
-          <span class="grey--text"
-            ><template v-for="icon in item.icons"
-              ><v-icon :key="icon" x-small>{{ icon }}</v-icon
-              >&thinsp;</template
-            ></span
-          >
+        <span>
+          {{ item.title }} &middot;
+          <span class="text-grey">
+            <template v-for="icon in item.raw.icons" :key="icon">
+              <v-icon size="x-small">{{ icon }}</v-icon>
+              &thinsp;
+            </template>
+          </span>
         </span>
       </template>
     </e-select>
@@ -43,35 +41,32 @@
       path="role"
       :items="items"
       persistent-hint
+      item-title="role"
       item-value="key"
-      item-text="role"
       vee-rules="required"
     >
-      <template #item="{ item, on, attrs }">
-        <v-list-item v-bind="attrs" two-line v-on="on">
-          <v-list-item-content>
-            <v-list-item-title>{{ item.role }}</v-list-item-title>
-            <span class="caption">{{ item.abilities }}</span>
-          </v-list-item-content>
-          <v-list-item-action-text class="text-right">
-            <span
-              ><template v-for="icon in item.icons"
-                ><v-icon :key="icon" small>{{ icon }}</v-icon
-                >&thinsp;</template
-              ></span
-            >
-          </v-list-item-action-text>
+      <template #item="{ item, props }">
+        <v-list-item lines="two" v-bind="props">
+          <v-list-item-subtitle>{{ item.raw.abilities }}</v-list-item-subtitle>
+          <template #append>
+            <span>
+              <template v-for="icon in item.raw.icons" :key="icon">
+                <v-icon size="small">{{ icon }}</v-icon>
+                &thinsp;
+              </template>
+            </span>
+          </template>
         </v-list-item>
       </template>
       <template #selection="{ item }">
-        <span
-          >{{ item.role }} &middot;
-          <span class="grey--text"
-            ><template v-for="icon in item.icons"
-              ><v-icon :key="icon" x-small>{{ icon }}</v-icon
-              >&thinsp;</template
-            ></span
-          >
+        <span>
+          {{ item.title }} &middot;
+          <span class="text-grey">
+            <template v-for="icon in item.raw.icons" :key="icon">
+              <v-icon size="x-small">{{ icon }}</v-icon>
+              &thinsp;
+            </template>
+          </span>
         </span>
       </template>
     </e-select>
@@ -81,7 +76,7 @@
       class="e-form-container e-avatar-field v-card__text rounded-t"
     >
       <legend>
-        {{ $tc('components.collaborator.collaboratorForm.overrideAvatar') }}
+        {{ $t('components.collaborator.collaboratorForm.overrideAvatar') }}
       </legend>
 
       <div class="d-flex gap-4 align-center">
@@ -93,13 +88,13 @@
           <e-text-field
             v-model="localCollaboration.abbreviation"
             path="abbreviation"
-            :filled="false"
+            variant="underlined"
             vee-rules="oneEmojiOrTwoCharacters"
           />
 
           <e-color-picker
             v-model="localCollaboration.color"
-            :filled="false"
+            variant="underlined"
             path="color"
           />
         </div>
@@ -124,21 +119,21 @@ export default {
     items() {
       return [
         {
-          key: 'manager',
-          role: this.$tc('entity.camp.collaborators.manager'),
-          abilities: this.$tc('global.collaborationAbilities.manager'),
+          value: 'manager',
+          text: this.$t('entity.camp.collaborators.manager'),
+          abilities: this.$t('global.collaborationAbilities.manager'),
           icons: ['mdi-eye-outline', 'mdi-pencil-outline', 'mdi-cog-outline'],
         },
         {
-          key: 'member',
-          role: this.$tc('entity.camp.collaborators.member'),
-          abilities: this.$tc('global.collaborationAbilities.member'),
+          value: 'member',
+          text: this.$t('entity.camp.collaborators.member'),
+          abilities: this.$t('global.collaborationAbilities.member'),
           icons: ['mdi-eye-outline', 'mdi-pencil-outline'],
         },
         {
-          key: 'guest',
-          role: this.$tc('entity.camp.collaborators.guest'),
-          abilities: this.$tc('global.collaborationAbilities.guest'),
+          value: 'guest',
+          text: this.$t('entity.camp.collaborators.guest'),
+          abilities: this.$t('global.collaborationAbilities.guest'),
           icons: ['mdi-eye-outline'],
         },
       ]
@@ -153,7 +148,7 @@ export default {
       }
     },
     translatedStatus() {
-      return this.$tc(`entity.campCollaboration.status.${this.status}`)
+      return this.$t(`entity.campCollaboration.status.${this.status}`)
     },
   },
 }

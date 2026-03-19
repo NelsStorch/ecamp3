@@ -14,41 +14,40 @@ Displays a field as a picker (can be used with v-model)
       min-width="290px"
       max-width="290px"
     >
-      <template #activator="{ on }">
+      <template #activator="{ props }">
         <e-text-field
+          v-bind="$attrs"
           :id="id"
           ref="textField"
-          :value="fieldValue"
+          v-model="fieldValue"
           :readonly="readonly"
           :disabled="disabled"
-          :filled="filled"
           :hide-details="hideDetails"
           :input-class="inputClass"
           :path="path"
           :label="label"
           :validation-label-override="validationLabelOverride"
-          v-bind="$attrs"
           :error-messages="combinedErrorMessages"
-          @click="(...args) => (openOnTextFieldClick ? onMenuOpen(on, ...args) : null)"
-          @input="debouncedParseValue"
+          @click="(...args) => (openOnTextFieldClick ? onMenuOpen(props, ...args) : null)"
+          @update:model-value="debouncedParseValue"
         >
           <template #prepend>
             <slot
               name="prepend"
               :color="iconColor"
               :attrs="{
-                'aria-label': $tc(buttonAriaLabelI18nKey, 0, {
+                'aria-label': $t(buttonAriaLabelI18nKey, 0, {
                   label: labelOrEntityFieldLabel,
                 }),
               }"
-              :on="{ click: (...args) => onMenuOpen(on, ...args) }"
+              :on="{ click: (...args) => onMenuOpen(props, ...args) }"
             >
               <v-icon
                 :color="iconColor"
                 :aria-label="
-                  $tc(buttonAriaLabelI18nKey, 0, { label: labelOrEntityFieldLabel })
+                  $t(buttonAriaLabelI18nKey, 0, { label: labelOrEntityFieldLabel })
                 "
-                @click="(...args) => onMenuOpen(on, ...args)"
+                @click="(...args) => onMenuOpen(props, ...args)"
               >
                 {{ icon }}
               </v-icon>
@@ -72,12 +71,15 @@ Displays a field as a picker (can be used with v-model)
 import { debounce } from 'lodash-es'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 
+/**
+ * TODO: rename modelValue -> serializedValue, fieldValue -> stringValue, localValue -> internalValue to be more consistent with EParseField
+ */
 export default {
   name: 'BasePicker',
   inheritAttr: false,
   mixins: [formComponentPropsMixin],
   props: {
-    value: { type: [Number, String], required: true },
+    modelValue: { type: [Number, String], required: true },
     icon: { type: String, required: false, default: null },
     iconColor: { type: String, required: false, default: null },
     readonly: { type: Boolean, required: false, default: false },
@@ -107,6 +109,7 @@ export default {
      */
     parsePicker: { type: Function, required: false, default: null },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       // internal random string used for identifying the menu in the DOM
@@ -115,6 +118,7 @@ export default {
       // internal value
       localValue: null,
       localValueInitialized: false,
+      fieldValue: null,
 
       showPicker: false,
       parseError: null,
@@ -127,15 +131,6 @@ export default {
     }
   },
   computed: {
-    // value formatted for text field
-    fieldValue() {
-      if (this.format !== null) {
-        return this.format(this.localValue)
-      } else {
-        return this.localValue
-      }
-    },
-
     // value formatted for picker component
     pickerValue() {
       if (this.formatPicker !== null) {
@@ -157,9 +152,17 @@ export default {
     },
   },
   watch: {
-    value(val) {
+    modelValue(val) {
       this.localValueInitialized = false
       this.setValue(val)
+    },
+    // value formatted for text field
+    localValue(_) {
+      if (this.format !== null) {
+        this.fieldValue = this.format(this.localValue)
+      } else {
+        this.fieldValue = this.localValue
+      }
     },
   },
   mounted() {
@@ -170,9 +173,9 @@ export default {
     }
     document.addEventListener('keydown', this.escapeKeyHandler)
 
-    this.setValue(this.value)
+    this.setValue(this.modelValue)
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.clickOutsideHandler) {
       document.removeEventListener('click', this.clickOutsideHandler)
     }
@@ -181,9 +184,9 @@ export default {
     }
   },
   methods: {
-    onMenuOpen(on, ...args) {
-      if (typeof on.click === 'function') {
-        return on.click(...args)
+    onMenuOpen(props, ...args) {
+      if (typeof props.onClick === 'function') {
+        return props.onClick(...args)
       }
       return () => {}
     },
@@ -192,9 +195,9 @@ export default {
         this.localValue = val
 
         if (this.localValueInitialized) {
-          this.$emit('input', val)
+          this.$emit('update:modelValue', val)
           // after saving value, trigger validations
-          this.$refs.textField.$refs.validationProvider.validate(this.fieldValue)
+          // this.$refs.textField.$refs.validationProvider.validate(this.fieldValue)
         }
       }
       this.localValueInitialized = true
@@ -217,7 +220,7 @@ export default {
       this.showPicker = false
     },
     async inputFromPicker(val) {
-      if (this.value === val) {
+      if (this.modelValue === val) {
         return
       }
       try {

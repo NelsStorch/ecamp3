@@ -13,7 +13,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, '.gitignore')
 export default [
-  ...vueEslint.configs['flat/vue2-recommended'],
   ...vueEslint.configs['flat/recommended'],
   ...vueScopedCssEslint.configs['flat/recommended'],
   js.configs.recommended,
@@ -54,18 +53,8 @@ export default [
       ],
 
       'vue/multi-word-component-names': 'off',
-      'vue/no-deprecated-delete-set': 'warn',
-      'vue/no-deprecated-destroyed-lifecycle': 'off',
-      'vue/no-deprecated-dollar-listeners-api': 'off',
-      'vue/no-deprecated-dollar-scopedslots-api': 'off',
-      'vue/no-deprecated-filter': 'warn',
-      'vue/no-deprecated-props-default-this': 'off',
-      'vue/no-deprecated-slot-attribute': 'off',
-      'vue/no-deprecated-slot-scope-attribute': 'off',
+      'vue/no-reserved-component-names': ['error', { htmlElementCaseSensitive: true }],
       'vue/no-deprecated-v-bind-sync': 'off',
-      'vue/no-deprecated-v-on-native-modifier': 'warn',
-      'vue/no-v-for-template-key-on-child': 'off',
-      'vue/no-v-model-argument': 'warn',
       'vue/require-explicit-emits': 'off',
 
       'no-unused-vars': [

@@ -1,9 +1,19 @@
 import { size } from 'lodash-es'
 
-export default (i18n) => ({
-  validate: (value) => {
-    return /\p{Extended_Pictographic}/u.test(value) ? size(value) <= 1 : value.length <= 2
-  },
-  message: (field, values) =>
-    i18n.tc('global.validation.oneEmojiOrTwoCharacters', 0, values),
-})
+export default (i18n) =>
+  (value, _, { label }) => {
+    if (!value) {
+      return true
+    }
+    const validate = /\p{Extended_Pictographic}/u.test(value)
+      ? size(value) <= 1
+      : value.length <= 2
+
+    if (validate) {
+      return true
+    }
+
+    return i18n.global.t('global.validation.oneEmojiOrTwoCharacters', {
+      field: label,
+    })
+  }

@@ -3,18 +3,17 @@ Displays a field as a e-textarea + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$props" separate-buttons v-on="$listeners">
+  <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }" separate-buttons>
     <e-textarea
-      :value="wrapper.localValue"
+      :model-value="wrapper.localValue"
       v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :outlined="outlined"
-      :filled="filled"
-      :dense="dense"
+      :variant
+      :density
       @input="wrapper.on.input"
       @blur="wrapper.on.blur"
     >

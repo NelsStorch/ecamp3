@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
 span {
-  color: rgba(0, 0, 0, 0.12);
+  color: rgba(var(--v-border-color), var(--v-border-opacity));
   align-self: center;
 }
 </style>

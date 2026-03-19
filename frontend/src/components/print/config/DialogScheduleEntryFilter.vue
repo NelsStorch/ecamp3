@@ -2,23 +2,22 @@
   <DetailPane
     v-model="dialogOpen"
     max-width="900px"
-    :title="$tc('components.print.config.dialogScheduleEntryFilter.title')"
+    :title="$t('components.print.config.dialogScheduleEntryFilter.title')"
     icon="mdi-filter"
     :cancel-action="close"
     :cancel-visible="false"
     @input="emit"
   >
-    <template #activator="{ on, attrs }">
+    <template #activator="{ props }">
       <v-chip
-        :input-value="dialogOpen"
         label
-        outlined
-        :color="anyFilter ? 'primary' : null"
+        variant="outlined"
+        :color="anyFilter ? 'primary' : 'secondary'"
+        border="sm"
         class="align-self-stretch mt-4 mb-4"
-        v-bind="attrs"
-        v-on="on"
+        v-bind="props"
       >
-        <v-icon left size="20">mdi-filter</v-icon>
+        <v-icon start size="20">mdi-filter</v-icon>
         <span class="flex-grow-1 text-center">{{ activatorLabel }}</span>
       </v-chip>
     </template>
@@ -52,6 +51,7 @@ export default {
     hidePeriodFilter: { type: Boolean, default: false },
     hideDayFilter: { type: Boolean, default: false },
   },
+  emits: ['input'],
   data() {
     return {
       dialogOpen: false,
@@ -64,30 +64,22 @@ export default {
     },
     activatorLabel() {
       if (this.anyFilter)
-        return this.$tc(
-          'components.print.config.dialogScheduleEntryFilter.filterActive',
-          1,
-          {
-            filtered: this.filteredCount,
-            total: this.filterFn({}).length,
-          }
-        )
-      return this.$tc(
+        return this.$t('components.print.config.dialogScheduleEntryFilter.filterActive', {
+          filtered: this.filteredCount,
+          total: this.filterFn({}).length,
+        })
+      return this.$t(
         'components.print.config.dialogScheduleEntryFilter.filterActivities',
-        1,
         {
           total: this.filterFn({}).length,
         }
       )
     },
     resultCountLabel() {
-      return this.$tc(
+      return this.$t(
         'components.print.config.dialogScheduleEntryFilter.resultCount',
-        1,
-        {
-          filtered: this.filteredCount,
-          total: this.filterFn({}).length,
-        }
+        { filtered: this.filteredCount, total: this.filterFn({}).length },
+        1
       )
     },
     anyFilter() {

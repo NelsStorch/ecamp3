@@ -1,8 +1,10 @@
 <template>
   <draggable
-    v-model="localSortedItems"
+    :model-value="localSortedItems"
     ghost-class="ghost"
     handle=".drag-and-drop-handle"
+    tag="transition-group"
+    :component-data="{ name: !dragging ? 'flip-list' : null }"
     :animation="200"
     :force-fallback="true"
     :disabled="disabled"
@@ -10,16 +12,11 @@
     @end="dragging = false"
     @update="finishDrag"
   >
-    <!-- disable transition for drag&drop as draggable already comes with its own anmations -->
-    <transition-group :name="!dragging ? 'flip-list' : null" tag="div">
-      <div
-        v-for="(item, i) in localSortedItems"
-        :key="item._meta.self"
-        :data-href="item._meta.self"
-      >
-        <slot :item-position="i" :item="item" />
+    <template #item="{ element, index }">
+      <div :key="element._meta.self" :data-href="element._meta.self">
+        <slot :item-position="index" :item="element" />
       </div>
-    </transition-group>
+    </template>
   </draggable>
 </template>
 
@@ -27,6 +24,8 @@
 import draggable from 'vuedraggable'
 import { every, sortBy } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
+import { useToast } from 'vue-toastification'
+
 export default {
   name: 'ApiSortable',
   components: {
@@ -35,6 +34,10 @@ export default {
   props: {
     endpoint: { type: Object, required: true },
     disabled: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -82,8 +85,12 @@ export default {
         })
         .catch((e) => {
           this.$toast.error(errorToMultiLineToast(e))
+          this.$store.commit('addSnackbarMessage', errorToMultiLineToast(e))
         })
-        .finally(() => this.endpoint.$reload())
+        .finally(async () => {
+          await this.endpoint.$reload()
+          this.localSortedItems = this.endpoint.items
+        })
       this.savingRequest--
       if (this.savingRequest === 0) {
         this.dirty = false
@@ -94,12 +101,14 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .flip-list-move {
   transition: transform 0.5s;
   opacity: 0.5;
   background: #c8ebfb;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;

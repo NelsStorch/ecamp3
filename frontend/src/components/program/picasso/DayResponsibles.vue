@@ -13,7 +13,7 @@
     path="dayResponsibles"
     :error-messages="errorMessages"
     :menu-props="{ closeOnClick: true, closeOnContentClick: true, overflowY: true }"
-    :filled="false"
+    variant="underlined"
     multiple
     chips
     single-line
@@ -21,11 +21,12 @@
     persistent-placeholder
     v-bind="$attrs"
     :readonly="readonly"
+    class="e-day-responsible-dropdown rounded-0"
     :class="{ 'e-day-responsible--readonly': readonly }"
-    @input="onInput"
+    @update:model-value="onInput"
   >
     <template #prepend-item>
-      <v-subheader>{{ $tc('entity.day.fields.dayResponsibles') }}</v-subheader>
+      <v-list-subheader>{{ $t('entity.day.fields.dayResponsibles') }}</v-list-subheader>
     </template>
   </e-select>
 </template>
@@ -81,7 +82,7 @@ export default {
           // following structure is defined by vuetify v-select items property
           return {
             value: value._meta.self,
-            text: campCollaborationDisplayName(value, this.$tc.bind(this)),
+            text: campCollaborationDisplayName(value, this.$t.bind(this)),
           }
         })
     },
@@ -188,16 +189,39 @@ export default {
 }
 
 .e-day-responsible--readonly {
-  &:deep(.v-input__append-inner) {
-    display: none;
+  :deep(.v-field__input) {
+    justify-content: center !important;
   }
-
-  &:deep(.v-select__selections) {
-    justify-content: center;
+  :deep(.v-field__overlay) {
+    opacity: 0;
   }
-  &:deep(.v-chip--clickable) {
+  &:deep(.v-field),
+  &:deep(.v-field__input) {
     cursor: auto;
   }
+}
+
+.e-day-responsible-dropdown :deep(.v-field__input) {
+  justify-content: start;
+}
+
+.e-day-responsible-dropdown :deep(.v-field) {
+  &:not(:hover) .v-field__overlay {
+    opacity: 0;
+  }
+  .v-field__append-inner {
+    align-items: baseline;
+  }
+  --v-input-control-height: auto;
+  --v-field-padding-start: 2px;
+  --v-field-input-padding-top: 2px;
+  --v-field-input-padding-bottom: 2px;
+  --v-field-padding-end: 2px;
+}
+
+.e-day-responsible-dropdown :deep(.v-field--appended) {
+  -webkit-padding-end: 0;
+  padding-inline-end: 0;
 }
 
 :deep(.v-select__selections) input {

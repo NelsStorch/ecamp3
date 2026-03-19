@@ -26,7 +26,7 @@ describe('create new camp', () => {
     )
 
     cy.get('[data-testid="create-camp-next-step"]').click()
-    cy.get('.v-select__selections > [data-testid="prototype-select"]').click()
+    cy.get('div.v-input[data-testid="prototype-select"]').click()
     cy.contains('Keine Vorlage').click()
     cy.contains('Achtung: Du hast "Keine Vorlage" ausgewählt.').should('be.visible')
     cy.get('[data-testid="create-camp-button"]').click()

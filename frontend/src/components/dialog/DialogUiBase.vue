@@ -1,15 +1,16 @@
 <script>
+import { componentI18n } from '@/plugins/i18n/index.js'
+
 export default {
   name: 'DialogUiBase',
   props: {
-    value: { type: Boolean, required: true },
-
+    modelValue: { type: Boolean, required: true },
     submitAction: { type: Function, default: null, required: false },
     submitIcon: { type: String, default: 'mdi-send-variant', required: false },
     submitLabel: {
       type: String,
       default: function () {
-        return this.$tc('global.button.submit')
+        return componentI18n.t('global.button.submit')
       },
       required: false,
     },
@@ -21,7 +22,7 @@ export default {
     cancelLabel: {
       type: String,
       default: function () {
-        return this.$tc('global.button.cancel')
+        return componentI18n.t('global.button.cancel')
       },
       required: false,
     },
@@ -35,6 +36,7 @@ export default {
     loading: { type: Boolean, default: false, required: false },
     error: { type: [Object, String, Error], default: null, required: false },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       isSaving: false,

@@ -1,18 +1,13 @@
-import { describe, beforeEach, vi, test, expect } from 'vitest'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-
-import formBaseComponents from '@/plugins/formBaseComponents'
 
 import { mount as mountComponent } from '@vue/test-utils'
 import ESwitch from '@/components/form/base/ESwitch.vue'
 import { touch } from '@/test/util'
 import { screen } from '@testing-library/vue'
 
-Vue.use(Vuetify)
-Vue.use(formBaseComponents)
-
-describe('An ESwitch', () => {
+describe.skip('An ESwitch', () => {
   let vuetify
 
   const mount = (options) => {

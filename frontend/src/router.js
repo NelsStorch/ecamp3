@@ -1,12 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { slugify } from '@/plugins/slugify.js'
-import { isLoggedIn, isAdmin } from '@/plugins/auth'
+import { isAdmin, isLoggedIn } from '@/plugins/auth'
 import { apiStore } from '@/plugins/store'
 import { campShortTitle } from '@/common/helpers/campShortTitle'
 import { getEnv } from '@/environment.js'
-
-Vue.use(Router)
 
 const NavigationAuth = () => import('./views/auth/NavigationAuth.vue')
 const NavigationDefault = () => import('./views/NavigationDefault.vue')
@@ -14,8 +11,9 @@ const NavigationCamp = () => import('./views/camp/navigation/NavigationCamp.vue'
 const GenericPage = () => import('./components/generic/GenericPage.vue')
 
 /* istanbul ignore next */
-export default new Router({
+const router = createRouter({
   mode: 'history',
+  history: createWebHistory(),
   base: '/',
   routes: [
     ...(getEnv().FEATURE_DEVELOPER
@@ -26,14 +24,6 @@ export default new Router({
             name: 'controls',
             components: {
               default: () => import('./views/dev/Controls.vue'),
-            },
-            beforeEnter: requireAuth,
-          },
-          {
-            path: '/performance',
-            name: 'performance',
-            components: {
-              default: () => import('./views/dev/Performance.vue'),
             },
             beforeEnter: requireAuth,
           },
@@ -289,7 +279,7 @@ export default new Router({
           path: 'program',
           name: 'camp/program',
           async beforeEnter(to, from, next) {
-            redirectToPeriod(to, from, next, 'camp/period/program')
+            return redirectToPeriod(to, from, next, 'camp/period/program')
           },
         },
         {
@@ -307,7 +297,7 @@ export default new Router({
           path: 'story',
           name: 'camp/story',
           async beforeEnter(to, from, next) {
-            redirectToPeriod(to, from, next, 'camp/period/story')
+            return redirectToPeriod(to, from, next, 'camp/period/story')
           },
         },
         {
@@ -524,7 +514,8 @@ export default new Router({
       components: {
         navigation: NavigationCamp,
         default: () => import('./views/camp/activity/Activity.vue'),
-        aside: () => import('./views/camp/activity/SideBarProgram.vue'),
+        // comment for now until we have everything else up and running.
+        // aside: () => import('./views/camp/activity/SideBarProgram.vue'),
       },
       beforeEnter: all([requireAuth, requireCamp, requireActivityScheduleEntry]),
       props: {
@@ -551,7 +542,7 @@ export default new Router({
       redirect: { name: 'camps' },
     },
     {
-      path: '**',
+      path: '/**',
       name: 'PageNotFound',
       components: {
         navigation: NavigationDefault,
@@ -560,6 +551,8 @@ export default new Router({
     },
   ],
 })
+
+export default router
 
 function evaluateGuards(guards, to, from, next) {
   const guardsLeft = guards.slice(0)

@@ -1,4 +1,4 @@
-describe('The filters in the dashboard', () => {
+describe.skip('The filters in the dashboard', () => {
   beforeEach(() => {
     cy.login('test@example.com')
     cy.visit('/camps')

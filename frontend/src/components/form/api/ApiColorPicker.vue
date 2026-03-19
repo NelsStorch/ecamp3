@@ -3,18 +3,18 @@ Displays a field as a color picker + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$props" v-on="$listeners">
+  <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }">
     <e-color-picker
-      :value="wrapper.localValue || ''"
       v-bind="$attrs"
+      :model-value="wrapper.localValue || ''"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       outlined
-      :filled="false"
+      :variant="variant"
       :error-messages="wrapper.errorMessages"
-      @input="wrapper.on.input"
+      @update:model-value="wrapper.on.input"
     >
       <template #append>
         <api-wrapper-append :wrapper="wrapper" />

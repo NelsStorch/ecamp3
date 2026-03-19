@@ -3,16 +3,18 @@
     <e-select
       v-model="options.periods"
       :items="periods"
-      :label="$tc('print.config.periods')"
+      path="periods"
+      :label="$t('print.config.periods')"
       multiple
-      :filled="false"
+      :variant="periods.length === 1 ? 'plain' : 'underlined'"
       :readonly="periods.length === 1"
-      @input="$emit('input')"
+      @update:model-value="$emit('input')"
     />
     <e-checkbox
       v-model="options.dayOverview"
-      :label="$tc('components.print.config.programConfig.dayOverview')"
-      @input="$emit('input')"
+      path="dayOverview"
+      :label="$t('components.print.config.programConfig.dayOverview')"
+      @update:model-value="$emit('input')"
     />
     <div class="flex-grow-1"></div>
     <DialogScheduleEntryFilter
@@ -28,7 +30,7 @@
 <script>
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
-import { repairPrintFilterConfig } from '../repairPrintConfig.js'
+import repairFilterConfig from '../../program/repairFilterConfig.js'
 
 export default {
   name: 'ProgramConfig',
@@ -58,13 +60,16 @@ export default {
         return this.filter.periods.includes(period._meta.self)
       })
     },
+    selectedScheduleEntries() {
+      return this.selectedPeriods.flatMap((period) => period.scheduleEntries().items)
+    },
   },
   methods: {
     filterFn() {
       return (filter) =>
-        this.selectedPeriods
-          .flatMap((period) => period.scheduleEntries().items)
-          .filter((scheduleEntry) => filterMatchScheduleEntry(scheduleEntry, filter))
+        this.selectedScheduleEntries.filter((scheduleEntry) =>
+          filterMatchScheduleEntry(scheduleEntry, filter)
+        )
     },
     updateFilter(newFilter) {
       this.options.filter = newFilter
@@ -93,7 +98,8 @@ export default {
       })
     }
     if (typeof config.options.dayOverview !== 'boolean') config.options.dayOverview = true
-    return repairPrintFilterConfig(config, camp, knownPeriods)
+    config.options.filter = repairFilterConfig(config, camp)
+    return config
   },
 }
 </script>

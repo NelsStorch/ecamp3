@@ -26,16 +26,20 @@
  */
 export default function (listenersList) {
   const mergedListeners = {}
+  const listenerCaller = {}
 
   listenersList.forEach((listeners) => {
-    for (const [eventName, callback] of Object.entries(listeners)) {
-      if (mergedListeners[eventName] === undefined) {
-        mergedListeners[eventName] = []
+    for (const callbackName in listeners) {
+      if (mergedListeners[callbackName] === undefined) {
+        mergedListeners[callbackName] = []
+        listenerCaller[callbackName] = (...params) => {
+          mergedListeners[callbackName].forEach((callback) => callback(...params))
+        }
       }
 
-      mergedListeners[eventName].push(callback)
+      mergedListeners[callbackName].push(listeners[callbackName])
     }
   })
 
-  return mergedListeners
+  return listenerCaller
 }

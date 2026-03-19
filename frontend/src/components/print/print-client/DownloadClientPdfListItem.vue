@@ -1,32 +1,38 @@
 <template>
-  <v-list-item :disabled="loading" @click.stop="generatePdf">
-    <v-tooltip v-model="loading" top>
-      <!-- eslint-disable-next-line vue/no-unused-vars -->
-      <template #activator="_">
-        <v-list-item-icon>
-          <v-progress-circular
-            v-if="loading"
-            :value="progress"
-            :rotate="270"
-            size="24"
-          ></v-progress-circular>
-          <v-icon v-else>mdi-printer</v-icon>
-        </v-list-item-icon>
-      </template>
-      <span>{{ state }}</span>
-    </v-tooltip>
+  <v-list-item
+    :readonly="loading"
+    :lines="loading ? 'two' : 'one'"
+    @click.stop="generatePdf"
+  >
     <v-list-item-title>
-      {{ $tc('components.print.printClient.downloadClientPdfListItem.label') }}
+      <v-progress-circular
+        v-if="loading"
+        :model-value="progress"
+        :rotate="0"
+        size="24"
+        color="primary"
+        class="mr-2"
+      />
+      <v-icon v-else start icon="mdi-printer" />
+      {{ $t('components.print.printClient.downloadClientPdfListItem.label') }}
     </v-list-item-title>
+    <v-list-item-subtitle v-if="loading">
+      {{ state }}
+    </v-list-item-subtitle>
   </v-list-item>
 </template>
 
 <script>
 import { generatePdfMixin } from './generatePdfMixin.js'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'DownloadClientPdfListItem',
   mixins: [generatePdfMixin],
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
 }
 </script>
 

@@ -4,9 +4,9 @@
     :loading="loading"
     :error="error"
     icon="mdi-calendar-plus"
-    :title="$tc('components.campAdmin.dialogCategoryCreate.title')"
+    :title="$t('components.campAdmin.dialogCategoryCreate.title')"
     :submit-action="createCategory"
-    :submit-label="$tc('global.button.create')"
+    :submit-label="$t('global.button.create')"
     submit-color="success"
     :cancel-action="close"
   >
@@ -19,10 +19,10 @@
         translation-context-i18n-key="components.campAdmin.dialogCategoryCreate.clipboardInfoDialog"
         @closed="attemptLoadingEntityFromClipboard"
       >
-        <template #activator="{ on }">
-          <v-btn v-show="showClipboardPrompt" v-on="on">
-            <v-icon left>mdi-information-outline</v-icon>
-            {{ $tc('components.campAdmin.dialogCategoryCreate.copyPasteCategory') }}
+        <template #activator="{ props }">
+          <v-btn v-show="showClipboardPrompt" v-bind="props">
+            <v-icon start>mdi-information-outline</v-icon>
+            {{ $t('components.campAdmin.dialogCategoryCreate.copyPasteCategory') }}
           </v-btn>
         </template>
       </ClipboardInfoDialog>
@@ -31,7 +31,7 @@
     <div v-if="hasClipboardEntity">
       <div class="mb-8">
         <div v-if="!clipboardAccessDenied">
-          {{ $tc('components.campAdmin.dialogCategoryCreate.clipboard') }}
+          {{ $t('components.campAdmin.dialogCategoryCreate.clipboard') }}
           <div style="float: right">
             <small>
               <a
@@ -39,32 +39,36 @@
                 style="color: inherit; text-decoration: none"
                 @click="clearClipboard"
               >
-                {{ $tc('components.campAdmin.dialogCategoryCreate.clearClipboard') }}
+                {{ $t('components.campAdmin.dialogCategoryCreate.clearClipboard') }}
               </a>
             </small>
           </div>
         </div>
         <v-list-item
-          class="ec-copy-source rounded-xl blue-grey lighten-5 blue-grey--text text--darken-4 mt-1"
+          class="ec-copy-source rounded-xl bg-blue-grey-lighten-5 text-blue-grey-darken-4 mt-1"
         >
-          <v-list-item-avatar>
-            <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>
-              <CategoryChip :category="copyCategorySourceCategory" class="mx-1" dense />
-              {{ clipboardEntity.title }}
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ clipboardEntity.camp().title }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <e-checkbox
-              v-model="copyContent"
-              :label="$tc('components.campAdmin.dialogCategoryCreate.copyContent')"
-            />
-          </v-list-item-action>
+          <template #prepend>
+            <v-avatar>
+              <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
+            </v-avatar>
+          </template>
+
+          <v-list-item-title>
+            <CategoryChip :category="copyCategorySourceCategory" class="mx-1" dense />
+            {{ clipboardEntity.title }}
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            {{ clipboardEntity.camp().title }}
+          </v-list-item-subtitle>
+
+          <template #append>
+            <v-list-item-action>
+              <e-checkbox
+                v-model="copyContent"
+                :label="$t('components.campAdmin.dialogCategoryCreate.copyContent')"
+              />
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </div>
     </div>
@@ -73,25 +77,25 @@
         <PopoverPrompt
           v-model="showCopyCategoryUrlPopover"
           icon="mdi-content-paste"
-          :title="$tc('components.campAdmin.dialogCategoryCreate.pasteCategory')"
+          :title="$t('components.campAdmin.dialogCategoryCreate.pasteCategory')"
         >
-          <template #activator="{ on }">
+          <template #activator="{ props }">
             <v-btn
-              :title="$tc('components.campAdmin.dialogCategoryCreate.pasteCategory')"
-              text
+              :title="$t('components.campAdmin.dialogCategoryCreate.pasteCategory')"
+              variant="text"
               class="v-btn--has-bg"
               height="56"
-              v-on="on"
+              v-bind="props"
             >
               <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
               <v-icon v-else>mdi-content-paste</v-icon>
             </v-btn>
           </template>
-          {{ $tc('components.campAdmin.dialogCategoryCreate.copySourceInfo') }}
+          {{ $t('components.campAdmin.dialogCategoryCreate.copySourceInfo') }}
           <e-text-field
             v-model="clipboardEntityUrl"
             :label="
-              $tc('components.campAdmin.dialogCategoryCreate.copyCategoryOrActivity')
+              $t('components.campAdmin.dialogCategoryCreate.copyCategoryOrActivity')
             "
             style="margin-bottom: 12px"
             autofocus
@@ -143,7 +147,7 @@ export default {
       fetchClipboardEntity: async (url) => {
         if (!url.startsWith(window.location.origin)) return null
         url = url.substring(window.location.origin.length)
-        const match = router.matcher.match(url)
+        const match = router.resolve(url)
 
         let result
         if (match.name === 'camp/activity') {

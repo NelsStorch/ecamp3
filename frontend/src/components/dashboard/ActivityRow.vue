@@ -37,13 +37,13 @@
     <td v-if="!scheduleEntry._meta.loading" class="w-100 contentrow">
       <router-link
         :to="routerLink"
-        class="text-decoration-none text-decoration-hover-underline black--text font-weight-medium"
+        class="text-decoration-none text-decoration-hover-underline text-inherit font-weight-medium mr-1"
       >
         {{ title }}
       </router-link>
 
       <span
-        v-if="!loadingEndpoints?.progressLabels && $vuetify.breakpoint.mdAndUp"
+        v-if="!loadingEndpoints?.progressLabels && $vuetify.display.mdAndUp"
         class="e-subtitle e-subtitle--smaller"
       >
         {{ progressLabel }}
@@ -54,7 +54,7 @@
         <span class="e-subtitle">{{ location }}</span>
       </template>
 
-      <template v-if="!loadingEndpoints?.progressLabels && !$vuetify.breakpoint.mdAndUp">
+      <template v-if="!loadingEndpoints?.progressLabels && !$vuetify.display.mdAndUp">
         <br />
         <span class="e-subtitle e-subtitle--smaller">
           {{ progressLabel }}
@@ -153,7 +153,7 @@ export default {
 }
 
 tr + tr :is(td, th) {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
 }
 
 :is(td, th) {
@@ -177,7 +177,7 @@ tr + tr :is(td, th) {
 
 .e-subtitle {
   font-size: 0.9em;
-  color: #666;
+  color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
 }
 
 .e-subtitle--smaller {
@@ -192,7 +192,7 @@ tr + tr :is(td, th) {
   font-size: 0.75em;
 }
 
-.my-6px {
+:deep(.my-6px) {
   margin-top: 6px;
   margin-bottom: 6px;
 }

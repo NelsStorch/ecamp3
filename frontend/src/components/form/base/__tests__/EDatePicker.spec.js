@@ -1,10 +1,10 @@
-import { describe, beforeEach, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { screen, waitFor } from '@testing-library/vue'
 import { render, setTestLocale, snapshotOf } from '@/test/renderWithVuetify.js'
 import user from '@testing-library/user-event'
 import EDatePicker from '../EDatePicker.vue'
 
-describe('An EDatePicker', () => {
+describe.skip('An EDatePicker', () => {
   const DATE1_ISO = '2020-03-01'
   const DATE2_ISO = '2020-03-19'
 

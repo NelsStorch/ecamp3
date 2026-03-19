@@ -1,12 +1,12 @@
 <template>
   <v-container fluid>
     <content-card
-      :title="$tc('views.invitations.personalInvitations')"
+      :title="$t('views.invitations.personalInvitations')"
       max-width="800"
       toolbar
     >
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.breakpoint.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only />
       </template>
       <v-list class="py-0">
         <template v-if="loading">
@@ -21,7 +21,6 @@
 
 <script>
 import ContentCard from '@/components/layout/ContentCard.vue'
-import { mapGetters } from 'vuex'
 import UserMeta from '@/components/navigation/UserMeta.vue'
 import PersonalInvitations from '../components/personal_invitations/PersonalInvitations.vue'
 
@@ -34,21 +33,19 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.invitations.personalInvitations'),
+      title: this.$t('views.invitations.personalInvitations'),
     }
   },
   computed: {
     loading() {
       return this.api.get().personalInvitations().loading
     },
-    ...mapGetters({
-      user: 'getLoggedInUser',
-    }),
   },
 }
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-expansion-panel-content:deep(.v-expansion-panel-content__wrap) {
   padding: 0 !important;
 }

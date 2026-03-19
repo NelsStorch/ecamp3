@@ -1,43 +1,42 @@
 <template>
   <v-toolbar-items v-if="period.camp().periods().items.length > 1">
     <v-menu offset-y>
-      <template #activator="{ on, attrs, value }">
+      <template #activator="{ props }">
         <v-btn
-          text
-          large
+          variant="text"
+          size="large"
           class="justify-start px-4 my-1 rounded-pill ec-period-switcher__button"
           height="auto"
           block
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           <h1 class="text-subtitle-1">
             {{ period.description }}
           </h1>
-          <v-icon v-if="value" right>mdi-menu-up</v-icon>
-          <v-icon v-else right>mdi-menu-down</v-icon>
+          <v-icon v-if="value" end>mdi-menu-up</v-icon>
+          <v-icon v-else end>mdi-menu-down</v-icon>
         </v-btn>
       </template>
       <v-list>
-        <v-subheader>{{ $tc('components.program.periodSwitcher.title') }}</v-subheader>
+        <v-list-subheader>{{
+          $t('components.program.periodSwitcher.title')
+        }}</v-list-subheader>
         <v-list-item
           v-for="item in allPeriods"
           :key="item._meta.self"
           :to="periodRoute(item, routeName)"
-          two-line
+          lines="two"
         >
-          <v-list-item-content>
-            <v-list-item-title>{{ item.description }}</v-list-item-title>
-            <v-list-item-subtitle>
-              {{ dateRange(item.start, item.end) }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>{{ item.description }}</v-list-item-title>
+          <v-list-item-subtitle>
+            {{ dateRange(item.start, item.end) }}
+          </v-list-item-subtitle>
         </v-list-item>
       </v-list>
     </v-menu>
   </v-toolbar-items>
   <v-toolbar-title v-else>
-    <h1 class="subtitle-1">
+    <h1 class="text-subtitle-1">
       {{ period.description }}
     </h1>
   </v-toolbar-title>

@@ -1,33 +1,29 @@
 <template>
   <v-container fluid>
-    <content-card :title="$tc('views.camp.material.materialOverview.title')" toolbar>
+    <content-card :title="$t('views.camp.material.materialOverview.title')" toolbar>
       <template #title-actions>
         <v-menu offset-y>
-          <template #activator="{ attrs, on }">
-            <v-btn icon v-bind="attrs" v-on="on">
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props">
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
           <v-list class="py-0">
             <DialogMaterialListCreate v-if="isContributor" :camp="camp">
-              <template #activator="{ attrs, on }">
-                <v-list-item v-bind="attrs" v-on="on">
-                  <v-list-item-icon>
+              <template #activator="{ props }">
+                <v-list-item v-bind="props">
+                  <template #prepend>
                     <v-icon>mdi-plus</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content
-                    >{{ $tc('views.camp.material.materialOverview.createNewList') }}
-                  </v-list-item-content>
+                  </template>
+                  {{ $t('views.camp.material.materialOverview.createNewList') }}
                 </v-list-item>
               </template>
             </DialogMaterialListCreate>
             <v-list-item @click="downloadXlsx">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-microsoft-excel</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content
-                >{{ $tc('views.camp.material.materialOverview.download') }}
-              </v-list-item-content>
+              </template>
+              {{ $t('views.camp.material.materialOverview.download') }}
             </v-list-item>
           </v-list>
         </v-menu>
@@ -37,7 +33,7 @@
         v-model="openPeriods"
         multiple
         flat
-        accordion
+        variant="accordion"
       >
         <PeriodMaterialLists
           v-for="{ period, materialItems } in collection"
@@ -85,7 +81,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.camp.material.materialOverview.title'),
+      title: this.$t('views.camp.material.materialOverview.title'),
     }
   },
 }

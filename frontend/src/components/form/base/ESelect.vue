@@ -1,49 +1,57 @@
 <template>
-  <ValidationProvider
-    v-slot="{ errors: veeErrors }"
-    tag="div"
-    :name="validationLabel"
-    :vid="veeId"
+  <Field
+    v-slot="{ handleChange, errors: veeErrors }"
+    as="div"
+    :name="veeId ?? path ?? validationLabel"
+    :label="validationLabel"
     :rules="veeRules"
-    :skip-if-empty="skipIfEmpty"
-    :required="required"
-    :immediate="immediateValidation"
     class="e-form-container"
   >
     <v-select
-      v-bind="$attrs"
-      :filled="filled"
-      :hide-details="hideDetails"
-      :error-messages="veeErrors.concat(errorMessages)"
-      :label="labelOrEntityFieldLabel"
       :class="[inputClass]"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      v-bind="$attrs"
       :readonly="readonly"
-      :append-icon="readonly ? null : '$dropdown'"
-      v-on="$listeners"
+      :menu-icon="readonly ? null : '$dropdown'"
+      item-title="text"
+      item-value="value"
+      @update:model-value="
+        ($event) => {
+          handleChange($event)
+          $emit('update:model-value', $event)
+          $emit('input', $event)
+        }
+      "
     >
       <!-- passing through all slots -->
-      <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-      <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-        <slot :name="name" v-bind="slotData" />
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-select>
-  </ValidationProvider>
+  </Field>
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 
 export default {
   name: 'ESelect',
-  components: { ValidationProvider },
+  components: {
+    Field,
+  },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
+    // TODO: implement immediateValidation
     immediateValidation: { type: Boolean, default: false },
+    // TODO: implement skipIfEmpty
     skipIfEmpty: { type: Boolean, default: true },
     readonly: { type: Boolean, default: false },
   },
+  emits: ['input', 'update:model-value'],
 }
 </script>
 

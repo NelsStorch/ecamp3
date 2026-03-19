@@ -1,23 +1,32 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue2'
-import { createSvgPlugin } from 'vite-plugin-vue2-svg'
+import vue from '@vitejs/plugin-vue'
 import { comlink } from 'vite-plugin-comlink'
 import * as path from 'path'
-import { VuetifyResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { configDefaults } from 'vitest/config'
+import svgLoader from 'vite-svg-loader'
+import Vuetify from 'vite-plugin-vuetify'
+import { readdirSync } from 'fs'
+
+const componentsPath = 'node_modules/vuetify/lib/components'
+const vuetifyComponents = readdirSync(componentsPath)
+  .filter((file) => file.startsWith('V'))
+  .map((file) => `vuetify/components/${file}`)
 
 const plugins = [
   comlink(), // must be first
   vue(),
   Components({
-    resolvers: [
-      // Vuetify
-      VuetifyResolver(),
-    ],
+    resolvers: [],
   }),
-  createSvgPlugin(),
+  svgLoader(),
+  Vuetify({
+    autoImport: {
+      labs: true,
+    },
+    styles: { configFile: 'src/scss/settings.scss' },
+  }),
 ]
 const sentryAuthToken = process.env.SENTRY_AUTH_TOKEN
 if (sentryAuthToken) {
@@ -48,7 +57,9 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: [
+      ...vuetifyComponents.filter((dep) => !dep.includes('VOverflowBtn')),
       '@intlify/core',
+      '@leeoniya/ufuzzy',
       '@react-pdf/font',
       '@react-pdf/layout',
       '@react-pdf/pdfkit',
@@ -105,13 +116,16 @@ export default defineConfig(({ mode }) => ({
       'vue',
       'vuedraggable',
       'vue-toastification',
-      'vuetify/es5/components/VCalendar/modes/column.js',
-      'vuetify/es5/components/VCalendar/util/events.js',
+      // 'vuetify/es5/components/VCalendar/modes/column.js',
+      // 'vuetify/es5/components/VCalendar/util/events.js',
     ],
   },
   build: {
     sourcemap: true,
     minify: mode === 'development' ? false : 'esbuild',
+    rollupOptions: {
+      external: ['vuetify/lib'],
+    },
   },
   resolve: {
     alias: [
@@ -146,22 +160,17 @@ export default defineConfig(({ mode }) => ({
   css: {
     preprocessorOptions: {
       scss: {
-        // support for legacy api will be removed in vite 7. https://vite.dev/guide/migration.html#sass-now-uses-modern-api-by-default
-        api: 'legacy',
-        additionalData: '@import "./node_modules/vuetify/src/styles/styles.sass";\n', // original default variables from vuetify
-        silenceDeprecations: ['slash-div', 'mixed-decls'],
+        api: 'modern-compiler',
+        silenceDeprecations: ['mixed-decls'],
       },
       sass: {
-        // support for legacy api will be removed in vite 7. https://vite.dev/guide/migration.html#sass-now-uses-modern-api-by-default
-        api: 'legacy',
-        additionalData: '@import "./src/scss/variables.scss"\n', // vuetify variable overrides
-        silenceDeprecations: ['slash-div', 'mixed-decls'],
+        api: 'modern-compiler',
+        silenceDeprecations: ['mixed-decls'],
       },
     },
   },
   test: {
     environment: 'jsdom',
-    alias: [{ find: /^vue$/, replacement: 'vue/dist/vue.runtime.common.js' }],
     globalSetup: './tests/globalSetup.js',
     setupFiles: './tests/setup.js',
     maxWorkers: 1,
@@ -173,6 +182,7 @@ export default defineConfig(({ mode }) => ({
       reportsDirectory: './data/coverage',
     },
     deps: {
+      inline: ['vuetify'],
       optimizer: {
         web: {
           exclude: ['vue'],

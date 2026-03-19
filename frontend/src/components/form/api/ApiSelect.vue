@@ -5,26 +5,24 @@ Displays a field as a e-select + write access via API wrapper
 <template>
   <api-wrapper
     v-slot="wrapper"
-    v-bind="$props"
+    v-bind="{ ...$props, ...$attrs }"
+    :path
     :auto-save-delay="autoSaveDelayComputed"
-    v-on="$listeners"
   >
     <e-select
-      :value="wrapper.localValue"
+      :model-value="wrapper.localValue"
       v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :outlined="outlined"
-      :filled="filled"
-      :dense="dense"
+      :variant
+      :density
       :multiple="multiple"
-      @input="wrapper.on.input"
+      @update:model-value="wrapper.on.input"
     >
       <template #append>
-        <v-icon>mdi-menu-down</v-icon>
         <api-wrapper-append :wrapper="wrapper" />
       </template>
     </e-select>

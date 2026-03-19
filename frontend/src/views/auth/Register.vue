@@ -1,67 +1,59 @@
 <template>
   <auth-container>
-    <h1 class="display-1 text-center">{{ $tc('views.auth.register.title') }}</h1>
-    <validation-observer v-slot="{ handleSubmit }">
+    <h1 class="text-h4 text-center">{{ $t('views.auth.register.title') }}</h1>
+
+    <VeeForm v-slot="{ handleSubmit }">
       <e-form name="profile">
         <v-form @submit.prevent="handleSubmit(register)">
           <e-text-field
             v-model="firstname"
-            path="firstname"
-            vee-rules="required"
-            append-icon="mdi-account-outline"
-            dense
-            type="text"
+            append-inner-icon="mdi-account-outline"
             autocomplete="given-name"
+            density="compact"
+            path="firstname"
+            type="text"
+            vee-rules="required"
           />
 
           <e-text-field
             v-model="surname"
-            path="surname"
-            vee-rules="required"
-            append-icon="mdi-account-outline"
-            dense
-            type="text"
+            append-inner-icon="mdi-account-outline"
             autocomplete="family-name"
-          />
-
-          <e-text-field
-            v-model="nickname"
-            path="nickname"
-            append-icon="mdi-account-outline"
-            dense
+            density="compact"
+            path="surname"
             type="text"
-            autocomplete="nickname"
+            vee-rules="required"
           />
 
           <e-text-field
             v-model="email"
-            path="email"
-            vee-rules="email|required"
-            append-icon="mdi-at"
-            dense
-            type="email"
+            append-inner-icon="mdi-at"
             autocomplete="username"
+            density="compact"
+            path="email"
+            type="email"
+            vee-rules="email|required"
           />
 
           <e-text-field
             v-model="pw1"
-            path="password"
-            vee-rules="required|min:12|max:128"
-            validate-on-blur
-            append-icon="mdi-lock-outline"
-            dense
-            type="password"
+            append-inner-icon="mdi-lock-outline"
             autocomplete="new-password"
-            minlength="12"
-            maxlength="128"
-            passwordrules="minlength: 12; maxlength: 128;"
+            density="compact"
             loading
-            @input="debouncedPasswordStrengthCheck"
+            maxlength="128"
+            minlength="12"
+            passwordrules="minlength: 12; maxlength: 128;"
+            path="password"
+            type="password"
+            validate-on-blur
+            vee-rules="required|min:12|max:128"
+            @input="(event) => debouncedPasswordStrengthCheck(event.target.value)"
           >
-            <template #progress>
+            <template #loader>
               <v-progress-linear
-                :value="passwordStrength"
                 :color="passwordStrengthColor"
+                :model-value="passwordStrength"
                 absolute
                 height="5"
               />
@@ -70,48 +62,51 @@
 
           <e-text-field
             v-model="pw2"
-            path="passwordConfirmation"
-            :label="$tc('views.auth.register.passwordConfirmation')"
-            vee-rules="required|confirmed:password"
-            validate-on-blur
-            dense
-            append-icon="mdi-lock-outline"
-            type="password"
+            :label="$t('views.auth.register.passwordConfirmation')"
+            append-inner-icon="mdi-lock-outline"
             autocomplete="new-password"
-            minlength="12"
+            density="compact"
             maxlength="128"
+            minlength="12"
             passwordrules="minlength: 12; maxlength: 128;"
+            path="passwordConfirmation"
+            type="password"
+            validate-on-blur
+            vee-rules="required|confirmed:@password"
           />
 
-          <e-select v-model="language" path="language" dense :items="availableLocales" />
+          <e-select
+            v-model="language"
+            :items="availableLocales"
+            density="compact"
+            path="language"
+          />
 
           <e-checkbox
             v-if="termsOfServiceLink"
             v-model="tos"
+            path="tos"
+            :label="$t('views.auth.register.acceptTermsOfService')"
             :vee-rules="{ required: { allowFalse: false } }"
             class="align-center"
-            :label="$tc('views.auth.register.acceptTermsOfService')"
           >
             <template #label>
-              <span
-                style="hyphens: auto"
-                :class="{ 'body-2': $vuetify.breakpoint.xsOnly }"
-              >
-                {{ $tc('views.auth.register.acceptTermsOfService') }}
+              <span :class="{ 'body-2': $vuetify.display.xs }" style="hyphens: auto">
+                {{ $t('views.auth.register.acceptTermsOfService') }}
               </span>
             </template>
             <template #append>
               <v-btn
-                text
-                dense
-                min-width="0"
-                :title="$tc('global.button.open')"
-                target="_blank"
-                class="px-1"
                 :href="termsOfServiceLink"
+                :title="$t('global.button.open')"
+                class="px-1"
+                density="compact"
+                min-width="0"
                 tabindex="-1"
+                target="_blank"
+                variant="text"
               >
-                <v-icon small>mdi-open-in-new</v-icon>
+                <v-icon size="small">mdi-open-in-new</v-icon>
               </v-btn>
             </template>
           </e-checkbox>
@@ -119,25 +114,25 @@
           <p class="mt-0 mb-4 text--secondary text-left">
             <small>
               <span style="color: #d32f2f">*</span>
-              {{ $tc('views.auth.register.requiredField') }}
+              {{ $t('views.auth.register.requiredField') }}
             </small>
           </p>
 
-          <v-btn type="submit" color="primary" block x-large>
+          <v-btn block color="primary" type="submit" size="x-large">
             <v-progress-circular v-if="registering" indeterminate size="24" />
             <v-spacer />
-            <span>{{ $tc('views.auth.register.register') }}</span>
+            <span>{{ $t('views.auth.register.register') }}</span>
             <v-spacer />
             <icon-spacer />
           </v-btn>
         </v-form>
       </e-form>
-    </validation-observer>
+    </VeeForm>
 
     <p class="mt-8 mb-0 text--secondary text-center">
-      {{ $tc('views.auth.register.alreadyHaveAnAccount') }}<br />
+      {{ $t('views.auth.register.alreadyHaveAnAccount') }}<br />
       <router-link :to="{ name: 'login' }">
-        {{ $tc('global.button.login') }}
+        {{ $t('global.button.login') }}
       </router-link>
     </p>
   </auth-container>
@@ -147,21 +142,26 @@
 import { load } from 'recaptcha-v3'
 import AuthContainer from '@/components/layout/AuthContainer.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
-import VueI18n from '@/plugins/i18n'
-import { ValidationObserver } from 'vee-validate'
+import { componentI18n } from '@/plugins/i18n'
 import { passwordStrengthMixin } from '../../mixins/passwordStrengthMixin.js'
 import { parseTemplate } from 'url-template'
 import { getEnv } from '@/environment.js'
 import EForm from '@/components/form/base/EForm.vue'
+import { Form as VeeForm } from 'vee-validate'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'Register',
   components: {
     EForm,
     AuthContainer,
-    ValidationObserver,
+    VeeForm,
   },
   mixins: [passwordStrengthMixin],
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
   data() {
     return {
       registering: false,
@@ -178,7 +178,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.auth.register.register'),
+      title: this.$t('views.auth.register.register'),
     }
   },
   computed: {
@@ -193,28 +193,29 @@ export default {
       }
     },
     availableLocales() {
-      return VueI18n.availableLocales.map((l) => ({
+      return componentI18n.availableLocales.map((l) => ({
         value: l,
-        text: this.$tc('global.language', 1, l),
+        text: this.$t('global.language', 1, { locale: l }),
       }))
     },
     termsOfServiceLink() {
+      const currentLanguage = this.language || ''
       return (
         parseTemplate(getEnv().TERMS_OF_SERVICE_LINK_TEMPLATE || '').expand({
-          lang: this.language.substring(0, 2),
+          lang: currentLanguage.substring(0, 2),
         }) || false
       )
     },
   },
   watch: {
     language() {
-      if (VueI18n.availableLocales.includes(this.language)) {
+      if (componentI18n.availableLocales.includes(this.language)) {
         this.$store.commit('setLanguage', this.language)
       }
     },
   },
   mounted() {
-    this.language = this.$i18n.browserPreferredLocale
+    this.language = navigator.language
 
     if (getEnv().RECAPTCHA_SITE_KEY) {
       this.recaptcha = load(getEnv().RECAPTCHA_SITE_KEY, {
@@ -247,7 +248,7 @@ export default {
         })
         .then(() => this.$router.push({ name: 'register-done' }))
         .catch((e) => {
-          this.$toast.error(errorToMultiLineToast(e))
+          this.toast.error(errorToMultiLineToast(e))
           this.registering = false
         })
     },

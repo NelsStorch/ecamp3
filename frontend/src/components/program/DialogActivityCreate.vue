@@ -4,9 +4,9 @@
     :loading="loading"
     :error="error"
     icon="mdi-calendar-plus"
-    :title="$tc('entity.activity.new')"
+    :title="$t('entity.activity.new')"
     :submit-action="createActivity"
-    :submit-label="$tc('global.button.create')"
+    :submit-label="$t('global.button.create')"
     submit-icon="mdi-plus"
     submit-color="success"
     :cancel-action="cancelCreate"
@@ -21,10 +21,10 @@
         translation-context-i18n-key="components.program.dialogActivityCreate.clipboardInfoDialog"
         @closed="attemptLoadingEntityFromClipboard"
       >
-        <template #activator="{ on }">
-          <v-btn v-show="showClipboardPrompt" v-on="on">
-            <v-icon left>mdi-information-outline</v-icon>
-            {{ $tc('components.program.dialogActivityCreate.copyPasteActivity') }}
+        <template #activator="{ props }">
+          <v-btn v-show="showClipboardPrompt" v-bind="props">
+            <v-icon start>mdi-information-outline</v-icon>
+            {{ $t('components.program.dialogActivityCreate.copyPasteActivity') }}
           </v-btn>
         </template>
       </ClipboardInfoDialog>
@@ -33,7 +33,7 @@
     <div v-if="hasClipboardEntity">
       <div class="mb-8">
         <div v-if="!clipboardAccessDenied">
-          {{ $tc('components.program.dialogActivityCreate.clipboard') }}
+          {{ $t('components.program.dialogActivityCreate.clipboard') }}
           <div style="float: right">
             <small>
               <a
@@ -41,63 +41,67 @@
                 style="color: inherit; text-decoration: none"
                 @click="clearClipboard"
               >
-                {{ $tc('components.program.dialogActivityCreate.clearClipboard') }}
+                {{ $t('components.program.dialogActivityCreate.clearClipboard') }}
               </a>
             </small>
           </div>
         </div>
         <v-list-item
-          class="ec-copy-source rounded-xl blue-grey lighten-5 blue-grey--text text--darken-4 mt-1"
+          class="ec-copy-source rounded-xl bg-blue-grey-lighten-5 text-blue-grey-darken-4 mt-1"
         >
-          <v-list-item-avatar>
-            <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>
-              <CategoryChip :category="clipboardEntity.category()" class="mx-1" dense />
-              {{ clipboardEntity.title }}
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ clipboardEntity.camp().title }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <e-checkbox
-              :value="entityData.copyActivitySource !== null"
-              :label="$tc('components.program.dialogActivityCreate.copyActivityContent')"
-              @input="setCopyContentCheckbox"
-            />
-          </v-list-item-action>
+          <template #prepend>
+            <v-avatar>
+              <v-icon color="blue-grey">mdi-clipboard-check-outline</v-icon>
+            </v-avatar>
+          </template>
+
+          <v-list-item-title>
+            <CategoryChip :category="clipboardEntity.category()" class="mx-1" dense />
+            {{ clipboardEntity.title }}
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            {{ clipboardEntity.camp().title }}
+          </v-list-item-subtitle>
+
+          <template #append>
+            <v-list-item-action>
+              <e-checkbox
+                :model-value="entityData.copyActivitySource !== null"
+                :label="$t('components.program.dialogActivityCreate.copyActivityContent')"
+                @input="setCopyContentCheckbox"
+              />
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </div>
     </div>
     <DialogActivityForm
       :activity="entityData"
-      :period="scheduleEntry.period()"
       :autoselect-title="true"
+      :period="scheduleEntry.period()"
     >
       <template v-if="clipboardAccessDenied" #textFieldTitleAppend>
         <PopoverPrompt
           v-model="showCopyActivityUrlPopover"
           icon="mdi-content-paste"
-          :title="$tc('components.program.dialogActivityCreate.pasteActivity')"
+          :title="$t('components.program.dialogActivityCreate.pasteActivity')"
         >
-          <template #activator="scope">
+          <template #activator="{ props }">
             <v-btn
-              :title="$tc('components.program.dialogActivityCreate.pasteActivity')"
-              text
+              v-bind="props"
+              :title="$t('components.program.dialogActivityCreate.pasteActivity')"
+              variant="text"
               class="v-btn--has-bg"
               height="56"
-              v-on="scope.on"
             >
               <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
               <v-icon v-else>mdi-content-paste</v-icon>
             </v-btn>
           </template>
-          {{ $tc('components.program.dialogActivityCreate.copySourceInfo') }}
+          {{ $t('components.program.dialogActivityCreate.copySourceInfo') }}
           <e-text-field
             v-model="clipboardEntityUrl"
-            :label="$tc('components.program.dialogActivityCreate.copyActivity')"
+            :label="$t('components.program.dialogActivityCreate.copyActivity')"
             style="margin-bottom: 12px"
             autofocus
           />
@@ -133,6 +137,7 @@ export default {
   props: {
     scheduleEntry: { type: Object, required: true },
   },
+  emits: ['activity-created'],
   setup() {
     const showCopyActivityUrlPopover = ref(false)
 
@@ -149,7 +154,7 @@ export default {
       fetchClipboardEntity: async (url) => {
         if (!url.startsWith(window.location.origin)) return null
         url = url.substring(window.location.origin.length)
-        const match = router.matcher.match(url)
+        const match = router.resolve(url)
 
         if (match.name !== 'camp/activity') return null
         const result = await api.get().activities({ id: match.params['activityId'] })

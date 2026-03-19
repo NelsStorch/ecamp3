@@ -5,9 +5,8 @@
       value-format="YYYY-MM-DDTHH:mm:ssZ"
       path="startDate"
       :vee-id="'startDate' + startUTC"
-      vee-rules="required"
       :allowed-dates="dateIsInAnyPeriod"
-      :filled="false"
+      variant="underlined"
       class="area-startdate date-picker"
       required
     />
@@ -16,8 +15,7 @@
       <e-time-dropdown
         v-model="localScheduleEntry.start"
         path="startDatetime"
-        vee-rules="required"
-        :filled="false"
+        variant="underlined"
         required
         value-format="YYYY-MM-DDTHH:mm:ssZ"
         :items="startTimeList"
@@ -37,7 +35,7 @@
         path="endDatetime"
         :vee-rules="endTimeValidation"
         :min="minEndTime"
-        :filled="false"
+        variant="underlined"
         required
         :items="endTimeList"
         :menu-props="{
@@ -54,15 +52,15 @@
       </e-time-dropdown>
     </div>
 
+    <!-- :vee-rules="'required|greaterThanOrEqual_date:@startDate' + startUTC" -->
     <e-date-picker
       v-model="localScheduleEntry.end"
       value-format="YYYY-MM-DDTHH:mm:ssZ"
       path="endDate"
-      :vee-rules="'required|greaterThanOrEqual_date:@startDate' + startUTC"
       :min="localScheduleEntry.start"
       :allowed-dates="dateIsInSelectedPeriod"
-      :filled="false"
-      :class="{ 'hide-control': $vuetify.breakpoint.mdAndUp && isSameDay }"
+      variant="underlined"
+      :class="{ 'hide-control': $vuetify.display.mdAndUp && isSameDay }"
       class="area-enddate date-picker"
       required
     />
@@ -70,14 +68,15 @@
       <e-text-field
         readonly
         path="duration"
-        :filled="false"
+        variant="underlined"
         class="duration"
-        :value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
+        :model-value="timeDurationShort(localScheduleEntry.start, localScheduleEntry.end)"
       />
       <button-delete
         class="ml-auto"
         :disabled="!deletable"
         icon-only
+        variant="text"
         @click="$emit('delete')"
       />
     </div>
@@ -153,9 +152,7 @@ export default {
 
       // only compare time if date is the same day
       if (this.isSameDay) {
-        validator.greaterThan_time = {
-          min: this.$date.utc(this.localScheduleEntry.start),
-        }
+        validator.greaterThan_dateTime = [this.localScheduleEntry.start]
       }
       return validator
     },

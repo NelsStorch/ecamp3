@@ -2,20 +2,22 @@
   <div role="row" class="e-storyboard-row e-storyboard-row--dense">
     <div v-if="!layoutMode" role="cell" class="e-storyboard-row__handle">
       <v-btn
-        icon
-        small
+        icon="mdi-drag"
+        size="small"
         class="drag-and-drop-handle"
         :disabled="isLastSection"
-        :aria-label="$tc('global.button.move')"
+        variant="flat"
+        density="comfortable"
+        :aria-label="$t('global.button.move')"
         @keydown.down="$emit('move-down', itemKey)"
         @keydown.up="$emit('move-up', itemKey)"
       >
-        <v-icon>mdi-drag</v-icon>
+        <v-icon icon="mdi-drag" size="24" />
       </v-btn>
     </div>
     <div role="cell" class="e-storyboard-row__time">
       <api-text-field
-        :label="$tc('contentNode.storyboard.entity.section.fields.column1')"
+        :label="$t('contentNode.storyboard.entity.section.fields.column1')"
         :single-line="false"
         :path="`data.sections[${itemKey}].column1`"
         :disabled="layoutMode || disabled"
@@ -23,7 +25,7 @@
     </div>
     <div role="cell" class="e-storyboard-row__responsible">
       <api-text-field
-        :label="$tc('contentNode.storyboard.entity.section.fields.column3')"
+        :label="$t('contentNode.storyboard.entity.section.fields.column3')"
         :single-line="false"
         :path="`data.sections[${itemKey}].column3`"
         :disabled="layoutMode || disabled"
@@ -31,7 +33,7 @@
     </div>
     <div role="cell" class="e-storyboard-row__text">
       <api-richtext
-        :label="$tc('contentNode.storyboard.entity.section.fields.column2Html')"
+        :label="$t('contentNode.storyboard.entity.section.fields.column2Html')"
         :path="`data.sections[${itemKey}].column2Html`"
         rows="4"
         :disabled="layoutMode || disabled"
@@ -39,16 +41,18 @@
     </div>
     <div v-if="!layoutMode && !disabled" role="cell" class="e-storyboard-row__controls">
       <dialog-remove-section @submit="$emit('delete', itemKey)">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <v-btn
-            icon
-            small
+            v-bind="props"
+            icon="mdi-delete-outline"
+            variant="text"
+            size="small"
+            density="comfortable"
             class="e-storyboard-row__delete"
             color="error"
             :disabled="isLastSection"
-            v-on="on"
           >
-            <v-icon>mdi-delete-outline</v-icon>
+            <v-icon icon="mdi-delete-outline" size="24" />
           </v-btn>
         </template>
       </dialog-remove-section>
@@ -115,6 +119,7 @@ export default {
   }
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .e-form-container + .e-form-container {
   margin-top: 0;
 }

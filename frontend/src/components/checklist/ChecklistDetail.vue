@@ -18,13 +18,12 @@
         height="24"
         @click="makeChecklistNameEditable()"
       >
-        <v-icon small>mdi-pencil</v-icon>
+        <v-icon size="small">mdi-pencil</v-icon>
       </v-btn>
       <api-form v-if="editChecklistName" :entity="checklist" class="mx-2 flex-grow-1">
         <api-text-field
           path="name"
-          :disabled="layoutMode"
-          dense
+          density="compact"
           autofocus
           :auto-save="false"
           @finished="editChecklistName = false"
@@ -35,8 +34,8 @@
       <ChecklistItemCreate v-if="isContributor" :checklist="checklist" />
       <!-- hamburger menu -->
       <v-menu v-if="isContributor" offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
@@ -47,17 +46,17 @@
             :error-handler="deleteErrorHandler"
             :success-handler="deleteSuccessHandler"
           >
-            <template #activator="{ on }">
-              <v-list-item v-on="on">
-                <v-list-item-icon>
+            <template #activator="{ props }">
+              <v-list-item v-bind="props">
+                <template #prepend>
                   <v-icon>mdi-delete</v-icon>
-                </v-list-item-icon>
+                </template>
                 <v-list-item-title>
-                  {{ $tc('global.button.delete') }}
+                  {{ $t('global.button.delete') }}
                 </v-list-item-title>
               </v-list-item>
             </template>
-            {{ $tc('components.checklist.checklistDetail.deleteWarning') }}
+            {{ $t('components.checklist.checklistDetail.deleteWarning') }}
           </DialogEntityDelete>
         </v-list>
       </v-menu>
@@ -67,7 +66,7 @@
         v-if="checklist && !checklist._meta.deleting"
         :parent="null"
         :checklist="checklist"
-        :disabled="isOutsider"
+        :disabled="debouncedDisabled"
       />
     </v-list>
   </content-card>
@@ -81,6 +80,7 @@ import ApiForm from '@/components/form/api/ApiForm.vue'
 import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import { checklistRoute } from '@/router.js'
 import { campRoleMixin } from '@/mixins/campRoleMixin.js'
+import { nextTick } from 'vue'
 
 export default {
   name: 'ChecklistDetail',
@@ -105,7 +105,11 @@ export default {
     },
   },
   data() {
-    return { dragging: false, editChecklistName: false }
+    return {
+      dragging: false,
+      editChecklistName: false,
+      debouncedDisabled: true,
+    }
   },
   computed: {
     items() {
@@ -120,6 +124,9 @@ export default {
         camp: this.camp._meta.self,
       })
       .$loadItems()
+
+    await nextTick()
+    this.debouncedDisabled = this.isOutsider
   },
   methods: {
     makeChecklistNameEditable() {
@@ -127,7 +134,7 @@ export default {
     },
     deleteErrorHandler(e) {
       if (e?.response?.status === 422 /* Validation Error */) {
-        return this.$tc('components.checklist.checklistDetail.deleteError')
+        return this.$t('components.checklist.checklistDetail.deleteError')
       }
       return null
     },

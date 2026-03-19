@@ -8,7 +8,7 @@
       <BooleanFilter
         v-if="loadingEndpoints !== true && loadingEndpoints.campCollaborations !== true"
         v-model="showOnlyMyActivities"
-        :label="$tc('components.program.scheduleEntryFilters.onlyMyActivities')"
+        :label="$t('components.program.scheduleEntryFilters.onlyMyActivities')"
         :result-count="myActivitiesCount"
       />
       <v-skeleton-loader
@@ -16,7 +16,7 @@
         type="button"
         class="v-skeleton-loader--inherit-size"
         height="32"
-        width="160px"
+        width="160"
       />
       <FilterDivider />
     </template>
@@ -24,11 +24,11 @@
       <template v-if="loadingEndpoints !== true && loadingEndpoints.periods !== true">
         <SelectFilter
           v-if="multiplePeriods"
-          v-model="value.period"
+          v-model="modelValue.period"
           :items="periodItems"
           display-field="description"
-          :label="$tc('components.program.scheduleEntryFilters.period')"
-          @input="(val) => updateFilter({ period: val })"
+          :label="$t('components.program.scheduleEntryFilters.period')"
+          @update:model-value="(val) => updateFilter({ period: val })"
         />
       </template>
       <v-skeleton-loader
@@ -41,13 +41,13 @@
     </template>
     <SelectFilter
       v-if="loadingEndpoints !== true && loadingEndpoints.campCollaborations !== true"
-      v-model="value.responsible"
+      v-model="modelValue.responsible"
       multiple
       and-filter
       :items="campCollaborations"
       :display-field="campCollaborationDisplayName"
-      :label="$tc('components.program.scheduleEntryFilters.responsible')"
-      @input="(val) => updateFilter({ responsible: val })"
+      :label="$t('components.program.scheduleEntryFilters.responsible')"
+      @update:model-value="(val) => updateFilter({ responsible: val })"
     >
       <template #item="{ item }">
         <template v-if="item.exclusiveNone">
@@ -70,12 +70,12 @@
     />
     <SelectFilter
       v-if="loadingEndpoints !== true && loadingEndpoints.categories !== true"
-      v-model="value.category"
+      v-model="modelValue.category"
       multiple
       :items="categories"
       display-field="short"
-      :label="$tc('components.program.scheduleEntryFilters.category')"
-      @input="(val) => updateFilter({ category: val })"
+      :label="$t('components.program.scheduleEntryFilters.category')"
+      @update:model-value="(val) => updateFilter({ category: val })"
     >
       <template #item="{ item }">
         <CategoryChip dense :category="categories[item.value]" class="mr-1" />
@@ -92,12 +92,12 @@
     <template v-if="!hideDayFilter">
       <SelectFilter
         v-if="loadingEndpoints !== true && loadingEndpoints.days !== true"
-        v-model="value.day"
+        v-model="modelValue.day"
         multiple
         :items="dayItems"
         display-field="label"
-        :label="$tc('components.program.scheduleEntryFilters.day')"
-        @input="(val) => updateFilter({ day: val })"
+        :label="$t('components.program.scheduleEntryFilters.day')"
+        @update:model-value="(val) => updateFilter({ day: val })"
       />
       <v-skeleton-loader
         v-else
@@ -109,12 +109,12 @@
     </template>
     <SelectFilter
       v-if="loadingEndpoints !== true && loadingEndpoints.progressLabels !== true"
-      v-model="value.progressLabel"
+      v-model="modelValue.progressLabel"
       multiple
       :items="progressLabels"
       display-field="title"
-      :label="$tc('components.program.scheduleEntryFilters.progressLabel')"
-      @input="(val) => updateFilter({ progressLabel: val })"
+      :label="$t('components.program.scheduleEntryFilters.progressLabel')"
+      @update:model-value="(val) => updateFilter({ progressLabel: val })"
     >
       <template #item="{ item }">
         {{ progressLabels[item.value].title }}
@@ -127,10 +127,17 @@
       height="32"
       width="100"
     />
-    <v-chip v-if="filterSet" label outlined @click="resetFilter">
+    <v-chip
+      v-if="filterSet"
+      label
+      variant="flat"
+      color="surface"
+      border="sm"
+      @click="resetFilter"
+    >
       <span>&ZeroWidthSpace;</span>
-      <v-icon left>mdi-close</v-icon>
-      {{ $tc('components.program.scheduleEntryFilters.clearFilters') }}
+      <v-icon start>mdi-close</v-icon>
+      {{ $t('components.program.scheduleEntryFilters.clearFilters') }}
     </v-chip>
   </div>
 </template>
@@ -161,7 +168,7 @@ export default {
     UserAvatar,
   },
   props: {
-    value: {
+    modelValue: {
       type: Object,
       default: () => ({
         period: null,
@@ -199,6 +206,7 @@ export default {
       default: false,
     },
   },
+  emits: ['update:modelValue', 'height-changed'],
   computed: {
     periodItems() {
       return keyBy(
@@ -217,10 +225,14 @@ export default {
         this.camp.periods().items.flatMap((period) =>
           period.days().items.map((day) => ({
             ...day,
-            label: this.$tc('components.program.scheduleEntryFilters.dayLabel', 0, {
-              dayNumber: day.number,
-              date: this.$date.utc(day.start).format('dd. DD. MMM'),
-            }),
+            label: this.$t(
+              'components.program.scheduleEntryFilters.dayLabel',
+              {
+                dayNumber: day.number,
+                date: this.$date.utc(day.start).format('dd. DD. MMM'),
+              },
+              0
+            ),
             resultCount: this.resultCountWithModifiedFilter('day', day._meta.self),
           }))
         ),
@@ -232,7 +244,7 @@ export default {
     }),
     loggedInCampCollaboration() {
       return Object.values(this.campCollaborations).find((collaboration) => {
-        if (typeof collaboration.user !== 'function') {
+        if (typeof collaboration.user !== 'function' || !this.loggedInUser) {
           return false
         }
         return this.loggedInUser?._meta?.self === collaboration.user?.()?._meta?.self
@@ -242,21 +254,21 @@ export default {
       return {
         none: {
           exclusiveNone: true,
-          label: this.$tc('components.program.scheduleEntryFilters.responsibleNone'),
+          label: this.$t('components.program.scheduleEntryFilters.responsibleNone'),
           _meta: { self: 'none' },
           resultCount: this.resultCountWithModifiedFilter('responsible', ['none']),
         },
         ...keyBy(
           sortBy(this.camp.campCollaborations().items, (u) =>
-            campCollaborationDisplayName(u, this.$tc.bind(this)).toLowerCase()
+            campCollaborationDisplayName(u, this.$t.bind(this)).toLowerCase()
           ).map((campCollaboration) => {
             return {
               ...campCollaboration,
               resultCount: this.resultCountWithModifiedFilter(
                 'responsible',
-                this.value.responsible?.includes('none')
+                this.modelValue.responsible?.includes('none')
                   ? [campCollaboration._meta.self]
-                  : [...(this.value.responsible ?? []), campCollaboration._meta.self]
+                  : [...(this.modelValue.responsible ?? []), campCollaboration._meta.self]
               ),
             }
           }),
@@ -281,7 +293,7 @@ export default {
       const labels = sortBy(this.camp.progressLabels().items, (l) => l.position)
       return {
         none: {
-          title: this.$tc('components.program.scheduleEntryFilters.progressLabelNone'),
+          title: this.$t('components.program.scheduleEntryFilters.progressLabelNone'),
           _meta: { self: 'none' },
           resultCount: this.resultCountWithModifiedFilter('progressLabel', ['none']),
         },
@@ -299,7 +311,7 @@ export default {
       }
     },
     filteredPropertiesCount() {
-      return Object.values(this.value).filter((item) =>
+      return Object.values(this.modelValue).filter((item) =>
         Array.isArray(item) ? item.length : !!item
       ).length
     },
@@ -309,11 +321,11 @@ export default {
     showOnlyMyActivities: {
       get() {
         return (
-          filterEquals(this.value.responsible, [this.loggedInCampCollaboration]) &&
-          filterEquals(this.value.category, []) &&
-          filterEquals(this.value.day, []) &&
-          filterEquals(this.value.period, null) &&
-          filterEquals(this.value.progressLabel, [])
+          filterEquals(this.modelValue.responsible, [this.loggedInCampCollaboration]) &&
+          filterEquals(this.modelValue.category, []) &&
+          filterEquals(this.modelValue.day, []) &&
+          filterEquals(this.modelValue.period, null) &&
+          filterEquals(this.modelValue.progressLabel, [])
         )
       },
       set(value) {
@@ -344,7 +356,7 @@ export default {
   },
   methods: {
     campCollaborationDisplayName(campCollaboration) {
-      return campCollaborationDisplayName(campCollaboration, this.$tc.bind(this))
+      return campCollaborationDisplayName(campCollaboration, this.$t.bind(this))
     },
     loadEndpointData(endpoint, filterKey, hasNone = false) {
       this.camp[endpoint]()._meta.load.then(({ allItems }) => {
@@ -354,7 +366,8 @@ export default {
         }
         this.updateFilter({
           [filterKey]:
-            this.value[filterKey].filter((value) => collection.includes(value)) ?? null,
+            this.modelValue[filterKey].filter((value) => collection.includes(value)) ??
+            null,
         })
         this.loadingEndpoints[endpoint] = false
       })
@@ -373,14 +386,14 @@ export default {
     },
     resultCountWithModifiedFilter(filterName, filterValue) {
       return this.filterFn({
-        ...this.value,
+        ...this.modelValue,
         [filterName]: filterValue,
       }).length
     },
     updateFilter(updates = {}) {
-      const valueClone = clone(this.value)
+      const valueClone = clone(this.modelValue)
       Object.assign(valueClone, updates)
-      this.$emit('input', valueClone)
+      this.$emit('update:modelValue', valueClone)
     },
   },
 }

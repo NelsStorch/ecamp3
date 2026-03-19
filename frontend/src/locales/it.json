@@ -506,11 +506,11 @@
       "short": "Errore del server"
     },
     "validation": {
-      "greaterThan": "{_field_} deve essere maggiore di {min}",
-      "greaterThanOrEqual_date": "{_field_} non può essere prima che {min}",
+      "greaterThan": "{field} deve essere maggiore di {min}",
+      "greaterThanOrEqual_date": "{field} non può essere prima che {min}",
       "greaterThan_time": "{_camp_} deve essere posteriore a {min}",
       "lessThanOrEqual_date": "{_camp_} non può essere successivo a {max}",
-      "oneEmojiOrTwoCharacters": "{_field_} può contenere solo 1 emoji o 2 lettere/numeri"
+      "oneEmojiOrTwoCharacters": "{field} può contenere solo 1 emoji o 2 lettere/numeri"
     },
     "warning": {
       "delete": "Volete davvero cancellarlo? | Volete davvero cancellarlo \"{entity}\"?"
@@ -528,7 +528,7 @@
         "accountless": "Non hanno ancora un conto?",
         "email": "Indirizzo e-mail",
         "infoText": {
-          "dev": "Questa è la versione di sviluppo di eCamp v3.{br}IMPORTANTE: è destinata esclusivamente all'uso per lo sviluppo. Tutti i dati sono pubblici e verranno cancellati periodicamente!{br}Login: test@example.com / test"
+          "dev": "Questa è la versione di sviluppo di eCamp v3.{br}IMPORTANTE: è destinata esclusivamente all'uso per lo sviluppo. Tutti i dati sono pubblici e verranno cancellati periodicamente!{br}Login: test(at)example.com / test"
         },
         "loginCallback": {
           "loginInProgress": "Sarai loggato"

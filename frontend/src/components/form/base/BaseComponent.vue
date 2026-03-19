@@ -8,17 +8,14 @@
     <component
       :is="inputComponent"
       v-bind="$attrs"
-      :filled="filled"
       :hide-details="hideDetails"
       :error-messages="veeErrors.concat(errorMessages)"
       :label.prop="labelOrEntityFieldLabel"
       :class="[inputClass]"
-      v-on="$listeners"
     >
       <!-- passing through all slots -->
-      <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-      <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-        <slot :name="name" v-bind="slotData" />
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </component>
   </ValidationProvider>
@@ -27,7 +24,7 @@
 <script>
 import { ValidationProvider } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { VTextField } from 'vuetify/lib'
+import { VTextField } from 'vuetify/components'
 
 export default {
   name: 'BaseComponent',

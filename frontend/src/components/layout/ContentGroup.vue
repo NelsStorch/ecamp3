@@ -8,9 +8,11 @@ Displays the content wrapped inside a card.
       <component
         :is="titleTag"
         v-if="title"
-        class="ec-content-group__title py-1 subtitle-1"
+        class="ec-content-group__title py-1 text-subtitle-1"
       >
-        <v-icon v-if="icon" left size="20" class="mb-n1">{{ icon }}</v-icon>
+        <v-icon v-if="icon" start size="20" class="mb-n1" color="surface-variant">{{
+          icon
+        }}</v-icon>
         {{ title }}
         <v-spacer />
         <slot name="title-actions" />
@@ -34,9 +36,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .ec-content-group__title {
-  border-bottom: 1px solid map-get($blue-grey, 'lighten-4');
+  border-bottom: 1px solid map.get(settings.$blue-grey, 'lighten-4');
   display: flex;
   align-items: baseline;
   justify-content: space-between;

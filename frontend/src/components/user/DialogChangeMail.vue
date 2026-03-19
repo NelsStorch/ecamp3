@@ -1,11 +1,11 @@
 <template>
   <dialog-form
     v-model="showDialog"
-    :title="$tc('components.user.dialogChangeMail.title')"
+    :title="$t('components.user.dialogChangeMail.title')"
     :submit-action="status === 'initial' ? sendChangeMailRequest : null"
     :cancel-action="close"
     :cancel-label="
-      status === 'initial' ? $tc('global.button.cancel') : $tc('global.button.close')
+      status === 'initial' ? $t('global.button.cancel') : $t('global.button.close')
     "
     submit-color="success"
   >
@@ -17,18 +17,18 @@
         v-model="entityData.newEmail"
         path="email"
         vee-rules="email|required"
-        append-icon="mdi-at"
+        append-inner-icon="mdi-at"
         autofocus
       />
       <p class="mt-5">
-        {{ $tc('components.user.dialogChangeMail.message') }}
+        {{ $t('components.user.dialogChangeMail.message') }}
       </p>
     </e-form>
     <div v-if="status == 'success'">
-      {{ $tc('components.user.dialogChangeMail.success') }}
+      {{ $t('components.user.dialogChangeMail.success') }}
     </div>
     <div v-if="status == 'error'">
-      {{ $tc('components.user.dialogChangeMail.error') }}
+      {{ $t('components.user.dialogChangeMail.error') }}
     </div>
   </dialog-form>
 </template>
@@ -59,7 +59,9 @@ export default {
   methods: {
     async sendChangeMailRequest() {
       await this.api
-        .patch(this.entityUri, this.entityData)
+        .patch(this.entityUri, {
+          newEmail: this.entityData.newEmail,
+        })
         .then(() => {
           this.status = 'success'
         })

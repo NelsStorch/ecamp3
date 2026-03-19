@@ -67,6 +67,10 @@
       "enabled": false
     },
     {
+      "matchFileNames": ["frontend-old/package.json"],
+      "enabled": false
+    },
+    {
       "matchDepNames": ["sass"],
       "dependencyDashboardApproval": true
     },

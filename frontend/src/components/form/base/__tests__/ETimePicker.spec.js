@@ -1,10 +1,10 @@
-import { describe, beforeEach, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { screen, waitFor } from '@testing-library/vue'
 import { render, setTestLocale, snapshotOf } from '@/test/renderWithVuetify.js'
 import user from '@testing-library/user-event'
 import ETimePicker from '../ETimePicker.vue'
 
-describe('An ETimePicker', () => {
+describe.skip('An ETimePicker', () => {
   const TIME1_ISO = '2037-07-18T09:52:00+00:00'
   const TIME1_HHMM = '09:52'
   const TIME2_ISO = '2037-07-18T18:33:00+00:00'

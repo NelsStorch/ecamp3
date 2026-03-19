@@ -1,3 +1,5 @@
+import { inject } from 'vue'
+
 export const apiPropsMixin = {
   inheritAttrs: false,
   inject: {
@@ -5,7 +7,7 @@ export const apiPropsMixin = {
   },
   props: {
     /* value is not required; by default value is read directly from api */
-    value: { required: false, default: null },
+    modelValue: { required: false, default: null },
 
     /* field path and URI for saving back to API */
     path: { type: String, required: true },
@@ -15,12 +17,13 @@ export const apiPropsMixin = {
       type: String,
       required: false,
       default() {
-        if (this.apiUri === null) {
+        const apiUri = inject('apiUri')
+        if (apiUri === null) {
           throw new Error(
             'ApiWrapper: `uri` not set on component; no ApiForm component found as parent for fallback'
           )
         }
-        return this.apiUri
+        return apiUri
       },
     },
 
@@ -35,20 +38,14 @@ export const apiPropsMixin = {
     autoSave: { type: Boolean, default: true, required: false },
     autoSaveDelay: { type: Number, default: 800, required: false },
 
-    /* control style */
-    filled: {
-      type: Boolean,
-      default: false,
+    variant: {
+      type: String,
+      default: 'outlined',
       required: false,
     },
-    outlined: {
-      type: Boolean,
-      default: true,
-      required: false,
-    },
-    dense: {
-      type: Boolean,
-      default: false,
+    density: {
+      type: [null, String],
+      default: 'default',
       required: false,
     },
   },

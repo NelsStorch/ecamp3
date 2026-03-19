@@ -1,5 +1,5 @@
 <template>
-  <content-card :title="$tc('views.camp.admin.info.title')" toolbar>
+  <content-card :title="$t('views.camp.admin.info.title')" toolbar>
     <v-container fluid class="px-4 pb-8">
       <v-row>
         <v-col cols="12" md="6" class="pb-0">
@@ -16,9 +16,9 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-expansion-panels v-model="openPanels" flat accordion multiple>
+    <v-expansion-panels v-model="openPanels" flat variant="accordion" multiple>
       <CampConditionalFields :camp="camp" :disabled="!isManager" />
-      <CampDangerZone v-if="isManager" :camp="camp" />
+      <CampDangerZone v-if="isManager" :camp="camp" :active="dangerOpen" />
     </v-expansion-panels>
   </content-card>
 </template>
@@ -53,8 +53,13 @@ export default {
   }),
   head() {
     return {
-      title: this.$tc('views.camp.admin.info.title'),
+      title: this.$t('views.camp.admin.info.title'),
     }
+  },
+  computed: {
+    dangerOpen() {
+      return this.openPanels.includes(1)
+    },
   },
   mounted() {
     this.camp._meta.load.then((camp) => {

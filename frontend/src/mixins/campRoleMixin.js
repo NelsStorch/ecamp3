@@ -4,18 +4,20 @@ export const campRoleMixin = {
       return this.isMember || this.isManager
     },
     isGuest() {
-      return this.role === 'guest'
+      return this._campRole === 'guest'
     },
     isManager() {
-      return this.role === 'manager'
+      return this._campRole === 'manager'
     },
     isMember() {
-      return this.role === 'member'
+      return this._campRole === 'member'
     },
     isOutsider() {
-      return this.camp && typeof this._campCollaborations === 'function' && !this.role
+      return (
+        this.camp && typeof this._campCollaborations === 'function' && !this._campRole
+      )
     },
-    role() {
+    _campRole() {
       const currentUserLink = this.$store.getters.getLoggedInUser?._meta.self
       const result = this._campCollaborations
         .filter((coll) => typeof coll.user === 'function')

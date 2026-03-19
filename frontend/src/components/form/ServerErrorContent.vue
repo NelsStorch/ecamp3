@@ -11,6 +11,7 @@
 
 <script>
 import { violationsToFlatArray } from '@/helpers/serverError'
+import { componentI18n } from '@/plugins/i18n/index.js'
 
 export default {
   name: 'ServerErrorContent',
@@ -22,7 +23,7 @@ export default {
   },
   computed: {
     errorList() {
-      return violationsToFlatArray(this.serverError, this.$i18n)
+      return violationsToFlatArray(this.serverError, componentI18n)
     },
   },
 }

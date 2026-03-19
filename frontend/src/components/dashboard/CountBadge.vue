@@ -1,5 +1,5 @@
 <template>
-  <v-badge inline bordered dark color="blue-grey lighten-5" :content="String(count)" />
+  <v-badge inline bordered dark color="blue-grey-lighten-5" :content="String(count)" />
 </template>
 
 <script>
@@ -18,10 +18,10 @@ export default {
 }
 
 :deep(.v-badge__badge) {
-  color: currentcolor;
-  min-width: 18px;
+  color: currentcolor !important;
+  min-width: 20px;
   font-weight: 500;
-  line-height: 12.5px;
+  line-height: 12px;
   margin-top: 0;
 }
 
@@ -39,6 +39,7 @@ export default {
   border-width: 1px;
   transform: none;
   border-color: #cfd8dc;
+  color: inherit;
 }
 /* eslint-enable vue-scoped-css/no-unused-selector */
 </style>

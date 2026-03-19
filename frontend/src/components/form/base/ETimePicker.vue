@@ -6,7 +6,7 @@ Allows 15min steps only
 <template>
   <base-picker
     :icon="icon"
-    :value="value"
+    :model-value="modelValue"
     :format="format"
     :format-picker="formatPicker"
     :parse="parse"
@@ -15,21 +15,21 @@ Allows 15min steps only
     :vee-id="veeId"
     :vee-rules="veeRules"
     button-aria-label-i18n-key="components.form.base.eTimePicker.openPicker"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:model-value', $event)"
   >
     <template #default="picker">
       <v-time-picker
-        :value="picker.value || ''"
+        :model-value="picker.value || ''"
         :allowed-minutes="allowedStep"
-        :format="$tc('global.datetime.vuetifyTimePickerFormat')"
+        :format="$t('global.datetime.vuetifyTimePickerFormat')"
         :min="min"
         :max="max"
         scrollable
-        @input="picker.onInput"
+        @update:model-value="picker.onInput"
       >
         <v-spacer />
-        <v-btn text color="primary" @click="picker.close">
-          {{ $tc('global.button.close') }}
+        <v-btn color="primary" variant="text" @click="picker.close">
+          {{ $t('global.button.close') }}
         </v-btn>
       </v-time-picker>
     </template>
@@ -53,7 +53,7 @@ export default {
   mixins: [formComponentMixin],
   props: {
     icon: { type: String, required: false, default: 'mdi-clock-outline' },
-    value: { type: [Number, String], required: true },
+    modelValue: { type: [Number, String], required: true },
 
     // format in which the `value` property is being provided & input events are triggered
     valueFormat: { type: [String, Array], default: 'YYYY-MM-DDTHH:mm:ssZ' },
@@ -70,7 +70,7 @@ export default {
      */
     setTimeOnValue(time) {
       // current value as DayJS
-      let valueDateTime = this.getValueAsDateTime(this.value)
+      let valueDateTime = this.getValueAsDateTime(this.modelValue)
 
       // override time
       if (valueDateTime) {
@@ -125,7 +125,7 @@ export default {
           return Promise.resolve(newValue)
         } else {
           return Promise.reject(
-            new Error(this.$tc('components.form.base.eTimePicker.invalidFormat'))
+            new Error(this.$t('components.form.base.eTimePicker.invalidFormat'))
           )
         }
       } else {

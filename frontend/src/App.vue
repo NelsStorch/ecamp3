@@ -13,21 +13,40 @@
 
     <v-footer v-if="offline" app class="offline">
       <p class="mb-0">
-        <strong>{{ $tc('global.info.offline.title') }}</strong>
-        {{ $tc('global.info.offline.description') }}
+        <strong>{{ $t('global.info.offline.title') }}</strong>
+        {{ $t('global.info.offline.description') }}
       </p>
     </v-footer>
+    <v-snackbar-queue v-model="snackbarMessages"></v-snackbar-queue>
   </v-app>
 </template>
 
 <script>
 import VueI18n from '@/plugins/i18n'
+import { headEnvironment } from '@/plugins/index.js'
+import { mapGetters } from 'vuex'
+import { useHead } from '@unhead/vue'
 
 export default {
   name: 'App',
+  setup() {
+    useHead({
+      title: null,
+      templateParams: {
+        site: 'eCamp v3',
+        separator: '·',
+        environment: headEnvironment,
+        section: null,
+      },
+      titleTemplate: '%environment %s %separator %section %separator %site',
+    })
+  },
   data: () => ({
     offline: false,
   }),
+  computed: {
+    ...mapGetters(['snackbarMessages']),
+  },
   created() {
     this.$store.commit('setLanguage', this.$store.state.lang.language)
 
@@ -40,12 +59,12 @@ export default {
       const user = await this.$auth.loadUser()
       const profile = await user.profile()._meta.load
 
-      if (VueI18n.availableLocales.includes(profile.language)) {
+      if (VueI18n.global.availableLocales.includes(profile.language)) {
         this.$store.commit('setLanguage', profile.language)
       }
     }
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('offline', this.offlineListener)
     window.removeEventListener('online', this.onlineListener)
   },
@@ -69,11 +88,13 @@ export default {
 <!-- these styles must be global -->
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style lang="scss">
-@import 'src/scss/tailwind';
-@import 'src/scss/global';
+@use 'sass:map';
+@use 'vuetify/settings';
+//@import 'src/scss/tailwind';
+//@import 'src/scss/global';
 @import '~@mdi/font/css/materialdesignicons.css';
 
-@media #{map-get($display-breakpoints, 'xs-only')} {
+@media #{map.get(settings.$display-breakpoints, 'xs')} {
   html,
   body,
   .v-application {
@@ -107,8 +128,8 @@ export default {
   border-top-right-radius: 0 !important;
 }
 
-@media #{map-get($display-breakpoints, 'xs-only')} {
-  .v-main > .v-main__wrap > .container {
+@media #{map.get(settings.$display-breakpoints, 'xs')} {
+  .v-main > .v-container--fluid {
     min-height: 100%;
     display: flex;
 
@@ -125,9 +146,9 @@ export default {
   font-feature-settings: 'tnum';
 }
 
-@media #{map-get($display-breakpoints, 'sm-and-down')} {
+@media #{map-get(settings.$display-breakpoints, 'sm-and-down')} {
   // TODO: this changes look & feel of all v-containers. Do we really want this?
-  .container.container--fluid {
+  .v-container.v-container--fluid {
     padding: 0;
 
     & > .v-card {

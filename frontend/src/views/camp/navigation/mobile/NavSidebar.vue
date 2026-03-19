@@ -1,17 +1,18 @@
 <template>
   <v-navigation-drawer
-    :value="value"
+    :model-value="modelValue"
     app
-    right
+    location="right"
+    scrim
     width="300"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <div class="d-flex flex-column fill-height">
-      <div class="d-flex flex-column align-center blue-grey darken-4 white--text py-6">
-        <v-icon x-large>$vuetify.icons.ecamp</v-icon>
-        <h2 class="title text-center">eCamp</h2>
+      <div class="d-flex flex-column align-center bg-blue-grey-darken-4 text-white py-6">
+        <v-icon size="x-large">$ecamp</v-icon>
+        <h2 class="text-h6 text-center">eCamp</h2>
       </div>
-      <v-divider class="blue-grey darken-2" />
+      <v-divider class="bg-blue-grey-darken-2" />
       <v-list>
         <SidebarListItem
           v-if="user && !user._meta.loading"
@@ -23,13 +24,15 @@
           :to="{ name: 'profile', query: { isDetail: true } }"
         >
           <template #pre>
-            <v-list-item-avatar>
-              <UserAvatar :user="user" :camp-collaboration="currentCampCollaboration" />
-            </v-list-item-avatar>
+            <UserAvatar
+              :user="user"
+              :camp-collaboration="currentCampCollaboration"
+              size="40"
+            />
           </template>
         </SidebarListItem>
         <SidebarListItem
-          :title="$tc('views.camp.navigation.mobile.navSidebar.itemCamps', 2)"
+          :title="$t('views.camp.navigation.mobile.navSidebar.itemCamps', 2)"
           icon="mdi-format-list-bulleted-triangle"
           :to="{ name: 'camps', query: { isDetail: true } }"
         />
@@ -49,37 +52,37 @@
         <v-divider inset i />
         <SidebarListItem
           :to="adminRoute(camp, 'info')"
-          :title="$tc('views.camp.navigation.mobile.navSidebar.itemInfos')"
+          :title="$t('views.camp.navigation.mobile.navSidebar.itemInfos')"
           icon="mdi-cogs"
         />
         <v-divider inset />
         <SidebarListItem
           :to="adminRoute(camp, 'activity')"
-          :title="$tc('views.camp.navigation.mobile.navSidebar.itemActivity')"
-          :subtitle="$tc('views.camp.navigation.mobile.navSidebar.itemActivitySubtitle')"
+          :title="$t('views.camp.navigation.mobile.navSidebar.itemActivity')"
+          :subtitle="$t('views.camp.navigation.mobile.navSidebar.itemActivitySubtitle')"
           icon="mdi-view-dashboard"
         />
         <v-divider inset />
         <SidebarListItem
           :to="campRoute(camp, 'overview/checklists')"
-          :title="$tc('views.camp.navigation.mobile.navSidebar.itemChecklists')"
+          :title="$t('views.camp.navigation.mobile.navSidebar.itemChecklists')"
           icon="mdi-clipboard-list-outline"
         />
         <v-divider inset />
         <SidebarListItem
-          :title="$tc('views.camp.navigation.mobile.navSidebar.itemCollaborators')"
+          :title="$t('views.camp.navigation.mobile.navSidebar.itemCollaborators')"
           icon="mdi-account-group"
           :to="adminRoute(camp, 'collaborators')"
         />
         <v-divider inset />
         <SidebarListItem
           :to="adminRoute(camp, 'material')"
-          :title="$tc('views.camp.navigation.mobile.navSidebar.itemMaterialLists')"
+          :title="$t('views.camp.navigation.mobile.navSidebar.itemMaterialLists')"
           icon="mdi-package-variant"
         />
         <v-divider inset />
         <SidebarListItem
-          :title="$tc('views.camp.navigation.mobile.navSidebar.itemPrinting')"
+          :title="$t('views.camp.navigation.mobile.navSidebar.itemPrinting')"
           icon="mdi-file"
           :to="adminRoute(camp, 'print')"
         />
@@ -89,14 +92,14 @@
 
       <v-list>
         <SidebarListItem
-          :title="$tc('global.navigation.help')"
+          :title="$t('global.navigation.help')"
           icon="mdi-help-circle-outline"
           :href="helpLink"
           target="_blank"
           hide-chevron
         />
         <SidebarListItem
-          :title="$tc('global.navigation.news')"
+          :title="$t('global.navigation.news')"
           icon="mdi-script-text-outline"
           :href="newsLink"
           target="_blank"
@@ -105,16 +108,16 @@
       </v-list>
       <div class="mt-auto">
         <v-btn
-          x-large
+          size="large"
           height="56"
-          text
+          variant="text"
           tile
           block
           class="ec-close-drawer pb-safe"
-          @click="$emit('input', false)"
+          @click="$emit('update:modelValue', false)"
         >
-          {{ $tc('views.camp.navigation.mobile.navSidebar.itemClose') }}
-          <v-icon right>mdi-close</v-icon>
+          {{ $t('views.camp.navigation.mobile.navSidebar.itemClose') }}
+          <v-icon end>mdi-close</v-icon>
         </v-btn>
       </div>
     </div>
@@ -135,9 +138,10 @@ export default {
     UserAvatar,
   },
   props: {
-    value: { type: Boolean, required: true },
+    modelValue: { type: Boolean, required: true },
     camp: { type: Object, required: true },
   },
+  emits: ['update:modelValue'],
   computed: {
     newsLink() {
       return getEnv().NEWS_LINK
@@ -168,8 +172,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .v-application .ec-close-drawer {
-  background-color: #{map-get($blue-grey, 'lighten-5')};
-  border-top: 1px solid #{map-get($blue-grey, 'lighten-4')};
+  background-color: #{map.get(settings.$blue-grey, 'lighten-5')};
+  border-top: 1px solid #{map.get(settings.$blue-grey, 'lighten-4')};
 }
 </style>

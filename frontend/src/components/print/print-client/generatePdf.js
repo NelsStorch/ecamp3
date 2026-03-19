@@ -1,6 +1,7 @@
 import { prepareInMainThread } from '@/pdf/prepareInMainThread.js'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import { proxy } from 'comlink'
+import jsonStringifyReactiveValue from '@/components/print/jsonStringifyReactiveValue.js'
 
 export const generatePdf = async (data, onProgress) => {
   await prepareInMainThread(data.config)
@@ -20,7 +21,7 @@ export const generatePdf = async (data, onProgress) => {
 function prepareDataForSerialization(data) {
   return {
     config: JSON.parse(
-      JSON.stringify(replaceEntitiesWithRelativeUris(cloneDeep(data.config)))
+      jsonStringifyReactiveValue(replaceEntitiesWithRelativeUris(cloneDeep(data.config)))
     ),
     storeData: JSON.parse(JSON.stringify(data.storeData)),
     translationData: JSON.parse(JSON.stringify(data.translationData)),

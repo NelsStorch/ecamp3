@@ -1,7 +1,8 @@
 <template>
   <EParseField
+    v-bind="$attrs"
     ref="input"
-    :value="value"
+    :model-value="modelValue"
     :format="format"
     :parse="parse"
     :serialize="serialize"
@@ -10,22 +11,19 @@
     :vee-id="veeId"
     :vee-rules="veeRules"
     reset-on-blur
-    v-bind="$attrs"
-    v-on="$listeners"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:model-value', $event)"
   >
     <!-- passing through all slots -->
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-      <slot v-if="name !== 'prepend'" :name="name" v-bind="slotData" />
+    <template v-for="(_, slot) of filteredSlots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData || {}"></slot>
     </template>
-    <template #prepend="props">
-      <slot name="prepend" v-bind="props">
+    <template #prepend="slotData">
+      <slot name="prepend" v-bind="slotData">
         <ColorSwatch
           class="mt-n1"
-          :color="props.serializedValue"
+          :color="slotData.serializedValue"
           tag="div"
-          :aria-label="props.serializedValue"
+          :aria-label="slotData.serializedValue"
         />
       </slot>
     </template>
@@ -43,9 +41,16 @@ export default {
   components: { ColorSwatch },
   mixins: [formComponentMixin],
   props: {
-    value: { type: String, required: false, default: null },
+    modelValue: { type: String, required: false, default: null },
   },
-  emits: ['input'],
+  emits: ['update:model-value'],
+  computed: {
+    filteredSlots() {
+      return Object.fromEntries(
+        Object.entries(this.$slots).filter((_, slot) => slot !== 'prepend')
+      )
+    },
+  },
   methods: {
     format(value) {
       if (typeof value === 'string') {
@@ -72,7 +77,7 @@ export default {
         return reactive(color)
       } catch (e) {
         if (e instanceof TypeError) {
-          throw new Error(this.$tc('components.form.base.eColorField.parseError'))
+          throw new Error(this.$t('components.form.base.eColorField.parseError'))
         } else {
           throw e
         }

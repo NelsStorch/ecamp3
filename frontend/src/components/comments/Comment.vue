@@ -1,12 +1,5 @@
 <template>
-  <v-sheet
-    outlined
-    class="ec-comment"
-    elevation="2"
-    rounded="lg"
-    border="left"
-    colored-border="blue"
-  >
+  <v-sheet border class="ec-comment" elevation="2" rounded="lg" colored-border="blue">
     <v-card-text class="px-3 pt-2 pb-2 ec-comment__text">
       <slot />
     </v-card-text>
@@ -22,7 +15,7 @@
           class="ec-comment__delete"
           icon
           absolute
-          right
+          location="right"
           v-bind="attrs"
           v-on="on"
         >
@@ -43,19 +36,21 @@ export default {
   props: {
     comment: {
       type: Object,
-      required: false,
-    },
-  },
-
-  methods: {
-    isDeletable() {
-      return this.comment !== undefined && this.comment.author().id === this.authUser.id
+      required: true,
     },
   },
   computed: {
     ...mapGetters({
       authUser: 'getLoggedInUser',
     }),
+  },
+  methods: {
+    isDeletable() {
+      return (
+        this.comment !== undefined &&
+        this.comment.author()._meta.self === this.authUser?._meta.self
+      )
+    },
   },
 }
 </script>
@@ -71,6 +66,7 @@ export default {
   display: none;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-comment button.ec-comment__delete {
   top: 0;
   right: 0rem;

@@ -1,8 +1,8 @@
 import { computed, onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router/composables'
+import { useRoute } from 'vue-router'
 import * as XLSX from 'xlsx'
 import { slugify } from '@/plugins/slugify.js'
-import i18n from '@/plugins/i18n/index.js'
+import { componentI18n } from '@/plugins/i18n/index.js'
 import dayjs from '@/common/helpers/dayjs.js'
 import { campShortTitle } from '@/common/helpers/campShortTitle.js'
 import { apiStore } from '@/plugins/store/index.js'
@@ -11,8 +11,8 @@ import shortScheduleEntryDescription from './shortScheduleEntryDescription.js'
 
 function generateFilename(camp, materialList) {
   const description = materialList
-    ? [i18n.tc('components.material.useMaterialViewHelper.detail'), materialList]
-    : [i18n.tc('components.material.useMaterialViewHelper.overview')]
+    ? [componentI18n.t('components.material.useMaterialViewHelper.detail'), materialList]
+    : [componentI18n.t('components.material.useMaterialViewHelper.overview')]
   const filename = [campShortTitle(camp), ...description].map(slugify)
   return [...filename, dayjs().format('YYMMDDHHmmss')].join('_') + '.xlsx'
 }
@@ -33,15 +33,16 @@ async function getSheets(camp, collection, materialList) {
       const data = [
         [
           `${
-            materialList ?? i18n.tc('components.material.useMaterialViewHelper.overview')
+            materialList ??
+            componentI18n.t('components.material.useMaterialViewHelper.overview')
           }: ${period.description}`,
         ],
         [
-          i18n.tc('entity.materialItem.fields.quantity'),
-          i18n.tc('entity.materialItem.fields.unit'),
-          i18n.tc('entity.materialItem.fields.article'),
-          ...(!materialList ? [i18n.tc('entity.materialItem.fields.list')] : []),
-          i18n.tc('entity.materialItem.fields.reference'),
+          componentI18n.t('entity.materialItem.fields.quantity'),
+          componentI18n.t('entity.materialItem.fields.unit'),
+          componentI18n.t('entity.materialItem.fields.article'),
+          ...(!materialList ? [componentI18n.t('entity.materialItem.fields.list')] : []),
+          componentI18n.t('entity.materialItem.fields.reference'),
         ],
       ]
       await Promise.all(
@@ -49,7 +50,9 @@ async function getSheets(camp, collection, materialList) {
           const activity = await getActivity(camp, materialItem)
           const scheduleEntries = activity
             ?.scheduleEntries()
-            .items.map((item) => shortScheduleEntryDescription(item, i18n.tc.bind(i18n)))
+            .items.map((item) =>
+              shortScheduleEntryDescription(item, componentI18n.t.bind(componentI18n))
+            )
             .join(', ')
           data.push([
             materialItem.quantity,

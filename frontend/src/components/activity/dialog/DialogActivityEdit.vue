@@ -1,12 +1,12 @@
 <template>
   <dialog-form
     v-model="showDialog"
-    :title="$tc('components.activity.dialog.dialogActivityEdit.title')"
+    :title="$t('components.activity.dialog.dialogActivityEdit.title')"
     :loading="loading"
     :error="error"
     icon="mdi-calendar-plus"
     :submit-action="updateActivity"
-    :submit-label="$tc('global.button.update')"
+    :submit-label="$t('global.button.update')"
     submit-color="success"
     :cancel-action="close"
     max-width="700px"
@@ -43,6 +43,7 @@ export default {
       default: false,
     },
   },
+  emits: ['activity-updated', 'submit'],
   data() {
     return {
       entityProperties: ['title', 'location'],
@@ -66,20 +67,16 @@ export default {
         this.loadEntityData(this.activity._meta.self)
 
         const scheduleEntries = await this.scheduleEntries.$loadItems()
-        this.$set(
-          this.entityData,
-          'scheduleEntries',
-          scheduleEntries.items.map((scheduleEntry) => {
-            return {
-              period: scheduleEntry.period,
-              start: scheduleEntry.start,
-              end: scheduleEntry.end,
-              key: scheduleEntry._meta.self,
-              deleted: false,
-              self: scheduleEntry._meta.self,
-            }
-          })
-        )
+        this.entityData.scheduleEntries = scheduleEntries.items.map((scheduleEntry) => {
+          return {
+            period: scheduleEntry.period,
+            start: scheduleEntry.start,
+            end: scheduleEntry.end,
+            key: scheduleEntry._meta.self,
+            deleted: false,
+            self: scheduleEntry._meta.self,
+          }
+        })
       }
     },
   },
@@ -140,11 +137,14 @@ export default {
       })
 
       // patch activity entity
-      const activityPayload = { ...this.entityData }
+      const activityPayload = {
+        title: this.entityData.title,
+        category: this.entityData.category,
+        location: this.entityData.location,
+      }
       if (this.hideHeaderFields) {
         delete activityPayload.location
       }
-      delete activityPayload.scheduleEntries
       promises.push(this.api.patch(this.entityUri, activityPayload))
 
       // execute all requests together --> onError if one fails

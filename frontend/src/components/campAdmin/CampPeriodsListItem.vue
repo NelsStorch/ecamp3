@@ -4,119 +4,119 @@ Displays a single period as a list item including controls to edit and delete it
 
 <template>
   <v-list-item v-if="!period._meta.loading">
-    <v-list-item-content class="pt-0 pb-2">
-      <v-list-item-title>{{ period.description }}</v-list-item-title>
-      <v-list-item-subtitle>
-        {{ dateRange(period.start, period.end) }}
-      </v-list-item-subtitle>
-    </v-list-item-content>
+    <v-list-item-title>{{ period.description }}</v-list-item-title>
+    <v-list-item-subtitle>
+      {{ dateRange(period.start, period.end) }}
+    </v-list-item-subtitle>
 
-    <v-menu v-if="!disabled" v-model="showMenuEdit" offset-y>
-      <template #activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on">
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-        <dialog-period-description-edit :period="period" @closed="showMenuEdit = false">
-          <template #activator="{ on, attrs }">
-            <v-list-item v-bind="attrs" v-on="on">
-              <v-list-item-icon>
-                <v-icon>mdi-pencil</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>{{
-                $tc('components.campAdmin.campPeriodsListItem.changePeriodDescription')
-              }}</v-list-item-title>
-            </v-list-item>
-          </template>
-        </dialog-period-description-edit>
+    <template #append>
+      <v-menu v-if="!disabled" v-model="showMenuEdit" offset-y>
+        <template #activator="{ props }">
+          <v-btn variant="text" icon v-bind="props">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <dialog-period-description-edit :period="period" @closed="showMenuEdit = false">
+            <template #activator="{ props }">
+              <v-list-item v-bind="props">
+                <template #prepend>
+                  <v-icon>mdi-pencil</v-icon>
+                </template>
+                <v-list-item-title>{{
+                  $t('components.campAdmin.campPeriodsListItem.changePeriodDescription')
+                }}</v-list-item-title>
+              </v-list-item>
+            </template>
+          </dialog-period-description-edit>
 
-        <dialog-period-date-edit
-          :period="period"
-          mode="move"
-          @closed="showMenuEdit = false"
-        >
-          <template #activator="{ on, attrs }">
-            <v-list-item v-bind="attrs" v-on="on">
-              <v-list-item-icon>
-                <v-icon>mdi-arrow-left-right</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>
-                {{ $tc('components.campAdmin.campPeriodsListItem.movePeriod') }}
-              </v-list-item-title>
-            </v-list-item>
-          </template>
-        </dialog-period-date-edit>
+          <dialog-period-date-edit
+            :period="period"
+            mode="move"
+            @closed="showMenuEdit = false"
+          >
+            <template #activator="{ props }">
+              <v-list-item v-bind="props">
+                <template #prepend>
+                  <v-icon>mdi-arrow-left-right</v-icon>
+                </template>
+                <v-list-item-title>
+                  {{ $t('components.campAdmin.campPeriodsListItem.movePeriod') }}
+                </v-list-item-title>
+              </v-list-item>
+            </template>
+          </dialog-period-date-edit>
 
-        <dialog-period-date-edit
-          :period="period"
-          mode="changeStart"
-          @closed="showMenuEdit = false"
-        >
-          <template #activator="{ on, attrs }">
-            <v-list-item v-bind="attrs" v-on="on">
-              <v-list-item-icon>
-                <v-icon>mdi-arrow-collapse-left</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>
-                {{
-                  $tc('components.campAdmin.campPeriodsListItem.periodChangeStart')
-                }}</v-list-item-title
-              >
-            </v-list-item>
-          </template>
-        </dialog-period-date-edit>
+          <dialog-period-date-edit
+            :period="period"
+            mode="changeStart"
+            @closed="showMenuEdit = false"
+          >
+            <template #activator="{ props }">
+              <v-list-item v-bind="props">
+                <template #prepend>
+                  <v-icon>mdi-arrow-collapse-left</v-icon>
+                </template>
+                <v-list-item-title>
+                  {{
+                    $t('components.campAdmin.campPeriodsListItem.periodChangeStart')
+                  }}</v-list-item-title
+                >
+              </v-list-item>
+            </template>
+          </dialog-period-date-edit>
 
-        <dialog-period-date-edit
-          :period="period"
-          mode="changeEnd"
-          @closed="showMenuEdit = false"
-        >
-          <template #activator="{ on, attrs }">
-            <v-list-item v-bind="attrs" v-on="on">
-              <v-list-item-icon>
-                <v-icon>mdi-arrow-collapse-right</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>
-                {{
-                  $tc('components.campAdmin.campPeriodsListItem.periodChangeEnd')
-                }}</v-list-item-title
-              >
-            </v-list-item>
-          </template>
-        </dialog-period-date-edit>
+          <dialog-period-date-edit
+            :period="period"
+            mode="changeEnd"
+            @closed="showMenuEdit = false"
+          >
+            <template #activator="{ props }">
+              <v-list-item v-bind="props">
+                <template #prepend>
+                  <v-icon>mdi-arrow-collapse-right</v-icon>
+                </template>
+                <v-list-item-title>
+                  {{
+                    $t('components.campAdmin.campPeriodsListItem.periodChangeEnd')
+                  }}</v-list-item-title
+                >
+              </v-list-item>
+            </template>
+          </dialog-period-date-edit>
 
-        <v-divider />
+          <v-divider />
 
-        <dialog-entity-delete
-          :entity="period"
-          :submit-enabled="!isLastPeriod"
-          @closed="showMenuEdit = false"
-        >
-          <template #activator="{ on }">
-            <v-list-item v-on="on">
-              <v-list-item-icon>
-                <v-icon>mdi-delete</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>
-                {{ $tc('global.button.delete') }}
-              </v-list-item-title>
-            </v-list-item>
-          </template>
-          <div v-if="isLastPeriod">
-            {{ $tc('components.campAdmin.campPeriodsListItem.lastPeriodNotDeletable') }}
-          </div>
-          <div v-else>
-            {{ $tc('components.campAdmin.campPeriodsListItem.deleteWarning') }} <br />
-            <ul>
-              <li>
-                {{ period.description }}
-              </li>
-            </ul>
-          </div>
-        </dialog-entity-delete>
-      </v-list>
-    </v-menu>
+          <dialog-entity-delete
+            :entity="period"
+            :submit-enabled="!isLastPeriod"
+            @closed="showMenuEdit = false"
+          >
+            <template #activator="{ props }">
+              <v-list-item v-bind="props">
+                <template #prepend>
+                  <v-icon>mdi-delete</v-icon>
+                </template>
+                <v-list-item-title>
+                  {{ $t('global.button.delete') }}
+                </v-list-item-title>
+              </v-list-item>
+            </template>
+            <div v-if="isLastPeriod">
+              {{ $t('components.campAdmin.campPeriodsListItem.lastPeriodNotDeletable') }}
+            </div>
+            <div v-else>
+              {{ $t('components.campAdmin.campPeriodsListItem.deleteWarning') }} <br />
+              <ul>
+                <li>
+                  {{ period.description }}
+                </li>
+              </ul>
+            </div>
+          </dialog-entity-delete>
+        </v-list>
+      </v-menu>
+    </template>
   </v-list-item>
 </template>
 

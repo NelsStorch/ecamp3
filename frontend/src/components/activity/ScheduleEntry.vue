@@ -12,29 +12,22 @@ Displays a single scheduleEntry
     :max-width="isPaperDisplaySize ? '944px' : ''"
   >
     <template #title>
-      <v-toolbar-title class="font-weight-bold">
+      <div class="font-weight-bold text-h6 d-flex gap-2">
         <span class="tabular-nums">
           {{ scheduleEntry.number }}
         </span>
         <v-menu
           offset-y
-          rounded="lg"
-          nudge-left="10"
-          nudge-bottom="4"
+          location="bottom"
+          offset="10 4"
           :disabled="layoutMode || !isContributor"
         >
-          <template #activator="{ on, attrs }">
-            <CategoryChip
-              :schedule-entry="scheduleEntry"
-              large
-              dense
-              v-bind="attrs"
-              v-on="on"
-            >
+          <template #activator="{ props }">
+            <CategoryChip :schedule-entry="scheduleEntry" large dense v-bind="props">
               <template #after>
                 <v-icon
                   v-if="isContributor"
-                  right
+                  end
                   class="ml-0 e-category-chip-save-icon"
                   :class="{ 'mdi-spin': categoryChangeState === 'saving' }"
                 >
@@ -49,24 +42,24 @@ Displays a single scheduleEntry
               </template>
             </CategoryChip>
           </template>
-          <v-list class="py-0">
+          <v-list class="py-0" rounded="lg">
             <v-list-item
               v-for="cat in camp.categories().items"
               :key="cat._meta.self"
               class="px-3"
+              :title="cat.name"
               @click="changeCategory(cat)"
             >
-              <v-list-item-title>
-                <CategoryChip :category="cat" dense />
-                {{ cat.name }}
-              </v-list-item-title>
+              <template #prepend>
+                <CategoryChip :category="cat" dense class="mr-2" />
+              </template>
             </v-list-item>
           </v-list>
         </v-menu>
         <a v-if="!editActivityTitle" style="color: inherit">
           {{ activity.title }}
         </a>
-      </v-toolbar-title>
+      </div>
       <v-btn
         v-if="isContributor && !editActivityTitle"
         icon
@@ -75,13 +68,13 @@ Displays a single scheduleEntry
         height="24"
         @click="makeTitleEditable()"
       >
-        <v-icon small>mdi-pencil</v-icon>
+        <v-icon size="x-small">mdi-pencil</v-icon>
       </v-btn>
       <api-form v-if="editActivityTitle" :entity="activity" class="mx-2 flex-grow-1">
         <api-text-field
           path="title"
           :disabled="layoutMode"
-          dense
+          density="compact"
           autofocus
           :auto-save="false"
           @finished="editActivityTitle = false"
@@ -94,21 +87,21 @@ Displays a single scheduleEntry
         v-if="layoutMode"
         color="success"
         class="ml-3"
-        outlined
+        variant="outlined"
         @click="layoutMode = false"
       >
-        <template v-if="$vuetify.breakpoint.smAndUp">
-          <v-icon left>mdi-file-document-edit-outline</v-icon>
-          {{ $tc('components.activity.scheduleEntry.backToContents') }}
+        <template v-if="$vuetify.display.smAndUp">
+          <v-icon start>mdi-file-document-edit-outline</v-icon>
+          {{ $t('components.activity.scheduleEntry.backToContents') }}
         </template>
-        <template v-else>{{ $tc('global.button.back') }}</template>
+        <template v-else>{{ $t('global.button.back') }}</template>
       </v-btn>
 
       <TogglePaperSize v-model="isPaperDisplaySize" />
       <!-- hamburger menu -->
       <v-menu v-if="!layoutMode" offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
@@ -125,22 +118,18 @@ Displays a single scheduleEntry
             :disabled="!isContributor"
             @click="layoutMode = true"
           >
-            <v-list-item-icon>
-              <v-icon>mdi-puzzle-edit-outline</v-icon>
-            </v-list-item-icon>
             <v-list-item-title>
-              {{ $tc('components.activity.scheduleEntry.changeLayout') }}
+              <v-icon start>mdi-puzzle-edit-outline</v-icon>
+              {{ $t('components.activity.scheduleEntry.changeLayout') }}
             </v-list-item-title>
           </v-list-item>
 
           <v-divider />
 
           <v-list-item @click="copyUrlToClipboard">
-            <v-list-item-icon>
-              <v-icon>mdi-content-copy</v-icon>
-            </v-list-item-icon>
             <v-list-item-title>
-              {{ $tc('components.activity.scheduleEntry.copyScheduleEntry') }}
+              <v-icon start>mdi-content-copy</v-icon>
+              {{ $t('components.activity.scheduleEntry.copyScheduleEntry') }}
             </v-list-item-title>
           </v-list-item>
           <ClipboardInfoDialog
@@ -152,17 +141,15 @@ Displays a single scheduleEntry
 
           <!-- remove activity -->
           <DialogEntityDelete v-if="!isOutsider" :entity="activity" @submit="onDelete">
-            <template #activator="{ on }">
-              <v-list-item :disabled="!isContributor" v-on="on">
-                <v-list-item-icon>
-                  <v-icon>mdi-delete</v-icon>
-                </v-list-item-icon>
+            <template #activator="{ props }">
+              <v-list-item :disabled="!isContributor" v-bind="props">
                 <v-list-item-title>
-                  {{ $tc('global.button.delete') }}
+                  <v-icon start>mdi-delete</v-icon>
+                  {{ $t('global.button.delete') }}
                 </v-list-item-title>
               </v-list-item>
             </template>
-            {{ $tc('components.activity.scheduleEntry.deleteWarning') }}
+            {{ $t('components.activity.scheduleEntry.deleteWarning') }}
           </DialogEntityDelete>
         </v-list>
       </v-menu>
@@ -182,13 +169,13 @@ Displays a single scheduleEntry
                     scope="col"
                     class="text-right pb-2 pr-4"
                   >
-                    {{ $tc('entity.scheduleEntry.fields.nr') }}
+                    {{ $t('entity.scheduleEntry.fields.nr') }}
                   </th>
                   <th scope="col" class="text-left pb-2 pr-4">
-                    {{ $tc('entity.scheduleEntry.fields.duration') }}
+                    {{ $t('entity.scheduleEntry.fields.duration') }}
                   </th>
                   <th scope="col" class="text-left pb-2" colspan="2">
-                    {{ $tc('entity.scheduleEntry.fields.time') }}
+                    {{ $t('entity.scheduleEntry.fields.time') }}
                   </th>
                 </tr>
               </thead>
@@ -238,34 +225,24 @@ Displays a single scheduleEntry
                 </tr>
               </tbody>
             </table>
-            <DialogActivityEdit
-              v-if="scheduleEntry && isContributor"
-              :schedule-entry="scheduleEntry"
-              hide-header-fields
-              @activity-updated="activity.$reload()"
-            >
-              <template #activator="{ on }">
-                <ButtonEdit text small class="v-btn--has-bg" v-on="on" />
-              </template>
-            </DialogActivityEdit>
           </v-col>
           <v-col class="col col-sm-6 col-12 px-0">
             <api-form :entity="activity" name="activity">
               <v-row dense>
-                <v-col class="col col-sm-8 col-12">
+                <v-col sm="8" cols="12">
                   <api-text-field
                     path="location"
                     :disabled="layoutMode || !isContributor"
-                    dense
+                    density="compact"
                   />
                 </v-col>
-                <v-col class="col col-sm-4 col-12">
+                <v-col sm="4" cols="12">
                   <api-select
                     path="progressLabel"
                     :items="progressLabels"
                     :disabled="layoutMode || !isContributor"
                     clearable
-                    dense
+                    density="compact"
                   />
                 </v-col>
               </v-row>
@@ -314,16 +291,13 @@ import DialogEntityDelete from '@/components/dialog/DialogEntityDelete.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import ApiForm from '@/components/form/api/ApiForm.vue'
 import ApiSelect from '@/components/form/api/ApiSelect.vue'
-import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
-import DialogActivityEdit from '@/components/activity/dialog/DialogActivityEdit.vue'
 import scheduleEntryRouteChange from '@/helpers/scheduleEntryRouteChange.js'
 import ClipboardInfoDialog from '../generic/ClipboardInfoDialog.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'ScheduleEntry',
   components: {
-    DialogActivityEdit,
-    ButtonEdit,
     ApiForm,
     ApiSelect,
     TogglePaperSize,
@@ -358,6 +332,10 @@ export default {
       type: String,
       default: null,
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -471,7 +449,7 @@ export default {
         .$patch({
           category: category._meta.self,
         })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
         .then(() => {
           this.categoryChangeState = null
           if (category.numberingStyle !== this.scheduleEntry.numberingStyle) {
@@ -482,7 +460,7 @@ export default {
         })
         .catch((e) => {
           this.categoryChangeState = 'error'
-          this.$toast.error(errorToMultiLineToast(e))
+          this.toast.error(errorToMultiLineToast(e))
         })
     },
     async reloadAllScheduleEntriesInRelatedPeriods() {
@@ -525,8 +503,8 @@ export default {
       const url = window.location.origin + router.resolve(scheduleEntry).href
       await navigator.clipboard.writeText(url)
 
-      this.$toast.info(
-        this.$tc('global.toast.copied', null, { source: this.activityName }),
+      this.toast.info(
+        this.$t('global.toast.copied', { source: this.activityName }, null),
         {
           timeout: 2000,
         }

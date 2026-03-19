@@ -1,5 +1,5 @@
 <template>
-  <content-card :title="$tc('entity.checklist.name', 2)" toolbar max-width="800">
+  <content-card :title="$t('entity.checklist.name', 2)" toolbar max-width="800">
     <template #title-actions>
       <ChecklistCreate
         v-if="isContributor"
@@ -14,18 +14,11 @@
           :key="checklist._meta.self"
           :to="checklistRoute(camp, checklist)"
           class="px-2 rounded"
+          :title="checklist.name"
         >
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ checklist.name }}
-            </v-list-item-title>
-          </v-list-item-content>
-
-          <v-list-item-action v-if="isContributor" style="display: inline">
-            <v-item-group>
-              <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
-            </v-item-group>
-          </v-list-item-action>
+          <template v-if="isContributor" #append>
+            <ButtonEdit color="primary" variant="tonal" />
+          </template>
         </v-list-item>
       </v-list>
     </v-card-text>

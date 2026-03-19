@@ -1,21 +1,14 @@
-import { describe, beforeEach, vi, test, expect } from 'vitest'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-
-import formBaseComponents from '@/plugins/formBaseComponents'
-
+import { describe, expect, test } from 'vitest'
+import { setupVuetify } from '/tests/setupVuetify.js'
 import { mount as mountComponent } from '@vue/test-utils'
 import ECheckbox from '../ECheckbox.vue'
 import { screen } from '@testing-library/vue'
 
-Vue.use(Vuetify)
-Vue.use(formBaseComponents)
+setupVuetify()
 
 describe('An ECheckbox', () => {
-  let vuetify
-
   const mount = (options) => {
-    const app = Vue.component('App', {
+    const App = {
       components: { ECheckbox },
       data: function () {
         return {
@@ -24,24 +17,26 @@ describe('An ECheckbox', () => {
       },
       template: `
         <div data-app>
-          <e-checkbox label="test" v-model="data">
+          <span id="value">{{ data }}</span>
+          <e-checkbox label="test" v-model="data" path="test">
             ${options?.children}
           </e-checkbox>
         </div>
       `,
+    }
+    return mountComponent(App, {
+      attachTo: document.body,
+      ...options,
     })
-    return mountComponent(app, { vuetify, attachTo: document.body, ...options })
   }
-  beforeEach(() => {
-    vuetify = new Vuetify()
-  })
+
   test('looks like a checkbox', async () => {
     const wrapper = mount()
     await wrapper.setData({ data: false })
-    expect(wrapper).toMatchSnapshot('unchecked')
+    expect(wrapper.html()).toMatchSnapshot('unchecked')
 
     await wrapper.setData({ data: true })
-    expect(wrapper).toMatchSnapshot('checked')
+    expect(wrapper.html()).toMatchSnapshot('checked')
   })
 
   test('is checked when initialized checked', () => {
@@ -53,38 +48,38 @@ describe('An ECheckbox', () => {
       },
     })
     expect(
-      wrapper.find('input[type=checkbox]').element.getAttribute('aria-checked')
-    ).toBe('true')
+      wrapper.find('input[type=checkbox]').element.hasAttribute('checked')
+    ).toStrictEqual(true)
   })
 
   test('updates checkbox when vModel changes', async () => {
     const wrapper = mount()
     await wrapper.setData({ data: false })
     expect(
-      wrapper.find('input[type=checkbox]').element.getAttribute('aria-checked')
-    ).toBe('false')
+      wrapper.find('input[type=checkbox]').element.hasAttribute('checked')
+    ).toStrictEqual(false)
 
     await wrapper.setData({ data: true })
     expect(
-      wrapper.find('input[type=checkbox]').element.getAttribute('aria-checked')
-    ).toBe('true')
+      wrapper.find('input[type=checkbox]').element.hasAttribute('checked')
+    ).toStrictEqual(true)
 
     await wrapper.setData({ data: false })
     expect(
-      wrapper.find('input[type=checkbox]').element.getAttribute('aria-checked')
-    ).toBe('false')
+      wrapper.find('input[type=checkbox]').element.hasAttribute('checked')
+    ).toStrictEqual(false)
   })
 
   test('updates vModel when user clicks on checkbox', async () => {
     const wrapper = mount()
     const input = wrapper.find('input')
+    const valueElement = wrapper.find('#value')
 
     await input.trigger('click')
-    expect(wrapper.vm.data).toBe(true)
+    expect(valueElement.text()).toStrictEqual('true')
 
-    vi.resetAllMocks()
     await input.trigger('click')
-    expect(wrapper.vm.data).toBe(false)
+    expect(valueElement.text()).toStrictEqual('false')
   })
 
   test('allows to use the append slot', async () => {

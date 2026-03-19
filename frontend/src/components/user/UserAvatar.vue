@@ -1,5 +1,5 @@
 <template>
-  <v-avatar :size="size" :color="color" :title="displayName" v-bind="$attrs">
+  <v-avatar :color="color" :size="size" :title="displayName" v-bind="$attrs">
     <span :aria-hidden="shortAria ? null : 'true'" :style="style">{{ initials }}</span>
     <span v-if="shortAria" class="d-sr-only">{{ displayName }}</span>
   </v-avatar>
@@ -50,7 +50,7 @@ export default {
         return ''
       }
       return this.campCollaboration
-        ? campCollaborationDisplayName(this.campCollaboration, this.$tc.bind(this))
+        ? campCollaborationDisplayName(this.campCollaboration, this.$t.bind(this))
         : userDisplayName(this.user)
     },
     /**

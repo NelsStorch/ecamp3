@@ -2,25 +2,21 @@
   <v-menu
     v-if="authUser"
     v-model="open"
-    offset-y
     dark
-    right
+    location="bottom end"
     rounded
-    :content-class="
-      ['ec-usermenu my-4', $vuetify.breakpoint.xsOnly && 'rounded-lg mt-2'].join(' ')
-    "
+    :content-class="['py-4 rounded-lg', !$vuetify.display.xs ? 'mt-2' : ''].join(' ')"
     transition="slide-y-transition"
     :close-on-content-click="false"
     z-index="5"
   >
-    <template #activator="{ on, value, attrs }">
+    <template #activator="{ props, isActive }">
       <v-toolbar-items v-if="!avatarOnly">
         <v-btn
-          right
-          text
-          v-bind="attrs"
-          :class="[btnClasses, { 'v-btn--open': value }]"
-          v-on="on"
+          start
+          variant="text"
+          v-bind="props"
+          :class="[btnClasses, { 'v-btn--open': isActive }]"
         >
           <template v-if="authUser">
             <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
@@ -36,35 +32,32 @@
               :camp-collaboration="currentCampCollaboration"
               :size="40"
             />
+            <span class="sr-only-sm-and-down mx-3">
+              {{ authUser.displayName }}
+            </span>
           </template>
-          <span class="sr-only-sm-and-down mx-3">
-            {{ authUser.displayName }}
-          </span>
         </v-btn>
       </v-toolbar-items>
       <v-btn
         v-else
-        fab
-        text
-        v-bind="attrs"
-        :class="[btnClasses, { 'v-btn--open': value }]"
-        v-on="on"
+        icon
+        variant="text"
+        v-bind="props"
+        :class="[btnClasses, { 'v-btn--open': isActive }]"
       >
-        <template v-if="authUser">
-          <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
-            <UserAvatar
-              :user="authUser"
-              :camp-collaboration="currentCampCollaboration"
-              :size="40"
-            />
-          </v-badge>
+        <v-badge v-if="invitationCount > 0" color="#f00" dot overlap bordered>
           <UserAvatar
-            v-else
             :user="authUser"
             :camp-collaboration="currentCampCollaboration"
             :size="40"
           />
-        </template>
+        </v-badge>
+        <UserAvatar
+          v-else
+          :user="authUser"
+          :camp-collaboration="currentCampCollaboration"
+          :size="40"
+        />
         <span class="sr-only-sm-and-down mx-3">
           {{ authUser.displayName }}
         </span>
@@ -77,12 +70,12 @@
         :to="{ name: 'profile', query: { isDetail: true } }"
         @click="open = false"
       >
-        <v-icon left>mdi-account</v-icon>
-        <span>{{ $tc('components.navigation.userMeta.profile') }}</span>
+        <v-icon start icon="mdi-account" />
+        <span>{{ $t('components.navigation.userMeta.profile') }}</span>
       </v-list-item>
       <v-list-item block tag="li" exact :to="{ name: 'camps' }" @click="open = false">
-        <v-icon left>mdi-format-list-bulleted-triangle</v-icon>
-        <span>{{ $tc('components.navigation.userMeta.myCamps') }}</span>
+        <v-icon start icon="mdi-format-list-bulleted-triangle" />
+        <span>{{ $t('components.navigation.userMeta.myCamps') }}</span>
       </v-list-item>
       <v-list-item
         block
@@ -91,11 +84,17 @@
         :to="{ name: 'invitations' }"
         @click="open = false"
       >
-        <v-icon left>mdi-email</v-icon>
-        <span>{{ $tc('components.navigation.userMeta.invitations') }}</span>
-        <v-list-item-action-text v-if="invitationCount > 0">
-          <v-badge inline bordered color="#f00" :content="invitationCount" />
-        </v-list-item-action-text>
+        <v-icon start>mdi-email</v-icon>
+        <span>{{ $t('components.navigation.userMeta.invitations') }}</span>
+        <template #append>
+          <v-badge
+            v-if="invitationCount > 0"
+            inline
+            bordered
+            color="#f00"
+            :content="invitationCount"
+          />
+        </template>
       </v-list-item>
       <v-list-item
         v-if="isAdmin"
@@ -105,25 +104,27 @@
         :to="{ name: 'admin/debug' }"
         @click="open = false"
       >
-        <v-icon left>mdi-coffee</v-icon>
-        <span>{{ $tc('components.navigation.userMeta.admin') }}</span>
+        <v-icon start icon="mdi-coffee" />
+        <span>{{ $t('components.navigation.userMeta.admin') }}</span>
       </v-list-item>
       <v-list-item
-        v-if="!$vuetify.breakpoint.lgAndUp"
+        v-if="!$vuetify.display.lgAndUp"
         block
         :href="helpLink"
         target="_blank"
       >
-        <v-icon left>mdi-help-circle</v-icon>
-        <span>{{ $tc('global.navigation.help') }}</span>
-        <v-spacer />
-        <v-icon small right>mdi-open-in-new</v-icon>
+        <v-icon start icon="mdi-help-circle" />
+        <span>{{ $t('global.navigation.help') }}</span>
+        <template #append>
+          <v-icon size="x-small" end icon="mdi-open-in-new" />
+        </template>
       </v-list-item>
       <v-list-item block :href="newsLink" target="_blank">
-        <v-icon left>mdi-script-text-outline</v-icon>
-        <span>{{ $tc('global.navigation.news') }}</span>
-        <v-spacer />
-        <v-icon small right>mdi-open-in-new</v-icon>
+        <v-icon start>mdi-script-text-outline</v-icon>
+        <span>{{ $t('global.navigation.news') }}</span>
+        <template #append>
+          <v-icon size="x-small" end icon="mdi-open-in-new" />
+        </template>
       </v-list-item>
       <v-divider />
       <v-list-item block tag="li" @click="logout">
@@ -133,9 +134,9 @@
           size="18"
           class="mr-2"
         />
-        <v-icon v-else left>mdi-logout</v-icon>
+        <v-icon v-else start icon="mdi-logout" />
 
-        <span>{{ $tc('components.navigation.userMeta.logOut') }}</span>
+        <span>{{ $t('components.navigation.userMeta.logOut') }}</span>
       </v-list-item>
     </v-list>
   </v-menu>
@@ -193,7 +194,8 @@ export default {
     currentCampCollaboration() {
       if (
         typeof this.camp?.campCollaborations !== 'function' ||
-        this.camp.campCollaborations()._meta.loading
+        this.camp.campCollaborations()._meta.loading ||
+        !this.authUser
       ) {
         return undefined
       }
@@ -201,7 +203,7 @@ export default {
         ?.campCollaborations()
         .items.find(
           (collaboration) =>
-            this.authUser?._meta?.self === collaboration.user?.()?._meta?.self
+            this.authUser._meta?.self === collaboration.user?.()?._meta?.self
         )
     },
   },

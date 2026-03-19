@@ -1,35 +1,34 @@
 <template>
   <v-skeleton-loader v-if="loading" type="article" />
   <div v-else>
-    <PagesOverview v-model="cnf.contents" @input="onChange">
-      <PagesConfig
-        v-for="(content, idx) in cnf.contents"
-        :key="idx"
-        :title="$tc('components.print.printConfigurator.config.' + content.type)"
-        :landscape="content.options.orientation === 'L'"
-        :multiple="
-          contentComponents[content.type].design.multiple ||
-          content.options?.periods?.length > 1
-        "
-        @remove="removeContent(idx)"
-      >
-        <component
-          :is="contentComponents[content.type]"
-          :value="content.options"
-          :camp="camp"
-          @input="onChange"
-        />
-      </PagesConfig>
+    <PagesOverview v-model="cnf.contents" @update:model-value="onChange">
+      <template #item="{ element: content, index: idx }">
+        <PagesConfig
+          :title="$t('components.print.printConfigurator.config.' + content.type)"
+          :landscape="content.options.orientation === 'L'"
+          :multiple="
+            contentComponents[content.type].design.multiple ||
+            content.options?.periods?.length > 1
+          "
+          @remove="removeContent(idx)"
+        >
+          <component
+            :is="contentComponents[content.type]"
+            :value="content.options"
+            :camp="camp"
+            @input="onChange"
+          />
+        </PagesConfig>
+      </template>
 
       <v-menu offset-y rounded="lg" offset-overflow>
-        <template #activator="{ on, attrs }">
+        <template #activator="{ props }">
           <PagesConfig
             id="page-config"
-            :title="$tc('components.print.printConfigurator.add')"
+            :title="$t('components.print.printConfigurator.add')"
             multiple
             template
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           />
         </template>
         <v-list>
@@ -44,7 +43,7 @@
             "
           >
             <v-list-item-title>
-              {{ $tc('components.print.printConfigurator.config.' + idx) }}
+              {{ $t('components.print.printConfigurator.config.' + idx) }}
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -52,34 +51,34 @@
 
       <template #drawer>
         <v-expansion-panels flat class="e-print-configurator__cnf">
-          <v-expansion-panel class="transparent rounded-0">
-            <v-expansion-panel-header class="subtitle py-2"
-              >{{ $tc('components.print.printConfigurator.options') }}
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
+          <v-expansion-panel class="bg-transparent rounded-0">
+            <v-expansion-panel-title class="subtitle py-2"
+              >{{ $t('components.print.printConfigurator.options') }}
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
               <e-checkbox
                 v-model="cnf.options.pageNumbers"
-                :label="$tc('components.print.printConfigurator.pageNumbers')"
+                :label="$t('components.print.printConfigurator.pageNumbers')"
                 @input="onChange"
               />
               <e-select
                 v-model="cnf.options.pageSize"
                 class="mt-4"
                 :items="pageSizes"
-                :label="$tc('components.print.printConfigurator.fontSize')"
+                :label="$t('components.print.printConfigurator.fontSize')"
                 @input="onChange"
               />
-            </v-expansion-panel-content>
+            </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
         <v-expansion-panels v-if="isDev" flat class="e-print-configurator__cnf">
-          <v-expansion-panel class="transparent rounded-0">
-            <v-expansion-panel-header class="subtitle py-2"
+          <v-expansion-panel class="bg-transparent rounded-0">
+            <v-expansion-panel-title class="subtitle py-2"
               >View Print-Config
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <pre style="font-size: 12px">{{ cnf }}</pre>
-            </v-expansion-panel-content>
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <pre style="font-size: 12px">{{ prettyConfig }}</pre>
+            </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
       </template>
@@ -90,28 +89,32 @@
       <DownloadClientPdfButton :config="cnf" />
     </v-card-text>
 
-    <v-tabs v-if="isDev" v-model="previewTab" class="px-4">
-      <v-tab>Nuxt preview</v-tab>
-      <v-tab>Client print preview</v-tab>
-      <v-tab-item>
-        <print-preview-nuxt
-          v-if="previewTab === 0"
-          :config="cnf"
-          width="100%"
-          height="600"
-          class="my-4"
-        />
-      </v-tab-item>
-      <v-tab-item>
-        <print-preview-client
-          v-if="previewTab === 1"
-          :config="cnf"
-          width="100%"
-          height="600"
-          class="my-4"
-        />
-      </v-tab-item>
-    </v-tabs>
+    <template v-if="isDev">
+      <v-tabs v-model="previewTab" class="px-4">
+        <v-tab>Nuxt preview</v-tab>
+        <v-tab>Client print preview</v-tab>
+      </v-tabs>
+      <v-tabs-window v-model="previewTab">
+        <v-tabs-window-item>
+          <print-preview-nuxt
+            v-if="previewTab === 0"
+            :config="cnf"
+            width="100%"
+            height="600"
+            class="my-4"
+          />
+        </v-tabs-window-item>
+        <v-tabs-window-item>
+          <print-preview-client
+            v-if="previewTab === 1"
+            :config="cnf"
+            width="100%"
+            height="600"
+            class="my-4"
+          />
+        </v-tabs-window-item>
+      </v-tabs-window>
+    </template>
   </div>
 </template>
 
@@ -132,11 +135,12 @@ import DownloadNuxtPdfButton from '@/components/print/print-nuxt/DownloadNuxtPdf
 import DownloadClientPdfButton from '@/components/print/print-client/DownloadClientPdfButton.vue'
 import { getEnv } from '@/environment.js'
 import cloneDeep from 'lodash-es/cloneDeep'
-import VueI18n from '../../plugins/i18n/index.js'
+import { componentI18n } from '../../plugins/i18n/index.js'
 import repairConfig from './repairPrintConfig.js'
 import StoryConfig from '@/components/print/config/StoryConfig.vue'
 import SafetyConsiderationsConfig from '@/components/print/config/SafetyConsiderationsConfig.vue'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
+import jsonStringifyReactiveValue from '@/components/print/jsonStringifyReactiveValue.js'
 
 export default {
   name: 'PrintConfigurator',
@@ -165,7 +169,12 @@ export default {
   data() {
     return {
       loading: true,
-      contentComponents: {
+      previewTab: null,
+    }
+  },
+  computed: {
+    contentComponents() {
+      return {
         Cover: CoverConfig,
         Picasso: PicassoConfig,
         Story: StoryConfig,
@@ -174,11 +183,8 @@ export default {
         Activity: ActivityConfig,
         Toc: TocConfig,
         ActivityList: ActivityListConfig,
-      },
-      previewTab: null,
-    }
-  },
-  computed: {
+      }
+    },
     lang() {
       return this.$store.state.lang.language
     },
@@ -196,11 +202,14 @@ export default {
     pageSizes() {
       return ['A5', 'A4'].map((size) => ({
         value: size,
-        text: this.$tc(`components.print.printConfigurator.fontSizes.${size}`),
+        text: this.$t(`components.print.printConfigurator.fontSizes.${size}`),
       }))
     },
     isDev() {
       return getEnv().FEATURE_DEVELOPER ?? false
+    },
+    prettyConfig() {
+      return jsonStringifyReactiveValue(this.cnf, 2)
     },
   },
   watch: {
@@ -282,7 +291,7 @@ export default {
       this.$nextTick(() => {
         this.$store.commit('setLastPrintConfig', {
           campUri: this.camp._meta.self,
-          printConfig: cloneDeep(this.cnf),
+          printConfig: cloneDeep(JSON.parse(jsonStringifyReactiveValue(this.cnf))),
         })
       })
     },
@@ -297,7 +306,7 @@ export default {
       return repairConfig(
         config,
         this.camp,
-        VueI18n.availableLocales,
+        componentI18n.availableLocales,
         this.lang,
         repairers,
         this.defaultContents()
@@ -309,20 +318,18 @@ export default {
 
 <style scoped lang="scss">
 .e-print-configurator__cnf {
-  &:deep {
-    .v-expansion-panel-header {
-      font-family: monospace;
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    }
+  &:deep(.v-expansion-panel-title) {
+    font-family: monospace;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
 
-    .v-expansion-panel-header--active {
-      border-bottom: none;
-    }
+  &:deep(.v-expansion-panel-title--active) {
+    border-bottom: none;
+  }
 
-    .v-expansion-panel-content {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    }
+  &:deep(.v-expansion-panel-text) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 }
 </style>

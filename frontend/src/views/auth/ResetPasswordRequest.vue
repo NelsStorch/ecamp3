@@ -1,15 +1,15 @@
 <template>
   <auth-container>
-    <h1 class="display-1 text-center mb-4">
-      {{ $tc('views.auth.resetPasswordRequest.title') }}
+    <h1 class="text-h4 text-center mb-4">
+      {{ $t('views.auth.resetPasswordRequest.title') }}
     </h1>
 
     <v-alert v-if="status == 'success'" type="success">
-      {{ $tc('views.auth.resetPasswordRequest.successMessage') }}
+      {{ $t('views.auth.resetPasswordRequest.successMessage') }}
     </v-alert>
 
     <v-alert v-if="status == 'error'" type="error">
-      {{ $tc('views.auth.resetPasswordRequest.errorMessage') }}
+      {{ $t('views.auth.resetPasswordRequest.errorMessage') }}
     </v-alert>
 
     <v-form
@@ -18,11 +18,11 @@
     >
       <e-text-field
         v-model="email"
-        :label="$tc('entity.profile.fields.email')"
+        :density="$vuetify.display.xs && 'compact'"
         name="email"
         vee-rules="email"
         append-icon="mdi-at"
-        :dense="$vuetify.breakpoint.xsOnly"
+        :label="$t('entity.profile.fields.email')"
         type="email"
         autocomplete="username"
         autofocus
@@ -32,21 +32,21 @@
         block
         :color="email ? 'blue darken-2' : 'blue lightne-4'"
         :disabled="!email"
-        outlined
-        :x-large="$vuetify.breakpoint.smAndUp"
+        :size="$vuetify.display.smAndUp && 'x-large'"
+        variant="outlined"
         class="my-4"
       >
         <v-progress-circular v-if="status == 'sending'" indeterminate size="24" />
-        <v-icon v-else>$vuetify.icons.ecamp</v-icon>
+        <v-icon v-else>$ecamp</v-icon>
         <v-spacer />
-        <span>{{ $tc('views.auth.resetPasswordRequest.send') }}</span>
+        <span>{{ $t('views.auth.resetPasswordRequest.send') }}</span>
         <v-spacer />
         <icon-spacer />
       </v-btn>
     </v-form>
     <p class="mt-8 mb0 text--secondary text-center">
       <router-link :to="{ name: 'login' }">
-        {{ $tc('global.button.login') }}
+        {{ $t('global.button.login') }}
       </router-link>
     </p>
   </auth-container>
@@ -69,7 +69,7 @@ export default {
 
   head() {
     return {
-      title: this.$tc('views.auth.resetPasswordRequest.title'),
+      title: this.$t('views.auth.resetPasswordRequest.title'),
     }
   },
 

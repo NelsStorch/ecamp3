@@ -6,19 +6,20 @@
     :color="color"
     :icon="btnIcon && iconOnly"
     v-bind="$attrs"
-    v-on="$listeners"
   >
-    <v-icon v-if="iconOnly">{{ icon }}</v-icon>
-    <v-icon v-else-if="!text" :left="$vuetify.breakpoint.smAndUp">{{ icon }}</v-icon>
-    <v-icon v-if="!iconOnly && text" :left="$vuetify.breakpoint.smAndUp">{{
+    <v-icon v-if="iconOnly" size="24">{{ icon }}</v-icon>
+    <v-icon v-else-if="!text" :start="$vuetify.display.smAndUp" size="24">{{
+      icon
+    }}</v-icon>
+    <v-icon v-if="!iconOnly && text" :start="$vuetify.display.smAndUp" size="24">{{
       icon
     }}</v-icon>
 
     <span v-if="!iconOnly" class="d-none d-sm-block">
-      <slot>{{ $tc('global.button.delete') }}</slot>
+      <slot>{{ $t('global.button.delete') }}</slot>
     </span>
     <span class="d-sr-only" :class="{ 'd-sm-none': !iconOnly }">
-      <slot>{{ $tc('global.button.delete') }}</slot>
+      <slot>{{ $t('global.button.delete') }}</slot>
     </span>
   </v-btn>
 </template>

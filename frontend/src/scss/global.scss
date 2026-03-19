@@ -1,23 +1,32 @@
-@use '~inter-ui/default' as inter-ui with (
-  $inter-font-path: '~inter-ui/Inter (web hinted latin)'
+@use 'sass:map';
+@use 'vuetify/settings';
+@use 'inter-ui/default' as inter-ui with (
+  $inter-font-path: 'inter-ui/Inter (web hinted latin)'
 );
+
 @include inter-ui.weight-200;
 @include inter-ui.weight-400;
 @include inter-ui.weight-500;
 @include inter-ui.weight-600;
+
 body {
   font-feature-settings: 'ss03', 'calt', 'rlig', 'kern', 'cv05', 'cv07', 'cv08';
 }
+
 .text-uppercase {
   font-feature-settings: 'ss03', 'calt', 'rlig', 'kern', 'cv05', 'cv07';
 }
+
 .v-toolbar__title {
   font-weight: 500;
 }
-.theme--light.v-application {
+
+.v-theme--light.v-application {
   background: #546e7a !important;
 }
+
 .v-calendar-daily,
+.v-skeleton-loader,
 .v-skeleton-loader__actions,
 .v-skeleton-loader__article,
 .v-skeleton-loader__card-heading,
@@ -36,25 +45,53 @@ body {
 .v-skeleton-loader__table-tfoot {
   background: none !important;
 }
+
+.v-skeleton-loader__text {
+  margin-bottom: 6px;
+}
+
+.v-skeleton-loader__avatar {
+  max-width: 100%;
+  min-width: 0;
+  max-height: 100%;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.v-skeleton-loader__bone {
+  gap: 1rem;
+}
+
 .v-skeleton-loader--inherit-size .v-skeleton-loader__bone {
   height: inherit !important;
   width: inherit !important;
 }
+
 .v-skeleton-loader--no-margin .v-skeleton-loader__bone {
   margin-bottom: 0 !important;
 }
+
 .v-btn--outlined:before {
   opacity: 0.08 !important;
 }
-.theme--dark.v-btn.v-btn--outlined:hover::before {
+
+.v-theme--dark.v-btn.v-btn--outlined:hover::before {
   opacity: 0.16 !important;
 }
+
 .w-100 {
   width: 100%;
 }
+
 .h-full {
   height: 100%;
 }
+
+.v-btn .v-icon {
+  --v-icon-size-multiplier: 0.75;
+}
+
 .v-application {
   ul.v-list {
     padding-left: 0;
@@ -79,13 +116,15 @@ body {
     }
   }
 
-  .v-alert.warning--text {
+  .v-alert.text-warning {
     .v-alert__icon {
       color: #d25f00 !important;
     }
+
     .v-alert__content {
       color: #972e00 !important;
     }
+
     border-color: #ffe0b2 !important;
   }
 
@@ -96,6 +135,7 @@ body {
       0 1px 10px 0px rgba(0, 0, 0, 0.06) !important;
   }
 }
+
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
@@ -130,7 +170,7 @@ body {
   }
 }
 
-.v-text-field--outlined.v-input--is-readonly:not(.v-input--is-focused):not(
+.v-text-field--outlined.v-input--readonly:not(.v-input--is-focused):not(
     .v-input--has-state
   )
   > .v-input__control
@@ -139,23 +179,28 @@ body {
   color: rgb(0, 0, 0, 0.18);
 }
 
-.v-text-field.v-input--is-readonly > .v-input__control > .v-input__slot,
-.v-text-field.v-input--is-readonly > .v-input__control > .v-input__slot:before,
-.v-text-field.v-input--is-readonly > .v-input__control > .v-input__slot:after {
+.v-text-field.v-input--readonly > .v-input__control .v-field__outline,
+.v-text-field.v-input--readonly > .v-input__control .v-field__outline:before,
+.v-text-field.v-input--readonly > .v-input__control .v-field__outline:after {
   border-color: transparent !important;
   background-color: transparent !important;
 }
 
-.v-text-field--outlined.v-input--is-readonly
-  > .v-input__control
-  > .v-input__slot
-  fieldset {
+.v-input--readonly .v-field--variant-outlined .v-field__outline__start,
+.v-input--readonly .v-field--variant-outlined .v-field__outline__notch::before,
+.v-input--readonly .v-field--variant-outlined .v-field__outline__notch::after,
+.v-input--readonly .v-field--variant-outlined .v-field__outline__end {
   border: none !important;
+}
+
+.v-input--horizontal .v-input__append {
+  margin-left: 0 !important;
 }
 
 .v-list-item__title {
   font-size: 16px;
 }
+
 .v-list-item__content {
   align-content: flex-start;
 }
@@ -179,16 +224,21 @@ body {
 .d-flow-root {
   display: flow-root;
 }
+
 .v-application {
   .d-contents {
     display: contents !important;
   }
 
-  @media #{map-get($display-breakpoints, 'sm-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
     .d-sm-contents {
       display: contents !important;
     }
   }
+}
+
+:root {
+  --v-theme-overlay-multiplier: 2;
 }
 
 .d-grid {
@@ -255,4 +305,9 @@ body {
 
 .justify-items-center {
   justify-items: center;
+}
+
+// https://github.com/vuetifyjs/vuetify/issues/22648
+.v-field {
+  contain: none !important;
 }

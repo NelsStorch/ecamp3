@@ -1,40 +1,35 @@
 <template>
-  <v-list-item class="px-2 rounded e-collaborator-item" two-line v-on="$listeners">
-    <v-list-item-action>
+  <v-list-item
+    class="px-2 rounded e-collaborator-item"
+    lines="two"
+    v-bind="$attrs"
+    :title="name"
+  >
+    <template #prepend>
       <user-avatar size="40" :camp-collaboration="collaborator" omit-sr />
-    </v-list-item-action>
-    <v-list-item-content>
-      <v-list-item-title>
-        {{ name }}
-      </v-list-item-title>
-      <v-list-item-subtitle>
-        <v-tooltip right>
-          <template #activator="{ on }">
-            <button v-on="on">
-              {{ $tc(roles[collaborator.role].roleTranslation)
-              }}<span>
-                &middot;
-                <template v-for="icon in roles[collaborator.role].icons"
-                  ><v-icon :key="icon" x-small class="vertical-baseline">{{
-                    icon
-                  }}</v-icon
-                  >&thinsp;</template
-                ></span
-              >
-            </button>
-          </template>
-          {{ $tc(roles[collaborator.role].abilitiesTranslation) }}
-        </v-tooltip>
-      </v-list-item-subtitle>
-    </v-list-item-content>
-    <v-list-item-action class="e-collaborator-item__actions ml-2">
-      <button-edit
-        v-if="editable"
-        color="primary--text"
-        text
-        class="my-n1 v-btn--has-bg"
-      />
-    </v-list-item-action>
+    </template>
+    <v-list-item-subtitle>
+      <v-tooltip location="right">
+        <template #activator="{ props }">
+          <button v-bind="props">
+            {{ $t(roles[collaborator.role].roleTranslation)
+            }}<span>
+              &middot;
+              <template v-for="icon in roles[collaborator.role].icons" :key="icon"
+                ><v-icon class="vertical-baseline" size="x-small">{{ icon }}</v-icon
+                >&thinsp;</template
+              ></span
+            >
+          </button>
+        </template>
+        {{ $t(roles[collaborator.role].abilitiesTranslation) }}
+      </v-tooltip>
+    </v-list-item-subtitle>
+    <template #append>
+      <v-list-item-action class="e-collaborator-item__actions ml-2">
+        <button-edit v-if="editable" color="primary" variant="tonal" class="my-n1" />
+      </v-list-item-action>
+    </template>
   </v-list-item>
 </template>
 
@@ -74,7 +69,7 @@ export default {
   }),
   computed: {
     name() {
-      return campCollaborationDisplayName(this.collaborator, this.$tc.bind(this), false)
+      return campCollaborationDisplayName(this.collaborator, this.$t.bind(this), false)
     },
   },
 }

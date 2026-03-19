@@ -1,19 +1,19 @@
 <template>
   <content-group
-    :title="$tc('components.campAdmin.campCategories.title')"
+    :title="$t('components.campAdmin.campCategories.title')"
     icon="mdi-shape"
   >
     <template #title-actions>
       <DialogCategoryCreate v-if="!disabled" :camp="camp">
-        <template #activator="{ on }">
+        <template #activator="{ props }">
           <ButtonAdd
-            color="secondary"
-            text
-            :hide-label="$vuetify.breakpoint.xsOnly"
+            v-bind="props"
+            color="blue-grey-darken-2"
+            variant="text"
+            :hide-label="$vuetify.display.xs"
             class="my-n2"
-            v-on="on"
           >
-            {{ $tc('components.campAdmin.campCategories.create') }}
+            {{ $t('components.campAdmin.campCategories.create') }}
           </ButtonAdd>
         </template>
       </DialogCategoryCreate>
@@ -27,22 +27,20 @@
       <v-list-item
         v-for="category in categories.items"
         :key="category._meta.self"
-        class="px-2 rounded"
+        class="px-2 py-2 rounded"
         :to="categoryRoute(camp, category)"
       >
-        <v-list-item-content>
-          <v-list-item-title>
-            <CategoryChip :category="category" class="pointer-events-none">
-              (1.{{ category.numberingStyle }}) {{ category.short }}: {{ category.name }}
-            </CategoryChip>
-          </v-list-item-title>
-        </v-list-item-content>
+        <template #title>
+          <CategoryChip :category="category" class="pointer-events-none">
+            (1.{{ category.numberingStyle }}) {{ category.short }}: {{ category.name }}
+          </CategoryChip>
+        </template>
 
-        <v-list-item-action v-if="!disabled" style="display: inline">
-          <v-item-group>
-            <ButtonEdit color="primary--text" text class="my-n1 v-btn--has-bg" />
+        <template #append>
+          <v-item-group v-if="!disabled">
+            <ButtonEdit color="primary" variant="tonal" class="my-n1 v-btn--has-bg" />
           </v-item-group>
-        </v-list-item-action>
+        </template>
       </v-list-item>
     </v-list>
   </content-group>

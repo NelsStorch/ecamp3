@@ -1,215 +1,198 @@
 <template>
-  <v-stepper-content :step="2" class="pa-0">
-    <ValidationObserver v-slot="{ handleSubmit, valid, validate }">
-      <e-form name="camp">
-        <v-form ref="form" @submit.prevent="handleSubmit(() => $emit('create-camp'))">
-          <v-card-text>
-            <server-error :server-error="serverError" />
+  <Form ref="form" v-slot="{ meta }" @submit="() => $emit('create-camp')">
+    <v-card-text>
+      <server-error :server-error="serverError" />
 
-            <e-select
-              v-model="selectedPrototypeValue"
-              :vee-rules="{ required: true }"
-              :skip-if-empty="false"
-              :label="$tc('entity.camp.prototype')"
-              :hint="prototypeHint"
-              persistent-hint
-              :items="campTemplates"
-              :menu-props="{ offsetY: true }"
-              data-testid="prototype-select"
-            />
-            <div
-              v-if="selectedPrototypeValue === 'other'"
-              class="e-form-container d-flex gap-2"
-            >
-              <e-text-field
-                ref="copyCampUrlInput"
-                v-model="copyCampUrl"
-                :vee-rules="{ required: true }"
-                :label="$tc('components.campCreate.campCreateStep2.prototypeCampUrl')"
-                class="flex-grow-1"
-                @input="setClipboardEntityUrl"
-              />
-              <ClipboardInfoDialog
-                v-if="showClipboardPrompt"
-                ref="clipboardInfoDialog"
-                translation-context-i18n-key="components.campCreate.campCreateStep2.clipboardInfoDialog"
-                @closed="attemptLoadingEntityFromClipboard"
-              >
-                <template #activator="{ on }">
-                  <v-btn
-                    :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
-                    text
-                    class="v-btn--has-bg"
-                    height="56"
-                    v-on="on"
-                  >
-                    <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
-                    <v-icon v-else>mdi-content-paste</v-icon>
-                  </v-btn>
-                </template>
-              </ClipboardInfoDialog>
-              <v-btn
-                v-else-if="!clipboardAccessDenied"
-                ref="pasteButton"
-                :title="$tc('components.campCreate.campCreateStep2.pasteCamp')"
-                text
-                class="v-btn--has-bg"
-                height="56"
-                @click="attemptLoadingEntityFromClipboard"
-              >
-                <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
-                <v-icon v-else>mdi-content-paste</v-icon>
-              </v-btn>
-            </div>
-            <div v-if="prototypePreview" class="px-2 rounded-lg dashborder">
-              <h3 class="mt-2 h3">
-                {{ $tc('components.campCreate.campCreateStep2.preview') }}
-              </h3>
-              <v-list class="w-100" dense color="transparent">
-                <v-subheader class="px-0" style="height: auto">
-                  {{ $tc('components.campCreate.campCreateStep2.category') }}
-                </v-subheader>
-                <v-list-item
-                  v-for="category in prototypePreview.categories().items"
-                  :key="category._meta.self"
-                  class="pt-0 pb-1 px-0 min-h-0"
-                >
-                  <v-list-item-title class="d-flex gap-2 align-baseline">
-                    <CategoryChip :category="category" class="mx-0 flex-shrink-0" dense />
-                    <span class="font-weight-medium">{{ category.name }}</span>
-                    <small class="blue-grey--text">{{
-                      category
-                        .preferredContentTypes()
-                        .items.map((item) =>
-                          $tc('contentNode.' + camelCase(item.name) + '.name')
-                        )
-                        .join(', ') ||
-                      $tc('components.campCreate.campCreateStep2.noContent')
-                    }}</small>
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
-              <div class="d-flex flex-row">
-                <v-list class="w-100 sm:w-50" dense color="transparent">
-                  <v-subheader class="px-0" style="height: auto">
-                    {{ $tc('components.campCreate.campCreateStep2.progressLabels') }}
-                  </v-subheader>
-                  <v-list-item
-                    v-for="(progressLabel, idx) in prototypePreview.progressLabels()
-                      .items"
-                    :key="progressLabel._meta.self"
-                    class="pt-1 pb-1 px-0 min-h-0"
-                  >
-                    <v-list-item-title class="d-flex gap-2 align-baseline">
-                      <v-avatar color="rgba(0,0,0,0.12)" size="20">{{
-                        idx + 1
-                      }}</v-avatar>
-                      {{ progressLabel.title }}
-                    </v-list-item-title>
-                  </v-list-item>
-                </v-list>
-                <v-list class="w-100 sm:w-50" dense color="transparent">
-                  <v-subheader class="px-0" style="height: auto">
-                    {{ $tc('components.campCreate.campCreateStep2.materialLists') }}
-                  </v-subheader>
-                  <v-list-item
-                    v-for="materialList in copyableMaterialLists"
-                    :key="materialList._meta.self"
-                    class="pt-1 pb-1 px-0 min-h-0"
-                  >
-                    <v-list-item-title class="d-flex gap-2 align-baseline">
-                      {{ materialList.name }}
-                    </v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </div>
-              <v-list
-                v-if="prototypePreview.checklists().items.length"
-                class="w-100"
-                dense
-                color="transparent"
-              >
-                <v-subheader class="px-0" style="height: auto">
-                  {{ $tc('components.campCreate.campCreateStep2.checklists') }}
-                </v-subheader>
-                <v-list-item
-                  v-for="checklist in prototypePreview.checklists().items"
-                  :key="checklist._meta.self"
-                  class="pt-1 pb-1 px-0 min-h-0"
-                >
-                  <v-list-item-title class="d-flex gap-2 align-baseline">
-                    {{ checklist.name }}
-                    <small class="blue-grey--text">{{
-                      $tc(
-                        'components.campCreate.campCreateStep2.checklistItemCount',
-                        checklist.checklistItems().items.length
-                      )
-                    }}</small>
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </div>
-            <v-alert
-              v-if="selectedPrototypeValue === 'none'"
-              color="#0661ab"
-              elevation="0"
-              text
-              icon="mdi-alert-circle-outline"
-            >
-              <strong>{{
-                $tc('components.campCreate.campCreateStep2.noPrototypeAlert.title')
-              }}</strong>
-              <br />
-              {{
-                $tc('components.campCreate.campCreateStep2.noPrototypeAlert.description')
-              }}
-            </v-alert>
-          </v-card-text>
-          <v-divider />
-          <ContentActions>
+      <e-select
+        v-model="selectedPrototypeValue"
+        :hint="prototypeHint"
+        :items="campTemplates"
+        :label="$t('entity.camp.prototype')"
+        :menu-props="{ offsetY: true }"
+        :skip-if-empty="false"
+        :vee-rules="{ required: true }"
+        data-testid="prototype-select"
+        path="prototype"
+        persistent-hint
+      />
+      <div
+        v-if="selectedPrototypeValue === 'other'"
+        class="e-form-container d-flex gap-2"
+      >
+        <e-text-field
+          ref="copyCampUrlInput"
+          v-model="copyCampUrl"
+          :label="$t('components.campCreate.campCreateStep2.prototypeCampUrl')"
+          :vee-rules="{ required: true }"
+          class="flex-grow-1"
+          path="campPrototypeUrl"
+          @input="setClipboardEntityUrl"
+        />
+        <ClipboardInfoDialog
+          v-if="showClipboardPrompt"
+          ref="clipboardInfoDialog"
+          translation-context-i18n-key="components.campCreate.campCreateStep2.clipboardInfoDialog"
+          @closed="attemptLoadingEntityFromClipboard"
+        >
+          <template #activator="{ props }">
             <v-btn
-              text
-              color="secondary"
-              :disabled="isSaving"
-              @click="$emit('previous-step')"
+              :title="$t('components.campCreate.campCreateStep2.pasteCamp')"
+              class="v-btn--has-bg"
+              height="56"
+              v-bind="props"
+              variant="text"
             >
-              <v-icon left>mdi-arrow-left</v-icon>
-              {{ $tc('global.button.back') }}
+              <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
+              <v-icon v-else>mdi-content-paste</v-icon>
             </v-btn>
-            <div class="ml-auto">
-              <ButtonCancel :disabled="isSaving" @click="$router.go(-1)" />
-              <ButtonAdd
-                v-if="valid"
-                type="submit"
-                :loading="isSaving"
-                data-testid="create-camp-button"
-              >
-                {{ $tc('components.campCreate.campCreateStep2.create') }}
-              </ButtonAdd>
-              <v-tooltip v-else top>
-                <template #activator="{ attrs, on }">
-                  <ButtonAdd
-                    color="secondary"
-                    elevation="0"
-                    v-bind="attrs"
-                    @click="validate()"
-                    v-on="on"
-                  >
-                    {{ $tc('components.campCreate.campCreateStep2.create') }}
-                  </ButtonAdd>
-                </template>
-                {{ $tc('components.campCreate.campCreateStep2.submitTooltipPrototype') }}
-              </v-tooltip>
-            </div>
-          </ContentActions>
-        </v-form>
-      </e-form>
-    </ValidationObserver>
-  </v-stepper-content>
+          </template>
+        </ClipboardInfoDialog>
+        <v-btn
+          v-else-if="!clipboardAccessDenied"
+          ref="pasteButton"
+          :title="$t('components.campCreate.campCreateStep2.pasteCamp')"
+          class="v-btn--has-bg"
+          height="56"
+          variant="text"
+          @click="attemptLoadingEntityFromClipboard"
+        >
+          <v-progress-circular v-if="clipboardEntityLoading" indeterminate />
+          <v-icon v-else>mdi-content-paste</v-icon>
+        </v-btn>
+      </div>
+      <div v-if="prototypePreview" class="px-2 rounded-lg dashborder">
+        <h3 class="mt-2 h3">
+          {{ $t('components.campCreate.campCreateStep2.preview') }}
+        </h3>
+        <v-list class="w-100" color="transparent" density="compact">
+          <v-list-subheader class="px-0" style="height: auto">
+            {{ $t('components.campCreate.campCreateStep2.category') }}
+          </v-list-subheader>
+          <v-list-item
+            v-for="category in prototypePreview.categories().items"
+            :key="category._meta.self"
+            class="pt-0 pb-1 px-0 min-h-0"
+          >
+            <v-list-item-title class="d-flex gap-2 align-baseline">
+              <CategoryChip :category="category" class="mx-0 flex-shrink-0" dense />
+              <span class="font-weight-medium">{{ category.name }}</span>
+              <small class="text-blue-grey">{{
+                category
+                  .preferredContentTypes()
+                  .items.map((item) =>
+                    $t('contentNode.' + camelCase(item.name) + '.name')
+                  )
+                  .join(', ') || $t('components.campCreate.campCreateStep2.noContent')
+              }}</small>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+        <div class="d-flex flex-row">
+          <v-list class="w-100 sm:w-50" color="transparent" density="compact">
+            <v-list-subheader class="px-0" style="height: auto">
+              {{ $t('components.campCreate.campCreateStep2.progressLabels') }}
+            </v-list-subheader>
+            <v-list-item
+              v-for="(progressLabel, idx) in prototypePreview.progressLabels().items"
+              :key="progressLabel._meta.self"
+              class="pt-1 pb-1 px-0 min-h-0"
+            >
+              <v-list-item-title class="d-flex gap-2 align-baseline">
+                <v-avatar color="rgba(0,0,0,0.12)" size="20">{{ idx + 1 }}</v-avatar>
+                {{ progressLabel.title }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+          <v-list class="w-100 sm:w-50" color="transparent" density="compact">
+            <v-list-subheader class="px-0" style="height: auto">
+              {{ $t('components.campCreate.campCreateStep2.materialLists') }}
+            </v-list-subheader>
+            <v-list-item
+              v-for="materialList in copyableMaterialLists"
+              :key="materialList._meta.self"
+              class="pt-1 pb-1 px-0 min-h-0"
+            >
+              <v-list-item-title class="d-flex gap-2 align-baseline">
+                {{ materialList.name }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </div>
+        <v-list
+          v-if="prototypePreview.checklists().items.length"
+          class="w-100"
+          color="transparent"
+          density="compact"
+        >
+          <v-list-subheader class="px-0" style="height: auto">
+            {{ $t('components.campCreate.campCreateStep2.checklists') }}
+          </v-list-subheader>
+          <v-list-item
+            v-for="checklist in prototypePreview.checklists().items"
+            :key="checklist._meta.self"
+            class="pt-1 pb-1 px-0 min-h-0"
+          >
+            <v-list-item-title class="d-flex gap-2 align-baseline">
+              {{ checklist.name }}
+              <small class="text-blue-grey">{{
+                $t(
+                  'components.campCreate.campCreateStep2.checklistItemCount',
+                  checklist.checklistItems().items.length
+                )
+              }}</small>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </div>
+      <v-alert
+        v-if="selectedPrototypeValue === 'none'"
+        color="#0661ab"
+        elevation="0"
+        icon="mdi-alert-circle-outline"
+        variant="tonal"
+        class="mt-2 text-body-1"
+      >
+        <strong>{{
+          $t('components.campCreate.campCreateStep2.noPrototypeAlert.title')
+        }}</strong>
+        <br />
+        {{ $t('components.campCreate.campCreateStep2.noPrototypeAlert.description') }}
+      </v-alert>
+    </v-card-text>
+    <v-divider />
+    <ContentActions>
+      <v-btn
+        :disabled="isSaving"
+        color="secondary"
+        variant="text"
+        @click="$emit('previous-step')"
+      >
+        <v-icon start>mdi-arrow-left</v-icon>
+        {{ $t('global.button.back') }}
+      </v-btn>
+      <ButtonCancel class="ml-auto" :disabled="isSaving" @click="$router.go(-1)" />
+      <ButtonAdd
+        v-if="meta.dirty && meta.valid"
+        :loading="isSaving"
+        data-testid="create-camp-button"
+        type="submit"
+      >
+        {{ $t('components.campCreate.campCreateStep2.create') }}
+      </ButtonAdd>
+      <v-tooltip v-else location="top">
+        <template #activator="{ props }">
+          <ButtonAdd color="secondary" elevation="0" v-bind="props">
+            {{ $t('components.campCreate.campCreateStep2.create') }}
+          </ButtonAdd>
+        </template>
+        {{ $t('components.campCreate.campCreateStep2.submitTooltipPrototype') }}
+      </v-tooltip>
+    </ContentActions>
+  </Form>
 </template>
 <script>
 import camelCase from 'lodash-es/camelCase.js'
-import { ValidationObserver } from 'vee-validate'
+import { Form } from 'vee-validate'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
 import ButtonCancel from '@/components/buttons/ButtonCancel.vue'
 import CategoryChip from '@/components/generic/CategoryChip.vue'
@@ -229,8 +212,8 @@ export default {
     ButtonCancel,
     CategoryChip,
     ContentActions,
+    Form,
     ServerError,
-    ValidationObserver,
   },
   props: {
     camp: { type: Object, required: true },
@@ -256,7 +239,7 @@ export default {
       fetchClipboardEntity: async (url) => {
         if (!url.startsWith(window.location.origin)) return null
         url = url.substring(window.location.origin.length)
-        const match = router.matcher.match(url)
+        const match = router.resolve(url)
         if (!match.params?.campId) return null
 
         return await api.get().camps({ id: match.params.campId })
@@ -296,11 +279,11 @@ export default {
           : []),
         {
           value: 'other',
-          text: this.$tc('components.campCreate.campCreateStep2.otherPrototype'),
+          text: this.$t('components.campCreate.campCreateStep2.otherPrototype'),
         },
         {
           value: 'none',
-          text: this.$tc('components.campCreate.campCreateStep2.noPrototype'),
+          text: this.$t('components.campCreate.campCreateStep2.noPrototype'),
         },
       ])
     },
@@ -308,16 +291,16 @@ export default {
       const campPrototypeUris = this.campPrototypes.map((prototype) => prototype.value)
       switch (this.selectedPrototypeValue) {
         case '':
-          return this.$tc('components.campCreate.campCreateStep2.prototypeHint')
+          return this.$t('components.campCreate.campCreateStep2.prototypeHint')
         case 'none':
-          return this.$tc('components.campCreate.campCreateStep2.prototypeHintEmpty')
+          return this.$t('components.campCreate.campCreateStep2.prototypeHintEmpty')
         case 'other':
           return ''
         default:
           if (!campPrototypeUris.includes(this.selectedPrototypeValue)) {
-            return this.$tc('components.campCreate.campCreateStep2.prototypeHintOther')
+            return this.$t('components.campCreate.campCreateStep2.prototypeHintOther')
           }
-          return this.$tc('components.campCreate.campCreateStep2.prototypeHintSelected')
+          return this.$t('components.campCreate.campCreateStep2.prototypeHintSelected')
       }
     },
     prototypePreview() {
@@ -338,7 +321,7 @@ export default {
         .camps({ isPrototype: true })
         .items.map((ct) => ({
           value: ct._meta.self,
-          text: this.$tc(ct.title),
+          text: this.$t(ct.title),
           object: ct,
         }))
     },
@@ -364,7 +347,7 @@ export default {
   },
   mounted() {
     this.attemptLoadingEntityFromClipboard().then(() => {
-      this.localCamp.campPrototype = ''
+      this.localCamp.campPrototype = null
     })
   },
   methods: { camelCase },

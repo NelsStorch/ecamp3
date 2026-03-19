@@ -1,19 +1,17 @@
 <template>
-  <v-list-item link :to="to" :href="href" v-on="$listeners">
-    <slot name="pre">
-      <v-list-item-icon v-if="!hideAvatar">
+  <v-list-item link :to="to" :href="href" v-bind="$attrs" class="py-3">
+    <template v-if="!hideAvatar" #prepend>
+      <slot name="pre">
         <v-icon v-if="icon">{{ icon }}</v-icon>
-      </v-list-item-icon>
-    </slot>
-    <v-list-item-content>
-      <v-list-item-title :class="{ 'whitespace-normal': titleMultiline }">{{
-        title
-      }}</v-list-item-title>
-      <v-list-item-subtitle v-if="subtitle">{{ subtitle }}</v-list-item-subtitle>
-    </v-list-item-content>
-    <v-list-item-icon v-if="!hideChevron">
+      </slot>
+    </template>
+    <v-list-item-title :class="{ 'whitespace-normal': titleMultiline }">{{
+      title
+    }}</v-list-item-title>
+    <v-list-item-subtitle v-if="subtitle">{{ subtitle }}</v-list-item-subtitle>
+    <template v-if="!hideChevron" #append>
       <v-icon style="opacity: 0.6">mdi-chevron-right</v-icon>
-    </v-list-item-icon>
+    </template>
   </v-list-item>
 </template>
 

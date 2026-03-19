@@ -3,31 +3,27 @@
     <content-card :title="materialList.name" toolbar>
       <template #title-actions>
         <v-menu offset-y>
-          <template #activator="{ attrs, on }">
-            <v-btn icon v-bind="attrs" v-on="on">
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props">
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
           <v-list class="py-0">
             <DialogMaterialListEdit v-if="isContributor" :material-list="materialList">
-              <template #activator="{ attrs, on }">
-                <v-list-item v-bind="attrs" v-on="on">
-                  <v-list-item-icon>
+              <template #activator="{ props }">
+                <v-list-item v-bind="props">
+                  <template #prepend>
                     <v-icon>mdi-pencil</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>{{
-                    $tc('global.button.edit')
-                  }}</v-list-item-content>
+                  </template>
+                  {{ $t('global.button.edit') }}
                 </v-list-item>
               </template>
             </DialogMaterialListEdit>
             <v-list-item @click="downloadXlsx">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-microsoft-excel</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>{{
-                $tc('global.button.download')
-              }}</v-list-item-content>
+              </template>
+              {{ $t('global.button.download') }}
             </v-list-item>
           </v-list>
         </v-menu>
@@ -37,7 +33,7 @@
         v-model="openPeriods"
         multiple
         flat
-        accordion
+        variant="accordion"
       >
         <PeriodMaterialLists
           v-for="{ period, materialItems } in collection"

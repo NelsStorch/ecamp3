@@ -16,22 +16,24 @@
       }"
       :swap-threshold="0.65"
       :inverted-swap-threshold="0.65"
+      :item-key="(element) => element"
       @start="startDrag"
       @add="finishDrag"
       @update="finishDrag"
       @end="cleanupDrag"
     >
-      <content-node
-        v-for="id in draggableContentNodeIds"
-        :key="id"
-        :data-href="allContentNodesById[id]._meta.self"
-        :data-type="allContentNodesById[id].contentTypeName"
-        class="content-node"
-        :content-node="allContentNodesById[id]"
-        :layout-mode="layoutMode"
-        :draggable="draggingEnabled"
-        :disabled="disabled"
-      />
+      <template #item="{ element }">
+        <content-node
+          :key="element"
+          :data-href="allContentNodesById[element]._meta.self"
+          :data-type="allContentNodesById[element].contentTypeName"
+          class="content-node"
+          :content-node="allContentNodesById[element]"
+          :layout-mode="layoutMode"
+          :draggable="draggingEnabled"
+          :disabled="disabled"
+        />
+      </template>
       <v-sheet
         v-if="!layoutMode && draggableContentNodeIds.length === 0"
         elevation="0"
@@ -55,6 +57,7 @@ import { keyBy, sortBy } from 'lodash'
 import Draggable from 'vuedraggable'
 import ButtonNestedContentNodeAdd from '@/components/activity/ButtonNestedContentNodeAdd.vue'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'DraggableContentNodes',
@@ -74,6 +77,10 @@ export default {
     isRoot: { type: Boolean, default: false },
     compact: { type: Boolean, default: false },
   },
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
   data() {
     return {
       localContentNodeIds: [],
@@ -84,7 +91,7 @@ export default {
       return keyBy(this.allContentNodes().items, 'id')
     },
     draggingEnabled() {
-      return this.layoutMode && this.$vuetify.breakpoint.mdAndUp && !this.disabled
+      return this.layoutMode && this.$vuetify.display.mdAndUp && !this.disabled
     },
     contentNodeIds() {
       return sortBy(
@@ -114,7 +121,7 @@ export default {
       },
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.cleanupDrag()
   },
   methods: {
@@ -146,7 +153,7 @@ export default {
           position: event.newDraggableIndex,
         })
       } catch (e) {
-        this.$toast.error(errorToMultiLineToast(e))
+        this.toast.error(errorToMultiLineToast(e))
       }
 
       // reload all contentNodes to update position properties
@@ -167,6 +174,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .min-height {
   min-height: 10rem;
 }
@@ -237,7 +247,7 @@ export default {
       right: -4px;
       opacity: 40%;
       border-radius: 8px;
-      border: 2px dotted map-get($blue, 'darken-2');
+      border: 2px dotted map.get(settings.$blue, 'darken-2');
       opacity: 40%;
       content: '';
     }

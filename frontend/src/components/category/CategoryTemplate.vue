@@ -1,68 +1,54 @@
 <template>
   <div>
-    <i18n path="components.category.categoryTemplate.createLayoutHelp" tag="p">
+    <i18n-t
+      keypath="components.category.categoryTemplate.createLayoutHelp"
+      tag="p"
+      scope="global"
+    >
       <template #categoryShort>
         <CategoryChip :category="category" dense />
       </template>
       <template #br><br /></template>
-    </i18n>
+    </i18n-t>
 
     <div class="area rounded">
       <div class="relative">
         <v-tabs
           v-model="layoutMode"
           class="ec-category-layoutmode-tabs"
-          centered
+          align-tabs="center"
+          color="primary"
           hide-slider
         >
-          <v-tab :tab-value="true">
-            <v-icon left>mdi-view-compact-outline</v-icon>
-            {{ $tc('components.category.categoryTemplate.layout') }}
+          <v-tab :value="true">
+            <v-icon start>mdi-view-compact-outline</v-icon>
+            {{ $t('components.category.categoryTemplate.layout') }}
           </v-tab>
-          <v-tab :tab-value="false">
-            <v-icon left>mdi-text</v-icon>
-            {{ $tc('components.category.categoryTemplate.contents') }}
+          <v-tab :value="false">
+            <v-icon start>mdi-text</v-icon>
+            {{ $t('components.category.categoryTemplate.contents') }}
           </v-tab>
         </v-tabs>
       </div>
       <v-divider />
       <div class="relative">
-        <div
-          v-show="layoutMode"
-          :key="true"
-          class="ec-category-layoutmode-tab__layout"
-          :class="{ 'ec-category-layoutmode-tab--hidden': !layoutMode }"
-        >
-          <v-skeleton-loader v-if="loading" type="article" />
-          <root-node
-            :class="{
-              'ec-category-layoutmode-tab--hidden': loading,
-            }"
-            :content-node="category.rootContentNode()"
-            :layout-mode="true"
-            :disabled="disabled"
-          />
-        </div>
-        <div
-          v-show="!layoutMode"
-          :key="false"
-          :class="{ 'ec-category-layoutmode-tab--hidden': layoutMode }"
-          :style="{ opacity: layoutMode ? 0 : 1 }"
-        >
+        <div class="ec-category-layoutmode-tab__layout">
           <v-skeleton-loader v-if="loading" type="article" />
           <div
-            v-else-if="category.rootContentNode().children().items.length === 0"
+            v-else-if="
+              !layoutMode && category.rootContentNode().children().items.length === 0
+            "
             class="pa-2 text-center"
           >
-            {{ $tc('components.category.categoryTemplate.noTemplate') }}
+            {{ $t('components.category.categoryTemplate.noTemplate') }}
           </div>
           <root-node
-            v-if="category.rootContentNode().children().items.length !== 0"
+            v-else
             :class="{
               'ec-category-layoutmode-tab--hidden': loading,
             }"
             :content-node="category.rootContentNode()"
-            :layout-mode="false"
+            :layout-mode="layoutMode"
             :disabled="disabled"
           />
         </div>
@@ -99,6 +85,7 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-tabs :deep(.v-tabs-slider-wrapper) {
   transition: none;
 }

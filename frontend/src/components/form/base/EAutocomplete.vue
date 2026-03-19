@@ -1,59 +1,53 @@
 <template>
-  <ValidationProvider
+  <Field
     v-slot="{ errors: veeErrors }"
-    tag="div"
-    :name="validationLabel"
-    :vid="veeId"
+    as="div"
+    :label="validationLabel"
+    :name="veeId ?? path ?? validationLabel"
     :rules="veeRules"
-    :skip-if-empty="skipIfEmpty"
-    :required="required"
-    :immediate="immediateValidation"
     class="e-form-container"
   >
     <v-autocomplete
-      v-bind="$attrs"
-      :search-input.sync="search"
-      :filled="filled"
-      :hide-details="hideDetails"
-      :error-messages="veeErrors.concat(errorMessages)"
-      :label="labelOrEntityFieldLabel"
       :class="[inputClass]"
+      :custom-filter="tokensFilter"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      :menu-icon="readonly ? null : '$dropdown'"
+      item-title="text"
+      item-value="value"
       :readonly="readonly"
-      :append-icon="readonly ? null : '$dropdown'"
-      :filter="tokensFilter"
-      v-on="$listeners"
+      :search.sync="search"
+      v-bind="$attrs"
     >
-      <template #item="{ item, on, attrs }">
-        <v-list-item v-bind="attrs" v-on="on">
-          <v-list-item-content>
-            <v-list-item-title>
-              <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
-                <mark v-if="part.h">{{ part.text }}</mark>
-                <span v-else>{{ part.text }}</span>
-              </span>
-            </v-list-item-title>
-          </v-list-item-content>
+      <template #item="{ item, props }">
+        <v-list-item v-bind="props">
+          <v-list-item-title>
+            <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
+              <mark v-if="part.h">{{ part.text }}</mark>
+              <span v-else>{{ part.text }}</span>
+            </span>
+          </v-list-item-title>
         </v-list-item>
       </template>
 
       <!-- passing through all slots -->
-      <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-      <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-        <slot :name="name" v-bind="slotData" />
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-autocomplete>
-  </ValidationProvider>
+  </Field>
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 import uFuzzy from '@leeoniya/ufuzzy'
 
 export default {
   name: 'EAutocomplete',
-  components: { ValidationProvider },
+  components: { Field },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
     immediateValidation: { type: Boolean, default: false },
@@ -68,19 +62,19 @@ export default {
     }
   },
   methods: {
-    tokensFilter(item, queryText, itemText) {
-      const [idxs, info] = this.fuzzy.search([itemText], queryText, true, 1e3)
-      this.searchInfos.set(item.value, info)
+    tokensFilter(value, queryText) {
+      const [idxs, info] = this.fuzzy.search([value], queryText, true, 1e3)
+      this.searchInfos.set(value, info)
       return idxs && idxs.length > 0
     },
 
     renderHighlighted(item) {
-      if (this.search) {
-        if (this.searchInfos.has(item.value)) {
-          const info = this.searchInfos.get(item.value)
+      if (this.searchInfos.size > 0) {
+        if (this.searchInfos.has(item.title)) {
+          const info = this.searchInfos.get(item.title)
           if (info) {
             return uFuzzy.highlight(
-              item.text,
+              item.title,
               info.ranges[0],
               (p, m) => ({ h: m, text: p }),
               [],
@@ -91,7 +85,7 @@ export default {
           }
         }
       }
-      return [{ h: false, text: item.text }]
+      return [{ h: false, text: item.title }]
     },
   },
 }

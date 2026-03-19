@@ -14,13 +14,12 @@
 
     <v-btn
       v-if="showButton"
-      :fixed="$vuetify.breakpoint.mdAndUp"
-      :absolute="!$vuetify.breakpoint.mdAndUp"
+      :absolute="!$vuetify.display.mdAndUp"
+      :fixed="$vuetify.display.mdAndUp"
       dark
       fab
       style="z-index: 3"
-      bottom
-      right
+      location="bottom right"
       class="fab--bottom_nav float-right"
       color="red"
       @click.stop="createNewActivity()"
@@ -108,12 +107,15 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .fab--bottom_nav {
   position: fixed;
   bottom: calc(16px + 56px + env(safe-area-inset-bottom)) !important;
-  @media #{map-get($display-breakpoints, 'md-and-up')} {
-    bottom: calc(16px + env(safe-area-inset-bottom)) !important;
+  @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
+    bottom: calc(16px + 36px + env(safe-area-inset-bottom)) !important;
   }
 }
 </style>

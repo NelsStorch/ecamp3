@@ -3,20 +3,19 @@ Displays a field as a e-text-field + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$props" v-on="$listeners">
+  <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }">
     <e-text-field
       ref="textField"
-      :value="wrapper.localValue"
+      :model-value="wrapper.localValue"
       v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :outlined="outlined"
-      :filled="filled"
-      :dense="dense"
-      @input="wrapper.on.input"
+      :variant
+      :density
+      @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"
     >
       <template #append>
@@ -35,12 +34,6 @@ export default {
   name: 'ApiTextField',
   components: { ApiWrapper, ApiWrapperAppend },
   mixins: [apiPropsMixin],
-  props: {
-    outlined: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data() {
     return {}
   },

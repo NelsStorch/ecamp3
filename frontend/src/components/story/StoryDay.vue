@@ -1,9 +1,9 @@
 <template>
-  <v-expansion-panel ref="panel">
-    <v-expansion-panel-header>
+  <v-expansion-panel :value="panelValue">
+    <v-expansion-panel-title>
       <h3>{{ dateLong(day.start) }}</h3>
-    </v-expansion-panel-header>
-    <v-expansion-panel-content>
+    </v-expansion-panel-title>
+    <v-expansion-panel-text>
       <template v-if="entriesWithStory.length">
         <template v-for="{ scheduleEntry, storyChapters } in entriesWithStory">
           <div
@@ -43,13 +43,12 @@
               <api-richtext
                 class="e-story-day"
                 :class="{ 'e-story-day--textmode': !editMode }"
-                :outlined="false"
+                :variant="editMode ? 'underlined' : 'plain'"
                 :solo="false"
                 auto-grow
-                dense
+                density="compact"
                 :readonly="!editMode"
                 path="data.html"
-                aria-label="Erfassen"
                 label=""
               />
             </api-form>
@@ -57,9 +56,9 @@
         </template>
       </template>
       <p v-else>
-        {{ $tc('components.story.storyDay.noStory') }}
+        {{ $t('components.story.storyDay.noStory') }}
       </p>
-    </v-expansion-panel-content>
+    </v-expansion-panel-text>
   </v-expansion-panel>
 </template>
 <script>
@@ -102,21 +101,11 @@ export default {
     entriesWithStory() {
       return this.entries.filter(({ storyChapters }) => storyChapters.length)
     },
-  },
-  watch: {
-    day(value) {
-      this.updatePanelValue(value)
-    },
-  },
-  async mounted() {
-    this.updatePanelValue(this.day)
-  },
-  methods: {
-    updatePanelValue(day) {
+    panelValue() {
       // Mark the component with the date of the day.
       // This allows the use of the date in the parent component.
       // See StoryPeriod.vue: v-expansion-panels.v-model
-      this.$refs.panel.value = day.start.substr(0, 10)
+      return this.day.start.substr(0, 10)
     },
   },
 }

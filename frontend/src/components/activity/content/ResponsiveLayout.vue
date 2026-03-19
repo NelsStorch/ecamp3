@@ -12,8 +12,8 @@
   >
     <template #header>
       <strong>
-        <v-icon color="blue darken-2">$vuetify.icons.responsiveLayout</v-icon>
-        {{ $tc('contentNode.responsiveLayout.name') }}
+        <v-icon color="blue-darken-2">$responsiveLayout</v-icon>
+        {{ $t('contentNode.responsiveLayout.name') }}
       </strong>
       <menu-cardless-content-node :content-node="contentNode" />
     </template>
@@ -21,11 +21,8 @@
       <div
         class="d-flex flex-column flex-grow-1 ec-responsivelayout__slot ec-responsivelayout__slot--main"
       >
-        <p
-          v-if="layoutMode"
-          class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
-        >
-          {{ $tc('contentNode.responsiveLayout.mainContent') }}
+        <p v-if="layoutMode" class="mt-2 mb-1 text-blue-darken-3 font-weight-medium">
+          {{ $t('contentNode.responsiveLayout.mainContent') }}
         </p>
         <draggable-content-nodes
           slot-name="main"
@@ -40,11 +37,8 @@
         class="d-flex flex-column ec-responsivelayout__slot ec-responsivelayout__slot--aside-top"
         :class="{ 'flex-grow-1': !layoutMode }"
       >
-        <p
-          v-if="layoutMode"
-          class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
-        >
-          {{ $tc('contentNode.responsiveLayout.printAboveMainContent') }}
+        <p v-if="layoutMode" class="mt-2 mb-1 text-blue-darken-3 font-weight-medium">
+          {{ $t('contentNode.responsiveLayout.printAboveMainContent') }}
         </p>
         <draggable-content-nodes
           slot-name="aside-top"
@@ -64,11 +58,8 @@
         class="d-flex flex-column ec-responsivelayout__slot"
         :class="{ 'flex-grow-1': !layoutMode }"
       >
-        <p
-          v-if="layoutMode"
-          class="mt-2 mb-1 blue--text text--darken-3 font-weight-medium"
-        >
-          {{ $tc('contentNode.responsiveLayout.printBelowMainContent') }}
+        <p v-if="layoutMode" class="mt-2 mb-1 text-blue-darken-3 font-weight-medium">
+          {{ $t('contentNode.responsiveLayout.printBelowMainContent') }}
         </p>
         <draggable-content-nodes
           slot-name="aside-bottom"
@@ -140,7 +131,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ec-responsivelayout--layout-mode {
   border: 1px solid black;
   border-radius: 10px;
@@ -148,7 +139,7 @@ export default {
 
 .ec-responsivelayout__container {
   display: grid;
-  grid-template-columns: minmax(600px, 2fr) minmax(250px, 1fr);
+  grid-template-columns: minmax(560px, 2fr) minmax(320px, 1fr);
   grid-template-rows: 1fr 1fr;
   gap: 1px;
 }
@@ -167,12 +158,14 @@ export default {
   gap: 16px;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-responsivelayout--layout-mode .ec-layout-item {
   border-radius: 4px;
   grid-template-rows: auto 1fr;
   gap: 8px;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-responsivelayout--layout-mode .ec-draggable-area {
   padding: 0 8px 8px;
 }
@@ -185,6 +178,7 @@ export default {
   grid-row: 2 span;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-responsivelayout__aside {
   gap: 1px;
 }

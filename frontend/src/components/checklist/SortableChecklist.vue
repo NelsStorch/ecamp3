@@ -14,20 +14,22 @@
       :data-parent="parentKey"
       group="checklist"
       :sort="true"
+      :item-key="(element) => element"
       @start="dragStart"
       @end="dragStop"
     >
-      <SortableChecklistItem
-        v-for="(item, i) in localSortedItems"
-        :key="item._meta.self"
-        :data-href="item._meta.self"
-        :checklist="checklist"
-        :item="item"
-        :item-position="i"
-        :disabled="disabled"
-        @drag-start="dragStart"
-        @drag-end="dragEnd"
-      />
+      <template #item="{ element, index }">
+        <SortableChecklistItem
+          :key="element._meta.self"
+          :data-href="element._meta.self"
+          :checklist="checklist"
+          :item="element"
+          :item-position="index"
+          :disabled="disabled"
+          @drag-start="dragStart"
+          @drag-end="dragEnd"
+        />
+      </template>
     </draggable>
     <ChecklistItemCreate
       v-if="!disabled && !(parentDragging || dragging)"
@@ -35,21 +37,21 @@
       :checklist="checklist"
       :parent="parent?._meta.self"
     >
-      <template #activator="{ on }">
+      <template #activator="{ props }">
         <v-list-item
           class="e-sortable-checklist-item__add ml-10 mr-2 my-n1 px-0 rounded-pill min-h-0"
-          v-on="on"
+          v-bind="props"
         >
-          <v-avatar class="mr-2" size="32"
-            ><v-icon color="currentColor">mdi-plus</v-icon></v-avatar
-          >
-          <v-list-item-content class="py-0">
-            <v-list-item-title>{{
-              $tc('components.checklist.sortableChecklist.add', null, {
-                parent: parent?.text ?? checklist.name,
-              })
-            }}</v-list-item-title>
-          </v-list-item-content>
+          <template #prepend>
+            <v-avatar class="mr-2" size="32">
+              <v-icon color="currentColor">mdi-plus</v-icon>
+            </v-avatar>
+          </template>
+          <v-list-item-title>{{
+            $t('components.checklist.sortableChecklist.add', {
+              parent: parent?.text ?? checklist.name,
+            })
+          }}</v-list-item-title>
         </v-list-item>
       </template>
     </ChecklistItemCreate>
@@ -63,6 +65,7 @@ import { every, sortBy, filter } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
 import SortableChecklistItem from '@/components/checklist/SortableChecklistItem.vue'
 import ChecklistItemCreate from '@/components/checklist/ChecklistItemCreate.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'SortableChecklist',
@@ -86,6 +89,10 @@ export default {
     checklist: { type: Object, required: true },
     parent: { type: Object, default: null },
     disabled: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -156,7 +163,7 @@ export default {
             parent,
           })
           .catch((e) => {
-            this.$toast.error(errorToMultiLineToast(e))
+            this.toast.error(errorToMultiLineToast(e))
           })
           .finally(async () => await this.checklist.checklistItems().$reload())
         this.savingRequest--

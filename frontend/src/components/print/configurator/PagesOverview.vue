@@ -1,13 +1,22 @@
 <template>
   <div class="e-pages-overview">
     <draggable
+      :model-value="modelValue"
+      :item-key="() => undefined"
       handle=".handle"
       filter=".e-pages-config--template"
       class="e-pages-overview__grid pa-0 pa-md-8"
       v-bind="$attrs"
-      v-on="$listeners"
+      @update:model-value="$emit('update:modelValue', $event)"
     >
-      <slot />
+      <template #item="slotProps">
+        <div :key="slotProps.index">
+          <slot name="item" v-bind="slotProps" />
+        </div>
+      </template>
+      <template #footer>
+        <slot />
+      </template>
     </draggable>
     <slot name="drawer" />
   </div>
@@ -19,11 +28,21 @@ import Draggable from 'vuedraggable'
 export default {
   name: 'PagesOverview',
   components: { Draggable },
+  props: {
+    modelValue: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  emits: ['update:modelValue'],
 }
 </script>
 
 <style scoped lang="scss">
-@media #{map-get($display-breakpoints, 'md-and-up')} {
+@use 'vuetify/settings';
+@use 'sass:map';
+
+@media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
   .e-pages-overview {
     background: #eee;
     position: relative;

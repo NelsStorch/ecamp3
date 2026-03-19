@@ -1,12 +1,13 @@
 <template>
   <ContentNodeCard class="ec-la-thematic-area" v-bind="$props">
     <e-select
-      v-model="localSelection"
+      :model-value="localSelection"
+      path="localSelection"
+      :label="$t('contentNode.laThematicArea.name')"
       item-value="value"
       :items="items"
       multiple
-      :filled="false"
-      outlined
+      variant="outlined"
       persistent-placeholder
       :error-messages="errorMessages"
       :loading="savingRequestCount > 0"
@@ -15,16 +16,15 @@
         maxWidth: 'min(290px, calc(100vw - 32px))',
         contentClass: 'ec-la-thematic-area',
       }"
-      :placeholder="$tc('components.activity.content.lAThematicArea.placeholder')"
-      @input="onInput"
+      :placeholder="$t('components.activity.content.lAThematicArea.placeholder')"
+      @update:model-value="onInput"
     >
-      <template #selection="{ index, parent }">
+      <template #selection="{ index, item: parent }">
         <template v-if="index === 0">
           <v-list
             v-if="selectionCount > 0"
-            :two-line="selectionCount > 3"
-            :three-line="selectionCount <= 3"
-            class="flex-grow-1 transparent"
+            :lines="selectionCount <= 3 ? 'three' : 'two'"
+            class="flex-grow-1 bg-transparent"
           >
             <template v-for="[key] in dataOptions">
               <v-list-item
@@ -35,36 +35,31 @@
                 class="px-0 ec-lta-item"
                 @click.stop="parent.isMenuActive = !parent.isMenuActive"
               >
-                <v-list-item-content class="py-0">
-                  <v-list-item-title>
-                    {{ $tc(`contentNode.laThematicArea.entity.option.${key}.name`) }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{
-                      $tc(`contentNode.laThematicArea.entity.option.${key}.description`)
-                    }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
+                <v-list-item-title>
+                  {{ $t(`contentNode.laThematicArea.entity.option.${key}.name`) }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ $t(`contentNode.laThematicArea.entity.option.${key}.description`) }}
+                </v-list-item-subtitle>
               </v-list-item>
             </template>
           </v-list>
           <v-skeleton-loader v-else type="sentences" class="mt-2" width="100px" />
         </template>
       </template>
-      <template #item="{ item, parent, on, attrs }">
-        <v-list-item three-line class="ec-lta-item" v-bind="attrs" v-on="on">
+      <template #item="{ item, props }">
+        <v-list-item class="ec-lta-item" lines="three" v-bind="props">
           <v-list-item-action>
-            <v-simple-checkbox
+            <v-checkbox-btn
               class="pointer-events-none"
-              :value="parent.hasItem(item)"
-              :color="parent.color"
+              :color="item.raw.color"
+              :model-value="localSelection.includes(item.value)"
               :ripple="false"
             />
           </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
-            <v-list-item-subtitle>{{ item.description }}</v-list-item-subtitle>
-          </v-list-item-content>
+
+          <v-list-item-title>{{ item.text }}</v-list-item-title>
+          <v-list-item-subtitle>{{ item.description }}</v-list-item-subtitle>
         </v-list-item>
       </template>
     </e-select>
@@ -102,8 +97,8 @@ export default {
     },
     items() {
       return this.dataOptions.map(([key, option]) => ({
-        text: this.$tc(`contentNode.laThematicArea.entity.option.${key}.name`),
-        description: this.$tc(
+        text: this.$t(`contentNode.laThematicArea.entity.option.${key}.name`),
+        description: this.$t(
           `contentNode.laThematicArea.entity.option.${key}.description`
         ),
         value: key,
@@ -131,8 +126,9 @@ export default {
     this.debounceSave = debounce(this.save, DEBOUNCE_WAIT)
   },
   methods: {
-    onInput() {
+    onInput(newValue) {
       this.dirty = true
+      this.localSelection = newValue
       this.errorMessages = []
 
       this.debounceSave()
@@ -160,6 +156,8 @@ export default {
   },
 }
 </script>
+
+<script setup lang="ts"></script>
 
 <style scoped>
 .ec-la-thematic-area :deep(.v-input__slot) {

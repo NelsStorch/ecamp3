@@ -3,12 +3,12 @@
     v-resizeobserver.debounce="onResize"
     :headers="tableHeaders"
     :items="materialItemsData"
-    :disable-pagination="true"
+    :items-per-page="-1"
     :disable-filtering="layoutMode"
     :disable-sort="layoutMode"
     mobile-breakpoint="0"
     item-class="rowClass"
-    class="transparent"
+    class="bg-transparent"
     :class="{
       'ec-material-table--dense': !isDefaultVariant,
       'ec-material-table--default': isDefaultVariant,
@@ -31,7 +31,7 @@
       <api-number-field
         v-if="!item.readonly"
         :disabled="layoutMode || disabled"
-        dense
+        density="compact"
         :uri="item.uri"
         vee-rules="greaterThan:0"
         path="quantity"
@@ -44,7 +44,7 @@
       <api-text-field
         v-if="!item.readonly"
         :disabled="layoutMode || disabled"
-        dense
+        density="compact"
         :uri="item.uri"
         path="unit"
         maxlength="32"
@@ -57,12 +57,12 @@
         <api-text-field
           v-if="!item.readonly"
           :disabled="layoutMode || disabled"
-          dense
+          density="compact"
           :uri="item.uri"
           path="article"
           maxlength="64"
         />
-        <span v-if="item.readonly">{{ item.article }}</span>
+        <strong v-if="item.readonly">{{ item.article }}</strong>
       </template>
       <template v-else>
         <div class="d-flex">
@@ -77,7 +77,7 @@
       <api-select
         v-if="!item.readonly"
         :disabled="layoutMode || disabled"
-        dense
+        density="compact"
         :uri="item.uri"
         path="materialList"
         :items="materialLists"
@@ -108,8 +108,8 @@
           }"
         />
         <DialogMaterialItemEdit v-else :material-item-uri="item.uri">
-          <template #activator="{ on }">
-            <ButtonEdit class="v-btn--has-bg" small text v-on="on" />
+          <template #activator="{ props }">
+            <ButtonEdit v-bind="props" variant="tonal" small text />
           </template>
         </DialogMaterialItemEdit>
       </template>
@@ -124,10 +124,10 @@
         />
 
         <div v-if="item.serverError" class="d-flex gap-2 align-center">
-          <v-tooltip top color="red darken-2">
-            <template #activator="{ on, attrs }">
-              <span v-bind="attrs" class="red--text text--darken-2" v-on="on">{{
-                $tc('global.serverError.short')
+          <v-tooltip location="top" color="red-darken-2">
+            <template #activator="{ props }">
+              <span v-bind="props" class="text-red-darken-2">{{
+                $t('global.serverError.short')
               }}</span>
             </template>
             <ServerErrorContent :server-error="item.serverError" />
@@ -135,7 +135,7 @@
 
           <ButtonRetry @click="retry(item)" />
           <ButtonCancel class="v-btn--has-bg" @click="cancel(item)">
-            {{ $tc('global.button.discard') }}
+            {{ $t('global.button.discard') }}
           </ButtonCancel>
         </div>
       </div>
@@ -151,18 +151,18 @@
       >
         <span>
           <span v-if="!periodOnly" class="d-sr-only">{{
-            $tc('global.button.filter')
+            $t('global.button.filter')
           }}</span>
           {{
             periodOnly
-              ? $tc('components.material.materialTable.periodOnly')
-              : $tc('components.material.materialTable.reference')
+              ? $t('components.material.materialTable.periodOnly')
+              : $t('components.material.materialTable.reference')
           }}
         </span>
         <v-icon
           v-if="periodFilterEnabled"
           aria-hidden="true"
-          small
+          size="small"
           :color="periodOnly ? 'primary' : null"
         >
           {{ periodOnly ? 'mdi-filter' : 'mdi-filter-outline' }}
@@ -182,7 +182,7 @@
       />
     </template>
 
-    <template #footer>
+    <template #bottom>
       <!-- add new item (mobile view) -->
       <DialogMaterialItemCreate
         v-if="!layoutMode && !isDefaultVariant && !disabled"
@@ -191,15 +191,15 @@
         :material-list="materialList"
         @item-adding="add"
       >
-        <template #activator="{ on }">
-          <ButtonAdd class="mt-5" v-on="on">
-            {{ $tc('components.material.materialTable.addNewItem') }}
+        <template #activator="{ props }">
+          <ButtonAdd class="mt-5" v-bind="props">
+            {{ $t('components.material.materialTable.addNewItem') }}
           </ButtonAdd>
         </template>
       </DialogMaterialItemCreate>
     </template>
 
-    <template #no-data>{{ $tc('components.material.materialTable.noItems') }}</template>
+    <template #no-data>{{ $t('components.material.materialTable.noItems') }}</template>
   </v-data-table>
 </template>
 
@@ -220,6 +220,7 @@ import * as Sentry from '@sentry/browser'
 import { serverErrorToString } from '@/helpers/serverError.js'
 import PromptEntityDelete from '@/components/prompt/PromptEntityDelete.vue'
 import ApiNumberField from '@/components/form/api/ApiNumberField.vue'
+import { useToast } from 'vue-toastification'
 
 // Non-breaking space
 const nbsp = '\u00A0'
@@ -265,6 +266,10 @@ export default {
     // Hide the filter button activity / period
     hidePeriodFilter: { type: Boolean, required: false, default: false },
   },
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
   data() {
     return {
       newMaterialItems: {},
@@ -280,32 +285,32 @@ export default {
       if (this.isDefaultVariant) {
         headers.push(
           {
-            text: this.$tc('entity.materialItem.fields.quantity'),
+            title: this.$t('entity.materialItem.fields.quantity'),
             value: 'quantity',
             align: 'end',
             sortable: false,
             width: '10%',
           },
           {
-            text: this.$tc('entity.materialItem.fields.unit'),
+            title: this.$t('entity.materialItem.fields.unit'),
             value: 'unit',
             sortable: false,
             width: '15%',
           },
           {
-            text: this.$tc('entity.materialItem.fields.article'),
+            title: this.$t('entity.materialItem.fields.article'),
             value: 'article',
             cellClass: 'font-weight-bold',
           },
           {
-            text: this.$tc('entity.materialList.name'),
+            title: this.$t('entity.materialList.name'),
             value: 'listName',
             width: '20%',
           }
         )
       } else {
         headers.push({
-          text: this.$tc('entity.materialItem.fields.article'),
+          title: this.$t('entity.materialItem.fields.article'),
           value: 'article',
           align: 'start',
           sortable: true,
@@ -317,7 +322,7 @@ export default {
       // Activity column only shown in period overview
       if (this.period) {
         headers.push({
-          text: this.$tc('entity.materialItem.fields.reference'),
+          text: this.$t('entity.materialItem.fields.reference'),
           align: this.isDefaultVariant ? 'start' : 'end',
           width: this.isDefaultVariant ? '15%' : 'auto',
           value: 'lastColumn',
@@ -385,13 +390,6 @@ export default {
       return this.materialItemCollection.items.some((item) => item.materialNode === null)
     },
   },
-  watch: {
-    periodFilterEnabled() {
-      if (!this.periodFilterEnabled) {
-        this.periodOnly = false
-      }
-    },
-  },
   async mounted() {
     this.clientWidth = this.$el.clientWidth
 
@@ -415,18 +413,16 @@ export default {
       }
     },
 
-    // add new item to list & save to API
-    add(key, data) {
-      // add item to local array
-      this.$set(this.newMaterialItems, key, data)
+    add(key, data, resetForm) {
+      this.newMaterialItems[key] = data
 
       this.postToApi(key, data)
+      resetForm()
     },
 
     // retry to save to API (after server error)
     retry(item) {
-      // reset error
-      this.$set(this.newMaterialItems[item.id], 'serverError', undefined)
+      this.newMaterialItems[item.id]['serverError'] = undefined
 
       // try to save same data again
       this.postToApi(item.id, this.newMaterialItems[item.id])
@@ -434,7 +430,7 @@ export default {
 
     // cancel (remove) item that is not successfully stored to API
     cancel(item) {
-      this.$delete(this.newMaterialItems, item.id)
+      delete this.newMaterialItems[item.id]
     },
 
     postToApi(key, data) {
@@ -445,13 +441,13 @@ export default {
           // reload list after item has successfully been added
           this.api.reload(this.materialItemCollection).then(() => {
             this.api.reload(this.newMaterialItems[key].materialList)
-            this.$delete(this.newMaterialItems, key)
+            delete this.newMaterialItems[key]
           })
         })
         // catch server error
         .catch((error) => {
-          this.$set(this.newMaterialItems[key], 'serverError', error)
-          this.$toast.error(errorToMultiLineToast(error))
+          this.newMaterialItems[key]['serverError'] = error
+          this.toast.error(errorToMultiLineToast(error))
           Sentry.captureMessage(serverErrorToString(error))
         })
     },
@@ -491,17 +487,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.v-data-table:deep(.v-data-table__wrapper th),
-.v-data-table:deep(.v-data-table__wrapper td) {
+.v-data-table:deep(.v-table__wrapper th),
+.v-data-table:deep(.v-table__wrapper td) {
   padding: 0 2px;
 }
 
-.ec-material-table--dense.v-data-table::v-deep {
-  .v-data-table__wrapper th,
-  .v-data-table__wrapper td {
-    padding: 4px 2px;
-    line-height: normal;
-  }
+.ec-material-table--dense.v-table::v-deep(.v-table__wrapper th, .v-table__wrapper td) {
+  padding: 4px 2px;
+  line-height: normal;
 }
 
 .v-data-table:deep(tr.new) {

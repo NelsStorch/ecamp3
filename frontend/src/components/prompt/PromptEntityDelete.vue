@@ -2,27 +2,27 @@
   <PopoverPrompt
     v-model="showDialog"
     :icon="icon"
-    :title="$tc('components.prompt.promptEntityDelete.title')"
+    :title="$t('components.prompt.promptEntityDelete.title')"
     :error="error"
     type="error"
     :submit-action="del"
     :submit-enabled="submitEnabled && !$slots.error"
-    :submit-label="$tc('global.button.delete')"
+    :submit-label="$t('global.button.delete')"
     submit-color="error"
     :submit-icon="icon"
     cancel-icon=""
     :cancel-action="close"
     v-bind="$attrs"
   >
-    <template #activator="scope">
-      <slot name="activator" v-bind="scope">
-        <ButtonDelete v-bind="{ ...scope.attrs, ...btnAttrs }" v-on="scope.on" />
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }">
+        <ButtonDelete v-bind="{ ...props, ...btnAttrs }" />
       </slot>
     </template>
     <slot>
       <p>
         {{
-          $tc('global.warning.delete', warningTextEntity ? 2 : 0, {
+          $t('global.warning.delete', warningTextEntity ? 2 : 0, {
             entity: warningTextEntity,
           })
         }}

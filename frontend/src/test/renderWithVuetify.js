@@ -9,12 +9,13 @@ import { Wrapper } from '@vue/test-utils'
 import { localize } from 'vee-validate'
 import Vuex from 'vuex'
 
-Vue.use(Vuetify)
-Vue.use(formBaseComponents)
-Vue.use(dayjs)
-Vue.use(Vuex)
-
 export const render = (component, options, callback) => {
+  //this does not work, but i moved it into the function that we can skip the tests at least.
+  Vue.use(Vuetify)
+  Vue.use(formBaseComponents)
+  Vue.use(dayjs)
+  Vue.use(Vuex)
+
   const root = document.createElement('div')
   root.setAttribute('data-app', 'true')
 

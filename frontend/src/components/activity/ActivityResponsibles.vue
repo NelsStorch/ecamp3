@@ -1,22 +1,21 @@
 <template>
   <e-select
     v-model="selectedCampCollaborations"
+    v-bind="$attrs"
     :items="availableCampCollaborations"
     :loading="isSaving || isLoading ? 'secondary' : false"
     path="responsible"
     :error-messages="errorMessages"
-    outlined
-    :filled="false"
-    dense
+    variant="outlined"
+    density="compact"
     multiple
     chips
     deletable-chips
     small-chips
-    v-bind="$attrs"
     @input="onInput"
   >
     <template #selection="{ item }">
-      <v-chip :key="item.value" small class="mx-0">
+      <v-chip :key="item.value" class="mx-0" size="small">
         <UserAvatar
           :camp-collaboration="item.campCollaboration"
           left
@@ -78,7 +77,7 @@ export default {
             return {
               value: value._meta.self,
               campCollaboration: value,
-              text: campCollaborationDisplayName(value, this.$tc.bind(this)),
+              text: campCollaborationDisplayName(value, this.$t.bind(this)),
             }
           }),
         (value) => value.text.toLowerCase()

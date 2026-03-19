@@ -1,23 +1,26 @@
 <template>
-  <v-tooltip v-if="showIcon" v-model="showTooltip" max-width="300px" color="#333" bottom>
-    <!-- eslint-disable-next-line vue/no-unused-vars -->
-    <template #activator="_">
+  <v-tooltip
+    v-if="showIcon"
+    v-model="showTooltip"
+    color="#333"
+    location="bottom"
+    max-width="300px"
+  >
+    <template #activator="{ props }">
       <v-btn
-        icon
-        v-bind="$attrs"
+        :icon="icon"
         class="tooltip-activator"
+        v-bind="props"
         @click="click"
         @mouseenter="mouseenter"
         @mouseleave="mouseleave"
-      >
-        <v-icon>{{ icon }}</v-icon>
-      </v-btn>
+      />
     </template>
     <slot>
       {{ text }}
-      <i18n v-if="tooltipI18nKey" :path="tooltipI18nKey">
+      <i18n-t v-if="tooltipI18nKey" :keypath="tooltipI18nKey" scope="global">
         <template #br><br class="linebreak" /></template>
-      </i18n>
+      </i18n-t>
     </slot>
   </v-tooltip>
 </template>
@@ -39,17 +42,21 @@ export default {
   },
   computed: {
     showIcon() {
-      return this.text || 'default' in this.$slots || this.$tc(this.tcKey) != this.tcKey
+      return (
+        this.text ||
+        'default' in this.$slots ||
+        this.$t(this.tooltipI18nKey) != this.tooltipI18nKey
+      )
     },
   },
   methods: {
     click() {
-      if (this.$vuetify.breakpoint.xsOnly) {
+      if (this.$vuetify.display.xs) {
         this.showTooltip = !this.showTooltip
       }
     },
     mouseenter() {
-      if (!this.$vuetify.breakpoint.xsOnly) {
+      if (!this.$vuetify.display.xs) {
         this.showTooltip = true
       }
     },

@@ -229,8 +229,8 @@ export const auth = {
 }
 
 class AuthPlugin {
-  install(Vue) {
-    Object.defineProperties(Vue.prototype, {
+  install(app) {
+    Object.defineProperties(app.config.globalProperties, {
       $auth: {
         get() {
           return auth

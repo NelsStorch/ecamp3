@@ -12,21 +12,21 @@ Displays a field as a color picker (can be used with v-model)
       offset-y
       offset-overflow
       :open-on-click="false"
-      :close-on-click="false"
+      persistent
       :close-on-content-click="false"
       min-width="290px"
       max-width="290px"
-      @input="onPickerClose"
+      @update:model-value="onPickerClose"
     >
-      <template #activator="{ on }">
-        <div v-on="on">
+      <template #activator="{ props }">
+        <div v-bind="props">
           <EColorField
+            v-bind="$attrs"
             :id="id"
             ref="input"
-            :value="pickerValue"
+            :model-value="pickerValue"
             :vee-id="veeId"
             :vee-rules="veeRules"
-            :filled="filled"
             :hide-details="hideDetails"
             :input-class="inputClass"
             :required="required"
@@ -34,9 +34,8 @@ Displays a field as a color picker (can be used with v-model)
             :label="label"
             :validation-label-override="validationLabelOverride"
             :error-messages="errorMessages"
-            v-bind="$attrs"
             @blur="onBlur"
-            @input="onInput($event)"
+            @update:model-value="onInput($event)"
             @click.prevent="onInputClick"
           >
             <template #prepend="{ serializedValue }">
@@ -46,10 +45,12 @@ Displays a field as a color picker (can be used with v-model)
                 class="mt-n1"
                 :aria-label="
                   pickerOpen
-                    ? $tc('components.form.base.eColorPicker.closePicker')
-                    : $tc('components.form.base.eColorPicker.openPicker', 0, {
-                        label: labelOrEntityFieldLabel,
-                      })
+                    ? $t('components.form.base.eColorPicker.closePicker')
+                    : $t(
+                        'components.form.base.eColorPicker.openPicker',
+                        { label: labelOrEntityFieldLabel },
+                        0
+                      )
                 "
                 aria-haspopup="true"
                 :aria-expanded="pickerOpen ? 'true' : 'false'"
@@ -66,18 +67,24 @@ Displays a field as a color picker (can be used with v-model)
         <v-color-picker
           v-if="pickerNull"
           key="model"
-          value="#FF0000"
+          model-value="#FF0000"
+          :modes="['hex', 'rgb', 'hsl']"
+          class="w-100"
+          elevation="0"
           :style="{ '--picker-contrast-color': contrast }"
           flat
-          @update:color="onPickerInput($event.hex)"
+          @update:model-value="onPickerInput($event)"
         />
         <v-color-picker
           v-else
           key="null"
-          :value="pickerValue"
+          :model-value="pickerValue"
+          :modes="['hex', 'rgb', 'hsl']"
+          class="w-100"
+          elevation="0"
           :style="{ '--picker-contrast-color': contrast }"
           flat
-          @update:color="debouncedPickerValue($event.hex)"
+          @update:model-value="debouncedPickerValue($event)"
         />
         <v-divider />
         <div class="d-flex gap-2 pa-4 flex-wrap">
@@ -112,9 +119,9 @@ export default {
   mixins: [formComponentMixin, formComponentPropsMixin],
   inheritAttrs: false,
   props: {
-    value: { type: String, required: false, default: null },
+    modelValue: { type: String, required: false, default: null },
   },
-  emits: ['input'],
+  emits: ['update:modelValue', 'blur'],
   data: () => ({
     pickerOpen: false,
     pickerValue: null,
@@ -142,8 +149,8 @@ export default {
     contrast() {
       try {
         // Vuetify returns invalid value #NANNAN in the initialization phase
-        return this.value && this.value !== '#NANNAN'
-          ? contrastColor(this.value)
+        return this.modelValue && this.modelValue !== '#NANNAN'
+          ? contrastColor(this.modelValue)
           : 'black'
       } catch {
         return 'black'
@@ -156,7 +163,7 @@ export default {
     },
   },
   watch: {
-    value: {
+    modelValue: {
       handler(newValue) {
         this.pickerValue = newValue
         this.pickerNull = [null, ''].includes(newValue)
@@ -196,7 +203,7 @@ export default {
     },
     onInput(value) {
       this.pickerValue = value
-      this.$emit('input', this.pickerValue)
+      this.$emit('update:model-value', this.pickerValue)
     },
     onBlur(event) {
       if (!this.pickerOpen) {
@@ -206,11 +213,11 @@ export default {
     onPickerInput(value) {
       this.pickerValue = value.toUpperCase()
       this.pickerNull = false
-      this.$emit('input', this.pickerValue)
+      this.$emit('update:model-value', this.pickerValue)
     },
     onSwatchSelect(color) {
       this.pickerValue = color
-      this.$emit('input', this.pickerValue)
+      this.$emit('update:model-value', this.pickerValue)
       this.pickerOpen = false
       this.$refs.inputSwatch.$el.focus()
     },

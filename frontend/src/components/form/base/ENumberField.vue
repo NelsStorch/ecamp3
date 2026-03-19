@@ -1,7 +1,8 @@
 <template>
   <EParseField
+    v-bind="$attrs"
     ref="input"
-    :value="value"
+    :model-value="modelValue"
     :format="format"
     :parse="parse"
     :input-filter="inputFilter"
@@ -9,11 +10,12 @@
     :vee-id="veeId"
     :vee-rules="veeRules"
     reset-on-blur
-    v-bind="$attrs"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <!-- passing through all slots -->
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
+    <template v-for="(_, slot) of $slots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData || {}"></slot>
+    </template>
   </EParseField>
 </template>
 
@@ -24,9 +26,9 @@ export default {
   name: 'ENumberField',
   mixins: [formComponentMixin],
   props: {
-    value: { type: [String, Number], required: false, default: null },
+    modelValue: { type: [String, Number], required: false, default: null },
   },
-  emits: ['input'],
+  emits: ['update:modelValue'],
   methods: {
     format(value) {
       switch (value) {

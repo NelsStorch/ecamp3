@@ -17,18 +17,18 @@
       <template #title-actions>
         <TogglePaperSize v-model="isPaperDisplaySize" />
         <v-menu offset-y>
-          <template #activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props">
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
           <v-list>
             <v-list-item @click="copyUrlToClipboard">
-              <v-list-item-icon>
+              <template #prepend>
                 <v-icon>mdi-content-copy</v-icon>
-              </v-list-item-icon>
+              </template>
               <v-list-item-title>
-                {{ $tc('views.camp.category.category.copyCategory') }}
+                {{ $t('views.camp.category.category.copyCategory') }}
               </v-list-item-title>
             </v-list-item>
             <ClipboardInfoDialog
@@ -39,16 +39,16 @@
               v-if="isManager"
               :entity="category"
               :warning-text-entity="category.name"
-              :dialog-title="$tc('views.camp.category.category.deleteCategory')"
+              :dialog-title="$t('views.camp.category.category.deleteCategory')"
               :success-handler="goToActivityAdmin"
             >
-              <template #activator="{ on }">
-                <v-list-item v-on="on">
-                  <v-list-item-icon>
+              <template #activator="{ props }">
+                <v-list-item v-bind="props">
+                  <template #prepend>
                     <v-icon>mdi-delete</v-icon>
-                  </v-list-item-icon>
+                  </template>
                   <v-list-item-title>
-                    {{ $tc('views.camp.category.category.deleteCategory') }}
+                    {{ $t('views.camp.category.category.deleteCategory') }}
                   </v-list-item-title>
                 </v-list-item>
               </template>
@@ -62,36 +62,36 @@
           </v-list>
         </v-menu>
       </template>
-      <v-expansion-panels :value="openPanels" flat multiple accordion>
+      <v-expansion-panels :model-value="openPanels" flat multiple variant="accordion">
         <v-expansion-panel>
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
-              {{ $tc('views.camp.category.category.properties') }}
+              {{ $t('views.camp.category.category.properties') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <CategoryProperties
               :key="category._meta.self"
               :category="category"
               :disabled="!isManager"
             />
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
 
         <v-expansion-panel>
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
-              {{ $tc('views.camp.category.category.template') }}
+              {{ $t('views.camp.category.category.template') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <CategoryTemplate
               :category="category"
               :layout-mode="layoutMode"
               :loading="loading"
               :disabled="!isManager"
             />
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
     </content-card>
@@ -109,6 +109,7 @@ import CategoryTemplate from '@/components/category/CategoryTemplate.vue'
 import TogglePaperSize from '@/components/activity/TogglePaperSize.vue'
 import router, { categoryRoute } from '@/router.js'
 import ClipboardInfoDialog from '@/components/generic/ClipboardInfoDialog.vue'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'Category',
@@ -142,6 +143,10 @@ export default {
       default: null,
       required: false,
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -217,8 +222,8 @@ export default {
       const url = window.location.origin + router.resolve(category).href
       await navigator.clipboard.writeText(url)
 
-      this.$toast.info(
-        this.$tc('global.toast.copied', null, { source: this.category.name }),
+      this.toast.info(
+        this.$t('global.toast.copied', { source: this.category.name }, null),
         {
           timeout: 2000,
         }
@@ -228,7 +233,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .ec-category {
   transition: max-width 0.7s ease;
 }

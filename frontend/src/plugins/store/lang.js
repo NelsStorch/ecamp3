@@ -1,7 +1,7 @@
-import Vue from 'vue'
 import axios from 'axios'
 import VueI18n from '@/plugins/i18n'
-import { localeChanged } from 'vee-validate'
+import { setLocale as veeValidateSetLocale } from '@vee-validate/i18n'
+import dayjs from '@/common/helpers/dayjs.js'
 import { toDayjsLocale } from '@/common/helpers/dayjs.js'
 
 const LANG_KEY = 'language'
@@ -22,9 +22,9 @@ export const mutations = {
     }
 
     state.language = lang
-    VueI18n.locale = lang
-    Vue.dayjs.locale(toDayjsLocale(lang))
-    localeChanged()
+    VueI18n.global.locale.value = lang
+    dayjs.locale(toDayjsLocale(lang))
+    veeValidateSetLocale(lang.substring(0, 2))
     axios.defaults.headers.common['Accept-Language'] = lang
     document.querySelector('html').setAttribute('lang', lang)
     window.localStorage.setItem(LANG_KEY, lang)

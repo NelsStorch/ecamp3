@@ -4,33 +4,31 @@ Show all activity schedule entries of a single period.
 
 <template>
   <content-card
-    :title="$tc('views.camp.campProgram.title')"
+    :title="$t('views.camp.campProgram.title')"
     toolbar
-    :no-border="$vuetify.breakpoint.mdAndUp && openFilter"
+    :no-border="$vuetify.display.mdAndUp && openFilter"
   >
     <template #title-actions>
       <period-switcher :period="period" />
       <v-spacer />
-      <template v-if="$vuetify.breakpoint.smAndUp">
+      <template v-if="$vuetify.display.smAndUp">
         <v-toolbar-items v-if="isFilterSet">
           <v-chip
             label
-            outlined
-            :input-value="openFilter"
+            variant="outlined"
             color="primary"
             class="align-self-center mr-2"
             @click="openFilter = !openFilter"
           >
-            <v-icon left size="20">mdi-filter</v-icon>
+            <v-icon start size="20">mdi-filter</v-icon>
             {{ filteredPropertiesCount }}
           </v-chip>
         </v-toolbar-items>
         <v-chip
           v-else
-          outlined
+          variant="outlined"
           label
           class="mr-1"
-          :input-value="openFilter"
           @click="openFilter = !openFilter"
         >
           <v-icon size="20" color="rgba(0, 0, 0, 0.54)">mdi-filter</v-icon>
@@ -44,10 +42,10 @@ Show all activity schedule entries of a single period.
         @click="editMode = !editMode"
       />
       <v-menu offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" data-testid="campprogram-menu" v-on="on">
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props" data-testid="campprogram-menu">
             <v-badge
-              v-if="!$vuetify.breakpoint.smAndUp && filteredPropertiesCount > 0"
+              v-if="!$vuetify.display.smAndUp && filteredPropertiesCount > 0"
               overlap
               offset-x="2"
               dot
@@ -69,12 +67,12 @@ Show all activity schedule entries of a single period.
             :color="isFilterSet ? 'primary' : null"
             @click="openFilter = !openFilter"
           >
-            <v-list-item-icon>
+            <template #prepend>
               <v-icon>mdi-filter</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Filter</v-list-item-title>
-            </v-list-item-content>
+            </template>
+
+            <v-list-item-title>Filter</v-list-item-title>
+
             <v-list-item-action v-if="isFilterSet">
               <v-badge inline color="primary" :content="filteredPropertiesCount" />
             </v-list-item-action>
@@ -87,7 +85,7 @@ Show all activity schedule entries of a single period.
     </template>
 
     <ScheduleEntryFilters
-      v-if="$vuetify.breakpoint.mdAndUp && openFilter"
+      v-if="$vuetify.display.mdAndUp && openFilter"
       v-model="filter"
       class="ec-content-card__toolbar--border pb-4 justify-center"
       :loading-endpoints="loadingEndpoints"
@@ -99,7 +97,7 @@ Show all activity schedule entries of a single period.
       @height-changed="scheduleEntryFiltersHeightChanged"
     />
     <template v-if="loading">
-      <v-skeleton-loader type="table" />
+      <v-skeleton-loader type="table" class="ma-4" />
     </template>
     <ScheduleEntries
       v-else
@@ -125,7 +123,7 @@ Show all activity schedule entries of a single period.
       <v-icon>mdi-lock</v-icon>
       {{ reminderText }}
     </v-snackbar>
-    <v-bottom-sheet v-if="!$vuetify.breakpoint.mdAndUp" v-model="openFilter">
+    <v-bottom-sheet v-if="!$vuetify.display.mdAndUp" v-model="openFilter">
       <v-sheet class="text-center" height="200px">
         <ScheduleEntryFilters
           v-model="filter"
@@ -199,7 +197,7 @@ export default {
   head() {
     return {
       title: () =>
-        this.$tc('views.camp.campProgram.title') + ': ' + this.period.description,
+        this.$t('views.camp.campProgram.title') + ': ' + this.period.description,
     }
   },
   computed: {
@@ -284,8 +282,8 @@ export default {
     showUnlockReminder(move) {
       if (this.isOutsider) return
       this.reminderText = move
-        ? this.$tc('views.camp.campProgram.reminderLockedMove')
-        : this.$tc('views.camp.campProgram.reminderLockedCreate')
+        ? this.$t('views.camp.campProgram.reminderLockedMove')
+        : this.$t('views.camp.campProgram.reminderLockedCreate')
       this.showReminder = true
     },
     persistRouterState() {
@@ -306,7 +304,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 :root {
   --schedule-entry-filters-height: 0px;
 }

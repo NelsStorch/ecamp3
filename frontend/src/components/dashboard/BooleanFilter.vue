@@ -1,5 +1,11 @@
 <template>
-  <v-chip label outlined :color="value ? 'primary' : null" @click="$emit('input', !value)"
+  <v-chip
+    label
+    :class="modelValue ?? 'text-primary'"
+    :border="modelValue ? null : 'sm'"
+    :variant="modelValue ? 'outlined' : 'flat'"
+    :color="modelValue ? 'primary' : 'surface'"
+    @click.prevent="$emit('update:modelValue', !modelValue)"
     >{{ label }} <CountBadge v-if="resultCount !== null" :count="resultCount"
   /></v-chip>
 </template>
@@ -11,9 +17,10 @@ export default {
   name: 'BooleanFilter',
   components: { CountBadge },
   props: {
-    value: Boolean,
+    modelValue: Boolean,
     label: { type: String, required: true },
     resultCount: { type: Number, default: null },
   },
+  emits: ['update:modelValue'],
 }
 </script>

@@ -1,14 +1,15 @@
 <template>
   <div class="e-form-container">
-    <v-card outlined color="grey lighten-3" class="period mb-2 rounded-b-0">
+    <v-card color="grey-lighten-3" elevation="0" class="period mb-2 rounded-b-0">
       <v-row no-gutters>
         <v-col class="header mb-3">
           <legend class="py-2 px-3 float-left">
-            {{ $tc('components.activity.dialog.formScheduleEntryList.name') }}
+            {{ $t('components.activity.dialog.formScheduleEntryList.name') }}
           </legend>
 
           <button-add
             color="secondary"
+            variant="text"
             text
             class="ma-1 float-right"
             @click="addScheduleEntry"
@@ -18,7 +19,7 @@
       <transition-group
         name="transition-list"
         tag="div"
-        class="row no-gutters d-grid gap-4"
+        class="row no-gutters d-grid gap-4 pb-4"
       >
         <FormScheduleEntryItem
           v-for="scheduleEntry in scheduleEntriesWithoutDeleted"
@@ -34,9 +35,6 @@
           @delete="deleteEntry(scheduleEntry)"
         />
       </transition-group>
-      <v-row>
-        <v-col cols="12" class="text-center" />
-      </v-row>
     </v-card>
   </div>
 </template>
@@ -112,12 +110,15 @@ export default {
       })
     },
     deleteEntry(scheduleEntry) {
-      this.$set(scheduleEntry, 'deleted', true)
+      scheduleEntry.deleted = true
     },
   },
 }
 </script>
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .period.period {
   border-bottom-width: 1px !important;
   border-bottom-style: solid !important;
@@ -125,7 +126,7 @@ export default {
 }
 
 .header {
-  border-bottom: 1px solid map-get($blue-grey, 'lighten-4');
+  border-bottom: 1px solid map.get(settings.$blue-grey, 'lighten-4');
 }
 .transition-list-item {
   transition: all 0.5s;

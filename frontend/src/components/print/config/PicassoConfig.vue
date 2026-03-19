@@ -2,19 +2,21 @@
   <div class="px-md-4 flex-grow-1 d-flex flex-column justify-content-between">
     <e-select
       v-model="options.periods"
-      :label="$tc('print.config.periods')"
+      :label="$t('print.config.periods')"
       :items="periods"
+      path="periods"
       multiple
-      :filled="false"
+      :variant="periods.length === 1 ? 'plain' : 'underlined'"
       :readonly="periods.length === 1"
-      @input="$emit('input')"
+      @update:model-value="$emit('input')"
     />
     <e-select
       v-model="options.orientation"
-      :label="$tc('components.print.config.picassoConfig.orientation')"
+      :label="$t('components.print.config.picassoConfig.orientation')"
       :items="orientations"
-      :filled="false"
-      @input="$emit('input')"
+      path="orientation"
+      variant="underlined"
+      @update:model-value="$emit('input')"
     />
     <div class="flex-grow-1"></div>
     <DialogScheduleEntryFilter
@@ -30,7 +32,7 @@
 <script>
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
-import { repairPrintFilterConfig } from '../repairPrintConfig.js'
+import repairFilterConfig from '../../program/repairFilterConfig.js'
 
 export default {
   name: 'PicassoConfig',
@@ -44,11 +46,11 @@ export default {
       orientations: [
         {
           value: 'L',
-          text: this.$tc('components.print.config.picassoConfig.landscape'),
+          text: this.$t('components.print.config.picassoConfig.landscape'),
         },
         {
           value: 'P',
-          text: this.$tc('components.print.config.picassoConfig.portrait'),
+          text: this.$t('components.print.config.picassoConfig.portrait'),
         },
       ],
     }
@@ -74,13 +76,16 @@ export default {
         return this.filter.periods.includes(period._meta.self)
       })
     },
+    selectedScheduleEntries() {
+      return this.selectedPeriods.flatMap((period) => period.scheduleEntries().items)
+    },
   },
   methods: {
     filterFn() {
       return (filter) =>
-        this.selectedPeriods
-          .flatMap((period) => period.scheduleEntries().items)
-          .filter((scheduleEntry) => filterMatchScheduleEntry(scheduleEntry, filter))
+        this.selectedScheduleEntries.filter((scheduleEntry) =>
+          filterMatchScheduleEntry(scheduleEntry, filter)
+        )
     },
     updateFilter(newFilter) {
       this.options.filter = newFilter
@@ -111,7 +116,8 @@ export default {
     if (!['L', 'P'].includes(config.options.orientation)) {
       config.options.orientation = 'L'
     }
-    return repairPrintFilterConfig(config, camp, knownPeriods)
+    config.options.filter = repairFilterConfig(config, camp)
+    return config
   },
 }
 </script>

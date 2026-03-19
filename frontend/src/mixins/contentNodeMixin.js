@@ -6,9 +6,9 @@ export const contentNodeMixin = {
     disabled: { type: Boolean, default: false },
   },
   inject: ['camp'],
-  computed: {
-    camp() {
-      return this.camp()
-    },
-  },
+  //computed: {
+  //  camp() {
+  //    return this.camp()
+  //  },
+  //},
 }

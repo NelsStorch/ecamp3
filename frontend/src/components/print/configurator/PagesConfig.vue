@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$vuetify.breakpoint.mdAndUp" class="e-pages-config__wrapper">
+  <div v-if="$vuetify.display.mdAndUp" class="e-pages-config__wrapper">
     <div
       class="e-pages-config"
       :class="{
@@ -15,11 +15,11 @@
         tabindex="-1"
         icon-only
       />
-      <div class="e-pages-config__inner" v-bind="$attrs" v-on="$listeners">
+      <div class="e-pages-config__inner" v-bind="$attrs">
         <div class="e-pages-config__scroller">
-          <v-icon v-if="template" x-large class="ma-auto">mdi-plus</v-icon>
+          <v-icon v-if="template" class="ma-auto" size="x-large">mdi-plus</v-icon>
           <h3
-            class="e-pages-config__title title py-4 white sticky"
+            class="e-pages-config__title text-h6 py-4 bg-white sticky"
             :class="{ handle: !template }"
           >
             <TextAlignBaseline v-if="!template"
@@ -37,35 +37,25 @@
         v-if="!template"
         :text="false"
         icon-only
-        color="grey"
-        dark
+        color="transparent"
         class="e-pages-config__delete px-2"
-        :class="{ 'rounded-l-0': !landscape, 'rounded-t-0': landscape }"
+        variant="flat"
+        :class="{ 'rounded-s-0': !landscape, 'rounded-t-0': landscape }"
         @click="$emit('remove')"
       />
     </div>
   </div>
-  <v-list-item v-else-if="template" class="py-2 px-0" v-bind="$attrs" v-on="$listeners">
-    <v-list-item-icon class="mr-0 my-0 px-4 py-2 align-self-baseline">
-      <TextAlignBaseline><v-icon>mdi-plus</v-icon></TextAlignBaseline>
-    </v-list-item-icon>
-    <v-list-item-content class="align-self-baseline">
-      <v-list-item-title
-        ><h3>{{ title }}</h3></v-list-item-title
-      >
-    </v-list-item-content>
+  <v-list-item v-else-if="template" icon="mdi-plus" class="py-2 px-0" v-bind="$attrs">
+    <v-list-item-title
+      ><h3>{{ title }}</h3></v-list-item-title
+    >
   </v-list-item>
   <div v-else>
-    <v-list-item class="py-2 px-0">
-      <v-list-item-icon v-if="!template" class="mr-0 my-0 px-4 py-2 align-self-baseline">
-        <TextAlignBaseline><v-icon class="handle">mdi-drag</v-icon></TextAlignBaseline>
-      </v-list-item-icon>
-      <v-list-item-content class="align-self-baseline">
-        <v-list-item-title class="mb-2"
-          ><h3>{{ title }}</h3></v-list-item-title
-        >
-        <slot />
-      </v-list-item-content>
+    <v-list-item :icon="!template ?? 'mdi-drag'" class="py-2 px-0">
+      <v-list-item-title class="mb-2"
+        ><h3>{{ title }}</h3></v-list-item-title
+      >
+      <slot />
       <v-list-item-action v-if="!template" class="align-self-baseline my-0">
         <TextAlignBaseline
           ><v-btn icon class="mr-6" @click="$emit('remove')"
@@ -95,6 +85,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .e-pages-config__wrapper {
   display: flow-root;
   aspect-ratio: 1 / 1;
@@ -224,6 +217,6 @@ export default {
 }
 
 .e-pages-config__delete:hover {
-  color: map-get($red, 'base') !important;
+  color: map.get(settings.$red, 'base') !important;
 }
 </style>

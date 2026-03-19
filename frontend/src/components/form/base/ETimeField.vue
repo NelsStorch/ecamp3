@@ -1,7 +1,8 @@
 <template>
   <EParseField
+    v-bind="$attrs"
     ref="input"
-    :value="value"
+    :model-value="modelValue"
     :format="format"
     :parse="parse"
     :serialize="serialize"
@@ -10,14 +11,11 @@
     :vee-id="veeId"
     :vee-rules="veeRules"
     reset-on-blur
-    v-bind="$attrs"
-    v-on="$listeners"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:model-value', $event)"
   >
     <!-- passing through all slots -->
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-      <slot v-if="name !== 'prepend'" :name="name" v-bind="slotData" />
+    <template v-for="(_, slot) of $slots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData"></slot>
     </template>
   </EParseField>
 </template>
@@ -30,12 +28,12 @@ export default {
   name: 'ETimeField',
   mixins: [formComponentMixin],
   props: {
-    value: { type: String, required: false, default: null },
+    modelValue: { type: String, required: false, default: null },
 
     // format in which the `value` property is being provided & input events are triggered
     valueFormat: { type: [String, Array], default: 'HH:mm' },
   },
-  emits: ['input'],
+  emits: ['update:model-value'],
   data() {
     return {
       date: null,
@@ -68,7 +66,7 @@ export default {
             .millisecond(parsedDateTime.millisecond()) ?? parsedDateTime
         )
       } else {
-        throw new Error(this.$tc('components.form.base.eTimeField.parseError'))
+        throw new Error(this.$t('components.form.base.eTimeField.parseError'))
       }
     },
     /**

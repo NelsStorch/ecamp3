@@ -1,41 +1,44 @@
 <template>
-  <ValidationProvider
-    v-slot="{ errors: veeErrors }"
-    tag="div"
-    :name="validationLabel"
-    :vid="veeId"
+  <Field
+    v-slot="{ handleChange, errors: veeErrors }"
+    :label="validationLabel"
+    :name="veeId ?? path"
     :rules="veeRules"
-    :required="required"
-    class="e-form-container"
   >
     <v-tiptap-editor
-      v-bind="$attrs"
-      :with-extensions="false"
-      :filled="filled"
-      :hide-details="hideDetails"
-      :error-messages="veeErrors.concat(errorMessages)"
-      :label="labelOrEntityFieldLabel"
       :class="[inputClass]"
-      v-on="$listeners"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      :with-extensions="false"
+      :on-input="
+        ($event) => {
+          handleChange($event)
+          $emit('update:model-value', $event)
+        }
+      "
+      v-bind="$attrs"
     >
       <!-- passing through all slots -->
-      <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-      <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-        <slot :name="name" v-bind="slotData" />
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-tiptap-editor>
-  </ValidationProvider>
+  </Field>
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate'
+import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import VTiptapEditor from '@/components/form/tiptap/VTiptapEditor.vue'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 
 export default {
   name: 'ETextarea',
-  components: { VTiptapEditor, ValidationProvider },
+  components: {
+    Field,
+    VTiptapEditor,
+  },
   mixins: [formComponentPropsMixin, formComponentMixin],
 }
 </script>

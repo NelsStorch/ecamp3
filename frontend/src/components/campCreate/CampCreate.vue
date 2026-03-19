@@ -1,33 +1,37 @@
 <template>
-  <v-stepper v-model="step" flat>
+  <v-stepper :model-value="step" flat>
     <v-stepper-header class="elevation-0">
-      <v-spacer v-if="$vuetify.breakpoint.smAndUp" />
-      <v-stepper-step :complete="step > 1" :step="1" class="px-4">
-        {{ $tc('components.campCreate.campCreate.steps.infos') }}
-      </v-stepper-step>
+      <v-spacer v-if="$vuetify.display.smAndUp" class="w-100" />
+      <v-stepper-item :value="1" :complete="step > 1" class="px-4" color="primary">
+        {{ $t('components.campCreate.campCreate.steps.infos') }}
+      </v-stepper-item>
       <v-divider class="mx-n2" />
-      <v-stepper-step :complete="step > 2" :step="2" class="px-4">
-        {{ $tc('components.campCreate.campCreate.steps.template') }}
-      </v-stepper-step>
-      <v-spacer v-if="$vuetify.breakpoint.smAndUp" />
+      <v-stepper-item :value="2" :complete="step > 2" class="px-4" color="primary">
+        {{ $t('components.campCreate.campCreate.steps.template') }}
+      </v-stepper-item>
+      <v-spacer v-if="$vuetify.display.smAndUp" class="w-100" />
     </v-stepper-header>
     <v-divider />
-    <v-stepper-items>
-      <CampCreateStep1
-        :camp="camp"
-        :is-saving="isSaving"
-        @add-period="addPeriod"
-        @delete-period="deletePeriod"
-        @next-step="step++"
-      />
-      <CampCreateStep2
-        :camp="camp"
-        :is-saving="isSaving"
-        :server-error="serverError"
-        @create-camp="createCamp"
-        @previous-step="step--"
-      />
-    </v-stepper-items>
+    <v-stepper-window class="ma-0">
+      <v-stepper-window-item :value="1">
+        <CampCreateStep1
+          :camp="camp"
+          :is-saving="isSaving"
+          @add-period="addPeriod"
+          @delete-period="deletePeriod"
+          @next-step="step++"
+        />
+      </v-stepper-window-item>
+      <v-stepper-window-item :value="2">
+        <CampCreateStep2
+          :camp="camp"
+          :is-saving="isSaving"
+          :server-error="serverError"
+          @create-camp="createCamp"
+          @previous-step="step--"
+        />
+      </v-stepper-window-item>
+    </v-stepper-window>
   </v-stepper>
 </template>
 <script>
@@ -50,10 +54,10 @@ export default {
           {
             start: '',
             end: '',
-            description: this.$tc('entity.period.defaultDescription'),
+            description: this.$t('entity.period.defaultDescription'),
           },
         ],
-        campPrototype: '',
+        campPrototype: null,
       },
       serverError: null,
       isSaving: false,

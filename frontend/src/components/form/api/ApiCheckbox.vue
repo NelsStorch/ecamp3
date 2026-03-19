@@ -5,16 +5,16 @@ Displays a field as a e-checkbox + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$props" separate-buttons v-on="$listeners">
+  <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }" separate-buttons>
     <e-checkbox
-      :value="wrapper.localValue"
+      :model-value="wrapper.localValue"
       v-bind="$attrs"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving"
-      @input="wrapper.on.input"
+      @update:model-value="wrapper.on.input"
     >
       <template #append>
         <api-wrapper-append :wrapper="wrapper" />

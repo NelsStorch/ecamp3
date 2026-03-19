@@ -1,20 +1,22 @@
 <template>
-  <v-btn
-    class="px-3 px-sm-4"
-    min-width="0"
-    :color="color"
-    v-bind="$attrs"
-    v-on="$listeners"
-  >
-    <v-icon v-if="!iconLast" :left="!hideLabel" size="150%" :class="{ animate: animate }">
-      {{ icon }}
-    </v-icon>
+  <v-btn v-bind="$attrs" class="px-3 px-sm-4" min-width="0" :color="color">
+    <v-icon
+      v-if="!iconLast"
+      :start="!hideLabel"
+      size="150%"
+      :class="{ animate: animate }"
+      :icon="icon"
+    />
     <span :class="{ 'd-sr-only': hideLabel }">
       <slot />
     </span>
-    <v-icon v-if="iconLast" :right="!hideLabel" size="150%" :class="{ animate: animate }">
-      {{ icon }}
-    </v-icon>
+    <v-icon
+      v-if="iconLast"
+      :end="!hideLabel"
+      size="150%"
+      :class="{ animate: animate }"
+      :icon="icon"
+    />
   </v-btn>
 </template>
 

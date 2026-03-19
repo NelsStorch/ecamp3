@@ -3,19 +3,18 @@ Displays a field as a e-color-field + write access via API wrapper
 -->
 
 <template>
-  <api-wrapper v-slot="wrapper" v-bind="$props" separate-buttons v-on="$listeners">
+  <api-wrapper v-slot="wrapper" v-bind="{ ...$props, ...$attrs }" separate-buttons>
     <e-color-field
-      :value="wrapper.localValue"
       v-bind="$attrs"
+      :model-value="wrapper.localValue"
       :path="path"
       :readonly="wrapper.readonly"
       :disabled="disabled"
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
-      :outlined="outlined"
-      :filled="filled"
-      :dense="dense"
-      @input="wrapper.on.input"
+      :variant
+      :density
+      @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"
     >
       <template #append>

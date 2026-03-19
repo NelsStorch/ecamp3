@@ -3,11 +3,12 @@
     <e-select
       v-model="options.periods"
       :items="periods"
-      :label="$tc('print.config.periods')"
+      path="periods"
+      :label="$t('print.config.periods')"
       multiple
-      :filled="false"
+      :variant="periods.length === 1 ? 'plain' : 'underlined'"
       :readonly="periods.length === 1"
-      @input="$emit('input')"
+      @update:model-value="$emit('input')"
     />
     <div class="flex-grow-1"></div>
     <DialogScheduleEntryFilter
@@ -25,7 +26,7 @@ import SummaryConfig, {
   SUMMARY_CONTENTTYPES,
 } from '@/components/print/config/SummaryConfig.vue'
 import DialogScheduleEntryFilter from './DialogScheduleEntryFilter.vue'
-import { repairPrintFilterConfig } from '../repairPrintConfig.js'
+import repairFilterConfig from '../../program/repairFilterConfig.js'
 
 export default {
   name: 'StoryConfig',
@@ -56,7 +57,8 @@ export default {
         return knownPeriods.includes(period)
       })
     }
-    return repairPrintFilterConfig(config, camp, knownPeriods)
+    config.options.filter = repairFilterConfig(config, camp)
+    return config
   },
 }
 </script>

@@ -9,18 +9,17 @@
       'ec-button-contentnode-add-wrapper--single': single,
     }"
   >
-    <v-menu bottom left offset-y>
-      <template #activator="{ on, attrs }">
+    <v-menu location="bottom left" offset-y>
+      <template #activator="{ props }">
         <v-btn
           class="ec-button-contentnode-add"
           color="primary--text"
           block
           :loading="isAdding"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
-          <v-icon left>mdi-plus-circle-outline</v-icon>
-          {{ $tc('global.button.add') }}
+          <v-icon start>mdi-plus-circle-outline</v-icon>
+          {{ $t('global.button.add') }}
         </v-btn>
       </template>
       <v-list>
@@ -30,11 +29,11 @@
           :key="contentType._meta.self"
           @click="addContentNode(contentType)"
         >
-          <v-list-item-icon>
-            <v-icon>{{ $tc(contentTypeIconKey(contentType)) }}</v-icon>
-          </v-list-item-icon>
+          <template #prepend>
+            <v-icon>{{ $t(contentTypeIconKey(contentType)) }}</v-icon>
+          </template>
           <v-list-item-title>
-            {{ $tc(contentTypeNameKey(contentType)) }}
+            {{ $t(contentTypeNameKey(contentType)) }}
           </v-list-item-title>
         </v-list-item>
 
@@ -46,11 +45,11 @@
           :key="contentType._meta.self"
           @click="addContentNode(contentType)"
         >
-          <v-list-item-icon>
-            <v-icon>{{ $tc(contentTypeIconKey(contentType)) }}</v-icon>
-          </v-list-item-icon>
+          <template #prepend>
+            <v-icon>{{ $t(contentTypeIconKey(contentType)) }}</v-icon>
+          </template>
           <v-list-item-title>
-            {{ $tc(contentTypeNameKey(contentType)) }}
+            {{ $t(contentTypeNameKey(contentType)) }}
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -62,6 +61,8 @@ import { camelCase } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
 import { getEnv } from '@/environment.js'
 import contentTypeIcons from './content/contentTypeIcons.js'
+import { useToast } from 'vue-toastification'
+import { componentI18n } from '@/plugins/i18n/index.js'
 
 export default {
   name: 'ButtonNestedContentNodeAdd',
@@ -72,6 +73,10 @@ export default {
     slotName: { type: String, required: true },
     root: { type: Boolean, default: false },
     single: { type: Boolean, default: false },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -128,8 +133,8 @@ export default {
       }
     },
     sortContentTypeByTranslatedName(ct1, ct2) {
-      const ct1name = this.$i18n.tc(this.contentTypeNameKey(ct1))
-      const ct2name = this.$i18n.tc(this.contentTypeNameKey(ct2))
+      const ct1name = componentI18n.t(this.contentTypeNameKey(ct1))
+      const ct2name = componentI18n.t(this.contentTypeNameKey(ct2))
       return ct1name.localeCompare(ct2name)
     },
     async addContentNode(contentType) {
@@ -147,7 +152,7 @@ export default {
 
         await this.allContentNodes().$reload()
       } catch (error) {
-        this.$toast.error(errorToMultiLineToast(error))
+        this.toast.error(errorToMultiLineToast(error))
       }
       this.isAdding = false
     },

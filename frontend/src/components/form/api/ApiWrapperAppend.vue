@@ -9,79 +9,79 @@
 
     <!-- Retry/Cancel button if saving failed -->
     <template v-if="wrapper.hasServerError">
-      <v-tooltip bottom class="ml-auto">
-        <template #activator="{ on }">
+      <v-tooltip class="ml-auto" location="bottom">
+        <template #activator="{ props }">
           <v-btn
             fab
             dark
-            depressed
-            x-small
+            size="x-small"
+            variant="flat"
             color="error"
             type="submit"
             class="mr-1"
-            :aria-label="$tc('global.button.tryagain')"
-            v-on="on"
+            :aria-label="$t('global.button.tryagain')"
+            v-bind="props"
             @click="wrapper.on.save"
           >
             <v-icon>mdi-refresh</v-icon>
           </v-btn>
         </template>
-        <span>{{ $tc('global.button.tryagain') }}</span>
+        <span>{{ $t('global.button.tryagain') }}</span>
       </v-tooltip>
-      <v-tooltip bottom class="ml-auto">
-        <template #activator="{ on }">
+      <v-tooltip class="ml-auto" location="bottom">
+        <template #activator="{ props }">
           <v-btn
             fab
             dark
-            depressed
-            x-small
+            size="x-small"
+            variant="flat"
             color="grey"
-            :aria-label="$tc('global.button.cancel')"
-            v-on="on"
+            :aria-label="$t('global.button.cancel')"
+            v-bind="props"
             @click="wrapper.on.reset"
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </template>
-        <span>{{ $tc('global.button.cancel') }}</span>
+        <span>{{ $t('global.button.cancel') }}</span>
       </v-tooltip>
     </template>
 
     <template v-else-if="!wrapper.autoSave">
-      <v-tooltip v-if="wrapper.dirty" bottom class="ml-auto">
-        <template #activator="{ on }">
+      <v-tooltip v-if="wrapper.dirty" class="ml-auto" location="bottom">
+        <template #activator="{ props }">
           <v-btn
             fab
             dark
-            depressed
-            x-small
+            size="x-small"
+            variant="flat"
             color="success"
             type="submit"
             class="mr-1"
-            :aria-label="$tc('global.button.save')"
-            v-on="on"
+            :aria-label="$t('global.button.save')"
+            v-bind="props"
           >
             <v-icon>mdi-check</v-icon>
           </v-btn>
         </template>
-        <span>{{ $tc('global.button.save') }}</span>
+        <span>{{ $t('global.button.save') }}</span>
       </v-tooltip>
-      <v-tooltip bottom class="ml-auto">
-        <template #activator="{ on }">
+      <v-tooltip class="ml-auto" location="bottom">
+        <template #activator="{ props }">
           <v-btn
             fab
             dark
-            depressed
-            x-small
+            size="x-small"
+            variant="flat"
             color="grey"
-            :aria-label="$tc('global.button.cancel')"
-            v-on="on"
+            :aria-label="$t('global.button.cancel')"
+            v-bind="props"
             @click="wrapper.on.reset"
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </template>
-        <span>{{ $tc('global.button.cancel') }}</span>
+        <span>{{ $t('global.button.cancel') }}</span>
       </v-tooltip>
     </template>
 

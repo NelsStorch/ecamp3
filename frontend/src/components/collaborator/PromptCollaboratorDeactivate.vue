@@ -1,6 +1,7 @@
 <template>
   <PopoverPrompt
     v-model="showDialog"
+    v-bind="$attrs"
     type="error"
     :error="error"
     :submit-action="deactivateUser"
@@ -10,10 +11,9 @@
     submit-icon="mdi-cancel"
     cancel-icon=""
     :cancel-action="close"
-    v-bind="$attrs"
   >
-    <template #activator="scope">
-      <slot name="activator" v-bind="scope" />
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }" />
     </template>
     <slot>
       {{ warningText }}
@@ -33,6 +33,7 @@ import { errorToMultiLineToast } from '@/components/toast/toasts'
 import PopoverPrompt from '@/components/prompt/PopoverPrompt.vue'
 import isOwnCampCollaboration from './isOwnCampCollaboration.js'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'PromptCollaboratorDeactivate',
@@ -41,23 +42,27 @@ export default {
   props: {
     entity: { type: Object, required: true },
   },
+  setup() {
+    const toast = useToast()
+    return { toast }
+  },
   computed: {
     isOwnCampCollaboration() {
       return isOwnCampCollaboration(this.entity, this.$store.state.auth)
     },
     displayName() {
-      return campCollaborationDisplayName(this.entity, this.$tc.bind(this))
+      return campCollaborationDisplayName(this.entity, this.$t.bind(this))
     },
     submitLabel() {
       return this.isOwnCampCollaboration
-        ? this.$tc('components.collaborator.promptCollaboratorDeactivate.leaveCamp')
-        : this.$tc('components.collaborator.promptCollaboratorDeactivate.deactivate')
+        ? this.$t('components.collaborator.promptCollaboratorDeactivate.leaveCamp')
+        : this.$t('components.collaborator.promptCollaboratorDeactivate.deactivate')
     },
     warningText() {
       const key = this.isOwnCampCollaboration
         ? 'components.collaborator.promptCollaboratorDeactivate.warningTextLeaveCamp'
         : 'components.collaborator.promptCollaboratorDeactivate.warningText'
-      return this.$tc(key, 1, {
+      return this.$t(key, 1, {
         name: this.displayName,
         camp: campShortTitle(this.entity.camp()),
       })
@@ -71,7 +76,7 @@ export default {
       this.error = null
       const promise = this.api
         .patch(this.entity, { status: 'inactive' })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
 
       // User left camp -> navigate to camp-overview
       promise.then(() => {

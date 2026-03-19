@@ -1,34 +1,33 @@
 <template>
-  <v-bottom-navigation grow app background-color="blue-grey darken-4" dark>
+  <v-bottom-navigation grow app bg-color="blue-grey-darken-4" dark class="ec-bottombar">
     <v-btn :to="campRoute(camp, 'program')">
-      <span>{{ $tc('views.camp.navigation.mobile.navBottombar.program') }}</span>
       <v-icon>mdi-view-dashboard</v-icon>
+      <span>{{ $t('views.camp.navigation.mobile.navBottombar.program') }}</span>
     </v-btn>
     <v-btn :to="campRoute(camp, 'story')">
-      <span>{{ $tc('views.camp.navigation.mobile.navBottombar.story') }}</span>
       <v-icon>mdi-book-open-variant</v-icon>
+      <span>{{ $t('views.camp.navigation.mobile.navBottombar.story') }}</span>
     </v-btn>
     <v-btn
       :to="campRoute(camp, 'dashboard')"
       class="ec-home-button flex-shrink-0 flex-grow-1 px-0"
     >
+      <v-icon size="large" icon="mdi-tent" />
       <span class="ec-home-button__inner">{{ campShortTitle(camp) }}</span>
-      <v-icon large>mdi-tent</v-icon>
     </v-btn>
     <v-btn :to="materialListRoute(camp, '/lists')">
-      <span>{{ $tc('views.camp.navigation.mobile.navBottombar.material') }}</span>
       <v-icon>mdi-package-variant</v-icon>
+      <span>{{ $t('views.camp.navigation.mobile.navBottombar.material') }}</span>
     </v-btn>
     <v-btn @click="$emit('input', true)">
-      <span>{{ $tc('views.camp.navigation.mobile.navBottombar.more') }}</span>
       <v-icon>mdi-menu</v-icon>
+      <span>{{ $t('views.camp.navigation.mobile.navBottombar.more') }}</span>
     </v-btn>
   </v-bottom-navigation>
 </template>
 
 <script>
 import { campRoute, materialListRoute } from '@/router'
-import { mapGetters } from 'vuex'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
 
 export default {
@@ -41,11 +40,6 @@ export default {
       value: false,
     }
   },
-  computed: {
-    ...mapGetters({
-      user: 'getLoggedInUser',
-    }),
-  },
   methods: {
     materialListRoute,
     campRoute,
@@ -55,11 +49,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// eslint-disable-next-line vue-scoped-css/no-unused-selector
-.v-bottom-navigation--fixed {
+@use 'vuetify/settings';
+@use 'sass:map';
+
+.ec-bottombar {
   height: auto !important;
   min-height: 56px;
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+:deep(.v-btn--stacked .v-icon) {
+  --v-icon-size-multiplier: 1;
+}
+
+:deep(.v-bottom-navigation--grow .v-bottom-navigation__content > .v-btn) {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 1;
+  width: 100%;
 }
 
 .ec-home-button {

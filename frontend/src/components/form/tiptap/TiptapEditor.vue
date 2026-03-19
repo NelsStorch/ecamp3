@@ -11,10 +11,13 @@
       ref="bubbleMenu"
       :editor="editor"
       :should-show="shouldShow"
-      :tippy-options="{ maxWidth: 'none' }"
     >
-      <div class="elevation-4 ec-tiptap-toolbar white">
-        <v-toolbar class="elevation-0 ec-tiptap-toolbar--first" dense color="transparent">
+      <div class="elevation-4 ec-tiptap-toolbar bg-white">
+        <v-toolbar
+          class="elevation-0 ec-tiptap-toolbar--first"
+          density="compact"
+          color="transparent"
+        >
           <TiptapToolbarButton
             icon="mdi-format-bold"
             :class="editor.isActive('bold') ? 'v-item--active v-btn--active' : ''"
@@ -75,7 +78,7 @@
         <v-divider class="ec-tiptap-toolbar__mobile-divider" />
         <v-toolbar
           class="elevation-0 ec-tiptap-toolbar--second"
-          dense
+          density="compact"
           color="transparent"
         >
           <TiptapToolbarButton
@@ -114,7 +117,8 @@
   </div>
 </template>
 <script>
-import { BubbleMenu, Editor, EditorContent } from '@tiptap/vue-2'
+import { Editor, EditorContent } from '@tiptap/vue-3'
+import { BubbleMenu } from '@tiptap/vue-3/menus'
 import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
@@ -135,6 +139,10 @@ import {
 } from '@/components/form/tiptap/AutoLinkDecoration.js'
 import { isTextSelection } from '@tiptap/core'
 
+function isSillyThingThatHappensWithTipTap(val) {
+  return val && Object.prototype.hasOwnProperty.call(val, 'isTrusted')
+}
+
 export default {
   name: 'TiptapEditor',
   components: {
@@ -143,7 +151,7 @@ export default {
     BubbleMenu,
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       default: '',
     },
@@ -160,6 +168,7 @@ export default {
       default: true,
     },
   },
+  emits: ['input', 'focus', 'blur'],
   data() {
     const placeholder = Placeholder.configure({
       emptyEditorClass: 'is-editor-empty',
@@ -194,8 +203,10 @@ export default {
       hoverCursor: false,
       editor: new Editor({
         extensions: extensions,
-        content: this.value,
+        content: this.modelValue,
         onUpdate: this.onUpdate,
+        onFocus: (e) => this.$emit('focus', e),
+        onBlur: (e) => this.$emit('blur', e),
         editable: this.editable,
       }),
       placeholderExtension: placeholder,
@@ -253,11 +264,12 @@ export default {
     },
   },
   watch: {
-    value(val) {
+    modelValue(val) {
       // Be careful to only use setContent when absolutely necessary, because it resets the user's cursor to the end
       // of the input field
-      if (val !== this.html) {
-        this.editor.commands.setContent(val)
+      if (val !== this.html && !isSillyThingThatHappensWithTipTap(val)) {
+        // we do not want to trigger onUpdate when modelValue is updated from outside
+        this.editor.commands.setContent(val, { emitUpdate: false })
       }
     },
     editable() {
@@ -271,7 +283,7 @@ export default {
     document.addEventListener('keyup', this.specialKeyListeners, { passive: true })
     document.addEventListener('contextmenu', this.specialMenuListeners, { passive: true })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('keydown', this.specialKeyListeners)
     document.removeEventListener('keyup', this.specialKeyListeners)
     document.removeEventListener('contextmenu', this.specialMenuListeners)
@@ -294,6 +306,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 div.editor:deep(p.is-editor-empty:first-child::before) {
   content: attr(data-placeholder);
   float: left;
@@ -319,7 +334,7 @@ div.editor:deep(.ec-tiptap-toolbar) {
 .ec-tiptap-toolbar--second,
 .ec-tiptap-toolbar__mobile-divider {
   display: block;
-  @media #{map-get($display-breakpoints, 'sm-and-up')} {
+  @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
     display: none;
   }
 }
@@ -352,7 +367,7 @@ div.editor:deep(.editor__content .ProseMirror) {
   overflow-wrap: anywhere;
 }
 
-.theme--light.v-input--is-disabled div.editor:deep(.editor__content .ProseMirror) {
+.v-theme--light.v-input--is-disabled div.editor:deep(.editor__content .ProseMirror) {
   color: rgba(0, 0, 0, 0.38);
 }
 
@@ -363,6 +378,10 @@ div.editor:deep(.editor__content .ProseMirror p),
 div.editor:deep(.editor__content .ProseMirror ol),
 div.editor:deep(.editor__content .ProseMirror ul) {
   margin-bottom: 6px;
+}
+div.editor:deep(.editor__content .ProseMirror ol),
+div.editor:deep(.editor__content .ProseMirror ul) {
+  padding-left: 24px;
 }
 div.editor:deep(.editor__content .ProseMirror h1) {
   margin-top: 18px;
@@ -384,6 +403,9 @@ div.editor:deep(.editor__content .ProseMirror li p) {
 }
 div.editor:deep(.editor__content .ProseMirror li p:not(:last-child)) {
   margin-bottom: 0;
+}
+.editor.editor--editable {
+  cursor: text;
 }
 .editor.editor--editable:deep(.autolink) {
   cursor: text;

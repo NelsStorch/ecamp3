@@ -1,21 +1,23 @@
 <template>
   <li>
     <div
-      class="d-flex gap-2 align-baseline pb-2"
+      class="d-flex gap-2 pb-2"
       @click="checked ? $emit('remove-item', item.id) : $emit('add-item', item.id)"
     >
       <component :is="checked ? 'strong' : 'span'" class="flex-grow-1"
         >{{ item.text }}
       </component>
-      <v-switch inset dense :input-value="checked" hide-details class="mt-0" />
+      <v-switch :model-value="checked" density="compact" hide-details inset />
     </div>
-    <ol v-if="children.length > 0">
+    <ol v-if="children.length > 0" class="pl-6">
       <ChecklistItem
         v-for="child in children"
         :key="child._meta.self"
         :checklist="checklist"
         :item="child"
-        v-on="$listeners"
+        v-bind="$attrs"
+        @add-item="$emit('add-item', $event)"
+        @remove-item="$emit('remove-item', $event)"
       />
     </ol>
   </li>
@@ -57,4 +59,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+::v-deep(.v-input.v-input--horizontal) {
+  grid-template-areas: unset;
+}
+</style>

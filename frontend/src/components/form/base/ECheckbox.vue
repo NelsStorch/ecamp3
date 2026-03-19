@@ -1,42 +1,49 @@
 <template>
-  <ValidationProvider
-    v-slot="{ errors: veeErrors }"
-    :name="validationLabel"
-    :vid="veeId"
+  <Field
+    v-slot="{ handleChange, errors: veeErrors }"
+    :model-value="modelValue"
+    as="div"
+    :name="veeId ?? path ?? validationLabel"
+    :label="validationLabel"
     :rules="veeRules"
-    :required="required"
+    class="e-form-container"
   >
     <v-checkbox
-      v-bind="$attrs"
       :id="id"
-      :hide-details="hideDetails"
-      :error-messages="veeErrors.concat(errorMessages)"
-      :label="labelOrEntityFieldLabel"
       :class="[inputClass]"
-      :input-value="value"
-      @change="$emit('input', $event)"
-      v-on="$listeners"
+      :error-messages="(veeErrors ?? []).concat(errorMessages)"
+      :hide-details="hideDetails"
+      :label="labelOrEntityFieldLabel"
+      :model-value="modelValue"
+      v-bind="$attrs"
+      @update:model-value="
+        ($event) => {
+          handleChange($event)
+          $emit('update:model-value', $event)
+        }
+      "
     >
       <!-- passing through all slots -->
-      <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-      <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-        <slot :name="name" v-bind="slotData" />
+      <template v-for="(_, slot) of $slots" #[slot]="slotData">
+        <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-checkbox>
-  </ValidationProvider>
+  </Field>
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { Field } from 'vee-validate'
 
 export default {
   name: 'ECheckbox',
-  components: { ValidationProvider },
+  components: {
+    Field,
+  },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
-    value: { type: Boolean, required: false },
+    modelValue: { type: Boolean, required: false },
   },
 }
 </script>
@@ -47,6 +54,7 @@ export default {
   font-size: 12px;
   color: #d32f2f;
 }
+
 [required]:deep(.v-input--is-label-active label::after) {
   color: gray;
 }

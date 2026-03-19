@@ -1,56 +1,63 @@
 <template>
-  <ValidationObserver
+  <Form
     v-if="materialListsSorted.length > 0"
-    ref="validation"
-    tag="tr"
-    class="newItemRow"
-    @keyup.enter="submitForm"
+    v-slot="{ handleSubmit, resetForm }"
+    as="tr"
   >
     <td class="pt-1">
       <e-number-field
         ref="quantity"
         v-model="materialItem.quantity"
-        dense
-        vee-rules="greaterThan:0"
+        density="compact"
         inputmode="decimal"
         path="quantity"
+        vee-rules="greaterThan:0"
       />
     </td>
     <td class="pt-1">
-      <e-text-field v-model="materialItem.unit" dense path="unit" maxlength="32" />
+      <e-text-field
+        v-model="materialItem.unit"
+        density="compact"
+        maxlength="32"
+        path="unit"
+      />
     </td>
     <td class="pt-1">
       <e-text-field
         v-model="materialItem.article"
-        dense
-        vee-rules="required"
-        path="article"
+        density="compact"
         maxlength="64"
+        path="article"
+        vee-rules="required"
       />
     </td>
-    <td class="pt-1" :colspan="columns - 4">
+    <td :colspan="columns - 4" class="pt-1">
       <e-select
         v-model="materialItem.materialList"
-        dense
-        vee-rules="required"
-        :label="$tc('entity.materialList.name')"
         :items="materialListsSorted"
+        :label="$t('entity.materialList.name')"
+        density="compact"
+        path="materialList"
+        vee-rules="required"
       />
     </td>
     <td class="pt-1">
-      <ButtonAdd height="52" hide-label @click="submitForm" />
+      <ButtonAdd
+        height="52"
+        hide-label
+        @click="handleSubmit(() => createMaterialItem(resetForm))"
+      />
     </td>
-  </ValidationObserver>
-
+  </Form>
   <tr v-else>
     <td :colspan="columns">
       <div>
         <p>
-          {{ $tc('components.material.materialCreateItem.noMaterialListAvailable') }}
+          {{ $t('components.material.materialCreateItem.noMaterialListAvailable') }}
         </p>
         <v-btn :to="campRoute(camp, 'admin')">
-          <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-cogs</v-icon>
-          {{ $tc('components.material.materialCreateItem.campSettingsButton') }}
+          <v-icon :left="$vuetify.display.mdAndUp">mdi-cogs</v-icon>
+          {{ $t('components.material.materialCreateItem.campSettingsButton') }}
         </v-btn>
       </div>
     </td>
@@ -59,13 +66,16 @@
 
 <script>
 import { campRoute } from '@/router.js'
-import { ValidationObserver } from 'vee-validate'
+import { Form } from 'vee-validate'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
 import materialListsSorted from '@/common/helpers/materialListsSorted.js'
 
 export default {
   name: 'MaterialCreateItem',
-  components: { ValidationObserver, ButtonAdd },
+  components: {
+    Form,
+    ButtonAdd,
+  },
   provide() {
     return {
       entityName: 'materialItem',
@@ -101,22 +111,15 @@ export default {
         materialList: this.materialList?._meta.self ?? undefined,
       }
     },
-    async submitForm() {
-      const isValid = await this.$refs.validation.validate()
-      if (isValid) {
-        this.createMaterialItem()
-      }
-    },
-    createMaterialItem() {
+    createMaterialItem(resetForm) {
       const key = Date.now()
       const data = this.materialItem
 
       this.initEntity()
-      this.$refs.validation.reset()
       this.$refs.quantity.focus()
 
       // fire event to allow for eager adding before post has finished
-      this.$emit('item-adding', key, data)
+      this.$emit('item-adding', key, data, resetForm)
     },
     campRoute,
   },
@@ -124,10 +127,13 @@ export default {
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .newItemRow {
   line-height: 80px;
   vertical-align: top;
 }
+
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-btn {
   vertical-align: text-bottom;
 }

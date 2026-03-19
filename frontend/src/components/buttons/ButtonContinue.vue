@@ -1,6 +1,6 @@
 <template>
-  <v-btn color="primary" v-bind="$attrs" v-on="$listeners">
-    {{ $tc('global.button.continue') }}
+  <v-btn color="primary" variant="elevated" v-bind="$attrs" type="submit">
+    {{ $t('global.button.continue') }}
   </v-btn>
 </template>
 

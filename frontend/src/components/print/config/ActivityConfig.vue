@@ -3,10 +3,11 @@
     <e-select
       v-if="!loading"
       v-model="optionsScheduleEntry"
+      path="optionsScheduleEntry"
       :items="scheduleEntries"
-      :label="$tc('components.print.config.activityConfig.activity')"
-      :filled="false"
-      @input="$emit('input')"
+      :label="$t('components.print.config.activityConfig.activity')"
+      variant="underlined"
+      @update:model-value="$emit('input')"
     />
     <v-skeleton-loader v-else type="image" height="56" />
   </div>

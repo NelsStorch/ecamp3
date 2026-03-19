@@ -4,21 +4,21 @@
     :loading="loading"
     :error="error"
     icon="mdi-account-plus"
-    :title="$tc('components.checklist.checklistCreate.title')"
+    :title="$t('components.checklist.checklistCreate.title')"
     :submit-action="createChecklist"
-    :submit-label="$tc('global.button.create')"
+    :submit-label="$t('global.button.create')"
     submit-icon="mdi-plus"
     submit-color="success"
     :cancel-action="close"
   >
-    <template #activator="{ on }">
+    <template #activator="{ props }">
       <ButtonAdd
-        color="secondary"
-        text
-        class="my-n2"
+        color="blue-grey-darken-2"
+        variant="text"
         icon="mdi-playlist-plus"
-        v-on="on"
-        >{{ $tc('components.checklist.checklistCreate.title') }}</ButtonAdd
+        v-bind="props"
+        @click="showDialog = true"
+        >{{ $t('components.checklist.checklistCreate.title') }}</ButtonAdd
       >
     </template>
 
@@ -32,6 +32,8 @@
     <e-autocomplete
       v-model="entityData.copyChecklistSource"
       path="copyChecklistSource"
+      item-title="text"
+      item-value="value"
       clearable
       :items="prototypeChecklists"
     />

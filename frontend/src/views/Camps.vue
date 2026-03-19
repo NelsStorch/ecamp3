@@ -1,33 +1,34 @@
 <template>
   <v-container fluid>
-    <content-card :title="$tc('views.camps.title')" max-width="800" toolbar>
+    <content-card :title="$t('views.camps.title')" max-width="800" toolbar>
       <template #title-actions>
-        <UserMeta v-if="!$vuetify.breakpoint.mdAndUp" avatar-only btn-classes="mr-n4" />
+        <UserMeta v-if="!$vuetify.display.mdAndUp" avatar-only />
       </template>
       <v-list class="py-0">
         <template v-if="loading">
-          <v-skeleton-loader type="list-item-two-line" height="64" />
-          <v-skeleton-loader type="list-item-two-line" height="64" />
+          <v-skeleton-loader type="list-item-two-line" height="64" class="pa-4" />
+          <v-skeleton-loader type="list-item-two-line" height="64" class="pa-4" />
         </template>
         <template v-else>
           <CampListItem
-            v-for="{ camp, periods } in upcomingCamps"
+            v-for="{ camp, periods: upcomingPeriods } in upcomingCamps"
             :key="camp._meta.self"
             :camp="camp"
-            :periods="periods"
+            :periods="upcomingPeriods"
           />
         </template>
-        <v-list-item>
-          <v-list-item-content />
-          <v-list-item-action>
-            <button-add
-              data-testid="create-camp-button"
-              icon="mdi-plus"
-              :to="{ name: 'camps/create' }"
-            >
-              {{ $tc('views.camps.create') }}
-            </button-add>
-          </v-list-item-action>
+        <v-list-item lines="two">
+          <template #append>
+            <v-list-item-action>
+              <button-add
+                data-testid="create-camp-button"
+                icon="mdi-plus"
+                :to="{ name: 'camps/create' }"
+              >
+                {{ $t('views.camps.create') }}
+              </button-add>
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </v-list>
       <v-expansion-panels
@@ -37,15 +38,15 @@
         v-model="openedPanels"
         multiple
         flat
-        accordion
+        variant="accordion"
       >
         <v-expansion-panel v-if="isAdmin && prototypeCamps.length > 0">
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
-              {{ $tc('views.camps.prototypeCamps') }}
+              {{ $t('views.camps.prototypeCamps') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <v-list class="py-0">
               <CampListItem
                 v-for="camp in prototypeCamps"
@@ -53,24 +54,24 @@
                 :camp="camp"
               />
             </v-list>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
         <v-expansion-panel v-if="!loading && pastCamps.length > 0">
-          <v-expansion-panel-header>
+          <v-expansion-panel-title>
             <h3>
-              {{ $tc('views.camps.pastCamps') }}
+              {{ $t('views.camps.pastCamps') }}
             </h3>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
             <v-list class="py-0">
               <CampListItem
-                v-for="{ camp, periods } in pastCamps"
+                v-for="{ camp, periods: pastperiods } in pastCamps"
                 :key="camp._meta.self"
                 :camp="camp"
-                :periods="periods"
+                :periods="pastperiods"
               />
             </v-list>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
     </content-card>
@@ -82,7 +83,6 @@ import dayjs from '@/common/helpers/dayjs.js'
 import { isAdmin } from '@/plugins/auth'
 import ContentCard from '@/components/layout/ContentCard.vue'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
-import { mapGetters } from 'vuex'
 import UserMeta from '@/components/navigation/UserMeta.vue'
 import CampListItem from '@/components/camp/CampListItem.vue'
 import groupBy from 'lodash-es/groupBy.js'
@@ -104,7 +104,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.camps.title'),
+      title: this.$t('views.camps.title'),
     }
   },
   computed: {
@@ -146,9 +146,6 @@ export default {
         }))
         .filter(({ camp }) => !camp.isPrototype)
     },
-    ...mapGetters({
-      user: 'getLoggedInUser',
-    }),
   },
   async mounted() {
     this.loadCamps()
@@ -178,7 +175,7 @@ export default {
 </script>
 
 <style scoped>
-.v-expansion-panel-content:deep(.v-expansion-panel-content__wrap) {
+:deep(.v-expansion-panel-text .v-expansion-panel-text__wrapper) {
   padding: 0 !important;
 }
 </style>

@@ -8,6 +8,7 @@ export default {
 
     successHandler: { type: Function, required: false, default: null },
   },
+  emits: ['opened', 'closed', 'submit', 'success', 'error'],
   data() {
     return {
       // specifies entity properties available in the form
@@ -56,10 +57,7 @@ export default {
     },
     setEntityData(data) {
       const loadingPromises = []
-
-      this.entityProperties.forEach((key) => {
-        this.$set(this.entityData, key, data[key])
-      })
+      this.entityData = data
       this.embeddedEntities.forEach((key) => {
         if (data[key]) {
           const promise =
@@ -67,7 +65,7 @@ export default {
               ? data[key]()._meta.load
               : data[key]._meta.load
           loadingPromises.push(promise)
-          promise.then((obj) => this.$set(this.entityData, key, obj._meta.self))
+          promise.then((obj) => (this.entityData[key] = obj._meta.self))
         }
       })
       this.embeddedCollections.forEach((key) => {
@@ -76,11 +74,7 @@ export default {
           data[key]()
             .$loadItems()
             .then((obj) => {
-              this.$set(
-                this.entityData,
-                key,
-                obj.items.map((entity) => entity._meta.self)
-              )
+              this.entityData[key] = obj.items.map((entity) => entity._meta.self)
             })
         }
       })
@@ -104,8 +98,17 @@ export default {
       this.error = null
       const _events = this._events
       payloadData ??= this.entityData
+      const updatePayload = {}
+      for (const property of [
+        ...this.entityProperties,
+        ...this.embeddedEntities,
+        ...this.embeddedCollections,
+      ]) {
+        updatePayload[property] = payloadData[property]
+      }
+
       const promise = this.api
-        .patch(this.entityUri, payloadData)
+        .patch(this.entityUri, updatePayload)
         .then(this.onSuccess, (e) => this.onError(_events, e))
       this.$emit('submit')
       return promise
@@ -147,7 +150,7 @@ export default {
       let defaultMessage = e.message
       if (e.response) {
         if (e.response.status === 409 /* Conflict */) {
-          defaultMessage = this.$tc('global.serverError.409')
+          defaultMessage = this.$t('global.serverError.409')
         }
         if (e.response.status === 422 /* Validation Error */) {
           defaultMessage = e

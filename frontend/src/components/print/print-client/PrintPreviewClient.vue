@@ -2,18 +2,23 @@
   <div style="position: relative">
     <iframe
       :src="urlWithPagemodes"
-      :title="$tc('components.print.printClient.printPreviewClient.previewIframeTitle')"
+      :title="$t('components.print.printClient.printPreviewClient.previewIframeTitle')"
       class="d-block"
       v-bind="$attrs"
       height="800px"
     />
-    <v-overlay absolute :value="loading || error" z-index="2">
+    <v-overlay
+      :model-value="loading || error"
+      contained
+      z-index="2"
+      content-class="w-100 h-100 text-white"
+    >
       <div v-if="error">
-        {{ $tc('components.print.printClient.printPreviewClient.previewError') }}
+        {{ $t('components.print.printClient.printPreviewClient.previewError') }}
       </div>
-      <div v-else class="d-flex flex-column gap-3 align-center">
+      <div v-else class="d-flex flex-column gap-3 align-center h-100 justify-center">
         <v-progress-circular
-          :value="progress"
+          :model-value="progress"
           :rotate="270"
           size="24"
         ></v-progress-circular>
@@ -26,6 +31,8 @@
 <script>
 import { generatePdf } from './generatePdf.js'
 import { generatePdfMixin } from './generatePdfMixin.js'
+import { componentI18n } from '@/plugins/index.js'
+import { useToast } from 'vue-toastification'
 
 const RENDER_IN_WORKER = true
 
@@ -37,6 +44,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   data() {
     return {
@@ -88,7 +99,7 @@ export default {
         {
           config: { ...this.config, apiGet: this.api.get.bind(this) },
           storeData: this.$store.state,
-          translationData: this.$i18n.messages,
+          translationData: componentI18n.messages.value,
           renderInWorker: RENDER_IN_WORKER,
         },
         this.onProgress.bind(this)

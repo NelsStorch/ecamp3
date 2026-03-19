@@ -10,12 +10,6 @@ export const formComponentPropsMixin = {
     },
 
     // vuetify property hideDetails
-    filled: {
-      type: Boolean,
-      default: true,
-    },
-
-    // vuetify property hideDetails
     hideDetails: {
       type: [String, Boolean],
       default: 'auto',
@@ -80,7 +74,10 @@ export const formComponentPropsMixin = {
       if (this.label) {
         return this.label
       }
-      return this.$t(`entity.${this.entityName}.fields.${this.path}`)
+      if (this.entityName) {
+        return this.$t(`entity.${this.entityName}.fields.${this.path}`)
+      }
+      return this.path
     },
   },
 }

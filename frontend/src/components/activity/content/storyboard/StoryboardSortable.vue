@@ -8,17 +8,18 @@
     :disabled="disabled"
     :tag="variant === 'dense' ? 'div' : 'tbody'"
     :role="variant === 'dense' ? 'rowgroup' : null"
+    :item-key="itemKey"
     @sort="onSort"
     @start="dragging = true"
     @end="dragging = false"
   >
-    <template v-for="key in localSortedKeys">
+    <template #item="{ element }">
       <StoryboardRowDefault
         v-if="variant === 'default'"
-        :key="key"
+        :key="`default-${element}`"
         :disabled="disabled"
         :is-last-section="isLastSection"
-        :item-key="key"
+        :item-key="element"
         :layout-mode="layoutMode"
         @delete="deleteItem"
         @move-down="moveDown"
@@ -26,10 +27,10 @@
       />
       <StoryboardRowDense
         v-else-if="variant === 'dense'"
-        :key="key"
+        :key="`dense-${element}`"
         :disabled="disabled"
         :is-last-section="isLastSection"
-        :item-key="key"
+        :item-key="element"
         :layout-mode="layoutMode"
         @delete="deleteItem"
         @move-down="moveDown"
@@ -65,6 +66,7 @@ export default {
     entity: { type: Object, required: true },
     variant: { type: String, required: true },
   },
+  emits: ['sort'],
   data() {
     return {
       dragging: false,
@@ -130,8 +132,8 @@ export default {
       if (newIndex >= 0 && newIndex < list.length) {
         // swap spaces in sortedKeys
         const movingListItem = list[oldIndex]
-        this.$set(list, oldIndex, list[newIndex])
-        this.$set(list, newIndex, movingListItem)
+        list[oldIndex] = list[newIndex]
+        list[newIndex] = movingListItem
 
         this.onSort()
       }
@@ -175,17 +177,23 @@ export default {
 
       return payload
     },
+
+    itemKey(key) {
+      return this.variant === 'default' ? `default-${key}` : `dense-${key}`
+    },
   },
 }
 </script>
 
 <style scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .flip-list-move {
   transition: transform 0.5s;
   opacity: 0.5;
   background: #c8ebfb;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;

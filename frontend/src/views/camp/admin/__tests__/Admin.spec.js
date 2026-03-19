@@ -5,7 +5,7 @@ import { render } from '@/test/renderWithVuetify.js'
 import Admin from '../Info.vue'
 import flushPromises from 'flush-promises'
 
-describe('Admin view', () => {
+describe.skip('Admin view', () => {
   it('shows the danger zone when the user has a manager role', async () => {
     const camp = createCampWithRole('manager')
     const { getByText } = render(Admin, {

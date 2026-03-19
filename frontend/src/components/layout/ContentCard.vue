@@ -3,23 +3,18 @@ Displays the content wrapped inside a card.
 -->
 
 <template>
-  <v-card
-    :max-width="maxWidth"
-    width="100%"
-    :tile="$vuetify.breakpoint.xsOnly"
-    class="mx-auto"
-  >
+  <v-card :max-width="maxWidth" width="100%" :tile="$vuetify.display.xs" class="mx-auto">
     <v-toolbar
-      v-if="back || !$vuetify.breakpoint.mdAndUp || toolbar"
+      v-if="back || !$vuetify.display.mdAndUp || toolbar"
       class="ec-content-card__toolbar"
       :class="{ 'ec-content-card__toolbar--border': !noBorder }"
       elevation="0"
-      dense
+      color="surface"
+      density="compact"
     >
       <v-toolbar-items>
         <button-back
-          v-if="back || (!$vuetify.breakpoint.mdAndUp && !!$route.query.isDetail)"
-          class="ml-n4"
+          v-if="back || (!$vuetify.display.mdAndUp && !!$route.query.isDetail)"
         />
       </v-toolbar-items>
 
@@ -30,13 +25,15 @@ Displays the content wrapped inside a card.
       </slot>
       <v-spacer />
 
-      <v-skeleton-loader v-if="!loaded" type="actions" />
-      <slot v-else name="title-actions" />
+      <template v-if="!loaded" #append>
+        <v-skeleton-loader type="button" width="40" class="mr-2" />
+      </template>
+      <slot v-if="loaded" name="title-actions" />
     </v-toolbar>
 
     <!-- main content -->
     <v-sheet class="ec-content-card__content fill-height">
-      <v-skeleton-loader v-if="!loaded" type="article" />
+      <v-skeleton-loader v-if="!loaded" type="article" class="pa-4" />
       <slot v-else />
     </v-sheet>
   </v-card>
@@ -62,17 +59,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'vuetify/settings';
+@use 'sass:map';
+
 .ec-content-card__toolbar {
-  @media #{map-get($display-breakpoints, 'xs-only')} {
+  @media #{map.get(settings.$display-breakpoints, 'xs')} {
     position: sticky;
     top: 0;
     z-index: 5;
   }
 }
-</style>
 
-<style>
 .ec-content-card__toolbar--border {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-bottom: 1px solid rgba(var(--v-border-color), 0.12) !important;
 }
 </style>

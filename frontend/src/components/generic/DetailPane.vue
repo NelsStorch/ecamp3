@@ -1,14 +1,14 @@
 <template>
   <DialogBottomSheet
-    v-if="$vuetify.breakpoint.smAndDown"
+    v-if="$vuetify.display.smAndDown"
     :saving-override.sync="isSaving"
-    :value="value"
-    v-bind="{ ...$props, ...$attrs }"
-    v-on="$listeners"
+    :model-value
+    v-bind="$props"
+    @update:model-value="$emit('update:model-value', $event)"
   >
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-      <slot :name="name" v-bind="slotData" />
+    <!-- passing through all slots -->
+    <template v-for="(_, slot) of $slots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData || {}"></slot>
     </template>
   </DialogBottomSheet>
   <DialogForm
@@ -16,13 +16,13 @@
     :saving-override.sync="isSaving"
     content-class="ec-dialog-form"
     eager
-    :value="value"
-    v-bind="{ ...$props, ...$attrs }"
-    v-on="$listeners"
+    :model-value
+    v-bind="$props"
+    @update:model-value="$emit('update:model-value', $event)"
   >
-    <slot v-for="(_, name) in $slots" :slot="name" :name="name" />
-    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
-      <slot :name="name" v-bind="slotData" />
+    <!-- passing through all slots -->
+    <template v-for="(_, slot) of $slots" #[slot]="slotData">
+      <slot :name="slot" v-bind="slotData || {}"></slot>
     </template>
   </DialogForm>
 </template>
@@ -36,5 +36,6 @@ export default {
   name: 'DetailPane',
   components: { DialogBottomSheet, DialogForm },
   extends: DialogUiBase,
+  emits: ['update:model-value'],
 }
 </script>

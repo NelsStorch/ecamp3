@@ -1,13 +1,12 @@
 <template>
   <IconButton
-    class="px-3 px-sm-4"
+    :hide-label="hideLabel || $vuetify.display.xs"
+    class="px-3 px-sm-4 ec-edit-button"
     color="primary"
     :icon="icon"
-    :hide-label="hideLabel || $vuetify.breakpoint.xsOnly"
     v-bind="$attrs"
-    v-on="$listeners"
   >
-    <slot>{{ $tc('global.button.edit') }}</slot>
+    <slot>{{ $t('global.button.edit') }}</slot>
   </IconButton>
 </template>
 
@@ -24,4 +23,13 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.ec-edit-button:not(:hover):not(:focus) :deep(.v-btn__underlay) {
+  background-color: #f6f6f6;
+  opacity: 1;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+}
+.ec-edit-button :deep(.v-btn__content) {
+  z-index: 1;
+}
+</style>

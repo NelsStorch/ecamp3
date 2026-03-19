@@ -32,16 +32,25 @@
           <component
             :is="item.component('v')"
             v-if="item.component('v') !== ''"
-            v-model="item.value"
+            v-model="values[item.id]"
             v-bind="{ ...item.props, ...config }"
           />
-          <span v-else v-text="item.value" />
+          <span v-else v-text="values[item.id]" />
         </template>
         <template #[`item.e`]="{ item }">
           <component
             :is="item.component('e')"
-            v-model="item.value"
+            v-model="values[item.id]"
             v-bind="{ ...item.props, ...config }"
+          />
+        </template>
+        <template #[`item.e-ro`]="{ item }">
+          <component
+            :is="item.component('e')"
+            v-model="values[item.id]"
+            v-bind="{ ...item.props, ...config }"
+            :disabled="true"
+            :readonly="true"
           />
         </template>
         <template #[`item.api`]="{ item }">
@@ -50,6 +59,16 @@
             v-if="item.props.uri !== null"
             v-bind="{ ...item.props, ...config }"
             :auto-save="false"
+          />
+        </template>
+        <template #[`item.api-ro`]="{ item }">
+          <component
+            :is="item.component('api')"
+            v-if="item.props.uri !== null"
+            v-bind="{ ...item.props, ...config }"
+            :auto-save="false"
+            :disabled="true"
+            :readonly="true"
           />
         </template>
         <template #[`item.api.autosave`]="{ item }">
@@ -91,7 +110,7 @@ import ApiDatePicker from '@/components/form/api/ApiDatePicker.vue'
 import ApiTimePicker from '@/components/form/api/ApiTimePicker.vue'
 import ApiColorPicker from '@/components/form/api/ApiColorPicker.vue'
 import VueI18n from '@/plugins/i18n'
-import { VTextField, VTextarea, VCheckbox, VSwitch, VSelect } from 'vuetify/lib'
+import { VTextField, VTextarea, VCheckbox, VSwitch, VSelect } from 'vuetify/components'
 
 export default {
   name: 'Controls',
@@ -134,23 +153,31 @@ export default {
     label: false,
     labelText: 'Label',
 
-    textfieldValue: 'FFFFFFFFFF',
-    numberfieldValue: 10,
-    textareaValue: 'FFFFFFFFFF',
-    richtextValue: '<p>FFFFFFFFFF</p>',
-    checkboxValue: false,
     colorValue: null,
-    selectValue: null,
-    dateValue: '2020-01-01',
-    timeValue: '2020-01-01T14:45:00+00:00',
-    timeValue2: '00:00',
+
+    values: {
+      textfield: 'FFFFFFFFFF',
+      textarea: 'FFFFFFFFFF',
+      richtext: '<p>FFFFFFFFFF</p>',
+      checkbox: false,
+      switch: false,
+      select: null,
+      numberfield: 10,
+      datepicker: '2020-01-01',
+      timepicker: '2020-01-01T14:45:00+00:00',
+      timefield: '05:00',
+      colorpicker: '#FF9800',
+      colorfield: '#229800',
+    },
 
     headers: [
-      { text: 'Type', value: 'id' },
-      { text: 'v-input', value: 'v', sortable: false },
-      { text: 'e-input', value: 'e', sortable: false },
-      { text: 'api-input', value: 'api', sortable: false },
-      { text: 'api-input.autosave', value: 'api.autosave', sortable: false },
+      { title: 'Type', value: 'id' },
+      { title: 'v-input', value: 'v', sortable: false },
+      { title: 'e-input', value: 'e', sortable: false },
+      { title: 'e-input readonly', value: 'e-ro', sortable: false },
+      { title: 'api-input', value: 'api', sortable: false },
+      { title: 'api-input readonly', value: 'api-ro', sortable: false },
+      { title: 'api-input.autosave', value: 'api.autosave', sortable: false },
     ],
   }),
 
@@ -162,19 +189,18 @@ export default {
     items() {
       return [
         {
-          id: 'text-field',
+          id: 'textfield',
           component: (type) => `${type}-text-field`,
-          value: this.textfieldValue,
           props: {
             placeholder: this.placeholder,
             path: 'nickname',
             uri: this.profileUri,
+            veeRules: 'required',
           },
         },
         {
-          id: 'number-field',
+          id: 'numberfield',
           component: (type) => (type === 'v' ? '' : `${type}-number-field`),
-          value: this.numberfieldValue,
           props: {
             placeholder: this.placeholder,
             inputmode: 'decimal',
@@ -185,7 +211,6 @@ export default {
         {
           id: 'textarea',
           component: (type) => `${type}-textarea`,
-          value: this.textareaValue,
           props: {
             placeholder: this.placeholder,
             rows: 3,
@@ -196,7 +221,6 @@ export default {
         {
           id: 'richtext',
           component: (type) => (type === 'v' ? 'v-tiptap-editor' : `${type}-richtext`),
-          value: this.richtextValue,
           props: {
             placeholder: this.placeholder,
             rows: 3,
@@ -207,18 +231,19 @@ export default {
         {
           id: 'select',
           component: (type) => `${type}-select`,
-          value: this.selectValue,
           props: {
             path: 'language',
             placeholder: this.placeholder,
             items: this.availableLocales,
             uri: this.profileUri,
+            itemTitle: 'text',
+            itemValue: 'value',
+            veeRules: 'required',
           },
         },
         {
           id: 'checkbox',
           component: (type) => `${type}-checkbox`,
-          value: this.checkboxValue,
           props: {
             path: 'printYSLogoOnPicasso',
             uri: this.campUri,
@@ -227,16 +252,14 @@ export default {
         {
           id: 'switch',
           component: (type) => `${type}-switch`,
-          value: this.checkboxValue,
           props: {
             path: 'printYSLogoOnPicasso',
             uri: this.campUri,
           },
         },
         {
-          id: 'date-picker',
+          id: 'datepicker',
           component: (type) => (type === 'v' ? '' : `${type}-date-picker`),
-          value: this.dateValue,
           props: {
             placeholder: this.placeholder,
             path: 'start',
@@ -244,9 +267,8 @@ export default {
           },
         },
         {
-          id: 'time-picker',
+          id: 'timepicker',
           component: (type) => (type === 'v' ? '' : `${type}-time-picker`),
-          value: this.timeValue,
           props: {
             placeholder: this.placeholder,
             'value-format': 'YYYY-MM-DDTHH:mm:ssZ',
@@ -255,9 +277,17 @@ export default {
           },
         },
         {
-          id: 'color-picker',
+          id: 'timefield',
+          component: (type) => (type === 'e' ? `${type}-time-field` : ''),
+          props: {
+            placeholder: this.placeholder,
+            path: 'start',
+            uri: this.scheduleEntryUri,
+          },
+        },
+        {
+          id: 'colorpicker',
           component: (type) => (type === 'v' ? '' : `${type}-color-picker`),
-          value: this.colorValue,
           props: {
             placeholder: this.placeholder,
             path: 'color',
@@ -266,24 +296,13 @@ export default {
           },
         },
         {
-          id: 'color-field',
+          id: 'colorfield',
           component: (type) => (type !== 'v' ? `${type}-color-field` : ''),
-          value: this.colorValue,
           props: {
             placeholder: this.placeholder,
             path: 'color',
             uri: this.campCollaborationUri,
             veeRules: 'required',
-          },
-        },
-        {
-          id: 'time-field',
-          component: (type) => (type === 'e' ? `${type}-time-field` : ''),
-          value: this.timeValue2,
-          props: {
-            placeholder: this.placeholder,
-            path: 'start',
-            uri: this.scheduleEntryUri,
           },
         },
       ]
@@ -313,9 +332,9 @@ export default {
       return '/camp_collaborations/3229d273decd' // Harry Potter - Snoopy
     },
     availableLocales() {
-      return VueI18n.availableLocales.map((l) => ({
+      return VueI18n.global.availableLocales.map((l) => ({
         value: l,
-        text: this.$tc('global.language', 1, l),
+        text: this.$t('global.language', 1, { locale: l }),
       }))
     },
     config() {

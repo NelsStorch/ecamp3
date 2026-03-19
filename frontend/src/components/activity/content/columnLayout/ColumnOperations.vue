@@ -1,21 +1,19 @@
 <template>
   <div>
     <v-list-item :disabled="!addingColumnEnabled" @click="addColumn">
-      <v-list-item-icon>
+      <template #prepend>
         <v-icon>mdi-playlist-plus</v-icon>
-      </v-list-item-icon>
+      </template>
       <v-list-item-title>
-        {{ $tc('components.activity.content.columnLayout.columnOperations.addColumn') }}
+        {{ $t('components.activity.content.columnLayout.columnOperations.addColumn') }}
       </v-list-item-title>
     </v-list-item>
     <v-list-item :disabled="!removingColumnEnabled" @click="removeColumn">
-      <v-list-item-icon>
+      <template #prepend>
         <v-icon>mdi-playlist-minus</v-icon>
-      </v-list-item-icon>
+      </template>
       <v-list-item-title>
-        {{
-          $tc('components.activity.content.columnLayout.columnOperations.removeColumn')
-        }}
+        {{ $t('components.activity.content.columnLayout.columnOperations.removeColumn') }}
       </v-list-item-title>
     </v-list-item>
   </div>
@@ -27,6 +25,7 @@ import {
   adjustColumnWidths,
 } from '@/components/activity/content/columnLayout/calculateNextSlotName.js'
 import { errorToMultiLineToast } from '@/components/toast/toasts'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'ColumnOperations',
@@ -35,6 +34,10 @@ export default {
     contentNode: { type: Object, required: true },
     minColumnWidth: { type: Number, default: 3 },
     totalWidth: { type: Number, default: 12 },
+  },
+  setup() {
+    const toast = useToast()
+    return { toast }
   },
   computed: {
     addingColumnEnabled() {
@@ -79,7 +82,7 @@ export default {
       columns = adjustColumnWidths(columns, this.minColumnWidth, this.totalWidth)
       this.contentNode
         .$patch({ data: { columns } })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
     },
     removeColumn() {
       let columns = cloneDeep(this.contentNode.data.columns)
@@ -90,7 +93,7 @@ export default {
       )
       this.contentNode
         .$patch({ data: { columns } })
-        .catch((e) => this.$toast.error(errorToMultiLineToast(e)))
+        .catch((e) => this.toast.error(errorToMultiLineToast(e)))
     },
   },
 }

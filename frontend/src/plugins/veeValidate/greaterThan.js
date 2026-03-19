@@ -1,17 +1,19 @@
-export default (i18n) => ({
-  params: ['min'],
+export const validationMessageKey = 'global.validation.greaterThan'
+export default (i18n) =>
   /**
-   *
    * @param {string} value value of a float number
-   * @param number min   Comparison value in string format 'HH:mm'
+   * @param number min   Comparison value (interpreted as float)
+   * @param {string} label Field label
    * @returns {boolean}       validation result
    */
-  validate: (value, { min }) => {
-    return parseFloat(value) > min
-  },
-  message: (field, { min }) => {
-    return i18n.tc('global.validation.greaterThan', 0, {
+  (value, [min], { label }) => {
+    const validate = parseFloat(value) > min
+
+    if (validate) {
+      return true
+    }
+    return i18n.global.t(validationMessageKey, {
       min: min,
+      field: label,
     })
-  },
-})
+  }

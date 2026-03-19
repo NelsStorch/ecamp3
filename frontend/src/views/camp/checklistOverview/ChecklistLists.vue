@@ -1,5 +1,5 @@
 <template>
-  <content-card :title="$tc('views.camp.checklistOverview.checklistLists.title')" toolbar>
+  <content-card :title="$t('views.camp.checklistOverview.checklistLists.title')" toolbar>
     <v-list>
       <v-skeleton-loader v-if="checklists._meta.loading" type="list-item@3" />
       <v-list-item
@@ -8,12 +8,11 @@
         :to="checklistOverviewRoute(camp, checklist, { isDetail: true })"
         exact-path
       >
-        <v-list-item-content>
-          <v-list-item-title>{{ checklist.name }}</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-icon>
-          <v-icon color="blue-grey lighten-3">mdi-chevron-right</v-icon>
-        </v-list-item-icon>
+        <v-list-item-title>{{ checklist.name }}</v-list-item-title>
+
+        <template #append>
+          <v-icon color="blue-grey-lighten-3">mdi-chevron-right</v-icon>
+        </template>
       </v-list-item>
     </v-list>
   </content-card>
@@ -33,7 +32,7 @@ export default {
   },
   head() {
     return {
-      title: this.$tc('views.camp.checklistOverview.checklistLists.title'),
+      title: this.$t('views.camp.checklistOverview.checklistLists.title'),
     }
   },
   computed: {

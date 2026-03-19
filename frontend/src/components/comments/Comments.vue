@@ -10,12 +10,12 @@
       >
         <e-richtext
           class="e-story-day e-story-day-readonly"
-          :value="comment.textHtml"
+          :model-value="comment.textHtml"
           :readonly="true"
           :outlined="false"
           :solo="false"
           auto-grow
-          dense
+          density="compact"
           label=""
         />
         <div class="d-flex align-center justify-space-between mt-1 gap-2">
@@ -24,7 +24,7 @@
             {{ comment.author().displayName }}</span
           >
           <span>{{
-            $date(comment.createTime).format($tc('global.datetime.dateTimeLong'))
+            $date(comment.createTime).format($t('global.datetime.dateTimeLong'))
           }}</span>
         </div>
       </Comment>
@@ -37,13 +37,13 @@
         />
         <div class="d-flex align-center mt-2 gap-2">
           <span
-            ><UserAvatar :user="authUser" size="24" class="mr-1" />
+            ><UserAvatar v-if="authUser" :user="authUser" size="24" class="mr-1" />
             {{ authUser.displayName }}</span
           >
         </div>
         <v-btn
           absolute
-          text
+          variant="text"
           style="bottom: 2px; right: 1px"
           :disabled="newComment.length === 0"
           @click="addComment"

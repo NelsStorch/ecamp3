@@ -629,11 +629,11 @@
       "copied": "{source} kopiert"
     },
     "validation": {
-      "greaterThan": "{_field_} muss grösser sein als {min}",
-      "greaterThanOrEqual_date": "{_field_} darf nicht vor {min} liegen",
-      "greaterThan_time": "{_field_} muss später als {min} sein",
-      "lessThanOrEqual_date": "{_field_} darf nicht nach {max} liegen",
-      "oneEmojiOrTwoCharacters": "{_field_} darf nur 1 Emoji oder 2 Buchstaben/Zahlen haben"
+      "greaterThan": "{field} muss grösser sein als {min}",
+      "greaterThanOrEqual_date": "{field} darf nicht vor {min} liegen",
+      "greaterThan_time": "{field} muss später als {min} sein",
+      "lessThanOrEqual_date": "{field} darf nicht nach {max} liegen",
+      "oneEmojiOrTwoCharacters": "{field} darf nur 1 Emoji oder 2 Buchstaben/Zahlen haben"
     },
     "warning": {
       "delete": "Möchtest du das wirklich löschen? | Möchtest du \"{entity}\" wirklich löschen?"
@@ -651,7 +651,7 @@
         "accountless": "Hast du noch keinen Account?",
         "email": "E-Mail",
         "infoText": {
-          "dev": "Dies ist die Entwickler-Version von eCamp v3.{br}WICHTIG: Nur für Entwickler-Gebrauch geeignet. Alle Daten sind öffentlich und werden periodisch gelöscht!{br}Login: test@example.com / test"
+          "dev": "Dies ist die Entwickler-Version von eCamp v3.{br}WICHTIG: Nur für Entwickler-Gebrauch geeignet. Alle Daten sind öffentlich und werden periodisch gelöscht!{br}Login: test(at)example.com / test"
         },
         "loginCallback": {
           "loginInProgress": "Du wirst eingeloggt"
@@ -821,8 +821,8 @@
             "campIsLoading": "Lager wird geladen",
             "material": "Material",
             "program": "Programm",
-            "story": "Geschichte",
-            "checklist": "Checkliste"
+            "checklist": "Checklisten",
+            "story": "Geschichte"
           }
         },
         "mobile": {

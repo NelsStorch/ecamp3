@@ -4,9 +4,9 @@
     :loading="loading"
     :error="error"
     icon="mdi-account-plus"
-    :title="$tc('components.checklist.checklistItemEdit.title')"
+    :title="$t('components.checklist.checklistItemEdit.title')"
     :submit-action="update"
-    :submit-label="$tc('global.button.submit')"
+    :submit-label="$t('global.button.submit')"
     submit-icon="mdi-send"
     submit-color="success"
     :cancel-action="close"
@@ -28,15 +28,17 @@
           />
         </template>
         {{
-          $tc('components.checklist.checklistItemEdit.delete', 0, {
-            text: checklistItem.text,
-          })
+          $t(
+            'components.checklist.checklistItemEdit.delete',
+            { text: checklistItem.text },
+            0
+          )
         }}
       </PromptEntityDelete>
     </template>
 
-    <template #activator="{ on }">
-      <slot name="activator" v-bind="{ on }" />
+    <template #activator="{ props }">
+      <slot name="activator" v-bind="{ props }" />
     </template>
 
     <e-text-field
@@ -144,8 +146,8 @@ export default {
   methods: {
     async loadData() {
       return Promise.all([
-        this.api.get().checklistNodes({ camp: this.camp._meta.self })._meta.load,
-        this.checklist.checklistItems().$loadItems(),
+        this.api.get().checklistNodes({ camp: this.camp._meta.self }),
+        this.api.get().checklistItems({ 'checklist.camp': this.camp._meta.self }),
       ])
     },
   },
