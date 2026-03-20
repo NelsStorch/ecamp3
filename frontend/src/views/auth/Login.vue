@@ -106,7 +106,7 @@
         :size="$vuetify.display.smAndUp && 'large'"
         height="50"
         variant="outlined"
-        class="my-4 ecamp-login-button"
+        class="my-4 ec-login-button"
       >
         <v-progress-circular v-if="authenticationInProgress" indeterminate size="24" />
         <v-icon v-else size="large">$ecamp</v-icon>
@@ -315,16 +315,16 @@ export default {
   translate: 0 -12px;
 }
 
-.ecamp-login-button.v-btn--disabled {
+.ec-login-button.v-btn--disabled {
   color: rgba(0, 0, 0, 0.26) !important;
   opacity: 1;
 }
 
-.ecamp-login-button :deep(.v-btn__overlay) {
+.ec-login-button :deep(.v-btn__overlay) {
   opacity: 0.08;
 }
 
-.ecamp-login-button :deep(.v-btn__content) {
+.ec-login-button :deep(.v-btn__content) {
   width: 100%;
 }
 
