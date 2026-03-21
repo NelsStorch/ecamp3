@@ -54,7 +54,7 @@ class CampCollaborationUpdateProcessorTest extends TestCase {
 
         $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $security = $this->createMock(Security::class);
-        $security->expects(self::any())->method('getUser')->willReturn($this->user);
+        $security->method('getUser')->willReturn($this->user);
         $pwHashFactory = $this->createStub(PasswordHasherFactory::class);
         $this->mailService = $this->createMock(MailService::class);
 

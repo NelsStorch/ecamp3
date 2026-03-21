@@ -38,10 +38,7 @@ class ProfileUpdateProcessorTest extends TestCase {
         $this->mailService = $this->createMock(MailService::class);
         $decoratedProcessor = $this->createStub(ProcessorInterface::class);
 
-        $pwHasherFactory->expects(self::any())
-            ->method('getPasswordHasher')
-            ->willReturn($this->pwHasher)
-        ;
+        $pwHasherFactory->method('getPasswordHasher')->willReturn($this->pwHasher);
 
         $this->processor = new ProfileUpdateProcessor(
             $decoratedProcessor,

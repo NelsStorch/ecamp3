@@ -66,7 +66,7 @@ class CampCollaborationCreateProcessorTest extends TestCase {
 
         $decoratedProcessor = $this->createStub(ProcessorInterface::class);
         $this->security = $this->createMock(Security::class);
-        $this->security->expects(self::any())->method('getUser')->willReturn($this->user);
+        $this->security->method('getUser')->willReturn($this->user);
         $pwHashFactory = $this->createStub(PasswordHasherFactory::class);
         $this->profileRepository = $this->createMock(ProfileRepository::class);
         $this->em = $this->createMock(EntityManagerInterface::class);
