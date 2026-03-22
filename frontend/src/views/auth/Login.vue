@@ -315,6 +315,15 @@ export default {
   translate: 0 -12px;
 }
 
+.ec-login-button.v-btn--disabled {
+  color: rgba(0, 0, 0, 0.26) !important;
+  opacity: 1;
+}
+
+.ec-login-button :deep(.v-btn__overlay) {
+  opacity: 0.08;
+}
+
 .ec-login-button :deep(.v-btn__content) {
   width: 100%;
 }
