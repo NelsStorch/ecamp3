@@ -1,7 +1,7 @@
 <template>
   <v-toolbar-items v-if="period.camp().periods().items.length > 1">
     <v-menu offset-y>
-      <template #activator="{ props }">
+      <template #activator="{ props, isActive }">
         <v-btn
           variant="text"
           size="large"
@@ -13,7 +13,7 @@
           <h1 class="text-subtitle-1">
             {{ period.description }}
           </h1>
-          <v-icon v-if="value" end>mdi-menu-up</v-icon>
+          <v-icon v-if="isActive" end>mdi-menu-up</v-icon>
           <v-icon v-else end>mdi-menu-down</v-icon>
         </v-btn>
       </template>
