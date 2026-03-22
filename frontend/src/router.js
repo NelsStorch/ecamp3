@@ -514,8 +514,7 @@ const router = createRouter({
       components: {
         navigation: NavigationCamp,
         default: () => import('./views/camp/activity/Activity.vue'),
-        // comment for now until we have everything else up and running.
-        // aside: () => import('./views/camp/activity/SideBarProgram.vue'),
+        aside: () => import('./views/camp/activity/SideBarProgram.vue'),
       },
       beforeEnter: all([requireAuth, requireCamp, requireActivityScheduleEntry]),
       props: {
