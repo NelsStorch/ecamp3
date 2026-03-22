@@ -342,6 +342,14 @@ export default {
         : 1.3 * Math.max((this.$vuetify.display.height - 204) / this.intervalCount, 32)
     },
   },
+  watch: {
+    start: {
+      immediate: true,
+      handler(newStart) {
+        this.value = new Date(newStart)
+      },
+    },
+  },
   mounted() {
     this.period
       .camp()
