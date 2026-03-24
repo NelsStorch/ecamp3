@@ -189,6 +189,7 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
     )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'activity')]
+    #[ORM\OrderBy(['createTime' => 'ASC'])]
     public Collection $comments;
 
     /**
@@ -197,6 +198,7 @@ class Activity extends BaseEntity implements BelongsToCampInterface {
     #[ApiProperty(writable: false)]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: ActivityResponsible::class, mappedBy: 'activity', orphanRemoval: true)]
+    #[ORM\OrderBy(['createTime' => 'ASC'])]
     private Collection $activityResponsibles;
 
     public function __construct() {

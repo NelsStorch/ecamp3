@@ -104,6 +104,7 @@ class Period extends BaseEntity implements BelongsToCampInterface {
      * activities.
      */
     #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'period')]
+    #[ORM\OrderBy(['article' => 'ASC', 'createTime' => 'ASC'])]
     public Collection $materialItems;
 
     /**

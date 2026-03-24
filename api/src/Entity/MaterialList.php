@@ -65,6 +65,7 @@ class MaterialList extends BaseEntity implements BelongsToCampInterface, CopyFro
     #[ApiProperty(writable: false, example: '["/material_items/1a2b3c4d"]')]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'materialList')]
+    #[ORM\OrderBy(['article' => 'ASC', 'createTime' => 'ASC'])]
     public Collection $materialItems;
 
     /**
