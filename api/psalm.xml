@@ -18,6 +18,5 @@
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
-        <InvalidAttribute errorLevel="suppress" />
     </issueHandlers>
 </psalm>
