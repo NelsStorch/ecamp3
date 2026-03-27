@@ -143,7 +143,7 @@ export default {
 .basis-num {
   width: 2.5ch;
 }
-/* .e-day-switcher__menu is in the <e-select> tag */
+/* .ec-day-switcher__menu is in the <e-select> tag */
 /*noinspection CssUnusedSymbol*/
 .ec-day-switcher__menu {
   transform: translateX(-12px);
@@ -159,13 +159,13 @@ export default {
   --v-field-padding-end: 0;
 }
 
-/* ..v-input__append-inner is in an inner tag */
+/* .v-select__selection is in an inner tag */
 /*noinspection CssUnusedSymbol*/
 .ec-day-switcher :deep(.v-select__selection) {
   width: 100%;
 }
 
-/* ..v-input__append-inner is in an inner tag */
+/* .v-field__append-inner is in an inner tag */
 /*noinspection CssUnusedSymbol*/
 .ec-day-switcher :deep(.v-field__append-inner) {
   align-items: center;
