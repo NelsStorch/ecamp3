@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2996a84d6d7ca242571e32184a3b5231",
+    "content-hash": "1a7d67bd3883a3ed7aeed85f2be20200",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -738,16 +738,16 @@
         },
         {
             "name": "api-platform/metadata",
-            "version": "v4.3.1",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/metadata.git",
-                "reference": "10016ebdff602c3460a49bcf7002ad0d68231e8b"
+                "reference": "e5d54902ad9817f1734ef39fe5b34d3c9b505f27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/metadata/zipball/10016ebdff602c3460a49bcf7002ad0d68231e8b",
-                "reference": "10016ebdff602c3460a49bcf7002ad0d68231e8b",
+                "url": "https://api.github.com/repos/api-platform/metadata/zipball/e5d54902ad9817f1734ef39fe5b34d3c9b505f27",
+                "reference": "e5d54902ad9817f1734ef39fe5b34d3c9b505f27",
                 "shasum": ""
             },
             "require": {
@@ -830,9 +830,9 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/metadata/tree/v4.3.1"
+                "source": "https://github.com/api-platform/metadata/tree/v4.3.3"
             },
-            "time": "2026-03-13T14:49:56+00:00"
+            "time": "2026-03-27T06:51:10+00:00"
         },
         {
             "name": "api-platform/openapi",
