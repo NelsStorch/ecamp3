@@ -52,6 +52,11 @@
           <v-icon size="x-small" color="white">mdi-pencil</v-icon>
         </v-btn>
       </template>
+      <template #moreActions>
+        <v-btn color="primary" :to="scheduleEntryRoute">
+          {{ $t('global.button.open') }}
+        </v-btn>
+      </template>
     </DialogActivityEdit>
 
     <h4 class="e-picasso-entry__title">
