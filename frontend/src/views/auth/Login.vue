@@ -315,6 +315,7 @@ export default {
   translate: 0 -12px;
 }
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .ec-login-button.v-btn--disabled {
   color: rgba(0, 0, 0, 0.26) !important;
   opacity: 1;
