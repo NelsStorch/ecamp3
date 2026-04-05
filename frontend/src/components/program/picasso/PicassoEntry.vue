@@ -53,7 +53,7 @@
         </v-btn>
       </template>
       <template #moreActions>
-        <v-btn color="primary" :to="scheduleEntryRoute">
+        <v-btn color="primary" variant="elevated" :to="scheduleEntryRoute">
           {{ $t('global.button.open') }}
         </v-btn>
       </template>
