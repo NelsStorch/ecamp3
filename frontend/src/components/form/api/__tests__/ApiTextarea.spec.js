@@ -1,8 +1,6 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import ApiTextarea from '@/components/form/api/ApiTextarea.vue'
 import ApiWrapper from '@/components/form/api/ApiWrapper.vue'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
 import flushPromises from 'flush-promises'
 import merge from 'lodash-es/merge'
 import { ApiMock } from '@/components/form/api/__tests__/ApiMock'
@@ -10,12 +8,14 @@ import { i18n } from '@/plugins'
 import { mount as mountComponent } from '@vue/test-utils'
 import { waitForDebounce } from '@/test/util'
 import { mockEventClass } from '@/test/mockEventClass'
+import { setupVuetify } from '/tests/setupVuetify.js'
 
 mockEventClass('ClipboardEvent')
 mockEventClass('DragEvent')
 
-describe.skip('An ApiTextarea', () => {
-  let vuetify
+setupVuetify()
+
+describe('An ApiTextarea', () => {
   let wrapper
   let apiMock
 
@@ -24,17 +24,16 @@ describe.skip('An ApiTextarea', () => {
   const TEXT_2 = 'another text'
 
   beforeEach(() => {
-    vuetify = new Vuetify()
     apiMock = ApiMock.create()
   })
 
   afterEach(() => {
     vi.restoreAllMocks()
-    wrapper.destroy()
+    wrapper?.unmount()
   })
 
   const mount = (options) => {
-    const app = Vue.component('App', {
+    const app = {
       components: { ApiTextarea },
       props: {
         path: { type: String, default: path },
@@ -49,16 +48,17 @@ describe.skip('An ApiTextarea', () => {
             required="true"
           />
         </div>`,
-    })
+    }
     apiMock.get().thenReturn(ApiMock.success(TEXT_1).forPath(path))
     const defaultOptions = {
-      mocks: {
-        $tc: () => {},
-        api: apiMock.getMocks(),
+      global: {
+        mocks: {
+          $t: (key) => key,
+          api: apiMock.getMocks(),
+        },
       },
     }
     return mountComponent(app, {
-      vuetify,
       i18n,
       attachTo: document.body,
       ...merge(defaultOptions, options),
@@ -74,8 +74,6 @@ describe.skip('An ApiTextarea', () => {
     await waitForDebounce()
     await flushPromises()
 
-    expect(wrapper.find('div.e-form-container').element.getAttribute('value')).toBe(
-      TEXT_2
-    )
+    expect(wrapper.findComponent(ApiWrapper).vm.localValue).toBe(TEXT_2)
   })
 })
