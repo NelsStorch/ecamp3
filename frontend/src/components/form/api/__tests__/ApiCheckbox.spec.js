@@ -11,8 +11,7 @@ import { setupVuetify } from '/tests/setupVuetify.js'
 
 setupVuetify()
 
-describe.skip('An ApiCheckbox', () => {
-  let vuetify
+describe('An ApiCheckbox', () => {
   let wrapper
   let apiMock
 
@@ -24,11 +23,11 @@ describe.skip('An ApiCheckbox', () => {
 
   afterEach(() => {
     vi.restoreAllMocks()
-    wrapper.destroy()
+    wrapper?.unmount()
   })
 
   const mount = (options) => {
-    const app = mount('App', {
+    const app = {
       components: { ApiCheckbox },
       props: {
         path: { type: String, default: path },
@@ -44,16 +43,17 @@ describe.skip('An ApiCheckbox', () => {
           />
         </div>
       `,
-    })
+    }
     apiMock.get().thenReturn(ApiMock.success(true).forPath(path))
     const defaultOptions = {
-      mocks: {
-        $tc: () => {},
-        api: apiMock.getMocks(),
+      global: {
+        mocks: {
+          $t: (key) => key,
+          api: apiMock.getMocks(),
+        },
       },
     }
     return mountComponent(app, {
-      vuetify,
       i18n,
       attachTo: document.body,
       ...merge(defaultOptions, options),
@@ -87,8 +87,9 @@ describe.skip('An ApiCheckbox', () => {
     await flushPromises()
 
     expect(wrapper.findComponent(ApiWrapper).vm.localValue).toBe(false)
+    // aria-checked is null when value is falsy (unchecked)
     expect(
       wrapper.find('input[type=checkbox]').element.getAttribute('aria-checked')
-    ).toBe('false')
+    ).toBeFalsy()
   })
 })

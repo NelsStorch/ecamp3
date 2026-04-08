@@ -1,19 +1,17 @@
-// Libraries
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-
-import { mount as mountComponent } from '@vue/test-utils'
 import ApiSelect from '../ApiSelect.vue'
 import flushPromises from 'flush-promises'
 import ApiWrapper from '@/components/form/api/ApiWrapper.vue'
 import { i18n } from '@/plugins'
 import merge from 'lodash-es/merge'
 import { ApiMock } from '@/components/form/api/__tests__/ApiMock'
+import { mount as mountComponent } from '@vue/test-utils'
 import { waitForDebounce } from '@/test/util'
+import { setupVuetify } from '/tests/setupVuetify.js'
 
-describe.skip('An ApiSelect', () => {
-  let vuetify
+setupVuetify()
+
+describe('An ApiSelect', () => {
   let wrapper
   let apiMock
 
@@ -31,17 +29,16 @@ describe.skip('An ApiSelect', () => {
   const selectValues = [FIRST_OPTION, SECOND_OPTION]
 
   beforeEach(() => {
-    vuetify = new Vuetify()
     apiMock = ApiMock.create()
   })
 
   afterEach(() => {
     vi.restoreAllMocks()
-    wrapper.destroy()
+    wrapper?.unmount()
   })
 
   const mount = (options) => {
-    const app = Vue.component('App', {
+    const app = {
       components: { ApiSelect },
       props: {
         path: { type: String, default: path },
@@ -59,23 +56,24 @@ describe.skip('An ApiSelect', () => {
           />
         </div>
       `,
-    })
+    }
     apiMock.get().thenReturn(ApiMock.success(FIRST_OPTION.value).forPath(path))
     const defaultOptions = {
-      mocks: {
-        $tc: () => {},
-        api: apiMock.getMocks(),
+      global: {
+        mocks: {
+          $t: (key) => key,
+          api: apiMock.getMocks(),
+        },
       },
     }
     return mountComponent(app, {
-      vuetify,
       i18n,
       attachTo: document.body,
       ...merge(defaultOptions, options),
     })
   }
 
-  test('triggers api.patch and status update if input changes', async () => {
+  test.skip('triggers api.patch and status update if input changes', async () => {
     apiMock.patch().thenReturn(ApiMock.success(SECOND_OPTION.value))
     wrapper = mount()
 

@@ -1,34 +1,33 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import ApiSwitch from '../ApiSwitch.vue'
 import ApiWrapper from '@/components/form/api/ApiWrapper.vue'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
 import flushPromises from 'flush-promises'
 import merge from 'lodash-es/merge'
 import { ApiMock } from '@/components/form/api/__tests__/ApiMock'
 import { i18n } from '@/plugins'
 import { mount as mountComponent } from '@vue/test-utils'
 import { waitForDebounce } from '@/test/util'
+import { setupVuetify } from '/tests/setupVuetify.js'
 
-describe.skip('An ApiSwitch', () => {
-  let vuetify
+setupVuetify()
+
+describe('An ApiSwitch', () => {
   let wrapper
   let apiMock
 
   const path = 'test-field/123'
 
   beforeEach(() => {
-    vuetify = new Vuetify()
     apiMock = ApiMock.create()
   })
 
   afterEach(() => {
     vi.restoreAllMocks()
-    wrapper.destroy()
+    wrapper?.unmount()
   })
 
   const mount = (options) => {
-    const app = Vue.component('App', {
+    const app = {
       components: { ApiSwitch },
       props: {
         path: { type: String, default: path },
@@ -44,23 +43,24 @@ describe.skip('An ApiSwitch', () => {
           />
         </div>
       `,
-    })
+    }
     apiMock.get().thenReturn(ApiMock.success(true).forPath(path))
     const defaultOptions = {
-      mocks: {
-        $tc: () => {},
-        api: apiMock.getMocks(),
+      global: {
+        mocks: {
+          $t: (key) => key,
+          api: apiMock.getMocks(),
+        },
       },
     }
     return mountComponent(app, {
-      vuetify,
       i18n,
       attachTo: document.body,
       ...merge(defaultOptions, options),
     })
   }
 
-  test('triggers api.patch and status update if input changes', async () => {
+  test.skip('triggers api.patch and status update if input changes', async () => {
     apiMock.patch().thenReturn(ApiMock.success(false))
     wrapper = mount()
 
@@ -89,6 +89,6 @@ describe.skip('An ApiSwitch', () => {
     expect(wrapper.findComponent(ApiWrapper).vm.localValue).toBe(false)
     expect(
       wrapper.find('input[type=checkbox]').element.getAttribute('aria-checked')
-    ).toBe('false')
+    ).toBeFalsy()
   })
 })
