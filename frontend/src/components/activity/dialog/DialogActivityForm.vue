@@ -21,15 +21,21 @@
       <template #item="{ item, props }">
         <v-list-item :key="item" v-bind="props">
           <template #title>
-            <category-chip :category="categories[item.value]" dense />
-            {{ categories[item.value].name }}
+            <category-chip
+              :category="categories[item.value]"
+              dense
+              class="ec-category-chip"
+            />{{ categories[item.value].name }}
           </template>
         </v-list-item>
       </template>
       <template #selection="{ item }">
         <div class="v-select__selection">
-          <category-chip :category="categories[item.value]" dense />
-          {{ categories[item.value].name }}
+          <category-chip
+            :category="categories[item.value]"
+            dense
+            class="ec-category-chip"
+          />{{ categories[item.value].name }}
         </div>
       </template>
     </e-select>
@@ -93,3 +99,9 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="scss">
+.ec-category-chip {
+  margin-right: 5px;
+}
+</style>
