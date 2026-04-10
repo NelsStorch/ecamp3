@@ -20,7 +20,7 @@
       v-bind="$attrs"
     >
       <template #item="{ item, props }">
-        <v-list-item v-bind="props">
+        <v-list-item v-bind="{ ...props, title: undefined }">
           <v-list-item-title>
             <span v-for="(part, idx) in renderHighlighted(item)" :key="idx">
               <mark v-if="part.h">{{ part.text }}</mark>
