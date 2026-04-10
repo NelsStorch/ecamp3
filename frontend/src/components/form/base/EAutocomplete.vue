@@ -17,6 +17,7 @@
       item-title="text"
       item-value="value"
       :readonly="readonly"
+      v-model:search="search"
       v-bind="$attrs"
     >
       <template #item="{ item, props }">
@@ -57,6 +58,7 @@ export default {
   data() {
     return {
       fuzzy: new uFuzzy({ intraMode: 1 }),
+      search: null,
       searchInfos: new Map(),
     }
   },
@@ -68,10 +70,10 @@ export default {
     },
 
     renderHighlighted(item) {
-      if (this.searchInfos.size > 0) {
+      if (this.search && this.searchInfos.size > 0) {
         if (this.searchInfos.has(item.title)) {
           const info = this.searchInfos.get(item.title)
-          if (info) {
+          if (info && info.ranges) {
             return uFuzzy.highlight(
               item.title,
               info.ranges[0],
