@@ -1,6 +1,6 @@
 <template>
   <Field
-    v-slot="{ handleChange, handleReset, errors: veeFieldErrors }"
+    v-slot="{ handleChange, handleBlur, handleReset, errors: veeFieldErrors }"
     ref="validationField"
     :model-value="modelValue"
     as="div"
@@ -19,7 +19,7 @@
       v-bind="$attrs"
       :required="required"
       :hide-details="hideDetails"
-      @blur="onBlur($event, handleReset)"
+      @blur="onBlur($event, handleReset, handleBlur)"
       @update:model-value="onInput($event, handleChange)"
     >
       <!-- passing through all slots -->
@@ -54,8 +54,8 @@ export default {
   mounted() {
     this.preventValidationOnBlur =
       'autofocus' in this.$attrs &&
-      'required' in this.$refs.validationField.$attrs &&
-      this.$refs.textField.value == ''
+      this.veeRules?.includes('required') &&
+      this.modelValue == ''
   },
   methods: {
     focus() {
@@ -66,10 +66,12 @@ export default {
       handleChange(event)
       this.$emit('update:model-value', event)
     },
-    onBlur(event, handleReset) {
+    onBlur(event, handleReset, handleBlur) {
       this.$emit('blur', event)
       if (this.preventValidationOnBlur) {
         handleReset()
+      } else {
+        handleBlur()
       }
       this.preventValidationOnBlur = false
     },

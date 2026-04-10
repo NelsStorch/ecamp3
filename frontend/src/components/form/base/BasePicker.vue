@@ -118,7 +118,7 @@ export default {
       // internal value
       localValue: null,
       localValueInitialized: false,
-      fieldValue: null,
+      fieldValue: '',
 
       showPicker: false,
       parseError: null,
