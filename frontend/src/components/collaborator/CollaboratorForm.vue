@@ -3,7 +3,7 @@
     <e-text-field
       v-if="status"
       class="ec-status-field"
-      :value="translatedStatus"
+      :model-value="translatedStatus"
       readonly
       path="status"
     >

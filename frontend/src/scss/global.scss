@@ -179,6 +179,7 @@ body {
   color: rgb(0, 0, 0, 0.18);
 }
 
+.v-text-field.v-input--readonly > .v-input__control .v-field__overlay,
 .v-text-field.v-input--readonly > .v-input__control .v-field__outline,
 .v-text-field.v-input--readonly > .v-input__control .v-field__outline:before,
 .v-text-field.v-input--readonly > .v-input__control .v-field__outline:after {
