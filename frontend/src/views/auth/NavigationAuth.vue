@@ -17,12 +17,13 @@
     <v-btn
       :href="helpLink"
       target="_blank"
-      fab
-      size="x-small"
-      light
+      variant="elevated"
+      elevation="3"
+      density="comfortable"
+      icon="mdi-help"
       position="absolute"
       location="top right"
-      class="help-button--desktop"
+      class="help-button--desktop ma-3"
     >
       <v-icon>mdi-help</v-icon>
       <span class="d-sr-only">{{ $t('global.navigation.help') }}</span>
@@ -32,12 +33,13 @@
     v-else
     :href="helpLink"
     target="_blank"
-    fab
+    variant="elevated"
+    elevation="3"
+    density="comfortable"
     icon="mdi-help"
-    size="small"
     position="absolute"
     location="right top right"
-    class="help-button--mobile ma-4"
+    class="ma-3"
     style="z-index: 10"
   >
     <v-icon icon="mdi-help" />
@@ -66,10 +68,7 @@ export default {
 
 <style scoped lang="scss">
 .help-button--desktop {
-  top: 80px !important;
-}
-.help-button--mobile {
-  top: 16px !important;
+  top: 65px !important;
 }
 ::v-deep(.v-toolbar__content) {
   overflow: visible;
