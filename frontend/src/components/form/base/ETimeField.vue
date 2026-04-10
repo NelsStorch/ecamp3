@@ -66,7 +66,7 @@ export default {
             .millisecond(parsedDateTime.millisecond()) ?? parsedDateTime
         )
       } else {
-        throw new Error(this.$t('components.form.base.eTimeField.parseError'))
+        throw new Error(this.$t('components.form.base.eTimeField.invalidFormat'))
       }
     },
     /**

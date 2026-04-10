@@ -183,6 +183,9 @@
           "invalidFormat": "Format nunvalid, inditgescha per plaschair la data en il format DD-MM-YYYY",
           "openPicker": "Avrir il dialog per tscherner ina data per {label}"
         },
+        "eTimeField": {
+          "invalidFormat": "Format nunvalid, inditgescha per plaschair il temp en il format HH:MM"
+        },
         "eTimePicker": {
           "invalidFormat": "Format nunvalid, inditgescha per plaschair il temp en il format HH:MM",
           "openPicker": "Avrir il dialog per tscherner in temp per {label}"
