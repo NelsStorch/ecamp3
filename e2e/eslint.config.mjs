@@ -1,4 +1,4 @@
-import cypressEslint from 'eslint-plugin-cypress/flat'
+import cypressEslint from 'eslint-plugin-cypress'
 import { includeIgnoreFile } from '@eslint/compat'
 import globals from 'globals'
 import path from 'node:path'
