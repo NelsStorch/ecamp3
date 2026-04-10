@@ -215,7 +215,7 @@ export default {
     },
   },
   mounted() {
-    this.language = navigator.language
+    this.language = navigator.language.split('-')[0]
 
     if (getEnv().RECAPTCHA_SITE_KEY) {
       this.recaptcha = load(getEnv().RECAPTCHA_SITE_KEY, {
