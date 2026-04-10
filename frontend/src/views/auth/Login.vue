@@ -106,7 +106,7 @@
         :size="$vuetify.display.smAndUp && 'large'"
         height="50"
         variant="outlined"
-        class="my-4 ec-login-button"
+        class="my-4 pa-2 ec-login-button"
       >
         <v-progress-circular v-if="authenticationInProgress" indeterminate size="24" />
         <v-icon v-else size="large">$ecamp</v-icon>
