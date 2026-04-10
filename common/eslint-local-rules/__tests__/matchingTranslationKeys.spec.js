@@ -3,7 +3,7 @@ import { RuleTester } from 'eslint'
 import { describe, it } from 'vitest'
 import localRules from 'eslint-plugin-local-rules'
 import globals from 'globals'
-import utils from 'eslint-plugin-vue/lib/utils/index.js'
+import utils from 'eslint-plugin-vue/dist/utils/index.js'
 import eslintParser from 'vue-eslint-parser'
 
 RuleTester.describe = describe.skip
