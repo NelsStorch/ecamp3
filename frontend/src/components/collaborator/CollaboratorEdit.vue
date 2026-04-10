@@ -51,7 +51,6 @@
       <slot name="activator" v-bind="{ props }">
         <CollaboratorListItem
           :collaborator="collaborator"
-          :disabled="!isManager"
           editable
           @click="showDialog = true"
           v-on="props"
@@ -78,7 +77,7 @@
                 <template #activator="{ props: deactivateProps }">
                   <IconButton
                     color="secondary"
-                    text
+                    variant="text"
                     :aria-disabled="
                       (disabled && !isOwnCampCollaboration) || isLastManager
                     "
