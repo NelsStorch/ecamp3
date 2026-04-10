@@ -33,10 +33,7 @@ class UserCreateProcessorTest extends TestCase {
 
         $this->recaptchaResponse = $this->createMock(Response::class);
         $recaptcha = $this->createMock(ReCaptchaWrapper::class);
-        $recaptcha->expects(self::any())
-            ->method('verify')
-            ->willReturn($this->recaptchaResponse)
-        ;
+        $recaptcha->method('verify')->willReturn($this->recaptchaResponse);
 
         $this->userPasswordHasher = $this->createMock(UserPasswordHasher::class);
         $this->mailService = $this->createMock(MailService::class);

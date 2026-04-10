@@ -168,16 +168,10 @@ class UpdatePasswordTest extends ECampApiTestCase {
 
     protected function mockRecaptcha($shouldReturnSuccess = true) {
         $container = static::getContainer();
-        $recaptcha = $this->createMock(ReCaptchaWrapper::class);
-        $response = $this->createMock(Response::class);
-        $recaptcha->expects(self::any())
-            ->method('verify')
-            ->willReturn($response)
-        ;
-        $response->expects(self::any())
-            ->method('isSuccess')
-            ->willReturn($shouldReturnSuccess)
-        ;
+        $recaptcha = $this->createStub(ReCaptchaWrapper::class);
+        $response = $this->createStub(Response::class);
+        $recaptcha->method('verify')->willReturn($response);
+        $response->method('isSuccess')->willReturn($shouldReturnSuccess);
         $container->set(ReCaptchaWrapper::class, $recaptcha);
     }
 }
