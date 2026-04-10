@@ -72,16 +72,17 @@
       />
 
       <v-btn
-        :color="email ? 'blue darken-2' : 'blue lightne-4'"
-        :disabled="!email"
-        :size="$vuetify.display.smAndUp ? 'x-large' : undefined"
-        block
-        class="my-4"
         type="submit"
+        :color="email ? 'blue-darken-2' : 'blue-lighten-4'"
+        block
+        :disabled="!email"
+        :size="$vuetify.display.smAndUp && 'large'"
+        height="50"
         variant="outlined"
+        class="my-4 pa-2 ec-login-button"
       >
         <v-progress-circular v-if="status === 'reseting'" indeterminate size="24" />
-        <v-icon v-else>$ecamp</v-icon>
+        <v-icon v-else size="large">$ecamp</v-icon>
         <v-spacer />
         <span>{{ $t('views.auth.resetPassword.send') }}</span>
         <v-spacer />
@@ -173,3 +174,19 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
+.ec-login-button.v-btn--disabled {
+  color: rgba(0, 0, 0, 0.26) !important;
+  opacity: 1;
+}
+
+.ec-login-button :deep(.v-btn__overlay) {
+  opacity: 0.08;
+}
+
+.ec-login-button :deep(.v-btn__content) {
+  width: 100%;
+}
+</style>
