@@ -61,7 +61,7 @@
 <script>
 import { computed } from 'vue'
 import draggable from 'vuedraggable'
-import { every, sortBy, filter } from 'lodash-es'
+import { sortBy, filter } from 'lodash-es'
 import { errorToMultiLineToast } from '@/components/toast/toasts.js'
 import SortableChecklistItem from '@/components/checklist/SortableChecklistItem.vue'
 import ChecklistItemCreate from '@/components/checklist/ChecklistItemCreate.vue'
@@ -97,9 +97,6 @@ export default {
   data() {
     return {
       dragging: false,
-      dirty: false,
-      savingRequest: 0,
-      localSortedItems: [],
     }
   },
   computed: {
@@ -119,27 +116,6 @@ export default {
       return this.parent?._meta.self ? JSON.stringify(this.parent?._meta.self) : 'null'
     },
   },
-  watch: {
-    sortedItems: {
-      handler: function (newItems) {
-        // update local sorting with external sorting if not dirty
-        // or if number of items don't match (new incoming items or deleted items)
-        if (!this.dirty || newItems.length !== this.localSortedItems.length) {
-          this.localSortedItems = newItems
-          this.dirty = false
-          // remove dirty flag if external sorting is equal to local sorting (e.g. saving to API was successful)
-        } else if (
-          every(
-            this.localSortedItems,
-            (item, key) => item._meta.self === newItems[key]._meta.self
-          )
-        ) {
-          this.dirty = false
-        }
-      },
-      immediate: true,
-    },
-  },
   methods: {
     dragStart() {
       this.dragging = true
@@ -153,8 +129,6 @@ export default {
       this.dragging = false
       this.$emit('drag-end')
       if (event.originalEvent.type === 'drop') {
-        this.dirty = true
-        this.savingRequest++
         const parent = JSON.parse(event.to.dataset.parent)
         // patch content node location
         await this.api
@@ -166,10 +140,6 @@ export default {
             this.toast.error(errorToMultiLineToast(e))
           })
           .finally(async () => await this.checklist.checklistItems().$reload())
-        this.savingRequest--
-        if (this.savingRequest === 0) {
-          this.dirty = false
-        }
       } else {
         this.checklist.checklistItems().$reload()
       }
