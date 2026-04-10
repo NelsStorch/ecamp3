@@ -17,7 +17,6 @@
       item-title="text"
       item-value="value"
       :readonly="readonly"
-      :search.sync="search"
       v-bind="$attrs"
     >
       <template #item="{ item, props }">
@@ -54,10 +53,10 @@ export default {
     skipIfEmpty: { type: Boolean, default: true },
     readonly: { type: Boolean, default: false },
   },
+  emits: ['update:model-value'],
   data() {
     return {
       fuzzy: new uFuzzy({ intraMode: 1 }),
-      search: null,
       searchInfos: new Map(),
     }
   },
