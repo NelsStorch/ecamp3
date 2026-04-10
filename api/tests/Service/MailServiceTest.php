@@ -121,9 +121,9 @@ class MailServiceTest extends KernelTestCase {
         self::assertEmailAddressContains($mailerMessage, 'To', self::INVITE_MAIL);
         self::assertEmailHeaderSame($mailerMessage, 'subject', 'Bienvenue sur eCamp v3');
 
-        self::assertEmailHtmlBodyContains($mailerMessage, 'Welcome');
+        self::assertEmailHtmlBodyContains($mailerMessage, 'Bienvenue');
         self::assertEmailHtmlBodyContains($mailerMessage, self::INVITE_KEY);
-        self::assertEmailTextBodyContains($mailerMessage, 'Welcome');
+        self::assertEmailTextBodyContains($mailerMessage, 'Bienvenue');
         self::assertEmailTextBodyContains($mailerMessage, self::INVITE_KEY);
     }
 
