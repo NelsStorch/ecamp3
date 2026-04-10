@@ -249,7 +249,7 @@ const router = createRouter({
       props: {
         default: (route) => ({
           variant: 'default',
-          invitation: invitationFromInviteKey(route.params.inviteKey),
+          inviteKey: route.params.inviteKey,
         }),
       },
     },
@@ -746,10 +746,6 @@ export function campFromRoute(route) {
     return undefined
   }
   return apiStore.get().camps({ id: route.params.campId })
-}
-
-export function invitationFromInviteKey(inviteKey) {
-  return apiStore.get().invitations({ action: 'find', id: inviteKey })
 }
 
 export function periodFromRoute(route) {

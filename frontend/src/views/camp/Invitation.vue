@@ -114,8 +114,8 @@ export default {
   name: 'Invitation',
   components: { ButtonBack, UserMeta },
   props: {
-    invitation: { type: Object, required: false, default: null },
     variant: { type: String, default: 'default' },
+    inviteKey: { type: String, default: null },
   },
   setup() {
     const toast = useToast()
@@ -123,6 +123,7 @@ export default {
   },
   data: () => ({
     invitationFound: undefined,
+    invitation: null,
   }),
   head() {
     return {
@@ -150,19 +151,23 @@ export default {
       return this.$store.state.auth.user
     },
   },
-  mounted() {
+  async mounted() {
     this.invitationFound = undefined
 
     if (this.variant === 'default') {
-      // Content of api response depends on authenticated user --> reload every time this component is mounted
-      this.invitation?.$reload().then(
-        () => {
-          this.invitationFound = true
-        },
-        () => {
-          this.invitationFound = false
-        }
-      )
+      if (!this.inviteKey) {
+        this.invitationFound = false
+        return
+      }
+      try {
+        this.invitation = await this.api
+          .get()
+          .invitations({ action: 'find', id: this.inviteKey })
+          .$reload()
+        this.invitationFound = true
+      } catch {
+        this.invitationFound = false
+      }
     }
   },
   methods: {
