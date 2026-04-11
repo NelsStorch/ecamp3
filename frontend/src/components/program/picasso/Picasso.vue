@@ -269,7 +269,6 @@ export default {
             ? entry.activity().category().short + ': '
             : '') +
           entry.activity().title,
-        color: entry.activity().category().color,
         allDay: false,
       }))
 
