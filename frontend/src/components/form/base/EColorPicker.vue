@@ -250,7 +250,11 @@ export default {
 </script>
 
 <style scoped>
-:deep(.v-color-picker__dot > div::before) {
+:deep(.v-color-picker-edit__input input) {
+  background: white;
+}
+
+:deep(.v-color-picker-preview__dot > div::before) {
   content: '•';
   color: var(--picker-contrast-color);
   display: block;
