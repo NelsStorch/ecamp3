@@ -4,7 +4,6 @@
       :model-value="localSelection"
       path="localSelection"
       :label="$t('contentNode.laThematicArea.name')"
-      item-value="value"
       :items="items"
       multiple
       variant="outlined"
@@ -13,8 +12,7 @@
       :loading="savingRequestCount > 0"
       :disabled="layoutMode || disabled"
       :menu-props="{
-        maxWidth: 'min(290px, calc(100vw - 32px))',
-        contentClass: 'ec-la-thematic-area',
+        contentProps: { style: { maxWidth: 'min(290px, calc(100vw - 32px))' } },
       }"
       :placeholder="$t('components.activity.content.lAThematicArea.placeholder')"
       @update:model-value="onInput"
@@ -48,18 +46,22 @@
         </template>
       </template>
       <template #item="{ item, props }">
-        <v-list-item class="ec-lta-item" lines="three" v-bind="props">
-          <v-list-item-action>
-            <v-checkbox-btn
-              class="pointer-events-none"
-              :color="item.raw.color"
-              :model-value="localSelection.includes(item.value)"
-              :ripple="false"
-            />
-          </v-list-item-action>
-
-          <v-list-item-title>{{ item.text }}</v-list-item-title>
-          <v-list-item-subtitle>{{ item.description }}</v-list-item-subtitle>
+        <v-list-item
+          class="ec-lta-item"
+          lines="three"
+          v-bind="props"
+          active-class="text-blue-darken-2"
+          :subtitle="item.raw.description"
+        >
+          <template #prepend>
+            <v-list-item-action start>
+              <v-checkbox-btn
+                :model-value="localSelection.includes(item.value)"
+                :ripple="false"
+                class="pointer-events-none"
+              ></v-checkbox-btn>
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </template>
     </e-select>
