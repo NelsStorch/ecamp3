@@ -25,6 +25,7 @@ export default {
     minWidth: { type: Number, default: 3 },
     maxWidth: { type: Number, default: 12 },
   },
+  emits: ['resizeStart', 'resizeStop', 'resizing'],
   data() {
     return {
       dragging: false,
@@ -68,7 +69,7 @@ export default {
       this.dragging = true
       this.startWidth = this.$el.clientWidth
       this.startValue = this.width
-      this.$emit('resize-start')
+      this.$emit('resizeStart')
     },
     mouseMove(ev) {
       if (!this.dragging) return
@@ -85,7 +86,7 @@ export default {
       this.dragging = false
       this.startWidth = 0
       this.startValue = this.width
-      this.$emit('resize-stop')
+      this.$emit('resizeStop')
     },
     resizing(ev) {
       const pageX = typeof ev.pageX !== 'undefined' ? ev.pageX : ev.touches[0].pageX

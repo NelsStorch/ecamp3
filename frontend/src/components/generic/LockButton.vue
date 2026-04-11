@@ -40,6 +40,7 @@ export default {
       default: false,
     },
   },
+  emits: ['click'],
   computed: {
     tooltip() {
       if (this.disabledForGuest) {

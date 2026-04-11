@@ -109,7 +109,7 @@ export default {
      */
     inputFilter: { type: Function, required: false, default: null },
   },
-  emits: ['update:model-value'],
+  emits: ['update:model-value', 'blur'],
   data() {
     return {
       /**

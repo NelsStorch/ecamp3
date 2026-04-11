@@ -39,6 +39,7 @@ export default {
     value: { type: Object, required: true },
     camp: { type: Object, required: true },
   },
+  emits: ['input'],
   computed: {
     options: {
       get() {

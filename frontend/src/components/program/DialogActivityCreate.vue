@@ -137,7 +137,7 @@ export default {
   props: {
     scheduleEntry: { type: Object, required: true },
   },
-  emits: ['activity-created'],
+  emits: ['activityCreated'],
   setup() {
     const showCopyActivityUrlPopover = ref(false)
 
@@ -255,7 +255,7 @@ export default {
     },
     onSuccess(activity) {
       this.close()
-      this.$emit('activity-created', activity)
+      this.$emit('activityCreated', activity)
     },
     setCopyContentCheckbox(val) {
       if (val) {

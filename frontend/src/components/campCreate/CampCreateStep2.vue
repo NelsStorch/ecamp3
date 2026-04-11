@@ -1,5 +1,5 @@
 <template>
-  <Form ref="form" v-slot="{ meta }" @submit="() => $emit('create-camp')">
+  <Form ref="form" v-slot="{ meta }" @submit="() => $emit('createCamp')">
     <v-card-text>
       <server-error :server-error="serverError" />
 
@@ -165,7 +165,7 @@
         :disabled="isSaving"
         color="secondary"
         variant="text"
-        @click="$emit('previous-step')"
+        @click="$emit('previousStep')"
       >
         <v-icon start>mdi-arrow-left</v-icon>
         {{ $t('global.button.back') }}
@@ -223,6 +223,7 @@ export default {
       default: null,
     },
   },
+  emits: ['createCamp', 'previousStep'],
   setup({ camp }) {
     const localCamp = reactive(camp)
     const copyCampUrl = ref('')

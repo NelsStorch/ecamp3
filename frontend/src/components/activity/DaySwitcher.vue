@@ -104,6 +104,7 @@ export default {
     daySelection: { type: Object, required: true },
     loading: { type: Boolean },
   },
+  emits: ['changeDay'],
   computed: {
     items() {
       return reduce(
@@ -131,7 +132,7 @@ export default {
   },
   methods: {
     changeDay(value) {
-      this.$emit('change-day', toRaw(value))
+      this.$emit('changeDay', toRaw(value))
     },
   },
 }

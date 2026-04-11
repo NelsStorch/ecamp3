@@ -93,6 +93,7 @@ export default {
     template: Boolean,
     title: { type: String, required: true },
   },
+  emits: ['remove'],
 }
 </script>
 

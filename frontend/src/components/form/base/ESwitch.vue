@@ -20,7 +20,7 @@
       @update:model-value="
         ($event) => {
           handleChange($event)
-          $emit('update:model-value', $event)
+          $emit('update:modelValue', $event)
           $emit('input', $event)
         }
       "
@@ -47,5 +47,6 @@ export default {
   props: {
     modelValue: { type: Boolean, required: false },
   },
+  emits: ['update:modelValue', 'input'],
 }
 </script>

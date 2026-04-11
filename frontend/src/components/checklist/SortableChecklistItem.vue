@@ -41,8 +41,8 @@
       :checklist="checklist"
       :parent="item"
       :disabled="disabled"
-      @drag-start="$emit('drag-start')"
-      @drag-end="$emit('drag-end')"
+      @drag-start="$emit('dragStart')"
+      @drag-end="$emit('dragEnd')"
     />
   </div>
 </template>
@@ -64,6 +64,7 @@ export default {
     checklist: { type: Object, required: true },
     disabled: { type: Boolean, default: false },
   },
+  emits: ['dragStart', 'dragEnd'],
   data() {
     return {
       hover: false,

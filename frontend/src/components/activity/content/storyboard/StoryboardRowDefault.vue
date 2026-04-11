@@ -9,8 +9,8 @@
         variant="flat"
         density="comfortable"
         :aria-label="$t('global.button.move')"
-        @keydown.down="$emit('move-down', itemKey)"
-        @keydown.up="$emit('move-up', itemKey)"
+        @keydown.down="$emit('moveDown', itemKey)"
+        @keydown.up="$emit('moveUp', itemKey)"
       >
         <v-icon icon="mdi-drag" size="24" />
       </v-btn>
@@ -71,6 +71,7 @@ export default {
     layoutMode: { type: Boolean, required: true },
     disabled: { type: Boolean, default: false },
   },
+  emits: ['moveDown', 'moveUp', 'delete'],
 }
 </script>
 <style scoped lang="scss">

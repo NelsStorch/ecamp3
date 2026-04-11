@@ -46,6 +46,7 @@ export default {
       default: 'text',
     },
   },
+  emits: ['update:modelValue', 'blur'],
   data() {
     return {
       preventValidationOnBlur: false,
@@ -64,7 +65,7 @@ export default {
     onInput(event, handleChange) {
       this.preventValidationOnBlur = false
       handleChange(event)
-      this.$emit('update:model-value', event)
+      this.$emit('update:modelValue', event)
     },
     onBlur(event, handleReset, handleBlur) {
       this.$emit('blur', event)

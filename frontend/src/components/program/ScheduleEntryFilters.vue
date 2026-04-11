@@ -206,7 +206,7 @@ export default {
       default: false,
     },
   },
-  emits: ['update:modelValue', 'height-changed'],
+  emits: ['update:modelValue', 'heightChanged'],
   computed: {
     periodItems() {
       return keyBy(
@@ -382,7 +382,7 @@ export default {
       })
     },
     onResize({ height }) {
-      this.$emit('height-changed', height)
+      this.$emit('heightChanged', height)
     },
     resultCountWithModifiedFilter(filterName, filterValue) {
       return this.filterFn({

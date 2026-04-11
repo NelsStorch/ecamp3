@@ -37,6 +37,7 @@ export default {
     inputClass: { type: [String, Object], default: '' },
     menuProps: { type: Object, default: () => ({}) },
   },
+  emits: ['update:modelValue'],
   computed: {
     // find the closest index to current value
     index() {
@@ -52,7 +53,7 @@ export default {
   methods: {
     onInput(value) {
       this.$refs.menu && (this.$refs.menu.isActive = false)
-      this.$emit('update:model-value', value)
+      this.$emit('update:modelValue', value)
     },
     toggle() {
       setTimeout(() => this.setMenuIndex(this.index), 10)

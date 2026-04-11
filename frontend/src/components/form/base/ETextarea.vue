@@ -14,7 +14,7 @@
       :on-input="
         ($event) => {
           handleChange($event)
-          $emit('update:model-value', $event)
+          $emit('update:modelValue', $event)
         }
       "
       v-bind="$attrs"
@@ -41,5 +41,6 @@ export default {
     VTiptapEditor,
   },
   mixins: [formComponentPropsMixin, formComponentMixin],
+  emits: ['update:modelValue'],
 }
 </script>

@@ -156,8 +156,8 @@ export default {
 
   // emitted events
   emits: [
-    'new-entry', // triggered once when a new entry was created via drag & drop (parameters: startTimestamp, endTimestamp)
-    'unlock-reminder', // triggered when we think someone is trying to create/move in non-editable mode
+    'newEntry', // triggered once when a new entry was created via drag & drop (parameters: startTimestamp, endTimestamp)
+    'unlockReminder', // triggered when we think someone is trying to create/move in non-editable mode
   ],
 
   // composition API setup
@@ -202,11 +202,11 @@ export default {
     const createEntry = (startTimestamp, endTimestamp) => {
       const start = timestampToUtcString(startTimestamp)
       const end = timestampToUtcString(endTimestamp)
-      emit('new-entry', start, end)
+      emit('newEntry', start, end)
     }
 
     const showReminder = (move) => {
-      emit('unlock-reminder', move)
+      emit('unlockReminder', move)
     }
 
     const calenderStartTimestamp = computed(() => utcStringToTimestamp(start.value))

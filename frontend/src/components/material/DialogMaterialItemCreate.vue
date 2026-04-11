@@ -37,6 +37,7 @@ export default {
     // API collection on which to post the new item
     materialItemCollection: { type: Object, required: true },
   },
+  emits: ['itemAdding'],
   data() {
     return {
       entityProperties: ['quantity', 'unit', 'article'],
@@ -67,7 +68,7 @@ export default {
       const data = this.entityData
 
       // fire event to allow for eager adding before post has finished
-      this.$emit('item-adding', key, data)
+      this.$emit('itemAdding', key, data)
       this.close()
     },
   },

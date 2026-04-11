@@ -15,7 +15,7 @@ Allows 15min steps only
     :vee-id="veeId"
     :vee-rules="veeRules"
     button-aria-label-i18n-key="components.form.base.eTimePicker.openPicker"
-    @update:model-value="$emit('update:model-value', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <template #default="picker">
       <v-time-picker
@@ -62,6 +62,7 @@ export default {
     min: { type: String, default: null },
     max: { type: String, default: null },
   },
+  emits: ['update:modelValue'],
   methods: {
     allowedStep: (m) => m % 15 === 0,
 
