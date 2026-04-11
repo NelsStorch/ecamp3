@@ -33,7 +33,7 @@
               v-model="period.description"
               single-line
               path="description"
-              :veeId="`period[${i}].description`"
+              :vee-id="`period[${i}].description`"
               variant="underlined"
               vee-rules="required"
               :my="false"
@@ -47,7 +47,7 @@
             <e-date-picker
               v-model="period.start"
               path="start"
-              :veeId="`period[${i}].start`"
+              :vee-id="`period[${i}].start`"
               vee-rules="required"
               :max="period.end"
               :my="2"
@@ -61,7 +61,7 @@
               v-model="period.end"
               input-class="ml-2"
               path="end"
-              :veeId="`period[${i}].end`"
+              :vee-id="`period[${i}].end`"
               :vee-rules="`required|greaterThanOrEqual_date:@period[${i}].start`"
               :min="period.start"
               :my="2"
