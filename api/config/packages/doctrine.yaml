@@ -11,6 +11,8 @@ doctrine:
             
         schema_filter: ~^(?!view_)~
 
+        schema_manager_factory: 'App\Doctrine\DBAL\Schema\CustomSchemaManagerFactory'
+        
     orm:
         naming_strategy: App\Util\CamelPascalNamingStrategy
         identity_generation_preferences:
