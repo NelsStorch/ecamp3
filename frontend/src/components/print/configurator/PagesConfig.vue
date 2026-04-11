@@ -45,7 +45,12 @@
       />
     </div>
   </div>
-  <v-list-item v-else-if="template" icon="mdi-plus" class="py-2 px-0" v-bind="$attrs">
+  <v-list-item
+    v-else-if="template"
+    prepend-icon="mdi-plus"
+    class="py-2 px-0"
+    v-bind="$attrs"
+  >
     <v-list-item-title
       ><h3>{{ title }}</h3></v-list-item-title
     >
