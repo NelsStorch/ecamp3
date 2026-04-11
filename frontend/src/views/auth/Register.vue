@@ -9,7 +9,7 @@
             v-model="firstname"
             append-inner-icon="mdi-account-outline"
             autocomplete="given-name"
-            density="compact"
+            :density="$vuetify.display.xs ? 'comfortable' : undefined"
             path="firstname"
             type="text"
             vee-rules="required"
@@ -19,7 +19,7 @@
             v-model="surname"
             append-inner-icon="mdi-account-outline"
             autocomplete="family-name"
-            density="compact"
+            :density="$vuetify.display.xs ? 'comfortable' : undefined"
             path="surname"
             type="text"
             vee-rules="required"
@@ -29,7 +29,7 @@
             v-model="email"
             append-inner-icon="mdi-at"
             autocomplete="username"
-            density="compact"
+            :density="$vuetify.display.xs ? 'comfortable' : undefined"
             path="email"
             type="email"
             vee-rules="email|required"
@@ -39,7 +39,7 @@
             v-model="pw1"
             append-inner-icon="mdi-lock-outline"
             autocomplete="new-password"
-            density="compact"
+            :density="$vuetify.display.xs ? 'comfortable' : undefined"
             loading
             maxlength="128"
             minlength="12"
@@ -54,7 +54,6 @@
               <v-progress-linear
                 :color="passwordStrengthColor"
                 :model-value="passwordStrength"
-                absolute
                 height="5"
               />
             </template>
@@ -65,7 +64,7 @@
             :label="$t('views.auth.register.passwordConfirmation')"
             append-inner-icon="mdi-lock-outline"
             autocomplete="new-password"
-            density="compact"
+            :density="$vuetify.display.xs ? 'comfortable' : undefined"
             maxlength="128"
             minlength="12"
             passwordrules="minlength: 12; maxlength: 128;"
@@ -78,7 +77,7 @@
           <e-select
             v-model="language"
             :items="availableLocales"
-            density="compact"
+            :density="$vuetify.display.xs ? 'comfortable' : undefined"
             path="language"
           />
 
@@ -100,7 +99,7 @@
                 :href="termsOfServiceLink"
                 :title="$t('global.button.open')"
                 class="px-1"
-                density="compact"
+                :density="$vuetify.display.xs ? 'comfortable' : undefined"
                 min-width="0"
                 tabindex="-1"
                 target="_blank"
