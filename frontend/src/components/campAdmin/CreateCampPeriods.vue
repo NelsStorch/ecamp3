@@ -2,7 +2,7 @@
   <div class="e-form-container">
     <v-card
       v-for="(period, i) in periods"
-      :key="period.key"
+      :key="i"
       variant="flat"
       color="grey-lighten-3"
       class="period mb-2 rounded-b-0"
@@ -33,6 +33,7 @@
               v-model="period.description"
               single-line
               path="description"
+              :vee-id="`period[${i}].description`"
               variant="underlined"
               vee-rules="required"
               :my="false"
@@ -46,6 +47,7 @@
             <e-date-picker
               v-model="period.start"
               path="start"
+              :vee-id="`period[${i}].start`"
               vee-rules="required"
               :max="period.end"
               :my="2"
@@ -59,7 +61,8 @@
               v-model="period.end"
               input-class="ml-2"
               path="end"
-              vee-rules="required|greaterThanOrEqual_date:@start"
+              :vee-id="`period[${i}].end`"
+              :vee-rules="`required|greaterThanOrEqual_date:@period[${i}].start`"
               :min="period.start"
               :my="2"
               variant="underlined"
@@ -70,10 +73,10 @@
         </v-row>
       </e-form>
     </v-card>
-    <!--    <v-btn variant="text" block height="auto" class="pa-4" @click="addPeriod">-->
-    <!--      <v-icon>mdi-plus</v-icon>-->
-    <!--      {{ $t('components.campAdmin.createCampPeriods.add') }}-->
-    <!--    </v-btn>-->
+    <v-btn variant="text" block height="auto" class="pa-4" @click="addPeriod">
+      <v-icon>mdi-plus</v-icon>
+      {{ $t('components.campAdmin.createCampPeriods.add') }}
+    </v-btn>
   </div>
 </template>
 <script>
