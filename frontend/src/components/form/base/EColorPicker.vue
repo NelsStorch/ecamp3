@@ -119,6 +119,10 @@ import ColorSwatch from '@/components/form/base/ColorPicker/ColorSwatch.vue'
 import { debounce } from 'lodash-es'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 
+const DEBOUNCE_MS = 500
+const HEX3_PATTERN = /^#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])$/
+const HEX6_PATTERN = /^#[0-9A-Fa-f]{6}$/
+
 export default {
   name: 'EColorPicker',
   components: { ColorSwatch },
@@ -188,12 +192,12 @@ export default {
   created() {
     this.debouncedEmit = debounce((value) => {
       this.$emit('update:modelValue', value)
-    }, 500)
+    }, DEBOUNCE_MS)
     this.debouncedPickerUpdate = debounce((value) => {
       this.pickerValue = value
       this.pickerNull = false
       this.$emit('update:modelValue', value)
-    }, 500)
+    }, DEBOUNCE_MS)
   },
   mounted() {
     document.addEventListener('keydown', this.escapeHandler)
@@ -252,8 +256,8 @@ export default {
         }
         e.target.dispatchEvent(new Event('change', { bubbles: true }))
       } else if (e.target.type === 'text') {
-        const hex3 = e.target.value.match(/^#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])$/)
-        const hex6 = e.target.value.match(/^#[0-9A-Fa-f]{6}$/)
+        const hex3 = e.target.value.match(HEX3_PATTERN)
+        const hex6 = e.target.value.match(HEX6_PATTERN)
         if (hex3) {
           this.debouncedPickerUpdate(
             `#${hex3[1]}${hex3[1]}${hex3[2]}${hex3[2]}${hex3[3]}${hex3[3]}`.toUpperCase()
