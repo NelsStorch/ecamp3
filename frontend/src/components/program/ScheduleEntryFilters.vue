@@ -311,8 +311,9 @@ export default {
       }
     },
     filteredPropertiesCount() {
-      return Object.values(this.modelValue).filter((item) =>
-        Array.isArray(item) ? item.length : !!item
+      return Object.entries(this.modelValue).filter(
+        ([key, item]) =>
+          key !== 'activityCount' && (Array.isArray(item) ? item.length : !!item)
       ).length
     },
     filterSet() {

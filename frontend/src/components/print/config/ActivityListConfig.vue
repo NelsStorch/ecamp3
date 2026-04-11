@@ -8,15 +8,15 @@
       multiple
       :variant="periods.length === 1 ? 'plain' : 'underlined'"
       :readonly="periods.length === 1"
-      @update:model-value="$emit('input')"
+      @update:model-value="$emit('update:modelValue', modelValue)"
     />
     <div class="flex-grow-1"></div>
     <DialogScheduleEntryFilter
       :camp="camp"
       :filter-fn="filterFn()"
-      :filter="options.filter"
+      :model-value="options.filter"
       hide-period-filter
-      @input="updateFilter"
+      @update:model-value="updateFilter"
     />
   </div>
 </template>
@@ -30,17 +30,17 @@ export default {
   name: 'ActivityListConfig',
   components: { DialogScheduleEntryFilter },
   props: {
-    value: { type: Object, required: true },
+    modelValue: { type: Object, required: true },
     camp: { type: Object, required: true },
   },
   emits: ['input'],
   computed: {
     options: {
       get() {
-        return this.value
+        return this.modelValue
       },
       set(v) {
-        this.$emit('input', v)
+        this.$emit('update:modelValue', v)
       },
     },
     periods() {
@@ -74,7 +74,7 @@ export default {
     },
     updateFilter(newFilter) {
       this.options.filter = newFilter
-      this.$emit('input')
+      this.$emit('update:modelValue', this.options)
     },
   },
   design: {
@@ -91,7 +91,7 @@ export default {
         return knownPeriods.includes(period)
       })
     }
-    config.options.filter = repairFilterConfig(config, camp)
+    config.options.filter = repairFilterConfig(config.options.filter, camp)
     return config
   },
 }

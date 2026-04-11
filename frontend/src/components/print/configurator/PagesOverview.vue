@@ -3,7 +3,7 @@
     <draggable
       :model-value="modelValue"
       :item-key="() => undefined"
-      handle=".mdi-drag"
+      handle=".handle"
       filter=".e-pages-config--template"
       class="e-pages-overview__grid pa-0 pa-md-8"
       v-bind="$attrs"

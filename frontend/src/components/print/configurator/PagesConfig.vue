@@ -56,7 +56,20 @@
     >
   </v-list-item>
   <div v-else>
-    <v-list-item :prepend-icon="template ? '' : 'mdi-drag'" class="py-2 px-0">
+    <v-list-item class="py-2 px-0">
+      <template #prepend>
+        <v-btn
+          v-if="!template"
+          icon="mdi-drag"
+          size="small"
+          class="handle"
+          variant="flat"
+          density="comfortable"
+          :aria-label="$t('global.button.move')"
+        >
+          <v-icon icon="mdi-drag" size="24" />
+        </v-btn>
+      </template>
       <v-list-item-title class="mb-2"
         ><h3>{{ title }}</h3></v-list-item-title
       >
@@ -236,5 +249,8 @@ export default {
 :deep(.v-list-item__prepend),
 :deep(.v-list-item__append) {
   align-self: baseline;
+}
+.handle {
+  cursor: grab;
 }
 </style>

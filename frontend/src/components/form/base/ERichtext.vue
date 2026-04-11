@@ -11,15 +11,10 @@
       :class="[inputClass]"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
       :hide-details="hideDetails"
-      :on-input="
-        ($event) => {
-          handleChange($event)
-          $emit('update:modelValue', $event)
-        }
-      "
       :with-extensions="true"
       v-bind="$attrs"
       :center-affix="false"
+      @update:model-value="$emit('update:modelValue', $event) && handleChange($event)"
     >
       <!-- passing through all slots -->
       <template v-for="(_, slot) of $slots" #[slot]="slotData">
