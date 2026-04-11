@@ -35,7 +35,7 @@
         :uri="item.uri"
         vee-rules="greaterThan:0"
         path="quantity"
-        :validationLabelOverride="$t('entity.materialItem.fields.quantity')"
+        :validation-label-override="$t('entity.materialItem.fields.quantity')"
         inputmode="decimal"
       />
       <span v-if="item.readonly">{{ item.quantity }}</span>
