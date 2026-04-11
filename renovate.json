@@ -145,6 +145,15 @@
     },
     {
       "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.+\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)?\\s.*_VERSION: \"?(?<currentValue>.*)\"?\\s"
+      ]
+    },
+    {
+      "customType": "regex",
       "managerFilePatterns": ["/^.github/workflows/.+\\.ya?ml$/"],
       "matchStrings": ["php-version: '(?<currentValue>[0-9.]+)'"],
       "depNameTemplate": "php",
