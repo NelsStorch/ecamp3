@@ -370,7 +370,7 @@ const router = createRouter({
       path: '/camps/:campId/:campShortTitle?/material/lists',
       components: {
         navigation: NavigationCamp,
-        default: () => import('./views/camp/material/MaterialLists.vue'),
+        default: () => import('./views/camp/material/MaterialListsMobile.vue'),
       },
       beforeEnter: all([requireAuth, requireCamp]),
       props: {
