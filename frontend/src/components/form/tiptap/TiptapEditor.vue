@@ -11,6 +11,7 @@
       ref="bubbleMenu"
       :editor="editor"
       :should-show="shouldShow"
+      class="z-10"
     >
       <div class="elevation-4 ec-tiptap-toolbar bg-white">
         <v-toolbar
@@ -168,7 +169,7 @@ export default {
       default: true,
     },
   },
-  emits: ['input', 'focus', 'blur'],
+  emits: ['tiptapUpdate', 'focus', 'blur'],
   data() {
     const placeholder = Placeholder.configure({
       emptyEditorClass: 'is-editor-empty',
@@ -216,6 +217,10 @@ export default {
         lineBreak2: /<br\/>/g,
       },
       // copied from @tiptap/extension-bubble-menu
+      // https://github.com/ueberdosis/tiptap/blob/64f36b8d93b437f2230d8538a8ecdb504842d5f8/packages/extension-bubble-menu/src/bubble-menu-plugin.ts#L195-L216
+      // modifications:
+      // - autolink adaption
+      // - this.$refs.bubbleMenu instead of this.element
       shouldShow: ({ view, state, from, to }) => {
         const { doc, selection } = state
         const { empty } = selection
@@ -226,6 +231,7 @@ export default {
         const isEmptyTextBlock =
           !doc.textBetween(from, to).length && isTextSelection(state.selection)
 
+        // ===== START EDIT eCamp ======
         // Don't show if selection is within of an autolink
         if (this.withExtensions) {
           const links = AutoLinkKey.getState(state).find(
@@ -237,11 +243,14 @@ export default {
             return false
           }
         }
+        // ===== END   EDIT eCamp ======
 
-        // When clicking on an element inside the bubble menu the editor "blur" event
+        // When clicking on a element inside the bubble menu the editor "blur" event
         // is called and the bubble menu item is focussed. In this case we should
         // consider the menu as part of the editor and keep showing the menu
-        const isChildOfMenu = this.$refs.bubbleMenu.$el.contains(document.activeElement)
+        // ===== START EDIT eCamp ======
+        const isChildOfMenu = this.$refs.bubbleMenu?.$el.contains(document.activeElement)
+        // ===== END   EDIT eCamp ======
 
         const hasEditorFocus = view.hasFocus() || isChildOfMenu
 
@@ -293,7 +302,7 @@ export default {
       this.editor.commands.focus()
     },
     onUpdate() {
-      this.$emit('input', this.html)
+      this.$emit('tiptapUpdate', this.html)
     },
     specialKeyListeners(event) {
       this.hoverCursor = event.metaKey || event.ctrlKey

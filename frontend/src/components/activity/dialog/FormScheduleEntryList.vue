@@ -24,6 +24,7 @@
         <FormScheduleEntryItem
           v-for="scheduleEntry in scheduleEntriesWithoutDeleted"
           :key="scheduleEntry.key"
+          :index="scheduleEntry.key"
           class="transition-list-item pa-0"
           :schedule-entry="scheduleEntry"
           :periods="periods"

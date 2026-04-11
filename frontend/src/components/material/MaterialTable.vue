@@ -35,6 +35,7 @@
         :uri="item.uri"
         vee-rules="greaterThan:0"
         path="quantity"
+        :validation-label-override="$t('entity.materialItem.fields.quantity')"
         inputmode="decimal"
       />
       <span v-if="item.readonly">{{ item.quantity }}</span>
@@ -417,7 +418,9 @@ export default {
       this.newMaterialItems[key] = data
 
       this.postToApi(key, data)
-      resetForm()
+      if (resetForm) {
+        resetForm()
+      }
     },
 
     // retry to save to API (after server error)

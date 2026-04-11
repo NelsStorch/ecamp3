@@ -39,9 +39,9 @@ Displays a field as a date picker (can be used with v-model)
       </v-date-picker>
     </template>
 
-    <!-- passing the append slot through -->
-    <template #append>
-      <slot name="append" />
+    <!-- passing the append-inner slot through -->
+    <template #append-inner>
+      <slot name="append-inner" />
     </template>
   </base-picker>
 </template>

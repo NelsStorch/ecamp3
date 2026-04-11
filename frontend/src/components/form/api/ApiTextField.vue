@@ -18,7 +18,7 @@ Displays a field as a e-text-field + write access via API wrapper
       @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"
     >
-      <template #append>
+      <template #append-inner>
         <api-wrapper-append :wrapper="wrapper" />
       </template>
     </e-text-field>

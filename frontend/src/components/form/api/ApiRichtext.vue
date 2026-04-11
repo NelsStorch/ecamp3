@@ -13,10 +13,10 @@ Displays a field as a e-textarea + write access via API wrapper
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       :variant="variant"
-      @input="wrapper.on.input"
+      @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"
     >
-      <template #append>
+      <template #append-inner>
         <api-wrapper-append :wrapper="wrapper" />
       </template>
     </e-richtext>

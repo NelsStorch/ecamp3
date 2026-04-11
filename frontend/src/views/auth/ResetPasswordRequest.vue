@@ -18,11 +18,11 @@
     >
       <e-text-field
         v-model="email"
-        :density="$vuetify.display.xs && 'compact'"
+        :density="$vuetify.display.xs ? 'compact' : 'default'"
+        :label="$t('entity.profile.fields.email')"
         name="email"
         vee-rules="email"
-        append-icon="mdi-at"
-        :label="$t('entity.profile.fields.email')"
+        append-inner-icon="mdi-at"
         type="email"
         autocomplete="username"
         autofocus

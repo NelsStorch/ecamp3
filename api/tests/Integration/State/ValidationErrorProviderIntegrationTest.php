@@ -105,7 +105,7 @@ class ValidationErrorProviderIntegrationTest extends KernelTestCase {
                     'translations' => [
                         'en' => 'value must be one of inactive, was established',
                         'de' => 'Wert muss einer von inactive sein, war established',
-                        'fr' => 'La valeur doit être l\'une des suivantes : inactive, a été established',
+                        'fr' => 'la valeur "established" doit être l\'une des valeurs suivantes : inactive',
                         'it' => 'deve essere uno dei seguenti valori: inactive, è established',
                     ],
                 ],

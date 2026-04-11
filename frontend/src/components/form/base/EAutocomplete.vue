@@ -17,6 +17,7 @@
       item-value="value"
       :readonly="readonly"
       v-bind="$attrs"
+      @update:model-value="$emit('update:modelValue', $event)"
     >
       <template #item="{ item, props }">
         <v-list-item v-bind="{ ...props, title: undefined }">

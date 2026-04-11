@@ -7,7 +7,7 @@
     width="300"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <div class="d-flex flex-column fill-height">
+    <div class="d-flex flex-column min-h-full">
       <div class="d-flex flex-column align-center bg-blue-grey-darken-4 text-white py-6">
         <v-icon size="x-large">$ecamp</v-icon>
         <h2 class="text-h6 text-center">eCamp</h2>
