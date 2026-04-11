@@ -430,7 +430,12 @@ export default {
     }
   }
 
-  :deep(.v-calendar-daily_head-day, .v-calendar-daily__day) {
+  :deep(.v-calendar-daily__pane) {
+    overflow: visible;
+  }
+
+  :deep(.v-calendar-daily_head-day),
+  :deep(.v-calendar-daily__day) {
     min-width: 80px;
   }
 
@@ -456,7 +461,8 @@ export default {
     width: initial;
   }
 
-  :deep(.v-calendar-daily__head, .v-calendar-daily__intervals-body) {
+  :deep(.v-calendar-daily__head),
+  :deep(.v-calendar-daily__intervals-body) {
     position: sticky;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(4px);
@@ -464,7 +470,7 @@ export default {
 
   :deep(.v-calendar-daily__head) {
     top: 0;
-    z-index: 2;
+    z-index: 4;
     min-width: fit-content;
     overflow: hidden;
     box-shadow:
@@ -478,7 +484,7 @@ export default {
 
   :deep(.v-calendar-daily__intervals-body) {
     left: 0;
-    z-index: 1;
+    z-index: 3;
   }
 
   :deep(.v-calendar-daily__scroll-area) {
