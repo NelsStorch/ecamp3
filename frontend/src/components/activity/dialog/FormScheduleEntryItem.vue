@@ -121,10 +121,10 @@ export default {
     },
 
     // unique key in the list, used to generate unique vee-ids
-    index:{
+    index: {
       type: [String, Number],
       required: true,
-    }
+    },
   },
   data() {
     return {

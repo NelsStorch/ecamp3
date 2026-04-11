@@ -8,6 +8,7 @@
     class="e-form-container"
   >
     <v-autocomplete
+      v-model:search="search"
       :class="[inputClass]"
       :custom-filter="tokensFilter"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
@@ -17,7 +18,6 @@
       item-title="text"
       item-value="value"
       :readonly="readonly"
-      v-model:search="search"
       v-bind="$attrs"
     >
       <template #item="{ item, props }">
