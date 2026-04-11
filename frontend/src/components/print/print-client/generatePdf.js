@@ -2,19 +2,41 @@ import { prepareInMainThread } from '@/pdf/prepareInMainThread.js'
 import { cloneDeep } from 'lodash-es'
 import { proxy } from 'comlink'
 import jsonStringifyReactiveValue from '@/components/print/jsonStringifyReactiveValue.js'
+import axios from 'axios'
+import { getEnv } from '@/environment.js'
+
+const PRINT_URL = getEnv().PRINT_URL
 
 export const generatePdf = async (data, onProgress) => {
   await prepareInMainThread(data.config)
 
   const serializableData = prepareDataForSerialization(data)
+  const start = new Date()
+  let status = 500
+  try {
+    const result = await dispatchRenderPdf(data, serializableData, onProgress)
+    status = 200
+    return result
+  } finally {
+    // noinspection ES6MissingAwait
+    notifyPdfUsage({
+      config: data.config,
+      status,
+      measurements: {
+        total: (new Date() - start) / 1000,
+      },
+    })
+  }
+}
 
+async function dispatchRenderPdf(data, serializableData, onProgress) {
   if (data.renderInWorker) {
     // ComlinkWorker is provided by vite-plugin-comlink
     // eslint-disable-next-line no-undef
     const instance = new ComlinkWorker(new URL('./renderPdf.worker.js', import.meta.url))
-    return await instance.renderPdfInWorker(serializableData, proxy(onProgress))
+    return instance.renderPdfInWorker(serializableData, proxy(onProgress))
   } else {
-    return await (await import('./renderPdf.js')).renderPdf(serializableData, onProgress)
+    return (await import('./renderPdf.js')).renderPdf(serializableData, onProgress)
   }
 }
 
@@ -44,4 +66,25 @@ function relativeUriFor(entity) {
     return entity
   }
   return entity()?._meta?.self
+}
+
+async function notifyPdfUsage(data) {
+  try {
+    await axios({
+      baseURL: null,
+      method: 'post',
+      url: `${PRINT_URL}/api/logPdfUsage`,
+      data,
+      withCredentials: false,
+      headers: {
+        common: {
+          'Cache-Control': 'no-cache',
+          Pragma: 'no-cache',
+          Expires: '0',
+        },
+      },
+    })
+  } catch {
+    /* empty */
+  }
 }
