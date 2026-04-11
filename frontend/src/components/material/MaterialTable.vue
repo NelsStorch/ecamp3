@@ -418,7 +418,9 @@ export default {
       this.newMaterialItems[key] = data
 
       this.postToApi(key, data)
-      resetForm()
+      if (resetForm) {
+        resetForm()
+      }
     },
 
     // retry to save to API (after server error)
