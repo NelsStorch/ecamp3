@@ -51,18 +51,25 @@
     >
   </v-list-item>
   <div v-else>
-    <v-list-item :icon="!template ?? 'mdi-drag'" class="py-2 px-0">
+    <v-list-item :prepend-icon="template ? '' : 'mdi-drag'" class="py-2 px-0">
       <v-list-item-title class="mb-2"
         ><h3>{{ title }}</h3></v-list-item-title
       >
       <slot />
-      <v-list-item-action v-if="!template" class="align-self-baseline my-0">
-        <TextAlignBaseline
-          ><v-btn icon class="mr-6" @click="$emit('remove')"
-            ><v-icon color="red">mdi-delete</v-icon></v-btn
-          ></TextAlignBaseline
-        >
-      </v-list-item-action>
+      <template #append>
+        <v-list-item-action v-if="!template" class="my-0">
+          <TextAlignBaseline
+            ><v-btn
+              icon
+              variant="flat"
+              density="compact"
+              class="mr-6"
+              @click="$emit('remove')"
+              ><v-icon color="red">mdi-delete</v-icon></v-btn
+            ></TextAlignBaseline
+          >
+        </v-list-item-action>
+      </template>
     </v-list-item>
     <v-divider class="mx-4" />
   </div>
@@ -218,5 +225,10 @@ export default {
 
 .e-pages-config__delete:hover {
   color: map.get(settings.$red, 'base') !important;
+}
+
+:deep(.v-list-item__prepend),
+:deep(.v-list-item__append) {
+  align-self: baseline;
 }
 </style>
