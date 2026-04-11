@@ -4,7 +4,7 @@
       v-model="localScheduleEntry.start"
       value-format="YYYY-MM-DDTHH:mm:ssZ"
       path="startDate"
-      :vee-id="'startDate' + startUTC"
+      :vee-id="`scheduleEntry[${index}].startDate`"
       :allowed-dates="dateIsInAnyPeriod"
       variant="underlined"
       class="area-startdate date-picker"
@@ -14,6 +14,7 @@
     <div class="area-starttime">
       <e-time-dropdown
         v-model="localScheduleEntry.start"
+        :vee-id="`scheduleEntry[${index}].startDatetime`"
         path="startDatetime"
         variant="underlined"
         required
@@ -32,6 +33,7 @@
       <e-time-dropdown
         v-model="localScheduleEntry.end"
         value-format="YYYY-MM-DDTHH:mm:ssZ"
+        :vee-id="`scheduleEntry[${index}].endDatetime`"
         path="endDatetime"
         :vee-rules="endTimeValidation"
         :min="minEndTime"
@@ -52,11 +54,12 @@
       </e-time-dropdown>
     </div>
 
-    <!-- :vee-rules="'required|greaterThanOrEqual_date:@startDate' + startUTC" -->
     <e-date-picker
       v-model="localScheduleEntry.end"
       value-format="YYYY-MM-DDTHH:mm:ssZ"
+      :vee-id="`scheduleEntry[${index}].endDate`"
       path="endDate"
+      :vee-rules="`required|greaterThanOrEqual_date:@scheduleEntry[${index}].startDate`"
       :min="localScheduleEntry.start"
       :allowed-dates="dateIsInSelectedPeriod"
       variant="underlined"
@@ -115,6 +118,12 @@ export default {
     deletable: {
       type: Boolean,
       required: false,
+    },
+
+    // unique key in the list, used to generate unique vee-ids
+    index: {
+      type: [String, Number],
+      required: true,
     },
   },
   data() {
