@@ -63,7 +63,13 @@ Displays a field as a color picker (can be used with v-model)
           </EColorField>
         </div>
       </template>
-      <v-card ref="picker" :ripple="false" tabindex="-1" data-testid="colorpicker">
+      <v-card
+        ref="picker"
+        :ripple="false"
+        tabindex="-1"
+        data-testid="colorpicker"
+        @input="onPickerFieldInput"
+      >
         <v-color-picker
           v-if="pickerNull"
           key="model"
@@ -84,7 +90,7 @@ Displays a field as a color picker (can be used with v-model)
           elevation="0"
           :style="{ '--picker-contrast-color': contrast }"
           flat
-          @update:model-value="debouncedPickerValue($event)"
+          @update:model-value="onPickerInput($event)"
         />
         <v-divider />
         <div class="d-flex gap-2 pa-4 flex-wrap">
@@ -126,7 +132,8 @@ export default {
     pickerOpen: false,
     pickerValue: null,
     pickerNull: false,
-    debouncedPickerValue: null,
+    debouncedEmit: null,
+    debouncedPickerUpdate: null,
     swatches: [
       '#90B7E4',
       '#6EDBE9',
@@ -179,7 +186,14 @@ export default {
     },
   },
   created() {
-    this.debouncedPickerValue = debounce(this.onPickerInput, 300)
+    this.debouncedEmit = debounce((value) => {
+      this.$emit('update:modelValue', value)
+    }, 500)
+    this.debouncedPickerUpdate = debounce((value) => {
+      this.pickerValue = value
+      this.pickerNull = false
+      this.$emit('update:modelValue', value)
+    }, 500)
   },
   mounted() {
     document.addEventListener('keydown', this.escapeHandler)
@@ -213,7 +227,7 @@ export default {
     onPickerInput(value) {
       this.pickerValue = value.toUpperCase()
       this.pickerNull = false
-      this.$emit('update:model-value', this.pickerValue)
+      this.debouncedEmit(this.pickerValue)
     },
     onSwatchSelect(color) {
       this.pickerValue = color
@@ -226,6 +240,23 @@ export default {
     },
     closePickerConditional(event) {
       return this.pickerOpen && !this.$refs.picker?.$el.contains(event.target)
+    },
+    onPickerFieldInput(e) {
+      if (e.target.tagName !== 'INPUT') return
+      if (e.target.type === 'number') {
+        const raw = parseFloat(e.target.value)
+        if (!isNaN(raw)) {
+          const min = e.target.min !== '' ? parseFloat(e.target.min) : 0
+          const max = e.target.max !== '' ? parseFloat(e.target.max) : 255
+          e.target.value = String(Math.min(Math.max(raw, min), max))
+        }
+        e.target.dispatchEvent(new Event('change', { bubbles: true }))
+      } else if (
+        e.target.type === 'text' &&
+        /^#[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?$/.test(e.target.value)
+      ) {
+        this.debouncedPickerUpdate(e.target.value.toUpperCase())
+      }
     },
     onPickerClose() {
       switch (this.activator) {
