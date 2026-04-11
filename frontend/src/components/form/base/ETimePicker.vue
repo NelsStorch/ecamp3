@@ -34,9 +34,9 @@ Allows 15min steps only
       </v-time-picker>
     </template>
 
-    <!-- passing the append slot through -->
-    <template #append>
-      <slot name="append" />
+    <!-- passing the append-inner slot through -->
+    <template #append-inner>
+      <slot name="append-inner" />
     </template>
   </base-picker>
 </template>

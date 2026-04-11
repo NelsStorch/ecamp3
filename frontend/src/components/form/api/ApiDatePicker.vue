@@ -15,7 +15,7 @@ Displays a field as a date picker + write access via API wrapper
       :error-messages="wrapper.errorMessages"
       @update:model-value="wrapper.on.input"
     >
-      <template #append>
+      <template #append-inner>
         <api-wrapper-append :wrapper="wrapper" />
       </template>
     </e-date-picker>

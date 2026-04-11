@@ -19,6 +19,7 @@
       "
       :with-extensions="true"
       v-bind="$attrs"
+      :center-affix="false"
     >
       <!-- passing through all slots -->
       <template v-for="(_, slot) of $slots" #[slot]="slotData">
