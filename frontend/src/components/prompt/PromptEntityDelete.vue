@@ -22,9 +22,11 @@
     <slot>
       <p>
         {{
-          $t('global.warning.delete', warningTextEntity ? 2 : 0, {
-            entity: warningTextEntity,
-          })
+          $t(
+            'global.warning.delete',
+            { entity: warningTextEntity },
+            warningTextEntity ? 2 : 0
+          )
         }}
       </p>
     </slot>
