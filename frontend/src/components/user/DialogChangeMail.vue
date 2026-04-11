@@ -1,6 +1,7 @@
 <template>
   <dialog-form
     v-model="showDialog"
+    icon="mdi-email-outline"
     :title="$t('components.user.dialogChangeMail.title')"
     :submit-action="status === 'initial' ? sendChangeMailRequest : null"
     :cancel-action="close"
