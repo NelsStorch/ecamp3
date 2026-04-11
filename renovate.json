@@ -64,15 +64,17 @@
     },
     {
       "matchFileNames": ["frontend/package.json"],
-      "enabled": false
+      "matchUpdateTypes": ["patch", "pin", "lockFileMaintenance"],
+      "automerge": true
+    },
+    {
+      "matchFileNames": ["frontend/package.json"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false
     },
     {
       "matchFileNames": ["frontend-old/package.json"],
       "enabled": false
-    },
-    {
-      "matchDepNames": ["sass"],
-      "dependencyDashboardApproval": true
     },
     {
       "matchDepNames": ["php", "dunglas/frankenphp"],
