@@ -38,4 +38,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(.v-toolbar-title .v-spacer) {
+  flex-grow: 0;
+}
+</style>
