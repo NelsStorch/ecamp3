@@ -11,14 +11,9 @@
       :hide-details="hideDetails"
       :label="labelOrEntityFieldLabel"
       :with-extensions="false"
-      :on-input="
-        ($event) => {
-          handleChange($event)
-          $emit('update:model-value', $event)
-        }
-      "
       v-bind="$attrs"
       :center-affix="false"
+      @update:model-value="$emit('update:modelValue', $event) && handleChange($event)"
     >
       <!-- passing through all slots -->
       <template v-for="(_, slot) of $slots" #[slot]="slotData">
@@ -41,5 +36,6 @@ export default {
     VTiptapEditor,
   },
   mixins: [formComponentPropsMixin, formComponentMixin],
+  emits: ['update:modelValue'],
 }
 </script>

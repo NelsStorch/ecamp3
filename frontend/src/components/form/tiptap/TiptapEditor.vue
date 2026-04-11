@@ -169,7 +169,7 @@ export default {
       default: true,
     },
   },
-  emits: ['input', 'focus', 'blur'],
+  emits: ['tiptapUpdate', 'focus', 'blur'],
   data() {
     const placeholder = Placeholder.configure({
       emptyEditorClass: 'is-editor-empty',
@@ -302,7 +302,7 @@ export default {
       this.editor.commands.focus()
     },
     onUpdate() {
-      this.$emit('input', this.html)
+      this.$emit('tiptapUpdate', this.html)
     },
     specialKeyListeners(event) {
       this.hoverCursor = event.metaKey || event.ctrlKey

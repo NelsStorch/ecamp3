@@ -14,10 +14,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    onInput: {
-      type: Function,
-      required: true,
-    },
     modelValue: {
       type: String,
       default: '',
@@ -44,6 +40,7 @@ export default {
         reactive({
           ...toRefs(props),
           ...ctx.attrs,
+          onTiptapUpdate: (value) => ctx.emit('update:modelValue', value),
           editable: computed(() => !readonlyRef.value && !disabledRef.value),
         }),
         ctx.slots
