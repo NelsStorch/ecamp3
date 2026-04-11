@@ -13,6 +13,7 @@
     </div>
 
     <e-select
+      v-if="Object.values(categories).length > 0"
       v-model="activity.category"
       path="category"
       :items="Object.keys(categories)"
