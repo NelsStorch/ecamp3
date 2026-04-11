@@ -34,6 +34,7 @@
       <e-text-field
         v-model="password"
         :density="$vuetify.display.xs ? 'compact' : 'default'"
+        :label="$t('views.auth.resetPassword.password')"
         append-inner-icon="mdi-lock-outline"
         autocomplete="new-password"
         autofocus
