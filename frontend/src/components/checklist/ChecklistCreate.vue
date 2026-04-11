@@ -3,7 +3,7 @@
     v-model="showDialog"
     :loading="loading"
     :error="error"
-    icon="mdi-account-plus"
+    icon="mdi-playlist-plus"
     :title="$t('components.checklist.checklistCreate.title')"
     :submit-action="createChecklist"
     :submit-label="$t('global.button.create')"
