@@ -1,12 +1,16 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { fireEvent, screen, waitFor } from '@testing-library/vue'
 import { render, setTestLocale, snapshotOf } from '@/test/renderWithVuetify.js'
 import user from '@testing-library/user-event'
 import EColorPicker from '../EColorPicker.vue'
+import { mount as mountComponent } from '@vue/test-utils'
+import { ClickOutside } from 'vuetify/directives'
+import { setupVuetify } from '/tests/setupVuetify.js'
 
 import { ColorSpace, sRGB } from 'colorjs.io/fn'
 
 ColorSpace.register(sRGB)
+setupVuetify()
 describe.skip('An EColorPicker', () => {
   const COLOR1 = '#FF0000'
   const COLOR2 = '#FF00FF'
@@ -244,5 +248,218 @@ describe.skip('An EColorPicker', () => {
     // when
     await user.click(screen.getByTestId('colorpicker').querySelector('.reset'))
     expect(inputField).toHaveValue('')
+  })
+})
+
+describe('EColorPicker onPickerFieldInput', () => {
+  const mount = () =>
+    mountComponent(EColorPicker, {
+      props: { modelValue: '#FF0000', label: 'test' },
+      global: {
+        directives: { 'click-outside': ClickOutside },
+        mocks: { $t: (key) => key },
+      },
+      attachTo: document.body,
+    })
+
+  const numberInput = (value, { min = '', max = '' } = {}) => {
+    const el = document.createElement('input')
+    el.type = 'number'
+    el.value = value
+    el.min = min
+    el.max = max
+    return el
+  }
+
+  const textInput = (value) => {
+    const el = document.createElement('input')
+    el.type = 'text'
+    el.value = value
+    return el
+  }
+
+  let wrapper
+
+  beforeEach(() => {
+    vi.useFakeTimers()
+    wrapper = mount()
+  })
+
+  afterEach(() => {
+    wrapper.unmount()
+    vi.useRealTimers()
+  })
+
+  it('ignores events from non-INPUT elements', () => {
+    // given
+    const div = document.createElement('div')
+
+    // when / then (no error thrown)
+    wrapper.vm.onPickerFieldInput({ target: div })
+  })
+
+  it('clamps number input value above default max of 255', () => {
+    // given
+    const input = numberInput('300')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+
+    // then
+    expect(input.value).toBe('255')
+  })
+
+  it('clamps number input value below default min of 0', () => {
+    // given
+    const input = numberInput('-10')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+
+    // then
+    expect(input.value).toBe('0')
+  })
+
+  it('leaves number input value unchanged when within default range', () => {
+    // given
+    const input = numberInput('128')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+
+    // then
+    expect(input.value).toBe('128')
+  })
+
+  it('respects custom max attribute on number input', () => {
+    // given
+    const input = numberInput('400', { max: '360' })
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+
+    // then
+    expect(input.value).toBe('360')
+  })
+
+  it('respects custom min attribute on number input', () => {
+    // given
+    const input = numberInput('-5', { min: '10', max: '100' })
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+
+    // then
+    expect(input.value).toBe('10')
+  })
+
+  it('always dispatches a change event on number input', () => {
+    // given
+    const input = numberInput('128')
+    const dispatchSpy = vi.spyOn(input, 'dispatchEvent')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+
+    // then
+    expect(dispatchSpy).toHaveBeenCalledOnce()
+    expect(dispatchSpy.mock.calls[0][0].type).toBe('change')
+  })
+
+  it('dispatches change event even when number input value is empty/NaN', () => {
+    // given
+    const input = numberInput('')
+    const dispatchSpy = vi.spyOn(input, 'dispatchEvent')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+
+    // then
+    expect(dispatchSpy).toHaveBeenCalledOnce()
+    expect(input.value).toBe('')
+  })
+
+  it('updates pickerValue with valid 6-digit hex after debounce', () => {
+    // given
+    const input = textInput('#1A2B3C')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+    vi.runAllTimers()
+
+    // then
+    expect(wrapper.vm.pickerValue).toBe('#1A2B3C')
+  })
+
+  it('normalizes lowercase 6-digit hex to uppercase after debounce', () => {
+    // given
+    const input = textInput('#abc123')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+    vi.runAllTimers()
+
+    // then
+    expect(wrapper.vm.pickerValue).toBe('#ABC123')
+  })
+
+  it('expands 3-digit hex to 6-digit and updates pickerValue after debounce', () => {
+    // given
+    const input = textInput('#ABC')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+    vi.runAllTimers()
+
+    // then
+    expect(wrapper.vm.pickerValue).toBe('#AABBCC')
+  })
+
+  it('expands lowercase 3-digit hex to uppercase 6-digit after debounce', () => {
+    // given
+    const input = textInput('#a1b')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+    vi.runAllTimers()
+
+    // then
+    expect(wrapper.vm.pickerValue).toBe('#AA11BB')
+  })
+
+  it('does not update pickerValue for incomplete hex', () => {
+    // given
+    const input = textInput('#12345')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+    vi.runAllTimers()
+
+    // then
+    expect(wrapper.vm.pickerValue).toBe('#FF0000')
+  })
+
+  it('does not update pickerValue for non-hex text input', () => {
+    // given
+    const input = textInput('red')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+    vi.runAllTimers()
+
+    // then
+    expect(wrapper.vm.pickerValue).toBe('#FF0000')
+  })
+
+  it('does not update pickerValue before debounce timeout', () => {
+    // given
+    const input = textInput('#AABBCC')
+
+    // when
+    wrapper.vm.onPickerFieldInput({ target: input })
+    // do NOT advance timers
+
+    // then
+    expect(wrapper.vm.pickerValue).toBe('#FF0000')
   })
 })
