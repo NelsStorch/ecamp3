@@ -8,7 +8,7 @@
       <e-number-field
         ref="quantity"
         v-model="materialItem.quantity"
-        density="compact"
+        density="comfortable"
         inputmode="decimal"
         path="quantity"
         vee-rules="greaterThan:0"
@@ -17,7 +17,7 @@
     <td class="pt-1">
       <e-text-field
         v-model="materialItem.unit"
-        density="compact"
+        density="comfortable"
         maxlength="32"
         path="unit"
       />
@@ -25,7 +25,7 @@
     <td class="pt-1">
       <e-text-field
         v-model="materialItem.article"
-        density="compact"
+        density="comfortable"
         maxlength="64"
         path="article"
         vee-rules="required"
@@ -36,14 +36,14 @@
         v-model="materialItem.materialList"
         :items="materialListsSorted"
         :label="$t('entity.materialList.name')"
-        density="compact"
+        density="comfortable"
         path="materialList"
         vee-rules="required"
       />
     </td>
     <td class="pt-1">
       <ButtonAdd
-        height="52"
+        height="48"
         hide-label
         @click="handleSubmit(() => createMaterialItem(resetForm))"
       />
@@ -128,7 +128,7 @@ export default {
 
 <style scoped>
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-.newItemRow {
+tr {
   line-height: 80px;
   vertical-align: top;
 }
