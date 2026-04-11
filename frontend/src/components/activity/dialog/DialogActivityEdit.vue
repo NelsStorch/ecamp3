@@ -4,7 +4,7 @@
     :title="$t('components.activity.dialog.dialogActivityEdit.title')"
     :loading="loading"
     :error="error"
-    icon="mdi-calendar-plus"
+    icon="mdi-calendar-edit"
     :submit-action="updateActivity"
     :submit-label="$t('global.button.update')"
     submit-color="success"

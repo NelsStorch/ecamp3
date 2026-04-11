@@ -3,7 +3,7 @@
     v-model="showDialog"
     :loading="loading"
     :error="error"
-    icon="mdi-calendar-plus"
+    icon="mdi-shape-plus"
     :title="$t('components.campAdmin.dialogCategoryCreate.title')"
     :submit-action="createCategory"
     :submit-label="$t('global.button.create')"

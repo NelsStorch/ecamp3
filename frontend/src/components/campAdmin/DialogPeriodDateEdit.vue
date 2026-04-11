@@ -3,7 +3,7 @@
     v-model="showDialog"
     :loading="loading"
     :error="error"
-    icon="mdi-package-variant"
+    icon="mdi-calendar-edit"
     :title="period.description"
     :submit-action="update"
     submit-color="success"
