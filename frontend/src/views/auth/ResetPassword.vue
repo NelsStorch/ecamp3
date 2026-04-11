@@ -24,7 +24,7 @@
       <e-text-field
         :density="$vuetify.display.xs ? 'compact' : 'default'"
         :model-value="email"
-        append-icon="mdi-at"
+        append-inner-icon="mdi-at"
         autocomplete="username"
         path="email"
         readonly
@@ -34,7 +34,7 @@
       <e-text-field
         v-model="password"
         :density="$vuetify.display.xs ? 'compact' : 'default'"
-        append-icon="mdi-lock-outline"
+        append-inner-icon="mdi-lock-outline"
         autocomplete="new-password"
         autofocus
         maxlength="128"
@@ -60,7 +60,7 @@
         v-model="confirmation"
         :density="$vuetify.display.xs ? 'compact' : 'default'"
         :label="$t('views.auth.resetPassword.passwordConfirmation')"
-        append-icon="mdi-lock-outline"
+        append-inner-icon="mdi-lock-outline"
         autocomplete="new-password"
         maxlength="128"
         minlength="12"

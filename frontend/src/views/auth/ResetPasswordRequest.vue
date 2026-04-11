@@ -21,7 +21,7 @@
         :density="$vuetify.display.xs && 'compact'"
         name="email"
         vee-rules="email"
-        append-icon="mdi-at"
+        append-inner-icon="mdi-at"
         :label="$t('entity.profile.fields.email')"
         type="email"
         autocomplete="username"
