@@ -33,7 +33,7 @@
                   }}</ButtonEdit
                 >
               </template>
-              <p>
+              <p class="prose">
                 <strong>{{
                   $t(`components.campAdmin.campSharingSettings.${sharingStatus}.title`)
                 }}</strong
@@ -43,13 +43,12 @@
                   )
                 }}
               </p>
-              <p>
+              <p class="prose">
                 <v-btn
                   v-if="isManager"
                   :color="camp.isShared ? '' : 'error'"
                   elevation="0"
-                  variant="text"
-                  class="v-btn--has-bg"
+                  variant="tonal"
                   :loading="loading"
                   @click="toggleShare"
                   ><v-icon start>mdi-alert</v-icon

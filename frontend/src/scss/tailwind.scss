@@ -79,3 +79,8 @@
 .uppercase {
   text-transform: uppercase;
 }
+
+p.prose,
+.prose p {
+  margin-bottom: 1rem;
+}
