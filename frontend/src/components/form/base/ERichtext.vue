@@ -1,6 +1,6 @@
 <template>
   <Field
-    v-slot="{ handleChange, errors: veeErrors }"
+    v-slot="{ errors: veeErrors }"
     as="div"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
@@ -11,12 +11,6 @@
       :class="[inputClass]"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
       :hide-details="hideDetails"
-      :on-input="
-        ($event) => {
-          handleChange($event)
-          $emit('update:model-value', $event)
-        }
-      "
       :with-extensions="true"
       v-bind="$attrs"
       :center-affix="false"

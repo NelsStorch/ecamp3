@@ -14,10 +14,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    onInput: {
-      type: Function,
-      required: true,
-    },
     modelValue: {
       type: String,
       default: '',
