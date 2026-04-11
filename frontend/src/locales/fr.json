@@ -311,6 +311,9 @@
           "invalidFormat": "Format non valide, veuillez saisir la date au format MM/JJ/AAAA.",
           "openPicker": "Ouvre un dialogue pour sélectionner une date pour {label}"
         },
+        "eTimeField": {
+          "invalidFormat": "Format non valide, veuillez saisir l'heure au format HH:MM AM/PM"
+        },
         "eTimePicker": {
           "invalidFormat": "Format non valide, veuillez saisir l'heure au format HH:MM AM/PM",
           "openPicker": "Ouvre un dialogue pour sélectionner une heure pour {label}"

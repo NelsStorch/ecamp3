@@ -311,6 +311,9 @@
           "invalidFormat": "Ungültiges Format, bitte gib das Datum im Format DD.MM.YYYY ein",
           "openPicker": "Dialog öffnen, um ein Datum für {label} zu wählen"
         },
+        "eTimeField": {
+          "invalidFormat": "Ungültiges Format, bitte gib die Zeit im Format HH:MM ein"
+        },
         "eTimePicker": {
           "invalidFormat": "Ungültiges Format, bitte gib die Zeit im Format HH:MM ein",
           "openPicker": "Dialog öffnen, um eine Zeit für {label} zu wählen"

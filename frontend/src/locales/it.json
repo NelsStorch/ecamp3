@@ -246,6 +246,9 @@
           "invalidFormat": "Formato non valido, inserisci la data nel formato MM/GG/AAAA",
           "openPicker": "Apri una finestra di dialogo per selezionare una data per {label}"
         },
+        "eTimeField": {
+          "invalidFormat": "Formato non valido, inserire l'ora nel formato HH:MM AM/PM"
+        },
         "eTimePicker": {
           "invalidFormat": "Formato non valido, inserire l'ora nel formato HH:MM AM/PM",
           "openPicker": "Apri una finestra di dialogo per selezionare un orario per {label}"
