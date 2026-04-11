@@ -121,7 +121,6 @@
 <script>
 import PrintPreviewClient from './print-client/PrintPreviewClient.vue'
 import PrintPreviewNuxt from './print-nuxt/PrintPreviewNuxt.vue'
-import Draggable from 'vuedraggable'
 import CoverConfig from './config/CoverConfig.vue'
 import PicassoConfig from './config/PicassoConfig.vue'
 import SummaryConfig from './config/SummaryConfig.vue'
@@ -149,7 +148,6 @@ export default {
     DownloadNuxtPdfButton,
     PagesConfig,
     PagesOverview,
-    Draggable,
     PrintPreviewClient,
     PrintPreviewNuxt,
     CoverConfig,
