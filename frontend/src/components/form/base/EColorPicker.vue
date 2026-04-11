@@ -264,7 +264,7 @@ export default {
   text-align: center;
 }
 
-:deep(.e-colorswatch.reset::after) {
+:deep(.e-colorswatch.reset::before) {
   content: '×';
 }
 </style>
