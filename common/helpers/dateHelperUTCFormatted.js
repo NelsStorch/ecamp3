@@ -22,7 +22,7 @@ function timeDurationShort(start, end, tc) {
   const duration = dayjs.duration(endTime.diff(startTime))
 
   return tc(
-    duration.asDays() >= 1
+    Math.abs(duration.asDays()) >= 1
         ? duration.hours() === 0
           ? duration.minutes() === 0
             ? 'global.datetime.duration.daysOnly'
@@ -30,7 +30,7 @@ function timeDurationShort(start, end, tc) {
           : duration.minutes() === 0
             ? 'global.datetime.duration.daysAndHours'
             : 'global.datetime.duration.daysAndHoursAndMinutes'
-        : duration.asMinutes() < 60
+        : Math.abs(duration.asMinutes()) < 60
           ? 'global.datetime.duration.minutesOnly'
           : duration.minutes() === 0
             ? 'global.datetime.duration.hoursOnly'
