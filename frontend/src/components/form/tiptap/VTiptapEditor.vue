@@ -40,6 +40,7 @@ export default {
         reactive({
           ...toRefs(props),
           ...ctx.attrs,
+          onTiptapUpdate: (value) => ctx.emit('update:modelValue', value),
           editable: computed(() => !readonlyRef.value && !disabledRef.value),
         }),
         ctx.slots

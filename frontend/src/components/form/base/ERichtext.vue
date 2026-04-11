@@ -1,6 +1,6 @@
 <template>
   <Field
-    v-slot="{ errors: veeErrors }"
+    v-slot="{ handleChange, errors: veeErrors }"
     as="div"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
@@ -14,6 +14,7 @@
       :with-extensions="true"
       v-bind="$attrs"
       :center-affix="false"
+      @update:model-value="$emit('update:modelValue', $event) && handleChange($event)"
     >
       <!-- passing through all slots -->
       <template v-for="(_, slot) of $slots" #[slot]="slotData">
@@ -36,5 +37,6 @@ export default {
     VTiptapEditor,
   },
   mixins: [formComponentPropsMixin, formComponentMixin],
+  emits: ['update:modelValue'],
 }
 </script>

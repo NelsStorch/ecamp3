@@ -13,7 +13,7 @@ Displays a field as a e-textarea + write access via API wrapper
       :error-messages="wrapper.errorMessages"
       :loading="wrapper.isSaving || wrapper.isLoading ? 'secondary' : false"
       :variant="variant"
-      @tiptap-update="wrapper.on.input"
+      @update:model-value="wrapper.on.input"
       @blur="wrapper.on.blur"
     >
       <template #append-inner>
