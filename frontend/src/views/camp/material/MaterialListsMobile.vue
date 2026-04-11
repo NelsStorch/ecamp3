@@ -25,7 +25,7 @@ import DialogMaterialListCreate from '@/components/campAdmin/DialogMaterialListC
 import MaterialLists from '@/components/material/MaterialLists.vue'
 
 export default {
-  name: 'MaterialLists',
+  name: 'MaterialListsMobile',
   components: {
     MaterialLists,
     DialogMaterialListCreate,
