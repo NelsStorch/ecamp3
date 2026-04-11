@@ -160,7 +160,7 @@ Displays a single scheduleEntry
       <template v-else>
         <!-- Header -->
         <v-row dense class="activity-header">
-          <v-col class="col col-sm-6 col-12 px-0 pt-0 d-flex flex-wrap gap-x-4">
+          <v-col cols="12" sm="6" class="px-0 pt-0 d-flex flex-wrap gap-x-4">
             <table>
               <thead>
                 <tr>
@@ -236,7 +236,7 @@ Displays a single scheduleEntry
               </template>
             </DialogActivityEdit>
           </v-col>
-          <v-col class="col col-sm-6 col-12 px-0">
+          <v-col cols="12" sm="6" class="px-0">
             <api-form :entity="activity" name="activity">
               <v-row dense>
                 <v-col sm="8" cols="12">
