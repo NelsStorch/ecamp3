@@ -11,6 +11,7 @@
       ref="bubbleMenu"
       :editor="editor"
       :should-show="shouldShow"
+      class="z-10"
     >
       <div class="elevation-4 ec-tiptap-toolbar bg-white">
         <v-toolbar
