@@ -14,7 +14,7 @@
       :max="localPeriod.end"
       @update:model-value="localPeriod.start = $event"
     />
-    
+
     <e-date-picker
       :min="localPeriod.start"
       :model-value="localPeriod.end"
