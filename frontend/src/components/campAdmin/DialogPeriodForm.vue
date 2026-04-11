@@ -14,12 +14,12 @@
       :max="localPeriod.end"
       @update:model-value="localPeriod.start = $event"
     />
-
-    <!-- vee-rules="required|greaterThanOrEqual_date:@start" -->
+    
     <e-date-picker
       :min="localPeriod.start"
       :model-value="localPeriod.end"
       path="end"
+      vee-rules="required|greaterThanOrEqual_date:@start"
       @update:model-value="localPeriod.end = $event"
     />
   </e-form>
