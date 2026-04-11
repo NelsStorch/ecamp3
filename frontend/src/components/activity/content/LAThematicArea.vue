@@ -5,6 +5,7 @@
       path="localSelection"
       :label="$t('contentNode.laThematicArea.name')"
       :items="items"
+      density="compact"
       multiple
       variant="outlined"
       persistent-placeholder
@@ -171,9 +172,8 @@ export default {
   padding: 10px 0;
 }
 
-.ec-la-thematic-area :deep(.v-select .v-select__selections .v-list) {
-  padding: 6px 0;
-  width: 0;
+.ec-la-thematic-area :deep(.v-select .v-select__selection .v-list-item) {
+  padding: 0;
 }
 
 .ec-la-thematic-area :deep(.v-select .v-list-item + .v-list-item) {
