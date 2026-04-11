@@ -3,7 +3,7 @@
     v-model="showDialog"
     :loading="loading"
     :error="error"
-    icon="mdi-package-variant"
+    icon="mdi-package-variant-closed-plus"
     :title="$t('components.campAdmin.dialogMaterialListCreate.title')"
     :submit-action="createMaterialList"
     :submit-label="$t('global.button.create')"
