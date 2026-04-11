@@ -3,7 +3,7 @@
     v-slot="{ errors: veeErrors }"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
-    :rules="veeRules"
+    :vee-rules="veeRules"
   >
     <v-autocomplete
       v-model:search="search"
@@ -39,14 +39,14 @@
 
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import uFuzzy from '@leeoniya/ufuzzy'
 import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'EAutocomplete',
   components: { ValidationField },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     immediateValidation: { type: Boolean, default: false },
     skipIfEmpty: { type: Boolean, default: true },

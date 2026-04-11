@@ -32,14 +32,14 @@
 
 <script>
 import { reactive } from 'vue'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import { parse, serialize } from 'colorjs.io/fn'
 import ColorSwatch from '@/components/form/base/ColorPicker/ColorSwatch.vue'
 
 export default {
   name: 'EColorField',
   components: { ColorSwatch },
-  mixins: [formComponentMixin],
+  mixins: [formComponentValidation],
   props: {
     modelValue: { type: String, required: false, default: null },
   },

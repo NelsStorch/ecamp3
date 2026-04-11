@@ -1,4 +1,4 @@
-export const formComponentMixin = {
+export const formComponentValidation = {
   props: {
     // ID for vee-validation
     veeId: {

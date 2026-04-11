@@ -107,7 +107,7 @@ Displays a field as a color picker (can be used with v-model)
 </template>
 
 <script>
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import { contrastColor } from '@/common/helpers/colors.js'
 import ColorSwatch from '@/components/form/base/ColorPicker/ColorSwatch.vue'
 import { debounce } from 'lodash-es'
@@ -116,7 +116,7 @@ import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 export default {
   name: 'EColorPicker',
   components: { ColorSwatch },
-  mixins: [formComponentMixin, formComponentPropsMixin],
+  mixins: [formComponentValidation, formComponentPropsMixin],
   inheritAttrs: false,
   props: {
     modelValue: { type: String, required: false, default: null },

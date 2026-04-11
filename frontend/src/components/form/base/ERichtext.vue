@@ -3,7 +3,7 @@
     v-slot="{ handleChange, errors: veeErrors }"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
-    :rules="veeRules"
+    :vee-rules="veeRules"
   >
     <v-tiptap-editor
       :class="[inputClass]"
@@ -29,7 +29,7 @@
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import VTiptapEditor from '@/components/form/tiptap/VTiptapEditor.vue'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import ValidationField from './ValidationField.vue'
 
 export default {
@@ -38,6 +38,6 @@ export default {
     ValidationField,
     VTiptapEditor,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
 }
 </script>

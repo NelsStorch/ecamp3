@@ -4,7 +4,7 @@
     :model-value="modelValue"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
-    :rules="veeRules"
+    :vee-rules="veeRules"
   >
     <v-switch
       :class="[inputClass]"
@@ -33,7 +33,7 @@
 
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import ValidationField from './ValidationField.vue'
 
 export default {
@@ -41,7 +41,7 @@ export default {
   components: {
     ValidationField,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     modelValue: { type: Boolean, required: false },
   },

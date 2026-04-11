@@ -4,7 +4,7 @@
     :model-value="modelValue"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
-    :rules="veeRules"
+    :vee-rules="veeRules"
   >
     <v-checkbox
       :id="id"
@@ -31,14 +31,14 @@
 
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import ValidationField from './ValidationField.vue'
 export default {
   name: 'ECheckbox',
   components: {
     ValidationField,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     modelValue: { type: Boolean, required: false },
   },

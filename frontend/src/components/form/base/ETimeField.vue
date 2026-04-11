@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import parseTime from '@/common/helpers/dayjs/parseTime.js'
 
 export default {
   name: 'ETimeField',
-  mixins: [formComponentMixin],
+  mixins: [formComponentValidation],
   props: {
     modelValue: { type: String, required: false, default: null },
 

@@ -5,7 +5,7 @@
     :model-value="modelValue"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
-    :rules="veeRules"
+    :vee-rules="veeRules"
   >
     <v-text-field
       ref="textField"
@@ -30,13 +30,13 @@
 
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'ETextField',
   components: { ValidationField },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     modelValue: { type: String, required: false, default: null },
     type: {

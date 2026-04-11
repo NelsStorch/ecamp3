@@ -44,13 +44,13 @@ Allows 15min steps only
 <script>
 import BasePicker from './BasePicker.vue'
 import { HTML5_FMT } from '@/common/helpers/dateFormat.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import parseTime from '@/common/helpers/dayjs/parseTime.js'
 
 export default {
   name: 'ETimePicker',
   components: { BasePicker },
-  mixins: [formComponentMixin],
+  mixins: [formComponentValidation],
   props: {
     icon: { type: String, required: false, default: 'mdi-clock-outline' },
     modelValue: { type: [Number, String], required: true },

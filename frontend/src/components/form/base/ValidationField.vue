@@ -1,9 +1,10 @@
 <template>
   <Field
+    :rules="veeRules"
     v-bind="$attrs"
     as="div"
     class="e-form-container"
-    :class="{ 'e-form-container--required': isRequired }"
+    :class="{ 'e-form-container--required': required }"
   >
     <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
       <slot :name="slotName" v-bind="slotProps || {}"></slot>
@@ -13,12 +14,14 @@
 
 <script>
 import { Field } from 'vee-validate'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 
 export default {
   name: 'ValidationField',
   components: {
     Field,
   },
+  mixins: [formComponentValidation],
   inheritAttrs: false,
   computed: {
     isRequired() {

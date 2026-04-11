@@ -3,7 +3,7 @@
     v-slot="{ handleChange, errors: veeErrors }"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
-    :rules="veeRules"
+    :vee-rules="veeRules"
   >
     <v-select
       :class="[inputClass]"
@@ -33,7 +33,7 @@
 
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import ValidationField from '@/components/form/base/ValidationField.vue'
 
 export default {
@@ -41,7 +41,7 @@ export default {
   components: {
     ValidationField,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     // TODO: implement immediateValidation
     immediateValidation: { type: Boolean, default: false },
