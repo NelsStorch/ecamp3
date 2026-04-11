@@ -1,13 +1,11 @@
 <template>
-  <Field
+  <ValidationField
     v-slot="{ handleChange, handleBlur, handleReset, errors: veeFieldErrors }"
     ref="validationField"
     :model-value="modelValue"
-    as="div"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
     :rules="veeRules"
-    class="e-form-container"
   >
     <v-text-field
       ref="textField"
@@ -27,17 +25,17 @@
         <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-text-field>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
-import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'ETextField',
-  components: { Field },
+  components: { ValidationField },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
     modelValue: { type: String, required: false, default: null },
@@ -78,14 +76,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-[required]:deep(label::after) {
-  content: '\a0*';
-  font-size: 12px;
-  color: #d32f2f;
-}
-[required]:deep(.v-input--is-label-active label::after) {
-  color: gray;
-}
-</style>

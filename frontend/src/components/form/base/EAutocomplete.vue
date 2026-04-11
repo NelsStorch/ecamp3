@@ -1,13 +1,12 @@
 <template>
-  <Field
+  <ValidationField
     v-slot="{ errors: veeErrors }"
-    as="div"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
     :rules="veeRules"
-    class="e-form-container"
   >
     <v-autocomplete
+      v-model:search="search"
       :class="[inputClass]"
       :custom-filter="tokensFilter"
       :error-messages="(veeErrors ?? []).concat(errorMessages)"
@@ -17,7 +16,6 @@
       item-title="text"
       item-value="value"
       :readonly="readonly"
-      v-model:search="search"
       v-bind="$attrs"
     >
       <template #item="{ item, props }">
@@ -36,18 +34,18 @@
         <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-autocomplete>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
-import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
 import uFuzzy from '@leeoniya/ufuzzy'
+import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'EAutocomplete',
-  components: { Field },
+  components: { ValidationField },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
     immediateValidation: { type: Boolean, default: false },

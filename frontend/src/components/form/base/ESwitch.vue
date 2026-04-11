@@ -1,12 +1,10 @@
 <template>
-  <Field
+  <ValidationField
     v-slot="{ handleChange, errors: veeErrors }"
     :model-value="modelValue"
-    as="div"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
     :rules="veeRules"
-    class="e-form-container"
   >
     <v-switch
       :class="[inputClass]"
@@ -30,18 +28,18 @@
         <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-switch>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
-import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'ESwitch',
   components: {
-    Field,
+    ValidationField,
   },
   mixins: [formComponentPropsMixin, formComponentMixin],
   props: {
