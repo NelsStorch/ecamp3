@@ -23,30 +23,6 @@ export default {
   },
   mixins: [formComponentValidation],
   inheritAttrs: false,
-  computed: {
-    isRequired() {
-      // Check if `required` is explicitly passed as an attribute
-      if (
-        this.$attrs.required === '' ||
-        this.$attrs.required === true ||
-        this.$attrs.required === 'true'
-      ) {
-        return true
-      }
-
-      const rules = this.$attrs.rules
-      if ('object' === typeof rules && rules !== null) {
-        return Object.keys(rules).includes('required')
-      }
-      if (typeof rules === 'string') {
-        return rules
-          .split('|')
-          .map((rule) => rule.replace(/:.*/, ''))
-          .includes('required')
-      }
-      return false
-    },
-  },
 }
 </script>
 
