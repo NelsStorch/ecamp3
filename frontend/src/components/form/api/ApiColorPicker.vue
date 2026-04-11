@@ -16,7 +16,7 @@ Displays a field as a color picker + write access via API wrapper
       :error-messages="wrapper.errorMessages"
       @update:model-value="wrapper.on.input"
     >
-      <template #append>
+      <template #append-inner>
         <api-wrapper-append :wrapper="wrapper" />
       </template>
     </e-color-picker>

@@ -22,7 +22,7 @@ Displays a field as a e-select + write access via API wrapper
       :multiple="multiple"
       @update:model-value="wrapper.on.input"
     >
-      <template #append>
+      <template #append-inner>
         <api-wrapper-append :wrapper="wrapper" />
       </template>
     </e-select>

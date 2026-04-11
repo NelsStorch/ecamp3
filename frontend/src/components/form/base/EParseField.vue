@@ -42,6 +42,14 @@ Displays a field as a textfield (can be used with v-model)
           name="append"
         />
       </template>
+      <template v-if="'append-inner' in $slots" #append-inner>
+        <slot
+          :internal-value="internalValue"
+          :serialized-value="serializedValue"
+          :string-value="stringValue"
+          name="append-inner"
+        />
+      </template>
     </v-text-field>
   </Field>
 </template>

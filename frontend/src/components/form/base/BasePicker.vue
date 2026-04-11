@@ -54,9 +54,9 @@ Displays a field as a picker (can be used with v-model)
             </slot>
           </template>
 
-          <!-- passing the append slot through -->
-          <template #append>
-            <slot name="append" />
+          <!-- passing the append-inner slot through -->
+          <template #append-inner>
+            <slot name="append-inner" />
           </template>
         </e-text-field>
       </template>
