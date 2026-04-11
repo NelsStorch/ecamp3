@@ -251,11 +251,16 @@ export default {
           e.target.value = String(Math.min(Math.max(raw, min), max))
         }
         e.target.dispatchEvent(new Event('change', { bubbles: true }))
-      } else if (
-        e.target.type === 'text' &&
-        /^#[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?$/.test(e.target.value)
-      ) {
-        this.debouncedPickerUpdate(e.target.value.toUpperCase())
+      } else if (e.target.type === 'text') {
+        const hex3 = e.target.value.match(/^#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])$/)
+        const hex6 = e.target.value.match(/^#[0-9A-Fa-f]{6}$/)
+        if (hex3) {
+          this.debouncedPickerUpdate(
+            `#${hex3[1]}${hex3[1]}${hex3[2]}${hex3[2]}${hex3[3]}${hex3[3]}`.toUpperCase()
+          )
+        } else if (hex6) {
+          this.debouncedPickerUpdate(e.target.value.toUpperCase())
+        }
       }
     },
     onPickerClose() {
