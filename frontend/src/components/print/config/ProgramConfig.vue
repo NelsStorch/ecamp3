@@ -39,7 +39,7 @@ export default {
     modelValue: { type: Object, required: true },
     camp: { type: Object, required: true },
   },
-  emits: ['input'],
+  emits: ['update:modelValue'],
   computed: {
     options: {
       get() {
