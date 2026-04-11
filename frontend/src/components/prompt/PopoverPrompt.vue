@@ -13,10 +13,10 @@
       <slot name="activator" v-bind="{ props }" />
     </template>
     <v-alert
+      color="surface"
       border="bottom"
-      border-color
-      :type="type"
-      variant="elevated"
+      :border-color="type"
+      elevation="8"
       class="mb-0 pb-5"
       :class="{
         'rounded-tr-0': position === 'bottom' && align === 'right',
@@ -26,16 +26,21 @@
       }"
     >
       <slot />
-      <v-alert v-if="$slots.error" :color="color" icon="mdi-alert" variant="outlined">
+      <v-alert
+        v-if="$slots.error"
+        :color="color"
+        icon="mdi-alert"
+        variant="tonal"
+        class="border border-current"
+      >
         <slot name="error" />
       </v-alert>
       <div class="ec-prompt-buttons mt-2">
         <v-btn
           v-if="cancelVisible && cancelAction != null"
           :color="cancelColor"
-          variant="text"
+          variant="tonal"
           :disabled="!cancelEnabled"
-          class="v-btn--has-bg"
           @click="doCancel"
         >
           {{ cancelLabel }}
