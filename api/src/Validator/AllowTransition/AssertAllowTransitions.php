@@ -13,20 +13,14 @@ use Symfony\Component\Validator\Constraint;
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::IS_REPEATABLE)]
 class AssertAllowTransitions extends Constraint {
-    public array $transitions;
-
     public function __construct(
-        ?array $transitions = null,
-        ?array $options = null,
+        public readonly ?array $transitions = null,
         ?array $groups = null,
         $payload = null
     ) {
-        $transitionsValue = $transitions ?? $options['transitions'] ?? null;
-        if (null === $transitionsValue) {
-            throw new \InvalidArgumentException('The "transitions" option is required.');
+        if (null === $transitions) {
+            throw new \InvalidArgumentException('transitions is required.');
         }
-        $this->transitions = $transitionsValue;
-
         parent::__construct(null, $groups, $payload);
     }
 
