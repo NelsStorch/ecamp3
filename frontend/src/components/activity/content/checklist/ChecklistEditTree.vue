@@ -7,14 +7,15 @@
       <component :is="checked ? 'strong' : 'span'" class="flex-grow-1"
         >{{ item.text }}
       </component>
-      <v-switch :model-value="checked" density="compact" hide-details inset />
+      <v-switch :model-value="checked" density="compact" hide-details color="primary" />
     </div>
     <ol v-if="children.length > 0" class="pl-6">
-      <ChecklistItem
+      <ChecklistEditTree
         v-for="child in children"
-        :key="child._meta.self"
+        :key="child.item._meta.self"
         :checklist="checklist"
-        :item="child"
+        :item="child.item"
+        :items="items"
         v-bind="$attrs"
         @add-item="$emit('addItem', $event)"
         @remove-item="$emit('removeItem', $event)"
@@ -27,18 +28,20 @@
 import { filter, sortBy } from 'lodash-es'
 
 export default {
-  name: 'ChecklistItem',
+  name: 'ChecklistEditTree',
   inject: ['checkedItems'],
   props: {
     checklist: {
       type: Object,
-      default: null,
-      required: false,
+      required: true,
     },
     item: {
       type: Object,
-      default: null,
-      required: false,
+      required: true,
+    },
+    items: {
+      type: Array,
+      required: true,
     },
   },
   emits: ['addItem', 'removeItem'],
@@ -46,8 +49,8 @@ export default {
     children() {
       return sortBy(
         filter(
-          this.checklist.checklistItems().items,
-          ({ parent }) => parent?.()._meta.self === this.item?._meta.self
+          this.items,
+          ({ item }) => item.parent?.()._meta.self === this.item?._meta.self
         ),
         'position'
       )

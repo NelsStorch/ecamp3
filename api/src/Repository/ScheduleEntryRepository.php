@@ -32,6 +32,7 @@ class ScheduleEntryRepository extends ServiceEntityRepository implements CanFilt
             ->addOrderBy($alias.'.startOffset', 'ASC')
             ->addOrderBy($alias.'.left', 'ASC')
             ->addOrderBy($alias.'.endOffset', 'DESC')
+            ->addOrderBy($alias.'.createTime', 'ASC')
             ->addOrderBy($alias.'.id', 'ASC')
         ;
 

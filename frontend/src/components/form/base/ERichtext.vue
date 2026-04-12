@@ -1,11 +1,9 @@
 <template>
-  <Field
+  <ValidationField
     v-slot="{ handleChange, errors: veeErrors }"
-    as="div"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
-    :rules="veeRules"
-    class="e-form-container"
+    :vee-rules="veeRules"
   >
     <v-tiptap-editor
       :class="[inputClass]"
@@ -21,22 +19,22 @@
         <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-tiptap-editor>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
-import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
 import VTiptapEditor from '@/components/form/tiptap/VTiptapEditor.vue'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
+import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'ERichtext',
   components: {
-    Field,
+    ValidationField,
     VTiptapEditor,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   emits: ['update:modelValue'],
 }
 </script>

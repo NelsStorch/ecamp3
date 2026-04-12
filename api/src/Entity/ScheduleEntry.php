@@ -318,8 +318,15 @@ class ScheduleEntry extends BaseEntity implements BelongsToCampInterface, CanGen
                     return true;
                 }
                 if ($scheduleEntry->endOffset === $this->endOffset) {
-                    // for scheduleEntries starting at same time & same left value & same duration: ID as fallback comparison
-                    if ($scheduleEntry->getId() < $this->getId()) {
+                    // for scheduleEntries starting at same time & same left value & same duration:
+                    // sort by createTime, so that the users have the ability to choose which one comes first
+                    if ($scheduleEntry->createTime < $this->createTime) {
+                        return true;
+                    }
+
+                    // as a last resort fallback, sort by ID
+                    if ($scheduleEntry->createTime == $this->createTime
+                        && $scheduleEntry->getId() < $this->getId()) {
                         return true;
                     }
                 }

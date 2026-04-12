@@ -1,12 +1,10 @@
 <template>
-  <Field
+  <ValidationField
     v-slot="{ handleChange, errors: veeErrors }"
     :model-value="modelValue"
-    as="div"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
-    :rules="veeRules"
-    class="e-form-container"
+    :vee-rules="veeRules"
   >
     <v-checkbox
       :id="id"
@@ -28,35 +26,22 @@
         <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-checkbox>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
-import { Field } from 'vee-validate'
-
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
+import ValidationField from './ValidationField.vue'
 export default {
   name: 'ECheckbox',
   components: {
-    Field,
+    ValidationField,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     modelValue: { type: Boolean, required: false },
   },
   emits: ['update:modelValue'],
 }
 </script>
-
-<style scoped>
-[required]:deep(label::after) {
-  content: '\a0*';
-  font-size: 12px;
-  color: #d32f2f;
-}
-
-[required]:deep(.v-input--is-label-active label::after) {
-  color: gray;
-}
-</style>

@@ -20,6 +20,11 @@ import installLogsCollector from 'cypress-terminal-report/src/installLogsCollect
 installLogsCollector({
   commandTimings: 'seconds',
 })
+Cypress.on('uncaught:exception', (err) => {
+  if (err.message.includes('ResizeObserver')) {
+    return false
+  }
+})
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

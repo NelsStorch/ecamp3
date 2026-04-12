@@ -1,5 +1,5 @@
 <template>
-  <Form ref="form" v-slot="{ meta }" @submit="() => $emit('createCamp')">
+  <Form ref="form" v-slot="{ meta, validate }" @submit="() => $emit('createCamp')">
     <v-card-text>
       <server-error :server-error="serverError" />
 
@@ -181,7 +181,7 @@
       </ButtonAdd>
       <v-tooltip v-else location="top">
         <template #activator="{ props }">
-          <ButtonAdd color="secondary" elevation="0" v-bind="props">
+          <ButtonAdd color="secondary" elevation="0" v-bind="props" @click="validate">
             {{ $t('components.campCreate.campCreateStep2.create') }}
           </ButtonAdd>
         </template>

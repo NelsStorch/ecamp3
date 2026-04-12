@@ -1,11 +1,9 @@
 <template>
-  <Field
+  <ValidationField
     v-slot="{ errors: veeErrors }"
-    as="div"
     :label="validationLabel"
     :name="veeId ?? path ?? validationLabel"
-    :rules="veeRules"
-    class="e-form-container"
+    :vee-rules="veeRules"
   >
     <v-autocomplete
       v-model:search="search"
@@ -37,19 +35,19 @@
         <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-autocomplete>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
-import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 import uFuzzy from '@leeoniya/ufuzzy'
+import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'EAutocomplete',
-  components: { Field },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  components: { ValidationField },
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     immediateValidation: { type: Boolean, default: false },
     skipIfEmpty: { type: Boolean, default: true },
@@ -92,14 +90,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-[required]:deep(label::after) {
-  content: '\a0*';
-  font-size: 12px;
-  color: #d32f2f;
-}
-[required]:deep(.v-input--is-label-active label::after) {
-  color: gray;
-}
-</style>

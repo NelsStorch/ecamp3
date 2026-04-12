@@ -1,7 +1,13 @@
+@use 'vuetify/settings';
+@use 'sass:map';
 // This will eventually be replaced by tailwind
 
 .flex {
   display: flex;
+}
+
+.flex-none {
+  flex: none;
 }
 
 .whitespace-normal {
@@ -10,6 +16,10 @@
 
 .min-h-full {
   min-height: 100%;
+}
+
+.max-w-screen {
+  max-width: 100vw;
 }
 
 .w-0 {
@@ -26,6 +36,12 @@
 
 .gap-2 {
   gap: 8px;
+}
+
+@media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
+  .sm\:gap-2 {
+    gap: 8px;
+  }
 }
 
 .gap-x-2 {
@@ -78,6 +94,12 @@
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 p.prose,

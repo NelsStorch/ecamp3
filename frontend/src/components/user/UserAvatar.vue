@@ -27,7 +27,10 @@ export default {
   },
   computed: {
     isLoading() {
-      return (this.user || this.campCollaboration)?._meta?.loading
+      if (this.user || this.campCollaboration) {
+        return (this.user || this.campCollaboration)?._meta?.loading
+      }
+      return true
     },
     color() {
       if (this.isLoading) {

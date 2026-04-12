@@ -66,9 +66,8 @@
           <template #append>
             <v-list-item-action>
               <e-checkbox
-                :model-value="entityData.copyActivitySource !== null"
+                v-model="copyContent"
                 :label="$t('components.program.dialogActivityCreate.copyActivityContent')"
-                @input="setCopyContentCheckbox"
               />
             </v-list-item-action>
           </template>

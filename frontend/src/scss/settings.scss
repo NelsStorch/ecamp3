@@ -111,6 +111,7 @@
   $button-text-letter-spacing: 0.25px,
   $chip-icon-size-multiplier: 1,
   $container-padding-x: 12px,
+  $field-control-padding-start: 12px,
   $button-text-transform: inherit,
   $bottom-navigation-min-width: 60px,
   $menu-content-border-radius: 0 0 4px 4px,
@@ -129,5 +130,7 @@
   $list-item-title-line-height: 1.2,
   $list-item-icon-margin-start: 20px,
   $list-item-icon-margin-end: 16px,
-  $input-affix-margin-inside: 8px
+  $input-affix-margin-inside: 8px,
+  $table-font-size: 0.875rem,
+  $table-row-height: 48px
 );

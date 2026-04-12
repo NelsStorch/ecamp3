@@ -12,7 +12,7 @@ Displays a single scheduleEntry
     :max-width="isPaperDisplaySize ? '944px' : ''"
   >
     <template #title>
-      <div class="font-weight-bold text-h6 d-flex gap-2">
+      <h1 class="font-weight-bold text-h6 d-flex gap-1 sm:gap-2 items-center truncate">
         <span class="tabular-nums">
           {{ scheduleEntry.number }}
         </span>
@@ -23,7 +23,13 @@ Displays a single scheduleEntry
           :disabled="layoutMode || !isContributor"
         >
           <template #activator="{ props }">
-            <CategoryChip :schedule-entry="scheduleEntry" large dense v-bind="props">
+            <CategoryChip
+              :schedule-entry="scheduleEntry"
+              class="flex-shrink-0"
+              large
+              dense
+              v-bind="props"
+            >
               <template #after>
                 <v-icon
                   v-if="isContributor"
@@ -56,10 +62,10 @@ Displays a single scheduleEntry
             </v-list-item>
           </v-list>
         </v-menu>
-        <a v-if="!editActivityTitle" style="color: inherit">
+        <span v-if="!editActivityTitle" class="flex-shrink truncate">
           {{ activity.title }}
-        </a>
-      </div>
+        </span>
+      </h1>
       <v-btn
         v-if="isContributor && !editActivityTitle"
         icon

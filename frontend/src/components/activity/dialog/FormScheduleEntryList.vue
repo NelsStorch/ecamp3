@@ -71,17 +71,12 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      localScheduleEntries: this.scheduleEntries,
-    }
-  },
   computed: {
     scheduleEntriesWithoutDeleted() {
       return this.scheduleEntries.filter((entry) => !entry.deleted)
     },
     lastScheduleEntry() {
-      return this.localScheduleEntries[this.localScheduleEntries.length - 1]
+      return this.scheduleEntries[this.scheduleEntries.length - 1]
     },
     lastScheduleEntryStart() {
       return dayjs.utc(this.lastScheduleEntry.start)
@@ -102,7 +97,7 @@ export default {
         ? proposedStart
         : dayjs.utc(this.period.start).add(7, 'hour')
       const end = start.add(this.lastScheduleEntryDuration)
-      this.localScheduleEntries.push({
+      this.scheduleEntries.push({
         period: () => this.period,
         start: start.format(),
         end: end.format(),

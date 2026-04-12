@@ -17,45 +17,46 @@
             v-bind="props"
           >
             <v-skeleton-loader v-if="!itemsLoaded" class="px-4 pb-4" type="paragraph" />
-            <v-list-item v-else-if="activeChecklists.length === 0">
+            <v-list-item v-else-if="checkedItems.length === 0">
               <v-list-item-title>
                 {{ $t('global.button.edit') }}
               </v-list-item-title>
             </v-list-item>
-            <ChecklistItems
-              :active-checklists="activeChecklists"
+            <ChecklistDisplaySelectedItems
+              :checklists="checklists"
               :layout-mode="layoutMode"
             />
           </button>
         </template>
         <div class="ma-n4">
-          <v-expansion-panels multiple flat variant="accordion">
+          <v-expansion-panels
+            v-model="openChecklistPanels"
+            multiple
+            flat
+            variant="accordion"
+          >
             <v-expansion-panel
-              v-for="{ checklist, items } in allChecklists"
+              v-for="{ checklist, selectedItems, allItems } in checklists"
               :key="checklist._meta.self"
+              :value="checklist._meta.self"
             >
               <v-expansion-panel-title>
                 <h3>
                   {{ checklist.name }}
                   <small class="font-weight-regular">
-                    ({{
-                      selectionContentNode.filter(
-                        (item) =>
-                          checkedItems.includes(item.id) &&
-                          item.checklist()._meta.self === checklist?._meta?.self
-                      ).length
-                    }}
+                    ({{ selectedItems.length }}
                     selected)
                   </small>
                 </h3>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <ol class="pl-4 pr-4">
-                  <ChecklistItem
-                    v-for="{ item } in items.filter(({ item }) => item.parent == null)"
+                  <ChecklistEditTree
+                    v-for="{ item } in allItems.filter(({ item }) => item.parent == null)"
                     :key="item._meta.self"
                     :checklist="checklist"
                     :item="item"
+                    :items="allItems"
                     @remove-item="removeItem"
                     @add-item="addItem"
                   />
@@ -65,10 +66,10 @@
           </v-expansion-panels>
         </div>
       </DetailPane>
-      <ChecklistItems
+      <ChecklistDisplaySelectedItems
         v-else
         class="mb-1"
-        :active-checklists="activeChecklists"
+        :checklists="checklists"
         :layout-mode="layoutMode"
       />
     </template>
@@ -79,15 +80,20 @@
 import ContentNodeCard from '@/components/activity/content/layout/ContentNodeCard.vue'
 import { contentNodeMixin } from '@/mixins/contentNodeMixin.js'
 import DetailPane from '@/components/generic/DetailPane.vue'
-import ChecklistItem from './checklist/ChecklistItem.vue'
-import ChecklistItems from './checklist/ChecklistItems.vue'
+import ChecklistEditTree from './checklist/ChecklistEditTree.vue'
+import ChecklistDisplaySelectedItems from './checklist/ChecklistDisplaySelectedItems.vue'
 import { serverErrorToString } from '@/helpers/serverError.js'
 import { debounce, isEqual, sortBy, uniq } from 'lodash-es'
 import { computed } from 'vue'
 
 export default {
   name: 'Checklist',
-  components: { ChecklistItems, DetailPane, ContentNodeCard, ChecklistItem },
+  components: {
+    ChecklistDisplaySelectedItems,
+    DetailPane,
+    ContentNodeCard,
+    ChecklistEditTree,
+  },
   mixins: [contentNodeMixin],
   provide() {
     return {
@@ -104,6 +110,7 @@ export default {
       errorMessages: null,
       debouncedSave: () => null,
       itemsLoaded: false,
+      openChecklistPanels: [],
     }
   },
   computed: {
@@ -125,7 +132,7 @@ export default {
     serverSelection() {
       return this.selectionContentNode.map((item) => item.id)
     },
-    allChecklists() {
+    itemsGroupedByChecklist() {
       return this.camp?.checklists()?.items.map((checklist) => ({
         checklist,
         items: this.campChecklistItems
@@ -154,17 +161,12 @@ export default {
           }),
       }))
     },
-    activeChecklists() {
-      return this.allChecklists
-        .filter(({ checklist }) =>
-          this.contentNode
-            .checklistItems()
-            .items.some((item) => checklist._meta.self === item?.checklist()._meta.self)
-        )
-        .map(({ checklist, items }) => ({
-          checklist,
-          items: items.filter(({ item }) => this.checkedItems.includes(item.id)),
-        }))
+    checklists() {
+      return this.itemsGroupedByChecklist.map(({ checklist, items }) => ({
+        checklist,
+        allItems: items,
+        selectedItems: items.filter(({ item }) => this.checkedItems.includes(item.id)),
+      }))
     },
   },
   watch: {
@@ -185,7 +187,11 @@ export default {
   created() {
     const DEBOUNCE_WAIT = 500
     this.debounceSave = debounce(this.save, DEBOUNCE_WAIT)
-    this.camp.checklists()._meta.load.then(() => {
+    this.camp.checklists()._meta.load.then((checklists) => {
+      if (checklists.items.length === 1) {
+        this.openChecklistPanels = [checklists.items[0]._meta.self]
+      }
+
       this.api
         .get()
         .checklistItems({

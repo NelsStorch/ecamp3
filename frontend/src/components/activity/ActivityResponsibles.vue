@@ -9,20 +9,19 @@
     variant="outlined"
     density="compact"
     multiple
-    chips
-    deletable-chips
-    small-chips
     @input="onInput"
   >
     <template #selection="{ item }">
-      <v-chip :key="item.value" class="mx-0" size="small">
-        <UserAvatar
-          :camp-collaboration="item.campCollaboration"
-          left
-          size="20"
-          class="ml-n3"
-        />
-        <span>{{ item.text }}</span>
+      <v-chip
+        :key="item.value"
+        class="mx-0"
+        size="small"
+        prepend-icon="mdi-account-circle"
+      >
+        <template #prepend>
+          <UserAvatar :camp-collaboration="item.raw.campCollaboration" left size="20" />
+        </template>
+        <span>{{ item.title }}</span>
       </v-chip>
     </template>
   </e-select>

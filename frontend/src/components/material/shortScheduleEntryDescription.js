@@ -5,9 +5,13 @@ export default function shortScheduleEntryDescription(scheduleEntry, tc) {
   return (
     scheduleEntry?.number ||
     // For numbering style "none", display the activity title and day number instead
-    tc('global.shortScheduleEntryDescription', 1, {
-      dayNumber: scheduleEntry.dayNumber,
-      startTime: hourShort(scheduleEntry.start, tc),
-    })
+    tc(
+      'global.shortScheduleEntryDescription',
+      {
+        dayNumber: scheduleEntry.dayNumber,
+        startTime: hourShort(scheduleEntry.start, tc),
+      },
+      1
+    )
   )
 }

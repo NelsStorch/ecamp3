@@ -28,6 +28,7 @@
         v-for="(item, self) in processedItems"
         :key="self"
         density="compact"
+        min-height="50"
         :active="item.selected"
         active-class="text-primary"
         class="mb-0"

@@ -6,7 +6,7 @@ Displays the content wrapped inside a card.
   <v-card :max-width="maxWidth" width="100%" :tile="$vuetify.display.xs" class="mx-auto">
     <v-toolbar
       v-if="back || !$vuetify.display.mdAndUp || toolbar"
-      class="ec-content-card__toolbar"
+      class="ec-content-card__toolbar max-w-screen"
       :class="{ 'ec-content-card__toolbar--border': !noBorder }"
       elevation="0"
       color="surface"
@@ -19,7 +19,7 @@ Displays the content wrapped inside a card.
       </v-toolbar-items>
 
       <slot name="title">
-        <v-toolbar-title tag="h1" class="font-weight-bold">
+        <v-toolbar-title tag="h1" class="font-weight-bold flex-none">
           {{ title }}
         </v-toolbar-title>
       </slot>

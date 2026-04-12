@@ -1,9 +1,8 @@
 <template>
-  <ContentNodeCard class="ec-la-thematic-area" v-bind="$props">
+  <ContentNodeCard class="ec-la-thematic-area grow-v-slot" v-bind="$props">
     <e-select
       :model-value="localSelection"
       path="localSelection"
-      :label="$t('contentNode.laThematicArea.name')"
       :items="items"
       density="compact"
       multiple

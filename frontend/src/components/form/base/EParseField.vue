@@ -3,15 +3,13 @@ Displays a field as a textfield (can be used with v-model)
 -->
 
 <template>
-  <Field
+  <ValidationField
     v-slot="{ handleChange, errors: veeErrors }"
     ref="validationField"
     :model-value="serializedValue"
-    as="div"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
-    :rules="veeRules"
-    class="e-form-container"
+    :vee-rules="veeRules"
   >
     <v-text-field
       v-bind="$attrs"
@@ -51,21 +49,21 @@ Displays a field as a textfield (can be used with v-model)
         />
       </template>
     </v-text-field>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
 import { debounce } from 'lodash-es'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { Field } from 'vee-validate'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
+import ValidationField from './ValidationField.vue'
 
 export default {
   name: 'EParseField',
   components: {
-    Field,
+    ValidationField,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     modelValue: { validator: () => true, required: true },
     readonly: { type: Boolean, required: false, default: false },
