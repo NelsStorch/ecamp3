@@ -1,5 +1,5 @@
 <template>
-  <v-footer v-if="isOutsider || showSharedWarning" app class="shared-camp">
+  <v-footer v-if="isOutsider || showSharedWarning" app class="ec-footer shared-camp">
     <p class="mb-0">
       <v-icon start size="small" class="currentColor--text">mdi-earth</v-icon>
       <strong>{{ $t(`components.camp.footerSharedCamp.${key}`) }}</strong>
@@ -35,11 +35,9 @@ export default {
 /* <v-footer> is transformed to <footer class="v-footer"> */
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-footer.shared-camp {
-  border-top: 3px solid #c8930d;
-  z-index: 4;
+  border-color: #c8930d;
   background: #fbf0df;
   color: #7a4f0f;
-  font-size: 80%;
 }
 
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */

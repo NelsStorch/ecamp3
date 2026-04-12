@@ -116,8 +116,10 @@ export default {
 
 .fab--bottom_nav {
   position: fixed;
-  bottom: calc(16px + 56px + env(safe-area-inset-bottom)) !important;
   right: 16px !important;
+  bottom: calc(
+    16px + 56px + var(--footer-height) + env(safe-area-inset-bottom)
+  ) !important;
   @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
     bottom: calc(16px + var(--footer-height) + env(safe-area-inset-bottom)) !important;
   }

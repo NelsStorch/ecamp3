@@ -412,7 +412,8 @@ export default {
   }
 
   @media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
-    height: calc(100vh - 106px);
+    // 105px = BottomNavigation (56px) + ContentCard toolbar (48px) + border (1px)
+    height: calc(100vh - 105px - var(--footer-height));
   }
 
   @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {

@@ -11,7 +11,7 @@
 
     <FooterSharedCamp ref="footerSharedCamp" />
 
-    <v-footer v-if="offline" app class="offline">
+    <v-footer v-if="offline" app class="ec-footer offline">
       <p class="mb-0">
         <strong>{{ $t('global.info.offline.title') }}</strong>
         {{ $t('global.info.offline.description') }}
@@ -102,10 +102,18 @@ export default {
     },
     updateFooterHeight() {
       const footers = document.querySelectorAll('footer.v-footer')
+      const borderWidth = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          '--footer-border-width'
+        )
+      )
       let totalHeight = 0
-      footers.forEach((footer) => {
+      footers.forEach((footer, idx) => {
         if (footer.offsetHeight > 0) {
-          totalHeight += footer.offsetHeight
+          // v-footer tracks clientHeight which does not include borders (https://github.com/vuetifyjs/vuetify/blob/bf53f9e1021a4e7c9275cc21f1985ae754fb0635/packages/vuetify/src/components/VFooter/VFooter.tsx#L54C44-L54C56),
+          // so if there is more than one footer (shared camp + offline) we need to subtract the border width,
+          // because the border of the lower footer overlaps into the upper footer
+          totalHeight += footer.offsetHeight + (idx > 0 ? -borderWidth : 0)
         }
       })
       this.footerHeight = totalHeight > 0 ? `${totalHeight}px` : '0px'
@@ -134,6 +142,13 @@ export default {
 //@import 'src/scss/tailwind';
 //@import 'src/scss/global';
 @import '~@mdi/font/css/materialdesignicons.css';
+
+// Footer styling
+$footer-border-width: 3px;
+
+:root {
+  --footer-border-width: #{$footer-border-width};
+}
 
 @media #{map.get(settings.$display-breakpoints, 'xs')} {
   html,
@@ -208,16 +223,21 @@ export default {
     border: 0;
   }
 }
+
+// Shared styles for info footers (offline, shared camp)
+.v-footer.ec-footer {
+  border-top: $footer-border-width solid;
+  z-index: 4;
+  font-size: 80%;
+}
 </style>
 
 <style scoped>
 /* <v-footer> is transformed to <footer class="v-footer"> */
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-footer.offline {
-  border-top: 3px solid #c80d0d;
-  z-index: 4;
+  border-color: #c80d0d;
   background: #fbdfdf;
   color: #7a0f0f;
-  font-size: 80%;
 }
 </style>
