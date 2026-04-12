@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :style="{ '--footer-height': footerHeight }">
     <router-view name="navigation" />
 
     <router-view name="aside" />
@@ -9,9 +9,9 @@
       <router-view />
     </v-main>
 
-    <FooterSharedCamp />
+    <FooterSharedCamp ref="footerSharedCamp" />
 
-    <v-footer v-if="offline" app class="offline">
+    <v-footer v-if="offline" app class="ec-footer offline">
       <p class="mb-0">
         <strong>{{ $t('global.info.offline.title') }}</strong>
         {{ $t('global.info.offline.description') }}
@@ -43,9 +43,17 @@ export default {
   },
   data: () => ({
     offline: false,
+    footerHeight: '0px',
+    mutationObserver: null,
   }),
   computed: {
     ...mapGetters(['snackbarMessages']),
+  },
+  watch: {
+    offline() {
+      // Use a small delay to ensure DOM has been updated
+      setTimeout(() => this.updateFooterHeight(), 50)
+    },
   },
   created() {
     this.$store.commit('setLanguage', this.$store.state.lang.language)
@@ -63,12 +71,53 @@ export default {
         this.$store.commit('setLanguage', profile.language)
       }
     }
+
+    // Wait for next tick to ensure all footer components are rendered
+    this.$nextTick().then(() => {
+      this.updateFooterHeight()
+      // Set up MutationObserver to track footer visibility changes
+      this.setupFooterObserver()
+    })
   },
   unmounted() {
     window.removeEventListener('offline', this.offlineListener)
     window.removeEventListener('online', this.onlineListener)
+    this.mutationObserver?.disconnect()
   },
   methods: {
+    setupFooterObserver() {
+      const appElement = this.$el
+      if (!appElement) return
+
+      this.mutationObserver = new MutationObserver(() => {
+        this.updateFooterHeight()
+      })
+
+      this.mutationObserver.observe(appElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class'],
+      })
+    },
+    updateFooterHeight() {
+      const footers = document.querySelectorAll('footer.v-footer')
+      const borderWidth = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          '--footer-border-width'
+        )
+      )
+      let totalHeight = 0
+      footers.forEach((footer, idx) => {
+        if (footer.offsetHeight > 0) {
+          // v-footer tracks clientHeight which does not include borders (https://github.com/vuetifyjs/vuetify/blob/bf53f9e1021a4e7c9275cc21f1985ae754fb0635/packages/vuetify/src/components/VFooter/VFooter.tsx#L54C44-L54C56),
+          // so if there is more than one footer (shared camp + offline) we need to subtract the border width,
+          // because the border of the lower footer overlaps into the upper footer
+          totalHeight += footer.offsetHeight + (idx > 0 ? -borderWidth : 0)
+        }
+      })
+      this.footerHeight = totalHeight > 0 ? `${totalHeight}px` : '0px'
+    },
     offlineListener() {
       this.offline = true
     },
@@ -93,6 +142,10 @@ export default {
 //@import 'src/scss/tailwind';
 //@import 'src/scss/global';
 @import '~@mdi/font/css/materialdesignicons.css';
+
+:root {
+  --footer-border-width: 3px;
+}
 
 @media #{map.get(settings.$display-breakpoints, 'xs')} {
   html,
@@ -167,16 +220,21 @@ export default {
     border: 0;
   }
 }
+
+// Shared styles for info footers (offline, shared camp)
+.v-footer.ec-footer {
+  border-top: var(--footer-border-width) solid;
+  z-index: 4;
+  font-size: 80%;
+}
 </style>
 
 <style scoped>
 /* <v-footer> is transformed to <footer class="v-footer"> */
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .v-footer.offline {
-  border-top: 3px solid #c80d0d;
-  z-index: 4;
+  border-color: #c80d0d;
   background: #fbdfdf;
   color: #7a0f0f;
-  font-size: 80%;
 }
 </style>
