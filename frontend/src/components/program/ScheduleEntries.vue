@@ -120,7 +120,6 @@ export default {
   right: 16px !important;
   @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
     bottom: calc(16px + var(--footer-height) + env(safe-area-inset-bottom)) !important;
-    right: 16px !important;
   }
 }
 </style>
