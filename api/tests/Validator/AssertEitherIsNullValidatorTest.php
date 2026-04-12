@@ -22,7 +22,7 @@ class AssertEitherIsNullValidatorTest extends ConstraintValidatorTestCase {
     public function testExpectsRealPropertyName() {
         $this->setObject(new \stdClass());
         $this->expectException(InvalidArgumentException::class);
-        $this->validator->validate(null, new AssertEitherIsNull(null, 'something'));
+        $this->validator->validate(null, new AssertEitherIsNull(other: 'something'));
     }
 
     public function testSelfNullValid() {
@@ -31,7 +31,7 @@ class AssertEitherIsNullValidatorTest extends ConstraintValidatorTestCase {
         $this->setObject($object);
 
         // when
-        $this->validator->validate($object->a, new AssertEitherIsNull(null, 'b'));
+        $this->validator->validate($object->a, new AssertEitherIsNull(other: 'b'));
 
         // then
         $this->assertNoViolation();
@@ -43,7 +43,7 @@ class AssertEitherIsNullValidatorTest extends ConstraintValidatorTestCase {
         $this->setObject($object);
 
         // when
-        $this->validator->validate($object->a, new AssertEitherIsNull(null, 'b'));
+        $this->validator->validate($object->a, new AssertEitherIsNull(other: 'b'));
 
         // then
         $this->assertNoViolation();
@@ -55,7 +55,7 @@ class AssertEitherIsNullValidatorTest extends ConstraintValidatorTestCase {
         $this->setObject($object);
 
         // when
-        $this->validator->validate($object->a, new AssertEitherIsNull(null, 'b'));
+        $this->validator->validate($object->a, new AssertEitherIsNull(other: 'b'));
 
         // then
         $this->buildViolation('Either this value or {{ other }} should not be null.')
@@ -70,7 +70,7 @@ class AssertEitherIsNullValidatorTest extends ConstraintValidatorTestCase {
         $this->setObject($object);
 
         // when
-        $this->validator->validate($object->a, new AssertEitherIsNull(null, 'b'));
+        $this->validator->validate($object->a, new AssertEitherIsNull(other: 'b'));
 
         // then
         $this->buildViolation('Either this value or {{ other }} should be null.')
