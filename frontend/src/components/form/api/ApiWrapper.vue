@@ -3,26 +3,29 @@ Wrapper component for form components to save data back to API
 -->
 
 <template>
-  <VeeForm ref="validationForm" class="e-form-container" slim>
-    <v-form
-      :class="[{ 'api-wrapper--inline': !autoSave && !readonly && !separateButtons }]"
-      @submit.prevent="onEnter"
-    >
-      <slot
-        :auto-save="autoSave"
-        :dirty="dirty"
-        :error-messages="errorMessages"
-        :has-loading-error="hasLoadingError"
-        :has-server-error="hasServerError"
-        :is-loading="isLoading"
-        :is-saving="isSaving"
-        :local-value="localValue"
-        :on="eventHandlers"
-        :parsed-value="parsedLocalValue"
-        :readonly="readonly || !hasFinishedLoading"
-        :status="status"
-      />
-    </v-form>
+  <VeeForm
+    ref="validationForm"
+    class="e-form-container"
+    :class="[
+      $attrs.class,
+      { 'api-wrapper--inline': !autoSave && !readonly && !separateButtons },
+    ]"
+    @submit.prevent="onEnter"
+  >
+    <slot
+      :auto-save="autoSave"
+      :dirty="dirty"
+      :error-messages="errorMessages"
+      :has-loading-error="hasLoadingError"
+      :has-server-error="hasServerError"
+      :is-loading="isLoading"
+      :is-saving="isSaving"
+      :local-value="localValue"
+      :on="eventHandlers"
+      :parsed-value="parsedLocalValue"
+      :readonly="readonly || !hasFinishedLoading"
+      :status="status"
+    />
   </VeeForm>
 </template>
 
