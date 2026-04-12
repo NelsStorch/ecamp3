@@ -143,11 +143,8 @@ export default {
 //@import 'src/scss/global';
 @import '~@mdi/font/css/materialdesignicons.css';
 
-// Footer styling
-$footer-border-width: 3px;
-
 :root {
-  --footer-border-width: #{$footer-border-width};
+  --footer-border-width: 3px;
 }
 
 @media #{map.get(settings.$display-breakpoints, 'xs')} {
@@ -226,7 +223,7 @@ $footer-border-width: 3px;
 
 // Shared styles for info footers (offline, shared camp)
 .v-footer.ec-footer {
-  border-top: $footer-border-width solid;
+  border-top: var(--footer-border-width) solid;
   z-index: 4;
   font-size: 80%;
 }
