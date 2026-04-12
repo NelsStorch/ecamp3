@@ -26,10 +26,16 @@
           </button>
         </template>
         <div class="ma-n4">
-          <v-expansion-panels multiple flat variant="accordion">
+          <v-expansion-panels
+            multiple
+            flat
+            variant="accordion"
+            v-model="openChecklistPanels"
+          >
             <v-expansion-panel
               v-for="{ checklist, selectedItems, allItems } in checklists"
               :key="checklist._meta.self"
+              :value="checklist._meta.self"
             >
               <v-expansion-panel-title>
                 <h3>
@@ -96,6 +102,7 @@ export default {
       errorMessages: null,
       debouncedSave: () => null,
       itemsLoaded: false,
+      openChecklistPanels: [],
     }
   },
   computed: {
@@ -172,7 +179,11 @@ export default {
   created() {
     const DEBOUNCE_WAIT = 500
     this.debounceSave = debounce(this.save, DEBOUNCE_WAIT)
-    this.camp.checklists()._meta.load.then(() => {
+    this.camp.checklists()._meta.load.then((checklists) => {
+      if (checklists.items.length === 1) {
+        this.openChecklistPanels = [checklists.items[0]._meta.self]
+      }
+
       this.api
         .get()
         .checklistItems({
