@@ -56,6 +56,7 @@
                     :key="item._meta.self"
                     :checklist="checklist"
                     :item="item"
+                    :items="items"
                     @remove-item="removeItem"
                     @add-item="addItem"
                   />
