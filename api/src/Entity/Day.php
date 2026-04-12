@@ -88,6 +88,7 @@ class Day extends BaseEntity implements BelongsToCampInterface {
     )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: DayResponsible::class, mappedBy: 'day', orphanRemoval: true)]
+    #[ORM\OrderBy(['createTime' => 'ASC'])]
     public Collection $dayResponsibles;
 
     /**

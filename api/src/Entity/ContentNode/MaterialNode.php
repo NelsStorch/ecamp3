@@ -56,6 +56,7 @@ class MaterialNode extends ContentNode {
     #[ApiProperty(readableLink: true, writableLink: false)]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: MaterialItem::class, mappedBy: 'materialNode', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['article' => 'ASC', 'createTime' => 'ASC'])]
     public Collection $materialItems;
 
     public function __construct() {

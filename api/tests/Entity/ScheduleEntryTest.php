@@ -40,6 +40,10 @@ class ScheduleEntryTest extends TestCase {
         $this->scheduleEntry2->startOffset = 960;
         $this->scheduleEntry2->endOffset = 960 + 90;
         $this->period->addScheduleEntry($this->scheduleEntry2);
+        $reflection = new \ReflectionClass($this->scheduleEntry2);
+        $property = $reflection->getProperty('createTime');
+        $date = new \DateTime('2026-01-01 10:00:00');
+        $property->setValue($this->scheduleEntry2, $date);
 
         $this->scheduleEntry3 = new ScheduleEntry();
         $this->scheduleEntry3->startOffset = 2400;
@@ -50,6 +54,10 @@ class ScheduleEntryTest extends TestCase {
         $this->scheduleEntry1->startOffset = 420;
         $this->scheduleEntry1->endOffset = 420 + 30;
         $this->period->addScheduleEntry($this->scheduleEntry1);
+        $reflection = new \ReflectionClass($this->scheduleEntry1);
+        $property = $reflection->getProperty('createTime');
+        $date = new \DateTime('2026-11-11 10:00:00');
+        $property->setValue($this->scheduleEntry1, $date);
     }
 
     public function testGetStart() {
@@ -133,10 +141,23 @@ class ScheduleEntryTest extends TestCase {
         $this->assertSame('1.2', $this->scheduleEntry1->getNumber());
     }
 
-    public function testGetNumberOrdersSamePeriodOffsetAndLeftAndLengthById() {
+    public function testGetNumberOrdersSamePeriodOffsetAndLeftAndLengthByCreateTime() {
         $this->scheduleEntry1->startOffset = $this->scheduleEntry2->startOffset;
         $this->scheduleEntry1->left = $this->scheduleEntry2->left;
         $this->scheduleEntry1->endOffset = $this->scheduleEntry2->endOffset;
+
+        $this->assertSame('1.1', $this->scheduleEntry2->getNumber());
+        $this->assertSame('1.2', $this->scheduleEntry1->getNumber());
+    }
+
+    public function testGetNumberOrdersSamePeriodOffsetAndLeftAndLengthAndCreateTimeById() {
+        $this->scheduleEntry1->startOffset = $this->scheduleEntry2->startOffset;
+        $this->scheduleEntry1->left = $this->scheduleEntry2->left;
+        $this->scheduleEntry1->endOffset = $this->scheduleEntry2->endOffset;
+
+        $reflection = new \ReflectionClass($this->scheduleEntry2);
+        $property = $reflection->getProperty('createTime');
+        $property->setValue($this->scheduleEntry1, $property->getValue($this->scheduleEntry2));
 
         if ($this->scheduleEntry1->getId() < $this->scheduleEntry2->getId()) {
             $this->assertSame('1.1', $this->scheduleEntry1->getNumber());
