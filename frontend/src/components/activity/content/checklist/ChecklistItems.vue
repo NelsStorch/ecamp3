@@ -1,12 +1,14 @@
 <template>
   <div class="w-100">
     <template
-      v-for="{ checklist, items } in activeChecklists"
+      v-for="{ checklist, selectedItems } in checklists.filter(
+        ({ selectedItems }) => selectedItems.length > 0
+      )"
       :key="checklist._meta.self"
     >
       <h3 class="px-4">{{ checklist.name }}</h3>
       <v-list-item
-        v-for="{ item, parents } in items"
+        v-for="{ item, parents } in selectedItems"
         :key="item._meta.self"
         class="min-h-0 d-grid"
         :disabled="layoutMode"
@@ -29,7 +31,7 @@
 export default {
   name: 'ChecklistItems',
   props: {
-    activeChecklists: {
+    checklists: {
       type: Array,
       required: true,
     },
