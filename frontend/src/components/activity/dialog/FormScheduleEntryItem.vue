@@ -251,11 +251,12 @@ export default {
   },
   methods: {
     dateIsInAnyPeriod: function (val) {
-      const calendarDate = dayjs.utc(val)
+      // use non-UTC comparison here, as the `val` coming from v-date-picker is always on local timezone
+      const calendarDate = dayjs(val)
       return this.periods.some((period) => {
         return calendarDate.isBetween(
-          dayjs.utc(period.start),
-          dayjs.utc(period.end),
+          dayjs(period.start),
+          dayjs(period.end),
           'date',
           '[]'
         )
@@ -265,10 +266,12 @@ export default {
       if (this.period === undefined) {
         return this.dateIsInAnyPeriod(val)
       }
-      const calendarDate = dayjs.utc(val)
+
+      // use non-UTC comparison here, as the `val` coming from v-date-picker is always on local timezone
+      const calendarDate = dayjs(val)
       return calendarDate.isBetween(
-        dayjs.utc(this.period.start),
-        dayjs.utc(this.period.end),
+        dayjs(this.period.start),
+        dayjs(this.period.end),
         'date',
         '[]'
       )
