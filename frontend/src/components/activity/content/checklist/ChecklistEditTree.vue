@@ -10,7 +10,7 @@
       <v-switch :model-value="checked" density="compact" hide-details color="primary" />
     </div>
     <ol v-if="children.length > 0" class="pl-6">
-      <ChecklistItem
+      <ChecklistEditTree
         v-for="child in children"
         :key="child.item._meta.self"
         :checklist="checklist"
@@ -28,7 +28,7 @@
 import { filter, sortBy } from 'lodash-es'
 
 export default {
-  name: 'ChecklistItem',
+  name: 'ChecklistEditTree',
   inject: ['checkedItems'],
   props: {
     checklist: {

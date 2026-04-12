@@ -22,7 +22,10 @@
                 {{ $t('global.button.edit') }}
               </v-list-item-title>
             </v-list-item>
-            <ChecklistItems :checklists="checklists" :layout-mode="layoutMode" />
+            <ChecklistDisplaySelectedItems
+              :checklists="checklists"
+              :layout-mode="layoutMode"
+            />
           </button>
         </template>
         <div class="ma-n4">
@@ -48,7 +51,7 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <ol class="pl-4 pr-4">
-                  <ChecklistItem
+                  <ChecklistEditTree
                     v-for="{ item } in allItems.filter(({ item }) => item.parent == null)"
                     :key="item._meta.self"
                     :checklist="checklist"
@@ -63,7 +66,7 @@
           </v-expansion-panels>
         </div>
       </DetailPane>
-      <ChecklistItems
+      <ChecklistDisplaySelectedItems
         v-else
         class="mb-1"
         :checklists="checklists"
@@ -77,15 +80,20 @@
 import ContentNodeCard from '@/components/activity/content/layout/ContentNodeCard.vue'
 import { contentNodeMixin } from '@/mixins/contentNodeMixin.js'
 import DetailPane from '@/components/generic/DetailPane.vue'
-import ChecklistItem from './checklist/ChecklistItem.vue'
-import ChecklistItems from './checklist/ChecklistItems.vue'
+import ChecklistEditTree from './checklist/ChecklistEditTree.vue'
+import ChecklistDisplaySelectedItems from './checklist/ChecklistDisplaySelectedItems.vue'
 import { serverErrorToString } from '@/helpers/serverError.js'
 import { debounce, isEqual, sortBy, uniq } from 'lodash-es'
 import { computed } from 'vue'
 
 export default {
   name: 'Checklist',
-  components: { ChecklistItems, DetailPane, ContentNodeCard, ChecklistItem },
+  components: {
+    ChecklistDisplaySelectedItems,
+    DetailPane,
+    ContentNodeCard,
+    ChecklistEditTree,
+  },
   mixins: [contentNodeMixin],
   provide() {
     return {

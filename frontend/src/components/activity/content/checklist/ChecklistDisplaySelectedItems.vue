@@ -29,7 +29,7 @@
 </template>
 <script>
 export default {
-  name: 'ChecklistItems',
+  name: 'ChecklistDisplaySelectedItems',
   props: {
     checklists: {
       type: Array,
