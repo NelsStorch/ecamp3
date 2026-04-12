@@ -71,11 +71,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      localScheduleEntries: this.scheduleEntries,
-    }
-  },
   computed: {
     scheduleEntriesWithoutDeleted() {
       return this.scheduleEntries.filter((entry) => !entry.deleted)
