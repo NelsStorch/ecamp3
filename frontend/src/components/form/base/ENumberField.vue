@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
 
 export default {
   name: 'ENumberField',
-  mixins: [formComponentMixin],
+  mixins: [formComponentValidation],
   props: {
     modelValue: { type: [String, Number], required: false, default: null },
   },

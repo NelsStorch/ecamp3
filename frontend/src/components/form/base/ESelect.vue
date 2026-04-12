@@ -1,11 +1,9 @@
 <template>
-  <Field
+  <ValidationField
     v-slot="{ handleChange, errors: veeErrors }"
-    as="div"
     :name="veeId ?? path ?? validationLabel"
     :label="validationLabel"
-    :rules="veeRules"
-    class="e-form-container"
+    :vee-rules="veeRules"
   >
     <v-select
       :class="[inputClass]"
@@ -30,20 +28,20 @@
         <slot :name="slot" v-bind="slotData || {}"></slot>
       </template>
     </v-select>
-  </Field>
+  </ValidationField>
 </template>
 
 <script>
-import { Field } from 'vee-validate'
 import { formComponentPropsMixin } from '@/mixins/formComponentPropsMixin.js'
-import { formComponentMixin } from '@/mixins/formComponentMixin.js'
+import { formComponentValidation } from '@/mixins/formComponentValidation.js'
+import ValidationField from '@/components/form/base/ValidationField.vue'
 
 export default {
   name: 'ESelect',
   components: {
-    Field,
+    ValidationField,
   },
-  mixins: [formComponentPropsMixin, formComponentMixin],
+  mixins: [formComponentPropsMixin, formComponentValidation],
   props: {
     // TODO: implement immediateValidation
     immediateValidation: { type: Boolean, default: false },
@@ -54,14 +52,3 @@ export default {
   emits: ['input', 'update:model-value'],
 }
 </script>
-
-<style scoped>
-[required]:deep(label::after) {
-  content: '\a0*';
-  font-size: 12px;
-  color: #d32f2f;
-}
-[required]:deep(.v-input--is-label-active label::after) {
-  color: gray;
-}
-</style>
