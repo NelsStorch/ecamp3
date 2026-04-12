@@ -73,18 +73,16 @@ export default {
     }
 
     // Wait for next tick to ensure all footer components are rendered
-    await this.$nextTick()
-    this.updateFooterHeight()
-
-    // Set up MutationObserver to track footer visibility changes
-    this.setupFooterObserver()
+    this.$nextTick().then(() => {
+      this.updateFooterHeight()
+      // Set up MutationObserver to track footer visibility changes
+      this.setupFooterObserver()
+    })
   },
   unmounted() {
     window.removeEventListener('offline', this.offlineListener)
     window.removeEventListener('online', this.onlineListener)
-    if (this.mutationObserver) {
-      this.mutationObserver.disconnect()
-    }
+    this.mutationObserver?.disconnect()
   },
   methods: {
     setupFooterObserver() {
@@ -92,7 +90,6 @@ export default {
       if (!appElement) return
 
       this.mutationObserver = new MutationObserver(() => {
-        // Debounce to avoid too many updates
         this.updateFooterHeight()
       })
 
