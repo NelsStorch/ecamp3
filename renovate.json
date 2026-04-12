@@ -146,7 +146,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^\\.github/workflows/.+\\.ya?ml$/"
+        "/^\\.github/.+\\.ya?ml$/"
       ],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)?\\s.*_VERSION: \"?(?<currentValue>.*)\"?\\s"
