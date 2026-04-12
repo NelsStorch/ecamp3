@@ -27,6 +27,7 @@
       <v-toolbar-title
         v-if="!editInstanceName"
         style="flex-basis: auto"
+        tag="h2"
         :class="{ 'user-select-none': layoutMode }"
       >
         {{ instanceOrContentTypeName }}
@@ -74,7 +75,7 @@
     </v-toolbar>
     <slot name="outer">
       <v-card-text
-        class="flex-grow-1"
+        class="flex-grow-1 pt-0"
         :class="{ 'pointer-events-none user-select-none': layoutMode }"
       >
         <slot />
@@ -154,7 +155,10 @@ export default {
   transition: opacity 0.2s linear;
 }
 
-::v-deep(.e-form-container, .v-input, .v-input__control) {
+:deep(.grow-v-slot.e-form-container),
+.grow-v-slot :deep(.e-form-container),
+:deep(.grow-v-slot .v-field),
+.grow-v-slot :deep(.v-input) {
   height: 100%;
 }
 
