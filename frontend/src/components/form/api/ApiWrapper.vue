@@ -10,7 +10,7 @@ Wrapper component for form components to save data back to API
       $attrs.class,
       { 'api-wrapper--inline': !autoSave && !readonly && !separateButtons },
     ]"
-    @submit.prevent="onEnter"
+    :on-submit="onEnter"
   >
     <slot
       :auto-save="autoSave"
