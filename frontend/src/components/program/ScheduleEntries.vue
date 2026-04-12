@@ -18,13 +18,16 @@
       :fixed="$vuetify.display.mdAndUp"
       dark
       fab
+      icon
+      size="large"
+      elevation="6"
       style="z-index: 3"
       location="bottom right"
       class="fab--bottom_nav float-right"
       color="red"
       @click.stop="createNewActivity()"
     >
-      <v-icon>mdi-plus</v-icon>
+      <v-icon size="large">mdi-plus</v-icon>
     </v-btn>
   </div>
 </template>
@@ -114,8 +117,10 @@ export default {
 .fab--bottom_nav {
   position: fixed;
   bottom: calc(16px + 56px + env(safe-area-inset-bottom)) !important;
+  right: 16px !important;
   @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
-    bottom: calc(16px + 36px + env(safe-area-inset-bottom)) !important;
+    bottom: calc(16px + var(--footer-height) + env(safe-area-inset-bottom)) !important;
+    right: 16px !important;
   }
 }
 </style>

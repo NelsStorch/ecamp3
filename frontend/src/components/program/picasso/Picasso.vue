@@ -416,7 +416,10 @@ export default {
   }
 
   @media #{map.get(settings.$display-breakpoints, 'md-and-up')} {
-    height: calc(100vh - 136px - var(--schedule-entry-filters-height));
+    // 137px = NavTopbar (64px) + ContentCard toolbar (48px) + border (1px) + spacing (24px)
+    height: calc(
+      100vh - 137px - var(--schedule-entry-filters-height) - var(--footer-height)
+    );
   }
 
   :deep(.v-event-timed-container) {

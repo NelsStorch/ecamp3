@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :style="{ '--footer-height': footerHeight }">
     <router-view name="navigation" />
 
     <router-view name="aside" />
@@ -9,7 +9,7 @@
       <router-view />
     </v-main>
 
-    <FooterSharedCamp />
+    <FooterSharedCamp ref="footerSharedCamp" />
 
     <v-footer v-if="offline" app class="offline">
       <p class="mb-0">
@@ -43,9 +43,17 @@ export default {
   },
   data: () => ({
     offline: false,
+    footerHeight: '0px',
+    mutationObserver: null,
   }),
   computed: {
     ...mapGetters(['snackbarMessages']),
+  },
+  watch: {
+    offline() {
+      // Use a small delay to ensure DOM has been updated
+      setTimeout(() => this.updateFooterHeight(), 50)
+    },
   },
   created() {
     this.$store.commit('setLanguage', this.$store.state.lang.language)
@@ -63,12 +71,48 @@ export default {
         this.$store.commit('setLanguage', profile.language)
       }
     }
+
+    // Wait for next tick to ensure all footer components are rendered
+    await this.$nextTick()
+    this.updateFooterHeight()
+
+    // Set up MutationObserver to track footer visibility changes
+    this.setupFooterObserver()
   },
   unmounted() {
     window.removeEventListener('offline', this.offlineListener)
     window.removeEventListener('online', this.onlineListener)
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect()
+    }
   },
   methods: {
+    setupFooterObserver() {
+      const appElement = this.$el
+      if (!appElement) return
+
+      this.mutationObserver = new MutationObserver(() => {
+        // Debounce to avoid too many updates
+        this.updateFooterHeight()
+      })
+
+      this.mutationObserver.observe(appElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class'],
+      })
+    },
+    updateFooterHeight() {
+      const footers = document.querySelectorAll('footer.v-footer')
+      let totalHeight = 0
+      footers.forEach((footer) => {
+        if (footer.offsetHeight > 0) {
+          totalHeight += footer.offsetHeight
+        }
+      })
+      this.footerHeight = totalHeight > 0 ? `${totalHeight}px` : '0px'
+    },
     offlineListener() {
       this.offline = true
     },
