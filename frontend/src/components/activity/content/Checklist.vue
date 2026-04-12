@@ -30,10 +30,10 @@
         </template>
         <div class="ma-n4">
           <v-expansion-panels
+            v-model="openChecklistPanels"
             multiple
             flat
             variant="accordion"
-            v-model="openChecklistPanels"
           >
             <v-expansion-panel
               v-for="{ checklist, selectedItems, allItems } in checklists"
