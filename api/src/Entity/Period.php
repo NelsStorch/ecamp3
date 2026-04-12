@@ -96,7 +96,7 @@ class Period extends BaseEntity implements BelongsToCampInterface {
     )]
     #[Groups(['read'])]
     #[ORM\OneToMany(targetEntity: ScheduleEntry::class, mappedBy: 'period')]
-    #[ORM\OrderBy(['startOffset' => 'ASC', 'left' => 'ASC', 'endOffset' => 'DESC', 'id' => 'ASC'])]
+    #[ORM\OrderBy(['startOffset' => 'ASC', 'left' => 'ASC', 'endOffset' => 'DESC', 'createTime' => 'ASC'])]
     public Collection $scheduleEntries;
 
     /**
