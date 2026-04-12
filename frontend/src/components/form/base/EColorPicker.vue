@@ -246,6 +246,16 @@ export default {
       return this.pickerOpen && !this.$refs.picker?.$el.contains(event.target)
     },
     onPickerFieldInput(e) {
+      /**
+       * Validates and normalizes input values in the color picker's edit fields.
+       * For number inputs (RGB/HSL values), clamps them within their min/max bounds.
+       * For text inputs (hex values), expands 3-digit hex codes to 6-digit format
+       * and validates proper hex color syntax.
+       * - in basic v-color-picker you can force an alpha channel if you enter e.g. 400 in rgb, clamping
+       *   below avoids that
+       * - basic v-color-picker does not update the modelValue after typing (only when focusing away)
+       *   so we call debouncedPickerUpdate to update the color preview and the modelValue after a short delay
+       */
       if (e.target.tagName !== 'INPUT') return
       if (e.target.type === 'number') {
         const raw = parseFloat(e.target.value)
@@ -259,11 +269,11 @@ export default {
         const hex3 = e.target.value.match(HEX3_PATTERN)
         const hex6 = e.target.value.match(HEX6_PATTERN)
         if (hex3) {
-          this.debouncedPickerUpdate(
+          this.debouncedPickerUpdate?.(
             `#${hex3[1]}${hex3[1]}${hex3[2]}${hex3[2]}${hex3[3]}${hex3[3]}`.toUpperCase()
           )
         } else if (hex6) {
-          this.debouncedPickerUpdate(e.target.value.toUpperCase())
+          this.debouncedPickerUpdate?.(e.target.value.toUpperCase())
         }
       }
     },
@@ -291,7 +301,8 @@ export default {
 
 <style scoped>
 :deep(.v-color-picker-edit__input input) {
-  background: white;
+  background: rgb(var(--v-theme-surface));
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.38);
 }
 
 :deep(.v-color-picker-preview__dot > div::before) {
