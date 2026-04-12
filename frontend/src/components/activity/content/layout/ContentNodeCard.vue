@@ -2,7 +2,7 @@
   <v-card
     :elevation="draggable ? 4 : 0"
     :tile="!layoutMode"
-    class="ec-content-nodecard d-flex flex-column"
+    class="ec-content-nodecard max-w-screen d-flex flex-column"
     :class="{ 'mx-2 my-2 elevation-4--light': draggable }"
   >
     <v-toolbar density="compact" flat color="transparent" class="px-4">
