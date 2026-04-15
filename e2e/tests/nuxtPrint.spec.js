@@ -1,117 +1,113 @@
-// https://docs.cypress.io/api/introduction/api.html
+// NuxtPrint
 
-const path = require('path')
+import { readFileSync } from 'fs'
+import { test, expect } from '@playwright/test'
+import { getPdfProperties } from '../utils/getPdfProperties'
+import { login } from '../utils/helpers'
 
-describe('Nuxt print test', () => {
-  it('shows print preview', () => {
-    cy.login('test@example.com')
-
-    cy.request('/api/camps.jsonhal').then((response) => {
-      const body = response.body
-      const camp = body._embedded.items.filter((c) => c.motto)[0]
-      const campUri = camp._links.self.href
-      const campPeriodsLink = camp._links.periods.href
-      cy.request(campPeriodsLink).then((periodsResponse) => {
-        const period = periodsResponse.body._embedded.items[0]
-        const periodUri = period._links.self.href
-
-        const printConfig = {
-          language: 'en',
-          documentName: 'camp',
-          options: { pageNumbers: false },
-          camp: campUri,
-          contents: [
-            {
-              type: 'Cover',
-              options: {},
-            },
-            {
-              type: 'Picasso',
-              options: {
-                periods: [periodUri],
-                orientation: 'L',
-              },
-            },
-            {
-              type: 'Story',
-              options: {
-                periods: [periodUri],
-                contentType: 'Storycontext',
-              },
-            },
-            {
-              type: 'Program',
-              options: {
-                periods: [periodUri],
-                dayOverview: true,
-              },
-            },
-            {
-              type: 'Toc',
-              options: {},
-            },
-          ],
-        }
-
-        cy.visit(
-          Cypress.env('PRINT_URL') +
-            '/?config=' +
-            encodeURIComponent(JSON.stringify(printConfig))
-        )
-        cy.contains(camp.title)
-        cy.contains(camp.motto)
-
-        cy.get('#content_0_cover').should('have.css', 'font-size', '50px') // this ensures Tailwind is properly built and integrated
-      })
-    })
+test.describe('Nuxt print test', () => {
+  test.beforeEach(async ({ request }) => {
+    await login(request,'test@example.com')
   })
 
-  describe('downloads PDF', () => {
-    beforeEach(() => {
-      cy.task('deleteDownloads')
-      cy.login('test@example.com')
+  test('shows print preview', async ({ page, request }) => {
+    const campsResponse = await request.get('/api/camps.jsonhal')
+    const body = await campsResponse.json()
+    const camp = body._embedded.items.find((c) => c.motto)
+    const campUri = camp._links.self.href
+    const campPeriodsLink = camp._links.periods.href
 
-      cy.visit('/camps')
-      cy.get('a:contains("GRGR")').click()
+    const periodsResponse = await request.get(campPeriodsLink)
+    const periodsResponseBody = await periodsResponse.json()
+    const period = periodsResponseBody._embedded.items[0]
+    const periodUri = period._links.self.href
+
+    const printConfig = {
+      language: 'en',
+      documentName: 'camp',
+      options: { pageNumbers: false },
+      camp: campUri,
+      contents: [
+        {
+          type: 'Cover',
+          options: {},
+        },
+        {
+          type: 'Picasso',
+          options: {
+            periods: [periodUri],
+            orientation: 'L',
+          },
+        },
+        {
+          type: 'Story',
+          options: {
+            periods: [periodUri],
+            contentType: 'Storycontext',
+          },
+        },
+        {
+          type: 'Program',
+          options: {
+            periods: [periodUri],
+            dayOverview: true,
+          },
+        },
+        {
+          type: 'Toc',
+          options: {},
+        },
+      ],
+    }
+
+    const PRINT_URL = process.env.PRINT_URL || 'http://localhost:3000/print'
+    await page.goto(
+      `${PRINT_URL}/?config=${encodeURIComponent(JSON.stringify(printConfig))}`
+    )
+    await expect(page.locator('body')).toContainText(camp.title)
+    await expect(page.locator('body')).toContainText(camp.motto)
+
+    await expect(page.locator('#content_0_cover')).toHaveCSS('font-size', '50px')
+  })
+
+  test.describe('downloads PDF', () => {
+    test.beforeEach(async ({ page }) => {
+      await page.goto('/camps')
+      await page.locator('a:has-text("GRGR")').click()
     })
 
-    afterEach(() => {
-      cy.moveDownloads()
+    test('for whole camp', async ({ page }) => {
+      await page.locator('a:has-text("Admin")').click()
+      await page.locator('a:has-text("Drucken")').click()
+
+      const downloadPromise = page.waitForEvent('download')
+      await page.locator('button:has-text("PDF herunterladen (Layout #1)")').click()
+      const download = await downloadPromise
+
+      const path = await download.path()
+      const buffer = readFileSync(path)
+      const pdfProps = await getPdfProperties(buffer)
+
+      expect(download.suggestedFilename()).toBe('Pfila-2023.pdf')
+      expect(pdfProps.numPages).toBe(25)
     })
 
-    it('for whole camp', () => {
-      cy.get('a:contains("Admin")').click()
-      cy.get('a:contains("Drucken")').click()
-      cy.get('button:contains("PDF herunterladen (Layout #1)")').click()
+    test.skip('for picasso', async ({ page }) => {
+      await page.locator('a:has-text("Programm")').click()
+      await page.locator('[data-testid="campprogram-menu"]').click()
 
-      const downloadsFolder = Cypress.config('downloadsFolder')
-      const pdfPath = path.join(downloadsFolder, 'Pfila-2023.pdf')
-      cy.readFile(pdfPath, {
-        timeout: 30000,
-      })
-      cy.getPdfProperties(pdfPath).its('numPages').should('eq', 25)
-    })
-
-    it.skip('for picasso', () => {
-      if (Cypress.browser.name === 'firefox') {
-        console.log(
-          "This test doesn't test browser specific behaviour. Firefox makes problems, thus we dont test this with firefox."
-        )
-        return
-      }
-
-      cy.get('a:contains("Programm")').click()
-      cy.get('[data-testid="campprogram-menu"]').click()
-      cy.get('[role="menuitem"] :contains("PDF herunterladen (Layout #1)")')
-        .should('be.visible')
+      const downloadPromise = page.waitForEvent('download')
+      await page
+        .locator('[role="menuitem"]:has-text("PDF herunterladen (Layout #1)")')
         .click()
+      const download = await downloadPromise
 
-      const downloadsFolder = Cypress.config('downloadsFolder')
-      const pdfPath = path.join(downloadsFolder, 'Pfila-2023-Hauptlager.pdf')
-      cy.readFile(pdfPath, {
-        timeout: 30000,
-      })
-      cy.getPdfProperties(pdfPath).its('numPages').should('eq', 1)
+      const path = await download.path()
+      const buffer = readFileSync(path)
+      const pdfProps = await getPdfProperties(buffer)
+
+      expect(download.suggestedFilename()).toBe('Pfila-2023-Hauptlager.pdf')
+      expect(pdfProps.numPages).toBe(1)
     })
   })
 })
