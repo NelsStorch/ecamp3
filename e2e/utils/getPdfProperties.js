@@ -1,4 +1,4 @@
-import { getDocument } from 'pdfjs-dist'
+import { getDocument } from 'pdfjs-dist/legacy/build/pdf.min.mjs'
 
 async function getPdfProperties(buffer) {
   const data = new Uint8Array(buffer)
