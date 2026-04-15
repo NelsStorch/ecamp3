@@ -15,8 +15,6 @@ export async function login(request, identifier, password = 'test') {
   })
 }
 
-export { moveDownloads } from './moveDownloads'
-
 export { getPdfProperties } from './getPdfProperties'
 
 export async function expectCacheHit(request, uri) {
