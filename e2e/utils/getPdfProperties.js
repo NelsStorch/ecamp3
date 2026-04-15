@@ -1,14 +1,12 @@
-const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.mjs')
-const { readFileSync } = require('node:fs')
+import { getDocument } from 'pdfjs-dist'
 
-async function getPdfProperties(path) {
-  const data = new Uint8Array(readFileSync(path))
-
-  const loadDocument = pdfjsLib.getDocument({ data: data })
+async function getPdfProperties(buffer) {
+  const data = new Uint8Array(buffer)
+  const loadDocument = getDocument({ data: data })
   const pdfDocument = await loadDocument.promise
   return {
     numPages: pdfDocument.numPages,
   }
 }
 
-module.exports = { getPdfProperties }
+export { getPdfProperties }
