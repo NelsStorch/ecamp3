@@ -1,4 +1,6 @@
+import { test, expect } from '@playwright/test'
 import { bipiUser } from './constants'
+import { login } from '../utils/helpers'
 
 const tomorrow = new Date()
 tomorrow.setDate(tomorrow.getDate() + 1)
@@ -7,37 +9,40 @@ const in2Days = new Date()
 in2Days.setDate(in2Days.getDate() + 2)
 
 const campTitle = 'title'
-describe('create new camp', () => {
-  it('without prototype', function () {
-    if (Cypress.browser.name === 'edge') {
+
+test.describe('create new camp', () => {
+  test('without prototype', async ({ page, browserName, request }) => {
+    if (browserName === 'chromium' && test.info().project.name === 'edge') {
       console.log('edge has problems since the update to vue3.')
-      this.skip()
+      test.skip()
     }
 
-    cy.login(bipiUser)
+    await login(request, bipiUser)
 
-    cy.visit('/camps')
+    await page.goto('/camps')
 
-    cy.get('[data-testid="create-camp-button"]').click()
+    await page.goto('/camps')
 
-    cy.get('[data-testid="create-camp-title-input"] input').type(campTitle)
-    cy.get('[data-testid="create-camp-organizer"] input').type('org')
-    cy.get('[data-testid="create-camp-motto"] input').type('motto')
-    cy.get('[data-testid="start-date-picker"] input').type(
+    await page.locator('[data-testid="create-camp-button"]').click()
+
+    await page.locator('[data-testid="create-camp-title-input"] input').fill(campTitle)
+    await page.locator('[data-testid="create-camp-organizer"] input').fill('org')
+    await page.locator('[data-testid="create-camp-motto"] input').fill('motto')
+    await page.locator('[data-testid="start-date-picker"] input').fill(
       tomorrow.toLocaleDateString('de-CH')
     )
-    cy.get('[data-testid="end-date-picker"] input').type(
+    await page.locator('[data-testid="end-date-picker"] input').fill(
       in2Days.toLocaleDateString('de-CH')
     )
 
-    cy.get('[data-testid="create-camp-next-step"]').click()
-    cy.get('div.v-input[data-testid="prototype-select"]').click()
-    cy.get('.v-overlay--active').should('be.visible', { timeout: 10000 })
-    cy.contains('Keine Vorlage').click()
-    cy.contains('Achtung: Du hast "Keine Vorlage" ausgewählt.').should('be.visible')
-    cy.get('[data-testid="create-camp-button"]').click()
+    await page.locator('[data-testid="create-camp-next-step"]').click()
+    await page.locator('div.v-input[data-testid="prototype-select"]').click()
+    await expect(page.locator('.v-overlay--active')).toBeVisible({ timeout: 10000 })
+    await page.locator('text=Keine Vorlage').click()
+    await expect(page.locator('text=Achtung: Du hast "Keine Vorlage" ausgewählt.')).toBeVisible()
+    await page.locator('[data-testid="create-camp-button"]').click()
 
-    cy.contains('Lagerinfos').should('be.visible')
-    cy.get('[data-testid="title"] input').should('have.value', campTitle)
+    await expect(page.locator('text=Lagerinfos')).toBeVisible()
+    await expect(page.locator('[data-testid="title"] input')).toHaveValue(campTitle)
   })
 })
