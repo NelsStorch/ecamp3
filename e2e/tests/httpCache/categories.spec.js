@@ -118,6 +118,7 @@ test.describe('cache test: /camps/{campId}/categories', () => {
     await expectCacheHit(bipiApi, uri)
   })
 
+  // eslint-disable-next-line playwright/no-skipped-test
   test.skip('invalidates cached data when user leaves a camp', async ({ browser }) => {
     const castorContext = await browser.newContext()
     const bipiContext = await browser.newContext()

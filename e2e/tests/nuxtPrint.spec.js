@@ -92,6 +92,7 @@ test.describe('Nuxt print test', () => {
       expect(pdfProps.numPages).toBe(25)
     })
 
+    // eslint-disable-next-line playwright/no-skipped-test
     test.skip('for picasso', async ({ page }) => {
       await page.locator('a:has-text("Programm")').click()
       await page.locator('[data-testid="campprogram-menu"]').click()

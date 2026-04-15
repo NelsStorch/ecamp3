@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { loginAndSetCookie } from '../utils/helpers'
 
+// eslint-disable-next-line playwright/no-skipped-test
 test.describe.skip('The filters in the dashboard', () => {
   test.beforeEach(async ({ page, request }) => {
     await loginAndSetCookie(page, request, 'test@example.com')

@@ -11,12 +11,7 @@ in2Days.setDate(in2Days.getDate() + 2)
 const campTitle = 'title'
 
 test.describe('create new camp', () => {
-  test('without prototype', async ({ page, browserName, request }) => {
-    if (browserName === 'chromium' && test.info().project.name === 'edge') {
-      console.log('edge has problems since the update to vue3.')
-      test.skip()
-    }
-
+  test('without prototype', async ({ page, request }) => {
     await loginAndSetCookie(page, request, bipiUser)
 
     await page.goto('/camps')
