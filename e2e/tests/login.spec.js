@@ -1,24 +1,26 @@
-// https://docs.cypress.io/api/introduction/api.html
+import { test, expect } from '@playwright/test'
 
-describe('Login test', () => {
-  it('displays the login page', () => {
-    cy.visit('/')
-    cy.contains('Login')
-    cy.contains('This is the development version of eCamp v3.')
-    cy.contains('Register now')
+test.describe('Login test', () => {
+  test('displays the login page', async ({ page }) => {
+    await page.goto('/')
+    await expect(page.locator('body')).toContainText('Login')
+    await expect(page.locator('body')).toContainText(
+      'This is the development version of eCamp v3.'
+    )
+    await expect(page.locator('body')).toContainText('Register now')
   })
 
-  it('can login with default user', () => {
-    cy.visit('/')
+  test('can login with default user', async ({ page }) => {
+    await page.goto('/')
 
-    cy.get('[type="email"]').type('test@example.com')
-    cy.get('[type="password"]').type('test')
-    cy.get('[type="submit').click()
+    await page.locator('[type="email"]').fill('test@example.com')
+    await page.locator('[type="password"]').fill('test')
+    await page.locator('[type="submit"]').click()
 
-    cy.location('pathname', { timeout: 60000 }).should('include', '/camps')
+    await page.waitForURL('**/camps', { timeout: 60000 })
 
-    cy.contains('Meine Lager')
-    cy.contains('GRGR')
-    cy.contains('Harry Potter Lager')
+    await expect(page.locator('body')).toContainText('Meine Lager')
+    await expect(page.locator('body')).toContainText('GRGR')
+    await expect(page.locator('body')).toContainText('Harry Potter Lager')
   })
 })
