@@ -1,14 +1,24 @@
+import { test, expect } from '@playwright/test'
 import {
   bipiUser,
   bruceWayneUser,
-  cachedEndpoint,
   castorUser,
   skilagerPeriodId,
   grgrPeriodId,
   harryMainPeriodId,
   harrySecondPeriodId,
-} from '../constants'
-import collectionResponse from './responses/schedule_entries_collection.json'
+} from '../../utils/constants'
+import {
+  expectCacheHit,
+  expectCacheMiss,
+  waitForCacheMiss,
+  apiGet,
+  apiPatch,
+  apiPost,
+  apiDelete,
+  getAuthContext,
+} from '../../utils/helpers'
+import collectionResponse from '../../test-data/httpCache/schedule_entries_collection.json'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */
@@ -25,164 +35,157 @@ const collectionXKeys =
   /* collection URI (for detecting addition of new schedule entries) */
   '/api/periods/7fa4564a5d5d/schedule_entries'
 
-describe('cache test: /periods/{periodId}/scheduleEntries', () => {
-  it('caches /periods/{periodId}/schedule_entries separately for each login', () => {
+test.describe('cache test: /periods/{periodId}/scheduleEntries', () => {
+  test('caches /periods/{periodId}/schedule_entries separately for each login', async () => {
     const uri = `/api/periods/${skilagerPeriodId}/schedule_entries`
 
-    Cypress.session.clearAllSavedSessions()
-    cy.login(bipiUser)
+    const bipiApi = await getAuthContext(bipiUser)
 
     // first request is a cache miss
-    cy.request(`${cachedEndpoint}${uri}.jsonhal`).then((response) => {
-      const headers = response.headers
-      expect(headers.xkey).to.eq(collectionXKeys)
-      expect(headers['x-cache']).to.eq('MISS')
-      expect(response.body).to.deep.equal(collectionResponse)
-    })
+    const res1 = await apiGet(bipiApi, uri)
+    const headers = res1.headers()
+    expect(headers['xkey']).toBe(collectionXKeys)
+    expect(headers['x-cache']).toBe('MISS')
+    expect(await res1.json()).toEqual(collectionResponse)
 
     // second request is a cache hit
-    cy.expectCacheHit(uri)
+    await expectCacheHit(bipiApi, uri)
 
     // request with a new user is a cache miss
-    cy.login(bruceWayneUser)
-    cy.expectCacheMiss(uri)
+    const bruceApi = await getAuthContext(bruceWayneUser)
+    await expectCacheMiss(bruceApi, uri)
   })
 
-  it('invalidates /periods/{periodId}/schedule_entries for all users on scheduleEntry patch', () => {
+  test('invalidates /periods/{periodId}/schedule_entries for all users on scheduleEntry patch', async () => {
     const uri = `/api/periods/${grgrPeriodId}/schedule_entries`
     const scheduleEntryId = '12f34c89ce11'
 
     // bring data into defined state
-    Cypress.session.clearAllSavedSessions()
-    cy.login(bipiUser)
-    cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
+    const bipiApi = await getAuthContext(bipiUser)
+    await apiPatch(bipiApi, `/api/schedule_entries/${scheduleEntryId}`, {
       start: '2026-05-10T16:00:00+00:00',
     })
 
     // warm up cache
-    cy.waitForCacheMiss(uri)
-    cy.expectCacheHit(uri)
+    await apiGet(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
 
-    cy.login(castorUser)
-    cy.expectCacheMiss(uri)
-    cy.expectCacheHit(uri)
+    const castorApi = await getAuthContext(castorUser)
+    await apiGet(castorApi, uri)
+    await expectCacheHit(castorApi, uri)
 
     // touch scheduleEntry
-    cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
+    await apiPatch(castorApi, `/api/schedule_entries/${scheduleEntryId}`, {
       start: '2026-05-10T17:00:00+00:00',
     })
 
     // ensure cache was invalidated
-    cy.waitForCacheMiss(uri)
-    cy.expectCacheHit(uri)
+    await waitForCacheMiss(castorApi, uri)
+    await expectCacheHit(castorApi, uri)
 
-    cy.login(bipiUser)
-    cy.expectCacheMiss(uri)
+    await expectCacheMiss(bipiApi, uri)
   })
 
-  it('invalidates /periods/{periodId}/schedule_entries for new scheduleEntry', () => {
+  test('invalidates /periods/{periodId}/schedule_entries for new scheduleEntry', async () => {
     const uri = `/api/periods/${grgrPeriodId}/schedule_entries`
 
-    Cypress.session.clearAllSavedSessions()
-    cy.login(bipiUser)
+    const bipiApi = await getAuthContext(bipiUser)
 
     // warm up cache
-    cy.expectCacheMiss(uri)
-    cy.expectCacheHit(uri)
+    await apiGet(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
 
     // add new scheduleEntry to period
-    cy.apiPost('/api/schedule_entries', {
+    const postRes = await apiPost(bipiApi, '/api/schedule_entries', {
       start: '2026-05-10T10:00:00+00:00',
       end: '2026-05-10T11:00:00+00:00',
       period: `/api/periods/${grgrPeriodId}`,
       activity: `/api/activities/ffd08c52288c`,
-    }).then((response) => {
-      const newScheduleEntryUri = response.body._links.self.href
-
-      // ensure cache was invalidated
-      cy.waitForCacheMiss(uri)
-      cy.expectCacheHit(uri)
-
-      // delete newly created scheduleEntry
-      cy.apiDelete(newScheduleEntryUri)
-
-      // ensure cache was invalidated
-      cy.waitForCacheMiss(uri)
-      cy.expectCacheHit(uri)
     })
+    const body = await postRes.json()
+    const newScheduleEntryUri = body._links.self.href
+
+    // ensure cache was invalidated
+    await waitForCacheMiss(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
+
+    // delete newly created scheduleEntry
+    await apiDelete(bipiApi, newScheduleEntryUri)
+
+    // ensure cache was invalidated
+    await waitForCacheMiss(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
   })
 
-  it('invalidates /periods/{periodId}/schedule_entries when moving a schedule entry to another period', () => {
+  test('invalidates /periods/{periodId}/schedule_entries when moving a schedule entry to another period', async () => {
     const uri1 = `/api/periods/${harryMainPeriodId}/schedule_entries`
     const uri2 = `/api/periods/${harrySecondPeriodId}/schedule_entries`
     const scheduleEntryId = '9a4173c9bb73'
 
-    Cypress.session.clearAllSavedSessions()
-    cy.login(bipiUser)
+    const bipiApi = await getAuthContext(bipiUser)
 
     // warm up cache
-    cy.expectCacheMiss(uri1)
-    cy.expectCacheMiss(uri2)
-    cy.expectCacheHit(uri1)
-    cy.expectCacheHit(uri2)
+    await apiGet(bipiApi, uri1)
+    await apiGet(bipiApi, uri2)
+    await expectCacheHit(bipiApi, uri1)
+    await expectCacheHit(bipiApi, uri2)
 
     // move scheduleEntry to 2nd period
-    cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
+    await apiPatch(bipiApi, `/api/schedule_entries/${scheduleEntryId}`, {
       start: '2026-08-09T15:00:00+00:00',
       end: '2026-08-09T17:00:00+00:00',
       period: `/periods/${harrySecondPeriodId}`,
     })
 
     // ensure cache was invalidated
-    cy.waitForCacheMiss(uri1)
-    cy.waitForCacheMiss(uri2)
-    cy.expectCacheHit(uri1)
-    cy.expectCacheHit(uri2)
+    await waitForCacheMiss(bipiApi, uri1)
+    await waitForCacheMiss(bipiApi, uri2)
+    await expectCacheHit(bipiApi, uri1)
+    await expectCacheHit(bipiApi, uri2)
 
     // move scheduleEntry back
-    cy.apiPatch(`/api/schedule_entries/${scheduleEntryId}`, {
+    await apiPatch(bipiApi, `/api/schedule_entries/${scheduleEntryId}`, {
       start: '2026-07-20T15:00:00+00:00',
       end: '2026-07-20T17:00:00+00:00',
       period: `/periods/${harryMainPeriodId}`,
     })
 
     // ensure cache was invalidated
-    cy.waitForCacheMiss(uri1)
-    cy.waitForCacheMiss(uri2)
-    cy.expectCacheHit(uri1)
-    cy.expectCacheHit(uri2)
+    await waitForCacheMiss(bipiApi, uri1)
+    await waitForCacheMiss(bipiApi, uri2)
+    await expectCacheHit(bipiApi, uri1)
+    await expectCacheHit(bipiApi, uri2)
   })
 
-  it('invalidates /periods/{periodId}/schedule_entries when changing the period dates', () => {
+  test('invalidates /periods/{periodId}/schedule_entries when changing the period dates', async () => {
     const uri = `/api/periods/${grgrPeriodId}/schedule_entries`
 
-    Cypress.session.clearAllSavedSessions()
-    cy.login(bipiUser)
+    const bipiApi = await getAuthContext(bipiUser)
 
     // warm up cache
-    cy.expectCacheMiss(uri)
-    cy.expectCacheHit(uri)
+    await apiGet(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
 
     // move period start date
-    cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
+    await apiPatch(bipiApi, `/api/periods/${grgrPeriodId}`, {
       start: '2026-05-09',
       end: '2026-05-12',
       moveScheduleEntries: true,
     })
 
     // ensure cache was invalidated
-    cy.waitForCacheMiss(uri)
-    cy.expectCacheHit(uri)
+    await waitForCacheMiss(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
 
     // move period start date
-    cy.apiPatch(`/api/periods/${grgrPeriodId}`, {
+    await apiPatch(bipiApi, `/api/periods/${grgrPeriodId}`, {
       start: '2026-05-10',
       end: '2026-05-13',
       moveScheduleEntries: true,
     })
 
     // ensure cache was invalidated
-    cy.waitForCacheMiss(uri)
-    cy.expectCacheHit(uri)
+    await waitForCacheMiss(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
   })
 })

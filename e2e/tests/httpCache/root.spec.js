@@ -1,17 +1,27 @@
+import { expectCacheHit, expectCacheMiss, loginAndSetCookie } from '../../utils/helpers'
+import { test } from '@playwright/test'
+
 const user1 = 'test@example.com'
 const user2 = 'castor@example.com'
-it('caches the root endpoint', () => {
+
+test('caches the root endpoint', async ({ browser }) => {
   const uri = '/api/index'
 
-  Cypress.session.clearAllSavedSessions()
-  cy.login(user1)
+  // Create context for user 1
+  const context1 = await browser.newContext()
+  const page1 = await context1.newPage()
+  await loginAndSetCookie(page1, context1, user1)
 
-  // first request is a cache miss
-  cy.expectCacheMiss(uri)
+  await expectCacheMiss(context1.request, uri)
+  await expectCacheHit(context1.request, uri)
 
-  // second request is a cache hit
-  cy.expectCacheHit(uri)
+  await context1.close()
 
-  cy.login(user2)
-  cy.expectCacheMiss(uri)
+  // Create context for user 2
+  const context2 = await browser.newContext()
+  const page2 = await context2.newPage()
+  await loginAndSetCookie(page2, context2, user2)
+
+  await expectCacheMiss(context2.request, uri)
+  await context2.close()
 })
