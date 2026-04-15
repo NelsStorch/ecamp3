@@ -1,111 +1,80 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
+// Helpers
 // ***********************************************
 //
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import 'cypress-wait-until'
+import { expect } from '@playwright/test'
+// Use same env variables conceptually
+const API_ROOT_URL = process.env.API_ROOT_URL || 'http://localhost:3000/api'
+const API_ROOT_URL_CACHED = process.env.API_ROOT_URL_CACHED || 'http://localhost:3004'
+export const cachedEndpoint = API_ROOT_URL_CACHED
 
-Cypress.Commands.add('login', (identifier) => {
-  cy.session(identifier, () => {
-    cy.request({
-      method: 'POST',
-      url: Cypress.env('API_ROOT_URL') + '/authentication_token',
-      body: { identifier, password: 'test' },
-    })
+export async function login(request, identifier, password = 'test') {
+  await request.post(`${API_ROOT_URL}/authentication_token`, {
+    data: { identifier, password },
   })
-})
+}
 
-Cypress.Commands.add('moveDownloads', () => {
-  cy.task('moveDownloads', `${Cypress.spec.name}/${Cypress.currentTest.title}`)
-})
+export { moveDownloads } from './moveDownloads'
 
-Cypress.Commands.add('getPdfProperties', (path) => {
-  return cy.task('getPdfProperties', path)
-})
+export { getPdfProperties } from './getPdfProperties'
 
-Cypress.Commands.add('expectCacheHit', (uri) => {
-  cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
-    const headers = response.headers
-    expect(headers['x-cache']).to.eq('HIT')
-  })
-})
+export async function expectCacheHit(request, uri) {
+  const response = await request.get(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
+  const headers = response.headers()
+  expect(headers['x-cache']).toBe('HIT')
+  return response
+}
 
-Cypress.Commands.add('expectCacheMiss', (uri) => {
-  cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
-    const headers = response.headers
-    expect(headers['x-cache']).to.eq('MISS')
-  })
-})
+export async function expectCacheMiss(request, uri) {
+  const response = await request.get(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
+  const headers = response.headers()
+  expect(headers['x-cache']).toBe('MISS')
+  return response
+}
 
-Cypress.Commands.add('expectCachePass', (uri) => {
-  cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
-    const headers = response.headers
-    expect(headers['x-cache']).to.eq('PASS')
-  })
-})
+export async function expectCachePass(request, uri) {
+  const response = await request.get(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
+  const headers = response.headers()
+  expect(headers['x-cache']).toBe('PASS')
+  return response
+}
 
-Cypress.Commands.add('waitForCacheMiss', (uri) => {
-  cy.waitUntil(() =>
-    cy.request(Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal').then((response) => {
-      const headers = response.headers
-      return headers['x-cache'] === 'MISS'
-    })
-  ).then((result) => expect(result).to.eq(true))
-})
+export async function waitForCacheMiss(request, uri, timeout = 10000) {
+  const start = Date.now()
+  while (Date.now() - start < timeout) {
+    const response = await request.get(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
+    const headers = response.headers()
+    if (headers['x-cache'] === 'MISS') {
+      return response
+    }
+    await new Promise((r) => setTimeout(r, 500))
+  }
+  throw new Error(`Timeout waiting for cache miss on ${uri}`)
+}
 
-Cypress.Commands.add('apiGet', (uri) => {
-  return cy.request({
-    method: 'GET',
-    url: Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal',
-  })
-})
+export async function apiGet(request, uri) {
+  return await request.get(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
+}
 
-Cypress.Commands.add('apiPatch', (uri, body) => {
-  cy.request({
-    method: 'PATCH',
-    url: Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal',
-    body,
+export async function apiPatch(request, uri, body) {
+  return await request.patch(`${API_ROOT_URL_CACHED}${uri}.jsonhal`, {
+    data: body,
     headers: {
       'Content-Type': 'application/merge-patch+json',
     },
   })
-})
+}
 
-Cypress.Commands.add('apiPost', (uri, body) => {
-  cy.request({
-    method: 'POST',
-    url: Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal',
-    body,
+export async function apiPost(request, uri, body) {
+  return await request.post(`${API_ROOT_URL_CACHED}${uri}.jsonhal`, {
+    data: body,
     headers: {
       'Content-Type': 'application/hal+json',
     },
   })
-})
+}
 
-Cypress.Commands.add('apiDelete', (uri) => {
-  cy.request({
-    method: 'DELETE',
-    url: Cypress.env('API_ROOT_URL_CACHED') + uri + '.jsonhal',
-  })
-})
+export async function apiDelete(request, uri) {
+  return await request.delete(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
+}
