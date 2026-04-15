@@ -1,39 +1,34 @@
-const { defineConfig } = require('cypress')
-const { moveDownloads } = require('./tasks/moveDownloads')
-const { deleteDownloads } = require('./tasks/deleteDownloads')
-const { getPdfProperties } = require('./tasks/getPdfProperties')
+const { defineConfig, devices } = require('@playwright/test')
 
 module.exports = defineConfig({
-  video: false,
-  pageLoadTimeout: 120000,
-  defaultCommandTimeout: 8000,
-  screenshotsFolder: 'data/screenshots',
-  videosFolder: 'data/videos',
-  downloadsFolder: 'data/downloads',
-  trashAssetsBeforeRuns: false,
-  e2e: {
-    experimentalStudio: true,
-    setupNodeEvents(on, config) {
-      on('task', {
-        deleteDownloads: () => deleteDownloads(config),
-        getPdfProperties: async (path) => getPdfProperties(path),
-        moveDownloads: (destSubDir) => moveDownloads(config, destSubDir),
-      })
-      const cypressTerminalReportOptions = {
-        printLogsToConsole: 'always',
-      }
-      require('cypress-terminal-report/src/installLogsPrinter')(
-        on,
-        cypressTerminalReportOptions
-      )
+  testDir: './specs',
+  timeout: 120000, // global timeout
+  expect: {
+    timeout: 8000,
+  },
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: 'html',
+  use: {
+    baseURL: 'http://localhost:3000',
+    trace: 'on-first-retry',
+    video: 'off', // or 'retain-on-failure'
+    screenshot: 'only-on-failure',
+  },
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
     },
-    specPattern: 'specs/**/*.cy.{js,jsx,ts,tsx}',
-    supportFile: 'support/index.js',
-    baseUrl: 'http://localhost:3000',
-  },
-  env: {
-    PRINT_URL: 'http://localhost:3000/print',
-    API_ROOT_URL: 'http://localhost:3000/api',
-    API_ROOT_URL_CACHED: 'http://localhost:3004',
-  },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+  ],
 })
