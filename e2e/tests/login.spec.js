@@ -15,9 +15,10 @@ test.describe('Login test', () => {
 
     await page.locator('[type="email"]').fill('test@example.com')
     await page.locator('[type="password"]').fill('test')
-    await page.locator('[type="submit"]').click()
-
-    await page.waitForURL('**/camps', { timeout: 60000 })
+    await Promise.all([
+      page.locator('[type="submit"]').click(),
+      page.waitForURL('/camps', { timeout: 60000 }),
+    ])
 
     await expect(page.locator('body')).toContainText('Meine Lager')
     await expect(page.locator('body')).toContainText('GRGR')

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
-import { bipiUser } from './constants'
-import { login } from '../utils/helpers'
+import { bipiUser } from '../utils/constants'
+import { loginAndSetCookie } from '../utils/helpers'
 
 const tomorrow = new Date()
 tomorrow.setDate(tomorrow.getDate() + 1)
@@ -17,9 +17,7 @@ test.describe('create new camp', () => {
       test.skip()
     }
 
-    await login(request, bipiUser)
-
-    await page.goto('/camps')
+    await loginAndSetCookie(page, request, bipiUser)
 
     await page.goto('/camps')
 
@@ -28,21 +26,26 @@ test.describe('create new camp', () => {
     await page.locator('[data-testid="create-camp-title-input"] input').fill(campTitle)
     await page.locator('[data-testid="create-camp-organizer"] input').fill('org')
     await page.locator('[data-testid="create-camp-motto"] input').fill('motto')
-    await page.locator('[data-testid="start-date-picker"] input').fill(
-      tomorrow.toLocaleDateString('de-CH')
-    )
-    await page.locator('[data-testid="end-date-picker"] input').fill(
-      in2Days.toLocaleDateString('de-CH')
-    )
+    await page
+      .locator('[data-testid="start-date-picker"] input')
+      .fill(tomorrow.toLocaleDateString('de-CH'))
+    await page
+      .locator('[data-testid="end-date-picker"] input')
+      .fill(in2Days.toLocaleDateString('de-CH'))
 
     await page.locator('[data-testid="create-camp-next-step"]').click()
     await page.locator('div.v-input[data-testid="prototype-select"]').click()
     await expect(page.locator('.v-overlay--active')).toBeVisible({ timeout: 10000 })
     await page.locator('text=Keine Vorlage').click()
-    await expect(page.locator('text=Achtung: Du hast "Keine Vorlage" ausgewählt.')).toBeVisible()
-    await page.locator('[data-testid="create-camp-button"]').click()
+    await expect(
+      page.locator('text=Achtung: Du hast "Keine Vorlage" ausgewählt.')
+    ).toBeVisible()
+    await expect(page.locator('.v-overlay')).not.toBeVisible({ timeout: 10000 })
+    await page.getByTestId('create-camp-button').click()
 
-    await expect(page.locator('text=Lagerinfos')).toBeVisible()
+    await page.waitForURL('**/info')
+
+    await expect(page.locator('main >> text=Lagerinfos')).toBeVisible()
     await expect(page.locator('[data-testid="title"] input')).toHaveValue(campTitle)
   })
 })

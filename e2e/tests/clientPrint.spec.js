@@ -2,15 +2,15 @@
 
 import { test, expect } from '@playwright/test'
 import { getPdfProperties } from '../utils/getPdfProperties'
-import { login } from '../utils/helpers'
+import { loginAndSetCookie } from '../utils/helpers'
 
 import { readFileSync } from 'fs'
 
 test.describe('Client print test', () => {
   test('downloads PDF', async ({ page, request }) => {
     await page.goto('/')
-    await login(request,'test@example.com')
-    await page.waitForURL('**/camps')
+    await loginAndSetCookie(page, request, 'test@example.com')
+    await page.waitForURL('/camps')
 
     await page.locator('a:has-text("GRGR")').click()
     await page.locator('a:has-text("Admin")').click()

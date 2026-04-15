@@ -3,21 +3,21 @@
 import { readFileSync } from 'fs'
 import { test, expect } from '@playwright/test'
 import { getPdfProperties } from '../utils/getPdfProperties'
-import { login } from '../utils/helpers'
+import { loginAndSetCookie } from '../utils/helpers'
 
 test.describe('Nuxt print test', () => {
-  test.beforeEach(async ({ request }) => {
-    await login(request,'test@example.com')
+  test.beforeEach(async ({ page, request }) => {
+    await loginAndSetCookie(page, request, 'test@example.com')
   })
 
-  test('shows print preview', async ({ page, request }) => {
-    const campsResponse = await request.get('/api/camps.jsonhal')
+  test('shows print preview', async ({ page }) => {
+    const campsResponse = await page.request.get('/api/camps.jsonhal')
     const body = await campsResponse.json()
     const camp = body._embedded.items.find((c) => c.motto)
     const campUri = camp._links.self.href
     const campPeriodsLink = camp._links.periods.href
 
-    const periodsResponse = await request.get(campPeriodsLink)
+    const periodsResponse = await page.request.get(campPeriodsLink)
     const periodsResponseBody = await periodsResponse.json()
     const period = periodsResponseBody._embedded.items[0]
     const periodUri = period._links.self.href
@@ -97,9 +97,7 @@ test.describe('Nuxt print test', () => {
       await page.locator('[data-testid="campprogram-menu"]').click()
 
       const downloadPromise = page.waitForEvent('download')
-      await page
-        .locator('[role="menuitem"]:has-text("PDF herunterladen (Layout #1)")')
-        .click()
+      await page.locator('listitem:has-text("PDF herunterladen (Layout #1)")').click()
       const download = await downloadPromise
 
       const path = await download.path()

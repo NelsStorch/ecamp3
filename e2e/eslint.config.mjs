@@ -1,4 +1,4 @@
-import cypressEslint from 'eslint-plugin-cypress'
+import playwrightEslint from 'eslint-plugin-playwright'
 import { includeIgnoreFile } from '@eslint/compat'
 import globals from 'globals'
 import path from 'node:path'
@@ -13,10 +13,10 @@ const gitignorePath = path.resolve(__dirname, '.gitignore')
 
 export default [
   js.configs.recommended,
-  cypressEslint.configs.recommended,
+  playwrightEslint.configs['flat/recommended'],
   prettierRecommended,
   {
-    ignores: ['data/'],
+    ignores: ['data/', 'playwright-report/', 'test-results/'],
   },
 
   includeIgnoreFile(gitignorePath),
@@ -25,7 +25,6 @@ export default [
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.mocha,
       },
 
       ecmaVersion: 2022,
@@ -38,6 +37,18 @@ export default [
     rules: {
       'prefer-const': 'error',
       'prettier/prettier': 'error',
+      'playwright/expect-expect': [
+        'error',
+        {
+          assertFunctionNames: [
+            'expect',
+            'expectCacheHit',
+            'expectCacheMiss',
+            'expectCachePass',
+            'waitForCacheMiss',
+          ],
+        },
+      ],
     },
   },
 ]

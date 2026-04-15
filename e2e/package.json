@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test:ui": "playwright test --ui",
-    "test:run": "playwright test",
+    "test": "playwright test",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint --fix .",
     "lint:prettier": "prettier --write --ignore-path .gitignore **/*.{js,mjs,json,md}",
