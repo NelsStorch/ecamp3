@@ -1,78 +1,84 @@
-describe.skip('The filters in the dashboard', () => {
-  beforeEach(() => {
-    cy.login('test@example.com')
-    cy.visit('/camps')
-    cy.get('a:contains("GRGR")').click()
-    cy.contains('Hauptlager')
+import { test, expect } from '@playwright/test'
+import { login } from '../utils/helpers'
+test.describe.skip('The filters in the dashboard', () => {
+  test.beforeEach(async ({ page, request }) => {
+    await login(request,'test@example.com')
+    await page.goto('/camps')
+    await page.locator('a:has-text("GRGR")').click()
+    await expect(page.locator('body')).toContainText('Hauptlager')
   })
 
-  afterEach(() => {
+  test.afterEach(async ({ page }) => {
     /**
      * Firefox does not like it if a test is finished while
-     * requests are still running. Thus we wait for this text to be rendered.
+     * requests are still running. Thus, we wait for this text to be rendered.
      * This worked better than intercepting requests.
      */
-    cy.contains('Hauptlager')
+    await expect(page.locator('body')).toContainText('Hauptlager')
   })
 
-  it('can be shared via url', () => {
-    cy.get('span.v-chip:contains("Kategorie")').click()
-    clickOnItemWithLabel('Essen')
-    clickOnItemWithLabel('Lagersport')
+  test('can be shared via url', async ({ page }) => {
+    await page.locator('span.v-chip:has-text("Kategorie")').click()
+    await clickOnItemWithLabel(page, 'Essen')
+    await clickOnItemWithLabel(page, 'Lagersport')
 
-    cy.get('span.v-chip:contains("Kategorie: ES oder LS")').should('exist')
+    await expect(page.locator('span.v-chip:has-text("Kategorie: ES oder LS")')).toBeVisible()
 
-    cy.get('span.v-chip:contains("Status")').click()
-    clickOnItemWithLabel('Geplant')
-    clickOnItemWithLabel('Coach OK')
+    await page.locator('span.v-chip:has-text("Status")').click()
+    await clickOnItemWithLabel(page, 'Geplant')
+    await clickOnItemWithLabel(page, 'Coach OK')
 
-    cy.get('span.v-chip:contains("Status: Geplant oder Coach OK")').should('exist')
+    await expect(page.locator('span.v-chip:has-text("Status: Geplant oder Coach OK")')).toBeVisible()
 
-    cy.url().then((url) => cy.visit(url))
+    await page.reload();
 
-    cy.get('span.v-chip:contains("Kategorie: ES oder LS")')
-    cy.get('span.v-chip:contains("Status: Geplant oder Coach OK")')
+    await expect(page.locator('span.v-chip:has-text("Kategorie: ES oder LS")')).toBeVisible()
+    await expect(page.locator('span.v-chip:has-text("Status: Geplant oder Coach OK")')).toBeVisible()
   })
 
-  it('are removed from the url when removed in the gui', () => {
-    cy.get('span.v-chip:contains("Kategorie")').click()
-    clickOnItemWithLabel('Essen')
-    clickOnItemWithLabel('Lagersport')
+  test('are removed from the url when removed in the gui', async ({ page }) => {
+    await page.locator('span.v-chip:has-text("Kategorie")').click()
+    await clickOnItemWithLabel(page, 'Essen')
+    await clickOnItemWithLabel(page, 'Lagersport')
 
-    cy.get('span.v-chip:contains("Kategorie: ES oder LS")').should('exist')
+    await expect(page.locator('span.v-chip:has-text("Kategorie: ES oder LS")')).toBeVisible()
 
-    cy.url().then((url) => cy.visit(url))
+    await page.reload();
 
-    cy.get('span.v-chip:contains("Kategorie: ES oder LS")').should('exist')
+    await expect(page.locator('span.v-chip:has-text("Kategorie: ES oder LS")')).toBeVisible()
 
-    cy.get('span.v-chip:contains("Kategorie: ES oder LS")').click()
+    await page
+      .locator('span.v-chip:has-text("Kategorie: ES oder LS")')
+      .locator('.v-chip__close')
+      .click()
 
-    clickOnItemWithLabel('Essen')
-    clickOnItemWithLabel('Lagersport')
+    await clickOnItemWithLabel(page, 'Essen')
+    await clickOnItemWithLabel(page, 'Lagersport')
 
-    cy.get('span.v-chip:contains("Kategorie: ES oder LS")').should('not.exist')
-    cy.get('span.v-chip:contains("Kategorie")').should('exist')
+    await expect(page.locator('span.v-chip:has-text("Kategorie: ES oder LS")')).toBeHidden()
+    await expect(page.locator('span.v-chip:has-text("Kategorie")')).toBeVisible()
 
-    cy.url().then((url) => cy.visit(url))
+    await page.reload();
 
-    cy.get('span.v-chip:contains("Kategorie: ES oder LS")').should('not.exist')
-    cy.get('span.v-chip:contains("Kategorie")').should('exist')
+    await expect(page.locator('span.v-chip:has-text("Kategorie: ES oder LS")')).toBeHidden()
+    await expect(page.locator('span.v-chip:has-text("Kategorie")')).toBeVisible()
   })
 
-  it('support selecting activities without responsibles', () => {
-    cy.get('span.v-chip:contains("Verantwortlich")').click()
-    clickOnItemWithLabel('Keine Verantwortlichen')
+  test('support selecting activities without responsibles', async ({ page }) => {
+    await page.locator('span.v-chip:has-text("Verantwortlich")').click()
+    await clickOnItemWithLabel(page, 'Keine Verantwortlichen')
 
-    cy.get('span.v-chip:contains("Verantwortlich: Keine Verantwortlichen")')
+    await expect(page.locator('span.v-chip:has-text("Verantwortlich: Keine Verantwortlichen")')).toBeVisible()
 
-    cy.url().then((url) => cy.visit(url))
+    await page.reload();
 
-    cy.get('span.v-chip:contains("Verantwortlich: Keine Verantwortlichen")')
+    await expect(page.locator('span.v-chip:has-text("Verantwortlich: Keine Verantwortlichen")')).toBeVisible()
   })
 })
 
-function clickOnItemWithLabel(label) {
-  cy.get(`div.v-list-item:contains("${label}")`)
-    .find('.v-input--selection-controls__ripple')
+async function clickOnItemWithLabel(page, label) {
+  await page
+    .locator(`div.v-list-item:has-text("${label}")`)
+    .locator('.v-input--selection-controls__ripple')
     .click()
 }
