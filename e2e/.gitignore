@@ -3,6 +3,9 @@ node_modules
 /data
 /dist
 
+playwright-report/
+test-results/
+
 
 /reports/
 selenium-debug.log
