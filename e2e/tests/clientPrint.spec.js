@@ -1,24 +1,30 @@
-// https://docs.cypress.io/api/introduction/api.html
+// ClientPrint
 
-const path = require('path')
+import { test, expect } from '@playwright/test'
+import { getPdfProperties } from '../utils/getPdfProperties'
+import { login } from '../utils/helpers'
 
-describe('Client print test', () => {
-  it('downloads PDF', () => {
-    cy.task('deleteDownloads')
-    cy.login('test@example.com')
+import { readFileSync } from 'fs'
 
-    cy.visit('/camps')
-    cy.get('a:contains("GRGR")').click()
-    cy.get('a:contains("Admin")').click()
-    cy.get('a:contains("Drucken")').click()
-    cy.get('button:contains("PDF herunterladen (Layout #2)")').click()
+test.describe('Client print test', () => {
+  test('downloads PDF', async ({ page, request }) => {
+    await page.goto('/')
+    await login(request,'test@example.com')
+    await page.waitForURL('**/camps')
 
-    const downloadsFolder = Cypress.config('downloadsFolder')
-    const filePath = path.join(downloadsFolder, 'Pfila-2023.pdf')
-    cy.readFile(filePath, {
-      timeout: 30000,
-    })
-    cy.getPdfProperties(filePath).its('numPages').should('eq', 18)
-    cy.moveDownloads()
+    await page.locator('a:has-text("GRGR")').click()
+    await page.locator('a:has-text("Admin")').click()
+    await page.locator('a:has-text("Drucken")').click()
+
+    const downloadPromise = page.waitForEvent('download')
+    await page.locator('button:has-text("PDF herunterladen (Layout #2)")').click()
+    const download = await downloadPromise
+
+    const path = await download.path()
+    const buffer = readFileSync(path)
+    const pdfProps = await getPdfProperties(buffer)
+
+    expect(download.suggestedFilename()).toBe('Pfila-2023.pdf')
+    expect(pdfProps.numPages).toBe(18)
   })
 })
