@@ -45,7 +45,7 @@ docker compose --profile e2e run --rm e2e --browser chrome
 ### Run a specific e2e test
 
 ```shell
-docker compose --profile e2e run --rm e2e  --browser chrome --spec specs/login.cy.js
+docker compose --profile e2e run --rm e2e  --browser chrome --spec specs/login.spec.js
 ```
 
 ### Run tests using a specific browser
