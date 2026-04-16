@@ -13,10 +13,9 @@ const campTitle = 'title'
 test.describe('create new camp', () => {
   test('without prototype', async ({ page, request }) => {
     await loginAndSetCookie(page, request, bipiUser)
+    await expect(page.locator('body')).toContainText('GRGR')
 
-    await page.goto('/camps')
-
-    await page.locator('[data-testid="create-camp-button"]').click()
+    await page.getByTestId('create-camp-button').click()
 
     await page.locator('[data-testid="create-camp-title-input"] input').fill(campTitle)
     await page.locator('[data-testid="create-camp-organizer"] input').fill('org')
