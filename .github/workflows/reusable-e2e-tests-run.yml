@@ -83,7 +83,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: blob-report-${{ matrix.browser }}${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}
-          path: e2e/blob-report/**/*
+          path: e2e/blob-report/
           retention-days: 1
 
       # print running containers
