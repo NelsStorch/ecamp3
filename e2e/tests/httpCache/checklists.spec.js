@@ -21,6 +21,8 @@ const collectionXKeys =
   '/api/camps/5d28f99890bc/checklists'
 
 test.describe('cache test: /camps/checklists', () => {
+  test.describe.configure({ mode: 'serial' })
+
   test('caches /camp/{campId}/checklists separately for each login', async () => {
     const uri = `/api/camps/${basiskursCampId}/checklists`
 

@@ -36,6 +36,8 @@ const collectionXKeys =
   '/api/periods/7fa4564a5d5d/schedule_entries'
 
 test.describe('cache test: /periods/{periodId}/scheduleEntries', () => {
+  test.describe.configure({ mode: 'serial' })
+
   test('caches /periods/{periodId}/schedule_entries separately for each login', async () => {
     const uri = `/api/periods/${skilagerPeriodId}/schedule_entries`
 

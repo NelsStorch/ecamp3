@@ -58,6 +58,8 @@ const collectionXKeys =
   '/api/camps/70ca971c992f/activities'
 
 test.describe('cache test: /camps/{campId}/activities', () => {
+  test.describe.configure({ mode: 'serial' })
+
   test('caches /camps/{campId}/activities separately for each login', async () => {
     const uri = `/api/camps/${skilagerCampId}/activities`
 
