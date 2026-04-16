@@ -1,8 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { loginAndSetCookie } from '../utils/helpers'
 
-// eslint-disable-next-line playwright/no-skipped-test
-test.describe.skip('The filters in the dashboard', () => {
+test.describe('The filters in the dashboard', () => {
   test.beforeEach(async ({ page, request }) => {
     await loginAndSetCookie(page, request, 'test@example.com')
     await page.goto('/camps')
@@ -61,10 +60,7 @@ test.describe.skip('The filters in the dashboard', () => {
       page.locator('span.v-chip:has-text("Kategorie: ES oder LS")')
     ).toBeVisible()
 
-    await page
-      .locator('span.v-chip:has-text("Kategorie: ES oder LS")')
-      .locator('.v-chip__close')
-      .click()
+    await page.locator('span.v-chip:has-text("Kategorie: ES oder LS")').click()
 
     await clickOnItemWithLabel(page, 'Essen')
     await clickOnItemWithLabel(page, 'Lagersport')
@@ -98,9 +94,15 @@ test.describe.skip('The filters in the dashboard', () => {
   })
 })
 
+/**
+ *
+ * @param page import('@playwright/test').Page
+ * @param label
+ * @return {Promise<void>}
+ */
 async function clickOnItemWithLabel(page, label) {
   await page
-    .locator(`div.v-list-item:has-text("${label}")`)
-    .locator('.v-input--selection-controls__ripple')
+    .getByRole('listitem')
+    .filter({ has: page.getByText(label, { exact: true }) })
     .click()
 }

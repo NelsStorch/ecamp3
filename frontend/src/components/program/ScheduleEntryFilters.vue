@@ -51,13 +51,13 @@
     >
       <template #item="{ item }">
         <template v-if="item.exclusiveNone">
-          {{ item.text }}
+          <span>{{ item.text }}</span>
         </template>
         <template v-else>
           <TextAlignBaseline class="mr-1">
             <UserAvatar :camp-collaboration="campCollaborations[item.value]" size="20" />
           </TextAlignBaseline>
-          {{ item.text }}
+          <span>{{ item.text }}</span>
         </template>
       </template>
     </SelectFilter>
@@ -79,7 +79,7 @@
     >
       <template #item="{ item }">
         <CategoryChip dense :category="categories[item.value]" class="mr-1" />
-        {{ categories[item.value].name }}
+        <span>{{ categories[item.value].name }}</span>
       </template>
     </SelectFilter>
     <v-skeleton-loader
@@ -117,7 +117,7 @@
       @update:model-value="(val) => updateFilter({ progressLabel: val })"
     >
       <template #item="{ item }">
-        {{ progressLabels[item.value].title }}
+        <span>{{ progressLabels[item.value].title }}</span>
       </template>
     </SelectFilter>
     <v-skeleton-loader
