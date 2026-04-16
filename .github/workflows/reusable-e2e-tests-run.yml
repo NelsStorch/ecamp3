@@ -79,7 +79,7 @@ jobs:
         if: always()
 
       # store screenshots and videos on GitHub as artifacts, for downloading and debugging in case of problems
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: blob-report-${{ matrix.browser }}${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}
@@ -110,15 +110,23 @@ jobs:
         run: npm ci
 
       - name: Download blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@v4
         with:
           path: e2e/all-blob-reports
           pattern: blob-report-*
           merge-multiple: true
 
+      - run: mkdir -p e2e/all-blob-reports
+
       - name: Merge into HTML Report
         working-directory: e2e
         run: npx playwright merge-reports --reporter html ./all-blob-reports
+
+      - name:
+        uses: geekyeggo/delete-artifact@v6
+        with:
+          name: blob-report-*
+          failOnError: false
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
