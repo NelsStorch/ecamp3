@@ -73,7 +73,7 @@ jobs:
 
       - run: sh -x wait-for-container-startup.sh
 
-      - run: docker compose --profile e2e run --rm e2e npx playwright test --project ${{ matrix.browser }}
+      - run: docker compose --profile e2e run -e CI=true --rm e2e npx playwright test --project ${{ matrix.browser }}
 
       - run: sudo chown -R $USER e2e
         if: always()
