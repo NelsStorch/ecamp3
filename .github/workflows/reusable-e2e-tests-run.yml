@@ -86,7 +86,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: blob-report-${{ matrix.browser }}${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}
+          name: blob-report${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}-${{ matrix.browser }}
           path: e2e/blob-report/
           retention-days: 1
 
@@ -117,7 +117,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: e2e/all-blob-reports
-          pattern: blob-report-*
+          pattern: blob-report${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}-*
           merge-multiple: true
 
       - run: mkdir -p e2e/all-blob-reports
@@ -132,7 +132,7 @@ jobs:
       - name:
         uses: geekyeggo/delete-artifact@v6
         with:
-          name: blob-report-*
+          name: blob-report${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}-*
           failOnError: false
 
       - name: Upload HTML report
