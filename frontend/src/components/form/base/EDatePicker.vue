@@ -16,7 +16,7 @@ Displays a field as a date picker (can be used with v-model)
     :vee-rules="veeRules"
     button-aria-label-i18n-key="components.form.base.eDatePicker.openPicker"
     close-on-picker-input
-    @update:model-value="$emit('update:model-value', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <template #default="picker">
       <v-date-picker
@@ -68,6 +68,7 @@ export default {
     min: { type: String, default: null },
     max: { type: String, default: null },
   },
+  emits: ['update:modelValue'],
   data: () => ({
     pickerMonth: undefined,
   }),

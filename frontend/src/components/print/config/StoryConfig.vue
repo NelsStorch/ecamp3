@@ -32,6 +32,7 @@ export default {
   name: 'StoryConfig',
   components: { DialogScheduleEntryFilter },
   extends: SummaryConfig,
+  emits: ['update:modelValue'],
   defaultOptions(camp) {
     return {
       periods:

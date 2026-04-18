@@ -1,5 +1,5 @@
 <template>
-  <ValidationForm ref="form" v-slot="{ meta }" @submit="() => $emit('next-step')">
+  <ValidationForm ref="form" v-slot="{ meta }" @submit="() => $emit('nextStep')">
     <e-form name="camp">
       <v-card-text>
         <e-text-field
@@ -70,6 +70,7 @@ export default {
     camp: { type: Object, required: true },
     isSaving: { type: Boolean, required: true },
   },
+  emits: ['nextStep', 'addPeriod', 'deletePeriod'],
   data: function () {
     return {
       localCamp: this.camp,
@@ -82,10 +83,10 @@ export default {
   },
   methods: {
     addPeriod: function () {
-      this.$emit('add-period')
+      this.$emit('addPeriod')
     },
     deletePeriod: function (idx) {
-      this.$emit('delete-period', idx)
+      this.$emit('deletePeriod', idx)
     },
   },
 }

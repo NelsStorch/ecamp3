@@ -53,7 +53,7 @@ export default {
     skipIfEmpty: { type: Boolean, default: true },
     readonly: { type: Boolean, default: false },
   },
-  emits: ['update:model-value'],
+  emits: ['update:modelValue'],
   data() {
     return {
       fuzzy: new uFuzzy({ intraMode: 1 }),

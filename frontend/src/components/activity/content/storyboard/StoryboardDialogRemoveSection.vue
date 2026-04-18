@@ -29,6 +29,7 @@ import DialogForm from '@/components/dialog/DialogForm.vue'
 export default {
   name: 'StoryboardDialogRemoveSection',
   components: { DialogForm },
+  emits: ['submit'],
   data() {
     return {
       showDialog: false,

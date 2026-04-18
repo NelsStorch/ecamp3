@@ -126,6 +126,7 @@ export default {
       required: true,
     },
   },
+  emits: ['delete'],
   data() {
     return {
       localScheduleEntry: this.scheduleEntry,

@@ -31,6 +31,7 @@ export default {
       default: false,
     },
   },
+  emits: ['update:modelValue'],
   setup(props, ctx) {
     const readonlyRef = toRef(() => props.readonly)
     const disabledRef = toRef(() => props.disabled)

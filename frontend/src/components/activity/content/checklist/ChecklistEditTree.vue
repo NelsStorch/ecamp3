@@ -2,7 +2,7 @@
   <li>
     <div
       class="d-flex gap-2 pb-2"
-      @click="checked ? $emit('remove-item', item.id) : $emit('add-item', item.id)"
+      @click="checked ? $emit('removeItem', item.id) : $emit('addItem', item.id)"
     >
       <component :is="checked ? 'strong' : 'span'" class="flex-grow-1"
         >{{ item.text }}
@@ -17,8 +17,8 @@
         :item="child.item"
         :items="items"
         v-bind="$attrs"
-        @add-item="$emit('add-item', $event)"
-        @remove-item="$emit('remove-item', $event)"
+        @add-item="$emit('addItem', $event)"
+        @remove-item="$emit('removeItem', $event)"
       />
     </ol>
   </li>
@@ -44,7 +44,7 @@ export default {
       required: true,
     },
   },
-  emits: ['add-item', 'remove-item'],
+  emits: ['addItem', 'removeItem'],
   computed: {
     children() {
       return sortBy(

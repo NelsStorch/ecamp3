@@ -49,6 +49,7 @@ export default {
     entity: { type: Object, required: true },
     campTitle: { type: String, required: true },
   },
+  emits: ['submit'],
   created() {
     this.entityUri = this.entity._meta.self
   },

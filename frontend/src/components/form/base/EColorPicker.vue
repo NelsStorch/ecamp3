@@ -221,7 +221,7 @@ export default {
     },
     onInput(value) {
       this.pickerValue = value
-      this.$emit('update:model-value', this.pickerValue)
+      this.$emit('update:modelValue', this.pickerValue)
     },
     onBlur(event) {
       if (!this.pickerOpen) {
@@ -235,7 +235,7 @@ export default {
     },
     onSwatchSelect(color) {
       this.pickerValue = color
-      this.$emit('update:model-value', this.pickerValue)
+      this.$emit('update:modelValue', this.pickerValue)
       this.pickerOpen = false
       this.$refs.inputSwatch.$el.focus()
     },

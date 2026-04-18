@@ -49,6 +49,7 @@ export default {
       default: null,
     },
   },
+  emits: ['reseted', 'finished', 'saved'],
   data() {
     return {
       localValue: null,
