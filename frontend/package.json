@@ -110,7 +110,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-local-rules": "3.0.2",
     "eslint-plugin-n": "17.24.0",
-    "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-vue": "10.8.0",
     "eslint-plugin-vue-scoped-css": "2.12.0",
