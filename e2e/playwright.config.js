@@ -8,12 +8,12 @@ module.exports = defineConfig({
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? 'blob' : 'html',
   use: {
     baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
     video: 'off', // or 'retain-on-failure'
     screenshot: 'only-on-failure',
   },
