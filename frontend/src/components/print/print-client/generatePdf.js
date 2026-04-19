@@ -4,6 +4,7 @@ import { proxy } from 'comlink'
 import jsonStringifyReactiveValue from '@/components/print/jsonStringifyReactiveValue.js'
 import axios from 'axios'
 import { getEnv } from '@/environment.js'
+import * as Sentry from '@sentry/browser'
 
 const PRINT_URL = getEnv().PRINT_URL
 
@@ -18,10 +19,15 @@ export const generatePdf = async (data, onProgress) => {
     status = 200
     return result
   } finally {
+    let userIdHash = ''
+    if (window.crypto && serializableData.storeData?.auth?.user) {
+      userIdHash = await hashUserId(serializableData.storeData?.auth?.user)
+    }
     // noinspection ES6MissingAwait
     notifyPdfUsage({
       config: data.config,
       status,
+      userIdHash,
       measurements: {
         total: (new Date() - start) / 1000,
       },
@@ -86,5 +92,19 @@ async function notifyPdfUsage(data) {
     })
   } catch {
     /* empty */
+  }
+}
+
+async function hashUserId(userJson) {
+  try {
+    const user = JSON.parse(userJson)
+    const encoder = new TextEncoder()
+    const data = encoder.encode(user.id)
+    const hashBuffer = await window.crypto.subtle.digest('SHA-256', data)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    return hashArray.map((byte) => byte.toString(16).padStart(2, '0')).join('')
+  } catch (e) {
+    Sentry.captureException(e)
+    return ''
   }
 }
