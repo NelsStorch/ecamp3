@@ -60,7 +60,7 @@ export default defineConfig({
     include: ['src/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
     environment: 'jsdom',
     coverage: {
-      all: true,
+      include: ['src/**/*'],
       reporter: ['text', 'lcov', 'html'],
       reportsDirectory: './data/coverage',
     },
