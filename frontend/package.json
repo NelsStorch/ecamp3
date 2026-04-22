@@ -24,7 +24,7 @@
     "@intlify/core": "11.3.2",
     "@leeoniya/ufuzzy": "1.0.19",
     "@mdi/font": "7.4.47",
-    "@react-pdf/font": "4.0.6",
+    "@react-pdf/font": "4.0.7",
     "@react-pdf/layout": "4.4.1",
     "@react-pdf/pdfkit": "4.1.0",
     "@react-pdf/primitives": "4.2.0",
