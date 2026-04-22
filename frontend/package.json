@@ -47,7 +47,7 @@
     "@tiptap/extension-text": "3.22.3",
     "@tiptap/extension-underline": "3.22.3",
     "@tiptap/vue-3": "3.22.3",
-    "@unhead/vue": "2.1.13",
+    "@unhead/vue": "3.0.4",
     "@vee-validate/i18n": "4.15.1",
     "@vee-validate/rules": "4.15.1",
     "@zxcvbn-ts/core": "3.0.4",
