@@ -7,7 +7,7 @@ export async function login(request, identifier, password = 'test') {
   const response = await request.post(`${API_ROOT_URL}/authentication_token`, {
     data: { identifier, password },
   })
-  expect([200, 204]).toContain(response.status())
+  expect([204]).toContain(response.status())
 }
 
 /**
