@@ -2,19 +2,19 @@ const { defineConfig, devices } = require('@playwright/test')
 
 module.exports = defineConfig({
   testDir: './tests',
-  timeout: 120000, // global timeout
+  timeout: 120000,
   expect: {
     timeout: 8000,
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: process.env.CI ? 'blob' : 'html',
+  workers: 1,
+  reporter: process.env.CI ? 'blob' : [['html', { open: 'never' }]],
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'retain-on-failure',
-    video: 'off', // or 'retain-on-failure'
+    video: 'off',
     screenshot: 'only-on-failure',
   },
   projects: [
