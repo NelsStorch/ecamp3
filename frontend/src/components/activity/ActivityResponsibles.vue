@@ -182,7 +182,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-::v-deep(.v-select__selections) {
+:deep(.v-select__selections) {
   gap: 4px;
   padding-top: 8px !important;
 

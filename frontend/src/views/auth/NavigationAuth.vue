@@ -70,7 +70,7 @@ export default {
 .help-button--desktop {
   top: 65px !important;
 }
-::v-deep(.v-toolbar__content) {
+:deep(.v-toolbar__content) {
   overflow: visible;
 }
 </style>
