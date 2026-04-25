@@ -1,10 +1,4 @@
-// ***********************************************
-// Helpers
-// ***********************************************
-//
-
 import { expect, request, test } from '@playwright/test'
-// Use same env variables conceptually
 export const API_ROOT_URL = process.env.API_ROOT_URL || 'http://localhost:3000/api'
 export const API_ROOT_URL_CACHED =
   process.env.API_ROOT_URL_CACHED || 'http://localhost:3004'
@@ -33,7 +27,6 @@ export async function loginAndSetCookie(page, _, user, password = 'test') {
 }
 
 /**
- * @param defaultRequest APIRequestContext
  * @param user string
  * @return {Promise<import('@playwright/test').APIRequestContext>}
  */
