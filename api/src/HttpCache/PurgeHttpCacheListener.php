@@ -224,7 +224,7 @@ final readonly class PurgeHttpCacheListener {
         $associationMappings = $this->em->getClassMetadata(ClassUtils::getClass($entity))->getAssociationMappings();
 
         foreach ($associationMappings as $property => $associationMapping) {
-            if ($associationMapping instanceof AssociationMapping && ($associationMapping->targetEntity ?? null) && !$this->resourceClassResolver->isResourceClass($associationMapping->targetEntity)) {
+            if ($associationMapping instanceof AssociationMapping && $associationMapping->targetEntity && !$this->resourceClassResolver->isResourceClass($associationMapping->targetEntity)) {
                 return;
             }
 
