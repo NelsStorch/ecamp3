@@ -66,6 +66,7 @@
         "webonyx/graphql-php": "15.31.5"
     },
     "require-dev": {
+        "ext-intl": "*",
         "api-platform/graphql": "4.3.3",
         "api-platform/hydra":  "4.3.3",
         "api-platform/json-schema": "4.3.3",
