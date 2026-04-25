@@ -19,8 +19,7 @@ class ListMultiSelectTest extends ListContentNodeTestCase {
             $this->getIriFor('multiSelect2'),
         ];
 
-        $this->contentNodesCamp2 = [
-        ];
+        $this->contentNodesCamp2 = [];
 
         $this->contentNodesCampUnrelated = [
             $this->getIriFor('multiSelectCampUnrelated'),

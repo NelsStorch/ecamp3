@@ -41,8 +41,7 @@ class CreateMultiSelectTest extends CreateContentNodeTestCase {
     public function testCreateDoesNotAcceptOptions() {
         $this->create($this->getExampleWritePayload([
             'data' => [
-                'options' => [
-                ],
+                'options' => [],
             ],
         ]));
 
