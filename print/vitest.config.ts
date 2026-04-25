@@ -5,7 +5,7 @@ export default defineConfig({
   test: {
     exclude: ['node_modules/**', 'common/**'],
     coverage: {
-      all: true,
+      include: ['test/**/*'],
       exclude: [...(configDefaults.coverage.exclude || []), '**/.nuxt/**'],
       reporter: ['text', 'lcov', 'html'],
       reportsDirectory: './coverage',
