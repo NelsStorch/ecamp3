@@ -66,11 +66,12 @@
         "webonyx/graphql-php": "15.31.5"
     },
     "require-dev": {
+        "ext-intl": "*",
         "api-platform/graphql": "4.3.3",
         "api-platform/hydra":  "4.3.3",
         "api-platform/json-schema": "4.3.3",
         "brianium/paratest": "7.22.3",
-        "friendsofphp/php-cs-fixer": "3.94.2",
+        "friendsofphp/php-cs-fixer": "3.95.1",
         "hautelook/alice-bundle": "2.17.3",
         "justinrainbow/json-schema": "6.8.0",
         "php-coveralls/php-coveralls": "2.9.1",
