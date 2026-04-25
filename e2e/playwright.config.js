@@ -1,6 +1,7 @@
-const { defineConfig, devices } = require('@playwright/test')
+import { defineConfig, devices } from '@playwright/test'
 
-module.exports = defineConfig({
+// noinspection JSUnusedGlobalSymbols
+export default defineConfig({
   testDir: './tests',
   timeout: 120000,
   expect: {
