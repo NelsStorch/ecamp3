@@ -53503,7 +53503,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'Comment identifier'
+          description: 'Activity identifier'
           explode: false
           in: path
           name: activityId
@@ -55204,7 +55204,7 @@ paths:
         - CampCollaboration
   '/camp_collaborations/{id}/resend_invitation':
     patch:
-      description: 'Updates the CampCollaboration resource.'
+      description: 'Send the invitation email for this CampCollaboration again. Only possible, if the status is already invited.'
       operationId: api_camp_collaborations_idresend_invitation_patch
       parameters:
         -
@@ -55502,7 +55502,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'Activity identifier'
+          description: 'Camp identifier'
           explode: false
           in: path
           name: campId
@@ -55588,7 +55588,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'ActivityProgressLabel identifier'
+          description: 'Camp identifier'
           explode: false
           in: path
           name: campId
@@ -55696,7 +55696,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'CampCollaboration identifier'
+          description: 'Camp identifier'
           explode: false
           in: path
           name: campId
@@ -55782,7 +55782,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'Category identifier'
+          description: 'Camp identifier'
           explode: false
           in: path
           name: campId
@@ -55877,7 +55877,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'Checklist identifier'
+          description: 'Camp identifier'
           explode: false
           in: path
           name: campId
@@ -57128,7 +57128,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'ChecklistItem identifier'
+          description: 'Checklist identifier'
           explode: false
           in: path
           name: checklistId
@@ -61206,7 +61206,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'DayResponsible identifier'
+          description: 'Day identifier'
           explode: false
           in: path
           name: dayId
@@ -62733,7 +62733,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'Day identifier'
+          description: 'Period identifier'
           explode: false
           in: path
           name: periodId
@@ -62921,7 +62921,7 @@ paths:
           style: form
         -
           deprecated: false
-          description: 'ScheduleEntry identifier'
+          description: 'Period identifier'
           explode: false
           in: path
           name: periodId
@@ -63084,7 +63084,7 @@ paths:
         - PersonalInvitation
   '/personal_invitations/{id}/accept':
     patch:
-      description: 'Updates the PersonalInvitation resource.'
+      description: 'Accept a personal invitation.'
       operationId: api_personal_invitations_idaccept_patch
       parameters:
         -
@@ -63184,7 +63184,7 @@ paths:
         - PersonalInvitation
   '/personal_invitations/{id}/reject':
     patch:
-      description: 'Updates the PersonalInvitation resource.'
+      description: 'Reject a personal invitation.'
       operationId: api_personal_invitations_idreject_patch
       parameters:
         -
