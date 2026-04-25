@@ -94,6 +94,7 @@
         "phpmyadmin/phpmyadmin",
         "postgres",
         "python",
+        "renovate/renovate",
         "qoomon/docker-host"
       ],
       "groupName": "docker-images",
