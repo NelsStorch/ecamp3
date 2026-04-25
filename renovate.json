@@ -49,30 +49,6 @@
       ]
     },
     {
-      "extends": ["monorepo:vue"],
-      "matchUpdateTypes": ["major"],
-      "matchFileNames": ["print/package.json", "pdf/package.json"],
-      "dependencyDashboardApproval": true,
-      "groupName": "vue-major-print-pdf"
-    },
-    {
-      "extends": ["monorepo:vue"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchFileNames": ["print/package.json", "pdf/package.json"],
-      "dependencyDashboardApproval": false,
-      "groupName": "vue-minor-print-pdf"
-    },
-    {
-      "matchFileNames": ["frontend/package.json"],
-      "matchUpdateTypes": ["patch", "pin", "lockFileMaintenance"],
-      "automerge": true
-    },
-    {
-      "matchFileNames": ["frontend/package.json"],
-      "matchUpdateTypes": ["minor"],
-      "automerge": false
-    },
-    {
       "matchFileNames": ["frontend-old/package.json"],
       "enabled": false
     },
