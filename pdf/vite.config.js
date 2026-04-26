@@ -64,5 +64,8 @@ export default defineConfig({
       reporter: ['text', 'lcov', 'html'],
       reportsDirectory: './data/coverage',
     },
+    snapshotFormat: {
+      maxOutputLength: 1e10,
+    },
   },
 })
