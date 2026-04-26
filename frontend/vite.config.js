@@ -161,11 +161,9 @@ export default defineConfig(({ mode }) => ({
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
-        silenceDeprecations: ['mixed-decls'],
       },
       sass: {
         api: 'modern-compiler',
-        silenceDeprecations: ['mixed-decls'],
       },
     },
   },
