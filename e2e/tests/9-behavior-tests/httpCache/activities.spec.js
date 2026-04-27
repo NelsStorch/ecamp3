@@ -7,8 +7,8 @@ import {
   grgrPeriodId,
   loremIpsumCampId,
   skilagerCampId,
-} from '../../utils/constants'
-import collectionResponse from '../../test-data/httpCache/activities_collection.json'
+} from '../../../utils/constants'
+import collectionResponse from '../../../test-data/httpCache/activities_collection.json'
 import {
   getAuthContext,
   expectCacheHit,
@@ -18,7 +18,7 @@ import {
   apiPatch,
   apiPost,
   apiDelete,
-} from '../../utils/helpers'
+} from '../../../utils/helpers'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */

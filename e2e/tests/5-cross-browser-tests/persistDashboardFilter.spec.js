@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { loginAndSetCookie } from '../utils/helpers'
+import { loginAndSetCookie } from '../../utils/helpers'
 
 test.describe('The filters in the dashboard', () => {
   test.beforeEach(async ({ page, request }) => {
