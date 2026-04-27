@@ -89,6 +89,7 @@ export default {
     /* number of colums currently visible in table */
     columns: { type: Number, required: true },
   },
+  emits: ['itemAdding'],
   data() {
     return {
       materialItem: {},
@@ -119,7 +120,7 @@ export default {
       this.$refs.quantity.focus()
 
       // fire event to allow for eager adding before post has finished
-      this.$emit('item-adding', key, data, resetForm)
+      this.$emit('itemAdding', key, data, resetForm)
     },
     campRoute,
   },

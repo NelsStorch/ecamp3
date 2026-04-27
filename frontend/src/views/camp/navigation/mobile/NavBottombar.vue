@@ -35,6 +35,7 @@ export default {
   props: {
     camp: { type: Object, required: true },
   },
+  emits: ['input'],
   data() {
     return {
       value: false,

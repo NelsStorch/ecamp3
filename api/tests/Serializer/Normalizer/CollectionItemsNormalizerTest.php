@@ -93,10 +93,8 @@ class CollectionItemsNormalizerTest extends TestCase {
         $this->decoratedMock->method('normalize')->willReturn([
             'hello' => 'world',
             'totalItems' => 0,
-            '_links' => [
-            ],
-            '_embedded' => [
-            ],
+            '_links' => [],
+            '_embedded' => [],
         ]);
 
         // when
@@ -106,8 +104,7 @@ class CollectionItemsNormalizerTest extends TestCase {
         $this->assertSame([
             'hello' => 'world',
             'totalItems' => 0,
-            '_links' => [
-            ],
+            '_links' => [],
             '_embedded' => [
                 'items' => [],
             ],

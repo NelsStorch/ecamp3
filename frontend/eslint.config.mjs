@@ -55,7 +55,9 @@ export default [
       'vue/multi-word-component-names': 'off',
       'vue/no-reserved-component-names': ['error', { htmlElementCaseSensitive: true }],
       'vue/no-deprecated-v-bind-sync': 'off',
-      'vue/require-explicit-emits': 'off',
+      'vue/require-explicit-emits': 'error',
+      'vue/custom-event-name-casing': ['error', 'camelCase'],
+      'vue/v-on-event-hyphenation': ['error'],
 
       'no-unused-vars': [
         'error',

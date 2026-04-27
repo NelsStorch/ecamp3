@@ -161,11 +161,9 @@ export default defineConfig(({ mode }) => ({
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
-        silenceDeprecations: ['mixed-decls'],
       },
       sass: {
         api: 'modern-compiler',
-        silenceDeprecations: ['mixed-decls'],
       },
     },
   },
@@ -176,17 +174,14 @@ export default defineConfig(({ mode }) => ({
     maxWorkers: 1,
     minWorkers: 1,
     coverage: {
-      all: true,
+      include: ['src/**/*'],
       exclude: [...configDefaults.coverage.exclude, '**/src/pdf/**'],
       reporter: ['text', 'lcov', 'html'],
       reportsDirectory: './data/coverage',
     },
-    deps: {
-      inline: ['vuetify'],
-      optimizer: {
-        web: {
-          exclude: ['vue'],
-        },
+    server: {
+      deps: {
+        inline: ['vuetify'],
       },
     },
   },

@@ -8,8 +8,8 @@
     "group:apiPlatform"
   ],
   "constraints": {
-    "node": "24.14.1",
-    "php": "8.5.4"
+    "node": "24.15.0",
+    "php": "8.5.5"
   },
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
@@ -64,15 +64,17 @@
     },
     {
       "matchFileNames": ["frontend/package.json"],
-      "enabled": false
+      "matchUpdateTypes": ["patch", "pin", "lockFileMaintenance"],
+      "automerge": true
+    },
+    {
+      "matchFileNames": ["frontend/package.json"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false
     },
     {
       "matchFileNames": ["frontend-old/package.json"],
       "enabled": false
-    },
-    {
-      "matchDepNames": ["sass"],
-      "dependencyDashboardApproval": true
     },
     {
       "matchDepNames": ["php", "dunglas/frankenphp"],
@@ -92,6 +94,7 @@
         "phpmyadmin/phpmyadmin",
         "postgres",
         "python",
+        "renovate/renovate",
         "qoomon/docker-host"
       ],
       "groupName": "docker-images",

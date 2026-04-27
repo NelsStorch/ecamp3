@@ -4,6 +4,7 @@ import { hasLoggedOutFromLocalStorage } from '@/plugins/store/auth.js'
 import router from '@/router'
 import Cookies from 'js-cookie'
 import { getEnv } from '@/environment.js'
+import { isNavigationFailure, NavigationFailureType } from 'vue-router'
 
 axios.interceptors.response.use(null, (error) => {
   if (error.status === 401) {
@@ -37,7 +38,12 @@ export async function initRefresh() {
   }
   rescheduleRefresh()
   if (refreshedSuccessfully) {
-    await router.replace(originalTarget)
+    await router.replace(originalTarget).catch((e) => {
+      // Silently ignore if we are already at that target
+      if (!isNavigationFailure(e, NavigationFailureType.duplicated)) {
+        return Promise.reject(e)
+      }
+    })
   }
 }
 

@@ -17,7 +17,7 @@ class PbsmidataController extends AbstractController {
     public function connect(Request $request) {
         return $this->clientRegistry
             ->getClient('pbsmidata') // key used in config/packages/knpu_oauth2_client.yaml
-            ->redirect([], ['additionalData' => ['callback' => $request->get('callback')]])
+            ->redirect([], ['additionalData' => ['callback' => $request->query->get('callback')]])
         ;
     }
 

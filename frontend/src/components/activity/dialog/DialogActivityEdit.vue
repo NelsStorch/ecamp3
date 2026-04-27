@@ -43,7 +43,7 @@ export default {
       default: false,
     },
   },
-  emits: ['activity-updated', 'submit'],
+  emits: ['activityUpdated', 'submit'],
   data() {
     return {
       entityProperties: ['title', 'location'],
@@ -159,7 +159,7 @@ export default {
       this.close()
       this.api.reload(this.activity)
       this.api.reload(this.scheduleEntry.period().scheduleEntries())
-      this.$emit('activity-updated', data)
+      this.$emit('activityUpdated', data)
     },
   },
 }

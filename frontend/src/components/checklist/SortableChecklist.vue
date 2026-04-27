@@ -90,6 +90,7 @@ export default {
     parent: { type: Object, default: null },
     disabled: { type: Boolean, default: false },
   },
+  emits: ['dragStart', 'dragEnd'],
   setup() {
     const toast = useToast()
     return { toast }
@@ -119,15 +120,15 @@ export default {
   methods: {
     dragStart() {
       this.dragging = true
-      this.$emit('drag-start')
+      this.$emit('dragStart')
     },
     dragEnd() {
       this.dragging = false
-      this.$emit('drag-end')
+      this.$emit('dragEnd')
     },
     async dragStop(event) {
       this.dragging = false
-      this.$emit('drag-end')
+      this.$emit('dragEnd')
       if (event.originalEvent.type === 'drop') {
         const parent = JSON.parse(event.to.dataset.parent)
         // patch content node location

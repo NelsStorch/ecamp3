@@ -9,7 +9,7 @@
     :color="color"
     :ripple="false"
     v-bind="$attrs"
-    @click="$emit('select-color', color)"
+    @click="$emit('selectColor', color)"
   ></v-btn>
 </template>
 <script>
@@ -20,6 +20,7 @@ export default {
   props: {
     color: { type: String, default: null },
   },
+  emits: ['selectColor'],
   computed: {
     contrast() {
       // Vuetify returns invalid value #NANNAN in the initialization phase
