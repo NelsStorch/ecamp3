@@ -83,12 +83,18 @@ jobs:
         if: always()
 
       # store screenshots and videos on GitHub as artifacts, for downloading and debugging in case of problems
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
           name: blob-report${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}-${{ matrix.browser }}
           path: e2e/blob-report/
           retention-days: 1
+          
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: traces-${{ matrix.browser }}${{ inputs.run-identifier != null && format('-{0}', inputs.run-identifier) }}
+          path: e2e/test-results
 
       # print running containers
       - run: docker ps -a
@@ -114,7 +120,7 @@ jobs:
         run: npm ci
 
       - name: Download blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: e2e/all-blob-reports
           pattern: blob-report${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}-*
@@ -136,7 +142,7 @@ jobs:
           failOnError: false
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}
           path: e2e/playwright-report
