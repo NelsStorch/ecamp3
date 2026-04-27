@@ -9,7 +9,12 @@
         >{{ $t('components.camp.campListItem.public') }}</v-chip
       >
       <span class="flex-grow-1"></span>
-      <span>{{ date }}</span>
+      <span class="whitespace-normal max-w-60vw text-right">
+        <template v-for="(group, i) in date" :key="i">
+          <template v-if="!!i"> | </template>
+          <span class="break-inside-avoid">{{ group }}</span>
+        </template>
+      </span>
     </v-list-item-title>
     <v-list-item-subtitle class="d-flex gap-2 flex-wrap-reverse justify-space-between">
       <span class="whitespace-normal">{{ camp.motto }}</span>
@@ -21,6 +26,7 @@
 <script>
 import { campRoute } from '@/router.js'
 import { componentI18n } from '@/plugins/i18n/index.js'
+import groupBy from 'lodash-es/groupBy.js'
 export default {
   name: 'CampListItem',
   props: {
@@ -28,18 +34,46 @@ export default {
     periods: { type: Array, default: () => [] },
   },
   computed: {
-    date() {
-      if (!this.periods.length) return
-      const formatMY = new Intl.DateTimeFormat(componentI18n.locale, {
+    formatMY() {
+      return new Intl.DateTimeFormat(componentI18n.locale, {
         year: 'numeric',
         month: 'short',
       })
-      return [...this.periods]
-        .sort((a, b) => new Date(a.start) - new Date(b.start))
-        .map((period) => {
-          return formatMY.formatRange(new Date(period.start), new Date(period.end))
-        })
-        .join(' | ')
+    },
+    formatM() {
+      return new Intl.DateTimeFormat(componentI18n.locale, { month: 'short' })
+    },
+    date() {
+      return Object.entries(this.groupedPeriods).map(([key, periods]) => {
+        if (key.includes('-'))
+          return periods
+            .map(({ start, end }) => this.formatMY.formatRange(start, end))
+            .join(' | ')
+        else
+          return (
+            periods
+              .map(({ start, end }) => this.formatM.formatRange(start, end))
+              .join(', ') +
+            ' ' +
+            key
+          )
+      })
+    },
+    datePeriods() {
+      return this.periods
+        .map((period) => ({
+          ...period,
+          start: new Date(period.start),
+          end: new Date(period.end),
+        }))
+        .toSorted((a, b) => a.start - b.start)
+    },
+    groupedPeriods() {
+      return groupBy(this.datePeriods, (period) => {
+        if (period.start.getFullYear() === period.end.getFullYear())
+          return '' + period.start.getFullYear()
+        else return period.start.getFullYear() + '-' + period.end.getFullYear()
+      })
     },
   },
   methods: { campRoute },
