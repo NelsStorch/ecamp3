@@ -7,7 +7,7 @@ import {
   grgrPeriodId,
   harryMainPeriodId,
   harrySecondPeriodId,
-} from '../../utils/constants'
+} from '../../../utils/constants'
 import {
   expectCacheHit,
   expectCacheMiss,
@@ -17,8 +17,8 @@ import {
   apiPost,
   apiDelete,
   getAuthContext,
-} from '../../utils/helpers'
-import collectionResponse from '../../test-data/httpCache/schedule_entries_collection.json'
+} from '../../../utils/helpers'
+import collectionResponse from '../../../test-data/httpCache/schedule_entries_collection.json'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */

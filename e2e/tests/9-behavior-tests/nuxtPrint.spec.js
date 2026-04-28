@@ -2,8 +2,8 @@
 
 import { readFileSync } from 'fs'
 import { test, expect } from '@playwright/test'
-import { getPdfProperties } from '../utils/getPdfProperties'
-import { loginAndSetCookie } from '../utils/helpers'
+import { getPdfProperties } from '../../utils/getPdfProperties'
+import { loginAndSetCookie } from '../../utils/helpers'
 
 test.describe('Nuxt print test', () => {
   test.beforeEach(async ({ page, request }) => {

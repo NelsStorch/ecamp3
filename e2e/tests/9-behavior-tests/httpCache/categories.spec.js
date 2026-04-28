@@ -6,7 +6,7 @@ import {
   felicitySmoakUser,
   grgrCampId,
   loremIpsumCampId,
-} from '../../utils/constants'
+} from '../../../utils/constants'
 import {
   loginAndSetCookie,
   expectCacheHit,
@@ -17,8 +17,8 @@ import {
   apiPost,
   apiDelete,
   getAuthContext,
-} from '../../utils/helpers.js'
-import collectionResponse from '../../test-data/httpCache/categories_collection.json'
+} from '../../../utils/helpers.js'
+import collectionResponse from '../../../test-data/httpCache/categories_collection.json'
 
 const grgrLACategoryId = '1a869b162875'
 

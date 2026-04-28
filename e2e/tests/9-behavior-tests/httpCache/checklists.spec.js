@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { bipiUser, castorUser, basiskursCampId } from '../../utils/constants'
+import { bipiUser, castorUser, basiskursCampId } from '../../../utils/constants'
 import {
   getAuthContext,
   expectCacheHit,
@@ -9,8 +9,8 @@ import {
   apiPatch,
   apiPost,
   apiDelete,
-} from '../../utils/helpers'
-import collectionResponse from '../../test-data/httpCache/checklists_collection.json'
+} from '../../../utils/helpers'
+import collectionResponse from '../../../test-data/httpCache/checklists_collection.json'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */
