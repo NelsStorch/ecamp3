@@ -8,8 +8,7 @@
         class="align-self-center px-1 v-btn--has-bg"
         >{{ $t('components.camp.campListItem.public') }}</v-chip
       >
-      <span class="flex-grow-1"></span>
-      <span class="whitespace-normal max-w-60vw text-right">
+      <span class="ec-camp-list-item-date whitespace-normal max-w-60vw text-right">
         <template v-for="(group, i) in date" :key="i">
           <template v-if="!!i"> | </template>
           <span class="break-inside-avoid">{{ group }}</span>
