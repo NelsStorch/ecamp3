@@ -27,6 +27,7 @@
 import { campRoute } from '@/router.js'
 import { componentI18n } from '@/plugins/i18n/index.js'
 import groupBy from 'lodash-es/groupBy.js'
+import uniq from 'lodash-es/uniq.js'
 
 const YEAR_JOINER = '-'
 
@@ -54,9 +55,9 @@ export default {
             .join(' | ')
         else
           return (
-            periods
-              .map(({ start, end }) => this.formatM.formatRange(start, end))
-              .join(', ') +
+            uniq(
+              periods.map(({ start, end }) => this.formatM.formatRange(start, end))
+            ).join(', ') +
             ' ' +
             key
           )
@@ -64,19 +65,26 @@ export default {
     },
     datePeriods() {
       return this.periods
-        .map((period) => ({
-          ...period,
-          start: new Date(period.start),
-          end: new Date(period.end),
-        }))
-        .toSorted((a, b) => a.start - b.start)
+        .map((period) => {
+          const start = new Date(period.start)
+          const end = new Date(period.end)
+          const sameYear = start.getFullYear() === end.getFullYear()
+
+          return {
+            ...period,
+            start,
+            end,
+            key: start.getFullYear() + (sameYear ? '' : YEAR_JOINER + end.getFullYear()),
+          }
+        })
+        .toSorted((a, b) => {
+          const diff = a.start - b.start
+          if (diff !== 0) return diff
+          return a.end - b.end
+        })
     },
     groupedPeriods() {
-      return groupBy(this.datePeriods, (period) => {
-        if (period.start.getFullYear() === period.end.getFullYear())
-          return '' + period.start.getFullYear()
-        else return period.start.getFullYear() + YEAR_JOINER + period.end.getFullYear()
-      })
+      return groupBy(this.datePeriods, 'key')
     },
   },
   methods: { campRoute },
