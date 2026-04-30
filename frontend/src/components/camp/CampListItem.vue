@@ -27,6 +27,9 @@
 import { campRoute } from '@/router.js'
 import { componentI18n } from '@/plugins/i18n/index.js'
 import groupBy from 'lodash-es/groupBy.js'
+
+const YEAR_JOINER = '-'
+
 export default {
   name: 'CampListItem',
   props: {
@@ -45,7 +48,7 @@ export default {
     },
     date() {
       return Object.entries(this.groupedPeriods).map(([key, periods]) => {
-        if (key.includes('-'))
+        if (key.includes(YEAR_JOINER))
           return periods
             .map(({ start, end }) => this.formatMY.formatRange(start, end))
             .join(' | ')
@@ -72,7 +75,7 @@ export default {
       return groupBy(this.datePeriods, (period) => {
         if (period.start.getFullYear() === period.end.getFullYear())
           return '' + period.start.getFullYear()
-        else return period.start.getFullYear() + '-' + period.end.getFullYear()
+        else return period.start.getFullYear() + YEAR_JOINER + period.end.getFullYear()
       })
     },
   },
