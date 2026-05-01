@@ -9,7 +9,7 @@ vi.mock('@/router.js', () => ({
 
 vi.mock('@/plugins/i18n/index.js', () => ({
   componentI18n: {
-    locale: 'en-US', // Fixed locale for consistent date formatting assertions
+    locale: 'en-US',
   },
 }))
 
