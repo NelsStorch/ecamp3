@@ -50,8 +50,8 @@ export default {
       return Object.entries(this.groupedPeriods).map(([key, periods]) => {
         if (key.includes(YEAR_JOINER))
           return periods
-            .map(({ start, end }) => this.formatMY.formatRange(start, end))
-            .join(' | ')
+            .slice(0, 1)
+            .map(({ start, end }) => this.formatMY.formatRange(start, end))[0]
         else
           return (
             uniq(
