@@ -16,6 +16,7 @@ describe.skip('oneEmojiOrTwoCharacters validation', () => {
     ['😊😊', false],
     ['a😊', false],
     ['', true],
+    [null, true],
     ['😊😊😊😊', false],
   ])('validates %s as %s', (input, expected) => {
     // given
