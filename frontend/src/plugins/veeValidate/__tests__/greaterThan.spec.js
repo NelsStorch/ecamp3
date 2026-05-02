@@ -18,6 +18,7 @@ describe('greaterThan validation', () => {
     [['not a number', { min: 0 }], validationMessageKey],
     [['', { min: 0 }], true],
     [[null, { min: 0 }], true],
+    [[undefined, { min: 0 }], true],
   ])('validates %p as %p', (input, expected) => {
     // given
     const rule = greaterThan(mockI18n)

@@ -13,7 +13,7 @@ export default (dayjs, i18n) =>
    * @returns {boolean}       validation result
    */
   (value, [min], { label }) => {
-    if (value === '' || value === null) return true
+    if (value === '' || value == null) return true
 
     const valueDate = dayjs.utc('1970-01-01 ' + value, 'YYYY-MM-DD LT')
     const minDate = normalizeMin(min, dayjs)

@@ -6,7 +6,7 @@ export default (dayjs, i18n) =>
    * @returns {boolean}       validation result
    */
   (value, [max], { label }) => {
-    if (value === '' || value === null) return true
+    if (value === '' || value == null) return true
 
     const maxDate = dayjs.utc(max, 'L')
     const valueDate = dayjs.utc(value, 'L')

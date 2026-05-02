@@ -25,6 +25,7 @@ describe.skip('greaterThan_time validation', () => {
       [['now', { min: '09:30' }], false], // invalid date
       [['', { min: '09:30' }], true],
       [[null, { min: '09:30' }], true],
+      [[undefined, { min: '09:30' }], true],
     ],
     en: [
       [['09:31 AM', { min: '09:30 AM' }], true],
@@ -36,6 +37,7 @@ describe.skip('greaterThan_time validation', () => {
       [['now', { min: '09:30 AM' }], false], // invalid date
       [['', { min: '09:30 AM' }], true],
       [[null, { min: '09:30 AM' }], true],
+      [[undefined, { min: '09:30 AM' }], true],
     ],
   }
 

@@ -48,6 +48,7 @@ describe.skip('lessThanOrEqual_date validation', () => {
       [['today', { max: '01/02/2020' }], false], // invalid date
       [['', { max: '01/02/2020' }], true],
       [[null, { max: '01/02/2020' }], true],
+      [[undefined, { max: '01/02/2020' }], true],
     ])('validates %p as %p', (input, expected) => {
       // given
       const rule = lessThanOrEqual_date(dayjs, mockI18n)
