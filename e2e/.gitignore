@@ -3,6 +3,10 @@ node_modules
 /data
 /dist
 
+playwright-report/
+blob-report/
+test-results/
+
 
 /reports/
 selenium-debug.log

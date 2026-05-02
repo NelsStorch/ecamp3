@@ -6,16 +6,14 @@ use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 class AssertJsonSchema extends Constraint {
-    public string $message;
-
-    public array $schema;
-
-    public function __construct(?array $options = null, ?string $message = null, ?array $schema = null, ?array $groups = null, $payload = null) {
-        $this->message = $message ?? $options['message'] ?? "Provided JSON doesn't match required schema ({{ schemaError }}).";
-        $this->schema = $schema ?? $options['schema'] ?? [
+    public function __construct(
+        public readonly string $message = "Provided JSON doesn't match required schema ({{ schemaError }}).",
+        public readonly array $schema = [
             'type' => 'object',
-        ];
-
+        ],
+        ?array $groups = null,
+        $payload = null
+    ) {
         parent::__construct(null, $groups, $payload);
     }
 }

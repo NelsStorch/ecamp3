@@ -37,7 +37,9 @@
         @click.prevent="toggle(item.value, item.exclusiveNone)"
       >
         <v-list-item-title class="text-body-2">
-          <slot name="item" v-bind="{ item, self }">{{ item.text }}</slot>
+          <slot name="item" v-bind="{ item, self }"
+            ><span>{{ item.text }}</span></slot
+          >
           <CountBadge v-if="item.resultCount !== null" :count="item.resultCount" />
         </v-list-item-title>
         <template #append>

@@ -1,5 +1,3 @@
-export const cachedEndpoint = Cypress.env('API_ROOT_URL_CACHED')
-
 export const grgrCampId = '3c79b99ab424'
 export const loremIpsumCampId = '9c2447aefe38'
 export const skilagerCampId = '70ca971c992f'

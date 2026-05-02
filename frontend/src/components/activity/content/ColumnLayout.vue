@@ -110,9 +110,10 @@ export default {
     relativeColumnWidths() {
       // Cumulative sum of column widths, to know how many "width units" are to the left of each column
       // E.g. [0, 3, 8, 12] if there are three columns of width 3, 5, 4
-      const cumSum = Object.values(this.localColumnWidths).reduce(cumulativeSumReducer, [
-        0,
-      ])
+      const cumSum = Object.values(this.localColumnWidths).reduce(
+        cumulativeSumReducer,
+        [0]
+      )
       // Map the cumulative sum values to the slot names
       // E.g. {'1': 0, '2': 3, '3': 8}
       const colsLeft = Object.fromEntries(

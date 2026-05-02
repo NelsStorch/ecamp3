@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: node:24.14.1
+    image: node:24.15.0
     container_name: 'ecamp3-frontend'
     ports:
       - '9229:9229' # jest debug
@@ -26,7 +26,7 @@ services:
       - pdf
 
   frontend-old:
-    image: node:24.14.1
+    image: node:24.15.0
     container_name: 'ecamp3-frontend-old'
     stdin_open: true
     tty: true
@@ -82,7 +82,7 @@ services:
       - 'host.docker.internal:host-gateway'
 
   http-cache:
-    image: varnish:8.0.1
+    image: varnish:9.0.1
     container_name: 'ecamp3-http-cache'
     depends_on:
       - api
@@ -96,7 +96,7 @@ services:
       - VARNISH_HTTP_PORT=8080
 
   http-cache-logs:
-    image: varnish:8.0.1
+    image: varnish:9.0.1
     container_name: 'ecamp3-http-cache-logs'
     depends_on:
       - http-cache
@@ -105,7 +105,7 @@ services:
     command: varnishncsa
 
   pdf:
-    image: node:24.14.1
+    image: node:24.15.0
     container_name: 'ecamp3-pdf'
     stdin_open: true
     tty: true
@@ -125,7 +125,7 @@ services:
       - CI=${CI}
 
   print:
-    image: node:24.14.1
+    image: node:24.15.0
     container_name: 'ecamp3-print'
     user: ${USER_ID:-1000}
     volumes:
@@ -206,9 +206,10 @@ services:
       - ENABLE_DEBUGGER=false
 
   e2e:
-    image: cypress/included:15.9.0@sha256:91111352c3adf4a0ff5bee6f3f49af56a66deb81d74a784dbb68bc98a3fbd26e
+    image: mcr.microsoft.com/playwright:v1.59.1-noble
     profiles: ['e2e']
     container_name: 'ecamp3-e2e'
+    user: ${USER_ID:-1000}
     environment:
       - DISPLAY
     volumes:
@@ -219,7 +220,7 @@ services:
     working_dir: /e2e
 
   reverse-proxy:
-    image: nginx:1.29
+    image: nginx:1.30
     container_name: 'ecamp3-reverse-proxy'
     volumes:
       - ./reverse-proxy-nginx.conf:/etc/nginx/nginx.conf
@@ -237,7 +238,7 @@ services:
     stop_signal: SIGKILL
 
   translation:
-    image: node:24.14.1
+    image: node:24.15.0
     profiles: ['translation']
     container_name: 'ecamp3-translation'
     volumes:
