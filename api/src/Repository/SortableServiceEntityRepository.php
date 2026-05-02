@@ -9,6 +9,7 @@ declare(strict_types=1);
  * It also uses the EntityManagerInterface instead of the ObjectManager retrieved from the RegistryManager,
  * because SortableRepository depends on EntityManagerInterface.
  */
+
 namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
