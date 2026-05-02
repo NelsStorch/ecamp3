@@ -11,7 +11,7 @@ use ApiPlatform\OpenApi\Model\Operation as OpenApiOperation;
 use App\State\InvitationAcceptProcessor;
 use App\State\InvitationProvider;
 use App\State\InvitationRejectProcessor;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

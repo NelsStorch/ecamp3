@@ -150,7 +150,6 @@ class RelatedCollectionLinkNormalizer implements NormalizerInterface, Serializer
 
         // @phpstan-ignore instanceof.alwaysTrue
         if ($this->nameConverter instanceof NameConverterInterface) {
-            /** @phpstan-ignore arguments.count */
             $rel = $this->nameConverter->denormalize($rel, $resourceClass, null, array_merge($context, ['groups' => ['read']]));
         }
 

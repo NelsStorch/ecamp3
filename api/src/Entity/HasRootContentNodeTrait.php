@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\ApiProperty;
 use App\Entity\ContentNode\ColumnLayout;
 use App\Serializer\Normalizer\RelatedCollectionLink;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
