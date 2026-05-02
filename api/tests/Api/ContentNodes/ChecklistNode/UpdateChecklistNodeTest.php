@@ -180,8 +180,9 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
             ],
         ]);
         $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
-        $this->assertContains($checklistItem1, $checklistNode->getChecklistItems());
-        $this->assertContains($checklistItem2, $checklistNode->getChecklistItems());
+        $actualIds = array_map(fn ($item) => $item->getId(), $checklistNode->getChecklistItems());
+        $this->assertContains($checklistItem1->getId(), $actualIds);
+        $this->assertContains($checklistItem2->getId(), $actualIds);
     }
 
     public function testAddMultipleChecklistItemsForManager() {
@@ -200,8 +201,9 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
             ],
         ]);
         $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
-        $this->assertContains($checklistItem1, $checklistNode->getChecklistItems());
-        $this->assertContains($checklistItem2, $checklistNode->getChecklistItems());
+        $actualIds = array_map(fn ($item) => $item->getId(), $checklistNode->getChecklistItems());
+        $this->assertContains($checklistItem1->getId(), $actualIds);
+        $this->assertContains($checklistItem2->getId(), $actualIds);
     }
 
     public function testRemoveMultipleChecklistItemsForMember() {
@@ -219,8 +221,9 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
         ;
         $this->assertResponseStatusCodeSame(200);
         $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
-        $this->assertNotContains($checklistItem1, $checklistNode->getChecklistItems());
-        $this->assertNotContains($checklistItem2, $checklistNode->getChecklistItems());
+        $actualIds = array_map(fn ($item) => $item->getId(), $checklistNode->getChecklistItems());
+        $this->assertNotContains($checklistItem1->getId(), $actualIds);
+        $this->assertNotContains($checklistItem2->getId(), $actualIds);
     }
 
     public function testRemoveMultipleChecklistItemsForManager() {
@@ -235,8 +238,9 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
 
         $this->assertResponseStatusCodeSame(200);
         $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
-        $this->assertNotContains($checklistItem1, $checklistNode->getChecklistItems());
-        $this->assertNotContains($checklistItem2, $checklistNode->getChecklistItems());
+        $actualIds = array_map(fn ($item) => $item->getId(), $checklistNode->getChecklistItems());
+        $this->assertNotContains($checklistItem1->getId(), $actualIds);
+        $this->assertNotContains($checklistItem2->getId(), $actualIds);
     }
 
     public function testAddChecklistItemOfOtherCampIsDenied() {
