@@ -130,7 +130,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.e-profile--email ::v-deep(.v-input__append-inner) {
+.e-profile--email :deep(.v-input__append-inner) {
   margin-top: 0 !important;
   align-self: center;
 }

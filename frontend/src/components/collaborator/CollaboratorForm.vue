@@ -155,7 +155,8 @@ export default {
 </script>
 
 <style scoped>
-.ec-status-field::v-deep(.v-input__append-inner) {
+/*noinspection CssUnusedSymbol*/
+.ec-status-field:deep(.v-input__append-inner) {
   margin-top: 0;
   align-self: center;
   margin-right: -4px;

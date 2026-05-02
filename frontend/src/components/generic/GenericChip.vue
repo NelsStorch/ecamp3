@@ -26,7 +26,7 @@ export default {
   vertical-align: baseline;
   padding-inline: 0.5em;
 
-  ::v-deep(.v-chip__content) {
+  :deep(.v-chip__content) {
     font-size: 0.75em;
   }
 
@@ -40,7 +40,7 @@ export default {
   &.v-size--large {
     height: 1.2em;
 
-    ::v-deep(.v-chip__content) {
+    :deep(.v-chip__content) {
       font-size: 0.8em;
     }
   }

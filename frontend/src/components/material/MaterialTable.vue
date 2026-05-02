@@ -495,7 +495,7 @@ export default {
   padding: 0 2px;
 }
 
-.ec-material-table--dense.v-table::v-deep(.v-table__wrapper th, .v-table__wrapper td) {
+.ec-material-table--dense.v-table:deep(.v-table__wrapper th, .v-table__wrapper td) {
   padding: 4px 2px;
   line-height: normal;
 }

@@ -162,11 +162,11 @@ export default {
   height: 100%;
 }
 
-::v-deep(.v-text-field__details) {
+:deep(.v-text-field__details) {
   flex-grow: 0;
 }
 
-::v-deep(.grow-v-slot .v-input__slot) {
+:deep(.grow-v-slot .v-input__slot) {
   flex-grow: 1;
 }
 </style>

@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep(.v-input.v-input--horizontal) {
+:deep(.v-input.v-input--horizontal) {
   grid-template-areas: unset;
 }
 </style>

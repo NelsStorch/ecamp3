@@ -181,7 +181,7 @@ export default {
   min-height: 10rem;
 }
 
-.draggable-area ::v-deep(.content-node) {
+.draggable-area :deep(.content-node) {
   margin: 0 !important;
   flex-grow: 1;
   transition: all 0.4s 25ms ease;
@@ -204,7 +204,7 @@ export default {
 
 @supports selector(:has(+ *)) {
   .draggable-area--layout-mode
-    ::v-deep(
+    :deep(
       .content-node:hover:is(
           :not(:has(.content-node:hover)):not(:has(.ec-button-contentnode-add:hover)):not(
               :has(.resize-btn:hover)
@@ -218,7 +218,7 @@ export default {
   }
 }
 
-.draggable-area--row ::v-deep(.content-node) {
+.draggable-area--row :deep(.content-node) {
   flex: 1 0 320px !important;
 }
 
