@@ -2,7 +2,6 @@
 framework:
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
-    annotations: false
     trusted_proxies: '%env(TRUSTED_PROXIES)%'
     trusted_hosts:
         - localhost

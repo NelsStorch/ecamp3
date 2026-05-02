@@ -33,6 +33,8 @@ ENV COMPOSER_CACHE_DIR=/tmp/composer/cache
 RUN mkdir -p /tmp/composer/cache
 RUN chmod ugo+w /tmp/composer/cache
 
+ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
+
 RUN set -eux; \
 	install-php-extensions \
 	@composer \
@@ -49,24 +51,25 @@ RUN set -eux; \
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
-COPY --link docker/php/conf.d/api-platform.ini $PHP_INI_DIR/conf.d/
+COPY --link docker/php/conf.d/10-api-platform.ini $PHP_INI_DIR/app.conf.d/
 ENV LOG_LEVEL=info
-COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --link docker/caddy/Caddyfile /etc/frankenphp/Caddyfile
 COPY --link --chmod=755 docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY --link --chmod=755 docker/php/migrate-database.sh /usr/local/bin/migrate-database
 
 ENTRYPOINT ["docker-entrypoint"]
 
 HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
-CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile" ]
+CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]
 
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
-ENV APP_ENV=dev XDEBUG_MODE=off
+ENV APP_ENV=dev
+ENV XDEBUG_MODE=off
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-COPY --link docker/php/conf.d/api-platform.dev.ini $PHP_INI_DIR/conf.d/
+COPY --link docker/php/conf.d/20-api-platform.dev.ini $PHP_INI_DIR/app.conf.d/
 
 # renovate: datasource=github-tags depName=xdebug/xdebug
 ARG XDEBUG_VERSION=3.5.1
@@ -76,7 +79,7 @@ RUN set -eux; \
 	pcov \
 	;
 
-CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile", "--watch" ]
+CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod
@@ -86,8 +89,7 @@ ENV APP_ENV=prod
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-COPY --link docker/php/conf.d/api-platform.prod.ini $PHP_INI_DIR/conf.d/
-#COPY --link docker/caddy/worker.Caddyfile /etc/caddy/worker.Caddyfile
+COPY --link docker/php/conf.d/20-api-platform.prod.ini $PHP_INI_DIR/app.conf.d/
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* symfony.* ./

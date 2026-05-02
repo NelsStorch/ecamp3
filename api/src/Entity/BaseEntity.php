@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\ApiProperty;
 use App\Util\IdGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\MappedSuperclass]
 #[ORM\Index(columns: ['createTime'])]

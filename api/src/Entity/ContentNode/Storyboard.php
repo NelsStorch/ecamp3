@@ -15,7 +15,7 @@ use App\State\ContentNode\StoryboardPersistProcessor;
 use App\State\ContentNodeCollectionProvider;
 use App\Validator\AssertJsonSchema;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(

@@ -13,7 +13,7 @@ use ApiPlatform\OpenApi\Model\Operation as OpenApiOperation;
 use App\State\PersonalInvitationAcceptProcessor;
 use App\State\PersonalInvitationProvider;
 use App\State\PersonalInvitationRejectProcessor;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 /**
  * An invitation for a person who already has an account to collaborate in a camp.
