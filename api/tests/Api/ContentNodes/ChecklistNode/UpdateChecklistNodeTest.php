@@ -163,6 +163,82 @@ class UpdateChecklistNodeTest extends UpdateContentNodeTestCase {
         ]);
     }
 
+    public function testAddMultipleChecklistItemsForMember() {
+        $checklistItem1 = static::getFixture('checklistItem1_1_2');
+        $checklistItem2 = static::getFixture('checklistItem1_1_2_3');
+        static::createClientWithCredentials(['email' => static::getFixture('user2member')->getEmail()])
+            ->request('PATCH', $this->endpoint.'/'.$this->defaultEntity->getId(), ['json' => [
+                'addChecklistItemIds' => [$checklistItem1->getId(), $checklistItem2->getId()],
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            '_links' => [
+                'checklistItems' => [
+                    'href' => '/checklist_items?checklistNodes=%2Fcontent_node%2Fchecklist_nodes%2F'.$this->defaultEntity->getId(),
+                ],
+            ],
+        ]);
+        $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
+        $this->assertContains($checklistItem1, $checklistNode->getChecklistItems());
+        $this->assertContains($checklistItem2, $checklistNode->getChecklistItems());
+    }
+
+    public function testAddMultipleChecklistItemsForManager() {
+        $checklistItem1 = static::getFixture('checklistItem1_1_2');
+        $checklistItem2 = static::getFixture('checklistItem1_1_2_3');
+        static::createClientWithCredentials()->request('PATCH', $this->endpoint.'/'.$this->defaultEntity->getId(), ['json' => [
+            'addChecklistItemIds' => [$checklistItem1->getId(), $checklistItem2->getId()],
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains([
+            '_links' => [
+                'checklistItems' => [
+                    'href' => '/checklist_items?checklistNodes=%2Fcontent_node%2Fchecklist_nodes%2F'.$this->defaultEntity->getId(),
+                ],
+            ],
+        ]);
+        $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
+        $this->assertContains($checklistItem1, $checklistNode->getChecklistItems());
+        $this->assertContains($checklistItem2, $checklistNode->getChecklistItems());
+    }
+
+    public function testRemoveMultipleChecklistItemsForMember() {
+        $checklistItem1 = static::getFixture('checklistItem1_1_1');
+        $checklistItem2 = static::getFixture('checklistItem1_1_2');
+        static::createClientWithCredentials(['email' => static::getFixture('user2member')->getEmail()])
+            ->request('PATCH', $this->endpoint.'/'.$this->defaultEntity->getId(), ['json' => [
+                'addChecklistItemIds' => [$checklistItem2->getId()],
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        static::createClientWithCredentials(['email' => static::getFixture('user2member')->getEmail()])
+            ->request('PATCH', $this->endpoint.'/'.$this->defaultEntity->getId(), ['json' => [
+                'removeChecklistItemIds' => [$checklistItem1->getId(), $checklistItem2->getId()],
+            ], 'headers' => ['Content-Type' => 'application/merge-patch+json']])
+        ;
+        $this->assertResponseStatusCodeSame(200);
+        $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
+        $this->assertNotContains($checklistItem1, $checklistNode->getChecklistItems());
+        $this->assertNotContains($checklistItem2, $checklistNode->getChecklistItems());
+    }
+
+    public function testRemoveMultipleChecklistItemsForManager() {
+        $checklistItem1 = static::getFixture('checklistItem1_1_1');
+        $checklistItem2 = static::getFixture('checklistItem1_1_2');
+        static::createClientWithCredentials()->request('PATCH', $this->endpoint.'/'.$this->defaultEntity->getId(), ['json' => [
+            'addChecklistItemIds' => [$checklistItem2->getId()],
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+        static::createClientWithCredentials()->request('PATCH', $this->endpoint.'/'.$this->defaultEntity->getId(), ['json' => [
+            'removeChecklistItemIds' => [$checklistItem1->getId(), $checklistItem2->getId()],
+        ], 'headers' => ['Content-Type' => 'application/merge-patch+json']]);
+
+        $this->assertResponseStatusCodeSame(200);
+        $checklistNode = $this->getEntityManager()->getRepository(ChecklistNode::class)->find($this->defaultEntity->getId());
+        $this->assertNotContains($checklistItem1, $checklistNode->getChecklistItems());
+        $this->assertNotContains($checklistItem2, $checklistNode->getChecklistItems());
+    }
+
     public function testAddChecklistItemOfOtherCampIsDenied() {
         $checklistItemId = static::getFixture('checklistItem2_1_1')->getId();
         static::createClientWithCredentials(['email' => static::getFixture('user2member')->getEmail()])
