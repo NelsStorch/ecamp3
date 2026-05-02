@@ -23,10 +23,16 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ] || [ 
     
     composer install --prefer-dist --no-progress --no-interaction
 
+    # Display information about the current project
+    # Or about an error in project initialization
+    php bin/console -V
+
     if grep -q ^DATABASE_URL= .env; then
       migrate-database || exit 1
       migrate-database -e test || exit 1
     fi
+
+    echo 'PHP app ready!'
   fi
 fi
 

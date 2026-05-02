@@ -68,10 +68,11 @@ services:
         protocol: tcp
     environment:
       DATA_MIGRATIONS_DIR: ${DATA_MIGRATIONS_DIR:-dev-data}
-      DATABASE_URL: "postgresql://ecamp3:ecamp3@database:5432/ecamp3dev?serverVersion=15&charset=utf8"
+      DATABASE_URL: "postgresql://ecamp3:ecamp3@database:5432/ecamp3dev?serverVersion\
+        =15&charset=utf8"
       LOG_LEVEL: debug
       ADDITIONAL_TRUSTED_HOSTS: '.*'
-      SERVER_NAME: ":3001"
+      SERVER_NAME: ':3001'
     healthcheck:
       interval: 10s
       timeout: 3s
