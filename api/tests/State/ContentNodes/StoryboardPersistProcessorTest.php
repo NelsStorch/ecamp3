@@ -66,7 +66,6 @@ class StoryboardPersistProcessorTest extends TestCase {
 
     public function testSetsRootFromParentOnCreate() {
         // when
-        /** @var Storyboard $data */
         $data = $this->processor->onBefore($this->contentNode, new Post());
 
         // then
@@ -75,7 +74,6 @@ class StoryboardPersistProcessorTest extends TestCase {
 
     public function testDoesNotSetRootFromParentOnUpdate() {
         // when
-        /** @var Storyboard $data */
         $data = $this->processor->onBefore($this->contentNode, new Patch());
 
         // then
@@ -87,7 +85,6 @@ class StoryboardPersistProcessorTest extends TestCase {
         $this->contentNode->data = null;
 
         // when
-        /** @var Storyboard $data */
         $data = $this->processor->onBefore($this->contentNode, new Post());
 
         // then
@@ -102,7 +99,6 @@ class StoryboardPersistProcessorTest extends TestCase {
 
     public function testSantizeDataOnCreate() {
         // when
-        /** @var Storyboard $data */
         $data = $this->processor->onBefore($this->contentNode, new Post());
 
         // then
@@ -124,7 +120,6 @@ class StoryboardPersistProcessorTest extends TestCase {
 
     public function testSanitizeOnUpdate() {
         // when
-        /** @var Storyboard $data */
         $data = $this->processor->onBefore($this->contentNode, new Patch());
 
         // then

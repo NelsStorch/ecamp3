@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This class copies the concept of Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository with the
  * only change that it extends from Gedmo\Sortable\Entity\Repository\SortableRepository instead of the default
@@ -7,7 +9,6 @@
  * It also uses the EntityManagerInterface instead of the ObjectManager retrieved from the RegistryManager,
  * because SortableRepository depends on EntityManagerInterface.
  */
-
 namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;

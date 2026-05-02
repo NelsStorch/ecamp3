@@ -34,7 +34,7 @@ class ExpressionDateTimeFilterTest extends TestCase {
         ;
         $this->queryBuilderMock
             ->method('getDQLPart')
-            ->willReturnCallback(function ($part) {
+            ->willReturnCallback(function (string $part) {
                 return 'join' === $part ? [] : null;
             })
         ;

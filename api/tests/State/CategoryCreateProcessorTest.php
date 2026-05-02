@@ -43,7 +43,6 @@ class CategoryCreateProcessorTest extends TestCase {
         $this->entityManagerStub->method('getRepository')->willReturn($repositoryMock);
 
         // when
-        /** @var Category $data */
         $data = $this->processor->onBefore($this->category, new Post());
 
         // then

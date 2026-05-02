@@ -44,7 +44,6 @@ class UserActivateProcessorTest extends TestCase {
         $this->user->activationKey = 'activation key';
         $this->user->activationKeyHash = md5($this->user->activationKey);
 
-        /** @var User $activatedUser */
         $activatedUser = $this->processor->onBefore($this->user, new Patch());
         self::assertThat($activatedUser->state, self::equalTo(User::STATE_ACTIVATED));
         self::assertThat($activatedUser->activationKeyHash, self::isNull());

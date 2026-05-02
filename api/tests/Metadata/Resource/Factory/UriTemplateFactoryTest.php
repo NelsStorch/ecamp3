@@ -52,7 +52,7 @@ class UriTemplateFactoryTest extends TestCase {
         ]));
 
         $this->resourceNameCollectionFactory->method('create')->willReturnCallback(fn (): ResourceNameCollection => $this->resourceNameCollection);
-        $this->resourceMetadataCollectionFactory->method('create')->willReturnCallback(fn ($class) => match ($class) {
+        $this->resourceMetadataCollectionFactory->method('create')->willReturnCallback(fn (string $class) => match ($class) {
             'Dummy' => $this->resourceMetadataCollection
         });
 

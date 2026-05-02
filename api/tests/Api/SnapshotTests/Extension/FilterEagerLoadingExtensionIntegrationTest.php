@@ -37,7 +37,6 @@ class FilterEagerLoadingExtensionIntegrationTest extends ECampApiTestCase {
     }
 
     public function testLetQueryAsIsIfNoCondition() {
-        /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->repository->createQueryBuilder('o');
         $sqlBefore = $this->toSql($queryBuilder);
 
