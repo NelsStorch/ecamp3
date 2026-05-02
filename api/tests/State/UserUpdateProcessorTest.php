@@ -39,7 +39,6 @@ class UserUpdateProcessorTest extends TestCase {
         $this->userPasswordHasher->expects($this->once())->method('hashPassword')->willReturn('test hash');
 
         // when
-        /** @var User $data */
         $data = $this->processor->onBefore($this->user, new Patch());
 
         // then

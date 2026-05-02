@@ -8,9 +8,9 @@ use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\Schema\DefaultSchemaManagerFactory;
 use Doctrine\DBAL\Schema\SchemaManagerFactory;
 
-final class CustomSchemaManagerFactory implements SchemaManagerFactory {
+final readonly class CustomSchemaManagerFactory implements SchemaManagerFactory {
     public function __construct(
-        private readonly DefaultSchemaManagerFactory $defaultFactory = new DefaultSchemaManagerFactory(),
+        private DefaultSchemaManagerFactory $defaultFactory = new DefaultSchemaManagerFactory(),
     ) {}
 
     public function createSchemaManager(Connection $connection): AbstractSchemaManager {

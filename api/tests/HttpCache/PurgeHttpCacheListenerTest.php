@@ -79,7 +79,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $dummyClassMetadata->wakeupReflection(new StaticReflectionService());
         $this->emProphecy
             ->method('getClassMetadata')
-            ->willReturnCallback(fn ($class) => match ($class) {
+            ->willReturnCallback(fn (string $class) => match ($class) {
                 Dummy::class => $dummyClassMetadata,
             })
         ;
@@ -103,7 +103,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $operation = new GetCollection()->withShortName('Dummy')->withClass(Dummy::class);
         $operation2 = new GetCollection()->withShortName('DummyAsSubresource')->withClass(Dummy::class);
         $this->metadataFactoryProphecy->method('create')
-            ->willReturnCallback(fn ($class) => match ($class) {
+            ->willReturnCallback(fn (string $class) => match ($class) {
                 Dummy::class => new ResourceMetadataCollection('Dummy', [
                     new ApiResource('Dummy')
                         ->withShortName('Dummy')
@@ -321,7 +321,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
         $classMetadata = new ClassMetadata(Dummy::class);
         $classMetadata->mapManyToOne(['fieldName' => 'relatedDummy', 'targetEntity' => RelatedDummy::class, 'inversedBy' => 'dummies']);
         $emProphecy->method('getClassMetadata')
-            ->willReturnCallback(fn ($class) => match ($class) {
+            ->willReturnCallback(fn (string $class) => match ($class) {
                 Dummy::class => $classMetadata
             })
         ;
@@ -366,7 +366,7 @@ class PurgeHttpCacheListenerTest extends TestCase {
 
         $classMetadata = new ClassMetadata(DummyNoGetOperation::class);
         $emProphecy->method('getClassMetadata')
-            ->willReturnCallback(fn ($class) => match ($class) {
+            ->willReturnCallback(fn (string $class) => match ($class) {
                 DummyNoGetOperation::class => $classMetadata
             })
         ;

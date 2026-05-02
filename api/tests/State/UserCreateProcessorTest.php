@@ -67,7 +67,6 @@ class UserCreateProcessorTest extends TestCase {
         $this->userPasswordHasher->expects($this->never())->method('hashPassword');
 
         // when
-        /** @var User $data */
         $data = $this->processor->onBefore($this->user, new Post());
 
         // then
@@ -86,7 +85,6 @@ class UserCreateProcessorTest extends TestCase {
         $this->userPasswordHasher->expects($this->once())->method('hashPassword')->willReturn('test hash');
 
         // when
-        /** @var User $data */
         $data = $this->processor->onBefore($this->user, new Post());
 
         // then
@@ -104,7 +102,6 @@ class UserCreateProcessorTest extends TestCase {
         $this->mailService->expects($this->once())->method('sendUserActivationMail');
 
         // when
-        /** @var User $data */
         $data = $this->processor->onBefore($this->user, new Post());
         $this->processor->onAfter($this->user, new Post());
 
@@ -120,7 +117,6 @@ class UserCreateProcessorTest extends TestCase {
             ->willReturn(true)
         ;
 
-        /** @var User $data */
         $data = $this->processor->onBefore($this->user, new Post());
 
         // then

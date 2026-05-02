@@ -49,7 +49,6 @@ class ActivityCreateProcessorTest extends TestCase {
 
     public function testSetsCampFromCategory() {
         // when
-        /** @var Activity $data */
         $data = $this->processor->onBefore($this->activity, new Post());
 
         // then
@@ -58,7 +57,6 @@ class ActivityCreateProcessorTest extends TestCase {
 
     public function testPostCopiesContentFromCategory() {
         // when
-        /** @var Activity $data */
         $data = $this->processor->onBefore($this->activity, new Post());
 
         // then

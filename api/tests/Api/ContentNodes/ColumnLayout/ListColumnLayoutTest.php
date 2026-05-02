@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Api\ContentNodes\ColumnLayout;
 
 use App\Tests\Api\ContentNodes\ListContentNodeTestCase;

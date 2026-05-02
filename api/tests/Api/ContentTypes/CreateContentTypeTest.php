@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Api\ContentTypes;
 
 use App\Tests\Api\ECampApiTestCase;

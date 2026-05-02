@@ -41,7 +41,6 @@ class MultiSelectCreateProcessorTest extends TestCase {
 
     public function testSetsRootFromParentOnCreate() {
         // when
-        /** @var MultiSelect $data */
         $data = $this->processor->onBefore($this->contentNode, new Post());
 
         // then
@@ -50,7 +49,6 @@ class MultiSelectCreateProcessorTest extends TestCase {
 
     public function testCopyMultiSelectOptionsFromContentTypeOnCreate() {
         // when
-        /** @var MultiSelect $data */
         $data = $this->processor->onBefore($this->contentNode, new Post());
 
         // then
@@ -67,7 +65,6 @@ class MultiSelectCreateProcessorTest extends TestCase {
 
     public function testDoesNotSetRootFromParentOnUpdate() {
         // when
-        /** @var MultiSelect $data */
         $data = $this->processor->onBefore($this->contentNode, new Patch());
 
         // then
@@ -76,7 +73,6 @@ class MultiSelectCreateProcessorTest extends TestCase {
 
     public function testDoesNotCopyMultiSelectOptionsOnUpdate() {
         // when
-        /** @var MultiSelect $data */
         $data = $this->processor->onBefore($this->contentNode, new Patch());
 
         // then
