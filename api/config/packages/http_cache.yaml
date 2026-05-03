@@ -15,21 +15,17 @@ fos_http_cache:
         defaults:
             overwrite: true
         rules:
-            # matches /content_types endpoint
-            # matches /camps/133/categories endpoint
-            -
-                match:
-                    path: '%app.httpCache.matchPath%'
-                headers:
-                    overwrite: true
-                    cache_control: { public: true, max_age: 0, s_maxage: 3600 }
-                    vary: [Accept, Content-Type, Authorization, Origin]
+            - match:
+                  path: '%app.httpCache.matchPath%'
+              headers:
+                  overwrite: true
+                  cache_control: { public: true, max_age: 0, s_maxage: 43200 }
+                  vary: [Accept, Content-Type, Authorization, Origin]
 
             # match everything else to set defaults
-            -
-                match:
-                    path: ^/
-                headers:
-                    overwrite: true
-                    cache_control: { no-cache: true, private: true }
-                    vary: [Accept, Content-Type, Authorization, Origin]
+            - match:
+                  path: ^/
+              headers:
+                  overwrite: true
+                  cache_control: { no-cache: true, private: true }
+                  vary: [Accept, Content-Type, Authorization, Origin]
