@@ -260,6 +260,11 @@ export default {
     'filter.progressLabel': 'persistRouterState',
   },
   async mounted() {
+    const queryFilters = processRouteQuery(this.$route.query)
+    Object.entries(queryFilters).forEach(([key, value]) => {
+      this.filter[key] = value
+    })
+
     await Promise.all([
       this.camp._meta.load,
       this.api.get().days({ 'period.camp': this.camp._meta.self }),
@@ -270,11 +275,6 @@ export default {
     ])
 
     this.loading = false
-
-    const queryFilters = processRouteQuery(this.$route.query)
-    Object.entries(queryFilters).forEach(([key, value]) => {
-      this.filter[key] = value
-    })
 
     this.camp.periods()._meta.load.then(({ allItems }) => {
       const collection = allItems.map((entry) => entry._meta.self)
