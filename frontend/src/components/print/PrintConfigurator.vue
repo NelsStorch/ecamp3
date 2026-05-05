@@ -167,6 +167,7 @@ export default {
   data() {
     return {
       loading: true,
+      cnf: null,
       prettyConfig: '',
       previewTab: null,
     }
@@ -187,16 +188,20 @@ export default {
     lang() {
       return this.$store.state.lang.language
     },
-    cnf() {
-      return this.repairConfig(
-        this.$store.getters.getLastPrintConfig(this.camp._meta.self, {
-          language: this.lang,
-          documentName: campShortTitle(this.camp),
-          options: { pageNumbers: false, pageSize: 'A4' },
-          camp: this.camp._meta.self,
-          contents: this.defaultContents(),
-        })
-      )
+    lastPrintConfig() {
+      return this.$store.getters.getLastPrintConfig(this.camp._meta.self, null)
+    },
+    currentConfig() {
+      return this.lastPrintConfig ?? this.defaultConfig
+    },
+    defaultConfig() {
+      return {
+        language: this.lang,
+        documentName: campShortTitle(this.camp),
+        options: { pageNumbers: false, pageSize: 'A4' },
+        camp: this.camp._meta.self,
+        contents: this.defaultContents(),
+      }
     },
     pageSizes() {
       return ['A5', 'A4'].map((size) => ({
@@ -211,7 +216,9 @@ export default {
   watch: {
     lang: {
       handler(language) {
+        if (!this.cnf) return
         this.cnf.language = language
+        this.onChange()
       },
       immediate: true,
     },
@@ -228,14 +235,26 @@ export default {
       this.camp.activities().$reload(),
       this.camp.categories().$reload(),
     ])
+    this.setRepairedConfig(this.currentConfig)
     this.loading = false
   },
   methods: {
+    setRepairedConfig(config) {
+      const repaired = this.repairConfig(config)
+      this.cnf = repaired
+      if (jsonStringifyReactiveValue(config) !== jsonStringifyReactiveValue(repaired)) {
+        this.onChange()
+      }
+    },
+    createConfig() {
+      return this.repairConfig(this.currentConfig)
+    },
     resetConfig() {
       this.$store.commit('setLastPrintConfig', {
         campUri: this.camp._meta.self,
         printConfig: undefined,
       })
+      this.cnf = this.createConfig()
     },
     defaultContents() {
       const contents = [
