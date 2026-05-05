@@ -158,6 +158,11 @@ export default {
     TocConfig,
     ActivityListConfig,
   },
+  provide() {
+    return {
+      loadingEndpoints: this.loadingEndpoints,
+    }
+  },
   props: {
     camp: {
       type: Object,
@@ -168,6 +173,15 @@ export default {
     return {
       loading: true,
       cnf: null,
+      loadingEndpoints: {
+        activities: true,
+        categories: true,
+        periods: true,
+        days: true,
+        campCollaborations: true,
+        progressLabels: true,
+        scheduleEntries: true,
+      },
       prettyConfig: '',
       previewTab: null,
     }
@@ -224,27 +238,45 @@ export default {
     },
   },
   async mounted() {
-    await this.camp.periods().$reload()
-    await Promise.all([
-      ...this.camp
-        .periods()
-        .items.flatMap((period) => [
-          period.days().$reload(),
-          period.contentNodes().$reload(),
-        ]),
-      this.camp.activities().$reload(),
-      this.camp.categories().$reload(),
-    ])
+    await this.loadEndpointData('periods')
     this.setRepairedConfig(this.currentConfig)
     this.loading = false
+    await this.loadRemainingPrintData()
   },
   methods: {
+    async loadRemainingPrintData() {
+      const periods = this.camp.periods().items
+      await Promise.all([
+        this.loadEndpointData(
+          'scheduleEntries',
+          Promise.all(periods.map((period) => period.scheduleEntries()._meta.load))
+        ),
+        this.loadEndpointData('activities'),
+      ])
+
+      await Promise.all([
+        this.loadEndpointData(
+          'days',
+          Promise.all(periods.map((period) => period.days()._meta.load))
+        ),
+        Promise.all(periods.map((period) => period.contentNodes()._meta.load)),
+        this.loadEndpointData('categories'),
+        this.loadEndpointData('campCollaborations'),
+        this.loadEndpointData('progressLabels'),
+      ])
+
+      this.setRepairedConfig(this.cnf)
+    },
     setRepairedConfig(config) {
       const repaired = this.repairConfig(config)
       this.cnf = repaired
       if (jsonStringifyReactiveValue(config) !== jsonStringifyReactiveValue(repaired)) {
         this.onChange()
       }
+    },
+    async loadEndpointData(endpoint, load = this.camp[endpoint]()._meta.load) {
+      await load
+      this.loadingEndpoints[endpoint] = false
     },
     createConfig() {
       return this.repairConfig(this.currentConfig)

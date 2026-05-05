@@ -270,21 +270,36 @@ export default {
       this.api.get().days({ 'period.camp': this.camp._meta.self }),
       ...this.camp.periods().items.map((period) => period.scheduleEntries()._meta.load),
       this.camp.activities()._meta.load,
-      this.camp.categories()._meta.load,
-      this.camp.progressLabels()._meta.load,
     ])
 
     this.loading = false
 
-    this.camp.periods()._meta.load.then(({ allItems }) => {
-      const collection = allItems.map((entry) => entry._meta.self)
-      if (!collection.includes(this.filter.period)) {
-        this.filter.period = null
-      }
-      this.loadingEndpoints.periods = false
-    })
+    this.loadEndpointData('categories', 'category')
+    this.loadEndpointData('campCollaborations', 'responsible', true)
+    this.loadEndpointData('progressLabels', 'progressLabel', true)
+    this.loadPeriodsEndpointData()
   },
   methods: {
+    loadEndpointData(endpoint, filterKey, hasNone = false) {
+      this.camp[endpoint]()._meta.load.then(({ allItems }) => {
+        const collection = allItems.map((entry) => entry._meta.self)
+        if (hasNone) {
+          collection.push('none')
+        }
+        this.filter[filterKey] =
+          this.filter[filterKey].filter((value) => collection.includes(value)) ?? null
+        this.loadingEndpoints[endpoint] = false
+      })
+    },
+    loadPeriodsEndpointData() {
+      this.camp.periods()._meta.load.then(({ allItems }) => {
+        const collection = allItems.map((entry) => entry._meta.self)
+        if (!collection.includes(this.filter.period)) {
+          this.filter.period = null
+        }
+        this.loadingEndpoints.periods = false
+      })
+    },
     periodRoute,
     persistRouterState() {
       const query = transformValuesToHalId(this.filter)
