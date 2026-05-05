@@ -63,23 +63,26 @@ export default {
     filteredCount() {
       return this.filterFn(this.localFilter).length
     },
+    totalCount() {
+      return this.filterFn({}).length
+    },
     activatorLabel() {
       if (this.anyFilter)
         return this.$t('components.print.config.dialogScheduleEntryFilter.filterActive', {
           filtered: this.filteredCount,
-          total: this.filterFn({}).length,
+          total: this.totalCount,
         })
       return this.$t(
         'components.print.config.dialogScheduleEntryFilter.filterActivities',
         {
-          total: this.filterFn({}).length,
+          total: this.totalCount,
         }
       )
     },
     resultCountLabel() {
       return this.$t(
         'components.print.config.dialogScheduleEntryFilter.resultCount',
-        { filtered: this.filteredCount, total: this.filterFn({}).length },
+        { filtered: this.filteredCount, total: this.totalCount },
         1
       )
     },
