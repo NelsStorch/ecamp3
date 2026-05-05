@@ -167,6 +167,7 @@ export default {
   data() {
     return {
       loading: true,
+      prettyConfig: '',
       previewTab: null,
     }
   },
@@ -205,9 +206,6 @@ export default {
     },
     isDev() {
       return getEnv().FEATURE_DEVELOPER ?? false
-    },
-    prettyConfig() {
-      return jsonStringifyReactiveValue(this.cnf, 2)
     },
   },
   watch: {
@@ -292,6 +290,9 @@ export default {
           printConfig: cloneDeep(JSON.parse(jsonStringifyReactiveValue(this.cnf))),
         })
       })
+      if (this.isDev) {
+        this.prettyConfig = jsonStringifyReactiveValue(this.cnf, 2)
+      }
     },
     onChangeContentConfig(index, value) {
       this.cnf.contents[index].options = value
