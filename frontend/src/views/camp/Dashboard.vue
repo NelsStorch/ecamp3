@@ -30,7 +30,7 @@
         hide-day-filter
         :filter-fn="filterFn"
       />
-      <template v-if="!loading">
+      <template v-if="!loading && !scheduleEntriesLoading">
         <table
           v-for="(periodDays, uri) in groupedScheduleEntries"
           :key="uri"
@@ -100,12 +100,16 @@
           </template>
         </table>
         <p
-          v-if="scheduleEntries.length > 0 && filteredScheduleEntries.length === 0"
+          v-if="
+            !scheduleEntriesLoading &&
+            scheduleEntries.length > 0 &&
+            filteredScheduleEntries.length === 0
+          "
           class="ma-4"
         >
           {{ $t('views.camp.dashboard.noEntries') }}
         </p>
-        <p v-if="scheduleEntries.length === 0" class="ma-4">
+        <p v-if="!scheduleEntriesLoading && scheduleEntries.length === 0" class="ma-4">
           {{ $t('views.camp.dashboard.welcome') }}
         </p>
       </template>
@@ -202,6 +206,11 @@ export default {
       return Object.values(this.periods).flatMap(
         (period) => period.scheduleEntries().items
       )
+    },
+    scheduleEntriesLoading() {
+      return this.camp
+        .periods()
+        .items.some((period) => period.scheduleEntries()._meta.loading)
     },
     days() {
       return keyBy(
