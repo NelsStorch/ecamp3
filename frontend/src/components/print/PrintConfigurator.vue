@@ -1,5 +1,5 @@
 <template>
-  <v-skeleton-loader v-if="loading" type="article" />
+  <v-skeleton-loader v-if="loading" type="article" class="pa-4" />
   <div v-else>
     <PagesOverview v-model="cnf.contents" @update:model-value="onChange">
       <template #item="{ element: content, index: idx }">
@@ -90,23 +90,23 @@
     </v-card-text>
 
     <template v-if="isDev">
-      <v-tabs v-model="previewTab" class="px-4">
-        <v-tab>Nuxt preview</v-tab>
-        <v-tab>Client print preview</v-tab>
+      <v-tabs v-model="previewTab" :mandatory="false" class="px-4">
+        <v-tab value="nuxt">Nuxt preview</v-tab>
+        <v-tab value="client">Client print preview</v-tab>
       </v-tabs>
-      <v-tabs-window v-model="previewTab">
-        <v-tabs-window-item>
+      <v-tabs-window v-if="previewTab" v-model="previewTab">
+        <v-tabs-window-item value="nuxt">
           <print-preview-nuxt
-            v-if="previewTab === 0"
+            v-if="previewTab === 'nuxt'"
             :config="cnf"
             width="100%"
             height="600"
             class="my-4"
           />
         </v-tabs-window-item>
-        <v-tabs-window-item>
+        <v-tabs-window-item value="client">
           <print-preview-client
-            v-if="previewTab === 1"
+            v-if="previewTab === 'client'"
             :config="cnf"
             width="100%"
             height="600"
