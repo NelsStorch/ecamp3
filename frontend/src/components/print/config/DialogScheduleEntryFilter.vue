@@ -119,6 +119,9 @@ export default {
     },
   },
   watch: {
+    modelValue(value) {
+      this.localFilter = value
+    },
     filteredCount: {
       handler(val) {
         if (this.filterDataLoading) return
