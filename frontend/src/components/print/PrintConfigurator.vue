@@ -279,7 +279,7 @@ export default {
       this.loadingEndpoints[endpoint] = false
     },
     createConfig() {
-      return this.repairConfig(this.currentConfig)
+      return this.repairConfig(this.defaultConfig)
     },
     resetConfig() {
       this.$store.commit('setLastPrintConfig', {
