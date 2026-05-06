@@ -27,6 +27,30 @@
       </tr>
     </template>
 
+    <template #[`item.done`]="{ item }">
+      <api-checkbox
+        v-if="layoutMode || isContributor"
+        :disabled="disabled"
+        class="ec-material-table__done"
+        density="compact"
+        hide-details
+        :label="null"
+        :uri="item.uri"
+        path="done"
+      />
+      <v-checkbox-btn
+        v-else
+        class="ec-material-table__done"
+        density="compact"
+        hide-details
+        :ripple="false"
+        :label="null"
+        :model-value="item.done"
+        :disabled="layoutMode || disabled"
+        readonly
+      />
+    </template>
+
     <template #[`item.quantity`]="{ item }">
       <api-number-field
         v-if="!item.readonly"
@@ -208,6 +232,7 @@
 <script>
 import ApiTextField from '@/components/form/api/ApiTextField.vue'
 import ApiSelect from '@/components/form/api/ApiSelect.vue'
+import ApiCheckbox from '@/components/form/api/ApiCheckbox.vue'
 import ButtonEdit from '@/components/buttons/ButtonEdit.vue'
 import ButtonAdd from '@/components/buttons/ButtonAdd.vue'
 import DialogMaterialItemCreate from './DialogMaterialItemCreate.vue'
@@ -231,6 +256,7 @@ export default {
   name: 'MaterialTable',
   components: {
     PromptEntityDelete,
+    ApiCheckbox,
     ApiTextField,
     ApiNumberField,
     ApiSelect,
@@ -284,6 +310,13 @@ export default {
   computed: {
     tableHeaders() {
       const headers = []
+
+      headers.push({
+        value: 'done',
+        align: 'center',
+        sortable: true,
+        width: '48px',
+      })
 
       if (this.isDefaultVariant) {
         headers.push(
@@ -358,6 +391,7 @@ export default {
           uri: item._meta.self,
           quantity: item.quantity,
           unit: item.unit,
+          done: item.done,
           combinedQuantity: this.renderQuantity(item),
           article: item.article,
           listName: item.materialList ? item.materialList()?.name : '',
@@ -373,6 +407,7 @@ export default {
           id: key,
           quantity: mi.quantity,
           unit: mi.unit,
+          done: mi.done ?? false,
           combinedQuantity: this.renderQuantity(mi),
           article: mi.article,
           listName: this.materialLists.find(
