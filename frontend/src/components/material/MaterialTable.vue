@@ -175,7 +175,7 @@
     <template #[`body.append`]="{ headers }">
       <!-- add new item (desktop view) -->
       <MaterialCreateItem
-        v-if="!layoutMode && isDefaultVariant && !disabled"
+        v-if="!layoutMode && isDefaultVariant && !disabled && isContributor"
         key="addItemRow"
         :camp="camp"
         :columns="headers.length"
@@ -187,7 +187,7 @@
     <template #bottom>
       <!-- add new item (mobile view) -->
       <DialogMaterialItemCreate
-        v-if="!layoutMode && !isDefaultVariant && !disabled"
+        v-if="!layoutMode && !isDefaultVariant && !disabled && isContributor"
         :camp="camp"
         :material-item-collection="materialItemCollection"
         :material-list="materialList"
@@ -244,6 +244,7 @@ export default {
     ScheduleEntryLinks,
     ServerErrorContent,
   },
+  inject: ['isContributor'],
   props: {
     // camp Entity
     camp: { type: Object, required: true },
