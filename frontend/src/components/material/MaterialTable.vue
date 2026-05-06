@@ -103,6 +103,7 @@
             class: 'v-btn--has-bg',
             disabled: layoutMode || disabled,
             bg: true,
+            variant: 'text',
             width: !isDefaultVariant ? '100%' : null,
             iconOnly: true,
             btnIcon: false,
