@@ -301,11 +301,13 @@ export default {
           {
             title: this.$t('entity.materialItem.fields.article'),
             value: 'article',
+            sortable: true,
             cellClass: 'font-weight-bold',
           },
           {
             title: this.$t('entity.materialList.name'),
             value: 'listName',
+            sortable: true,
             width: '20%',
           }
         )
