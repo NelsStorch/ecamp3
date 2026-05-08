@@ -117,7 +117,7 @@
     "eslint-plugin-vue": "10.9.0",
     "eslint-plugin-vue-scoped-css": "3.0.0",
     "flush-promises": "1.0.2",
-    "globals": "17.5.0",
+    "globals": "17.6.0",
     "jest-serializer-vue-tjw": "4.0.0",
     "jsdom": "29.1.1",
     "lint-staged": "16.4.0",
