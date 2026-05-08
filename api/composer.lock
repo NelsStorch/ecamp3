@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55328b4685f865eb7ef14179fd38dcdf",
+    "content-hash": "d80d06a4dad92fb4304bb75fd06ae7ab",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -836,16 +836,16 @@
         },
         {
             "name": "api-platform/openapi",
-            "version": "v4.3.3",
+            "version": "v4.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/openapi.git",
-                "reference": "6ae725b4d2cee60972c18c4bd6148b63ccf16785"
+                "reference": "1562617e7500a50c2b6e6f43a0fb29a6a47e83a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/openapi/zipball/6ae725b4d2cee60972c18c4bd6148b63ccf16785",
-                "reference": "6ae725b4d2cee60972c18c4bd6148b63ccf16785",
+                "url": "https://api.github.com/repos/api-platform/openapi/zipball/1562617e7500a50c2b6e6f43a0fb29a6a47e83a2",
+                "reference": "1562617e7500a50c2b6e6f43a0fb29a6a47e83a2",
                 "shasum": ""
             },
             "require": {
@@ -865,7 +865,7 @@
                 "api-platform/doctrine-orm": "^4.3",
                 "api-platform/serializer": "^4.3",
                 "phpspec/prophecy-phpunit": "^2.2",
-                "phpunit/phpunit": "^12.2",
+                "phpunit/phpunit": "^11.5 || ^12.2",
                 "symfony/type-info": "^7.3 || ^8.0"
             },
             "type": "library",
@@ -921,9 +921,9 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/openapi/tree/v4.3.3"
+                "source": "https://github.com/api-platform/openapi/tree/v4.3.4"
             },
-            "time": "2026-03-29T07:20:23+00:00"
+            "time": "2026-04-30T12:21:24+00:00"
         },
         {
             "name": "api-platform/serializer",
