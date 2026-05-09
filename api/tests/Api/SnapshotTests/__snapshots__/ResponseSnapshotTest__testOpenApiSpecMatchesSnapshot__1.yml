@@ -33255,8 +33255,8 @@ components:
           examples:
             - 404
           type:
+            - integer
             - 'null'
-            - number
         title:
           description: 'A short, human-readable summary of the problem.'
           readOnly: true
@@ -33296,8 +33296,8 @@ components:
               examples:
                 - 404
               type:
+                - integer
                 - 'null'
-                - number
             title:
               description: 'A short, human-readable summary of the problem.'
               readOnly: true
