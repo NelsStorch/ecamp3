@@ -110,7 +110,7 @@ Show all activity schedule entries of a single period.
         />
       </template>
     </ScheduleEntries>
-    <v-snackbar v-model="showReminder" light class="mb-12">
+    <v-snackbar v-model="showReminder" :timeout="REMINDER_TIMEOUT" light class="mb-12">
       <v-icon>mdi-lock</v-icon>
       {{ reminderText }}
     </v-snackbar>
@@ -148,6 +148,8 @@ import {
 import { filterMatchScheduleEntry } from '@/common/helpers/filterMatchScheduleEntry.js'
 import campShortTitle from '@/common/helpers/campShortTitle.js'
 
+const REMINDER_TIMEOUT = 5000
+
 export default {
   name: 'CampProgram',
   components: {
@@ -168,6 +170,8 @@ export default {
   data() {
     return {
       showReminder: false,
+      REMINDER_TIMEOUT,
+      reminderInst: null,
       reminderText: null,
       openFilter: false,
       loading: true,
@@ -271,11 +275,16 @@ export default {
   },
   methods: {
     showUnlockReminder(move) {
+      clearTimeout(this.reminderInst)
       if (this.isOutsider) return
       this.reminderText = move
         ? this.$t('views.camp.campProgram.reminderLockedMove')
         : this.$t('views.camp.campProgram.reminderLockedCreate')
       this.showReminder = true
+      this.reminderInst = setTimeout(
+        () => (this.showReminder = false),
+        this.REMINDER_TIMEOUT
+      )
     },
     persistRouterState() {
       const query = transformValuesToHalId(this.filter)
