@@ -17,7 +17,7 @@ Show all activity schedule entries of a single period.
             label
             variant="outlined"
             color="primary"
-            class="align-self-center mr-2"
+            class="align-self-center mr-1"
             @click="openFilter = !openFilter"
           >
             <v-icon start size="20">mdi-filter</v-icon>
@@ -26,7 +26,9 @@ Show all activity schedule entries of a single period.
         </v-toolbar-items>
         <v-chip
           v-else
-          variant="outlined"
+          border="sm"
+          color="surface"
+          variant="flat"
           label
           class="mr-1"
           @click="openFilter = !openFilter"
@@ -39,6 +41,7 @@ Show all activity schedule entries of a single period.
         v-model="editMode"
         :shake="showReminder"
         :disabled-for-guest="!isContributor"
+        class="mr-n1"
         @click="editMode = !editMode"
       />
       <v-menu offset-y>
