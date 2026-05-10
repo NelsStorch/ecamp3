@@ -58,19 +58,15 @@ Show all activity schedule entries of a single period.
             @click="editMode = !editMode"
           />
           <v-list-item
-            :input-value="isFilterSet"
+            title="Filter"
+            prepend-icon="mdi-filter"
+            :active="isFilterSet"
             :color="isFilterSet ? 'primary' : null"
             @click="openFilter = !openFilter"
           >
-            <template #prepend>
-              <v-icon>mdi-filter</v-icon>
-            </template>
-
-            <v-list-item-title>Filter</v-list-item-title>
-
-            <v-list-item-action v-if="isFilterSet">
+            <template v-if="isFilterSet" #append>
               <v-badge inline color="primary" :content="filteredPropertiesCount" />
-            </v-list-item-action>
+            </template>
           </v-list-item>
           <v-divider />
           <DownloadNuxtPdf :config="printConfig" />
