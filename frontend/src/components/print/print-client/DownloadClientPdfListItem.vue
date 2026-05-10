@@ -7,13 +7,14 @@
     @click.stop="generatePdf"
   >
     <template #prepend>
-      <v-progress-circular
-        v-if="loading"
-        :model-value="progress"
-        :rotate="0"
-        size="24"
-        color="primary"
-      />
+      <v-icon v-if="loading">
+        <v-progress-circular
+          :model-value="progress"
+          :rotate="0"
+          size="24"
+          color="primary"
+        />
+      </v-icon>
       <v-icon v-else icon="mdi-printer" />
     </template>
   </v-list-item>
