@@ -46,16 +46,8 @@ Show all activity schedule entries of a single period.
       />
       <v-menu offset-y>
         <template #activator="{ props }">
-          <v-btn icon v-bind="props" data-testid="campprogram-menu">
-            <v-badge
-              v-if="!$vuetify.display.smAndUp && filteredPropertiesCount > 0"
-              overlap
-              offset-x="2"
-              dot
-            >
-              <v-icon>mdi-dots-horizontal</v-icon>
-            </v-badge>
-            <v-icon v-else>mdi-dots-horizontal</v-icon>
+          <v-btn icon size="small" v-bind="props" data-testid="campprogram-menu">
+            <v-icon size="large">mdi-dots-horizontal</v-icon>
           </v-btn>
         </template>
         <v-list class="py-0">
