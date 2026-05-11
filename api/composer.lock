@@ -4,26 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "268c319d87851c1a7a3b91254c8bf058",
+    "content-hash": "0755a31ff9d3e221ba13376415097c3d",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-common.git",
-                "reference": "2072247e3c8126d815f20324e7aaa97c2b5ee889"
+                "reference": "089b196c2f8e4d14333aaa3c6db33356e8fd8be0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/doctrine-common/zipball/2072247e3c8126d815f20324e7aaa97c2b5ee889",
-                "reference": "2072247e3c8126d815f20324e7aaa97c2b5ee889",
+                "url": "https://api.github.com/repos/api-platform/doctrine-common/zipball/089b196c2f8e4d14333aaa3c6db33356e8fd8be0",
+                "reference": "089b196c2f8e4d14333aaa3c6db33356e8fd8be0",
                 "shasum": ""
             },
             "require": {
                 "api-platform/metadata": "^4.2.6",
                 "api-platform/state": "^4.2.4",
-                "doctrine/collections": "^2.1",
+                "doctrine/collections": "^2.1 || ^3.0",
                 "doctrine/common": "^3.2.2",
                 "doctrine/persistence": "^3.2 || ^4.0",
                 "php": ">=8.2"
@@ -92,9 +92,9 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/doctrine-common/tree/v4.3.4"
+                "source": "https://github.com/api-platform/doctrine-common/tree/v4.3.5"
             },
-            "time": "2026-04-30T12:21:24+00:00"
+            "time": "2026-05-04T13:25:58+00:00"
         },
         {
             "name": "api-platform/doctrine-orm",
@@ -187,7 +187,7 @@
         },
         {
             "name": "api-platform/documentation",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/documentation.git",
@@ -244,7 +244,7 @@
             ],
             "description": "API Platform documentation controller.",
             "support": {
-                "source": "https://github.com/api-platform/documentation/tree/v4.3.4"
+                "source": "https://github.com/api-platform/documentation/tree/v4.3.5"
             },
             "time": "2026-04-30T12:21:24+00:00"
         },
@@ -328,7 +328,7 @@
         },
         {
             "name": "api-platform/http-cache",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/http-cache.git",
@@ -402,7 +402,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/http-cache/tree/v4.3.4"
+                "source": "https://github.com/api-platform/http-cache/tree/v4.3.5"
             },
             "time": "2026-04-30T12:21:24+00:00"
         },
@@ -495,7 +495,7 @@
         },
         {
             "name": "api-platform/json-api",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/json-api.git",
@@ -571,7 +571,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/json-api/tree/v4.3.4"
+                "source": "https://github.com/api-platform/json-api/tree/v4.3.5"
             },
             "time": "2026-04-30T12:21:24+00:00"
         },
@@ -927,7 +927,7 @@
         },
         {
             "name": "api-platform/serializer",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/serializer.git",
@@ -1015,7 +1015,7 @@
                 "serializer"
             ],
             "support": {
-                "source": "https://github.com/api-platform/serializer/tree/v4.3.4"
+                "source": "https://github.com/api-platform/serializer/tree/v4.3.5"
             },
             "time": "2026-04-30T12:21:24+00:00"
         },
@@ -11468,7 +11468,7 @@
     "packages-dev": [
         {
             "name": "api-platform/graphql",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/graphql.git",
@@ -11554,7 +11554,7 @@
                 "graphql"
             ],
             "support": {
-                "source": "https://github.com/api-platform/graphql/tree/v4.3.4"
+                "source": "https://github.com/api-platform/graphql/tree/v4.3.5"
             },
             "time": "2026-04-30T12:21:24+00:00"
         },
