@@ -257,23 +257,37 @@ export default {
     'filter.progressLabel': 'persistRouterState',
   },
   async mounted() {
+    const queryFilters = processRouteQuery(this.$route.query)
+    Object.entries(queryFilters).forEach(([key, value]) => {
+      this.filter[key] = value
+    })
+
     await Promise.all([
       this.camp._meta.load,
       this.period.scheduleEntries()._meta.load,
       this.camp.activities()._meta.load,
-      this.camp.categories()._meta.load,
+      this.loadEndpointData('categories', 'category'),
       this.period.days()._meta.load,
       this.period.dayResponsibles()._meta.load,
     ])
 
     this.loading = false
 
-    const queryFilters = processRouteQuery(this.$route.query)
-    Object.entries(queryFilters).forEach(([key, value]) => {
-      this.filter[key] = value
-    })
+    this.loadEndpointData('campCollaborations', 'responsible', true)
+    this.loadEndpointData('progressLabels', 'progressLabel', true)
   },
   methods: {
+    async loadEndpointData(endpoint, filterKey, hasNone = false) {
+      await this.camp[endpoint]()._meta.load.then(({ allItems }) => {
+        const collection = allItems.map((entry) => entry._meta.self)
+        if (hasNone) {
+          collection.push('none')
+        }
+        this.filter[filterKey] =
+          this.filter[filterKey].filter((value) => collection.includes(value)) ?? null
+        this.loadingEndpoints[endpoint] = false
+      })
+    },
     showUnlockReminder(move) {
       clearTimeout(this.reminderInst)
       if (this.isOutsider) return
