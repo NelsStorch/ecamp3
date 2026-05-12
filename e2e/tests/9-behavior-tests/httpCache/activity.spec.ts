@@ -3,12 +3,9 @@ import {
   bipiUser,
   bruceWayneUser,
   felicitySmoakUser,
-  grgrCampId,
   grgrPeriodId,
-  loremIpsumCampId,
-  skilagerCampId,
-} from '../../../utils/constants'
-import collectionResponse from '../../../test-data/httpCache/activities_collection.json'
+} from '@/utils/constants'
+import entityResponse from '@/test-data/httpCache/activities_entity.json'
 import {
   getAuthContext,
   expectCacheHit,
@@ -18,50 +15,41 @@ import {
   apiPatch,
   apiPost,
   apiDelete,
-} from '../../../utils/helpers'
+} from '@/utils/helpers'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */
   '10d8f02ce5b4 ' +
-  /**
-   * activitiy "Snowboardfahren"
-   */
+  /* activity "Snowboardfahren" + embedded relations */
   'a13fadc97610 a13fadc97610#scheduleEntries a13fadc97610#camp a13fadc97610#category a13fadc97610#progressLabel a13fadc97610#activityResponsibles a13fadc97610#rootContentNode ' +
-  /* embedded progress labels: */
+  /* category "Snowboard" */
+  'eddb2cd8cee0 eddb2cd8cee0#camp eddb2cd8cee0#preferredContentTypes eddb2cd8cee0#rootContentNode eddb2cd8cee0#emptyContentNodesForIriGeneration a13fadc97610#embeddedCategory ' +
+  /* progressLabel "Rudolf OK" */
   'af92782262d7 af92782262d7#camp a13fadc97610#embeddedProgressLabel ' +
-  /* embedded schedule entries: */
+  /* contentNodes */
+  '9ace4f6be500 9ace4f6be500#root 9ace4f6be500#parent 9ace4f6be500#children 9ace4f6be500#contentType ' +
+  '0f20419761b6 0f20419761b6#root 0f20419761b6#parent 0f20419761b6#children 0f20419761b6#contentType ' +
+  '160f007bd04f 160f007bd04f#root 160f007bd04f#parent 160f007bd04f#children 160f007bd04f#contentType ' +
+  'aa0738bc61de aa0738bc61de#root aa0738bc61de#parent aa0738bc61de#children aa0738bc61de#contentType ' +
+  'a13fadc97610#embeddedContentNodes ' +
+  /* scheduleEntries */
   /* (the first schedule entry also includes the period id) */
   '29c9e9a07d82 7fa4564a5d5d 29c9e9a07d82#period 29c9e9a07d82#activity 29c9e9a07d82#day ' +
   'f08d69cae18a f08d69cae18a#period f08d69cae18a#activity f08d69cae18a#day ' +
   '7e8086d94633 7e8086d94633#period 7e8086d94633#activity 7e8086d94633#day ' +
   'a13fadc97610#embeddedScheduleEntries ' +
-  /* embedded activitiy responsibles: */
+  /* activityResponsible */
   '06743ccfeedd 06743ccfeedd#activity 06743ccfeedd#campCollaboration ' +
   '21bc6661c569 21bc6661c569#activity 21bc6661c569#campCollaboration ' +
-  'a13fadc97610#embeddedActivityResponsibles a13fadc97610#emptyContentNodesForIriGeneration ' +
-  /**
-   * activity "Skifahren"
-   */
-  'b29d387cc403 b29d387cc403#scheduleEntries b29d387cc403#camp b29d387cc403#category b29d387cc403#progressLabel b29d387cc403#activityResponsibles ' +
-  /* embedded progress labels: */
-  'b29d387cc403#rootContentNode b29d387cc403#embeddedProgressLabel ' +
-  /* embedded schedule entries: */
-  'e68f4e47517a e68f4e47517a#period e68f4e47517a#activity e68f4e47517a#day ' +
-  'f0883e931649 f0883e931649#period f0883e931649#activity f0883e931649#day ' +
-  'ee85308a97d1 ee85308a97d1#period ee85308a97d1#activity ee85308a97d1#day ' +
-  'f89a1501dbb6 f89a1501dbb6#period f89a1501dbb6#activity f89a1501dbb6#day ' +
-  /* embedded activitiy responsibles: */
-  'b29d387cc403#embeddedScheduleEntries ' +
-  'a9a760e36fd8 a9a760e36fd8#activity a9a760e36fd8#campCollaboration b29d387cc403#embeddedActivityResponsibles ' +
-  'b29d387cc403#emptyContentNodesForIriGeneration ' +
-  /* collection URI (for detecting addition of new activities) */
-  '/api/camps/70ca971c992f/activities'
+  'a13fadc97610#embeddedActivityResponsibles ' +
+  'a13fadc97610#emptyContentNodesForIriGeneration'
 
 test.describe('cache test: /camps/{campId}/activities', () => {
   test.describe.configure({ mode: 'serial' })
 
-  test('caches /camps/{campId}/activities separately for each login', async () => {
-    const uri = `/api/camps/${skilagerCampId}/activities`
+  test('caches /activities/{activitiyId} separately for each login', async () => {
+    const snowboardfahrenActivityId = 'a13fadc97610'
+    const uri = `/api/activities/${snowboardfahrenActivityId}`
 
     const bipiApi = await getAuthContext(bipiUser)
 
@@ -70,7 +58,7 @@ test.describe('cache test: /camps/{campId}/activities', () => {
     const headers = request.headers()
     expect(headers['xkey']).toBe(collectionXKeys)
     expect(headers['x-cache']).toBe('MISS')
-    expect(await request.json()).toEqual(collectionResponse)
+    expect(await request.json()).toEqual(entityResponse)
 
     // second request is a cache hit
     await expectCacheHit(bipiApi, uri)
@@ -80,9 +68,9 @@ test.describe('cache test: /camps/{campId}/activities', () => {
     await expectCacheMiss(bruceApi, uri)
   })
 
-  test('invalidates /camps/{campId}/activities for all users on activity patch', async () => {
-    const uri = `/api/camps/${loremIpsumCampId}/activities`
+  test('invalidates /activities/{activitiyId} for all users on activity patch', async () => {
     const activityId = '3d1e5c91ceb2'
+    const uri = `/api/activities/${activityId}`
 
     // bring data into defined state
     const bruceApi = await getAuthContext(bruceWayneUser)
@@ -111,44 +99,9 @@ test.describe('cache test: /camps/{campId}/activities', () => {
     await expectCacheMiss(bruceApi2, uri)
   })
 
-  test('invalidates /camps/{campId}/activities for new activity', async () => {
-    const uri = `/api/camps/${grgrCampId}/activities`
-
-    const bipiApi = await getAuthContext(bipiUser)
-
-    // warm up cache
-    await apiGet(bipiApi, uri)
-    await expectCacheHit(bipiApi, uri)
-
-    // add new activity to camp
-    const postRes = await apiPost(bipiApi, '/api/activities', {
-      title: 'New_activity',
-      category: '/api/categories/1a869b162875',
-      scheduleEntries: [
-        {
-          period: '/periods/76be24bce434',
-          start: '2026-05-10T08:00:00+00:00',
-          end: '2026-05-10T09:00:00+00:00',
-        },
-      ],
-    })
-    const body = await postRes.json()
-    const newActivityUri = body._links.self.href
-
-    // ensure cache was invalidated
-    await waitForCacheMiss(bipiApi, uri)
-    await expectCacheHit(bipiApi, uri)
-
-    // delete newly created contentNode
-    await apiDelete(bipiApi, newActivityUri)
-
-    // ensure cache was invalidated
-    await waitForCacheMiss(bipiApi, uri)
-    await expectCacheHit(bipiApi, uri)
-  })
-
-  test('invalidates /camps/{campId}/activities when adding a scheduleEntry', async () => {
-    const uri = `/api/camps/${grgrCampId}/activities`
+  test('invalidates /activities/{activitiyId} when adding a scheduleEntry', async () => {
+    const activityId = 'ffd08c52288c'
+    const uri = `/api/activities/${activityId}`
 
     const bipiApi = await getAuthContext(bipiUser)
 
@@ -158,7 +111,7 @@ test.describe('cache test: /camps/{campId}/activities', () => {
 
     // add new scheduleEntry
     const postRes = await apiPost(bipiApi, '/api/schedule_entries', {
-      activity: '/activities/ffd08c52288c',
+      activity: `/activities/${activityId}`,
       end: '2026-05-11T06:00:00+00:00',
       period: '/periods/76be24bce434',
       start: '2026-05-11T05:00:00+00:00',
@@ -178,9 +131,10 @@ test.describe('cache test: /camps/{campId}/activities', () => {
     await expectCacheHit(bipiApi, uri)
   })
 
-  test('invalidates /camps/{campId}/activities when patching a progress label', async () => {
-    const uri = `/api/camps/${grgrCampId}/activities`
+  test('invalidates /activities/{activitiyId}  when patching a progress label', async () => {
+    const activityId = '130f9a87373b'
     const progressLabelId = '82547049ea38'
+    const uri = `/api/activities/${activityId}`
 
     // bring data into defined state
     const bipiApi = await getAuthContext(bipiUser)
@@ -202,8 +156,9 @@ test.describe('cache test: /camps/{campId}/activities', () => {
     await expectCacheHit(bipiApi, uri)
   })
 
-  test('invalidates /camps/{campId}/activities when adding an activity responsible', async () => {
-    const uri = `/api/camps/${grgrCampId}/activities`
+  test('invalidates /activities/{activitiyId}  when adding an activity responsible', async () => {
+    const activityId = 'ffd08c52288c'
+    const uri = `/api/activities/${activityId}`
 
     const bipiApi = await getAuthContext(bipiUser)
 
@@ -213,7 +168,7 @@ test.describe('cache test: /camps/{campId}/activities', () => {
 
     // add new activity responsible
     const postRes = await apiPost(bipiApi, '/api/activity_responsibles', {
-      activity: '/activities/ffd08c52288c',
+      activity: `/activities/${activityId}`,
       campCollaboration: '/camp_collaborations/b0bdb7202a9d',
     })
     const body = await postRes.json()
@@ -231,8 +186,9 @@ test.describe('cache test: /camps/{campId}/activities', () => {
     await expectCacheHit(bipiApi, uri)
   })
 
-  test('invalidates /camps/{campId}/activities when changing the period dates (moveScheduleEntries: true)', async () => {
-    const uri = `/api/camps/${grgrCampId}/activities`
+  test('invalidates /activities/{activitiyId} when changing the period dates (moveScheduleEntries: true)', async () => {
+    const activityId = '130f9a87373b'
+    const uri = `/api/activities/${activityId}`
 
     const bipiApi = await getAuthContext(bipiUser)
 
@@ -263,8 +219,9 @@ test.describe('cache test: /camps/{campId}/activities', () => {
     await expectCacheHit(bipiApi, uri)
   })
 
-  test('invalidates /camps/{campId}/activities when changing the period dates (moveScheduleEntries: false)', async () => {
-    const uri = `/api/camps/${grgrCampId}/activities`
+  test('invalidates /activities/{activitiyId} when changing the period dates (moveScheduleEntries: false)', async () => {
+    const activityId = '130f9a87373b'
+    const uri = `/api/activities/${activityId}`
 
     const bipiApi = await getAuthContext(bipiUser)
 
@@ -287,6 +244,37 @@ test.describe('cache test: /camps/{campId}/activities', () => {
       start: '2026-05-10',
       moveScheduleEntries: false,
     })
+
+    // ensure cache was invalidated
+    await waitForCacheMiss(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
+  })
+
+  test('invalidates /activities/{activitiyId}  when adding a contentNode', async () => {
+    const activityId = '130f9a87373b'
+    const uri = `/api/activities/${activityId}`
+
+    const bipiApi = await getAuthContext(bipiUser)
+
+    // warm up cache
+    await apiGet(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
+
+    // add new contentNode
+    const postRes = await apiPost(bipiApi, '/api/content_node/single_texts', {
+      contentType: '/content_types/4f0c657fecef',
+      parent: '/content_node/column_layouts/0cc124cdd9f6',
+      slot: '1',
+    })
+    const body = await postRes.json()
+    const newContentNodeUri = body._links.self.href
+
+    // ensure cache was invalidated
+    await waitForCacheMiss(bipiApi, uri)
+    await expectCacheHit(bipiApi, uri)
+
+    // delete newly created contentNode
+    await apiDelete(bipiApi, newContentNodeUri)
 
     // ensure cache was invalidated
     await waitForCacheMiss(bipiApi, uri)

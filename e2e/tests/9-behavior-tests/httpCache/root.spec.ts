@@ -1,8 +1,4 @@
-import {
-  expectCacheHit,
-  expectCacheMiss,
-  loginAndSetCookie,
-} from '../../../utils/helpers'
+import { expectCacheHit, expectCacheMiss, loginAndSetCookie } from '@/utils/helpers'
 import { test } from '@playwright/test'
 
 const user1 = 'test@example.com'

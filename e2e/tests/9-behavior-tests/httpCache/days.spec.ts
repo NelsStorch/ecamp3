@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { bipiUser, bruceWayneUser, grgrPeriodId } from '../../../utils/constants'
+import { bipiUser, bruceWayneUser, grgrPeriodId } from '@/utils/constants'
 import {
   expectCacheHit,
   expectCacheMiss,
@@ -9,8 +9,8 @@ import {
   apiPost,
   apiDelete,
   getAuthContext,
-} from '../../../utils/helpers'
-import collectionResponse from '../../../test-data/httpCache/days_collection.json'
+} from '@/utils/helpers'
+import collectionResponse from '@/test-data/httpCache/days_collection.json'
 
 const collectionXKeys =
   /* campCollaboration for bipiUser */

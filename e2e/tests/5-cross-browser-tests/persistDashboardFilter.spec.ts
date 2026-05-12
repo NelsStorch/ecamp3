@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test'
-import { loginAndSetCookie } from '../../utils/helpers'
+import { test, expect, type Page } from '@playwright/test'
+import { loginAndSetCookie } from '@/utils/helpers'
 
 test.describe('The filters in the dashboard', () => {
   test.beforeEach(async ({ page, request }) => {
@@ -94,13 +94,7 @@ test.describe('The filters in the dashboard', () => {
   })
 })
 
-/**
- *
- * @param page import('@playwright/test').Page
- * @param label
- * @return {Promise<void>}
- */
-async function clickOnItemWithLabel(page, label) {
+async function clickOnItemWithLabel(page: Page, label: string) {
   await page
     .getByRole('listitem')
     .filter({ has: page.getByText(label, { exact: true }) })

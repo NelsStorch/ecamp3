@@ -1,22 +1,31 @@
-import { expect, request, test } from '@playwright/test'
+import {
+  expect,
+  request,
+  test,
+  type APIRequestContext,
+  type Page,
+} from '@playwright/test'
 export const API_ROOT_URL = process.env.API_ROOT_URL || 'http://localhost:3000/api'
 export const API_ROOT_URL_CACHED =
   process.env.API_ROOT_URL_CACHED || 'http://localhost:3004'
 
-export async function login(request, identifier, password = 'test') {
+export async function login(
+  request: APIRequestContext,
+  identifier: string,
+  password: string = 'test'
+) {
   const response = await request.post(`${API_ROOT_URL}/authentication_token`, {
     data: { identifier, password },
   })
   expect([204]).toContain(response.status())
 }
 
-/**
- * @param page import('@playwright/test').Page
- * @param user string
- * @param password string
- * @return {Promise<void>}
- */
-export async function loginAndSetCookie(page, _, user, password = 'test') {
+export async function loginAndSetCookie(
+  page: Page,
+  _: unknown,
+  user: string,
+  password: string = 'test'
+) {
   await page.goto('/')
   await page.locator('[type="email"]').fill(user)
   await page.locator('[type="password"]').fill(password)
@@ -26,11 +35,7 @@ export async function loginAndSetCookie(page, _, user, password = 'test') {
   ])
 }
 
-/**
- * @param user string
- * @return {Promise<import('@playwright/test').APIRequestContext>}
- */
-export async function getAuthContext(user) {
+export async function getAuthContext(user: string): Promise<APIRequestContext> {
   const defaultRequest = await request.newContext()
   await login(defaultRequest, user)
   const state = await defaultRequest.storageState()
@@ -42,7 +47,11 @@ export async function getAuthContext(user) {
 
 export { getPdfProperties } from './getPdfProperties'
 
-export async function expectCacheHeader(request, uri, expectedHeader) {
+export async function expectCacheHeader(
+  request: APIRequestContext,
+  uri: string,
+  expectedHeader: string
+) {
   await test.step(
     `Check Header: ${expectedHeader}`,
     async () => {
@@ -53,7 +62,7 @@ export async function expectCacheHeader(request, uri, expectedHeader) {
   )
 }
 
-export async function expectCacheHit(request, uri) {
+export async function expectCacheHit(request: APIRequestContext, uri: string) {
   await test.step(
     'Expect Cache HIT',
     async () => {
@@ -63,7 +72,7 @@ export async function expectCacheHit(request, uri) {
   )
 }
 
-export async function expectCacheMiss(request, uri) {
+export async function expectCacheMiss(request: APIRequestContext, uri: string) {
   await test.step(
     'Expect Cache MISS',
     async () => {
@@ -73,7 +82,7 @@ export async function expectCacheMiss(request, uri) {
   )
 }
 
-export async function expectCachePass(request, uri) {
+export async function expectCachePass(request: APIRequestContext, uri: string) {
   await test.step(
     'Expect Cache PASS',
     async () => {
@@ -83,7 +92,7 @@ export async function expectCachePass(request, uri) {
   )
 }
 
-export async function waitForCacheMiss(request, uri) {
+export async function waitForCacheMiss(request: APIRequestContext, uri: string) {
   await test.step(
     `Wait for Cache MISS on ${uri}`,
     async () => {
@@ -101,11 +110,15 @@ export async function waitForCacheMiss(request, uri) {
   )
 }
 
-export async function apiGet(request, uri) {
+export async function apiGet(request: APIRequestContext, uri: string) {
   return await request.get(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
 }
 
-export async function apiPatch(request, uri, body) {
+export async function apiPatch(
+  request: APIRequestContext,
+  uri: string,
+  body: Record<string, unknown>
+) {
   return await request.patch(`${API_ROOT_URL_CACHED}${uri}.jsonhal`, {
     data: body,
     headers: {
@@ -114,7 +127,11 @@ export async function apiPatch(request, uri, body) {
   })
 }
 
-export async function apiPost(request, uri, body) {
+export async function apiPost(
+  request: APIRequestContext,
+  uri: string,
+  body: Record<string, unknown>
+) {
   return await request.post(`${API_ROOT_URL_CACHED}${uri}.jsonhal`, {
     data: body,
     headers: {
@@ -123,6 +140,6 @@ export async function apiPost(request, uri, body) {
   })
 }
 
-export async function apiDelete(request, uri) {
+export async function apiDelete(request: APIRequestContext, uri: string) {
   return await request.delete(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
 }

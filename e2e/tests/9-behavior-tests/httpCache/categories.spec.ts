@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, type APIRequestContext } from '@playwright/test'
 import {
   bipiUser,
   bruceWayneUser,
@@ -6,7 +6,7 @@ import {
   felicitySmoakUser,
   grgrCampId,
   loremIpsumCampId,
-} from '../../../utils/constants'
+} from '@/utils/constants'
 import {
   loginAndSetCookie,
   expectCacheHit,
@@ -17,8 +17,8 @@ import {
   apiPost,
   apiDelete,
   getAuthContext,
-} from '../../../utils/helpers.js'
-import collectionResponse from '../../../test-data/httpCache/categories_collection.json'
+} from '@/utils/helpers'
+import collectionResponse from '@/test-data/httpCache/categories_collection.json'
 
 const grgrLACategoryId = '1a869b162875'
 
@@ -147,7 +147,10 @@ test.describe('cache test: /camps/{campId}/categories', () => {
           res.url().includes('/api/camp_collaborations/') &&
           res.request().method() === 'PATCH'
       ),
-      bipiPage.locator('div[role="alert"] >> button', { name: 'Deaktivieren' }).click(),
+      bipiPage
+        .locator('div[role="alert"]')
+        .getByRole('button', { name: 'Deaktivieren' })
+        .click(),
     ])
 
     // ensure cache was invalidated
@@ -191,10 +194,13 @@ test.describe('cache test: /camps/{campId}/categories', () => {
   })
 
   test.describe('invalidates /camps/{campId}/categories', () => {
+    // @ts-expect-error we can type this later
     let categoryBefore
-    let bipiApi
+    let bipiApi: APIRequestContext
     function preferredContentTypeIrisBefore() {
+      // @ts-expect-error we can type this later
       return categoryBefore._embedded.preferredContentTypes.map(
+        // @ts-expect-error we can type this later
         (contentType) => contentType._links.self.href
       )
     }
@@ -209,9 +215,13 @@ test.describe('cache test: /camps/{campId}/categories', () => {
     test.afterEach(async () => {
       const res = await apiPatch(bipiApi, `/api/categories/${grgrLACategoryId}`, {
         preferredContentTypes: preferredContentTypeIrisBefore(),
+        // @ts-expect-error we can type this later
         short: categoryBefore.short,
+        // @ts-expect-error we can type this later
         name: categoryBefore.name,
+        // @ts-expect-error we can type this later
         color: categoryBefore.color,
+        // @ts-expect-error we can type this later
         numberingStyle: categoryBefore.numberingStyle,
       })
       expect(res.status()).toBe(200)
