@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
-import { bipiUser } from '../../utils/constants'
-import { loginAndSetCookie } from '../../utils/helpers'
+import { bipiUser } from '@/utils/constants'
+import { loginAndSetCookie } from '@/utils/helpers'
 
 const tomorrow = new Date()
 tomorrow.setDate(tomorrow.getDate() + 1)

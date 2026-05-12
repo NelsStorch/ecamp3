@@ -1,9 +1,10 @@
 // NuxtPrint
 
 import { readFileSync } from 'fs'
-import { test, expect } from '@playwright/test'
-import { getPdfProperties } from '../../utils/getPdfProperties'
-import { loginAndSetCookie } from '../../utils/helpers'
+import { expect, test } from '@playwright/test'
+import { getPdfProperties } from '@/utils/getPdfProperties'
+import { loginAndSetCookie } from '@/utils/helpers'
+import { CampItem, PeriodItem } from '@/shared-types/ecamp'
 
 test.describe('Nuxt print test', () => {
   test.beforeEach(async ({ page, request }) => {
@@ -12,13 +13,17 @@ test.describe('Nuxt print test', () => {
 
   test('shows print preview', async ({ page }) => {
     const campsResponse = await page.request.get('/api/camps.jsonhal')
-    const body = await campsResponse.json()
+    const body = (await campsResponse.json()) as {
+      _embedded: { items: CampItem[] }
+    }
     const camp = body._embedded.items.find((c) => c.motto)
-    const campUri = camp._links.self.href
-    const campPeriodsLink = camp._links.periods.href
+    const campUri = camp!._links.self.href
+    const campPeriodsLink = camp!._links.periods.href
 
     const periodsResponse = await page.request.get(campPeriodsLink)
-    const periodsResponseBody = await periodsResponse.json()
+    const periodsResponseBody = (await periodsResponse.json()) as {
+      _embedded: { items: PeriodItem[] }
+    }
     const period = periodsResponseBody._embedded.items[0]
     const periodUri = period._links.self.href
 
@@ -64,8 +69,8 @@ test.describe('Nuxt print test', () => {
     await page.goto(
       `${PRINT_URL}/?config=${encodeURIComponent(JSON.stringify(printConfig))}`
     )
-    await expect(page.locator('body')).toContainText(camp.title)
-    await expect(page.locator('body')).toContainText(camp.motto)
+    await expect(page.locator('body')).toContainText(camp!.title)
+    await expect(page.locator('body')).toContainText(camp!.motto!)
 
     await expect(page.locator('#content_0_cover')).toHaveCSS('font-size', '50px')
   })
