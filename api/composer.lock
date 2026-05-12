@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45fea8db03ed7907abb52460b744cba4",
+    "content-hash": "a7ff3619c1ced3eae0b3c6edb0295394",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -577,7 +577,7 @@
         },
         {
             "name": "api-platform/json-schema",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/json-schema.git",
@@ -652,7 +652,7 @@
                 "swagger"
             ],
             "support": {
-                "source": "https://github.com/api-platform/json-schema/tree/v4.3.4"
+                "source": "https://github.com/api-platform/json-schema/tree/v4.3.5"
             },
             "time": "2026-04-30T12:21:24+00:00"
         },
