@@ -28,7 +28,7 @@ jobs:
         uses: nefrob/pr-description@4dcc9f3ad5ec06b2a197c5f8f93db5e69d2fdca7 # v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          regex: ".*"
+          regex: '.*'
           regexFlags: s
           content: |
             ### <span aria-hidden="true">🏗️</span> Changes in this deployment

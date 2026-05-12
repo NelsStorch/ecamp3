@@ -90,7 +90,7 @@ jobs:
           name: blob-report${{ inputs.run-identifier != '' && format('-{0}', inputs.run-identifier) || '' }}-${{ matrix.browser }}
           path: e2e/blob-report/
           retention-days: 1
-          
+
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
