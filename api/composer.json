@@ -57,7 +57,7 @@
         "symfony/security-bundle": "8.0.8",
         "symfony/security-core": "8.0.8",
         "symfony/serializer": "8.0.10",
-        "symfony/translation": "8.0.8",
+        "symfony/translation": "8.0.10",
         "symfony/twig-bundle": "8.0.8",
         "symfony/validator": "8.0.10",
         "symfony/yaml": "8.0.10",
