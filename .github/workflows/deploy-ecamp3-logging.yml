@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: "Choose environment"
+        description: 'Choose environment'
         type: environment
         required: true
       action:
-        description: "Choose action"
+        description: 'Choose action'
         type: choice
         required: true
         default: diff
@@ -18,7 +18,7 @@ on:
 
 jobs:
   deploy-ecamp3-logging:
-    name: "Deploy ecamp3-logging"
+    name: 'Deploy ecamp3-logging'
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     steps:
@@ -29,7 +29,6 @@ jobs:
             if (!"${{ github.event.inputs.environment }}".startsWith("ecamp3-logging")) {
                 throw new Error("Environment must start with 'ecamp3-logging'");
             }
-
 
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 

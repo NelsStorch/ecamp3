@@ -8,7 +8,7 @@ on:
         type: environment
         default: dev
       action:
-        description: "Choose action"
+        description: 'Choose action'
         type: choice
         required: true
         default: diff
@@ -27,7 +27,7 @@ env:
 
 jobs:
   deploy-ingress:
-    name: "Deploy ingress"
+    name: 'Deploy ingress'
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     steps:

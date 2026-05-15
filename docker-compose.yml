@@ -250,6 +250,23 @@ services:
     working_dir: /translation
     command: tail -F anything
 
+  prettier:
+    image: node:24.15.0
+    profiles: ['prettier']
+    stdin_open: true
+    tty: true
+    user: ${USER_ID:-1000}
+    volumes:
+      - ./:/app:delegated
+      - ./.cache/npm:/home/node/.npm
+    working_dir: /app
+    entrypoint: ./docker-setup.sh
+    command: 'npm run lint'
+    environment:
+      - NPM_CONFIG_UPDATE_NOTIFIER=false
+      - NPM_CONFIG_CACHE=/home/node/.npm
+      - CI=${CI}
+
 volumes:
   db-data-postgres: null
   caddy_data:

@@ -1,4 +1,4 @@
-name: "[reusable only] Build images and push to registry"
+name: '[reusable only] Build images and push to registry'
 
 on:
   workflow_dispatch:
@@ -111,7 +111,7 @@ jobs:
 
   build-and-push:
     runs-on: ubuntu-latest
-    name: "Build and push image ${{ matrix.build-config.service }}"
+    name: 'Build and push image ${{ matrix.build-config.service }}'
     needs:
       - build-info
     strategy:
