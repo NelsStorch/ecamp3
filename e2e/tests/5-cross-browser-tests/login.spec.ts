@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import { mockDateNow } from '@/utils/helpers'
 
 test.describe('Login test', () => {
-  test.beforeEach(async ({ page, request }) => {
+  test.beforeEach(async ({ page }) => {
     await mockDateNow(page)
   })
 

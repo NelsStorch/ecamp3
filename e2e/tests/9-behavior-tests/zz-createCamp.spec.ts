@@ -11,7 +11,7 @@ in2Days.setDate(in2Days.getDate() + 2)
 const campTitle = 'title'
 
 test.describe('create new camp', () => {
-  test.beforeEach(async ({ page, request }) => {
+  test.beforeEach(async ({ page }) => {
     await mockDateNow(page)
   })
 

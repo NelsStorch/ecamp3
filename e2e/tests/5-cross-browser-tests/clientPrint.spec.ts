@@ -7,7 +7,7 @@ import { loginAndSetCookie, mockDateNow } from '@/utils/helpers'
 import { readFileSync } from 'fs'
 
 test.describe('Client print test', () => {
-  test.beforeEach(async ({ page, request }) => {
+  test.beforeEach(async ({ page }) => {
     await mockDateNow(page)
   })
 
