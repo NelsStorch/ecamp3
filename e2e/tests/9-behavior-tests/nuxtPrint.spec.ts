@@ -3,12 +3,13 @@
 import { readFileSync } from 'fs'
 import { expect, test } from '@playwright/test'
 import { getPdfProperties } from '@/utils/getPdfProperties'
-import { loginAndSetCookie } from '@/utils/helpers'
+import { loginAndSetCookie, mockDateNow } from '@/utils/helpers'
 import { CampItem, PeriodItem } from '@/shared-types/ecamp'
 
 test.describe('Nuxt print test', () => {
   test.beforeEach(async ({ page, request }) => {
     await loginAndSetCookie(page, request, 'test@example.com')
+    await mockDateNow(page)
   })
 
   test('shows print preview', async ({ page }) => {

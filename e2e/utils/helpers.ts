@@ -143,3 +143,25 @@ export async function apiPost(
 export async function apiDelete(request: APIRequestContext, uri: string) {
   return await request.delete(`${API_ROOT_URL_CACHED}${uri}.jsonhal`)
 }
+
+export async function mockDateNow(page: Page, date: string = "April 30 2026 13:00:00") {
+
+  const fakeNow = new Date(date).valueOf();
+
+  await page.addInitScript(`{
+    Date = class extends Date {
+      constructor(...args) {
+        if (args.length === 0) {
+          super(${fakeNow});
+        } else {
+          super(...args);
+        }
+      }
+    }
+
+    const __DateNowOffset = ${fakeNow} - Date.now();
+    const __DateNow = Date.now;
+    Date.now = () => __DateNow() + __DateNowOffset;
+  }`);
+
+}
