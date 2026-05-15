@@ -158,7 +158,7 @@
       "depNameTemplate": "composer",
       "packageNameTemplate": "composer/composer",
       "datasourceTemplate": "github-tags",
-      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+).*?$"
+      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(-(?<prerelease>\\w+))?$"
     },
     {
       "customType": "regex",
