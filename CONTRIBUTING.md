@@ -153,6 +153,7 @@ Following it will not only enhance the quality and consistency of your contribut
 - [x] **Language & Spelling:** :book: Use English for all variable names, class names, functions, comments, etc., and ensure that all added content has been spellchecked.
 - [x] **Sensitive Information:** :no_entry: Before submitting, double-check to ensure no passwords, credentials, or local configurations are present in your changes.
 - [x] **Continuous Integration:** :green_circle: Confirm that the GitHub Actions CI build finishes successfully without test failures.
+- [x] **ARM and x86 support** We currently use ARM and x86 architectures in the core team. Make sure your changes work on both. Docker images must offer both architectures.
 
 ## Database :floppy_disk:
 
