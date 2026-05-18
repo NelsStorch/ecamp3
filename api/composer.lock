@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28d444af4a85b59c16d179aebae26aee",
+    "content-hash": "0190718102719b23517cf538c48d7014",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -250,16 +250,16 @@
         },
         {
             "name": "api-platform/hal",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/hal.git",
-                "reference": "e6d9f543e9c3a95fe8174c21eb3e9ac1b678c7ee"
+                "reference": "2e3eb7aaaf42edfc6ff32a83d7d3e1f72abebbac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/hal/zipball/e6d9f543e9c3a95fe8174c21eb3e9ac1b678c7ee",
-                "reference": "e6d9f543e9c3a95fe8174c21eb3e9ac1b678c7ee",
+                "url": "https://api.github.com/repos/api-platform/hal/zipball/2e3eb7aaaf42edfc6ff32a83d7d3e1f72abebbac",
+                "reference": "2e3eb7aaaf42edfc6ff32a83d7d3e1f72abebbac",
                 "shasum": ""
             },
             "require": {
@@ -322,9 +322,9 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/hal/issues",
-                "source": "https://github.com/api-platform/hal/tree/v4.3.4"
+                "source": "https://github.com/api-platform/hal/tree/v4.3.5"
             },
-            "time": "2026-04-30T12:21:24+00:00"
+            "time": "2026-05-11T09:38:13+00:00"
         },
         {
             "name": "api-platform/http-cache",
