@@ -150,7 +150,7 @@ Durch das Prüfen dieser Punkte verbesserst du die Qualität und Konsistenz dein
 - [x] **Sprache & Rechtschreibung:** :book: Verwende Englisch für alle Variablennamen, Klassennamen, Funktionen, Kommentare usw., und stelle sicher, dass aller hinzugefügter Inhalt Rechtschreibprüfungen durchlaufen hat.
 - [x] **Sensible Informationen:** :no_entry: Überprüfe vor dem Einreichen noch einmal, um sicherzustellen, dass keine Passwörter, Zugangsdaten oder lokale Konfigurationen in deinen Änderungen vorhanden sind.
 - [x] **Kontinuierliche Integration:** :green_circle: Stelle sicher, dass der GitHub Actions CI-Build erfolgreich abgeschlossen werden kann, ohne Testfehler.
-- [X] **ARM und x86 support** Wir verwenden momentan ARM und x86 Prozessor- Architekturen im Core Team. Stelle sicher, dass deine Änderungen sowohl mit ARM als auch mit x86 funktionieren. Docker images müssen beide Architekturen zur Verfügung stellen.
+- [x] **ARM und x86 support** Wir verwenden momentan ARM und x86 Prozessor- Architekturen im Core Team. Stelle sicher, dass deine Änderungen sowohl mit ARM als auch mit x86 funktionieren. Docker images müssen beide Architekturen zur Verfügung stellen.
 
 ## Datenbank :floppy_disk:
 
