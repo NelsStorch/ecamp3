@@ -78,7 +78,7 @@
     "php-coveralls/php-coveralls": "2.9.1",
     "phpstan/phpstan": "2.1.54",
     "phpunit/phpunit": "13.1.9",
-    "rector/rector": "2.4.2",
+    "rector/rector": "2.4.3",
     "psalm/phar": "6.16.1",
     "spatie/phpunit-snapshot-assertions": "5.4.0",
     "symfony/browser-kit": "8.0.8",
