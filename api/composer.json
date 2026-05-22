@@ -72,7 +72,7 @@
     "api-platform/hydra": "4.3.5",
     "api-platform/json-schema": "4.3.5",
     "brianium/paratest": "7.22.4",
-    "friendsofphp/php-cs-fixer": "3.95.1",
+    "friendsofphp/php-cs-fixer": "3.95.2",
     "hautelook/alice-bundle": "2.17.3",
     "justinrainbow/json-schema": "6.8.2",
     "php-coveralls/php-coveralls": "2.9.1",
