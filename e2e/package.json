@@ -25,7 +25,7 @@
     "pdfjs-dist": "5.7.284",
     "prettier": "3.8.3",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.59.3"
+    "typescript-eslint": "8.59.4"
   },
   "overrides": {
     "uri-js": "npm:uri-js-replace"
