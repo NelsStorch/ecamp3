@@ -15,7 +15,7 @@
         "@pulumi/awsx": "3.5.0"
     },
     "devDependencies": {
-        "@babel/eslint-parser": "7.28.6",
+        "@babel/eslint-parser": "7.29.7",
         "@eslint/compat": "2.1.0",
         "@eslint/js": "9.39.4",
         "@types/node": "24.12.4",
