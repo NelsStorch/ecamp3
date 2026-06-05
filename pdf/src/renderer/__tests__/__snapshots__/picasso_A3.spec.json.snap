@@ -1583,58 +1583,31 @@
                                   "box": {},
                                   "children": [
                                     {
-                                      "box": {},
-                                      "children": [
-                                        {
-                                          "parent": [Circular],
-                                          "type": "TEXT_INSTANCE",
-                                          "value": "IC",
-                                        },
-                                      ],
                                       "parent": [Circular],
-                                      "props": {
-                                        "class": "responsibles-initials",
-                                        "style": {
-                                          "color": "#fff",
-                                        },
-                                      },
-                                      "style": {
-                                        "color": "#fff",
-                                        "fontSize": "6pt",
-                                        "lineHeight": "1.2",
-                                        "textAlign": "center",
-                                      },
-                                      "type": "TEXT",
+                                      "type": "TEXT_INSTANCE",
+                                      "value": "inactive@test.com (Inactive)",
                                     },
                                   ],
                                   "parent": [Circular],
-                                  "props": {
-                                    "class": "responsibles-avatar",
-                                    "style": {
-                                      "backgroundColor": "#4d4d4d",
-                                    },
-                                  },
-                                  "style": {
-                                    "backgroundColor": "#4d4d4d",
-                                    "borderRadius": "6pt",
-                                    "display": "flex",
-                                    "flexDirection": "column",
-                                    "height": "12pt",
-                                    "justifyContent": "center",
-                                    "width": "12pt",
-                                  },
-                                  "type": "VIEW",
+                                  "props": {},
+                                  "style": {},
+                                  "type": "TEXT",
                                 },
                               ],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -1656,11 +1629,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -1801,13 +1780,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -1829,11 +1813,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -1974,13 +1964,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -2002,11 +1997,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -2147,13 +2148,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -2175,11 +2181,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -2320,13 +2332,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -2348,11 +2365,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "6.9444444444445pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "6.9444444444445pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -2493,13 +2516,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -2521,11 +2549,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -3071,13 +3105,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -3099,11 +3138,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "6.944444444444446pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "6.944444444444446pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -3244,13 +3289,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -3272,11 +3322,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -3417,13 +3473,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -3445,11 +3506,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -3590,13 +3657,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -3618,11 +3690,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -3763,13 +3841,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -3791,11 +3874,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -3936,13 +4025,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -3964,11 +4058,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -4109,13 +4209,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -4137,11 +4242,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -4282,13 +4393,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -4310,11 +4426,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -4455,13 +4577,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -4483,11 +4610,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -5032,13 +5165,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -5060,11 +5198,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -5205,13 +5349,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -5233,11 +5382,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -5378,13 +5533,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -5406,11 +5566,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -5551,13 +5717,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -5579,11 +5750,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -5724,13 +5901,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -5752,11 +5934,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -5897,13 +6085,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -5925,11 +6118,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -6070,13 +6269,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -6098,11 +6302,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -6243,13 +6453,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -6271,11 +6486,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -6416,13 +6637,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -6444,11 +6670,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -6993,13 +7225,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -7021,11 +7258,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -7166,13 +7409,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -7194,11 +7442,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -7339,13 +7593,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -7367,11 +7626,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -7512,13 +7777,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -7540,11 +7810,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",
@@ -7685,13 +7961,18 @@
                               "children": [],
                               "parent": [Circular],
                               "props": {
-                                "class": "responsibles-avatars picasso-schedule-entry-responsibles",
-                                "key": 0,
+                                "class": "picasso-schedule-entry-responsibles",
+                                "key": 1,
+                                "style": {
+                                  "display": "flex",
+                                  "flex-direction": "row",
+                                  "flex-wrap": "wrap",
+                                },
                               },
                               "style": {
-                                "alignItems": "flex-end",
                                 "display": "flex",
                                 "flexDirection": "row",
+                                "flexWrap": "wrap",
                               },
                               "type": "VIEW",
                             },
@@ -7713,11 +7994,17 @@
                           "parent": [Circular],
                           "props": {
                             "class": "picasso-schedule-entry-responsibles-container",
+                            "style": {
+                              "color": "#000",
+                              "fontSize": "8pt",
+                            },
                           },
                           "style": {
                             "alignItems": "flex-end",
                             "bottom": "0",
+                            "color": "#000",
                             "flexDirection": "column",
+                            "fontSize": "8pt",
                             "justifyContent": "flex-end",
                             "left": "0",
                             "padding": "0 4pt",

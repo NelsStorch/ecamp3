@@ -10,12 +10,15 @@
       </Text>
     </Link>
     <View class="picasso-schedule-entry-spacer" />
-    <View class="picasso-schedule-entry-responsibles-container">
+    <View
+      class="picasso-schedule-entry-responsibles-container"
+      :style="{ fontSize: fontSize, color: textColor }"
+    >
       <View class="picasso-schedule-entry-spacer" />
       <Responsibles
         class="picasso-schedule-entry-responsibles"
         :activity="scheduleEntry.activity()"
-        avatars
+        :avatars="config.options?.pageSize !== 'A3'"
       />
       <View class="picasso-schedule-entry-spacer" />
     </View>
