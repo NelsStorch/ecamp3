@@ -88,6 +88,14 @@
       "matchDepNames": ["cypress", "cypress/included"],
       "automerge": false,
       "groupName": "cypress"
+    },
+    {
+      "groupName": "playwright",
+      "matchPackageNames": ["@playwright/test", "mcr.microsoft.com/playwright"]
+    },
+    {
+      "matchPackageNames": ["mcr.microsoft.com/playwright"],
+      "minimumReleaseAge": "0 days"
     }
   ],
   "customManagers": [
