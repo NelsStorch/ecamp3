@@ -549,7 +549,7 @@ at position 10: Trailing data',
             'violations' => [
                 [
                     'propertyPath' => 'end',
-                    'message' => 'Due to existing schedule entries, end-date can not be earlier then 2023-03-25',
+                    'message' => 'Due to existing schedule entries, end-date can not be earlier than 2023-03-25',
                 ],
             ],
         ]);
